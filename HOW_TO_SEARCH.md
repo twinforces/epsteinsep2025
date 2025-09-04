@@ -2,7 +2,7 @@
 
 GitHub indexes the TXT files for full-text search, making it easy to find keywords without downloading everything.
 
-- Go to the repo on GitHub.com. (Where you readint this)
+- Go to the repo on GitHub.com. (Where you are reading this)
 - Use the search bar at the top (or click "Go to file" > search icon).
 - Enter your query, e.g., "victim name" or "specific date".
 - Filter to this repo if needed (via the dropdown).
