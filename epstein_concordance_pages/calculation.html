@@ -1,0 +1,184 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "calculation"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 403, "end": 403, "pages": [403]}, {"start": 1089, "end": 1089, "pages": [1089]}, {"start": 1962, "end": 1962, "pages": [1962]}, {"start": 3253, "end": 3256, "pages": [3253, 3256]}, {"start": 3641, "end": 3641, "pages": [3641]}, {"start": 4375, "end": 4378, "pages": [4375, 4378]}, {"start": 4768, "end": 4768, "pages": [4768]}, {"start": 5640, "end": 5640, "pages": [5640]}, {"start": 5981, "end": 5981, "pages": [5981]}, {"start": 6602, "end": 6602, "pages": [6602]}, {"start": 6906, "end": 6906, "pages": [6906]}, {"start": 9236, "end": 9236, "pages": [9236]}, {"start": 9522, "end": 9523, "pages": [9522, 9523]}, {"start": 9534, "end": 9534, "pages": [9534]}, {"start": 9915, "end": 9915, "pages": [9915]}, {"start": 10201, "end": 10202, "pages": [10201, 10202]}, {"start": 10213, "end": 10213, "pages": [10213]}, {"start": 10552, "end": 10555, "pages": [10552, 10553, 10555]}, {"start": 10575, "end": 10575, "pages": [10575]}, {"start": 11537, "end": 11537, "pages": [11537]}, {"start": 11573, "end": 11573, "pages": [11573]}, {"start": 14765, "end": 14765, "pages": [14765]}, {"start": 14801, "end": 14801, "pages": [14801]}, {"start": 20007, "end": 20007, "pages": [20007]}, {"start": 21145, "end": 21145, "pages": [21145]}, {"start": 21273, "end": 21273, "pages": [21273]}, {"start": 21562, "end": 21563, "pages": [21562, 21563]}, {"start": 21581, "end": 21581, "pages": [21581]}, {"start": 21592, "end": 21592, "pages": [21592]}, {"start": 21599, "end": 21599, "pages": [21599]}];
+        const pageToPath = {"403": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000403.jpg", "1089": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001089.jpg", "1962": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001962.jpg", "3253": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003253.jpg", "3256": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003256.jpg", "3641": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003641.jpg", "4375": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004375.jpg", "4378": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004378.jpg", "4768": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004768.jpg", "5640": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005640.jpg", "5981": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005981.jpg", "6602": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006602.jpg", "6906": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006906.jpg", "9236": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009236.jpg", "9522": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009522.jpg", "9523": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009523.jpg", "9534": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009534.jpg", "9915": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009915.jpg", "10201": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010201.jpg", "10202": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010202.jpg", "10213": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010213.jpg", "10552": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010552.jpg", "10553": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010553.jpg", "10555": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010555.jpg", "10575": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010575.jpg", "11537": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011537.jpg", "11573": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011573.jpg", "14765": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014765.jpg", "14801": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014801.jpg", "20007": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020007.jpg", "21145": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021145.jpg", "21273": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021273.jpg", "21562": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021562.jpg", "21563": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021563.jpg", "21581": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021581.jpg", "21592": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021592.jpg", "21599": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021599.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000403.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001089.jpg": "...ernment's case. whatever calculation and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001962.jpg": "...ernment's case. whatever calculation and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003253.jpg": "...e sentencing: guidelines calculation, thatwould have resulted...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003256.jpg": "...ont for the  guidelines calculation shouing that. if prosee...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003641.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004375.jpg": "...reasonable 's guidelines calculation, that; would have result...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004378.jpg": "...ibuted a fed  euidelines calculation  tror shouing ‘that if p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004768.jpg": "...al offense level is  the calculation of the guidelities. the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005640.jpg": "...a sentencitig guidelines calculation). as the court explained...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005981.jpg": "....a sentencing guidelines calculation)..  the ¢ government. tr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006602.jpg": "...a sentencitig guidelines calculation). as the court explained...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006906.jpg": "....a sentencing guidelines calculation)..  the ¢ government. tr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009236.jpg": "...rist clignts—restitution calculation. .......... a-6o4:.  ame...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009522.jpg": "...action type  restitution calculation  tax benefit takenper’ r...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009523.jpg": "...st. clients: restitution calculation interest thru: ancy: l2/...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009534.jpg": "...um, 23 y  eo  guidelines calculation ‘is as follous:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009915.jpg": "...rist clignts—restitution calculation. .......... a-6o4:.  ame...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010201.jpg": "...action type  restitution calculation  tax benefit takenper’ r...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010202.jpg": "...st. clients: restitution calculation interest thru: ancy: l2/...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010213.jpg": "...um, 23 y  eo  guidelines calculation ‘is as follous:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010552.jpg": "...the psr, the guidelines calculation should. include two addi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010553.jpg": "...the probation. offiee’s calculation. for the ‘reasons! set f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010555.jpg": "...uing:  whe  example of a calculation of the last date of the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010575.jpg": "...poses, of the guidelines calculation, the scope of the pyrami...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011537.jpg": "...unn nou to the guideline calculation. ags  e6unsel is awafe;,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011573.jpg": "...etusn with the guideline calculation,  wale seid ae ssies a m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014765.jpg": "...unn nou to the guideline calculation. ags  e6unsel is awafe;,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014801.jpg": "...etusn with the guideline calculation,  wale seid ae ssies a m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020007.jpg": "...ernment's case. whatever calculation and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021145.jpg": "...range. after the court’s calculation, error  was pointed out;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021273.jpg": "...o recommend an; improper calculation®  we.  \"the manager told...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021562.jpg": "...?  everde  offense level calculation objections, and  the fin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021563.jpg": "...urn nou to the guideline calculation. as  counsel g8 aware, i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021581.jpg": "..., four objections to the calculation of the guideline range ‘...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021592.jpg": "...n. to the  psk guideline calculation. i do find that virginia...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021599.jpg": "...eturn with the guideline calculation complete, i will hear fr..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "calculation" (37 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">403-403</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1089-1089</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1962-1962</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3253-3256</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">3641-3641</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">4375-4378</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">4768-4768</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">5640-5640</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">5981-5981</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">6602-6602</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">6906-6906</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">9236-9236</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">9522-9523</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">9534-9534</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">9915-9915</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">10201-10202</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">10213-10213</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">10552-10555</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">10575-10575</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">11537-11537</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">11573-11573</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">14765-14765</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">14801-14801</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">20007-20007</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">21145-21145</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">21273-21273</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">21562-21563</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">21581-21581</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">21592-21592</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">21599-21599</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

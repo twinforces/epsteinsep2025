@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "architect"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 2025, "end": 2025, "pages": [2025]}, {"start": 3586, "end": 3586, "pages": [3586]}, {"start": 3597, "end": 3597, "pages": [3597]}, {"start": 8958, "end": 8958, "pages": [8958]}, {"start": 9602, "end": 9602, "pages": [9602]}, {"start": 12579, "end": 12579, "pages": [12579]}, {"start": 14237, "end": 14237, "pages": [14237]}, {"start": 15379, "end": 15379, "pages": [15379]}, {"start": 16860, "end": 16860, "pages": [16860]}, {"start": 18166, "end": 18166, "pages": [18166]}, {"start": 21025, "end": 21025, "pages": [21025]}];
+        const pageToPath = {"2025": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002025.jpg", "3586": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003586.jpg", "3597": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003597.jpg", "8958": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008958.jpg", "9602": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009602.jpg", "12579": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012579.jpg", "14237": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014237.jpg", "15379": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015379.jpg", "16860": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016860.jpg", "18166": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018166.jpg", "21025": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021025.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002025.jpg": "...”, “monster” and “master architect? - public opprobrium and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003586.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003597.jpg": "...use person, chef, pilot, architect.  ®.  l'm asking about i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008958.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009602.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012579.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014237.jpg": "...r husband de? a. he's an architect...  qo. there in texas?...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015379.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016860.jpg": "...r husband de? a. he's an architect...  qo. there in texas?...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018166.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021025.jpg": "...example, ‘that the:two «architect witnesses “could, havere..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "architect" (11 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">2025-2025</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">3586-3586</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">3597-3597</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">8958-8958</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">9602-9602</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">12579-12579</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">14237-14237</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">15379-15379</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">16860-16860</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">18166-18166</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">21025-21025</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

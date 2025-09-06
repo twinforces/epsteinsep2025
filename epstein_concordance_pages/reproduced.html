@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "reproduced"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 2419, "end": 2419, "pages": [2419]}, {"start": 5630, "end": 5630, "pages": [5630]}, {"start": 6184, "end": 6184, "pages": [6184]}, {"start": 6217, "end": 6217, "pages": [6217]}, {"start": 6257, "end": 6257, "pages": [6257]}, {"start": 6592, "end": 6592, "pages": [6592]}, {"start": 7498, "end": 7498, "pages": [7498]}, {"start": 8074, "end": 8074, "pages": [8074]}, {"start": 15150, "end": 15150, "pages": [15150]}];
+        const pageToPath = {"2419": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002419.jpg", "5630": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005630.jpg", "6184": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006184.jpg", "6217": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006217.jpg", "6257": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006257.jpg", "6592": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006592.jpg", "7498": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007498.jpg", "8074": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008074.jpg", "15150": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015150.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002419.jpg": "...dictment: ‘the: excerpts reproduced, in the  tndictment, as...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005630.jpg": "...sted, verified, or  992  reproduced; and they “virtually imp...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006184.jpg": "...be tested, verified, or‘reproduced.  hite s is important to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006217.jpg": "...be tested, verified, or  reproduced.”  © “there l is: no > g...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006257.jpg": "...be tested, verified, or‘reproduced.  hite s is important to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006592.jpg": "...sted, verified, or  992  reproduced; and they “virtually imp...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007498.jpg": "...be tested, verified, or‘reproduced.  hite s is important to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008074.jpg": "...be tested, verified, or‘reproduced.  hite s is important to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015150.jpg": "...xwell’s trial. some were reproduced. in. the maxwell. indict..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "reproduced" (9 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">2419-2419</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">5630-5630</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">6184-6184</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">6217-6217</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">6257-6257</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">6592-6592</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">7498-7498</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">8074-8074</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">15150-15150</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

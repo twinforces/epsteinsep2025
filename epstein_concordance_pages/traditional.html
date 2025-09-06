@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "traditional"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 489, "end": 489, "pages": [489]}, {"start": 801, "end": 801, "pages": [801]}, {"start": 980, "end": 980, "pages": [980]}, {"start": 1603, "end": 1603, "pages": [1603]}, {"start": 1920, "end": 1920, "pages": [1920]}, {"start": 3066, "end": 3066, "pages": [3066]}, {"start": 3240, "end": 3240, "pages": [3240]}, {"start": 3346, "end": 3346, "pages": [3346]}, {"start": 3381, "end": 3383, "pages": [3381, 3383]}, {"start": 4362, "end": 4362, "pages": [4362]}, {"start": 4468, "end": 4468, "pages": [4468]}, {"start": 4797, "end": 4797, "pages": [4797]}, {"start": 5220, "end": 5220, "pages": [5220]}, {"start": 5789, "end": 5789, "pages": [5789]}, {"start": 6714, "end": 6714, "pages": [6714]}, {"start": 9150, "end": 9150, "pages": [9150]}, {"start": 9555, "end": 9555, "pages": [9555]}, {"start": 9829, "end": 9829, "pages": [9829]}, {"start": 14386, "end": 14386, "pages": [14386]}, {"start": 15111, "end": 15111, "pages": [15111]}, {"start": 17008, "end": 17008, "pages": [17008]}, {"start": 19898, "end": 19898, "pages": [19898]}, {"start": 21298, "end": 21298, "pages": [21298]}, {"start": 21381, "end": 21381, "pages": [21381]}, {"start": 21538, "end": 21538, "pages": [21538]}];
+        const pageToPath = {"489": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000489.jpg", "801": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000801.jpg", "980": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000980.jpg", "1603": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001603.jpg", "1920": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001920.jpg", "3066": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003066.jpg", "3240": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003240.jpg", "3346": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003346.jpg", "3381": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003381.jpg", "3383": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003383.jpg", "4362": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004362.jpg", "4468": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004468.jpg", "4797": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004797.jpg", "5220": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005220.jpg", "5789": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005789.jpg", "6714": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006714.jpg", "9150": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009150.jpg", "9555": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009555.jpg", "9829": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009829.jpg", "14386": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014386.jpg", "15111": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015111.jpg", "17008": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017008.jpg", "19898": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019898.jpg", "21298": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021298.jpg", "21381": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021381.jpg", "21538": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021538.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000489.jpg": "...ness tampering has beta “traditional ground for pretrial dete...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000801.jpg": "...ness tampering has beta “traditional ground for pretrial dete...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000980.jpg": "...son” if she is convict  ‘traditional, pract ‘this district am...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001603.jpg": "...he  jithough a, o-year  ‘traditional, practice in. this  sent...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001920.jpg": "...e would normally do im a traditional. bail hedring, because o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003066.jpg": "...air:  of shocking to our traditional sense of justiec, of cof...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003240.jpg": ".... avosta describe € as a.traditional.state  concerned. that.a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003346.jpg": "...area. he ‘believed was. traditional handled. by state: law:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003381.jpg": "...ion, that it was tied to traditional sentencirig, goals, or t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003383.jpg": "...ual offender, orto other traditional sentencing factors such...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004362.jpg": "...avosta describe € das a.traditional.state  ‘involved. ‘in. ....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004468.jpg": "...area. he ‘believed was. traditional handled. by: state: law:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004797.jpg": "...air or  shocking to: our‘traditional, sense of’ justice” .or...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005220.jpg": "...require: an expansion of traditional.  ‘voir dite protocols....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005789.jpg": "...roach of ‘relaxing: the  traditional barriers to ‘opinion’ te...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006714.jpg": "...roach of ‘relaxing: the  traditional barriers to ‘opinion’ te...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009150.jpg": "...“closely linked” to the “traditional categories” of actual an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009555.jpg": "...3 (tracing rule: 6o6 to. traditional  d, 54l!  lbs  english,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009829.jpg": "...“closely linked” to the “traditional categories” of actual an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014386.jpg": "...t the court imelude the ‘traditional \"(evernment ls ast on tr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015111.jpg": "...ims” cvra xeghts.and the traditional. interests protected. by...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017008.jpg": "...t the court imelude the ‘traditional \"(evernment ls ast on tr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019898.jpg": "...son” if she is convict  ‘traditional, pract ‘this district am...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021298.jpg": "...en o  ‘as a ncony to for traditional. criminal restitution:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021381.jpg": "...te ‘the fod & al ines 4  traditional sentencing factors: su s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021538.jpg": "...imitation-with a  6o6 to traditional,  long, historical pedig..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "traditional" (26 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">489-489</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">801-801</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">980-980</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">1603-1603</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">1920-1920</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">3066-3066</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3240-3240</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">3346-3346</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">3381-3383</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">4362-4362</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">4468-4468</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">4797-4797</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">5220-5220</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">5789-5789</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">6714-6714</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">9150-9150</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">9555-9555</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">9829-9829</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">14386-14386</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">15111-15111</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">17008-17008</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">19898-19898</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">21298-21298</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">21381-21381</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">21538-21538</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

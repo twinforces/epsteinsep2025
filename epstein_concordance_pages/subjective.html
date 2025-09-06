@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "subjective"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 3043, "end": 3043, "pages": [3043]}, {"start": 4218, "end": 4225, "pages": [4218, 4223, 4225]}, {"start": 5644, "end": 5644, "pages": [5644]}, {"start": 5682, "end": 5682, "pages": [5682]}, {"start": 5798, "end": 5798, "pages": [5798]}, {"start": 6184, "end": 6184, "pages": [6184]}, {"start": 6257, "end": 6257, "pages": [6257]}, {"start": 6606, "end": 6606, "pages": [6606]}, {"start": 6643, "end": 6643, "pages": [6643]}, {"start": 6723, "end": 6723, "pages": [6723]}, {"start": 7140, "end": 7140, "pages": [7140]}, {"start": 7303, "end": 7304, "pages": [7303, 7304]}, {"start": 7498, "end": 7498, "pages": [7498]}, {"start": 7993, "end": 7994, "pages": [7993, 7994]}, {"start": 8074, "end": 8074, "pages": [8074]}, {"start": 8175, "end": 8176, "pages": [8175, 8176]}, {"start": 8480, "end": 8480, "pages": [8480]}, {"start": 8564, "end": 8564, "pages": [8564]}, {"start": 8644, "end": 8644, "pages": [8644]}, {"start": 8730, "end": 8730, "pages": [8730]}, {"start": 8968, "end": 8968, "pages": [8968]}, {"start": 9449, "end": 9449, "pages": [9449]}, {"start": 10128, "end": 10128, "pages": [10128]}, {"start": 11112, "end": 11112, "pages": [11112]}, {"start": 14599, "end": 14599, "pages": [14599]}, {"start": 15000, "end": 15001, "pages": [15000, 15001]}, {"start": 17220, "end": 17220, "pages": [17220]}];
+        const pageToPath = {"3043": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003043.jpg", "4218": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004218.jpg", "4223": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004223.jpg", "4225": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004225.jpg", "5644": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005644.jpg", "5682": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005682.jpg", "5798": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005798.jpg", "6184": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006184.jpg", "6257": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006257.jpg", "6606": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006606.jpg", "6643": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006643.jpg", "6723": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006723.jpg", "7140": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007140.jpg", "7303": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007303.jpg", "7304": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007304.jpg", "7498": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007498.jpg", "7993": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007993.jpg", "7994": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007994.jpg", "8074": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008074.jpg", "8175": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008175.jpg", "8176": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008176.jpg", "8480": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008480.jpg", "8564": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008564.jpg", "8644": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008644.jpg", "8730": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008730.jpg", "8968": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008968.jpg", "9449": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009449.jpg", "10128": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010128.jpg", "11112": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011112.jpg", "14599": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014599.jpg", "15000": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015000.jpg", "15001": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015001.jpg", "17220": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017220.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003043.jpg": "...ndant has demonstrated a subjective...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004218.jpg": ".... solely on accuser-3’s “subjective experience” of those enc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004223.jpg": "...r-3 will-testify to her “subjective  ‘and, abusive.”  ¢ opp....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004225.jpg": "...d testimony-about her.* ‘subjective experience e? of her law...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005644.jpg": "...|, and. she ‘formed her subjective  opinion based. eritirel...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005682.jpg": "...thstanding accuser-3's  “subjective experienee” of these ‘in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005798.jpg": "...: was based only on. his subjective conclusions after review...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006184.jpg": "...ing lias.  occlrred is.a subjective judgment hirging largely...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006257.jpg": "...ing lias.  occlrred is.a subjective judgment hirging largely...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006606.jpg": "...|, and. she ‘formed her subjective  opinion based. eritirel...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006643.jpg": "...y law, but because  her “subjective @ and.  ce” of these inc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006723.jpg": "...: was based only on. his subjective conclusions after review...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007140.jpg": "...dence about the sort of  subjective feelings of the individu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007303.jpg": "...psychelegieal study of  subjective experience; right?  a. y...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007304.jpg": "...ufdertaken here; l8 this subjective  study bo determine this...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007498.jpg": "...ing lias.  occlrred is.a subjective judgment hirging largely...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007993.jpg": "...psychelegieal study of  subjective experience; right?  a. y...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007994.jpg": "...ufdertaken here; l8 this subjective  study bo determine this...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008074.jpg": "...ing lias.  occlrred is.a subjective judgment hirging largely...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008175.jpg": "...ation of grooming is, a “subjective judgment” notice at 3-4....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008176.jpg": "...ing” carries within. ita subjective,judgment ‘of an.alleged...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008480.jpg": "...e fact of intent, though subjective,  tay be established by:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008564.jpg": "...fact-of ‘intent, though. subjective,  a,  i f  manifestation...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008644.jpg": "...e fact of intent, though subjective,  tay be established by:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008730.jpg": "...e fact of intent, though subjective,  tay be established by:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008968.jpg": "...oo  during deliberatior  subjective and thereby dilute the o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009449.jpg": "...ledge: the:standard is a subjective one. new york rule l:o(k...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010128.jpg": "...ledge: the:standard is a subjective one. new york rule l:o(k...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011112.jpg": "...is true of the witness’s subjective experience ofthe sexual...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014599.jpg": "...e fact ef intent, though subjective, may’  evidence based up...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015000.jpg": "...psychological study off subjective experience; fight?...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015001.jpg": "...undertaken here, is this subjective study to deterine this t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017220.jpg": "...e fact ef intent, though subjective, may’  evidence based up..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "subjective" (33 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">3043-3043</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">4218-4225</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">5644-5644</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">5682-5682</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">5798-5798</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">6184-6184</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">6257-6257</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">6606-6606</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">6643-6643</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">6723-6723</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">7140-7140</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">7303-7304</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">7498-7498</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">7993-7994</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">8074-8074</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">8175-8176</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">8480-8480</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">8564-8564</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">8644-8644</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">8730-8730</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">8968-8968</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">9449-9449</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">10128-10128</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">11112-11112</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">14599-14599</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">15000-15001</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">17220-17220</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

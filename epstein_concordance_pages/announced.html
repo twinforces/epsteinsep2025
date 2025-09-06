@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "announced"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 11, "end": 11, "pages": [11]}, {"start": 733, "end": 733, "pages": [733]}, {"start": 992, "end": 993, "pages": [992, 993]}, {"start": 1522, "end": 1522, "pages": [1522]}, {"start": 1618, "end": 1618, "pages": [1618]}, {"start": 2541, "end": 2541, "pages": [2541]}, {"start": 3185, "end": 3185, "pages": [3185]}, {"start": 4307, "end": 4307, "pages": [4307]}, {"start": 4844, "end": 4844, "pages": [4844]}, {"start": 4860, "end": 4860, "pages": [4860]}, {"start": 4873, "end": 4877, "pages": [4873, 4874, 4875, 4877]}, {"start": 4884, "end": 4884, "pages": [4884]}, {"start": 9617, "end": 9622, "pages": [9617, 9622]}, {"start": 10331, "end": 10331, "pages": [10331]}, {"start": 11454, "end": 11457, "pages": [11454, 11457]}, {"start": 11504, "end": 11504, "pages": [11504]}, {"start": 14860, "end": 14860, "pages": [14860]}, {"start": 15038, "end": 15038, "pages": [15038]}, {"start": 19195, "end": 19195, "pages": [19195]}, {"start": 19225, "end": 19225, "pages": [19225]}, {"start": 19910, "end": 19911, "pages": [19910, 19911]}, {"start": 20951, "end": 20951, "pages": [20951]}, {"start": 21804, "end": 21804, "pages": [21804]}, {"start": 21857, "end": 21857, "pages": [21857]}, {"start": 21887, "end": 21887, "pages": [21887]}, {"start": 22052, "end": 22052, "pages": [22052]}, {"start": 23489, "end": 23489, "pages": [23489]}];
+        const pageToPath = {"11": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000011.jpg", "733": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000733.jpg", "992": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000992.jpg", "993": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000993.jpg", "1522": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001522.jpg", "1618": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001618.jpg", "2541": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002541.jpg", "3185": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003185.jpg", "4307": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004307.jpg", "4844": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004844.jpg", "4860": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004860.jpg", "4873": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004873.jpg", "4874": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004874.jpg", "4875": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004875.jpg", "4877": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004877.jpg", "4884": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004884.jpg", "9617": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009617.jpg", "9622": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009622.jpg", "10331": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010331.jpg", "11454": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011454.jpg", "11457": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011457.jpg", "11504": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011504.jpg", "14860": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014860.jpg", "15038": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015038.jpg", "19195": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019195.jpg", "19225": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019225.jpg", "19910": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019910.jpg", "19911": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019911.jpg", "20951": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020951.jpg", "21804": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021804.jpg", "21857": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021857.jpg", "21887": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021887.jpg", "22052": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022052.jpg", "23489": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023489.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000011.jpg": "...le cot construction ‘it ‘announced l depended ‘on. ‘the: si...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000733.jpg": "...urcau of investigation.  announced. the coriclusion of thei...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000992.jpg": "...to ‘the main house; they announced ‘themselves as. ebi agen...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000993.jpg": "...and after the government announced that: its: investigation...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001522.jpg": "...closure. since the first announced case in new hampshire on...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001618.jpg": "...e: main. house,, they:  ‘announced, themselves as | rected....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002541.jpg": "...be: expected.  7 santis, announced that; he had directed,th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003185.jpg": "...ia  against. current  is;announced that he had aliteeted, t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004307.jpg": "...‘to the: ex  7  santis, announced that; he had directed,th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004844.jpg": "...deliberation, ‘the: jury announced that it could not reach...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004860.jpg": "...-district atorney castor announced tothe public, on  behalf...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004873.jpg": "...olute and. ‘final, or is announced in such.a way that it in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004874.jpg": "...torney castor’s publicly announced decision not to prosecti...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004875.jpg": "...t he considered. he then announced  that he was declining t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004877.jpg": "...announced that he “will reconsider...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004884.jpg": "...ately ten years. when he announced his  declination decisio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009617.jpg": "...o er ooo3o4. both. sides announced ready’ on  bruary: 9, 2o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009622.jpg": "...er, ooo3o4. both. sides announced ready’ on february: 9, 2...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010331.jpg": "...a. week: after the jury: announced :its verdict, on january...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011454.jpg": "...2o2o, the eve  p announced that individuals could b...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011457.jpg": "...ust 2o2l, -whenthe evcp. announced that it had.¢on¢luded it...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011504.jpg": "...na (“jordy”) h. reldman, announced that the program has awa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014860.jpg": "...le cot construction ‘it ‘announced l depended ‘on. ‘the: si...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015038.jpg": "...urcau of investigation.  announced the coriclusion of theif...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019195.jpg": "...losure.  since the first announced case im new hampshire on...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019225.jpg": "...losure.  since the first announced case im new hampshire on...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019910.jpg": "...to ‘the main house; they announced ‘themselves as. ebi agen...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019911.jpg": "...and after the government announced that: its: investigation...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020951.jpg": "...week after. the e jury: announced. its  informed the gourf...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021804.jpg": "...le cot construction ‘it ‘announced l depended ‘on. ‘the: si...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021857.jpg": "...le cot construction ‘it ‘announced l depended ‘on. ‘the: si...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021887.jpg": "...le cot construction ‘it ‘announced l depended ‘on. ‘the: si...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022052.jpg": "...ney general william barr announced follouing jeffrey epstei...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023489.jpg": "...eral michael e. horouitz:announced today the release of a r..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "announced" (34 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">11-11</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">733-733</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">992-993</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">1522-1522</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">1618-1618</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">2541-2541</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3185-3185</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">4307-4307</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">4844-4844</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">4860-4860</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">4873-4877</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">4884-4884</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">9617-9622</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">10331-10331</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">11454-11457</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">11504-11504</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">14860-14860</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">15038-15038</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">19195-19195</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">19225-19225</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">19910-19911</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">20951-20951</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">21804-21804</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">21857-21857</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">21887-21887</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">22052-22052</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">23489-23489</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

@@ -1,0 +1,235 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "somewhere"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 3314, "end": 3314, "pages": [3314]}, {"start": 3769, "end": 3769, "pages": [3769]}, {"start": 3994, "end": 3994, "pages": [3994]}, {"start": 6988, "end": 6988, "pages": [6988]}, {"start": 7144, "end": 7144, "pages": [7144]}, {"start": 9581, "end": 9581, "pages": [9581]}, {"start": 11843, "end": 11843, "pages": [11843]}, {"start": 11850, "end": 11850, "pages": [11850]}, {"start": 12196, "end": 12196, "pages": [12196]}, {"start": 12455, "end": 12455, "pages": [12455]}, {"start": 12483, "end": 12483, "pages": [12483]}, {"start": 13056, "end": 13056, "pages": [13056]}, {"start": 13088, "end": 13088, "pages": [13088]}, {"start": 13101, "end": 13101, "pages": [13101]}, {"start": 13148, "end": 13148, "pages": [13148]}, {"start": 13356, "end": 13356, "pages": [13356]}, {"start": 13453, "end": 13453, "pages": [13453]}, {"start": 13467, "end": 13467, "pages": [13467]}, {"start": 13515, "end": 13515, "pages": [13515]}, {"start": 13711, "end": 13711, "pages": [13711]}, {"start": 13761, "end": 13761, "pages": [13761]}, {"start": 13912, "end": 13912, "pages": [13912]}, {"start": 14138, "end": 14138, "pages": [14138]}, {"start": 14482, "end": 14482, "pages": [14482]}, {"start": 14701, "end": 14701, "pages": [14701]}, {"start": 14914, "end": 14914, "pages": [14914]}, {"start": 16336, "end": 16336, "pages": [16336]}, {"start": 16386, "end": 16386, "pages": [16386]}, {"start": 16536, "end": 16536, "pages": [16536]}, {"start": 16761, "end": 16761, "pages": [16761]}, {"start": 17103, "end": 17103, "pages": [17103]}, {"start": 17319, "end": 17319, "pages": [17319]}, {"start": 17433, "end": 17433, "pages": [17433]}, {"start": 17440, "end": 17440, "pages": [17440]}, {"start": 17785, "end": 17785, "pages": [17785]}, {"start": 18043, "end": 18043, "pages": [18043]}, {"start": 18071, "end": 18071, "pages": [18071]}, {"start": 18641, "end": 18641, "pages": [18641]}, {"start": 18673, "end": 18673, "pages": [18673]}, {"start": 18686, "end": 18686, "pages": [18686]}, {"start": 18733, "end": 18733, "pages": [18733]}, {"start": 18940, "end": 18940, "pages": [18940]}, {"start": 19037, "end": 19037, "pages": [19037]}, {"start": 19051, "end": 19051, "pages": [19051]}, {"start": 19099, "end": 19099, "pages": [19099]}, {"start": 20836, "end": 20839, "pages": [20836, 20839]}, {"start": 22680, "end": 22680, "pages": [22680]}];
+        const pageToPath = {"3314": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003314.jpg", "3769": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003769.jpg", "3994": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003994.jpg", "6988": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006988.jpg", "7144": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007144.jpg", "9581": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009581.jpg", "11843": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011843.jpg", "11850": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011850.jpg", "12196": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012196.jpg", "12455": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012455.jpg", "12483": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012483.jpg", "13056": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013056.jpg", "13088": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013088.jpg", "13101": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013101.jpg", "13148": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013148.jpg", "13356": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013356.jpg", "13453": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013453.jpg", "13467": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013467.jpg", "13515": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013515.jpg", "13711": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013711.jpg", "13761": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013761.jpg", "13912": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013912.jpg", "14138": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014138.jpg", "14482": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014482.jpg", "14701": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014701.jpg", "14914": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014914.jpg", "16336": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016336.jpg", "16386": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016386.jpg", "16536": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016536.jpg", "16761": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016761.jpg", "17103": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017103.jpg", "17319": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017319.jpg", "17433": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017433.jpg", "17440": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017440.jpg", "17785": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017785.jpg", "18043": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018043.jpg", "18071": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018071.jpg", "18641": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018641.jpg", "18673": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018673.jpg", "18686": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018686.jpg", "18733": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018733.jpg", "18940": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018940.jpg", "19037": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019037.jpg", "19051": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019051.jpg", "19099": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019099.jpg", "20836": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020836.jpg", "20839": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020839.jpg", "22680": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022680.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003314.jpg": "...our tenacity; he’  ‘d be somewhere suni another child” ss...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003769.jpg": "...d counties”—i,¢:,, from. somewhere other than: the place of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003994.jpg": "...s to load, and. that: i  somewhere in:the mailroom.at mdg....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006988.jpg": "...ify at least, 5o furers, somewhere in the 5o t6 6o prange....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007144.jpg": "...of't wart  to guess, but somewhere between four and six ‘p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009581.jpg": "...return flight as. “going somewhere away from... . new: mexi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011843.jpg": "...t epstein needed te ely  somewhere; isn't that right? a. “e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011850.jpg": "...at epstein needed to fly somewhere, ‘you would need to be g...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012196.jpg": "...professional agent?  a. somewhere im the semiorn year, yes...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012455.jpg": "...you then drive virginia somewhere? a. t dreve from her nos...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012483.jpg": "...nd puke them in a drawer somewhere and keep them to  record...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013056.jpg": "...afiether set, there was somewhere between four and ten tho...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013088.jpg": "...orida or in new york or  somewhere else; right?...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013101.jpg": "...@. and then did you move somewhere from new  a. yes, i move...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013148.jpg": "...you emeiber it, being?  somewhere between $l million and $...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013356.jpg": "...dates on -- at. least, somewhere on, ‘ehe page.  the cour...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013453.jpg": "...knew he was going to go somewhere, say, in, @ day on two,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013467.jpg": "...'s an 6xample, right, of somewhere where you,  might. put o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013515.jpg": "...om  q. he may bave laved somewhere else before that\"  ie  q...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013711.jpg": "...d.  a. l'm suse they are somewhere. this was before digital...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013761.jpg": "...n't. ask, you, to travel somewhere; comrect?  a. that\"s 46r...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013912.jpg": "...th jeffrey; she would be somewhere 6l5e.  q. dad you help a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014138.jpg": "..., everdell: it's in here somewhere, your honor. as part 6f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014482.jpg": "...t, the geyermment seized somewhere near  =  38,ooo photogra...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014701.jpg": "...toee) vs  going, hetie; somewhere €lse,; somewhere away fr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014914.jpg": "....  then, i typically do: somewhere between ‘eight and ten h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016336.jpg": "...d.  a. l'm suse they are somewhere. this was before digital...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016386.jpg": "...n't. ask, you, to travel somewhere; comrect?  a. that\"s 46r...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016536.jpg": "...th jeffrey; she would be somewhere 6l5e.  q. dad you help a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016761.jpg": "..., everdell: it's in here somewhere, your honor. as part 6f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017103.jpg": "...t, the geyermment seized somewhere near  =  38,ooo photogra...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017319.jpg": "...toee) vs  going, hetie; somewhere €lse,; somewhere away fr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017433.jpg": "...t epstein needed te ely  somewhere; isn't that right? a. “e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017440.jpg": "...at epstein needed to fly somewhere, ‘you would need to be g...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017785.jpg": "...professional agent?  a. somewhere im the semiorn year, yes...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018043.jpg": "...you then drive virginia somewhere? a. t dreve from her nos...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018071.jpg": "...nd puke them in a drawer somewhere and keep them to  record...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018641.jpg": "...afiether set, there was somewhere between four and ten tho...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018673.jpg": "...orida or in new york or  somewhere else; right?...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018686.jpg": "...@. and then did you move somewhere from new  a. yes, i move...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018733.jpg": "...you emeiber it, being?  somewhere between $l million and $...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018940.jpg": "...dates on -- at. least, somewhere on, ‘ehe page.  the cour...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019037.jpg": "...knew he was going to go somewhere, say, in, @ day on two,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019051.jpg": "...'s an 6xample, right, of somewhere where you,  might. put o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019099.jpg": "...om  q. he may bave laved somewhere else before that\"  ie  q...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020836.jpg": "...eturning, or it's; going somewhere else; lt..s going somewh...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020839.jpg": "...g, home, semewhere else, somewhere away from mr. epstein,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022680.jpg": "...int; she'siou working = ‘somewhere’ ‘ele. ‘he stopped. seei..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "somewhere" (48 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">3314-3314</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">3769-3769</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">3994-3994</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">6988-6988</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">7144-7144</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">9581-9581</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">11843-11843</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">11850-11850</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">12196-12196</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">12455-12455</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">12483-12483</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">13056-13056</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">13088-13088</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">13101-13101</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">13148-13148</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">13356-13356</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">13453-13453</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">13467-13467</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">13515-13515</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">13711-13711</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">13761-13761</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">13912-13912</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">14138-14138</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">14482-14482</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">14701-14701</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">14914-14914</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">16336-16336</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">16386-16386</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">16536-16536</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">16761-16761</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">17103-17103</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">17319-17319</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">17433-17433</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">17440-17440</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">17785-17785</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">18043-18043</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">18071-18071</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">18641-18641</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">18673-18673</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">18686-18686</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">18733-18733</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">18940-18940</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">19037-19037</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">19051-19051</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">19099-19099</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(45, 0); return false;">20836-20839</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(46, 0); return false;">22680-22680</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

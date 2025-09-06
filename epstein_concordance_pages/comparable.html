@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "comparable"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1709, "end": 1709, "pages": [1709]}, {"start": 1717, "end": 1717, "pages": [1717]}, {"start": 1892, "end": 1892, "pages": [1892]}, {"start": 2800, "end": 2800, "pages": [2800]}, {"start": 2873, "end": 2873, "pages": [2873]}, {"start": 3148, "end": 3148, "pages": [3148]}, {"start": 3628, "end": 3629, "pages": [3628, 3629]}, {"start": 4254, "end": 4254, "pages": [4254]}, {"start": 10244, "end": 10245, "pages": [10244, 10245]}, {"start": 10356, "end": 10359, "pages": [10356, 10359]}, {"start": 10467, "end": 10467, "pages": [10467]}, {"start": 10481, "end": 10481, "pages": [10481]}, {"start": 12353, "end": 12353, "pages": [12353]}, {"start": 13877, "end": 13877, "pages": [13877]}, {"start": 15012, "end": 15012, "pages": [15012]}, {"start": 16501, "end": 16501, "pages": [16501]}, {"start": 17941, "end": 17941, "pages": [17941]}, {"start": 20976, "end": 20979, "pages": [20976, 20979]}, {"start": 21707, "end": 21707, "pages": [21707]}];
+        const pageToPath = {"1709": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001709.jpg", "1717": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001717.jpg", "1892": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001892.jpg", "2800": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002800.jpg", "2873": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002873.jpg", "3148": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003148.jpg", "3628": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003628.jpg", "3629": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003629.jpg", "4254": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004254.jpg", "10244": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010244.jpg", "10245": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010245.jpg", "10356": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010356.jpg", "10359": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010359.jpg", "10467": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010467.jpg", "10481": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010481.jpg", "12353": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012353.jpg", "13877": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013877.jpg", "15012": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015012.jpg", "16501": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016501.jpg", "17941": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017941.jpg", "20976": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020976.jpg", "20979": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020979.jpg", "21707": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021707.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001709.jpg": "...l, should be granted, a: comparable ‘amount, of: time:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001717.jpg": "...l, should be granted, a: comparable ‘amount, of: time:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001892.jpg": "...urce of is  acopee: : l  comparable gireumstances li  wy oy...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002800.jpg": "...on the proposed subpoena comparable t fo quash, the law’ fir...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002873.jpg": "...her the information. (or comparable. information) is already...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003148.jpg": "...e executive branch, or.a comparable state:  ‘authority: invo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003628.jpg": "...fied jury: wheel and the comparable demogr.  aphies of the w...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003629.jpg": "...‘the date on which the  comparable demographies of the comm...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004254.jpg": "...unaware of any ‘case: of comparable complexity: and.scope in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010244.jpg": "...nse did. not propose any comparable  dire proeeeess whe indi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010245.jpg": "...ked about faitilial abu: comparable follou-up quest lons.  q...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010356.jpg": "...votr dire in this ease  comparable jurors evinecs. that: ju...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010359.jpg": "...ndant had. not-proposed. comparable questions  ay  duritig...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010467.jpg": "...d have been.exposed to a comparable guideline range. justice...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010481.jpg": "...9. solitary confinement comparable: to  n. her detention. i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012353.jpg": "...iterature  nnand: tiana  comparable to the pimp-prostitute c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013877.jpg": "...8e@xual, abuse; it seems comparable to me that dr. leftus ¢a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015012.jpg": "...rker context, is there a comparable sort of dialogue and dis...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016501.jpg": "...8e@xual, abuse; it seems comparable to me that dr. leftus ¢a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017941.jpg": "...iterature  nnand: tiana  comparable to the pimp-prostitute c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020976.jpg": "...ir dire:in this: case of comparable:jurors: evinces that jur...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020979.jpg": "...fendantzhad ‘not propo d comparable questions  during the: v...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021707.jpg": "...ential ingredient’ test” comparable to fhe categor: ical. ap..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "comparable" (23 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1709-1709</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1717-1717</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1892-1892</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">2800-2800</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">2873-2873</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">3148-3148</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3628-3629</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">4254-4254</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">10244-10245</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">10356-10359</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">10467-10467</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">10481-10481</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">12353-12353</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">13877-13877</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">15012-15012</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">16501-16501</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">17941-17941</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">20976-20979</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">21707-21707</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

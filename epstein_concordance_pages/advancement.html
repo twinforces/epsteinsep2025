@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "advancement"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 4259, "end": 4259, "pages": [4259]}, {"start": 7511, "end": 7511, "pages": [7511]}, {"start": 7526, "end": 7526, "pages": [7526]}, {"start": 7544, "end": 7544, "pages": [7544]}, {"start": 7564, "end": 7565, "pages": [7564, 7565]}, {"start": 7600, "end": 7600, "pages": [7600]}, {"start": 7849, "end": 7849, "pages": [7849]}, {"start": 12263, "end": 12264, "pages": [12263, 12264]}, {"start": 12270, "end": 12271, "pages": [12270, 12271]}, {"start": 12278, "end": 12278, "pages": [12278]}, {"start": 15371, "end": 15371, "pages": [15371]}, {"start": 15426, "end": 15426, "pages": [15426]}, {"start": 16044, "end": 16047, "pages": [16044, 16047]}, {"start": 17852, "end": 17853, "pages": [17852, 17853]}, {"start": 17859, "end": 17860, "pages": [17859, 17860]}, {"start": 17867, "end": 17867, "pages": [17867]}];
+        const pageToPath = {"4259": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004259.jpg", "7511": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007511.jpg", "7526": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007526.jpg", "7544": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007544.jpg", "7564": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007564.jpg", "7565": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007565.jpg", "7600": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007600.jpg", "7849": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007849.jpg", "12263": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012263.jpg", "12264": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012264.jpg", "12270": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012270.jpg", "12271": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012271.jpg", "12278": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012278.jpg", "15371": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015371.jpg", "15426": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015426.jpg", "16044": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016044.jpg", "16047": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016047.jpg", "17852": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017852.jpg", "17853": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017853.jpg", "17859": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017859.jpg", "17860": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017860.jpg", "17867": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017867.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004259.jpg": "...a conceitant two week.  advancement of the:dates forthe gove...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007511.jpg": "...ie  val!  \\ssoc. efor th advancement  american assoviation fo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007526.jpg": "...the emi, be y y. for the advancement:  994  ee. (l994) viewin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007544.jpg": "...nd  rere fe  gouncil for advancement ‘of scienec writing, dur...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007564.jpg": "...ican association for the advancement of science: member, l98l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007565.jpg": "...l978 association for the advancement of psychotherapy.  membe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007600.jpg": "...the law, ‘group for the advancement of psychiatry: the menta...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007849.jpg": "...outstanding: scientific advancement....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012263.jpg": "...by af individual in gur advancement department who's charged...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012264.jpg": "...e, our vice president of advancement  or president would hand...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012270.jpg": "...hen.'s vice president of advancement to mr. epstein, providin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012271.jpg": "...brose, vice president of advancement .  mr. rohrbach: ms. dre...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012278.jpg": "...en, imterlothen'\"s wiee  advancement, that we were havang the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015371.jpg": "...688/_/6o, eur; customs ; advancement | eur freooos25l 9o32l ‘...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015426.jpg": "...l 27.75: ‘44°oo custons ‘advancement fee: ukl 45o 23 fa ee ee...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016044.jpg": "...res. derit institutional advancement enclosures: inventory li...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016047.jpg": "...l l995...  tnotitutional advancement...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017852.jpg": "...by af individual in gur advancement department who's charged...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017853.jpg": "...e, our vice president of advancement  or president would hand...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017859.jpg": "...hen.'s vice president of advancement to mr. epstein, providin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017860.jpg": "...brose, vice president of advancement .  mr. rohrbach: ms. dre...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017867.jpg": "...en, imterlothen'\"s wiee  advancement, that we were havang the..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "advancement" (22 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">4259-4259</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">7511-7511</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">7526-7526</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">7544-7544</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">7564-7565</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">7600-7600</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">7849-7849</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">12263-12264</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">12270-12271</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">12278-12278</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">15371-15371</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">15426-15426</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">16044-16047</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">17852-17853</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">17859-17860</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">17867-17867</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

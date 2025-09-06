@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "suspension"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 967, "end": 967, "pages": [967]}, {"start": 1296, "end": 1296, "pages": [1296]}, {"start": 1591, "end": 1591, "pages": [1591]}, {"start": 2666, "end": 2669, "pages": [2666, 2669]}, {"start": 2999, "end": 2999, "pages": [2999]}, {"start": 9445, "end": 9445, "pages": [9445]}, {"start": 10124, "end": 10124, "pages": [10124]}, {"start": 11350, "end": 11352, "pages": [11350, 11351, 11352]}, {"start": 19885, "end": 19885, "pages": [19885]}, {"start": 20214, "end": 20214, "pages": [20214]}, {"start": 21108, "end": 21108, "pages": [21108]}, {"start": 22093, "end": 22093, "pages": [22093]}];
+        const pageToPath = {"967": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000967.jpg", "1296": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001296.jpg", "1591": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001591.jpg", "2666": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002666.jpg", "2669": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002669.jpg", "2999": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002999.jpg", "9445": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009445.jpg", "10124": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010124.jpg", "11350": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011350.jpg", "11351": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011351.jpg", "11352": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011352.jpg", "19885": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019885.jpg", "20214": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020214.jpg", "21108": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021108.jpg", "22093": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022093.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000967.jpg": "...sis. jd, at: *3.. ‘that  suspension persists:to this: day.*...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001296.jpg": "...a.  state of near total suspension for another six:months,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001591.jpg": "...this, which. wil  297%  suspension persists to this day | r...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002666.jpg": "...ch construed the wartime suspension of limitations.  act's e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002669.jpg": "...first; like the wartime suspension. act in. bridges;  § 328...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002999.jpg": "...concerned. the wartime:  suspension of limitations act (“wsl...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009445.jpg": "...vy  sif based  ae  ra :  suspension to'ayin ispensic  herlod...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010124.jpg": "...vy  sif based  ae  ra :  suspension to'ayin ispensic  herlod...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011350.jpg": "...ormey’s. disbariticnt of suspension. are not.  united states...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011351.jpg": "...qluiestions about his. suspension. from-.practice from. th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011352.jpg": "...ourt;that:the: [atorney] suspension document was  admissible...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019885.jpg": "...sis. jd, at: *3.. ‘that  suspension persists:to this: day.*...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020214.jpg": "...a.  state of near total suspension for another six:months,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021108.jpg": "...approdch to the wartime suspension of limitations act (  wa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022093.jpg": "...s: invelved. was given a.suspension. (mot. 6). but. thomas i..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "suspension" (15 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">967-967</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1296-1296</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1591-1591</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">2666-2669</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">2999-2999</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">9445-9445</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">10124-10124</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">11350-11352</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">19885-19885</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">20214-20214</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">21108-21108</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">22093-22093</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

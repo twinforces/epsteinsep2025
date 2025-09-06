@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "companion"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 4755, "end": 4755, "pages": [4755]}, {"start": 5935, "end": 5935, "pages": [5935]}, {"start": 8997, "end": 8997, "pages": [8997]}, {"start": 9062, "end": 9062, "pages": [9062]}, {"start": 9753, "end": 9753, "pages": [9753]}, {"start": 11713, "end": 11713, "pages": [11713]}, {"start": 16158, "end": 16158, "pages": [16158]}, {"start": 20984, "end": 20984, "pages": [20984]}];
+        const pageToPath = {"4755": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004755.jpg", "5935": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005935.jpg", "8997": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008997.jpg", "9062": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009062.jpg", "9753": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009753.jpg", "11713": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011713.jpg", "16158": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016158.jpg", "20984": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020984.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004755.jpg": "...ortant, ‘was’ the inmate companion pregram, ehe reasgqn why...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005935.jpg": "...& i; steinke * eas _ ab companion io h (pp. 259 265 5). lo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008997.jpg": "...ar)  juror 5o” ‘and, its companion, motion:remain ‘under se...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009062.jpg": "...enor, juror 5o” and ‘its companion motion. remain ‘under sc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009753.jpg": "...enor, juror 5o” and ‘its companion motion. remain ‘under sc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011713.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016158.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020984.jpg": "...stimony from.  ‘longtime companion.. the:  wie  smultiplerv..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "companion" (8 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">4755-4755</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">5935-5935</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">8997-8997</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">9062-9062</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">9753-9753</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">11713-11713</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">16158-16158</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">20984-20984</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

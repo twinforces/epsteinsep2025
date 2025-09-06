@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "girlfriend"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 7423, "end": 7423, "pages": [7423]}, {"start": 9102, "end": 9102, "pages": [9102]}, {"start": 9127, "end": 9128, "pages": [9127, 9128]}, {"start": 9793, "end": 9793, "pages": [9793]}, {"start": 9806, "end": 9807, "pages": [9806, 9807]}, {"start": 10299, "end": 10299, "pages": [10299]}, {"start": 10542, "end": 10542, "pages": [10542]}, {"start": 11367, "end": 11368, "pages": [11367, 11368]}, {"start": 11714, "end": 11714, "pages": [11714]}, {"start": 11906, "end": 11906, "pages": [11906]}, {"start": 12392, "end": 12392, "pages": [12392]}, {"start": 13314, "end": 13314, "pages": [13314]}, {"start": 13487, "end": 13487, "pages": [13487]}, {"start": 13500, "end": 13500, "pages": [13500]}, {"start": 13521, "end": 13521, "pages": [13521]}, {"start": 14227, "end": 14227, "pages": [14227]}, {"start": 16159, "end": 16159, "pages": [16159]}, {"start": 16850, "end": 16850, "pages": [16850]}, {"start": 17496, "end": 17496, "pages": [17496]}, {"start": 17980, "end": 17980, "pages": [17980]}, {"start": 18898, "end": 18898, "pages": [18898]}, {"start": 19071, "end": 19071, "pages": [19071]}, {"start": 19084, "end": 19084, "pages": [19084]}, {"start": 19105, "end": 19105, "pages": [19105]}, {"start": 21664, "end": 21664, "pages": [21664]}, {"start": 22053, "end": 22053, "pages": [22053]}];
+        const pageToPath = {"7423": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007423.jpg", "9102": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009102.jpg", "9127": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009127.jpg", "9128": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009128.jpg", "9793": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009793.jpg", "9806": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009806.jpg", "9807": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009807.jpg", "10299": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010299.jpg", "10542": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010542.jpg", "11367": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011367.jpg", "11368": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011368.jpg", "11714": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011714.jpg", "11906": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011906.jpg", "12392": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012392.jpg", "13314": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013314.jpg", "13487": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013487.jpg", "13500": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013500.jpg", "13521": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013521.jpg", "14227": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014227.jpg", "16159": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016159.jpg", "16850": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016850.jpg", "17496": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017496.jpg", "17980": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017980.jpg", "18898": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018898.jpg", "19071": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019071.jpg", "19084": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019084.jpg", "19105": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019105.jpg", "21664": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021664.jpg", "22053": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022053.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007423.jpg": "...defendant was epstein’s: girlfriend is:relevant and probativ...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009102.jpg": "...died that he  had had a girlfriend, just from 4 fiews artic...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009127.jpg": "...defendant. was epstein’s girlfriend, but he stated that he h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009128.jpg": "...n-had died.that-he had.a girlfriend,” and reaffirmed that he...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009793.jpg": "...died that he  had had a girlfriend, just from 4 fiews artic...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009806.jpg": "...defendant. was epstein’s girlfriend, but he stated that he h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009807.jpg": "...n-had died.that-he had.a girlfriend,” and reaffirmed that he...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010299.jpg": "...cessarily consider an ex-girlfriend. to be “someone: close:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010542.jpg": "...defendant was epstein’s girlfriend for many-years,, until....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011367.jpg": "...a” was mr. epstein’s “ex-girlfriend and they stayed,  eo ina...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011368.jpg": "...va was .mr. epstcin’s ex-girlfriend and  ar. visoski testifi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011714.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011906.jpg": "...u started; she was an ex-girlfriend; right?...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012392.jpg": "...e == ms. maxwell was the girlfriend of mr. epstein. i unders...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013314.jpg": "...the  first name of your girlfriend?  a. carolyn....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013487.jpg": "...she was epstein's former girlfriend, wasn't she?  @. and bef...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013500.jpg": "...‘you, femember hex as @ girlfriend ef epstein s?  brats oka...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013521.jpg": "...were sort of  boyfriend=girlfriend, that sort of relatienss...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014227.jpg": "...no)  a, she was a girlfriend ef jeffrey epstein\"  ea...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016159.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016850.jpg": "...no)  a, she was a girlfriend ef jeffrey epstein\"  ea...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017496.jpg": "...u started; she was an ex-girlfriend; right?...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017980.jpg": "...e == ms. maxwell was the girlfriend of mr. epstein. i unders...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018898.jpg": "...the  first name of your girlfriend?  a. carolyn....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019071.jpg": "...she was epstein's former girlfriend, wasn't she?  @. and bef...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019084.jpg": "...‘you, femember hex as @ girlfriend ef epstein s?  brats oka...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019105.jpg": "...were sort of  boyfriend=girlfriend, that sort of relatienss...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021664.jpg": "...to her role.as epstein’s girlfriend, max- well also: stiperv...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022053.jpg": "...n’ 5 on-again- offtagain girlfriend and longtime associate w..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "girlfriend" (29 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">7423-7423</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">9102-9102</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">9127-9128</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">9793-9793</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">9806-9807</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">10299-10299</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">10542-10542</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">11367-11368</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">11714-11714</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">11906-11906</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">12392-12392</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">13314-13314</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">13487-13487</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">13500-13500</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">13521-13521</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">14227-14227</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">16159-16159</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">16850-16850</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">17496-17496</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">17980-17980</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">18898-18898</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">19071-19071</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">19084-19084</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">19105-19105</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">21664-21664</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">22053-22053</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

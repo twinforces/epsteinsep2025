@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "perceived"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1042, "end": 1042, "pages": [1042]}, {"start": 1915, "end": 1915, "pages": [1915]}, {"start": 2056, "end": 2056, "pages": [2056]}, {"start": 3165, "end": 3165, "pages": [3165]}, {"start": 3245, "end": 3245, "pages": [3245]}, {"start": 3369, "end": 3369, "pages": [3369]}, {"start": 3661, "end": 3661, "pages": [3661]}, {"start": 4476, "end": 4476, "pages": [4476]}, {"start": 4491, "end": 4491, "pages": [4491]}, {"start": 5497, "end": 5497, "pages": [5497]}, {"start": 5753, "end": 5753, "pages": [5753]}, {"start": 6459, "end": 6459, "pages": [6459]}, {"start": 6690, "end": 6690, "pages": [6690]}, {"start": 10390, "end": 10390, "pages": [10390]}, {"start": 10495, "end": 10495, "pages": [10495]}, {"start": 10697, "end": 10697, "pages": [10697]}, {"start": 19960, "end": 19960, "pages": [19960]}, {"start": 21224, "end": 21224, "pages": [21224]}, {"start": 21359, "end": 21359, "pages": [21359]}, {"start": 21749, "end": 21749, "pages": [21749]}, {"start": 21832, "end": 21832, "pages": [21832]}];
+        const pageToPath = {"1042": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001042.jpg", "1915": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001915.jpg", "2056": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002056.jpg", "3165": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003165.jpg", "3245": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003245.jpg", "3369": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003369.jpg", "3661": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003661.jpg", "4476": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004476.jpg", "4491": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004491.jpg", "5497": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005497.jpg", "5753": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005753.jpg", "6459": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006459.jpg", "6690": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006690.jpg", "10390": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010390.jpg", "10495": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010495.jpg", "10697": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010697.jpg", "19960": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019960.jpg", "21224": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021224.jpg", "21359": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021359.jpg", "21749": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021749.jpg", "21832": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021832.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001042.jpg": "...wing her victims in with perceived  caring; only to entrap...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001915.jpg": "...wing her victims in with perceived  caning; only to entrap...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002056.jpg": "...d you are balancing any: perceived t tisk against the odds:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003165.jpg": ".... shop to achieve: some: perceived advantage. rather, it:so...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003245.jpg": "...[her] place? by him. she-perceived that ) menchel s making...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003369.jpg": "...ste we sssa tomes.  she perceived. no reason, to o obj ct....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003661.jpg": "...are designed. to remedy perceived deficiencies in. existin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004476.jpg": "...otivated. by-what they- ‘perceived. to. be best forthe: cas...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004491.jpg": "...: mould'be charged,  she perceived. no reason, to o obj ct....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005497.jpg": "...in order to:teetify the perceived injustice that the npa ‘...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005753.jpg": "...ter weight on evidence:  perceived. to haverthe:l impr. ima...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006459.jpg": "...in order to:teetify the perceived injustice that the npa ‘...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006690.jpg": "...ter weight on evidence:  perceived. to haverthe:l impr. ima...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010390.jpg": "...only im. orderto avert a perceived miscarriage of justice?...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010495.jpg": "...een’ to, have wealth aid perceived “undeserved’ social. pos...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010697.jpg": "...: use theit. actual. or ‘perceived. pouer. to.manipulate an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019960.jpg": "...wing her victims in with perceived  caring; only to entrap...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021224.jpg": "...eeting with. lourie they perceived lourie t gis  that a nes...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021359.jpg": "...stein’s ‘appeal and. who perceived. acosta to be:in favor o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021749.jpg": "...d cit.  l985) to-resolve perceived ambiguities was. an erro...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021832.jpg": "...teuit in annabi, whereby perceived ambiguities'in the scope..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "perceived" (21 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1042-1042</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1915-1915</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">2056-2056</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3165-3165</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">3245-3245</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">3369-3369</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3661-3661</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">4476-4476</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">4491-4491</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">5497-5497</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">5753-5753</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">6459-6459</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">6690-6690</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">10390-10390</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">10495-10495</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">10697-10697</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">19960-19960</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">21224-21224</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">21359-21359</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">21749-21749</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">21832-21832</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "disability"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 6190, "end": 6190, "pages": [6190]}, {"start": 6235, "end": 6235, "pages": [6235]}, {"start": 6263, "end": 6263, "pages": [6263]}, {"start": 6289, "end": 6289, "pages": [6289]}, {"start": 7288, "end": 7288, "pages": [7288]}, {"start": 7504, "end": 7504, "pages": [7504]}, {"start": 7631, "end": 7631, "pages": [7631]}, {"start": 7674, "end": 7676, "pages": [7674, 7676]}, {"start": 7978, "end": 7978, "pages": [7978]}, {"start": 8080, "end": 8080, "pages": [8080]}, {"start": 8133, "end": 8135, "pages": [8133, 8135]}, {"start": 9032, "end": 9032, "pages": [9032]}, {"start": 9723, "end": 9723, "pages": [9723]}, {"start": 11479, "end": 11479, "pages": [11479]}, {"start": 12340, "end": 12340, "pages": [12340]}, {"start": 14985, "end": 14985, "pages": [14985]}, {"start": 17928, "end": 17928, "pages": [17928]}, {"start": 20775, "end": 20775, "pages": [20775]}];
+        const pageToPath = {"6190": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006190.jpg", "6235": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006235.jpg", "6263": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006263.jpg", "6289": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006289.jpg", "7288": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007288.jpg", "7504": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007504.jpg", "7631": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007631.jpg", "7674": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007674.jpg", "7676": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007676.jpg", "7978": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007978.jpg", "8080": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008080.jpg", "8133": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008133.jpg", "8135": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008135.jpg", "9032": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009032.jpg", "9723": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009723.jpg", "11479": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011479.jpg", "12340": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012340.jpg", "14985": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014985.jpg", "17928": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017928.jpg", "20775": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020775.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006190.jpg": "...y times.  _ intellectual disability: intellectual: disabili...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006235.jpg": "...trior  and, intellectual disability ‘at icast involve dr. di...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006263.jpg": "...y times.  _ intellectual disability: intellectual: disabili...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006289.jpg": "...al ‘dis  intellect tual, disability id; mental retarda- tien...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007288.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007504.jpg": "...y times.  _ intellectual disability: intellectual: disabili...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007631.jpg": "..., l985  directed \"mental disability benefits,\" a course at t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007674.jpg": "...maryland  persons with:a disability— penalties,,  house judi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007676.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007978.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008080.jpg": "...y times.  _ intellectual disability: intellectual: disabili...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008133.jpg": "...maryland  persons with:a disability— penalties,,  house judi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008135.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009032.jpg": "...rk that result. in. any  disability: or prolonged pain, and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009723.jpg": "...rk that result. in. any  disability: or prolonged pain, and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011479.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012340.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014985.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017928.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020775.jpg": "...w duty, orsataches a new disability, an  respect totransacti..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "disability" (20 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">6190-6190</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">6235-6235</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">6263-6263</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">6289-6289</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">7288-7288</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">7504-7504</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">7631-7631</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">7674-7676</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">7978-7978</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">8080-8080</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">8133-8135</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">9032-9032</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">9723-9723</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">11479-11479</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">12340-12340</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">14985-14985</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">17928-17928</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">20775-20775</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "intellectual"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 2029, "end": 2029, "pages": [2029]}, {"start": 2065, "end": 2065, "pages": [2065]}, {"start": 3203, "end": 3203, "pages": [3203]}, {"start": 4325, "end": 4325, "pages": [4325]}, {"start": 5632, "end": 5632, "pages": [5632]}, {"start": 5791, "end": 5791, "pages": [5791]}, {"start": 6186, "end": 6190, "pages": [6186, 6190]}, {"start": 6220, "end": 6220, "pages": [6220]}, {"start": 6235, "end": 6235, "pages": [6235]}, {"start": 6259, "end": 6263, "pages": [6259, 6263]}, {"start": 6594, "end": 6594, "pages": [6594]}, {"start": 6716, "end": 6716, "pages": [6716]}, {"start": 7500, "end": 7504, "pages": [7500, 7504]}, {"start": 7510, "end": 7510, "pages": [7510]}, {"start": 8076, "end": 8080, "pages": [8076, 8080]}, {"start": 12340, "end": 12340, "pages": [12340]}, {"start": 17928, "end": 17928, "pages": [17928]}];
+        const pageToPath = {"2029": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002029.jpg", "2065": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002065.jpg", "3203": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003203.jpg", "4325": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004325.jpg", "5632": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005632.jpg", "5791": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005791.jpg", "6186": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006186.jpg", "6190": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006190.jpg", "6220": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006220.jpg", "6235": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006235.jpg", "6259": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006259.jpg", "6263": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006263.jpg", "6594": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006594.jpg", "6716": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006716.jpg", "7500": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007500.jpg", "7504": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007504.jpg", "7510": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007510.jpg", "8076": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008076.jpg", "8080": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008080.jpg", "12340": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012340.jpg", "17928": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017928.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002029.jpg": "...very i , singe 2oo3,  y intellectual and: passionate caring....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002065.jpg": "...re tneome derived ‘from ‘intellectual-property-rights; axation...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003203.jpg": "...of ‘nforeement  seatens  intellectual-property‘section, and, m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004325.jpg": "...‘headed. by  bnforeemene intellectual: ‘property’ scotion, and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005632.jpg": "...oom, the same  level. of intellectual rigerthat characterizes,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005791.jpg": "...rtroom the same level.of intellectual rigor that. 326 us. at l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006186.jpg": "...r, ‘and gerry edelman’s intellectual: pouer—and acknouledged,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006190.jpg": "..., and hou many times.  _ intellectual disability: intellectual...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006220.jpg": "...(id. 2 at: lo).  de  e “intellectual. disabilit ww. hout id,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006235.jpg": "...isorder, ‘histrior  and, intellectual disability ‘at icast inv...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006259.jpg": "...r, ‘and gerry edelman’s intellectual: pouer—and acknouledged,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006263.jpg": "..., and hou many times.  _ intellectual disability: intellectual...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006594.jpg": "...oom, the same  level. of intellectual rigerthat characterizes,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006716.jpg": "...rtroom the same level.of intellectual rigor that. 326 us. at l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007500.jpg": "...r, ‘and gerry edelman’s intellectual: pouer—and acknouledged,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007504.jpg": "..., and hou many times.  _ intellectual disability: intellectual...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007510.jpg": "...sig snificant lifetime  intellectual. contributions to the ba...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008076.jpg": "...r, ‘and gerry edelman’s intellectual: pouer—and acknouledged,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008080.jpg": "..., and hou many times.  _ intellectual disability: intellectual...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012340.jpg": "...dren  with cognitive and intellectual disabilities; for exampl...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017928.jpg": "...dren  with cognitive and intellectual disabilities; for exampl..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "intellectual" (21 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">2029-2029</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">2065-2065</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">3203-3203</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">4325-4325</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">5632-5632</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">5791-5791</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">6186-6190</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">6220-6220</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">6235-6235</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">6259-6263</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">6594-6594</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">6716-6716</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">7500-7504</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">7510-7510</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">8076-8080</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">12340-12340</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">17928-17928</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

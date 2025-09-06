@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "underwear"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 12526, "end": 12526, "pages": [12526]}, {"start": 13109, "end": 13109, "pages": [13109]}, {"start": 13124, "end": 13124, "pages": [13124]}, {"start": 13200, "end": 13200, "pages": [13200]}, {"start": 13743, "end": 13744, "pages": [13743, 13744]}, {"start": 14422, "end": 14422, "pages": [14422]}, {"start": 14563, "end": 14563, "pages": [14563]}, {"start": 16368, "end": 16369, "pages": [16368, 16369]}, {"start": 17043, "end": 17043, "pages": [17043]}, {"start": 17184, "end": 17184, "pages": [17184]}, {"start": 18113, "end": 18113, "pages": [18113]}, {"start": 18694, "end": 18694, "pages": [18694]}, {"start": 18709, "end": 18709, "pages": [18709]}, {"start": 18785, "end": 18785, "pages": [18785]}];
+        const pageToPath = {"12526": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012526.jpg", "13109": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013109.jpg", "13124": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013124.jpg", "13200": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013200.jpg", "13743": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013743.jpg", "13744": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013744.jpg", "14422": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014422.jpg", "14563": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014563.jpg", "16368": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016368.jpg", "16369": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016369.jpg", "17043": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017043.jpg", "17184": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017184.jpg", "18113": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018113.jpg", "18694": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018694.jpg", "18709": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018709.jpg", "18785": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018785.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012526.jpg": "...bout the giftl wath the  underwear exposing hen betom was m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013109.jpg": "...ike to keeep thy bra €nd underwear ons q. so at ‘that poamt...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013124.jpg": "...ssages?  l would keep my underwear on.  = ad, .  !  did. th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013200.jpg": "...ess to her  brassier and underwear and to prouide him with...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013743.jpg": "...tiy fiemery if iohad tiy underwear  on j said that i rememb...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013744.jpg": ".... you did. net have your underwear on; correct?  ra = yo  a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014422.jpg": "...g. they bought her white underwear. epstein gave her money....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014563.jpg": "...g ggifl pulling douh her underwear. she had, a bathzoom of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016368.jpg": "...tiy fiemery if iohad tiy underwear  on j said that i rememb...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016369.jpg": ".... you did. net have your underwear on; correct?  ra = yo  a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017043.jpg": "...g. they bought her white underwear. epstein gave her money....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017184.jpg": "...g ggifl pulling douh her underwear. she had, a bathzoom of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018113.jpg": "...bout the giftl wath the  underwear exposing hen betom was m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018694.jpg": "...ike to keeep thy bra €nd underwear ons q. so at ‘that poamt...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018709.jpg": "...ssages?  l would keep my underwear on.  = ad, .  !  did. th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018785.jpg": "...ess to her  brassier and underwear and to prouide him with..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "underwear" (16 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">12526-12526</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">13109-13109</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">13124-13124</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">13200-13200</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">13743-13744</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">14422-14422</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">14563-14563</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">16368-16369</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">17043-17043</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">17184-17184</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">18113-18113</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">18694-18694</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">18709-18709</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">18785-18785</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

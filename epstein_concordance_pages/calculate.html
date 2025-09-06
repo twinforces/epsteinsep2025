@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "calculate"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 25, "end": 25, "pages": [25]}, {"start": 2494, "end": 2494, "pages": [2494]}, {"start": 9534, "end": 9534, "pages": [9534]}, {"start": 10213, "end": 10213, "pages": [10213]}, {"start": 11476, "end": 11476, "pages": [11476]}, {"start": 11537, "end": 11537, "pages": [11537]}, {"start": 14765, "end": 14765, "pages": [14765]}, {"start": 14874, "end": 14874, "pages": [14874]}, {"start": 21593, "end": 21593, "pages": [21593]}, {"start": 21818, "end": 21818, "pages": [21818]}, {"start": 21871, "end": 21871, "pages": [21871]}, {"start": 21901, "end": 21901, "pages": [21901]}];
+        const pageToPath = {"25": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000025.jpg", "2494": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002494.jpg", "9534": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009534.jpg", "10213": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010213.jpg", "11476": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011476.jpg", "11537": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011537.jpg", "14765": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014765.jpg", "14874": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014874.jpg", "21593": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021593.jpg", "21818": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021818.jpg", "21871": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021871.jpg", "21901": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021901.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000025.jpg": "...istrict court  “fails to calculate (or improperly calculate...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002494.jpg": "...e  protocol as to hou to calculate days fior obtections bec...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009534.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010213.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011476.jpg": "...le: insight into: hou to calculate 'the incalculable,and ta...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011537.jpg": "...st, therefore accurately calculate the sentencing guideline...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014765.jpg": "...st, therefore accurately calculate the sentencing guideline...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014874.jpg": "...istrict court  “fails to calculate (or improperly calculate...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021593.jpg": "...tles” od ecclons, l, wit calculate. the guideline range. as...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021818.jpg": "...istrict court  “fails to calculate (or improperly calculate...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021871.jpg": "...istrict court  “fails to calculate (or improperly calculate...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021901.jpg": "...istrict court  “fails to calculate (or improperly calculate..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "calculate" (12 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">25-25</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">2494-2494</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">9534-9534</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">10213-10213</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">11476-11476</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">11537-11537</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">14765-14765</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">14874-14874</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">21593-21593</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">21818-21818</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">21871-21871</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">21901-21901</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

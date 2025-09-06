@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "continuity"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 2264, "end": 2264, "pages": [2264]}, {"start": 3943, "end": 3943, "pages": [3943]}, {"start": 3952, "end": 3952, "pages": [3952]}, {"start": 4113, "end": 4118, "pages": [4113, 4114, 4118]}, {"start": 12500, "end": 12500, "pages": [12500]}, {"start": 13549, "end": 13549, "pages": [13549]}, {"start": 18088, "end": 18088, "pages": [18088]}, {"start": 19132, "end": 19132, "pages": [19132]}];
+        const pageToPath = {"2264": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002264.jpg", "3943": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003943.jpg", "3952": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003952.jpg", "4113": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004113.jpg", "4114": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004114.jpg", "4118": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004118.jpg", "12500": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012500.jpg", "13549": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013549.jpg", "18088": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018088.jpg", "19132": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019132.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002264.jpg": "...ations; they, each ‘haye:continuity of operations:(coop) pla...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003943.jpg": "...r march.2o22 to cnstire, continuity of goverinient 6...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003952.jpg": "...ships with the victinis, continuity of goverinient cotinsel....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004113.jpg": "...trial, thereby cnsuring::continuity: of counsel. ‘in-particu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004114.jpg": "...ph oa isp imi j (listing continuity of government counsel as...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004118.jpg": "...s necessary. fo-provide “continuity of counsel and the poten...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012500.jpg": "...you can ask if  there's ‘continuity or you can go through th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013549.jpg": "...essages, because there's continuity between, the  mami er sa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018088.jpg": "...you can ask if  there's ‘continuity or you can go through th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019132.jpg": "...essages, because there's continuity between, the  mami er sa..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "continuity" (10 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">2264-2264</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">3943-3943</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">3952-3952</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">4113-4118</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">12500-12500</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">13549-13549</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">18088-18088</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">19132-19132</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

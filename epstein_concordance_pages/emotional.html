@@ -1,0 +1,262 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "emotional"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 3391, "end": 3391, "pages": [3391]}, {"start": 3421, "end": 3421, "pages": [3421]}, {"start": 3451, "end": 3451, "pages": [3451]}, {"start": 3819, "end": 3819, "pages": [3819]}, {"start": 4543, "end": 4543, "pages": [4543]}, {"start": 4573, "end": 4573, "pages": [4573]}, {"start": 5215, "end": 5215, "pages": [5215]}, {"start": 5760, "end": 5762, "pages": [5760, 5761, 5762]}, {"start": 5808, "end": 5808, "pages": [5808]}, {"start": 5864, "end": 5864, "pages": [5864]}, {"start": 5873, "end": 5873, "pages": [5873]}, {"start": 5901, "end": 5901, "pages": [5901]}, {"start": 5949, "end": 5949, "pages": [5949]}, {"start": 5999, "end": 5999, "pages": [5999]}, {"start": 6056, "end": 6056, "pages": [6056]}, {"start": 6191, "end": 6191, "pages": [6191]}, {"start": 6264, "end": 6264, "pages": [6264]}, {"start": 6279, "end": 6279, "pages": [6279]}, {"start": 6733, "end": 6733, "pages": [6733]}, {"start": 6789, "end": 6789, "pages": [6789]}, {"start": 6798, "end": 6798, "pages": [6798]}, {"start": 6826, "end": 6826, "pages": [6826]}, {"start": 6874, "end": 6874, "pages": [6874]}, {"start": 6924, "end": 6924, "pages": [6924]}, {"start": 7288, "end": 7288, "pages": [7288]}, {"start": 7444, "end": 7445, "pages": [7444, 7445]}, {"start": 7483, "end": 7483, "pages": [7483]}, {"start": 7505, "end": 7505, "pages": [7505]}, {"start": 7524, "end": 7524, "pages": [7524]}, {"start": 7534, "end": 7534, "pages": [7534]}, {"start": 7619, "end": 7619, "pages": [7619]}, {"start": 7978, "end": 7978, "pages": [7978]}, {"start": 8081, "end": 8081, "pages": [8081]}, {"start": 8119, "end": 8119, "pages": [8119]}, {"start": 8181, "end": 8182, "pages": [8181, 8182]}, {"start": 8986, "end": 8986, "pages": [8986]}, {"start": 9109, "end": 9109, "pages": [9109]}, {"start": 10344, "end": 10344, "pages": [10344]}, {"start": 10538, "end": 10538, "pages": [10538]}, {"start": 11113, "end": 11113, "pages": [11113]}, {"start": 11128, "end": 11128, "pages": [11128]}, {"start": 11152, "end": 11152, "pages": [11152]}, {"start": 11501, "end": 11501, "pages": [11501]}, {"start": 11589, "end": 11589, "pages": [11589]}, {"start": 11596, "end": 11596, "pages": [11596]}, {"start": 13141, "end": 13141, "pages": [13141]}, {"start": 13974, "end": 13974, "pages": [13974]}, {"start": 14817, "end": 14817, "pages": [14817]}, {"start": 14824, "end": 14824, "pages": [14824]}, {"start": 14886, "end": 14886, "pages": [14886]}, {"start": 14985, "end": 14985, "pages": [14985]}, {"start": 15106, "end": 15106, "pages": [15106]}, {"start": 16598, "end": 16598, "pages": [16598]}, {"start": 18726, "end": 18726, "pages": [18726]}, {"start": 20964, "end": 20964, "pages": [20964]}, {"start": 21622, "end": 21622, "pages": [21622]}];
+        const pageToPath = {"3391": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003391.jpg", "3421": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003421.jpg", "3451": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003451.jpg", "3819": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003819.jpg", "4543": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004543.jpg", "4573": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004573.jpg", "5215": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005215.jpg", "5760": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005760.jpg", "5761": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005761.jpg", "5762": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005762.jpg", "5808": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005808.jpg", "5864": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005864.jpg", "5873": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005873.jpg", "5901": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005901.jpg", "5949": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005949.jpg", "5999": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005999.jpg", "6056": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006056.jpg", "6191": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006191.jpg", "6264": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006264.jpg", "6279": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006279.jpg", "6733": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006733.jpg", "6789": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006789.jpg", "6798": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006798.jpg", "6826": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006826.jpg", "6874": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006874.jpg", "6924": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006924.jpg", "7288": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007288.jpg", "7444": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007444.jpg", "7445": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007445.jpg", "7483": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007483.jpg", "7505": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007505.jpg", "7524": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007524.jpg", "7534": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007534.jpg", "7619": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007619.jpg", "7978": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007978.jpg", "8081": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008081.jpg", "8119": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008119.jpg", "8181": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008181.jpg", "8182": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008182.jpg", "8986": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008986.jpg", "9109": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009109.jpg", "10344": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010344.jpg", "10538": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010538.jpg", "11113": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011113.jpg", "11128": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011128.jpg", "11152": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011152.jpg", "11501": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011501.jpg", "11589": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011589.jpg", "11596": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011596.jpg", "13141": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013141.jpg", "13974": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013974.jpg", "14817": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014817.jpg", "14824": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014824.jpg", "14886": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014886.jpg", "14985": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014985.jpg", "15106": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015106.jpg", "16598": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016598.jpg", "18726": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018726.jpg", "20964": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020964.jpg", "21622": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021622.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003391.jpg": "...their wwoutids—personal, emotional atid “financial—have gon...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003421.jpg": "...status requiring physica emotional | or pecuniary  ra]  the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003451.jpg": "...uffered direct physical, emotional, orpecuniary: harm: as....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003819.jpg": "...a os  s ehe@es ‘weike emotional distress) damages being:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004543.jpg": "...tatus requiring physica, emotional | or pecuniary  they cho...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004573.jpg": "...ffered. direct physical, emotional, or-peeuniary: harm: as....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005215.jpg": "...,produce visceral and,  ‘emotional reactiotis leading to mo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005760.jpg": "...cision based on a purely emotional basis)....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005761.jpg": "...ugh not:necessarily, an. emotional .one.” old ghief*v.. uni...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005762.jpg": "...an. improper:and. highly emotional. basis.  , 2.l, f. supp:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005808.jpg": "...cludig, dysregulation im emotional control, difficulties in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005864.jpg": "...of'a rape: is: “highly: emotional and. inflammatory:” (def...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005873.jpg": "...fional proble  © phrase “emotional secluc:  svt ‘additia  a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005901.jpg": "...‘more psychological : | emotional. regulation, intimacy de...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005949.jpg": "...ption ‘ol be: ur ral and emotional ‘problems. ysr. ‘has sho...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005999.jpg": "...otion, rape is. highly  ‘emotional and ‘inflammatory; :  ‘m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006056.jpg": "...subjcct.to physical and emotional abuse by the correction...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006191.jpg": "...ss the: literature, and. emotional distress. (c.g. ae is no...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006264.jpg": "...ss the: literature, and. emotional distress. (c.g. ae is no...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006279.jpg": "...r  as being; ily uls and emotional  sugeestive  sd.th: it s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006733.jpg": "...cludig, dysregulation im emotional control, difficulties in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006789.jpg": "...of'a rape: is: “highly: emotional and. inflammatory:” (def...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006798.jpg": "...fional proble  © phrase “emotional secluc:  svt ‘additia  a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006826.jpg": "...‘more psychological : | emotional. regulation, intimacy de...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006874.jpg": "...ption ‘ol be: ur ral and emotional ‘problems. ysr. ‘has sho...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006924.jpg": "...otion, rape is. highly  ‘emotional and ‘inflammatory; :  ‘m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007288.jpg": "...include people who have emotional disabilities;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007444.jpg": "...r-3 will. likely: become emotional. and-upset :if she allou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007445.jpg": "...he jury’s likely  strong emotional, response to: accuser-3\"...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007483.jpg": "...port the hypothesis that emotional distress (e:8., crying):...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007505.jpg": "...ss the: literature, and. emotional distress. (c.g. ae is no...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007524.jpg": "...: michie  g l l  oat als emotional ‘events: the fate of det...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007534.jpg": "...asing far nat ute tes  ) emotional content oft true and. fa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007619.jpg": "...tor efforts,”  dietz p: “emotional injury claims and signif...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007978.jpg": "...include people who have emotional disabilities;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008081.jpg": "...ss the: literature, and. emotional distress. (c.g. ae is no...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008119.jpg": "...r then-exi ing; > mental emotional, os pa sical condition”...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008181.jpg": "...an alleged. vi  tim’s: “emotional  ‘accusation remain cons...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008182.jpg": "...er opinions” on:victims” emotional distress. ‘det  br. at.l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008986.jpg": "...o “the embarrassment and emotional trauma from the very dis...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009109.jpg": "...ddress‘potential jurors’ emotional, reactions ‘to sexual. a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010344.jpg": "...ay well assigi their oun emotional connotations to terns li...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010538.jpg": "...ermanently scarred ‘with emotional and.  psychological inju...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011113.jpg": "...he medical condition :is emotional-testimony, i think-we ar...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011128.jpg": "...his person  condition is emotional  ia,  through questions...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011152.jpg": "...state of'mind .... .or: emotional, sensory, of physical, c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011501.jpg": "...sickness and restilting emotional distress within the mean...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011589.jpg": "...ation, intimidatsdon and emotional abus  used to €ontrel th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011596.jpg": "...s i began to repair the ‘emotional damage, i was  diagnesee...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013141.jpg": "...ause of allt the damage, emotional damage he did, to me.  o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013974.jpg": "...hen we measured peaple's emotional reactions  = 3 qo: 3 qo;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014817.jpg": "...ation, intimidatsdon and emotional abus  used to €ontrel th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014824.jpg": "...s i began to repair the ‘emotional damage, i was  diagnesee...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014886.jpg": "...related to coercion and emotional abuse er child abuse tha...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014985.jpg": "...include people who have emotional disabilities;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015106.jpg": "...t the psychological. and emotional.:wellbeing of! survivors...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016598.jpg": "...hen we measured peaple's emotional reactions  = 3 qo: 3 qo;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018726.jpg": "...ause of allt the damage, emotional damage he did, to me.  o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020964.jpg": "...y-well assign their, oun emotional, connotations to terms;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021622.jpg": "...mimensesd, 7 ‘epairea iy emotional health. i began, physica..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "emotional" (60 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">3391-3391</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">3421-3421</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">3451-3451</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3819-3819</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">4543-4543</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">4573-4573</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">5215-5215</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">5760-5762</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">5808-5808</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">5864-5864</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">5873-5873</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">5901-5901</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">5949-5949</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">5999-5999</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">6056-6056</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">6191-6191</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">6264-6264</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">6279-6279</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">6733-6733</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">6789-6789</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">6798-6798</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">6826-6826</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">6874-6874</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">6924-6924</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">7288-7288</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">7444-7445</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">7483-7483</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">7505-7505</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">7524-7524</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">7534-7534</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">7619-7619</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">7978-7978</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">8081-8081</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">8119-8119</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">8181-8182</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">8986-8986</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">9109-9109</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">10344-10344</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">10538-10538</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">11113-11113</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">11128-11128</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">11152-11152</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">11501-11501</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">11589-11589</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">11596-11596</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(45, 0); return false;">13141-13141</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(46, 0); return false;">13974-13974</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(47, 0); return false;">14817-14817</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(48, 0); return false;">14824-14824</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(49, 0); return false;">14886-14886</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(50, 0); return false;">14985-14985</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(51, 0); return false;">15106-15106</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(52, 0); return false;">16598-16598</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(53, 0); return false;">18726-18726</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(54, 0); return false;">20964-20964</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(55, 0); return false;">21622-21622</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

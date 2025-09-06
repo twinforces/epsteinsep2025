@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "therapeutic"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 5912, "end": 5912, "pages": [5912]}, {"start": 5931, "end": 5933, "pages": [5931, 5933]}, {"start": 5978, "end": 5978, "pages": [5978]}, {"start": 6001, "end": 6001, "pages": [6001]}, {"start": 6837, "end": 6837, "pages": [6837]}, {"start": 6856, "end": 6858, "pages": [6856, 6858]}, {"start": 6903, "end": 6903, "pages": [6903]}, {"start": 6926, "end": 6926, "pages": [6926]}, {"start": 7287, "end": 7287, "pages": [7287]}, {"start": 7977, "end": 7977, "pages": [7977]}, {"start": 12862, "end": 12862, "pages": [12862]}, {"start": 13987, "end": 13987, "pages": [13987]}, {"start": 14438, "end": 14438, "pages": [14438]}, {"start": 14984, "end": 14984, "pages": [14984]}, {"start": 16611, "end": 16611, "pages": [16611]}, {"start": 17059, "end": 17059, "pages": [17059]}, {"start": 18448, "end": 18448, "pages": [18448]}, {"start": 21617, "end": 21617, "pages": [21617]}];
+        const pageToPath = {"5912": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005912.jpg", "5931": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005931.jpg", "5933": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005933.jpg", "5978": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005978.jpg", "6001": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006001.jpg", "6837": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006837.jpg", "6856": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006856.jpg", "6858": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006858.jpg", "6903": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006903.jpg", "6926": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006926.jpg", "7287": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007287.jpg", "7977": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007977.jpg", "12862": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012862.jpg", "13987": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013987.jpg", "14438": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014438.jpg", "14984": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014984.jpg", "16611": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016611.jpg", "17059": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017059.jpg", "18448": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018448.jpg", "21617": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021617.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005912.jpg": "...ation: timely:access to. therapeutic services cani mitigate r...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005931.jpg": "...ing blamed and/or not:  ‘therapeutic rela sexual abuse p  rig...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005933.jpg": "...tur, inal  facilitating therapeutic: dis closure es.  net  l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005978.jpg": "...lling the truth. and are therapeutic. consumers ita financial...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006001.jpg": "...s her expertise on. her  therapeutic number of individuals wh...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006837.jpg": "...ation: timely:access to. therapeutic services cani mitigate r...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006856.jpg": "...ing blamed and/or not:  ‘therapeutic rela sexual abuse p  rig...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006858.jpg": "...tur, inal  facilitating therapeutic: dis closure es.  net  l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006903.jpg": "...lling the truth. and are therapeutic. consumers ita financial...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006926.jpg": "...s her expertise on. her  therapeutic number of individuals wh...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007287.jpg": "...n?  q. and forensie atid therapeutic roles are very different...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007977.jpg": "...n?  q. and forensie atid therapeutic roles are very different...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012862.jpg": "...you wese not, £famid lar therapeutic serviees for woren. elai...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013987.jpg": "...a psychologist who has a therapeutic  practice?’...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014438.jpg": "...o-yeax-oold, gial, but a therapeutic massage is ne that'’ss n...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014984.jpg": "...s.  q@. and forensic and therapeutic roles are very different...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016611.jpg": "...a psychologist who has a therapeutic  practice?’...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017059.jpg": "...o-yeax-oold, gial, but a therapeutic massage is ne that'’ss n...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018448.jpg": "...you wese not, £famid lar therapeutic serviees for woren. elai...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021617.jpg": "...maxweli*s trial. it was therapeutic. to: hear the testimony..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "therapeutic" (20 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">5912-5912</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">5931-5933</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">5978-5978</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">6001-6001</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">6837-6837</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">6856-6858</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">6903-6903</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">6926-6926</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">7287-7287</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">7977-7977</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">12862-12862</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">13987-13987</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">14438-14438</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">14984-14984</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">16611-16611</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">17059-17059</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">18448-18448</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">21617-21617</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

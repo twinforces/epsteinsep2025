@@ -1,0 +1,193 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "prosectition"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1494, "end": 1494, "pages": [1494]}, {"start": 1616, "end": 1616, "pages": [1616]}, {"start": 2593, "end": 2595, "pages": [2593, 2594, 2595]}, {"start": 2605, "end": 2605, "pages": [2605]}, {"start": 2964, "end": 2964, "pages": [2964]}, {"start": 2975, "end": 2975, "pages": [2975]}, {"start": 2985, "end": 2990, "pages": [2985, 2990]}, {"start": 3201, "end": 3201, "pages": [3201]}, {"start": 3375, "end": 3375, "pages": [3375]}, {"start": 3450, "end": 3450, "pages": [3450]}, {"start": 3500, "end": 3500, "pages": [3500]}, {"start": 3688, "end": 3688, "pages": [3688]}, {"start": 3888, "end": 3891, "pages": [3888, 3891]}, {"start": 4283, "end": 4288, "pages": [4283, 4284, 4288]}, {"start": 4323, "end": 4323, "pages": [4323]}, {"start": 4497, "end": 4497, "pages": [4497]}, {"start": 4553, "end": 4553, "pages": [4553]}, {"start": 4572, "end": 4572, "pages": [4572]}, {"start": 4722, "end": 4722, "pages": [4722]}, {"start": 4793, "end": 4793, "pages": [4793]}, {"start": 4979, "end": 4979, "pages": [4979]}, {"start": 8196, "end": 8196, "pages": [8196]}, {"start": 9598, "end": 9598, "pages": [9598]}, {"start": 10707, "end": 10707, "pages": [10707]}, {"start": 11433, "end": 11433, "pages": [11433]}, {"start": 21307, "end": 21307, "pages": [21307]}, {"start": 21343, "end": 21343, "pages": [21343]}, {"start": 21506, "end": 21506, "pages": [21506]}, {"start": 21673, "end": 21676, "pages": [21673, 21676]}, {"start": 21700, "end": 21700, "pages": [21700]}, {"start": 22042, "end": 22042, "pages": [22042]}, {"start": 22082, "end": 22090, "pages": [22082, 22086, 22088, 22090]}, {"start": 22100, "end": 22105, "pages": [22100, 22103, 22105]}];
+        const pageToPath = {"1494": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001494.jpg", "1616": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001616.jpg", "2593": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002593.jpg", "2594": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002594.jpg", "2595": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002595.jpg", "2605": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002605.jpg", "2964": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002964.jpg", "2975": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002975.jpg", "2985": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002985.jpg", "2990": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002990.jpg", "3201": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003201.jpg", "3375": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003375.jpg", "3450": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003450.jpg", "3500": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003500.jpg", "3688": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003688.jpg", "3888": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003888.jpg", "3891": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003891.jpg", "4283": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004283.jpg", "4284": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004284.jpg", "4288": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004288.jpg", "4323": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004323.jpg", "4497": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004497.jpg", "4553": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004553.jpg", "4572": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004572.jpg", "4722": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004722.jpg", "4793": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004793.jpg", "4979": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004979.jpg", "8196": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008196.jpg", "9598": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009598.jpg", "10707": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010707.jpg", "11433": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011433.jpg", "21307": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021307.jpg", "21343": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021343.jpg", "21506": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021506.jpg", "21673": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021673.jpg", "21676": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021676.jpg", "21700": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021700.jpg", "22042": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022042.jpg", "22082": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022082.jpg", "22086": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022086.jpg", "22088": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022088.jpg", "22090": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022090.jpg", "22100": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022100.jpg", "22103": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022103.jpg", "22105": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022105.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001494.jpg": "...d, gable her flight from prosectition. based on the government...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001616.jpg": "...prosecution. by the non-prosectition. agreement.  s..atorney’...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002593.jpg": "...‘principles to non-prosectition agreements have recogniz...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002594.jpg": "...was ‘ne  enforce the non-prosectition agreement. as a third pa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002595.jpg": "...st to the, standard non=-prosectition agreement,tised.in this...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002605.jpg": "...on bars the government’s prosectition  of ms. maxwell on. char...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002964.jpg": "...s she is. imnitine from. prosectition. for amir federal. crime...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002975.jpg": "...to foresee a. potential, prosectition of epstein’s, co-conspir...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002985.jpg": "...shall preclude such a.  prosectition before the child reaches...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002990.jpg": "...mitations, allouitig for prosectition wntil the ‘victim ‘reach...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003201.jpg": "...septeniber.24, 2oo7 non-prosectition apicenicit exhibit 4: ad...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003375.jpg": "...to resolve the federal. prosectition through a. mechanism tha...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003450.jpg": "...the investigation. atid prosectition of a crime, a responsibl...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003500.jpg": "...be deferred. l favor of prosectition. by the state of -elorid...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003688.jpg": "...uld. otherwise preclude -prosectition for an. offense involvin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003888.jpg": "...become embroiled in the  prosectition ofa third party—and i. f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003891.jpg": "...ation.” °  the npa. bars prosectition only for “the specific....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004283.jpg": "...charges ‘in, the  second prosectition were identical'to the di...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004284.jpg": "...in,a subsequent prosectition? “che court.held. that i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004288.jpg": "...a-previous. corispitacy*prosectition charged under the same s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004323.jpg": "...septeniber.24, 2oo7 non-prosectition apicenictit exhibit 4: a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004497.jpg": "...to resolve the federal. prosectition through a. mechanism ‘th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004553.jpg": "...cderal prosectition arisitig; from, a 2oo5 :...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004572.jpg": "...the investigation. atid prosectition of a crime, a responsibl...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004722.jpg": "...as here, any’ barricr to prosectition of the defendant arose f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004793.jpg": "...of hertestiniony in a-prosectition for pertry.  the court t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004979.jpg": "...ls. free. fo commence. a prosectition.  maxwell. has. not prev...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008196.jpg": "...while cross-examining a-prosectition witness during the gover...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009598.jpg": "...cess, clatise forecloses prosectition ofa claim becatise it l8...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010707.jpg": "...h, ass maxwell) escaped, prosectition entitely. see generally...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011433.jpg": "...e theory testified to by prosectition witnesses”).  a cece  as...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021307.jpg": "...ori¢ltided that-“tederal prosectition,  in this ‘case ‘vould n...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021343.jpg": "...l.  stigpested. that the prosectition. may have been....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021506.jpg": "...ons of'the agreement; no-prosectition, for ‘the.offenses set o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021673.jpg": "...d, nevertheless bars her prosectition im. the southern distric...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021676.jpg": "...t that the npa bars this prosectition. maxwell has no right to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021700.jpg": "...defendant’s] exposure to prosectition ret= roactively. it did...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022042.jpg": "...tigation with fbi.  the. prosectition itiust prodtice to the d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022082.jpg": "...a) ci fo} = be, =  inthe prosectition tean’s, possession.  mo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022086.jpg": "...bop is. “allied with the prosectition” and, therefore. the  go...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022088.jpg": "...the draft reports,  the prosectition. team, has had no tfivel...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022090.jpg": "...ents ofaugust 9 and lo,  prosectition, those underlyig  2ol9,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022100.jpg": "...een, ditferent.”).  “the prosectition’s obligation to disclose...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022103.jpg": "...s.  ox 9. cc.5  with the prosectition,  eee oe te ou  played a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022105.jpg": "...is seeking discovery in  prosectition deferse, he.has not iet..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "prosectition" (45 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1494-1494</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1616-1616</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">2593-2595</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">2605-2605</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">2964-2964</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">2975-2975</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">2985-2990</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">3201-3201</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">3375-3375</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">3450-3450</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">3500-3500</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">3688-3688</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">3888-3891</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">4283-4288</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">4323-4323</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">4497-4497</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">4553-4553</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">4572-4572</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">4722-4722</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">4793-4793</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">4979-4979</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">8196-8196</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">9598-9598</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">10707-10707</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">11433-11433</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">21307-21307</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">21343-21343</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">21506-21506</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">21673-21676</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">21700-21700</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">22042-22042</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">22082-22090</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">22100-22105</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

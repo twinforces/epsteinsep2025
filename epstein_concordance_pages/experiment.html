@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "experiment"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 6246, "end": 6246, "pages": [6246]}, {"start": 13967, "end": 13975, "pages": [13967, 13968, 13971, 13973, 13974, 13975]}, {"start": 13991, "end": 13991, "pages": [13991]}, {"start": 14030, "end": 14038, "pages": [14030, 14031, 14032, 14035, 14036, 14037, 14038]}, {"start": 14045, "end": 14047, "pages": [14045, 14047]}, {"start": 14469, "end": 14469, "pages": [14469]}, {"start": 16591, "end": 16599, "pages": [16591, 16592, 16595, 16597, 16598, 16599]}, {"start": 16615, "end": 16615, "pages": [16615]}, {"start": 16654, "end": 16662, "pages": [16654, 16655, 16656, 16659, 16660, 16661, 16662]}, {"start": 16669, "end": 16671, "pages": [16669, 16671]}, {"start": 17090, "end": 17090, "pages": [17090]}];
+        const pageToPath = {"6246": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006246.jpg", "13967": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013967.jpg", "13968": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013968.jpg", "13971": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013971.jpg", "13973": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013973.jpg", "13974": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013974.jpg", "13975": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013975.jpg", "13991": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013991.jpg", "14030": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014030.jpg", "14031": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014031.jpg", "14032": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014032.jpg", "14035": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014035.jpg", "14036": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014036.jpg", "14037": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014037.jpg", "14038": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014038.jpg", "14045": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014045.jpg", "14047": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014047.jpg", "14469": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014469.jpg", "16591": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016591.jpg", "16592": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016592.jpg", "16595": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016595.jpg", "16597": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016597.jpg", "16598": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016598.jpg", "16599": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016599.jpg", "16615": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016615.jpg", "16654": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016654.jpg", "16655": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016655.jpg", "16656": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016656.jpg", "16659": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016659.jpg", "16660": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016660.jpg", "16661": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016661.jpg", "16662": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016662.jpg", "16669": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016669.jpg", "16671": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016671.jpg", "17090": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017090.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006246.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013967.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013968.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013971.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013973.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013974.jpg": "..., you to engage ian that experiment?  = = x - i  a. yes; we...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013975.jpg": "...and requirement that the experiment that  you're engaging ih...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013991.jpg": "...ducted, by virtue of the experiment ioself,; you have preef...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014030.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014031.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014032.jpg": "...t?  a. correde.  q. that experiment involved an advertisemen...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014035.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014036.jpg": "...a  s6. ta this  4 os tl  experiment, abeut l6 pereent of ped...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014037.jpg": "...fied on direct, about an experiment, involving  boe iat ted...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014038.jpg": "...yes.  qo. qkay. in that experiment, did any of the experime...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014045.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014047.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014469.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016591.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016592.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016595.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016597.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016598.jpg": "..., you to engage ian that experiment?  = = x - i  a. yes; we...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016599.jpg": "...and requirement that the experiment that  you're engaging ih...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016615.jpg": "...ducted, by virtue of the experiment ioself,; you have preef...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016654.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016655.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016656.jpg": "...t?  a. correde.  q. that experiment involved an advertisemen...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016659.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016660.jpg": "...a  s6. ta this  4 os tl  experiment, abeut l6 pereent of ped...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016661.jpg": "...fied on direct, about an experiment, involving  boe iat ted...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016662.jpg": "...yes.  qo. qkay. in that experiment, did any of the experime...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016669.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016671.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017090.jpg": ""};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "experiment" (35 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">6246-6246</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">13967-13975</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">13991-13991</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">14030-14038</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">14045-14047</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">14469-14469</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">16591-16599</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">16615-16615</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">16654-16662</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">16669-16671</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">17090-17090</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

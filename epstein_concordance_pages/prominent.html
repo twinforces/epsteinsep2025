@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "prominent"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 434, "end": 434, "pages": [434]}, {"start": 440, "end": 440, "pages": [440]}, {"start": 1224, "end": 1224, "pages": [1224]}, {"start": 2150, "end": 2150, "pages": [2150]}, {"start": 2247, "end": 2247, "pages": [2247]}, {"start": 3180, "end": 3180, "pages": [3180]}, {"start": 3210, "end": 3211, "pages": [3210, 3211]}, {"start": 3300, "end": 3300, "pages": [3300]}, {"start": 3343, "end": 3344, "pages": [3343, 3344]}, {"start": 3742, "end": 3742, "pages": [3742]}, {"start": 4302, "end": 4302, "pages": [4302]}, {"start": 4332, "end": 4333, "pages": [4332, 4333]}, {"start": 4465, "end": 4466, "pages": [4465, 4466]}, {"start": 5634, "end": 5634, "pages": [5634]}, {"start": 5871, "end": 5871, "pages": [5871]}, {"start": 5898, "end": 5898, "pages": [5898]}, {"start": 5908, "end": 5908, "pages": [5908]}, {"start": 6596, "end": 6596, "pages": [6596]}, {"start": 6796, "end": 6796, "pages": [6796]}, {"start": 6823, "end": 6823, "pages": [6823]}, {"start": 6833, "end": 6833, "pages": [6833]}, {"start": 7487, "end": 7488, "pages": [7487, 7488]}, {"start": 10356, "end": 10356, "pages": [10356]}, {"start": 10456, "end": 10456, "pages": [10456]}, {"start": 11730, "end": 11730, "pages": [11730]}, {"start": 12520, "end": 12521, "pages": [12520, 12521]}, {"start": 12844, "end": 12844, "pages": [12844]}, {"start": 14012, "end": 14012, "pages": [14012]}, {"start": 14524, "end": 14524, "pages": [14524]}, {"start": 16175, "end": 16175, "pages": [16175]}, {"start": 16636, "end": 16636, "pages": [16636]}, {"start": 17145, "end": 17145, "pages": [17145]}, {"start": 18107, "end": 18108, "pages": [18107, 18108]}, {"start": 18430, "end": 18430, "pages": [18430]}, {"start": 20142, "end": 20142, "pages": [20142]}, {"start": 20976, "end": 20976, "pages": [20976]}, {"start": 21178, "end": 21178, "pages": [21178]}, {"start": 21208, "end": 21208, "pages": [21208]}];
+        const pageToPath = {"434": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000434.jpg", "440": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000440.jpg", "1224": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001224.jpg", "2150": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002150.jpg", "2247": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002247.jpg", "3180": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003180.jpg", "3210": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003210.jpg", "3211": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003211.jpg", "3300": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003300.jpg", "3343": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003343.jpg", "3344": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003344.jpg", "3742": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003742.jpg", "4302": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004302.jpg", "4332": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004332.jpg", "4333": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004333.jpg", "4465": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004465.jpg", "4466": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004466.jpg", "5634": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005634.jpg", "5871": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005871.jpg", "5898": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005898.jpg", "5908": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005908.jpg", "6596": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006596.jpg", "6796": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006796.jpg", "6823": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006823.jpg", "6833": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006833.jpg", "7487": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007487.jpg", "7488": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007488.jpg", "10356": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010356.jpg", "10456": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010456.jpg", "11730": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011730.jpg", "12520": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012520.jpg", "12521": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012521.jpg", "12844": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012844.jpg", "14012": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014012.jpg", "14524": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014524.jpg", "16175": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016175.jpg", "16636": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016636.jpg", "17145": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017145.jpg", "18107": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018107.jpg", "18108": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018108.jpg", "18430": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018430.jpg", "20142": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020142.jpg", "20976": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020976.jpg", "21178": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021178.jpg", "21208": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021208.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000434.jpg": "...gor, partner emeritus at prominent  manhatan accounting fir...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000440.jpg": "...ly:  ang) also nam ured. prominent  second, the same: recor...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001224.jpg": "...s finances prepared by:a‘prominent accounting firm.  for'pu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002150.jpg": "...ambassador in. paris and prominent*tunisian. diplomats * .m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002247.jpg": "...finances prepared by-a, prominent accounting firm  for-pur...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003180.jpg": "...his extensive team. of- prominent atorn “ys  tory to > cha...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003210.jpg": "...me.® he associated with. prominent, and wealthy: individual...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003211.jpg": "...: > joined by nationally prominent boston, criminal. defens...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003300.jpg": "...to acosta two y “in }  ‘prominent  ine and torniet us. ano...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003343.jpg": "...to highly skil led and ‘prominent. atornes yr or violent o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003344.jpg": "...n dershouitz, and. sth # prominent businessmen, acadei lour...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003742.jpg": "...er  incliding: iumerolis prominent american: politicians, p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004302.jpg": "...his extensive team. of- prominent atorn “ys  tory to > cha...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004332.jpg": "...me.’ he associated with. prominent, and wealthy: individual...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004333.jpg": "...e: joined. by nationally prominent boston. criminal. defens...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004465.jpg": "...to highly skil led and ‘prominent. atorne! yr or violent o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004466.jpg": "...n dershouitz, and. sth # prominent businessmen, acadein | s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005634.jpg": "...ecchio’s first.and most: prominent proposed. areca of testi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005871.jpg": "...hat elat ortant 8: “the ‘prominent philose sugge ted. that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005898.jpg": "...n teil? be 4  ive t6 nox prominent scores of child. sol p a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005908.jpg": "...eason for*this*  because prominent heories. of child sexual...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006596.jpg": "...ecchio’s first.and most: prominent proposed. areca of testi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006796.jpg": "...hat elat ortant 8: “the ‘prominent philose sugge ted. that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006823.jpg": "...n teil? be 4  ive t6 nox prominent scores of child. sol p a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006833.jpg": "...eason for*this*  because prominent heories. of child sexual...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007487.jpg": "...'and. thomas albright, a prominent cognitive scientist at t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007488.jpg": "...ex abuse cascs, has been’prominent in ‘state  court, whicke...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010356.jpg": "..., dbove, the defendant's prominent-citation, to sampson ‘v:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010456.jpg": "...ell home was filled with prominent guests atid. origoitig,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011730.jpg": "...friend of ghislaitie, a  prominent oldex british gentleman....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012520.jpg": "...all sorts of important  prominent. people; and so he never...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012521.jpg": "...with sueh, important and prominent pedeple, afd that somebo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012844.jpg": "...still involved with that prominent older  gertleman whe had...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014012.jpg": "...dene by ofe of the most prominent. peeple in this fl4l4,;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014524.jpg": "...she was if a mewe wth 4 prominent.  english acter. she had...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016175.jpg": "...friend of ghislaitie, a  prominent oldex british gentleman....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016636.jpg": "...dene by ofe of the most prominent. peeple in this fl4l4,;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017145.jpg": "...she was if a mewe wth 4 prominent.  english acter. she had...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018107.jpg": "...all sorts of important  prominent. people; and so he never...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018108.jpg": "...with sueh, important and prominent pedeple, afd that somebo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018430.jpg": "...still involved with that prominent older  gertleman whe had...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020142.jpg": "...s finances prepared by:a‘prominent accounting firm.  for'pu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020976.jpg": "...edsabove,the defendant's prominent citation. to sampson v....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021178.jpg": "...d his extensive feanr of prominent atorneys hi d. negatiate...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021208.jpg": "...ne: he z ssociated with. prominent ‘and. svealthy ndividual..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "prominent" (45 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">434-434</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">440-440</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1224-1224</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">2150-2150</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">2247-2247</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">3180-3180</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3210-3211</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">3300-3300</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">3343-3344</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">3742-3742</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">4302-4302</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">4332-4333</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">4465-4466</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">5634-5634</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">5871-5871</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">5898-5898</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">5908-5908</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">6596-6596</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">6796-6796</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">6823-6823</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">6833-6833</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">7487-7488</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">10356-10356</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">10456-10456</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">11730-11730</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">12520-12521</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">12844-12844</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">14012-14012</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">14524-14524</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">16175-16175</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">16636-16636</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">17145-17145</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">18107-18108</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">18430-18430</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">20142-20142</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">20976-20976</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">21178-21178</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">21208-21208</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

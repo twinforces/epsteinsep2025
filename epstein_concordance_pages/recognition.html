@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "recognition"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 647, "end": 647, "pages": [647]}, {"start": 1378, "end": 1378, "pages": [1378]}, {"start": 2826, "end": 2826, "pages": [2826]}, {"start": 3047, "end": 3047, "pages": [3047]}, {"start": 4882, "end": 4882, "pages": [4882]}, {"start": 5640, "end": 5640, "pages": [5640]}, {"start": 5889, "end": 5889, "pages": [5889]}, {"start": 5907, "end": 5907, "pages": [5907]}, {"start": 6299, "end": 6299, "pages": [6299]}, {"start": 6602, "end": 6602, "pages": [6602]}, {"start": 6814, "end": 6814, "pages": [6814]}, {"start": 6832, "end": 6832, "pages": [6832]}, {"start": 7511, "end": 7511, "pages": [7511]}, {"start": 8376, "end": 8376, "pages": [8376]}, {"start": 8998, "end": 8998, "pages": [8998]}, {"start": 9060, "end": 9060, "pages": [9060]}, {"start": 9751, "end": 9751, "pages": [9751]}, {"start": 10477, "end": 10477, "pages": [10477]}, {"start": 10704, "end": 10704, "pages": [10704]}, {"start": 11464, "end": 11464, "pages": [11464]}, {"start": 12774, "end": 12774, "pages": [12774]}, {"start": 18360, "end": 18360, "pages": [18360]}, {"start": 20296, "end": 20296, "pages": [20296]}];
+        const pageToPath = {"647": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000647.jpg", "1378": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001378.jpg", "2826": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002826.jpg", "3047": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003047.jpg", "4882": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004882.jpg", "5640": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005640.jpg", "5889": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005889.jpg", "5907": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005907.jpg", "6299": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006299.jpg", "6602": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006602.jpg", "6814": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006814.jpg", "6832": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006832.jpg", "7511": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007511.jpg", "8376": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008376.jpg", "8998": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008998.jpg", "9060": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009060.jpg", "9751": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009751.jpg", "10477": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010477.jpg", "10704": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010704.jpg", "11464": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011464.jpg", "12774": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012774.jpg", "18360": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018360.jpg", "20296": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020296.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000647.jpg": "...y in the face @f grouing recognition of victims'  sents pec o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001378.jpg": "...be exercised “with, the recognition that a ‘pretrial detenti...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002826.jpg": "...256 (2d cir. l9 86).. in recognition 6f that ‘promise, the si...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003047.jpg": "...‘party rule beyorid recognition. the defendarit was -iot...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004882.jpg": "...l] embodies:.a realistic recognition of the obvious: truth th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005640.jpg": "...ven the supreme court’s, recognition  that “[e]xpert evidence...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005889.jpg": "...ry. of the: significant: recognition’ that many .cases of chi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005907.jpg": "...omponents: (li) emotion: recognition; (2) perspective:raking;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006299.jpg": "...tory of the significant: recognition that many cases of child...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006602.jpg": "...ven the supreme court’s, recognition  that “[e]xpert evidence...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006814.jpg": "...ry. of the: significant: recognition’ that many .cases of chi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006832.jpg": "...omponents: (li) emotion: recognition; (2) perspective:raking;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007511.jpg": "...e.achievement.award (“in recognition ‘of outstanding ‘career...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008376.jpg": "...ns whieh is based on the recognition that even a depesition....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008998.jpg": "...iminal ‘case. this: is a recognition. of  general rule that;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009060.jpg": "...riminal  case; this, isa recognition of the general rule that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009751.jpg": "...riminal  case; this, isa recognition of the general rule that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010477.jpg": "...ard conditions merited.  recognition by courts in-measuring t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010704.jpg": "...signals both society's: recognition. of victims’ suffering a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011464.jpg": "...import  ‘court’s ‘prior recognition that maxwell sought evcp...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012774.jpg": "...tial atid perhaps beyond recognition in, order t6  avoid that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018360.jpg": "...tial atid perhaps beyond recognition in, order t6  avoid that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020296.jpg": "...be exercised “with, the recognition that a ‘pretrial detenti..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "recognition" (23 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">647-647</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1378-1378</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">2826-2826</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3047-3047</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">4882-4882</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">5640-5640</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">5889-5889</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">5907-5907</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">6299-6299</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">6602-6602</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">6814-6814</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">6832-6832</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">7511-7511</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">8376-8376</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">8998-8998</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">9060-9060</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">9751-9751</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">10477-10477</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">10704-10704</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">11464-11464</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">12774-12774</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">18360-18360</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">20296-20296</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "abandoned"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1155, "end": 1155, "pages": [1155]}, {"start": 2174, "end": 2174, "pages": [2174]}, {"start": 3351, "end": 3351, "pages": [3351]}, {"start": 3855, "end": 3855, "pages": [3855]}, {"start": 3996, "end": 3996, "pages": [3996]}, {"start": 4284, "end": 4284, "pages": [4284]}, {"start": 4473, "end": 4473, "pages": [4473]}, {"start": 6882, "end": 6882, "pages": [6882]}, {"start": 8270, "end": 8270, "pages": [8270]}, {"start": 14276, "end": 14280, "pages": [14276, 14279, 14280]}, {"start": 16899, "end": 16903, "pages": [16899, 16902, 16903]}, {"start": 19665, "end": 19665, "pages": [19665]}, {"start": 20073, "end": 20073, "pages": [20073]}, {"start": 20774, "end": 20774, "pages": [20774]}, {"start": 21749, "end": 21749, "pages": [21749]}];
+        const pageToPath = {"1155": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001155.jpg", "2174": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002174.jpg", "3351": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003351.jpg", "3855": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003855.jpg", "3996": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003996.jpg", "4284": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004284.jpg", "4473": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004473.jpg", "6882": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006882.jpg", "8270": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008270.jpg", "14276": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014276.jpg", "14279": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014279.jpg", "14280": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014280.jpg", "16899": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016899.jpg", "16902": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016902.jpg", "16903": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016903.jpg", "19665": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019665.jpg", "20073": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020073.jpg", "20774": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020774.jpg", "21749": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021749.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001155.jpg": "...ense nou appears to have abandoned ‘those arguments, at lea...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002174.jpg": "...ense nou appears to have abandoned ‘those arguments, at lea...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003351.jpg": "...if the: mater had ‘been. abandoned.  and sent back to the s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003855.jpg": "...iction at any cost, has  abandoned. fair playand. the pursu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003996.jpg": "...ernment has: completely: abandoned :that:position and exten...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004284.jpg": "..., of those offenses was. abandoned as part-of  the bargaiti...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004473.jpg": "...if the: mater had ‘been. abandoned.  and. sent back. to the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006882.jpg": "...ernment has apparently : abandoned ‘efforts :to-introduce h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008270.jpg": "...and the government has. abandoned that  plants fatest gee...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014276.jpg": "..., ak which time epstein, abandoned. se that d's a. opinien...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014279.jpg": "...ment's  posation that he abandoned dn january o£ '9¢, and b...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014280.jpg": "...ment whether mr. epstein abandoned the property in january...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016899.jpg": "..., ak which time epstein, abandoned. se that d's a. opinien...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016902.jpg": "...ment's  posation that he abandoned dn january o£ '9¢, and b...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016903.jpg": "...ment whether mr. epstein abandoned the property in january...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019665.jpg": "...vernment appears to have abandoned the argument it made to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020073.jpg": "...ense nou appears to have abandoned ‘those arguments, at lea...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020774.jpg": "...kes clear. that congress abandoned the retroactivity:  prov...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021749.jpg": "...use; and, (3) the court; abandoned its obligation. to ascer..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "abandoned" (19 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1155-1155</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">2174-2174</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">3351-3351</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3855-3855</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">3996-3996</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">4284-4284</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">4473-4473</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">6882-6882</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">8270-8270</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">14276-14280</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">16899-16903</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">19665-19665</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">20073-20073</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">20774-20774</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">21749-21749</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

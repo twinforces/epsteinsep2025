@@ -1,0 +1,217 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "equivalent"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 333, "end": 333, "pages": [333]}, {"start": 913, "end": 913, "pages": [913]}, {"start": 1070, "end": 1070, "pages": [1070]}, {"start": 1171, "end": 1171, "pages": [1171]}, {"start": 1418, "end": 1418, "pages": [1418]}, {"start": 1943, "end": 1943, "pages": [1943]}, {"start": 1983, "end": 1983, "pages": [1983]}, {"start": 2190, "end": 2190, "pages": [2190]}, {"start": 2555, "end": 2555, "pages": [2555]}, {"start": 2800, "end": 2800, "pages": [2800]}, {"start": 2996, "end": 2996, "pages": [2996]}, {"start": 3455, "end": 3455, "pages": [3455]}, {"start": 3480, "end": 3480, "pages": [3480]}, {"start": 3670, "end": 3670, "pages": [3670]}, {"start": 4263, "end": 4263, "pages": [4263]}, {"start": 4577, "end": 4577, "pages": [4577]}, {"start": 4602, "end": 4602, "pages": [4602]}, {"start": 6679, "end": 6679, "pages": [6679]}, {"start": 7182, "end": 7182, "pages": [7182]}, {"start": 7190, "end": 7191, "pages": [7190, 7191]}, {"start": 7872, "end": 7872, "pages": [7872]}, {"start": 7880, "end": 7881, "pages": [7880, 7881]}, {"start": 8595, "end": 8595, "pages": [8595]}, {"start": 8835, "end": 8835, "pages": [8835]}, {"start": 9210, "end": 9210, "pages": [9210]}, {"start": 9889, "end": 9889, "pages": [9889]}, {"start": 10475, "end": 10475, "pages": [10475]}, {"start": 10560, "end": 10560, "pages": [10560]}, {"start": 10756, "end": 10756, "pages": [10756]}, {"start": 11498, "end": 11498, "pages": [11498]}, {"start": 12931, "end": 12931, "pages": [12931]}, {"start": 14628, "end": 14628, "pages": [14628]}, {"start": 14887, "end": 14888, "pages": [14887, 14888]}, {"start": 17249, "end": 17249, "pages": [17249]}, {"start": 18517, "end": 18517, "pages": [18517]}, {"start": 19831, "end": 19831, "pages": [19831]}, {"start": 19988, "end": 19988, "pages": [19988]}, {"start": 20089, "end": 20089, "pages": [20089]}, {"start": 20336, "end": 20336, "pages": [20336]}, {"start": 21122, "end": 21122, "pages": [21122]}, {"start": 21344, "end": 21344, "pages": [21344]}];
+        const pageToPath = {"333": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000333.jpg", "913": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000913.jpg", "1070": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001070.jpg", "1171": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001171.jpg", "1418": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001418.jpg", "1943": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001943.jpg", "1983": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001983.jpg", "2190": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002190.jpg", "2555": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002555.jpg", "2800": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002800.jpg", "2996": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002996.jpg", "3455": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003455.jpg", "3480": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003480.jpg", "3670": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003670.jpg", "4263": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004263.jpg", "4577": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004577.jpg", "4602": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004602.jpg", "6679": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006679.jpg", "7182": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007182.jpg", "7190": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007190.jpg", "7191": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007191.jpg", "7872": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007872.jpg", "7880": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007880.jpg", "7881": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007881.jpg", "8595": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008595.jpg", "8835": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008835.jpg", "9210": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009210.jpg", "9889": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009889.jpg", "10475": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010475.jpg", "10560": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010560.jpg", "10756": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010756.jpg", "11498": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011498.jpg", "12931": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012931.jpg", "14628": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014628.jpg", "14887": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014887.jpg", "14888": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014888.jpg", "17249": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017249.jpg", "18517": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018517.jpg", "19831": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019831.jpg", "19988": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019988.jpg", "20089": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020089.jpg", "20336": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020336.jpg", "21122": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021122.jpg", "21344": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021344.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000333.jpg": "...ets: and. cash. or cash- equivalent holdings. and.-while the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000913.jpg": "...she has been held in the equivalent of  solitary confinement...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001070.jpg": "...h ip (co  l cald 2t, the equivalent ef the layman's  eonfine...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001171.jpg": "...dingly,, release: to the equivalent of a “privately funded j...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001418.jpg": "...he has been, held in the equivalent of solitary confinement,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001943.jpg": "...h ip (co  l call it, the equivalent ef the laym  term 6f sel...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001983.jpg": "...for over l5o days:in the equivalent of solitary.confineiment...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002190.jpg": "...dingly,, release: to the equivalent of a “privately funded j...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002555.jpg": "...and papers: ......is the equivalent: ofa  ‘ecasonable: searc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002800.jpg": "...ns. are functionally the equivalent of a,  motion.to. quash,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002996.jpg": "...tes that, “while not the equivalent of crimitial er  conside...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003455.jpg": "...missions: iat < are ‘the equivalent, of affirmative false: s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003480.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003670.jpg": "...callywith resp  used the equivalent of a “necessarily entail...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004263.jpg": "...e, finding thathe: state equivalent: of rule l6, like: its f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004577.jpg": "...ssions that’ 2 are, the, equivalent, of affirmative false: s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004602.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006679.jpg": "...sed:was the functional.  equivalent, of a one-on-one shou=up...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007182.jpg": "...rranged  space to do the equivalent of a sealed sidebar in t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007190.jpg": "...nn too ie oe roughly the equivalent of l5oo to 2,ooo houwrs....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007191.jpg": "...r?  a. i had a full-year equivalent ef a postdoctoral fellou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007872.jpg": "...rranged  space to do the equivalent of a sealed sidebar in t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007880.jpg": "...nn too ie oe roughly the equivalent of l5oo to 2,ooo hours.....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007881.jpg": "...r?  a. i had a full-year equivalent ef a postdoctoral fellou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008595.jpg": "...to my remaining instruc  equivalent of knouledge, unless you...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008835.jpg": "...he questionnaires is the equivalent of barring: the public’...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009210.jpg": "...nce te the fruth, isthe: equivalent. of: fraud.” diorio, 4o7...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009889.jpg": "...nce te the fruth, isthe: equivalent. of: fraud.” diorio, 4o7...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010475.jpg": "...e-sentence detention was equivalent to “supermax” confinemen...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010560.jpg": "...involves “the functional equivalent” of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010756.jpg": "...he questionnaires is the equivalent of barring: the public’...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011498.jpg": "...bassy or consulate or.an equivalent. alterna’ ive document.a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012931.jpg": "...l8th, same day; alfiest equivalent. number,  ng eut to siko...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014628.jpg": "...osative knouledge as the equivalent of knouledge, undles's....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014887.jpg": "...ira it ne rs roughly the equivalent. of l5oo to 2,ooo hours....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014888.jpg": "...r?  a. i had a full-year equivalent of a postdoctoral fellou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017249.jpg": "...osative knouledge as the equivalent of knouledge, undles's....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018517.jpg": "...l8th, same day; alfiest equivalent. number,  ng eut to siko...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019831.jpg": "...she has been held in the equivalent of  solitary confinement...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019988.jpg": "...h ip (co  l cald 2t, the equivalent ef the layman's  eonfine...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020089.jpg": "...dingly,, release: to the equivalent of a “privately funded j...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020336.jpg": "...he has been, held in the equivalent of solitary confinement,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021122.jpg": "...plication, while not the equivalent of criminal ex poss fact...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021344.jpg": "...ctims,  fo epstein, the: equivalent of  | have remained, sil..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "equivalent" (44 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">333-333</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">913-913</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1070-1070</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">1171-1171</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">1418-1418</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">1943-1943</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">1983-1983</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">2190-2190</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">2555-2555</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">2800-2800</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">2996-2996</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">3455-3455</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">3480-3480</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">3670-3670</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">4263-4263</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">4577-4577</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">4602-4602</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">6679-6679</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">7182-7182</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">7190-7191</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">7872-7872</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">7880-7881</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">8595-8595</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">8835-8835</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">9210-9210</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">9889-9889</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">10475-10475</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">10560-10560</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">10756-10756</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">11498-11498</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">12931-12931</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">14628-14628</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">14887-14888</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">17249-17249</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">18517-18517</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">19831-19831</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">19988-19988</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">20089-20089</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">20336-20336</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">21122-21122</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">21344-21344</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

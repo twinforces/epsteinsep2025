@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "commentary"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 5889, "end": 5889, "pages": [5889]}, {"start": 6299, "end": 6299, "pages": [6299]}, {"start": 6814, "end": 6814, "pages": [6814]}, {"start": 7529, "end": 7529, "pages": [7529]}, {"start": 7539, "end": 7539, "pages": [7539]}, {"start": 7680, "end": 7681, "pages": [7680, 7681]}, {"start": 8139, "end": 8140, "pages": [8139, 8140]}, {"start": 9000, "end": 9000, "pages": [9000]}, {"start": 10432, "end": 10433, "pages": [10432, 10433]}, {"start": 10569, "end": 10571, "pages": [10569, 10570, 10571]}, {"start": 11548, "end": 11548, "pages": [11548]}, {"start": 11554, "end": 11560, "pages": [11554, 11559, 11560]}, {"start": 14776, "end": 14776, "pages": [14776]}, {"start": 14782, "end": 14788, "pages": [14782, 14787, 14788]}, {"start": 21041, "end": 21042, "pages": [21041, 21042]}, {"start": 21574, "end": 21574, "pages": [21574]}, {"start": 21580, "end": 21586, "pages": [21580, 21585, 21586]}];
+        const pageToPath = {"5889": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005889.jpg", "6299": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006299.jpg", "6814": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006814.jpg", "7529": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007529.jpg", "7539": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007539.jpg", "7680": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007680.jpg", "7681": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007681.jpg", "8139": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008139.jpg", "8140": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008140.jpg", "9000": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009000.jpg", "10432": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010432.jpg", "10433": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010433.jpg", "10569": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010569.jpg", "10570": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010570.jpg", "10571": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010571.jpg", "11548": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011548.jpg", "11554": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011554.jpg", "11559": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011559.jpg", "11560": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011560.jpg", "14776": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014776.jpg", "14782": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014782.jpg", "14787": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014787.jpg", "14788": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014788.jpg", "21041": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021041.jpg", "21042": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021042.jpg", "21574": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021574.jpg", "21580": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021580.jpg", "21585": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021585.jpg", "21586": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021586.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005889.jpg": "...ledlo/29/2l. page:22‘of  commentary journal of interpersonal...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006299.jpg": "...lse'f2o-er-oo33o-pae.  commentary:  ocument.424-4. filed'l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006814.jpg": "...edll/l2/2l. page:22‘of'  commentary journal of interpersonal...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007529.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007539.jpg": "...ry is ence, 38, l967-68 (commentary) m., loftus, e. pay bou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007680.jpg": "...hall rcw; sorrentino ri commentary: women; violence ‘and. i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007681.jpg": "...ncarcerated populations. commentary. j.am.acad psychiatry la...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008139.jpg": "...hall rcw; sorrentino ri commentary: women; violence ‘and. i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008140.jpg": "...ncarcerated populations. commentary. j.am.acad psychiatry la...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009000.jpg": "...icity, spectilation, and commentary, all. of which  is preju...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010432.jpg": "...ear from:the: guidelines commentary and. the congressional i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010433.jpg": "...nale in ‘promulgating §  commentary to the: guideline explai...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010569.jpg": "...ent with the: guidelines commentary. ‘that;ecommentary expla...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010570.jpg": "...n any event; ‘guidelines commentary’ is not. binding: over t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010571.jpg": "...d even. when. guidelines commentary is |  agency’s: interpre...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011548.jpg": "...that's the text of the commentary, although as we moted, e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011554.jpg": "...nent that the background commentary can't be relied upon. as...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011559.jpg": "...uirement from background commentary by the senteneing. canri...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011560.jpg": "...the public.  background commentary explains that aside from...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014776.jpg": "...that's the text of the commentary, although as we moted, e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014782.jpg": "...nent that the background commentary can't be relied upon. as...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014787.jpg": "...uirement from background commentary by the senteneing. canri...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014788.jpg": "...the public.  background commentary explains that aside from...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021041.jpg": "...ot resort. te eackgnound commentary’.  one  united states v....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021042.jpg": "...the puolic.  backgreund commentary explains that aside =roe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021574.jpg": "...that's the text of the commentary, although as: we noted,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021580.jpg": "...ent that  the background commentary can't be relied upon as’...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021585.jpg": "...s writen, and. a6 frouna commentary .  united states v. sash...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021586.jpg": "...the public.  background ‘commentary explains ‘that aside fro..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "commentary" (29 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">5889-5889</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">6299-6299</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">6814-6814</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">7529-7529</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">7539-7539</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">7680-7681</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">8139-8140</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">9000-9000</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">10432-10433</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">10569-10571</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">11548-11548</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">11554-11560</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">14776-14776</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">14782-14788</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">21041-21042</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">21574-21574</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">21580-21586</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

@@ -1,0 +1,220 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "household"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 5779, "end": 5779, "pages": [5779]}, {"start": 6325, "end": 6325, "pages": [6325]}, {"start": 6698, "end": 6698, "pages": [6698]}, {"start": 8275, "end": 8275, "pages": [8275]}, {"start": 8959, "end": 8959, "pages": [8959]}, {"start": 10543, "end": 10543, "pages": [10543]}, {"start": 10564, "end": 10564, "pages": [10564]}, {"start": 10572, "end": 10572, "pages": [10572]}, {"start": 11175, "end": 11175, "pages": [11175]}, {"start": 11527, "end": 11527, "pages": [11527]}, {"start": 11561, "end": 11561, "pages": [11561]}, {"start": 11747, "end": 11747, "pages": [11747]}, {"start": 11755, "end": 11755, "pages": [11755]}, {"start": 11903, "end": 11903, "pages": [11903]}, {"start": 11980, "end": 11980, "pages": [11980]}, {"start": 12290, "end": 12290, "pages": [12290]}, {"start": 13071, "end": 13071, "pages": [13071]}, {"start": 13353, "end": 13353, "pages": [13353]}, {"start": 14408, "end": 14416, "pages": [14408, 14412, 14413, 14414, 14416]}, {"start": 14448, "end": 14448, "pages": [14448]}, {"start": 14454, "end": 14454, "pages": [14454]}, {"start": 14538, "end": 14542, "pages": [14538, 14542]}, {"start": 14578, "end": 14578, "pages": [14578]}, {"start": 14755, "end": 14755, "pages": [14755]}, {"start": 14789, "end": 14789, "pages": [14789]}, {"start": 16192, "end": 16192, "pages": [16192]}, {"start": 17029, "end": 17037, "pages": [17029, 17033, 17034, 17035, 17037]}, {"start": 17069, "end": 17069, "pages": [17069]}, {"start": 17075, "end": 17075, "pages": [17075]}, {"start": 17159, "end": 17163, "pages": [17159, 17163]}, {"start": 17199, "end": 17199, "pages": [17199]}, {"start": 17493, "end": 17493, "pages": [17493]}, {"start": 17570, "end": 17570, "pages": [17570]}, {"start": 17878, "end": 17878, "pages": [17878]}, {"start": 18656, "end": 18656, "pages": [18656]}, {"start": 18937, "end": 18937, "pages": [18937]}, {"start": 21023, "end": 21023, "pages": [21023]}, {"start": 21553, "end": 21553, "pages": [21553]}, {"start": 21587, "end": 21589, "pages": [21587, 21589]}, {"start": 21664, "end": 21665, "pages": [21664, 21665]}, {"start": 21737, "end": 21737, "pages": [21737]}, {"start": 21775, "end": 21775, "pages": [21775]}];
+        const pageToPath = {"5779": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005779.jpg", "6325": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006325.jpg", "6698": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006698.jpg", "8275": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008275.jpg", "8959": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008959.jpg", "10543": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010543.jpg", "10564": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010564.jpg", "10572": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010572.jpg", "11175": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011175.jpg", "11527": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011527.jpg", "11561": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011561.jpg", "11747": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011747.jpg", "11755": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011755.jpg", "11903": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011903.jpg", "11980": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011980.jpg", "12290": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012290.jpg", "13071": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013071.jpg", "13353": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013353.jpg", "14408": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014408.jpg", "14412": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014412.jpg", "14413": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014413.jpg", "14414": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014414.jpg", "14416": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014416.jpg", "14448": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014448.jpg", "14454": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014454.jpg", "14538": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014538.jpg", "14542": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014542.jpg", "14578": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014578.jpg", "14755": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014755.jpg", "14789": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014789.jpg", "16192": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016192.jpg", "17029": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017029.jpg", "17033": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017033.jpg", "17034": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017034.jpg", "17035": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017035.jpg", "17037": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017037.jpg", "17069": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017069.jpg", "17075": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017075.jpg", "17159": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017159.jpg", "17163": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017163.jpg", "17199": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017199.jpg", "17493": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017493.jpg", "17570": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017570.jpg", "17878": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017878.jpg", "18656": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018656.jpg", "18937": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018937.jpg", "21023": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021023.jpg", "21553": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021553.jpg", "21587": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021587.jpg", "21589": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021589.jpg", "21664": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021664.jpg", "21665": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021665.jpg", "21737": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021737.jpg", "21775": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021775.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005779.jpg": "...o6 is'a document titled “household manual” which was appare...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006325.jpg": "...: if the members of:your household. work, what‘kind ‘of wor...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006698.jpg": "...he unauthenticated 2oo5 “household-manual” is. outside the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008275.jpg": "...rnment-exhibit. 6o6 (the household. manual), and. (3) evide...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008959.jpg": "...have testified that the household manual was not created....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010543.jpg": "...hor and. implement. ‘a.  household. manual, which. containe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010564.jpg": "...ita  '7).. moreover, the household. manual ‘makes clearthat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010572.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011175.jpg": "...him. iti [] along with a household miaiual that corroborate...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011527.jpg": "...e case. for example, the household manual instrueteed emplo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011561.jpg": "...ht.  , evidence, and the household manual im evidence. l  r...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011747.jpg": "...e, in decouating, hiring household staht. duxinag  sok a &...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011755.jpg": "...no)  household staff that was actually...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011903.jpg": "...ess side. lt was jeffrey household personal «  q. the reaso...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011980.jpg": "...ed to. i was raised  o)  household where you were sort, of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012290.jpg": "...ontact book, and not the household manual. the court: wotil...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013071.jpg": "...ad that... a. suge. \"oux household manual duwaft does indic...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013353.jpg": "...was the practiee of  the household, these were the instuuec...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014408.jpg": "...ssages, fedex ecards, &@ household manual, and a litle  mam...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014412.jpg": "...maxwell's plate ih that. household from the early l99o5,  u...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014413.jpg": "...se ess sleet  that whole household manual, it's maxwell, an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014414.jpg": "...ein's partner,  nou, fhe household, itartal isn’t the only...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014416.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014448.jpg": "...t by goitig back 'to the household  manwal.. and what the m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014454.jpg": "...ere\"s why. you saw that. household marwal, government exhib...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014538.jpg": "...si, and the -iysteerieus household manual. nou, juan, aless...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014542.jpg": "...id ke didn't. follou the household manual, which is dated y...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014578.jpg": "...t like he told  you. the household manual shoued you in bla...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014755.jpg": "...e case. for example, the household manual instrueteed emplo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014789.jpg": "...ht.  , evidence, and the household manual im evidence. l  r...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016192.jpg": "...e, in decouating, hiring household staht. duxinag  sok a &...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017029.jpg": "...ssages, fedex ecards, &@ household manual, and a litle  mam...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017033.jpg": "...maxwell's plate ih that. household from the early l99o5,  u...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017034.jpg": "...se ess sleet  that whole household manual, it's maxwell, an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017035.jpg": "...ein's partner,  nou, fhe household, itartal isn’t the only...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017037.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017069.jpg": "...t by goitig back 'to the household  manwal.. and what the m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017075.jpg": "...ere\"s why. you saw that. household marwal, government exhib...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017159.jpg": "...si, and the -iysteerieus household manual. nou, juan, aless...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017163.jpg": "...id ke didn't. follou the household manual, which is dated y...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017199.jpg": "...t like he told  you. the household manual shoued you in bla...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017493.jpg": "...ess side. lt was jeffrey household personal «  q. the reaso...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017570.jpg": "...ed to. i was raised  o)  household where you were sort, of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017878.jpg": "...ontact book, and not the household manual. the court: wotil...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018656.jpg": "...ad that... a. suge. \"oux household manual duwaft does indic...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018937.jpg": "...was the practiee of  the household, these were the instuuec...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021023.jpg": "...untess,” not“the:  . the household:manual.wz  )oos ‘that co...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021553.jpg": "...e tase. for example; the household  manual instructed emplo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021587.jpg": "...: ‘i ‘ev.ioence; ana the household manual in evidence. i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021589.jpg": "...; hired. and oversaw the household  staff. the defendant ha...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021664.jpg": "...hich, were included in a household manual. dictating the op...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021665.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021737.jpg": "...fact. corroborated by.a household, manual, directing staff...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021775.jpg": "...ier version of the .2oo5 household manual, atested to by:..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "household" (54 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">5779-5779</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">6325-6325</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">6698-6698</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">8275-8275</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">8959-8959</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">10543-10543</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">10564-10564</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">10572-10572</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">11175-11175</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">11527-11527</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">11561-11561</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">11747-11747</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">11755-11755</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">11903-11903</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">11980-11980</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">12290-12290</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">13071-13071</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">13353-13353</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">14408-14416</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">14448-14448</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">14454-14454</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">14538-14542</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">14578-14578</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">14755-14755</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">14789-14789</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">16192-16192</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">17029-17037</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">17069-17069</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">17075-17075</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">17159-17163</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">17199-17199</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">17493-17493</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">17570-17570</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">17878-17878</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">18656-18656</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">18937-18937</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">21023-21023</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">21553-21553</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">21587-21589</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">21664-21665</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">21737-21737</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">21775-21775</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

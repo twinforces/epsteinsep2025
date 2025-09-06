@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "quotations"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 311, "end": 311, "pages": [311]}, {"start": 759, "end": 759, "pages": [759]}, {"start": 1319, "end": 1319, "pages": [1319]}, {"start": 1374, "end": 1374, "pages": [1374]}, {"start": 1442, "end": 1442, "pages": [1442]}, {"start": 1721, "end": 1721, "pages": [1721]}, {"start": 1821, "end": 1821, "pages": [1821]}, {"start": 2591, "end": 2591, "pages": [2591]}, {"start": 2607, "end": 2607, "pages": [2607]}, {"start": 3060, "end": 3060, "pages": [3060]}, {"start": 3071, "end": 3071, "pages": [3071]}, {"start": 3100, "end": 3100, "pages": [3100]}, {"start": 3671, "end": 3671, "pages": [3671]}, {"start": 3850, "end": 3850, "pages": [3850]}, {"start": 3882, "end": 3882, "pages": [3882]}, {"start": 3888, "end": 3888, "pages": [3888]}, {"start": 4256, "end": 4256, "pages": [4256]}, {"start": 4271, "end": 4275, "pages": [4271, 4275]}, {"start": 4285, "end": 4285, "pages": [4285]}, {"start": 4294, "end": 4294, "pages": [4294]}, {"start": 5696, "end": 5696, "pages": [5696]}, {"start": 6208, "end": 6208, "pages": [6208]}, {"start": 7359, "end": 7359, "pages": [7359]}, {"start": 7421, "end": 7421, "pages": [7421]}, {"start": 9031, "end": 9031, "pages": [9031]}, {"start": 9122, "end": 9122, "pages": [9122]}, {"start": 9141, "end": 9146, "pages": [9141, 9146]}, {"start": 9722, "end": 9722, "pages": [9722]}, {"start": 9801, "end": 9801, "pages": [9801]}, {"start": 9820, "end": 9825, "pages": [9820, 9825]}, {"start": 10349, "end": 10349, "pages": [10349]}, {"start": 11255, "end": 11255, "pages": [11255]}, {"start": 19424, "end": 19424, "pages": [19424]}, {"start": 19604, "end": 19604, "pages": [19604]}, {"start": 19616, "end": 19616, "pages": [19616]}, {"start": 20236, "end": 20236, "pages": [20236]}, {"start": 20292, "end": 20292, "pages": [20292]}, {"start": 20360, "end": 20360, "pages": [20360]}, {"start": 20969, "end": 20969, "pages": [20969]}];
+        const pageToPath = {"311": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000311.jpg", "759": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000759.jpg", "1319": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001319.jpg", "1374": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001374.jpg", "1442": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001442.jpg", "1721": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001721.jpg", "1821": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001821.jpg", "2591": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002591.jpg", "2607": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002607.jpg", "3060": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003060.jpg", "3071": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003071.jpg", "3100": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003100.jpg", "3671": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003671.jpg", "3850": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003850.jpg", "3882": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003882.jpg", "3888": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003888.jpg", "4256": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004256.jpg", "4271": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004271.jpg", "4275": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004275.jpg", "4285": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004285.jpg", "4294": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004294.jpg", "5696": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005696.jpg", "6208": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006208.jpg", "7359": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007359.jpg", "7421": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007421.jpg", "9031": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009031.jpg", "9122": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009122.jpg", "9141": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009141.jpg", "9146": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009146.jpg", "9722": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009722.jpg", "9801": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009801.jpg", "9820": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009820.jpg", "9825": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009825.jpg", "10349": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010349.jpg", "11255": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011255.jpg", "19424": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019424.jpg", "19604": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019604.jpg", "19616": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019616.jpg", "20236": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020236.jpg", "20292": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020292.jpg", "20360": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020360.jpg", "20969": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020969.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000311.jpg": "......2ooo): (citations aid quotations. omited):  cee,  ripenes...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000759.jpg": "...ly: dealing ‘with,  ‘use quotations: because what are these...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001319.jpg": "...erwise noted, case text. quotations omit all internal quotat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001374.jpg": "...ly on a regurgitation of quotations from. the louer court:(t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001442.jpg": "...herwise noted, case text quotations, omit all, internal quot...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001721.jpg": "...tool.) (emphasis added, quotations and citations ifee cs l3...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001821.jpg": "...y 2o2o warrait included. quotations from  aol  sete  ini, pa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002591.jpg": "...jd. at;269#7o (internal quotations and citatrons omited). h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002607.jpg": "...(citations and internal. quotations omited). the cotirt held...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003060.jpg": "...when.an-en dd. (internal quotations: marks and citations. om...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003071.jpg": "...igitial) (internal  coe  quotations. and citations omited)....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003100.jpg": "...”  cir. 99:l) ginternal, quotations and cifatror ed). ;  62o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003671.jpg": "...7 u.s, at ll5 (internal, quotations and citation, omited). b...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003850.jpg": "...thout this jurisdiction. quotations from testimony :concerni...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003882.jpg": "...ned.”  at; l67 (internal quotations omited). when the govern...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003888.jpg": "...” jd. at ‘l6o7 (internal quotations  omited), and‘epstein an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004256.jpg": "...r  er the government.”  quotations and, citations omited);...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004271.jpg": "...on, ), at l67 ginternal, quotations  sinited).  awe afths ki...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004275.jpg": "...dkt. 2o7 at 6 (internal, quotations omited); see.also id, at...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004285.jpg": "...“to resolve  (internal, quotations omited))  furthermore,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004294.jpg": "...report at l67 (internal. quotations omited)) (usao-sdfl newe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005696.jpg": "...(2d cir. f986) cinternal quotations and citations omited) (e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006208.jpg": "...” (internal citation and quotations. omited)).,  c. discissi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007359.jpg": "...issible, and not  re  - (quotations and citations omited)....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007421.jpg": "...ntern jal ‘citations and quotations  federal rule of evidenc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009031.jpg": "...d, gir. l979) (internal, quotations and citations. omited).“...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009122.jpg": "...64 u.s. 548, 553 (l984):(quotations and,  te atid sdeial -re...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009141.jpg": "...greer, 28s f.3d at l7l (quotations and citatiofis omited) ....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009146.jpg": "...5  l678, l28 f.3d at 46 (quotations aid, citations, omited)....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009722.jpg": "...d, gir. l979) (internal, quotations and citations. omited).“...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009801.jpg": "...64 u.s. 548, 553 (l984):(quotations and,  te atid sdeial -re...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009820.jpg": "...greer, 28s f.3d at l7l (quotations and citatiofis omited) ....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009825.jpg": "...5  l678, l28 f.3d at 46 (quotations aid, citations, omited)....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010349.jpg": "...95 f.3d _at:48 (internal quotations.  omited) (quoting greer...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011255.jpg": "...v  , 26, 2ol3) (internal quotations omited)....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019424.jpg": "...2d cir. 2olo) (internal  quotations omited). a writ:is prope...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019604.jpg": "...(2d cir. 2olo) (internal quotations omited). a writ is prope...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019616.jpg": "...ont citations, internal quotations, and jpreviotis alterati...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020236.jpg": "...erwise noted, case text. quotations omit all internal quotat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020292.jpg": "...ly on a regurgitation of quotations from. the louer court:(t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020360.jpg": "...herwise noted, case text quotations, omit all, internal quot...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020969.jpg": "...995°e.3d at-48 ginternal quotations:  omited) (quoting; gree..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "quotations" (42 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">311-311</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">759-759</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1319-1319</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">1374-1374</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">1442-1442</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">1721-1721</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">1821-1821</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">2591-2591</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">2607-2607</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">3060-3060</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">3071-3071</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">3100-3100</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">3671-3671</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">3850-3850</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">3882-3882</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">3888-3888</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">4256-4256</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">4271-4275</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">4285-4285</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">4294-4294</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">5696-5696</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">6208-6208</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">7359-7359</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">7421-7421</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">9031-9031</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">9122-9122</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">9141-9146</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">9722-9722</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">9801-9801</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">9820-9825</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">10349-10349</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">11255-11255</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">19424-19424</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">19604-19604</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">19616-19616</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">20236-20236</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">20292-20292</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">20360-20360</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">20969-20969</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

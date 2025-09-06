@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "terrorist"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 438, "end": 438, "pages": [438]}, {"start": 452, "end": 452, "pages": [452]}, {"start": 496, "end": 496, "pages": [496]}, {"start": 808, "end": 808, "pages": [808]}, {"start": 1271, "end": 1271, "pages": [1271]}, {"start": 2797, "end": 2797, "pages": [2797]}, {"start": 7610, "end": 7610, "pages": [7610]}, {"start": 7677, "end": 7677, "pages": [7677]}, {"start": 7687, "end": 7692, "pages": [7687, 7689, 7690, 7691, 7692]}, {"start": 8136, "end": 8136, "pages": [8136]}, {"start": 8146, "end": 8151, "pages": [8146, 8148, 8149, 8150, 8151]}, {"start": 20189, "end": 20189, "pages": [20189]}];
+        const pageToPath = {"438": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000438.jpg", "452": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000452.jpg", "496": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000496.jpg", "808": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000808.jpg", "1271": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001271.jpg", "2797": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002797.jpg", "7610": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007610.jpg", "7677": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007677.jpg", "7687": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007687.jpg", "7689": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007689.jpg", "7690": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007690.jpg", "7691": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007691.jpg", "7692": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007692.jpg", "8136": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008136.jpg", "8146": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008146.jpg", "8148": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008148.jpg", "8149": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008149.jpg", "8150": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008150.jpg", "8151": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008151.jpg", "20189": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020189.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000438.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000452.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000496.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000808.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001271.jpg": "...geria after he was co:  ‘terrorist: offences and subsequent...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002797.jpg": "...geria after he was co:  ‘terrorist: offences and subsequent...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007610.jpg": "...\"product _tampering asa terrorist tactic,\" 6th annual gove...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007677.jpg": "..., chapman mj: effects of terrorist atacks on the elderly, p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007687.jpg": "...scenarios, response: to: terrorist atacks, and sources of g...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007689.jpg": "...;)  hall: rcw, hall rcw: terrorist: bombings: medical and p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007690.jpg": "...oo9  hall rcw, hall rcw= terrorist bombings: medical and ps...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007691.jpg": "...o:  hall rcw:, hall rcw: terrorist bombings: medical ‘and p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007692.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008136.jpg": "..., chapman mj: effects of terrorist atacks on the elderly, p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008146.jpg": "...scenarios, response: to: terrorist atacks, and sources of g...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008148.jpg": "...;)  hall: rcw, hall rcw: terrorist: bombings: medical and p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008149.jpg": "...oo9  hall rcw, hall rcw= terrorist bombings: medical and ps...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008150.jpg": "...o:  hall rcw:, hall rcw: terrorist bombings: medical ‘and p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008151.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020189.jpg": "...geria after he was co:  ‘terrorist: offences and subsequent..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "terrorist" (20 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">438-438</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">452-452</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">496-496</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">808-808</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">1271-1271</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">2797-2797</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">7610-7610</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">7677-7677</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">7687-7692</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">8136-8136</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">8146-8151</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">20189-20189</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

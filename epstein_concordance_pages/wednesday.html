@@ -1,0 +1,199 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "wednesday"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 3277, "end": 3277, "pages": [3277]}, {"start": 4192, "end": 4194, "pages": [4192, 4194]}, {"start": 4399, "end": 4399, "pages": [4399]}, {"start": 6948, "end": 6948, "pages": [6948]}, {"start": 7167, "end": 7167, "pages": [7167]}, {"start": 7357, "end": 7357, "pages": [7357]}, {"start": 8257, "end": 8258, "pages": [8257, 8258]}, {"start": 8264, "end": 8264, "pages": [8264]}, {"start": 8917, "end": 8917, "pages": [8917]}, {"start": 9472, "end": 9472, "pages": [9472]}, {"start": 10151, "end": 10151, "pages": [10151]}, {"start": 11738, "end": 11738, "pages": [11738]}, {"start": 11763, "end": 11763, "pages": [11763]}, {"start": 12744, "end": 12744, "pages": [12744]}, {"start": 13232, "end": 13232, "pages": [13232]}, {"start": 13536, "end": 13536, "pages": [13536]}, {"start": 13721, "end": 13721, "pages": [13721]}, {"start": 13839, "end": 13844, "pages": [13839, 13843, 13844]}, {"start": 13850, "end": 13854, "pages": [13850, 13854]}, {"start": 14692, "end": 14692, "pages": [14692]}, {"start": 15083, "end": 15083, "pages": [15083]}, {"start": 15666, "end": 15666, "pages": [15666]}, {"start": 16183, "end": 16183, "pages": [16183]}, {"start": 16208, "end": 16208, "pages": [16208]}, {"start": 16346, "end": 16346, "pages": [16346]}, {"start": 16464, "end": 16469, "pages": [16464, 16468, 16469]}, {"start": 16475, "end": 16479, "pages": [16475, 16479]}, {"start": 17310, "end": 17310, "pages": [17310]}, {"start": 18331, "end": 18331, "pages": [18331]}, {"start": 18817, "end": 18817, "pages": [18817]}, {"start": 19120, "end": 19120, "pages": [19120]}, {"start": 20550, "end": 20550, "pages": [20550]}, {"start": 21275, "end": 21276, "pages": [21275, 21276]}, {"start": 22059, "end": 22059, "pages": [22059]}, {"start": 27527, "end": 27527, "pages": [27527]}];
+        const pageToPath = {"3277": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003277.jpg", "4192": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004192.jpg", "4194": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004194.jpg", "4399": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004399.jpg", "6948": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006948.jpg", "7167": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007167.jpg", "7357": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007357.jpg", "8257": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008257.jpg", "8258": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008258.jpg", "8264": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008264.jpg", "8917": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008917.jpg", "9472": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009472.jpg", "10151": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010151.jpg", "11738": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011738.jpg", "11763": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011763.jpg", "12744": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012744.jpg", "13232": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013232.jpg", "13536": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013536.jpg", "13721": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013721.jpg", "13839": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013839.jpg", "13843": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013843.jpg", "13844": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013844.jpg", "13850": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013850.jpg", "13854": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013854.jpg", "14692": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014692.jpg", "15083": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015083.jpg", "15666": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015666.jpg", "16183": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016183.jpg", "16208": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016208.jpg", "16346": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016346.jpg", "16464": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016464.jpg", "16468": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016468.jpg", "16469": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016469.jpg", "16475": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016475.jpg", "16479": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016479.jpg", "17310": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017310.jpg", "18331": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018331.jpg", "18817": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018817.jpg", "19120": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019120.jpg", "20550": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020550.jpg", "21275": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021275.jpg", "21276": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021276.jpg", "22059": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022059.jpg", "27527": "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027527.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003277.jpg": "...ed throughout the day on wednesday, se l9, 2oo7, with. will...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004192.jpg": "...ay afternoon and all day wednesday. do ‘you  united states...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004194.jpg": "...dscape ~ tharikst  sent: wednesday;, december o5, 2o78. 2.l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004399.jpg": "...ed throughout the day on wednesday, september l9, 2oo7, wit...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006948.jpg": "...judge:  as discussed at wednesday’s ‘conference, the gourt...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007167.jpg": "...the gate was monday  ©e wednesday that, we produced this m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007357.jpg": "..., with.a deadline ofthis wednesday, n fr tiat we: shave lus...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008257.jpg": "...the gourt: so if we do wednesday of this week and respons...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008258.jpg": "...o quash the subposena by wednesday  defense res  gonse by f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008264.jpg": "...ion ‘cost  incurred, on, wednesday 8, 2o2l, to the jury adm...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008917.jpg": "...regarding timing. as of wednesday; february’9,  2o22, the:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009472.jpg": "...eition,” new york times, wednesday, march l, 2ooo at a23 (t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010151.jpg": "...eition,” new york times, wednesday, march l, 2ooo at a23 (t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011738.jpg": "...ths  e monday, tuesday, wednesday |  yelole:  soa s  oe  n...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011763.jpg": "...ll sit monday; tuessday, wednesday. s6  that’s the 2oth, 2l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012744.jpg": "...sit monday, tuesday, or wednesday. so we will net sit dece...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013232.jpg": "...week;, monday, tuesday, wednesday, ther we're off for the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013536.jpg": "...tion to monday, tuesday, wednesday, if  5. comfortable with...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013721.jpg": "...oxnrect. qo. tit. wasn't wednesday to friday, for eexaifipl...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013839.jpg": "...ues fer monday, tuesday, wednesday. s6 we're aet  at amomen...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013843.jpg": ".... moe: yous honer, would wednesday at. moon be  aeceptable?...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013844.jpg": "...hey gan  have to meen en wednesday. t' ll then. have the pa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013850.jpg": "...ricted again sometime on wednesday, if that works.  ms. moe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013854.jpg": "...very well. not. be until wednesday. then we ga inte two day...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014692.jpg": "...that. -- i guess it was  wednesday that we're suppesed to w...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015083.jpg": "...by: hand, by  3.p.m. ‘on wednesday, august 6, 2o25: (l).all...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015666.jpg": "...on (cleanersy 56l 833. [ wednesday 8am— 4.3opm. also thursd...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016183.jpg": "...ths  e monday, tuesday, wednesday |  yelole:  soa s  oe  n...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016208.jpg": "...ll sit monday; tuessday, wednesday. s6  that’s the 2oth, 2l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016346.jpg": "...oxnrect. qo. tit. wasn't wednesday to friday, for eexaifipl...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016464.jpg": "...ues fer monday, tuesday, wednesday. s6 we're aet  at amomen...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016468.jpg": ".... moe: yous honer, would wednesday at. moon be  aeceptable?...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016469.jpg": "...hey gan  have to meen en wednesday. t' ll then. have the pa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016475.jpg": "...ricted again sometime on wednesday, if that works.  ms. moe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016479.jpg": "...very well. not. be until wednesday. then we ga inte two day...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017310.jpg": "...that. -- i guess it was  wednesday that we're suppesed to w...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018331.jpg": "...sit monday, tuesday, or wednesday. so we will net sit dece...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018817.jpg": "...week;, monday, tuesday, wednesday, ther we're off for the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019120.jpg": "...tion to monday, tuesday, wednesday, if  5. comfortable with...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020550.jpg": "...selection adjourned, to wednesday: november: l7, 2o2ll at:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021275.jpg": "...hroughout ‘the: day:‘on. wednesday, : september ne 2oo7,, w...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021276.jpg": "...the: late afternoon: of wednesday, s eptember  the follewi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022059.jpg": "...lmr mesting was held 6m wednesday, august 7, 2ol9  meeting...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027527.jpg": "...ified: by the end: user (wednesday-january-26-2oll 24. ssr'..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "wednesday" (44 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">3277-3277</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">4192-4194</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">4399-4399</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">6948-6948</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">7167-7167</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">7357-7357</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">8257-8258</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">8264-8264</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">8917-8917</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">9472-9472</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">10151-10151</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">11738-11738</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">11763-11763</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">12744-12744</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">13232-13232</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">13536-13536</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">13721-13721</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">13839-13844</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">13850-13854</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">14692-14692</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">15083-15083</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">15666-15666</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">16183-16183</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">16208-16208</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">16346-16346</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">16464-16469</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">16475-16479</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">17310-17310</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">18331-18331</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">18817-18817</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">19120-19120</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">20550-20550</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">21275-21276</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">22059-22059</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">27527-27527</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

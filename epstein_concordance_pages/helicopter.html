@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "helicopter"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1599, "end": 1599, "pages": [1599]}, {"start": 2434, "end": 2434, "pages": [2434]}, {"start": 11712, "end": 11712, "pages": [11712]}, {"start": 11798, "end": 11808, "pages": [11798, 11803, 11807, 11808]}, {"start": 11885, "end": 11885, "pages": [11885]}, {"start": 11918, "end": 11922, "pages": [11918, 11919, 11920, 11921, 11922]}, {"start": 12930, "end": 12930, "pages": [12930]}, {"start": 13470, "end": 13470, "pages": [13470]}, {"start": 16157, "end": 16157, "pages": [16157]}, {"start": 17388, "end": 17398, "pages": [17388, 17393, 17397, 17398]}, {"start": 17475, "end": 17475, "pages": [17475]}, {"start": 17508, "end": 17512, "pages": [17508, 17509, 17510, 17511, 17512]}, {"start": 18516, "end": 18516, "pages": [18516]}, {"start": 19054, "end": 19054, "pages": [19054]}, {"start": 21029, "end": 21029, "pages": [21029]}, {"start": 33157, "end": 33157, "pages": [33157]}];
+        const pageToPath = {"1599": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001599.jpg", "2434": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002434.jpg", "11712": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011712.jpg", "11798": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011798.jpg", "11803": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011803.jpg", "11807": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011807.jpg", "11808": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011808.jpg", "11885": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011885.jpg", "11918": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011918.jpg", "11919": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011919.jpg", "11920": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011920.jpg", "11921": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011921.jpg", "11922": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011922.jpg", "12930": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012930.jpg", "13470": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013470.jpg", "16157": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016157.jpg", "17388": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017388.jpg", "17393": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017393.jpg", "17397": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017397.jpg", "17398": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017398.jpg", "17475": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017475.jpg", "17508": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017508.jpg", "17509": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017509.jpg", "17510": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017510.jpg", "17511": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017511.jpg", "17512": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017512.jpg", "18516": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018516.jpg", "19054": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019054.jpg", "21029": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021029.jpg", "33157": "Prod 01_20250822/VOL00001/IMAGES/IMAGES012/DOJ-OGR-00033157.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001599.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002434.jpg": "...dent; clinton flew on.a, helicopter piloted by ghislaine max...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011712.jpg": "...people, she can pilot a helicopter, she speaks numerous  la...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011798.jpg": "...ort, i would 96 get. the helicopter and then pack him up and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011803.jpg": "...we -- af you angived by helicopter.  further douh from that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011807.jpg": "...e fsame, up until first, helicopter he purchased, one helice...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011808.jpg": "...pstein use these -- this helicopter  rh q pu lo)  rather tha...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011885.jpg": "...because you're @ trained helicopter pilot?  a. t  »  ak ls c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011918.jpg": "...he dlsd became a trained helicopter pilot, too? a. yes, she...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011919.jpg": "...aool fo begome a pranied helicopter paloty is that fight? ®....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011920.jpg": "...ance, ‘yes.  ®. and that helicopter corse that she took esgo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011921.jpg": "...q. -- she flew epstein\"s helicopter; is that night?...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011922.jpg": "...edge, that was epstein\"s helicopter, not ghislaine\"s helicop...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012930.jpg": "...one ce ee eee  l  of the helicopter we were looking at befer...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013470.jpg": ".... epstein bought another helicopter sometime  later from sik...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016157.jpg": "...people, she can pilot a helicopter, she speaks numerous  la...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017388.jpg": "...ort, i would 96 get. the helicopter and then pack him up and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017393.jpg": "...we -- af you angived by helicopter.  further douh from that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017397.jpg": "...e fsame, up until first, helicopter he purchased, one helice...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017398.jpg": "...pstein use these -- this helicopter  rh q pu lo)  rather tha...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017475.jpg": "...because you're @ trained helicopter pilot?  a. t  »  ak ls c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017508.jpg": "...he dlsd became a trained helicopter pilot, too? a. yes, she...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017509.jpg": "...aool fo begome a pranied helicopter paloty is that fight? ®....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017510.jpg": "...ance, ‘yes.  ®. and that helicopter corse that she took esgo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017511.jpg": "...q. -- she flew epstein\"s helicopter; is that night?...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017512.jpg": "...edge, that was epstein\"s helicopter, not ghislaine\"s helicop...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018516.jpg": "...one ce ee eee  l  of the helicopter we were looking at befer...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019054.jpg": ".... epstein bought another helicopter sometime  later from sik...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021029.jpg": "...g; »sut it was to buy a  helicopter that. was mot sor her. w...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES012/DOJ-OGR-00033157.jpg": "...2oo9 palm beach - miami ‘helicopter fight. | am also enclosi..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "helicopter" (30 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1599-1599</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">2434-2434</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">11712-11712</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">11798-11808</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">11885-11885</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">11918-11922</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">12930-12930</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">13470-13470</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">16157-16157</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">17388-17398</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">17475-17475</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">17508-17512</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">18516-18516</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">19054-19054</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">21029-21029</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">33157-33157</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

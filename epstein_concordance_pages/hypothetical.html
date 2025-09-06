@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "hypothetical"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 317, "end": 317, "pages": [317]}, {"start": 999, "end": 999, "pages": [999]}, {"start": 1240, "end": 1240, "pages": [1240]}, {"start": 1686, "end": 1687, "pages": [1686, 1687]}, {"start": 2106, "end": 2106, "pages": [2106]}, {"start": 2739, "end": 2739, "pages": [2739]}, {"start": 3005, "end": 3005, "pages": [3005]}, {"start": 5466, "end": 5466, "pages": [5466]}, {"start": 6246, "end": 6246, "pages": [6246]}, {"start": 6428, "end": 6428, "pages": [6428]}, {"start": 7106, "end": 7106, "pages": [7106]}, {"start": 7123, "end": 7127, "pages": [7123, 7127]}, {"start": 9132, "end": 9132, "pages": [9132]}, {"start": 9140, "end": 9142, "pages": [9140, 9141, 9142]}, {"start": 9148, "end": 9148, "pages": [9148]}, {"start": 9635, "end": 9635, "pages": [9635]}, {"start": 9811, "end": 9811, "pages": [9811]}, {"start": 9819, "end": 9821, "pages": [9819, 9820, 9821]}, {"start": 9827, "end": 9827, "pages": [9827]}, {"start": 9834, "end": 9834, "pages": [9834]}, {"start": 10292, "end": 10292, "pages": [10292]}, {"start": 10300, "end": 10301, "pages": [10300, 10301]}, {"start": 10336, "end": 10336, "pages": [10336]}, {"start": 10350, "end": 10352, "pages": [10350, 10352]}, {"start": 12026, "end": 12026, "pages": [12026]}, {"start": 12377, "end": 12377, "pages": [12377]}, {"start": 14702, "end": 14704, "pages": [14702, 14704]}, {"start": 15158, "end": 15158, "pages": [15158]}, {"start": 17320, "end": 17322, "pages": [17320, 17322]}, {"start": 17615, "end": 17615, "pages": [17615]}, {"start": 17965, "end": 17965, "pages": [17965]}, {"start": 19451, "end": 19451, "pages": [19451]}, {"start": 19917, "end": 19917, "pages": [19917]}, {"start": 20158, "end": 20158, "pages": [20158]}, {"start": 20840, "end": 20842, "pages": [20840, 20842]}, {"start": 20972, "end": 20972, "pages": [20972]}, {"start": 21013, "end": 21013, "pages": [21013]}, {"start": 21129, "end": 21129, "pages": [21129]}, {"start": 21717, "end": 21722, "pages": [21717, 21722]}];
+        const pageToPath = {"317": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000317.jpg", "999": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000999.jpg", "1240": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001240.jpg", "1686": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001686.jpg", "1687": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001687.jpg", "2106": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002106.jpg", "2739": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002739.jpg", "3005": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003005.jpg", "5466": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005466.jpg", "6246": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006246.jpg", "6428": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006428.jpg", "7106": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007106.jpg", "7123": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007123.jpg", "7127": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007127.jpg", "9132": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009132.jpg", "9140": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009140.jpg", "9141": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009141.jpg", "9142": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009142.jpg", "9148": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009148.jpg", "9635": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009635.jpg", "9811": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009811.jpg", "9819": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009819.jpg", "9820": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009820.jpg", "9821": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009821.jpg", "9827": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009827.jpg", "9834": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009834.jpg", "10292": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010292.jpg", "10300": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010300.jpg", "10301": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010301.jpg", "10336": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010336.jpg", "10350": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010350.jpg", "10352": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010352.jpg", "12026": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012026.jpg", "12377": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012377.jpg", "14702": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014702.jpg", "14704": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014704.jpg", "15158": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015158.jpg", "17320": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017320.jpg", "17322": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017322.jpg", "17615": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017615.jpg", "17965": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017965.jpg", "19451": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019451.jpg", "19917": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019917.jpg", "20158": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020158.jpg", "20840": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020840.jpg", "20842": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020842.jpg", "20972": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020972.jpg", "21013": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021013.jpg", "21129": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021129.jpg", "21717": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021717.jpg", "21722": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021722.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000317.jpg": "...s is plainly the type of hypothetical.:case:  4  that [a, cour...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000999.jpg": "...on assertions. about the hypothetical. risks: of covid-l9,. in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001240.jpg": "...ufficicnt’to address the hypothetical t  k of flight aid.  max...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001686.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001687.jpg": "...ment, pasils a seri  of “hypothetical examples® lic; fora. (ld...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002106.jpg": "...ms maxwell ‘had, im the hypothetical. scenario under consider...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002739.jpg": "...ufficient’to address the hypothetical t  k of flight aid. maxw...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003005.jpg": "...defense, but none of her hypothetical claims. of prejudice wit...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005466.jpg": "...required to respond, to hypothetical demands or ‘provide prev...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006246.jpg": "...was “based primarily on. hypothetical  situations. involving e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006428.jpg": "...required to respond, to hypothetical demands or ‘provide prev...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007106.jpg": "...il, lovolving  ip.  is a hypothetical. ee you the defendant. s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007123.jpg": "...ht. the  a sto osteet =  hypothetical, we wanted to be thought...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007127.jpg": "...e &  this,  oh  ce  she  hypothetical, 25, 3o, lt doesn't mate...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009132.jpg": "...termine:  have granted a hypothetical strike f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009140.jpg": "...it would, have granted a hypothetical  the defendant’s brief s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009141.jpg": "...court: have ruled on,a ‘hypothetical, for cause  had, disclos...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009142.jpg": "...tive: determination ofa. hypothetical challenge for:cause—the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009148.jpg": ".... agarn-relevant to  the hypothetical inquiry at issue. see;.e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009635.jpg": "...e is consistent;with the hypothetical  inquiry called for by ‘...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009811.jpg": "...termine:  have granted a hypothetical strike f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009819.jpg": "...would have granted the  hypothetical. challenge.” siewart, 43...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009820.jpg": "...court: have ruled on,a ‘hypothetical, for cause  had, disclos...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009821.jpg": "...tive: determination ofa. hypothetical challenge for:cause—the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009827.jpg": ".... agarn-relevant to  the hypothetical inquiry at issue. see;.e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009834.jpg": "...permit it to make: the  hypothetical. determitiation posed. b...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010292.jpg": "...urt would have granted.a hypothetical for cause challenge  cot...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010300.jpg": "...urt would hav granted. a.hypothetical for cause challenge  the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010301.jpg": "...it would have granted a hypothetical strike for eatise. ‘the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010336.jpg": "...e court “iu  granted.the hypothetical challenge” for:causeif t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010350.jpg": "...d, rot imagine a  wholly hypothetical-universe :for this:concl...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010352.jpg": "...ould:not have granted, a hypothetical challenge for cause, as...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012026.jpg": "...other example. mais is a hypothetical  one. larry wisoski just...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012377.jpg": "...a. given that. in your hypothetical fm assum  ing he wasn't...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014702.jpg": "...re nou guessing at what. hypothetical, facts the jury is talki...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014704.jpg": "...exual activity:  in this hypothetical that they've given in th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015158.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017320.jpg": "...re nou guessing at what. hypothetical, facts the jury is talki...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017322.jpg": "...exual activity:  in this hypothetical that they've given in th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017615.jpg": "...other example. mais is a hypothetical  one. larry wisoski just...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017965.jpg": "...a. given that. in your hypothetical fm assum  ing he wasn't...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019451.jpg": "...al, case is, not merely. hypothetical. or anticipated, but:rat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019917.jpg": "...on assertions. about the hypothetical. risks: of covid-l9,. in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020158.jpg": "...ufficicnt’to address the hypothetical t  k of flight aid.  max...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020840.jpg": "...are nou guessing 2  what hypothetical facts the jury is talkin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020842.jpg": "...exual activity.  in this hypothetical, that, they*ve givef in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020972.jpg": "...would notshave:granted a hypothetical challenge for. cause, as...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021013.jpg": "...to the destination ofthe hypothetical. re sturn flight, the st...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021129.jpg": "...s. biased, and whether a hypothetical  challenge for cause wou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021717.jpg": "...t would have granted a . hypothetical strike for cause. ur nit...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021722.jpg": "...ed not. imagine a wholly hypothetical universe” to.reach that..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "hypothetical" (51 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">317-317</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">999-999</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1240-1240</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">1686-1687</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">2106-2106</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">2739-2739</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3005-3005</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">5466-5466</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">6246-6246</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">6428-6428</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">7106-7106</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">7123-7127</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">9132-9132</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">9140-9142</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">9148-9148</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">9635-9635</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">9811-9811</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">9819-9821</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">9827-9827</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">9834-9834</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">10292-10292</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">10300-10301</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">10336-10336</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">10350-10352</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">12026-12026</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">12377-12377</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">14702-14704</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">15158-15158</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">17320-17322</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">17615-17615</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">17965-17965</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">19451-19451</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">19917-19917</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">20158-20158</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">20840-20842</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">20972-20972</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">21013-21013</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">21129-21129</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">21717-21722</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

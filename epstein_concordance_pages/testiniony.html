@@ -1,0 +1,307 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "testiniony"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 25, "end": 25, "pages": [25]}, {"start": 743, "end": 743, "pages": [743]}, {"start": 2242, "end": 2242, "pages": [2242]}, {"start": 3692, "end": 3692, "pages": [3692]}, {"start": 4233, "end": 4233, "pages": [4233]}, {"start": 4262, "end": 4262, "pages": [4262]}, {"start": 5396, "end": 5396, "pages": [5396]}, {"start": 5426, "end": 5430, "pages": [5426, 5430]}, {"start": 5640, "end": 5640, "pages": [5640]}, {"start": 5680, "end": 5680, "pages": [5680]}, {"start": 5788, "end": 5797, "pages": [5788, 5792, 5797]}, {"start": 6193, "end": 6193, "pages": [6193]}, {"start": 6242, "end": 6245, "pages": [6242, 6243, 6245]}, {"start": 6363, "end": 6363, "pages": [6363]}, {"start": 6393, "end": 6397, "pages": [6393, 6397]}, {"start": 6602, "end": 6602, "pages": [6602]}, {"start": 6687, "end": 6687, "pages": [6687]}, {"start": 6699, "end": 6699, "pages": [6699]}, {"start": 6713, "end": 6722, "pages": [6713, 6717, 6722]}, {"start": 6747, "end": 6747, "pages": [6747]}, {"start": 6966, "end": 6967, "pages": [6966, 6967]}, {"start": 7146, "end": 7146, "pages": [7146]}, {"start": 7478, "end": 7479, "pages": [7478, 7479]}, {"start": 7488, "end": 7490, "pages": [7488, 7490]}, {"start": 7867, "end": 7867, "pages": [7867]}, {"start": 8043, "end": 8043, "pages": [8043]}, {"start": 8068, "end": 8068, "pages": [8068]}, {"start": 8083, "end": 8083, "pages": [8083]}, {"start": 8174, "end": 8174, "pages": [8174]}, {"start": 8189, "end": 8189, "pages": [8189]}, {"start": 8278, "end": 8278, "pages": [8278]}, {"start": 8309, "end": 8309, "pages": [8309]}, {"start": 8369, "end": 8369, "pages": [8369]}, {"start": 8376, "end": 8376, "pages": [8376]}, {"start": 8522, "end": 8522, "pages": [8522]}, {"start": 8619, "end": 8619, "pages": [8619]}, {"start": 8687, "end": 8687, "pages": [8687]}, {"start": 8773, "end": 8773, "pages": [8773]}, {"start": 9577, "end": 9581, "pages": [9577, 9581]}, {"start": 9601, "end": 9601, "pages": [9601]}, {"start": 9612, "end": 9612, "pages": [9612]}, {"start": 10277, "end": 10277, "pages": [10277]}, {"start": 10312, "end": 10312, "pages": [10312]}, {"start": 10354, "end": 10354, "pages": [10354]}, {"start": 10408, "end": 10410, "pages": [10408, 10409, 10410]}, {"start": 10557, "end": 10557, "pages": [10557]}, {"start": 11110, "end": 11112, "pages": [11110, 11112]}, {"start": 11132, "end": 11132, "pages": [11132]}, {"start": 11141, "end": 11141, "pages": [11141]}, {"start": 11187, "end": 11187, "pages": [11187]}, {"start": 11236, "end": 11236, "pages": [11236]}, {"start": 11263, "end": 11263, "pages": [11263]}, {"start": 11276, "end": 11276, "pages": [11276]}, {"start": 11432, "end": 11432, "pages": [11432]}, {"start": 11556, "end": 11557, "pages": [11556, 11557]}, {"start": 11727, "end": 11727, "pages": [11727]}, {"start": 14368, "end": 14368, "pages": [14368]}, {"start": 14664, "end": 14664, "pages": [14664]}, {"start": 14784, "end": 14785, "pages": [14784, 14785]}, {"start": 14874, "end": 14874, "pages": [14874]}, {"start": 15007, "end": 15007, "pages": [15007]}, {"start": 15146, "end": 15146, "pages": [15146]}, {"start": 15161, "end": 15161, "pages": [15161]}, {"start": 16172, "end": 16172, "pages": [16172]}, {"start": 16990, "end": 16990, "pages": [16990]}, {"start": 17284, "end": 17284, "pages": [17284]}, {"start": 21140, "end": 21140, "pages": [21140]}, {"start": 21719, "end": 21719, "pages": [21719]}, {"start": 21818, "end": 21818, "pages": [21818]}, {"start": 21871, "end": 21871, "pages": [21871]}, {"start": 21901, "end": 21901, "pages": [21901]}];
+        const pageToPath = {"25": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000025.jpg", "743": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000743.jpg", "2242": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002242.jpg", "3692": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003692.jpg", "4233": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004233.jpg", "4262": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004262.jpg", "5396": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005396.jpg", "5426": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005426.jpg", "5430": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005430.jpg", "5640": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005640.jpg", "5680": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005680.jpg", "5788": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005788.jpg", "5792": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005792.jpg", "5797": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005797.jpg", "6193": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006193.jpg", "6242": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006242.jpg", "6243": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006243.jpg", "6245": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006245.jpg", "6363": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006363.jpg", "6393": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006393.jpg", "6397": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006397.jpg", "6602": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006602.jpg", "6687": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006687.jpg", "6699": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006699.jpg", "6713": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006713.jpg", "6717": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006717.jpg", "6722": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006722.jpg", "6747": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006747.jpg", "6966": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006966.jpg", "6967": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006967.jpg", "7146": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007146.jpg", "7478": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007478.jpg", "7479": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007479.jpg", "7488": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007488.jpg", "7490": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007490.jpg", "7867": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007867.jpg", "8043": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008043.jpg", "8068": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008068.jpg", "8083": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008083.jpg", "8174": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008174.jpg", "8189": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008189.jpg", "8278": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008278.jpg", "8309": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008309.jpg", "8369": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008369.jpg", "8376": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008376.jpg", "8522": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008522.jpg", "8619": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008619.jpg", "8687": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008687.jpg", "8773": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008773.jpg", "9577": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009577.jpg", "9581": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009581.jpg", "9601": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009601.jpg", "9612": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009612.jpg", "10277": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010277.jpg", "10312": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010312.jpg", "10354": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010354.jpg", "10408": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010408.jpg", "10409": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010409.jpg", "10410": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010410.jpg", "10557": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010557.jpg", "11110": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011110.jpg", "11112": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011112.jpg", "11132": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011132.jpg", "11141": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011141.jpg", "11187": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011187.jpg", "11236": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011236.jpg", "11263": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011263.jpg", "11276": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011276.jpg", "11432": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011432.jpg", "11556": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011556.jpg", "11557": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011557.jpg", "11727": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011727.jpg", "14368": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014368.jpg", "14664": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014664.jpg", "14784": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014784.jpg", "14785": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014785.jpg", "14874": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014874.jpg", "15007": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015007.jpg", "15146": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015146.jpg", "15161": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015161.jpg", "16172": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016172.jpg", "16990": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016990.jpg", "17284": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017284.jpg", "21140": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021140.jpg", "21719": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021719.jpg", "21818": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021818.jpg", "21871": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021871.jpg", "21901": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021901.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000025.jpg": "...s cofroborated. by other testiniony that maxwell  was epstei...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000743.jpg": "...all pertinent grand jury testiniony, ‘we filed.a. freedom, o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002242.jpg": "...port the main witnesses’ testiniony and link.the defendant t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003692.jpg": "...a jary would have foulid testiniony from epstein. credible e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004233.jpg": "...al, especially. when the testiniony of these three accusers...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004262.jpg": "...“blind” expert; opition testiniony. ms: maxwell cannot be e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005396.jpg": "...jtry with irre onflising testiniony  and. argument relating...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005426.jpg": "...§ l6.'  defendant secks testiniony “conceming the scope, ti...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005430.jpg": "...nd put the weight ofthis testiniony atid his eredibility'te...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005640.jpg": "...ive.  roechio’s proposed testiniony is also inadmissible tnd...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005680.jpg": "...eparately to exclude-the testiniony ofthe governmient’s prop...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005788.jpg": "...e court should admit the testiniony-of dr. lisa. rocchi the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005792.jpg": "...ly,, everi if the expert testiniony is relrable, it niwst.al...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005797.jpg": "...ibility, offer proposed. testiniony”). as noted. above, cour...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006193.jpg": "...stify in, rebutal to ary testiniony offered. by the governni...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006242.jpg": "...perly excluded where the testiniony addresses  knouledge of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006243.jpg": "...exelusion of dr loftus’s testiniony about. memory in context...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006245.jpg": "...o; dr. loftus*s proposed testiniony docs not satisfy the: da...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006363.jpg": "...jtry with irre onflising testiniony  and. argument relating...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006393.jpg": "...§ l6.'  defendant secks testiniony “conceming the scope, ti...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006397.jpg": "...nd put the weight ofthis testiniony atid his eredibility'te...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006602.jpg": "...ive.  roechio’s proposed testiniony is also inadmissible tnd...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006687.jpg": "...eclude any  pert opinion testiniony from. law enforcement wi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006699.jpg": "...by other photographs and.testiniony.  the manual. contains m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006713.jpg": "...e court should admit the testiniony-of dr. lisa. rocchi the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006717.jpg": "...ly,, everi if the expert testiniony is relrable, it niwst.al...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006722.jpg": "...ibility, offer proposed. testiniony”). as noted. above, cour...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006747.jpg": ".... reldan-zapata, 9l6  bs testiniony of employee-l employee-]...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006966.jpg": "...)(l) and (4).  here; the testiniony of employec-l. establish...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006967.jpg": "...moreover, eniployee-l’s testiniony will be ‘corroborated. b...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007146.jpg": "...the preffer 4s to that. testiniony. and :you  will deal wit...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007478.jpg": "...nion that dr. roechio’s 'testiniony:  to: because it is tain...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007479.jpg": "...knou. mot. at'l7. ‘the ‘testiniony is televarit, as explait...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007488.jpg": "...bility of eyex  witness. testiniony, has been deemed error...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007490.jpg": "...lpfultess ofthis type of testiniony is well recognized. see,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007867.jpg": "...y '2oo8  expert witness ‘testiniony workshop, mid-atlantia a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008043.jpg": "...ficance of dis h d  fact testiniony is tnadm  t. the court s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008068.jpg": "...to whatever testiniony is.“tieeded.” (ex. a at'...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008083.jpg": "...stify in, rebutal to ary testiniony offered. by the governni...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008174.jpg": "...mmons, 47o f.3d il. ‘the testiniony of dr. park dietz  in. i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008189.jpg": "...:  preclude dr:, dietz’s-testiniony atid -denies if part and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008278.jpg": "...mbination. with alessi’s testiniony, that: this.contact book...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008309.jpg": "...d, conclude based.on the testiniony of mr. alessi. and gx: 6...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008369.jpg": "...on. behalf of kate. that testiniony does :riot reveal a conf...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008376.jpg": "...leged, itis.  mich ofthe-testiniony*the detendarit secks ‘fr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008522.jpg": "...this case.  mere en?  °s testiniony merely because, he or sh...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008619.jpg": "...ave any doubt as to any. testiniony,; you may request that t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008687.jpg": "...this case.  mere en?  °s testiniony merely because, he or sh...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008773.jpg": "...this case.  mere en?  °s testiniony merely because, he or sh...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009577.jpg": "...ot “seek to exelude that testiniony, rior did. you. seek. a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009581.jpg": "...ss  aid fot iti. jatie’s testiniony—of hou and to where jane...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009601.jpg": "...s, “if alive, would give testiniony helpful. to [the deferid...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009612.jpg": "...imony, corroborated. by. testiniony froni message pads, ‘sho...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010277.jpg": "...consider anie’s testiniony as conspiracy to conimit...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010312.jpg": "...adict dr. loftus* expert testiniony...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010354.jpg": "...otirt' finds. juror 5o's testiniony to. be credible, forthri...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010408.jpg": "...could,  provide adequate-testiniony is, entirely tinsubstant...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010409.jpg": "...isckecper’s anticipated. testiniony that the defendant rarel...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010410.jpg": "...at trial, including the testiniony of jtian alessi.and an....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010557.jpg": "...sages tri:  and, her oun testiniony about, the duration, of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011110.jpg": "...tions of the anticipated testiniony may also serve permissib...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011112.jpg": "...nce” as’to the lines. of testiniony...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011132.jpg": "...admissibility of expert-testiniony. that rule  states:  a....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011141.jpg": "...‘unexpected expert testiniony, reduce the need for con...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011187.jpg": "...from. unexpected expert testiniony,  the need. for continua...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011236.jpg": "...on to ‘preclide heealy’s testiniony in part. beeatise there...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011263.jpg": "...‘pressure.  accordingly, testiniony from, dr. ‘loftus on tha...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011276.jpg": "...seo and have fun.  trial testiniony..  finally, during the:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011432.jpg": "...ry arid :in, deposition. testiniony acctiser-4  ‘does not. a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011556.jpg": "...6n porti6ns 6f carolyn's testiniony and sore message pads re...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011557.jpg": "...she explained during her testiniony that. at l8  yedrs. old,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011727.jpg": "...ask you tg exaeitine her testiniony,  wen, money was on  and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014368.jpg": "...se individual pieces  of testiniony. sg it seems inke hawiln...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014664.jpg": "...about it, ‘there's other testiniony regarding this @xhibit;,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014784.jpg": "...6n porti6ns 6f carolyn's testiniony and sore message pads re...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014785.jpg": "...she explained during her testiniony that. at l8  yedrs. old,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014874.jpg": "...s cofroborated. by other testiniony that maxwell  was epstei...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015007.jpg": "...the subject mater gf my testiniony today.  @. ok. and as i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015146.jpg": "...ect. to, redactions, all testiniony arid exhibits. before th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015161.jpg": "...hat the secrecy of their testiniony would. be lifted toniorr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016172.jpg": "...ask you tg exaeitine her testiniony,  wen, money was on  and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016990.jpg": "...se individual pieces  of testiniony. sg it seems inke hawiln...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017284.jpg": "...about it, ‘there's other testiniony regarding this @xhibit;,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021140.jpg": "...on, the testiniony of jane. jane recalled...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021719.jpg": "...est- ing that juror 5o’s testiniony athe hearme was “pa- ten...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021818.jpg": "...s cofroborated. by other testiniony that maxwell  was epstei...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021871.jpg": "...s cofroborated. by other testiniony that maxwell  was epstei...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021901.jpg": "...s cofroborated. by other testiniony that maxwell  was epstei..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "testiniony" (88 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">25-25</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">743-743</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">2242-2242</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3692-3692</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">4233-4233</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">4262-4262</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">5396-5396</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">5426-5430</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">5640-5640</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">5680-5680</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">5788-5797</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">6193-6193</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">6242-6245</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">6363-6363</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">6393-6397</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">6602-6602</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">6687-6687</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">6699-6699</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">6713-6722</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">6747-6747</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">6966-6967</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">7146-7146</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">7478-7479</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">7488-7490</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">7867-7867</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">8043-8043</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">8068-8068</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">8083-8083</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">8174-8174</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">8189-8189</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">8278-8278</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">8309-8309</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">8369-8369</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">8376-8376</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">8522-8522</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">8619-8619</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">8687-8687</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">8773-8773</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">9577-9581</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">9601-9601</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">9612-9612</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">10277-10277</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">10312-10312</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">10354-10354</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">10408-10410</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(45, 0); return false;">10557-10557</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(46, 0); return false;">11110-11112</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(47, 0); return false;">11132-11132</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(48, 0); return false;">11141-11141</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(49, 0); return false;">11187-11187</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(50, 0); return false;">11236-11236</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(51, 0); return false;">11263-11263</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(52, 0); return false;">11276-11276</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(53, 0); return false;">11432-11432</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(54, 0); return false;">11556-11557</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(55, 0); return false;">11727-11727</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(56, 0); return false;">14368-14368</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(57, 0); return false;">14664-14664</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(58, 0); return false;">14784-14785</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(59, 0); return false;">14874-14874</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(60, 0); return false;">15007-15007</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(61, 0); return false;">15146-15146</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(62, 0); return false;">15161-15161</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(63, 0); return false;">16172-16172</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(64, 0); return false;">16990-16990</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(65, 0); return false;">17284-17284</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(66, 0); return false;">21140-21140</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(67, 0); return false;">21719-21719</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(68, 0); return false;">21818-21818</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(69, 0); return false;">21871-21871</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(70, 0); return false;">21901-21901</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

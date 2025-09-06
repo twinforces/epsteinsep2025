@@ -1,0 +1,199 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "naked"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 263, "end": 263, "pages": [263]}, {"start": 2848, "end": 2848, "pages": [2848]}, {"start": 5221, "end": 5221, "pages": [5221]}, {"start": 8217, "end": 8218, "pages": [8217, 8218]}, {"start": 8226, "end": 8226, "pages": [8226]}, {"start": 10385, "end": 10385, "pages": [10385]}, {"start": 10547, "end": 10548, "pages": [10547, 10548]}, {"start": 11432, "end": 11432, "pages": [11432]}, {"start": 11696, "end": 11696, "pages": [11696]}, {"start": 11962, "end": 11963, "pages": [11962, 11963]}, {"start": 12411, "end": 12411, "pages": [12411]}, {"start": 12523, "end": 12523, "pages": [12523]}, {"start": 12798, "end": 12798, "pages": [12798]}, {"start": 12887, "end": 12887, "pages": [12887]}, {"start": 13125, "end": 13125, "pages": [13125]}, {"start": 13183, "end": 13183, "pages": [13183]}, {"start": 13229, "end": 13230, "pages": [13229, 13230]}, {"start": 14411, "end": 14411, "pages": [14411]}, {"start": 14419, "end": 14419, "pages": [14419]}, {"start": 14492, "end": 14492, "pages": [14492]}, {"start": 16141, "end": 16141, "pages": [16141]}, {"start": 17032, "end": 17032, "pages": [17032]}, {"start": 17040, "end": 17040, "pages": [17040]}, {"start": 17113, "end": 17113, "pages": [17113]}, {"start": 17552, "end": 17553, "pages": [17552, 17553]}, {"start": 17999, "end": 17999, "pages": [17999]}, {"start": 18110, "end": 18110, "pages": [18110]}, {"start": 18384, "end": 18384, "pages": [18384]}, {"start": 18473, "end": 18473, "pages": [18473]}, {"start": 18710, "end": 18710, "pages": [18710]}, {"start": 18768, "end": 18768, "pages": [18768]}, {"start": 18814, "end": 18815, "pages": [18814, 18815]}, {"start": 21002, "end": 21002, "pages": [21002]}, {"start": 21068, "end": 21068, "pages": [21068]}, {"start": 21667, "end": 21669, "pages": [21667, 21669]}];
+        const pageToPath = {"263": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000263.jpg", "2848": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002848.jpg", "5221": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005221.jpg", "8217": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008217.jpg", "8218": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008218.jpg", "8226": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008226.jpg", "10385": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010385.jpg", "10547": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010547.jpg", "10548": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010548.jpg", "11432": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011432.jpg", "11696": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011696.jpg", "11962": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011962.jpg", "11963": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011963.jpg", "12411": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012411.jpg", "12523": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012523.jpg", "12798": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012798.jpg", "12887": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012887.jpg", "13125": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013125.jpg", "13183": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013183.jpg", "13229": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013229.jpg", "13230": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013230.jpg", "14411": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014411.jpg", "14419": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014419.jpg", "14492": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014492.jpg", "16141": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016141.jpg", "17032": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017032.jpg", "17040": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017040.jpg", "17113": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017113.jpg", "17552": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017552.jpg", "17553": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017553.jpg", "17999": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017999.jpg", "18110": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018110.jpg", "18384": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018384.jpg", "18473": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018473.jpg", "18710": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018710.jpg", "18768": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018768.jpg", "18814": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018814.jpg", "18815": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018815.jpg", "21002": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021002.jpg", "21068": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021068.jpg", "21667": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021667.jpg", "21669": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021669.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000263.jpg": "...uld himself typically be naked. during these encounters...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002848.jpg": "...uld himself typically be naked. during these encounters...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005221.jpg": "...t. only the: law and the naked facts carry the burden....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008217.jpg": "...e ineluded.“paintings of naked:women, ‘and, orgies and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008218.jpg": "...isplaying: depictions of naked.  ‘women in his ‘homes f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008226.jpg": "...included “[p]aintings of naked. women. and orgies and’t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010385.jpg": "...rteen, in which, she was naked.in, the massage room and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010547.jpg": "...t.  ‘delivered kate to a naked epstein in the defendant...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010548.jpg": "...here, the:  le annie was naked.and ts  defendant ribbed...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011432.jpg": "...andthe  person.whe took.naked photes of accuser-4 in,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011696.jpg": "...a  with photographs of naked females. epstein brought...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011962.jpg": ".... that?  a. paintings of naked women and osgies and, th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011963.jpg": "...?  a. well, he would @6t naked and get gn kis bed. and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012411.jpg": "...y of those females fully naked?  q. those females that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012523.jpg": "...ing  hc)  photegraphs of naked people in. the house, it...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012798.jpg": "...tein wearing?  a. he was naked.  hex standing?  q. wher...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012887.jpg": "...you saw jeffrey  epstein naked?  a. °  ne  yes.  oo you...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013125.jpg": "...id maxwell see you fully naked in the massage room? a,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013183.jpg": "...ld the fbi, virgifia got naked and  canolyn undressed t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013229.jpg": "...s  ne  that they saw her naked if the massage room. i d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013230.jpg": "...he  ir  that, ehey were naked. it have the ssaite obye...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014411.jpg": "...ell and epstein swimming naked together in. a pool. the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014419.jpg": "...e room  when carolyn was naked, maxwell touched carolyn...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014492.jpg": "...led  with photegraphs ef naked women with a massage roo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016141.jpg": "...a  with photographs of naked females. epstein brought...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017032.jpg": "...ell and epstein swimming naked together in. a pool. the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017040.jpg": "...e room  when carolyn was naked, maxwell touched carolyn...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017113.jpg": "...led  with photegraphs ef naked women with a massage roo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017552.jpg": ".... that?  a. paintings of naked women and osgies and, th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017553.jpg": "...?  a. well, he would @6t naked and get gn kis bed. and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017999.jpg": "...y of those females fully naked?  q. those females that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018110.jpg": "...ing  hc)  photegraphs of naked people in. the house, it...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018384.jpg": "...tein wearing?  a. he was naked.  hex standing?  q. wher...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018473.jpg": "...you saw jeffrey  epstein naked?  a. °  ne  yes.  oo you...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018710.jpg": "...id maxwell see you fully naked in the massage room? a,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018768.jpg": "...ld the fbi, virgifia got naked and  canolyn undressed t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018814.jpg": "...s  ne  that they saw her naked if the massage room. i d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018815.jpg": "...he  ir  that, ehey were naked. it have the ssaite obye...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021002.jpg": "...t the: defendant saw:her naked tn, the massage room.and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021068.jpg": "...carolyn. maxwell saw her naked in the massage:room, a f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021667.jpg": "...ell delivered. kate to a naked epstein in maxwell’s oun...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021669.jpg": "...table while. annie. was: naked. (tr.2o85),. during the...."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "naked" (42 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">263-263</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">2848-2848</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">5221-5221</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">8217-8218</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">8226-8226</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">10385-10385</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">10547-10548</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">11432-11432</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">11696-11696</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">11962-11963</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">12411-12411</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">12523-12523</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">12798-12798</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">12887-12887</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">13125-13125</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">13183-13183</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">13229-13230</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">14411-14411</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">14419-14419</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">14492-14492</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">16141-16141</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">17032-17032</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">17040-17040</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">17113-17113</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">17552-17553</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">17999-17999</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">18110-18110</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">18384-18384</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">18473-18473</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">18710-18710</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">18768-18768</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">18814-18815</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">21002-21002</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">21068-21068</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">21667-21669</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

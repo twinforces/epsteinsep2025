@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "characterized"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 389, "end": 389, "pages": [389]}, {"start": 1399, "end": 1399, "pages": [1399]}, {"start": 1753, "end": 1753, "pages": [1753]}, {"start": 1805, "end": 1805, "pages": [1805]}, {"start": 2579, "end": 2582, "pages": [2579, 2582]}, {"start": 2603, "end": 2603, "pages": [2603]}, {"start": 2683, "end": 2683, "pages": [2683]}, {"start": 2908, "end": 2908, "pages": [2908]}, {"start": 3087, "end": 3087, "pages": [3087]}, {"start": 3245, "end": 3245, "pages": [3245]}, {"start": 3363, "end": 3363, "pages": [3363]}, {"start": 3597, "end": 3597, "pages": [3597]}, {"start": 3892, "end": 3892, "pages": [3892]}, {"start": 4003, "end": 4003, "pages": [4003]}, {"start": 4218, "end": 4222, "pages": [4218, 4222]}, {"start": 4367, "end": 4367, "pages": [4367]}, {"start": 4441, "end": 4441, "pages": [4441]}, {"start": 4485, "end": 4485, "pages": [4485]}, {"start": 5872, "end": 5872, "pages": [5872]}, {"start": 6189, "end": 6189, "pages": [6189]}, {"start": 6262, "end": 6262, "pages": [6262]}, {"start": 6797, "end": 6797, "pages": [6797]}, {"start": 7433, "end": 7435, "pages": [7433, 7435]}, {"start": 7503, "end": 7503, "pages": [7503]}, {"start": 8079, "end": 8079, "pages": [8079]}, {"start": 9164, "end": 9164, "pages": [9164]}, {"start": 9843, "end": 9843, "pages": [9843]}, {"start": 11182, "end": 11182, "pages": [11182]}, {"start": 11192, "end": 11192, "pages": [11192]}, {"start": 12199, "end": 12199, "pages": [12199]}, {"start": 13519, "end": 13519, "pages": [13519]}, {"start": 17788, "end": 17788, "pages": [17788]}, {"start": 19103, "end": 19103, "pages": [19103]}, {"start": 19449, "end": 19449, "pages": [19449]}, {"start": 19564, "end": 19564, "pages": [19564]}, {"start": 20317, "end": 20317, "pages": [20317]}];
+        const pageToPath = {"389": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000389.jpg", "1399": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001399.jpg", "1753": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001753.jpg", "1805": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001805.jpg", "2579": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002579.jpg", "2582": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002582.jpg", "2603": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002603.jpg", "2683": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002683.jpg", "2908": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002908.jpg", "3087": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003087.jpg", "3245": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003245.jpg", "3363": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003363.jpg", "3597": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003597.jpg", "3892": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003892.jpg", "4003": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004003.jpg", "4218": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004218.jpg", "4222": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004222.jpg", "4367": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004367.jpg", "4441": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004441.jpg", "4485": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004485.jpg", "5872": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005872.jpg", "6189": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006189.jpg", "6262": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006262.jpg", "6797": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006797.jpg", "7433": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007433.jpg", "7435": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007435.jpg", "7503": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007503.jpg", "8079": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008079.jpg", "9164": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009164.jpg", "9843": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009843.jpg", "11182": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011182.jpg", "11192": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011192.jpg", "12199": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012199.jpg", "13519": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013519.jpg", "17788": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017788.jpg", "19103": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019103.jpg", "19449": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019449.jpg", "19564": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019564.jpg", "20317": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020317.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000389.jpg": "...w york and that that. is characterized as:  high-risk individua...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001399.jpg": "...gal y  visiting rooms — ‘characterized by: an hv ag inspector a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001753.jpg": "...cie: ‘second circuit.has:characterized these:types of documents...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001805.jpg": "...ihe southern: * wh eh i characterized as spa art of ms. maxwel...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002579.jpg": "...ing; forthe: government, characterized. by:  the then-atorney g...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002582.jpg": "...erms it  npa,” which.opr characterized as. a “unique resolution...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002603.jpg": "...ally, the government has characterized the npa*s co-conspirator...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002683.jpg": "...r-3, some: of:which.are: characterized :as “overt acts” :in. fu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002908.jpg": "...gal y  visiting rooms — ‘characterized by: an hv ag inspector a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003087.jpg": "...dation.  a. i've already characterized my job was to ‘find peop...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003245.jpg": "...nrthe decisi  villafafia characterized ‘nv “meant to: intimidat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003363.jpg": "...rately and misleadingly: characterized conversations he ‘had wi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003597.jpg": "...dation.  a. i've alveady characterized my job. was to find peop...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003892.jpg": "...for this ‘district; has. characterized .as a “prequel” to offen...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004003.jpg": "...those that. courts have characterized as improper “any and all...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004218.jpg": "...ent concedes:that it has characterized acctiser-3’s lawful, con...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004222.jpg": "...that:it-has “accurately” characterized those allegations and th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004367.jpg": "...s in-your  62 villafaia, characterized ‘menchel%  4 ‘meant to:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004441.jpg": "...*  7. for, a8 dershouitz characterized sit. which. included a o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004485.jpg": "...rately and misleadingly: characterized conversations he ‘had wi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005872.jpg": "...weanne t, c  it iszoften characterized as a-seduetion, “invell...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006189.jpg": "...with. others are: often: characterized py inappropriate © sexua...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006262.jpg": "...with. others are: often: characterized py inappropriate © sexua...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006797.jpg": "...weanne t, c  it iszoften characterized as a-seduetion, “invell...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007433.jpg": "...lude that-the district:  characterized. the nba: as a *  court:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007435.jpg": "...who “can-reasonably: be characterized.as a“victim-of alleged s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007503.jpg": "...with. others are: often: characterized py inappropriate © sexua...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008079.jpg": "...with. others are: often: characterized py inappropriate © sexua...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009164.jpg": "...naire. the defendant has characterized. juror 5o°s request. for...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009843.jpg": "...naire. the defendant has characterized. juror 5o°s request. for...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011182.jpg": "...sted testimony should be characterized as fact or opinion,” whi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011192.jpg": "...latley:’s, testimony is ‘characterized as. expert “opinion™ tes...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012199.jpg": "...t shou,  a soap opera is characterized by ‘tangled interpersona...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013519.jpg": "...ps  | f  re  q. nou, you characterized her as epstein's number...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017788.jpg": "...t shou,  a soap opera is characterized by ‘tangled interpersona...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019103.jpg": "...ps  | f  re  q. nou, you characterized her as epstein's number...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019449.jpg": "...med, defendant has’ been characterized as! an “extraordinary re...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019564.jpg": "...cie: ‘second circuit.has:characterized these:types of documents...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020317.jpg": "...gal y  visiting rooms — ‘characterized by: an hv ag inspector a..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "characterized" (39 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">389-389</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1399-1399</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1753-1753</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">1805-1805</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">2579-2582</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">2603-2603</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">2683-2683</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">2908-2908</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">3087-3087</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">3245-3245</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">3363-3363</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">3597-3597</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">3892-3892</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">4003-4003</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">4218-4222</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">4367-4367</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">4441-4441</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">4485-4485</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">5872-5872</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">6189-6189</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">6262-6262</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">6797-6797</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">7433-7435</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">7503-7503</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">8079-8079</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">9164-9164</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">9843-9843</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">11182-11182</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">11192-11192</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">12199-12199</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">13519-13519</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">17788-17788</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">19103-19103</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">19449-19449</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">19564-19564</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">20317-20317</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

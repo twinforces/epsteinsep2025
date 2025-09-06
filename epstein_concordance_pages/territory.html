@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "territory"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 987, "end": 987, "pages": [987]}, {"start": 1129, "end": 1129, "pages": [1129]}, {"start": 1270, "end": 1270, "pages": [1270]}, {"start": 1613, "end": 1613, "pages": [1613]}, {"start": 2005, "end": 2005, "pages": [2005]}, {"start": 2099, "end": 2099, "pages": [2099]}, {"start": 2120, "end": 2120, "pages": [2120]}, {"start": 2796, "end": 2796, "pages": [2796]}, {"start": 3231, "end": 3231, "pages": [3231]}, {"start": 3241, "end": 3241, "pages": [3241]}, {"start": 3350, "end": 3350, "pages": [3350]}, {"start": 4353, "end": 4353, "pages": [4353]}, {"start": 4472, "end": 4472, "pages": [4472]}, {"start": 7402, "end": 7402, "pages": [7402]}, {"start": 8560, "end": 8560, "pages": [8560]}, {"start": 13845, "end": 13845, "pages": [13845]}, {"start": 14596, "end": 14596, "pages": [14596]}, {"start": 16470, "end": 16470, "pages": [16470]}, {"start": 17217, "end": 17217, "pages": [17217]}, {"start": 19905, "end": 19905, "pages": [19905]}, {"start": 20047, "end": 20047, "pages": [20047]}, {"start": 20188, "end": 20188, "pages": [20188]}, {"start": 21086, "end": 21086, "pages": [21086]}];
+        const pageToPath = {"987": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000987.jpg", "1129": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001129.jpg", "1270": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001270.jpg", "1613": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001613.jpg", "2005": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002005.jpg", "2099": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002099.jpg", "2120": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002120.jpg", "2796": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002796.jpg", "3231": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003231.jpg", "3241": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003241.jpg", "3350": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003350.jpg", "4353": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004353.jpg", "4472": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004472.jpg", "7402": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007402.jpg", "8560": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008560.jpg", "13845": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013845.jpg", "14596": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014596.jpg", "16470": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016470.jpg", "17217": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017217.jpg", "19905": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019905.jpg", "20047": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020047.jpg", "20188": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020188.jpg", "21086": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021086.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000987.jpg": "...erty that is. beyond the territory and judicial reach of th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001129.jpg": "...to any ‘nation orforeigh territory in which he-may be:found...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001270.jpg": "...son: from  ‘with  preteh territory by the police and its st...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001613.jpg": "...erty that is beyorid the territory.and judicial reach of th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002005.jpg": "...: any:nation. or-foreign territory in;which he may be:found...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002099.jpg": "...on jis. made’by a part 2 territory, the secreiary of siate...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002120.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002796.jpg": "...son: from  ‘with  preteh territory by the police and its st...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003231.jpg": "...es as. this ls uncharted territory to some degree. we can d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003241.jpg": "...tion would be “uncharted territory.” acosta explained. that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003350.jpg": "...case: lay in “uncharted territory,” there was no certainty...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004353.jpg": "...es as. this ls ineharted territory to some degree. we can d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004472.jpg": "...case:  lay in “uncharted territory,” there was no. certaint...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007402.jpg": "...canal. zone; ‘the ‘erust territory: of the pae  ie islands;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008560.jpg": "......coninicrce; or if any territory or possessioni.of the un...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013845.jpg": "...wlang, that's well-tread territory. even if  there's agreem...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014596.jpg": "...ate emitiercee gr ta any territory  eg possession ge the un...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016470.jpg": "...wlang, that's well-tread territory. even if  there's agreem...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017217.jpg": "...ate emitiercee gr ta any territory  eg possession ge the un...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019905.jpg": "...erty that is. beyond the territory and judicial reach of th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020047.jpg": "...o any ‘nation or'foreigh territory in which he-may be:found...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020188.jpg": "...son: from  ‘with  preteh territory by the police and its st...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021086.jpg": "...to new and inapplicable  territory. in this regard, the dis..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "territory" (23 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">987-987</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1129-1129</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1270-1270</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">1613-1613</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">2005-2005</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">2099-2099</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">2120-2120</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">2796-2796</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">3231-3231</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">3241-3241</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">3350-3350</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">4353-4353</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">4472-4472</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">7402-7402</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">8560-8560</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">13845-13845</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">14596-14596</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">16470-16470</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">17217-17217</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">19905-19905</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">20047-20047</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">20188-20188</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">21086-21086</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

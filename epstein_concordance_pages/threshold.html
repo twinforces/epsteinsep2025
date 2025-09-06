@@ -1,0 +1,220 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "threshold"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 308, "end": 308, "pages": [308]}, {"start": 1217, "end": 1217, "pages": [1217]}, {"start": 2106, "end": 2112, "pages": [2106, 2107, 2109, 2112]}, {"start": 2240, "end": 2240, "pages": [2240]}, {"start": 2515, "end": 2515, "pages": [2515]}, {"start": 3008, "end": 3008, "pages": [3008]}, {"start": 3043, "end": 3043, "pages": [3043]}, {"start": 3077, "end": 3077, "pages": [3077]}, {"start": 3096, "end": 3096, "pages": [3096]}, {"start": 3169, "end": 3169, "pages": [3169]}, {"start": 3343, "end": 3343, "pages": [3343]}, {"start": 3458, "end": 3458, "pages": [3458]}, {"start": 3669, "end": 3669, "pages": [3669]}, {"start": 4465, "end": 4465, "pages": [4465]}, {"start": 4580, "end": 4580, "pages": [4580]}, {"start": 5239, "end": 5239, "pages": [5239]}, {"start": 5248, "end": 5248, "pages": [5248]}, {"start": 5849, "end": 5849, "pages": [5849]}, {"start": 5901, "end": 5901, "pages": [5901]}, {"start": 6774, "end": 6774, "pages": [6774]}, {"start": 6826, "end": 6826, "pages": [6826]}, {"start": 7155, "end": 7155, "pages": [7155]}, {"start": 7403, "end": 7403, "pages": [7403]}, {"start": 7410, "end": 7410, "pages": [7410]}, {"start": 8327, "end": 8327, "pages": [8327]}, {"start": 8816, "end": 8816, "pages": [8816]}, {"start": 9135, "end": 9136, "pages": [9135, 9136]}, {"start": 9546, "end": 9551, "pages": [9546, 9549, 9551]}, {"start": 9557, "end": 9557, "pages": [9557]}, {"start": 9814, "end": 9815, "pages": [9814, 9815]}, {"start": 10422, "end": 10422, "pages": [10422]}, {"start": 11638, "end": 11638, "pages": [11638]}, {"start": 12544, "end": 12544, "pages": [12544]}, {"start": 18131, "end": 18131, "pages": [18131]}, {"start": 19357, "end": 19357, "pages": [19357]}, {"start": 19380, "end": 19380, "pages": [19380]}, {"start": 20135, "end": 20135, "pages": [20135]}, {"start": 20463, "end": 20463, "pages": [20463]}, {"start": 21088, "end": 21088, "pages": [21088]}, {"start": 21529, "end": 21529, "pages": [21529]}, {"start": 21539, "end": 21540, "pages": [21539, 21540]}, {"start": 21720, "end": 21720, "pages": [21720]}];
+        const pageToPath = {"308": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000308.jpg", "1217": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001217.jpg", "2106": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002106.jpg", "2107": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002107.jpg", "2109": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002109.jpg", "2112": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002112.jpg", "2240": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002240.jpg", "2515": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002515.jpg", "3008": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003008.jpg", "3043": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003043.jpg", "3077": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003077.jpg", "3096": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003096.jpg", "3169": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003169.jpg", "3343": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003343.jpg", "3458": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003458.jpg", "3669": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003669.jpg", "4465": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004465.jpg", "4580": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004580.jpg", "5239": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005239.jpg", "5248": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005248.jpg", "5849": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005849.jpg", "5901": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005901.jpg", "6774": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006774.jpg", "6826": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006826.jpg", "7155": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007155.jpg", "7403": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007403.jpg", "7410": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007410.jpg", "8327": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008327.jpg", "8816": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008816.jpg", "9135": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009135.jpg", "9136": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009136.jpg", "9546": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009546.jpg", "9549": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009549.jpg", "9551": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009551.jpg", "9557": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009557.jpg", "9814": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009814.jpg", "9815": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009815.jpg", "10422": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010422.jpg", "11638": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011638.jpg", "12544": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012544.jpg", "18131": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018131.jpg", "19357": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019357.jpg", "19380": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019380.jpg", "20135": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020135.jpg", "20463": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020463.jpg", "21088": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021088.jpg", "21529": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021529.jpg", "21539": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021539.jpg", "21540": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021540.jpg", "21720": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021720.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000308.jpg": "...ust be  addressed. as a ‘threshold. mater re egardless ¢ of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001217.jpg": "...sfies the relatively lou threshold. imposed by‘the burden o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002106.jpg": "...milarly, there is a high threshold in, relation to injustic...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002107.jpg": "...s. oppressidi as, a high;threshold, tiot cdsily surimmourit...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002109.jpg": "...al’”* tn, practice, this threshold. is rarely overcome: ‘in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002112.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002240.jpg": "...fies the relatively: lou-threshold imposed by; the burden,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002515.jpg": "...as a, threshold observation, the governm...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003008.jpg": "...: mot. 7.at lo-ll). as.a threshold:mater, the defendant ‘ha...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003043.jpg": "...he area. seatclied.  is ‘threshold.  question ‘involves two...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003077.jpg": "...efendant.has not:made:a, threshold, shouing that the govern...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003096.jpg": "...efamation.  action, as a threshold.issuc, houever, material...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003169.jpg": "...is no speeific numerical threshold ‘that.constitutes unacce...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003343.jpg": "...as a threshold mater, opr’s irivestigat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003458.jpg": "...lear on. their-face, the threshold isstie of ‘ra. rights at...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003669.jpg": "...e referenced.  monetary: threshold was required to 'be an e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004465.jpg": "...as a threshold mater, opr’s irivestigat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004580.jpg": "...lear on. their-face, the threshold isstie of ra rights atac...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005239.jpg": "...court in determining the threshold mater of  whether «a. he...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005248.jpg": "...court in determining the threshold mater of  whether «a. he...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005849.jpg": "...r. 2ool). this is.a high threshold to meet,  as the defenda...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005901.jpg": "...et ‘to i shty  ective :  threshold, this ‘could ‘include «...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006774.jpg": "...r. 2ool). this is.a high threshold to meet,  as the defenda...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006826.jpg": "...et ‘to i shty  ective :  threshold, this ‘could ‘include «...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007155.jpg": "...inty, ‘your honor.  as 4 threshold mater, yeur honer, i wou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007403.jpg": "...the eopy is true  at the threshold, domestic. birth, certif...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007410.jpg": "...annot mect;this minimal, threshold here:  ms. maxwell respe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008327.jpg": "...‘fo whether vt meets the threshold for admissibility, and t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008816.jpg": "...must. first address the threshold:question of whether an i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009135.jpg": "...n  sat ati td  sty’ the “threshold. requirement” of  dishon...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009136.jpg": "...l, while his a i is is a’threshold. fact: that must be dete...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009546.jpg": "...lection process.  c=  a. threshold :for an evidentiary hear...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009549.jpg": "...s not decide:whether the threshold to hold.a. hearing based...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009551.jpg": "...like selfies.” jd: ‘the:threshold. fora.  hearing-has ‘not...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009557.jpg": "...cient to :mect the high, threshold for an inquiry. without....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009814.jpg": "...n  sat ati td  sty’ the “threshold. requirement” of  dishon...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009815.jpg": "...l, while his a i is is a’threshold. fact: that must be dete...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010422.jpg": "...must first resolve the  threshold isstic of whether'the: 2...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011638.jpg": "...‘fo whether vt meets the threshold for admissibility, and t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012544.jpg": "...s; moe: your hener, @& a threshold tiatrer, i think  my. ev...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018131.jpg": "...s; moe: your hener, @& a threshold tiatrer, i think  my. ev...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019357.jpg": "...re do not meet the high. threshold. of expanding the collat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019380.jpg": "...re do not meet the high. threshold. of expanding the collat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020135.jpg": "...sfies the relatively lou threshold. imposed by‘the burden o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020463.jpg": "...t must first addtess the threshold id question of whether a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021088.jpg": "...%  as: a. threshold mater, none of. this, co...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021529.jpg": "...nthe current record.  a. threshold for an evidentiary b   i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021539.jpg": "..... td: at:  hot meet the threshold.of “ele  ectilative:  s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021540.jpg": "...cient to: mect:the: high threshold for an, inguiry:. withou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021720.jpg": "...e it would eliminate the threshold requirement. of: the med..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "threshold" (50 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">308-308</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1217-1217</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">2106-2112</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">2240-2240</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">2515-2515</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">3008-3008</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3043-3043</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">3077-3077</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">3096-3096</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">3169-3169</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">3343-3343</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">3458-3458</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">3669-3669</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">4465-4465</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">4580-4580</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">5239-5239</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">5248-5248</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">5849-5849</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">5901-5901</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">6774-6774</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">6826-6826</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">7155-7155</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">7403-7403</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">7410-7410</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">8327-8327</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">8816-8816</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">9135-9136</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">9546-9551</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">9557-9557</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">9814-9815</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">10422-10422</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">11638-11638</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">12544-12544</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">18131-18131</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">19357-19357</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">19380-19380</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">20135-20135</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">20463-20463</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">21088-21088</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">21529-21529</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">21539-21540</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">21720-21720</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

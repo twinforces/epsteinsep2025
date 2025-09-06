@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "aggressive"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 339, "end": 339, "pages": [339]}, {"start": 487, "end": 487, "pages": [487]}, {"start": 799, "end": 799, "pages": [799]}, {"start": 999, "end": 999, "pages": [999]}, {"start": 1625, "end": 1625, "pages": [1625]}, {"start": 2021, "end": 2024, "pages": [2021, 2024]}, {"start": 3017, "end": 3017, "pages": [3017]}, {"start": 4489, "end": 4489, "pages": [4489]}, {"start": 4530, "end": 4530, "pages": [4530]}, {"start": 6188, "end": 6188, "pages": [6188]}, {"start": 6261, "end": 6261, "pages": [6261]}, {"start": 7502, "end": 7502, "pages": [7502]}, {"start": 8078, "end": 8078, "pages": [8078]}, {"start": 13009, "end": 13009, "pages": [13009]}, {"start": 18595, "end": 18595, "pages": [18595]}, {"start": 19917, "end": 19917, "pages": [19917]}, {"start": 21209, "end": 21209, "pages": [21209]}, {"start": 22608, "end": 22608, "pages": [22608]}, {"start": 22711, "end": 22711, "pages": [22711]}];
+        const pageToPath = {"339": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000339.jpg", "487": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000487.jpg", "799": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000799.jpg", "999": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000999.jpg", "1625": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001625.jpg", "2021": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002021.jpg", "2024": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002024.jpg", "3017": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003017.jpg", "4489": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004489.jpg", "4530": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004530.jpg", "6188": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006188.jpg", "6261": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006261.jpg", "7502": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007502.jpg", "8078": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008078.jpg", "13009": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013009.jpg", "18595": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018595.jpg", "19917": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019917.jpg", "21209": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021209.jpg", "22608": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022608.jpg", "22711": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022711.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000339.jpg": "...‘use intimidation and. ‘aggressive tacti s in connection wi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000487.jpg": "...to use intimidation and aggressive tactics in connectien  w...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000799.jpg": "...to use intimidation and aggressive tactics in connectien  ‘...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000999.jpg": "...se to covid-l9: has been aggressive and. lias: included,. am...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001625.jpg": "...e to covid-l9 has been.  aggressive and has included, among...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002021.jpg": "...| aggressive: e! entire: experience;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002024.jpg": "...t grice.  they were  $o. aggressive. | dm: no stranger to ag...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003017.jpg": "...the government to. have aggressive lawyers collecting infor...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004489.jpg": "...espite defense counsel's aggressive tacties.  o rcirath 2 3...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004530.jpg": "...t should have been:more-aggressive with-hou:; : : i :dealt...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006188.jpg": "...aulted you can’ be an, | aggressive: act:and a. i lack: of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006261.jpg": "...aulted you can’ be an, | aggressive: act:and a. i lack: of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007502.jpg": "...aulted you can’ be an, | aggressive: act:and a. i lack: of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008078.jpg": "...aulted you can’ be an, | aggressive: act:and a. i lack: of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013009.jpg": "...of ot ginsit eo have an aggressive defense put  forth.  ms....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018595.jpg": "...of ot ginsit eo have an aggressive defense put  forth.  ms....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019917.jpg": "...se to covid-l9: has been aggressive and. lias: included,. am...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021209.jpg": "...onal reputation for, the aggressive: defense” of “high-profi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022608.jpg": "...against  l26: o.ll, l2:  aggressive  ey...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022711.jpg": "...against  l26: o.ll, l2:  aggressive  ey..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "aggressive" (20 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">339-339</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">487-487</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">799-799</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">999-999</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">1625-1625</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">2021-2024</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3017-3017</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">4489-4489</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">4530-4530</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">6188-6188</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">6261-6261</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">7502-7502</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">8078-8078</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">13009-13009</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">18595-18595</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">19917-19917</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">21209-21209</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">22608-22608</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">22711-22711</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

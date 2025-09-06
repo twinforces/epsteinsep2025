@@ -1,0 +1,280 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "identical"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1645, "end": 1645, "pages": [1645]}, {"start": 2284, "end": 2284, "pages": [2284]}, {"start": 2305, "end": 2306, "pages": [2305, 2306]}, {"start": 2349, "end": 2349, "pages": [2349]}, {"start": 2362, "end": 2362, "pages": [2362]}, {"start": 2372, "end": 2372, "pages": [2372]}, {"start": 2385, "end": 2385, "pages": [2385]}, {"start": 2394, "end": 2394, "pages": [2394]}, {"start": 2424, "end": 2424, "pages": [2424]}, {"start": 2450, "end": 2450, "pages": [2450]}, {"start": 2459, "end": 2459, "pages": [2459]}, {"start": 2579, "end": 2579, "pages": [2579]}, {"start": 2604, "end": 2604, "pages": [2604]}, {"start": 2868, "end": 2869, "pages": [2868, 2869]}, {"start": 2985, "end": 2985, "pages": [2985]}, {"start": 2997, "end": 2999, "pages": [2997, 2999]}, {"start": 3885, "end": 3886, "pages": [3885, 3886]}, {"start": 4277, "end": 4284, "pages": [4277, 4280, 4282, 4284]}, {"start": 4714, "end": 4716, "pages": [4714, 4716]}, {"start": 4740, "end": 4740, "pages": [4740]}, {"start": 4799, "end": 4799, "pages": [4799]}, {"start": 4854, "end": 4854, "pages": [4854]}, {"start": 4977, "end": 4978, "pages": [4977, 4978]}, {"start": 5046, "end": 5046, "pages": [5046]}, {"start": 5139, "end": 5139, "pages": [5139]}, {"start": 5161, "end": 5161, "pages": [5161]}, {"start": 5603, "end": 5603, "pages": [5603]}, {"start": 5680, "end": 5680, "pages": [5680]}, {"start": 6345, "end": 6345, "pages": [6345]}, {"start": 6565, "end": 6565, "pages": [6565]}, {"start": 6958, "end": 6958, "pages": [6958]}, {"start": 7371, "end": 7371, "pages": [7371]}, {"start": 7432, "end": 7432, "pages": [7432]}, {"start": 8951, "end": 8953, "pages": [8951, 8953]}, {"start": 9058, "end": 9058, "pages": [9058]}, {"start": 9588, "end": 9588, "pages": [9588]}, {"start": 9749, "end": 9749, "pages": [9749]}, {"start": 10280, "end": 10280, "pages": [10280]}, {"start": 10380, "end": 10380, "pages": [10380]}, {"start": 10698, "end": 10698, "pages": [10698]}, {"start": 11176, "end": 11176, "pages": [11176]}, {"start": 11191, "end": 11191, "pages": [11191]}, {"start": 11247, "end": 11247, "pages": [11247]}, {"start": 11312, "end": 11312, "pages": [11312]}, {"start": 11440, "end": 11440, "pages": [11440]}, {"start": 12895, "end": 12896, "pages": [12895, 12896]}, {"start": 12986, "end": 12986, "pages": [12986]}, {"start": 13065, "end": 13065, "pages": [13065]}, {"start": 13087, "end": 13088, "pages": [13087, 13088]}, {"start": 18481, "end": 18482, "pages": [18481, 18482]}, {"start": 18572, "end": 18572, "pages": [18572]}, {"start": 18650, "end": 18650, "pages": [18650]}, {"start": 18672, "end": 18673, "pages": [18672, 18673]}, {"start": 19500, "end": 19500, "pages": [19500]}, {"start": 20813, "end": 20813, "pages": [20813]}, {"start": 20997, "end": 20997, "pages": [20997]}, {"start": 21106, "end": 21106, "pages": [21106]}, {"start": 21119, "end": 21119, "pages": [21119]}, {"start": 21131, "end": 21131, "pages": [21131]}, {"start": 21441, "end": 21441, "pages": [21441]}, {"start": 21963, "end": 21963, "pages": [21963]}, {"start": 22033, "end": 22033, "pages": [22033]}];
+        const pageToPath = {"1645": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001645.jpg", "2284": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002284.jpg", "2305": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002305.jpg", "2306": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002306.jpg", "2349": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002349.jpg", "2362": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002362.jpg", "2372": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002372.jpg", "2385": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002385.jpg", "2394": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002394.jpg", "2424": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002424.jpg", "2450": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002450.jpg", "2459": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002459.jpg", "2579": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002579.jpg", "2604": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002604.jpg", "2868": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002868.jpg", "2869": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002869.jpg", "2985": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002985.jpg", "2997": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002997.jpg", "2999": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002999.jpg", "3885": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003885.jpg", "3886": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003886.jpg", "4277": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004277.jpg", "4280": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004280.jpg", "4282": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004282.jpg", "4284": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004284.jpg", "4714": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004714.jpg", "4716": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004716.jpg", "4740": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004740.jpg", "4799": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004799.jpg", "4854": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004854.jpg", "4977": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004977.jpg", "4978": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004978.jpg", "5046": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005046.jpg", "5139": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005139.jpg", "5161": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005161.jpg", "5603": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005603.jpg", "5680": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005680.jpg", "6345": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006345.jpg", "6565": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006565.jpg", "6958": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006958.jpg", "7371": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007371.jpg", "7432": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007432.jpg", "8951": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008951.jpg", "8953": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008953.jpg", "9058": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009058.jpg", "9588": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009588.jpg", "9749": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009749.jpg", "10280": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010280.jpg", "10380": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010380.jpg", "10698": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010698.jpg", "11176": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011176.jpg", "11191": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011191.jpg", "11247": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011247.jpg", "11312": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011312.jpg", "11440": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011440.jpg", "12895": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012895.jpg", "12896": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012896.jpg", "12986": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012986.jpg", "13065": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013065.jpg", "13087": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013087.jpg", "13088": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013088.jpg", "18481": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018481.jpg", "18482": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018482.jpg", "18572": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018572.jpg", "18650": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018650.jpg", "18672": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018672.jpg", "18673": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018673.jpg", "19500": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019500.jpg", "20813": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020813.jpg", "20997": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020997.jpg", "21106": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021106.jpg", "21119": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021119.jpg", "21131": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021131.jpg", "21441": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021441.jpg", "21963": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021963.jpg", "22033": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022033.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001645.jpg": "...nguage, which is neatly: identical. in all smaterial respec...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002284.jpg": "...three: cach, allege four identical overt: aets in, furthera...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002305.jpg": "...ts  2  vy cad  well, are identical. see ‘indictment 4§j9 an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002306.jpg": "...t l, paragraph. l.l, are identical to ‘those alleged in'cou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002349.jpg": "...e. a rejects an identical gambit: by “the governme...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002362.jpg": "..._] separately rejects an identical government  arolid the s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002372.jpg": "...34(a). .a. draft or non-identical copy is a separate: docu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002385.jpg": "...>, 3a(a). & draft-or non-identical,  hlsia separate ‘docume...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002394.jpg": "...34(@):.a. draft of tidn-identical copy is a. separate docu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002424.jpg": "...estion was, met with an, identical objection, and afierthe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002450.jpg": "...>, 3a(a). & draft-or non-identical,  hlsia separate ‘docume...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002459.jpg": "...34(@):.a. draft of tidn-identical copy is a. separate docu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002579.jpg": "...conduct:similar, if:not identical, to that alleged. in the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002604.jpg": "...alleged conduct almost  identical to: the alleged conduct...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002868.jpg": "...fthe s2 lndietmentremais identical to: court two ofthe si....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002869.jpg": "...of the:s2 ladietment is identical, to got five of the s'....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002985.jpg": "...o l8 u-s.c. § 3283 ‘with identical, language.  congress re-...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002997.jpg": ".... rule is  (rejecting an identical argument.relying on, zou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002999.jpg": "...lained in. rejecting an, identical, argument:  while bridge...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003885.jpg": "...els ‘an, triference that identical, rather than. different...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003886.jpg": "...siofiteveals air  monte  identical latiguage :in the co-cot...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004277.jpg": "...ge. pad  notes, ete.—was identical. (see ex. gat 56:2l-57:l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004280.jpg": "...lou-on. prosecutiof.are “identical to the disinissed charge...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004282.jpg": "...re the counts if.  earn  identical to the dismissed. counts...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004284.jpg": "...cute ms. maxwe  ‘for the identical charges that were resolv...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004714.jpg": "...clusively on the phrase “identical, to.  satatiatad ban ala...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004716.jpg": "...es; aridiftheoftense is, identical.  to a “resolved” count,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004740.jpg": "...exhibits certainly look: identical. at most, one vversion.a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004799.jpg": "...re,, these eases are not identical. ranks dealt with. an al...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004854.jpg": "...different victims to be identical in  impossible for two i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004977.jpg": "...ld that language tieatly identical to that.in  epstein’s np...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004978.jpg": "...s for charges that are  “identical to the: dismissed charge...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005046.jpg": "...d her evcp materials ate identical to, those in the bsf sub...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005139.jpg": "...a] document that is: not:identical, shall, be:  re iaiaiet...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005161.jpg": "...a] document that is: not:identical, shall, be:  re iaiaiet...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005603.jpg": "...to the defendant in.the identical formit. intended.to prod...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005680.jpg": "...e. a. modus oper  nearly:identical :in. method as to‘car-ma...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006345.jpg": "...aeademie literature.  . identical:testimony was adm  mmcee...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006565.jpg": "...to the defendant in.the identical formit. intended.to prod...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006958.jpg": "...e defendant: need not.be identical to any conspiracy:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007371.jpg": "...a. document that is not; identical. shall be considered a4...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007432.jpg": ".... 2o2.l) (deseribire the identical language in l8 u-s.c. §...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008951.jpg": "...and. five arevirtually. identical and are  the three consp...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008953.jpg": "...‘one and three alleged. identical, oyert ‘acts,  which per...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009058.jpg": "...ummoned to court for an. identical. process. if necessary,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009588.jpg": "...tutes are not “virtually identical” the court should, rejec...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009749.jpg": "...ummoned to court for an. identical. process. if necessary,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010280.jpg": "...and three) required. ari identical ‘finding of intent; ther...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010380.jpg": "...v: br. at:28. that  some identical overt-aets. were not lis...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010698.jpg": "..., 5ol u.s. 8o8, 825 (l9  identical conclusion. see.kenna-v....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011176.jpg": "...was  instructed. to, put identical copies of it.on epstein...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011191.jpg": "..., the  images, which are identical.  of ¢ 9 of media to mat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011247.jpg": "...remaining six pages are. identical except for the identifyi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011312.jpg": "...the l images, which, are identical.  ae iat sa: tata we  th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011440.jpg": "...tent of the releases is. identical.  evcp' mot: at l2. ms....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012895.jpg": "...rify that those were the identical images that we had on,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012896.jpg": "...verified that they were identical. and,  i. cheeked the at...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012986.jpg": "...presumed that those were identical to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013065.jpg": "...match, then the data, ds identical, and the  data was in th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013087.jpg": "...the image  you made was identical te the clone from which...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013088.jpg": "...make sure that they were identical; right?  a. that's €6rre...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018481.jpg": "...rify that those were the identical images that we had on,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018482.jpg": "...verified that they were identical. and,  i. cheeked the at...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018572.jpg": "...presumed that those were identical to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018650.jpg": "...match, then the data, ds identical, and the  data was in th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018672.jpg": "...the image  you made was identical te the clone from which...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018673.jpg": "...make sure that they were identical; right?  a. that's €6rre...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019500.jpg": "...nguage, which is neatly: identical. iti all imatetial tespe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020813.jpg": "...for charges ‘that are  “identical, torthe dismissed;charge...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020997.jpg": "...ed until:2ooo. see  some identical. overtiactsywere notilis...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021106.jpg": "...se...involving” language identical. to §...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021119.jpg": "...ress. contained language identical to the retroactivity pro...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021131.jpg": "..., ease no. o9-er-58l (\\  identical situation, acknouledged....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021441.jpg": "...eter was: substantially. identical to therprevious: ebl v....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021963.jpg": "...aid ‘packages are mearly identical with the excepto one or...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022033.jpg": "...hat there. was an almost identical. incident in 2oo5 or 2oo..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "identical" (76 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1645-1645</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">2284-2284</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">2305-2306</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">2349-2349</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">2362-2362</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">2372-2372</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">2385-2385</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">2394-2394</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">2424-2424</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">2450-2450</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">2459-2459</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">2579-2579</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">2604-2604</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">2868-2869</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">2985-2985</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">2997-2999</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">3885-3886</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">4277-4284</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">4714-4716</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">4740-4740</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">4799-4799</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">4854-4854</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">4977-4978</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">5046-5046</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">5139-5139</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">5161-5161</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">5603-5603</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">5680-5680</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">6345-6345</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">6565-6565</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">6958-6958</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">7371-7371</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">7432-7432</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">8951-8953</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">9058-9058</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">9588-9588</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">9749-9749</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">10280-10280</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">10380-10380</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">10698-10698</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">11176-11176</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">11191-11191</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">11247-11247</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">11312-11312</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">11440-11440</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(45, 0); return false;">12895-12896</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(46, 0); return false;">12986-12986</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(47, 0); return false;">13065-13065</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(48, 0); return false;">13087-13088</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(49, 0); return false;">18481-18482</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(50, 0); return false;">18572-18572</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(51, 0); return false;">18650-18650</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(52, 0); return false;">18672-18673</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(53, 0); return false;">19500-19500</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(54, 0); return false;">20813-20813</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(55, 0); return false;">20997-20997</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(56, 0); return false;">21106-21106</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(57, 0); return false;">21119-21119</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(58, 0); return false;">21131-21131</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(59, 0); return false;">21441-21441</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(60, 0); return false;">21963-21963</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(61, 0); return false;">22033-22033</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

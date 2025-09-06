@@ -1,0 +1,220 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "conscious"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1667, "end": 1667, "pages": [1667]}, {"start": 3103, "end": 3103, "pages": [3103]}, {"start": 3223, "end": 3223, "pages": [3223]}, {"start": 4345, "end": 4345, "pages": [4345]}, {"start": 6186, "end": 6189, "pages": [6186, 6189]}, {"start": 6259, "end": 6262, "pages": [6259, 6262]}, {"start": 6279, "end": 6279, "pages": [6279]}, {"start": 6287, "end": 6287, "pages": [6287]}, {"start": 7500, "end": 7503, "pages": [7500, 7503]}, {"start": 8076, "end": 8079, "pages": [8076, 8079]}, {"start": 8460, "end": 8460, "pages": [8460]}, {"start": 8467, "end": 8467, "pages": [8467]}, {"start": 8480, "end": 8480, "pages": [8480]}, {"start": 8503, "end": 8503, "pages": [8503]}, {"start": 8511, "end": 8512, "pages": [8511, 8512]}, {"start": 8551, "end": 8551, "pages": [8551]}, {"start": 8564, "end": 8564, "pages": [8564]}, {"start": 8587, "end": 8587, "pages": [8587]}, {"start": 8595, "end": 8596, "pages": [8595, 8596]}, {"start": 8624, "end": 8624, "pages": [8624]}, {"start": 8631, "end": 8631, "pages": [8631]}, {"start": 8644, "end": 8644, "pages": [8644]}, {"start": 8667, "end": 8667, "pages": [8667]}, {"start": 8675, "end": 8676, "pages": [8675, 8676]}, {"start": 8710, "end": 8710, "pages": [8710]}, {"start": 8717, "end": 8717, "pages": [8717]}, {"start": 8730, "end": 8730, "pages": [8730]}, {"start": 8753, "end": 8753, "pages": [8753]}, {"start": 8761, "end": 8762, "pages": [8761, 8762]}, {"start": 10345, "end": 10345, "pages": [10345]}, {"start": 14333, "end": 14333, "pages": [14333]}, {"start": 14364, "end": 14374, "pages": [14364, 14365, 14369, 14374]}, {"start": 14589, "end": 14589, "pages": [14589]}, {"start": 14598, "end": 14598, "pages": [14598]}, {"start": 14628, "end": 14629, "pages": [14628, 14629]}, {"start": 16955, "end": 16955, "pages": [16955]}, {"start": 16986, "end": 16996, "pages": [16986, 16987, 16991, 16996]}, {"start": 17210, "end": 17210, "pages": [17210]}, {"start": 17219, "end": 17219, "pages": [17219]}, {"start": 17249, "end": 17250, "pages": [17249, 17250]}, {"start": 19518, "end": 19518, "pages": [19518]}, {"start": 20965, "end": 20965, "pages": [20965]}];
+        const pageToPath = {"1667": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001667.jpg", "3103": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003103.jpg", "3223": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003223.jpg", "4345": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004345.jpg", "6186": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006186.jpg", "6189": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006189.jpg", "6259": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006259.jpg", "6262": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006262.jpg", "6279": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006279.jpg", "6287": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006287.jpg", "7500": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007500.jpg", "7503": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007503.jpg", "8076": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008076.jpg", "8079": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008079.jpg", "8460": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008460.jpg", "8467": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008467.jpg", "8480": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008480.jpg", "8503": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008503.jpg", "8511": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008511.jpg", "8512": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008512.jpg", "8551": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008551.jpg", "8564": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008564.jpg", "8587": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008587.jpg", "8595": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008595.jpg", "8596": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008596.jpg", "8624": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008624.jpg", "8631": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008631.jpg", "8644": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008644.jpg", "8667": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008667.jpg", "8675": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008675.jpg", "8676": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008676.jpg", "8710": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008710.jpg", "8717": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008717.jpg", "8730": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008730.jpg", "8753": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008753.jpg", "8761": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008761.jpg", "8762": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008762.jpg", "10345": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010345.jpg", "14333": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014333.jpg", "14364": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014364.jpg", "14365": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014365.jpg", "14369": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014369.jpg", "14374": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014374.jpg", "14589": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014589.jpg", "14598": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014598.jpg", "14628": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014628.jpg", "14629": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014629.jpg", "16955": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016955.jpg", "16986": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016986.jpg", "16987": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016987.jpg", "16991": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016991.jpg", "16996": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016996.jpg", "17210": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017210.jpg", "17219": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017219.jpg", "17249": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017249.jpg", "17250": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017250.jpg", "19518": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019518.jpg", "20965": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020965.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001667.jpg": "...ls ‘will, have made a a. conscious. ani  sae:  y ¥ assol ia...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003103.jpg": "...n atartrial  defendant?s conscious  aia stata ere  ny tat f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003223.jpg": "...ein’s atorneys  ‘made: a conscious s decision t to o skip h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004345.jpg": "...something the  “made : a conscious < decision-to ven ‘her i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006186.jpg": "...consciously lg; “outside conscious. awateness, and l8: not:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006189.jpg": "...s are often. outside the conscious awareness of thi . indiv...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006259.jpg": "...consciously lg; “outside conscious. awateness, and l8: not:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006262.jpg": "...s are often. outside the conscious awareness of thi . indiv...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006279.jpg": "...am be i | washed. out of conscious: amwatc coe. §  meemor....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006287.jpg": "...off of memory, personal ‘conscious sness, or gener ral. per...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007500.jpg": "...consciously lg; “outside conscious. awateness, and l8: not:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007503.jpg": "...s are often. outside the conscious awareness of thi . indiv...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008076.jpg": "...consciously lg; “outside conscious. awateness, and l8: not:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008079.jpg": "...s are often. outside the conscious awareness of thi . indiv...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008460.jpg": "...o violate federal-law —  conscious avoidance sevssveocsven,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008467.jpg": "...ay: be expressed without conscious awareness, control, or i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008480.jpg": "...ct:is the product of her conscious objective, thatzis,  ‘wh...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008503.jpg": "...ons :must have: beem her conscious: objective rather-than.a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008511.jpg": "...‘conscious avoidance  instruction }...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008512.jpg": "...and took: deliberate and conscious actiori to avoid confirm...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008551.jpg": "...ay: be expressed’without conscious awareness, control, or i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008564.jpg": "...t is the’ produet of her conscious objective, that is,  whe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008587.jpg": "...tions must have been-her conscious objective: rather than a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008595.jpg": "...ct-you on the concept of conscious  avoidance.  as i have e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008596.jpg": "...nd took; deliberate and. conscious action, to avoid confirm...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008624.jpg": "...3o instruction no. 39: ‘conscious avoidance........ccccccc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008631.jpg": "...ay: be expressed without conscious awareness, control, or i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008644.jpg": "...ct:is the product of her conscious objective, thatzis,  ‘wh...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008667.jpg": "...ons :must have: beem her conscious: objective rather-than.a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008675.jpg": "...‘conscious avoidance  instruction }...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008676.jpg": "...and took: deliberate and conscious actiori to avoid confirm...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008710.jpg": "...3o instruction no. 39: ‘conscious avoidance........ccccccc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008717.jpg": "...ay: be expressed without conscious awareness, control, or i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008730.jpg": "...ct:is the product of her conscious objective, thatzis,  ‘wh...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008753.jpg": "...ons :must have: beem her conscious: objective rather-than.a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008761.jpg": "...‘conscious avoidance  instruction }...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008762.jpg": "...and took: deliberate and conscious actiori to avoid confirm...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010345.jpg": "...nl im imls dss  made a, conscious decision in favorof disc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014333.jpg": "...part of ms. maxwell'’s conscious purpose in. having jane...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014364.jpg": "...34, instruction 39, the conscious avoidance  lastpugtion....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014365.jpg": "...the various offense si  conscious: avoidance theory......", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014369.jpg": "...that  doesn't relate to conscious avoidance, which is; sim...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014374.jpg": "...f the applicability 6f a conscious  avoidance instruction....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014589.jpg": "...trol, or intention. like conscious. bias, uscenseleus bias...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014598.jpg": "..., is the  product of her conscious objective; that is; when...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014628.jpg": "...law. the law galls this conscious avoidance of willful  bl...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014629.jpg": "...no)  consider conscious avoidance iff deciding w...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016955.jpg": "...part of ms. maxwell'’s conscious purpose in. having jane...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016986.jpg": "...34, instruction 39, the conscious avoidance  lastpugtion....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016987.jpg": "...the various offense si  conscious: avoidance theory......", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016991.jpg": "...that  doesn't relate to conscious avoidance, which is; sim...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016996.jpg": "...f the applicability 6f a conscious  avoidance instruction....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017210.jpg": "...trol, or intention. like conscious. bias, uscenseleus bias...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017219.jpg": "..., is the  product of her conscious objective; that is; when...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017249.jpg": "...law. the law galls this conscious avoidance of willful  bl...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017250.jpg": "...no)  consider conscious avoidance iff deciding w...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019518.jpg": "...ls ‘will, have made a a. conscious. ani  sae:  y ¥ assol ia...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020965.jpg": "...ined that he’had  made a conscious: decision in. favor of d..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "conscious" (58 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1667-1667</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">3103-3103</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">3223-3223</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">4345-4345</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">6186-6189</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">6259-6262</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">6279-6279</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">6287-6287</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">7500-7503</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">8076-8079</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">8460-8460</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">8467-8467</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">8480-8480</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">8503-8503</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">8511-8512</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">8551-8551</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">8564-8564</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">8587-8587</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">8595-8596</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">8624-8624</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">8631-8631</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">8644-8644</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">8667-8667</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">8675-8676</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">8710-8710</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">8717-8717</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">8730-8730</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">8753-8753</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">8761-8762</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">10345-10345</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">14333-14333</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">14364-14374</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">14589-14589</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">14598-14598</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">14628-14629</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">16955-16955</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">16986-16996</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">17210-17210</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">17219-17219</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">17249-17250</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">19518-19518</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">20965-20965</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "pennsylvania"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 215, "end": 215, "pages": [215]}, {"start": 3622, "end": 3622, "pages": [3622]}, {"start": 4283, "end": 4283, "pages": [4283]}, {"start": 4814, "end": 4814, "pages": [4814]}, {"start": 4824, "end": 4826, "pages": [4824, 4825, 4826]}, {"start": 4837, "end": 4837, "pages": [4837]}, {"start": 4860, "end": 4860, "pages": [4860]}, {"start": 4867, "end": 4871, "pages": [4867, 4871]}, {"start": 4887, "end": 4887, "pages": [4887]}, {"start": 4977, "end": 4977, "pages": [4977]}, {"start": 5449, "end": 5449, "pages": [5449]}, {"start": 6416, "end": 6416, "pages": [6416]}, {"start": 7557, "end": 7560, "pages": [7557, 7560]}, {"start": 7566, "end": 7571, "pages": [7566, 7570, 7571]}, {"start": 7582, "end": 7584, "pages": [7582, 7584]}, {"start": 7597, "end": 7597, "pages": [7597]}, {"start": 7629, "end": 7631, "pages": [7629, 7631]}, {"start": 9465, "end": 9465, "pages": [9465]}, {"start": 10144, "end": 10144, "pages": [10144]}, {"start": 13613, "end": 13613, "pages": [13613]}, {"start": 16238, "end": 16238, "pages": [16238]}, {"start": 21930, "end": 21930, "pages": [21930]}, {"start": 21950, "end": 21950, "pages": [21950]}, {"start": 21969, "end": 21969, "pages": [21969]}, {"start": 21989, "end": 21989, "pages": [21989]}];
+        const pageToPath = {"215": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000215.jpg", "3622": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003622.jpg", "4283": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004283.jpg", "4814": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004814.jpg", "4824": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004824.jpg", "4825": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004825.jpg", "4826": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004826.jpg", "4837": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004837.jpg", "4860": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004860.jpg", "4867": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004867.jpg", "4871": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004871.jpg", "4887": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004887.jpg", "4977": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004977.jpg", "5449": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005449.jpg", "6416": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006416.jpg", "7557": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007557.jpg", "7560": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007560.jpg", "7566": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007566.jpg", "7570": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007570.jpg", "7571": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007571.jpg", "7582": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007582.jpg", "7584": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007584.jpg", "7597": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007597.jpg", "7629": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007629.jpg", "7631": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007631.jpg", "9465": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009465.jpg", "10144": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010144.jpg", "13613": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013613.jpg", "16238": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016238.jpg", "21930": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021930.jpg", "21950": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021950.jpg", "21969": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021969.jpg", "21989": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021989.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000215.jpg": "...ys, for respond nti  95o pennsylvania avenue, n.:.w. washingto...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003622.jpg": ".... of the: university: of pennsylvania in.l97o. l have authored...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004283.jpg": "...the wester, district of  pennsylvania with “the same crimes an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004814.jpg": "...dy; jj:  gommonwealth of pennsylvania, : no: :39:'map 2o2o  ap...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004824.jpg": "...overeign commonwealth of pennsylvania.and, in my’ legal, opini...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004825.jpg": "...ly obtained pursuant’ to pennsylvania law:. after this analysi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004826.jpg": "...the eastern district of pennsylvania.®  during discovery: in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004837.jpg": "...ot'from the: statutes of pennsylvania. in his:final email to m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004860.jpg": "...f of the commonwealth of pennsylvania, that he would not prose...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004867.jpg": "...trial by  therefore; in pennsylvania, it is well setled that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004871.jpg": "...le |, ‘section  9 of the pennsylvania constitution mandate: th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004887.jpg": "...a, and is hot the law in pennsylvania. second; the  e suggesti...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004977.jpg": "...that the opinion of the pennsylvania, supreme...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005449.jpg": "...riment of justice:  \"95o pennsylvania avenuk nw  washington d....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006416.jpg": "...ariment of justice:  95o pennsylvania avenui nw  washington d....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007557.jpg": "...al of the  university of pennsylvania  fellouships  l973-l9 m....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007560.jpg": "...tly on inactive status)  pennsylvania state board of medical e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007566.jpg": "...inia)  member, l982-l99o pennsylvania psychiatric society  mem...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007570.jpg": "...s atorney, philadelphia, pennsylvania, in u.s. v. john bennet,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007571.jpg": "...ee aes  delaware county, pennsylvania, in commonwealth v..  jo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007582.jpg": "...a v. john dupont (media, pennsylvania) ied at trial, 2/l2/97 a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007584.jpg": "...a  - inc. (philadelphia; pennsylvania)  sma preventative secur...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007597.jpg": "...violence, university of pennsylvania, philadelphia, pa;  diet...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007629.jpg": "...hospital  university of pennsylvania, center for studies in c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007631.jpg": "...the law.,, philadelphia, pennsylvania, october l8, l986  direc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009465.jpg": "...new. york, .new jersey,,pennsylvania,.rhode . island; ‘vermoi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010144.jpg": "...new. york, .new jersey,,pennsylvania,.rhode . island; ‘vermoi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013613.jpg": "...ent to the university of pennsylvania for my ndergraduate.. q....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016238.jpg": "...ent to the university of pennsylvania for my ndergraduate.. q....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021930.jpg": "...sey, easteni district of pennsylvania. ary additionat travel u...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021950.jpg": "...o “the middle dishict of pennsylvania,  so'ordered..  dated: n...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021969.jpg": "...the eastern. district of pennsylvania,  tn addition, tit impos...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021989.jpg": "...‘the middle dastrict of pennsylvania. wl ae spect, to the fir..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "pennsylvania" (33 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">215-215</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">3622-3622</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">4283-4283</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">4814-4814</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">4824-4826</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">4837-4837</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">4860-4860</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">4867-4871</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">4887-4887</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">4977-4977</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">5449-5449</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">6416-6416</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">7557-7560</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">7566-7571</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">7582-7584</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">7597-7597</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">7629-7631</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">9465-9465</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">10144-10144</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">13613-13613</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">16238-16238</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">21930-21930</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">21950-21950</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">21969-21969</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">21989-21989</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

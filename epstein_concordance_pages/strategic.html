@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "strategic"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 2914, "end": 2914, "pages": [2914]}, {"start": 3015, "end": 3015, "pages": [3015]}, {"start": 3196, "end": 3196, "pages": [3196]}, {"start": 3345, "end": 3345, "pages": [3345]}, {"start": 4318, "end": 4318, "pages": [4318]}, {"start": 4467, "end": 4467, "pages": [4467]}, {"start": 4479, "end": 4479, "pages": [4479]}, {"start": 4726, "end": 4726, "pages": [4726]}, {"start": 4960, "end": 4960, "pages": [4960]}, {"start": 5464, "end": 5464, "pages": [5464]}, {"start": 5907, "end": 5907, "pages": [5907]}, {"start": 6183, "end": 6183, "pages": [6183]}, {"start": 6256, "end": 6256, "pages": [6256]}, {"start": 6426, "end": 6426, "pages": [6426]}, {"start": 6832, "end": 6832, "pages": [6832]}, {"start": 7211, "end": 7211, "pages": [7211]}, {"start": 7497, "end": 7497, "pages": [7497]}, {"start": 7901, "end": 7901, "pages": [7901]}, {"start": 8073, "end": 8073, "pages": [8073]}, {"start": 14908, "end": 14908, "pages": [14908]}, {"start": 21231, "end": 21231, "pages": [21231]}, {"start": 21343, "end": 21343, "pages": [21343]}, {"start": 22083, "end": 22086, "pages": [22083, 22086]}, {"start": 23069, "end": 23069, "pages": [23069]}];
+        const pageToPath = {"2914": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002914.jpg", "3015": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003015.jpg", "3196": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003196.jpg", "3345": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003345.jpg", "4318": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004318.jpg", "4467": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004467.jpg", "4479": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004479.jpg", "4726": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004726.jpg", "4960": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004960.jpg", "5464": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005464.jpg", "5907": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005907.jpg", "6183": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006183.jpg", "6256": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006256.jpg", "6426": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006426.jpg", "6832": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006832.jpg", "7211": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007211.jpg", "7497": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007497.jpg", "7901": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007901.jpg", "8073": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008073.jpg", "14908": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014908.jpg", "21231": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021231.jpg", "21343": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021343.jpg", "22083": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022083.jpg", "22086": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022086.jpg", "23069": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00023069.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002914.jpg": "...ndictment to gain, sonic strategic advantage: has ino basis...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003015.jpg": "...sult: of the  ‘gain. a a strategic advantage. here, as in l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003196.jpg": "...severed 4d  ‘reasofiable strategic. and policy consideratio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003345.jpg": "...otivated by ‘reasonable  strategic and. policy consideratio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004318.jpg": "...severed 4d  ‘reasofiable strategic. and policy consideratio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004467.jpg": "...otivated by ‘reasonable  strategic and. policy consideratio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004479.jpg": "...gal team: wer ‘ranted by strategic  although pre-indietment...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004726.jpg": "...indictment to gain. some strategic advantage has no basis i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004960.jpg": "...ammatory: langtiage, and strategic pauses to get ‘the 9 tio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005464.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005907.jpg": "...p p temporarily 38 as a ‘strategic part of  ls, more  ‘to b...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006183.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006256.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006426.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006832.jpg": "...p p temporarily 38 as a ‘strategic part of  ls, more  ‘to b...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007211.jpg": "...cive control refers to a strategic patern of behavior that'...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007497.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007901.jpg": "...cive control refers to a strategic patern of behavior that'...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008073.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014908.jpg": "...cive control refers to a strategic patern of behavior that'...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021231.jpg": "...accused. of not. being “strategic:  inkers” because: of ‘o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021343.jpg": "...harshly because of his  strategic: and poli  © proac ivell...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022083.jpg": "...tigative duties. or make strategic decisions. about; the pr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022086.jpg": "...stigative duties or made strategic  ‘decisions about the pr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00023069.jpg": ".... accused of not being, “strategic: thinkers* because: of o..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "strategic" (25 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">2914-2914</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">3015-3015</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">3196-3196</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3345-3345</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">4318-4318</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">4467-4467</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">4479-4479</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">4726-4726</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">4960-4960</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">5464-5464</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">5907-5907</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">6183-6183</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">6256-6256</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">6426-6426</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">6832-6832</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">7211-7211</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">7497-7497</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">7901-7901</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">8073-8073</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">14908-14908</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">21231-21231</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">21343-21343</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">22083-22086</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">23069-23069</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

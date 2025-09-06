@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "prerequisite"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 2710, "end": 2710, "pages": [2710]}, {"start": 3153, "end": 3153, "pages": [3153]}, {"start": 3324, "end": 3324, "pages": [3324]}, {"start": 3372, "end": 3372, "pages": [3372]}, {"start": 4446, "end": 4447, "pages": [4446, 4447]}, {"start": 4881, "end": 4881, "pages": [4881]}, {"start": 5414, "end": 5414, "pages": [5414]}, {"start": 5487, "end": 5487, "pages": [5487]}, {"start": 5599, "end": 5599, "pages": [5599]}, {"start": 6381, "end": 6381, "pages": [6381]}, {"start": 6449, "end": 6449, "pages": [6449]}, {"start": 6561, "end": 6561, "pages": [6561]}, {"start": 8062, "end": 8062, "pages": [8062]}, {"start": 8967, "end": 8967, "pages": [8967]}, {"start": 9031, "end": 9031, "pages": [9031]}, {"start": 9109, "end": 9109, "pages": [9109]}, {"start": 9134, "end": 9134, "pages": [9134]}, {"start": 9208, "end": 9208, "pages": [9208]}, {"start": 9722, "end": 9722, "pages": [9722]}, {"start": 9813, "end": 9813, "pages": [9813]}, {"start": 9887, "end": 9887, "pages": [9887]}, {"start": 11418, "end": 11418, "pages": [11418]}, {"start": 21128, "end": 21128, "pages": [21128]}];
+        const pageToPath = {"2710": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002710.jpg", "3153": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003153.jpg", "3324": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003324.jpg", "3372": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003372.jpg", "4446": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004446.jpg", "4447": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004447.jpg", "4881": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004881.jpg", "5414": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005414.jpg", "5487": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005487.jpg", "5599": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005599.jpg", "6381": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006381.jpg", "6449": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006449.jpg", "6561": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006561.jpg", "8062": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008062.jpg", "8967": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008967.jpg", "9031": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009031.jpg", "9109": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009109.jpg", "9134": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009134.jpg", "9208": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009208.jpg", "9722": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009722.jpg", "9813": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009813.jpg", "9887": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009887.jpg", "11418": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011418.jpg", "21128": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021128.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002710.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003153.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003324.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003372.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004446.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004447.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004881.jpg": "...n: the law knous no such prerequisite, and cosby cannot be pun...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005414.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005487.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005599.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006381.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006449.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006561.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008062.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008967.jpg": "...a furdaichtal structural prerequisite for ehsuring our clieits...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009031.jpg": "...ring voir dire is not.a ‘prerequisite to obtaining a new trial...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009109.jpg": "...ased jury is astructural:prerequisite fora fair trialand, part...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009134.jpg": "...during voir dire:is nota prerequisite to obtaining; a new tria...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009208.jpg": "...rate falschood ‘is not:a prerequisite to.a. new trial. gf tate...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009722.jpg": "...ring voir dire is not.a ‘prerequisite to obtaining a new trial...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009813.jpg": "...during voir dire:is nota prerequisite to obtaining; a new tria...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009887.jpg": "...rate falschood ‘is not:a prerequisite to.a. new trial. gf tate...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011418.jpg": "...of the harm is is. not a prerequisite. ‘to disclosure. and a l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021128.jpg": "...false” answers are not a prerequisite to satisfying the first..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "prerequisite" (24 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">2710-2710</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">3153-3153</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">3324-3324</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3372-3372</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">4446-4447</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">4881-4881</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">5414-5414</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">5487-5487</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">5599-5599</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">6381-6381</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">6449-6449</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">6561-6561</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">8062-8062</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">8967-8967</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">9031-9031</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">9109-9109</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">9134-9134</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">9208-9208</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">9722-9722</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">9813-9813</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">9887-9887</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">11418-11418</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">21128-21128</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

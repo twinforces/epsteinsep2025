@@ -1,0 +1,298 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "vulnerable"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 259, "end": 259, "pages": [259]}, {"start": 331, "end": 331, "pages": [331]}, {"start": 343, "end": 344, "pages": [343, 344]}, {"start": 478, "end": 483, "pages": [478, 483]}, {"start": 493, "end": 493, "pages": [493]}, {"start": 678, "end": 678, "pages": [678]}, {"start": 704, "end": 704, "pages": [704]}, {"start": 712, "end": 713, "pages": [712, 713]}, {"start": 790, "end": 795, "pages": [790, 795]}, {"start": 805, "end": 805, "pages": [805]}, {"start": 986, "end": 986, "pages": [986]}, {"start": 1293, "end": 1293, "pages": [1293]}, {"start": 1612, "end": 1612, "pages": [1612]}, {"start": 2894, "end": 2894, "pages": [2894]}, {"start": 3348, "end": 3348, "pages": [3348]}, {"start": 4470, "end": 4470, "pages": [4470]}, {"start": 5634, "end": 5634, "pages": [5634]}, {"start": 5754, "end": 5754, "pages": [5754]}, {"start": 5788, "end": 5788, "pages": [5788]}, {"start": 5794, "end": 5795, "pages": [5794, 5795]}, {"start": 5802, "end": 5806, "pages": [5802, 5806]}, {"start": 5904, "end": 5905, "pages": [5904, 5905]}, {"start": 6226, "end": 6226, "pages": [6226]}, {"start": 6344, "end": 6344, "pages": [6344]}, {"start": 6596, "end": 6596, "pages": [6596]}, {"start": 6691, "end": 6691, "pages": [6691]}, {"start": 6713, "end": 6713, "pages": [6713]}, {"start": 6719, "end": 6720, "pages": [6719, 6720]}, {"start": 6727, "end": 6731, "pages": [6727, 6731]}, {"start": 6829, "end": 6830, "pages": [6829, 6830]}, {"start": 7248, "end": 7252, "pages": [7248, 7249, 7252]}, {"start": 7289, "end": 7291, "pages": [7289, 7290, 7291]}, {"start": 7476, "end": 7476, "pages": [7476]}, {"start": 7495, "end": 7495, "pages": [7495]}, {"start": 7938, "end": 7942, "pages": [7938, 7939, 7942]}, {"start": 7979, "end": 7981, "pages": [7979, 7980, 7981]}, {"start": 8375, "end": 8375, "pages": [8375]}, {"start": 8952, "end": 8952, "pages": [8952]}, {"start": 8967, "end": 8967, "pages": [8967]}, {"start": 10482, "end": 10482, "pages": [10482]}, {"start": 10539, "end": 10545, "pages": [10539, 10540, 10544, 10545]}, {"start": 10572, "end": 10577, "pages": [10572, 10576, 10577]}, {"start": 10606, "end": 10606, "pages": [10606]}, {"start": 10664, "end": 10667, "pages": [10664, 10667]}, {"start": 11576, "end": 11576, "pages": [11576]}, {"start": 11584, "end": 11591, "pages": [11584, 11589, 11591]}, {"start": 11609, "end": 11609, "pages": [11609]}, {"start": 12324, "end": 12324, "pages": [12324]}, {"start": 13215, "end": 13215, "pages": [13215]}, {"start": 13266, "end": 13266, "pages": [13266]}, {"start": 13877, "end": 13877, "pages": [13877]}, {"start": 14425, "end": 14425, "pages": [14425]}, {"start": 14804, "end": 14804, "pages": [14804]}, {"start": 14812, "end": 14819, "pages": [14812, 14817, 14819]}, {"start": 14837, "end": 14837, "pages": [14837]}, {"start": 14937, "end": 14949, "pages": [14937, 14941, 14945, 14946, 14949]}, {"start": 14986, "end": 14988, "pages": [14986, 14987, 14988]}, {"start": 15135, "end": 15135, "pages": [15135]}, {"start": 16501, "end": 16501, "pages": [16501]}, {"start": 17046, "end": 17046, "pages": [17046]}, {"start": 17912, "end": 17912, "pages": [17912]}, {"start": 18800, "end": 18800, "pages": [18800]}, {"start": 18851, "end": 18851, "pages": [18851]}, {"start": 19904, "end": 19904, "pages": [19904]}, {"start": 20211, "end": 20211, "pages": [20211]}, {"start": 21602, "end": 21602, "pages": [21602]}, {"start": 21614, "end": 21617, "pages": [21614, 21615, 21617]}, {"start": 21665, "end": 21666, "pages": [21665, 21666]}];
+        const pageToPath = {"259": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000259.jpg", "331": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000331.jpg", "343": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000343.jpg", "344": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000344.jpg", "478": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000478.jpg", "483": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000483.jpg", "493": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000493.jpg", "678": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000678.jpg", "704": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000704.jpg", "712": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000712.jpg", "713": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000713.jpg", "790": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000790.jpg", "795": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000795.jpg", "805": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000805.jpg", "986": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000986.jpg", "1293": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001293.jpg", "1612": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001612.jpg", "2894": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002894.jpg", "3348": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003348.jpg", "4470": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004470.jpg", "5634": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005634.jpg", "5754": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005754.jpg", "5788": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005788.jpg", "5794": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005794.jpg", "5795": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005795.jpg", "5802": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005802.jpg", "5806": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005806.jpg", "5904": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005904.jpg", "5905": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005905.jpg", "6226": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006226.jpg", "6344": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006344.jpg", "6596": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006596.jpg", "6691": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006691.jpg", "6713": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006713.jpg", "6719": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006719.jpg", "6720": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006720.jpg", "6727": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006727.jpg", "6731": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006731.jpg", "6829": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006829.jpg", "6830": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006830.jpg", "7248": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007248.jpg", "7249": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007249.jpg", "7252": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007252.jpg", "7289": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007289.jpg", "7290": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007290.jpg", "7291": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007291.jpg", "7476": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007476.jpg", "7495": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007495.jpg", "7938": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007938.jpg", "7939": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007939.jpg", "7942": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007942.jpg", "7979": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007979.jpg", "7980": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007980.jpg", "7981": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007981.jpg", "8375": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008375.jpg", "8952": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008952.jpg", "8967": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008967.jpg", "10482": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010482.jpg", "10539": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010539.jpg", "10540": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010540.jpg", "10544": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010544.jpg", "10545": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010545.jpg", "10572": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010572.jpg", "10576": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010576.jpg", "10577": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010577.jpg", "10606": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010606.jpg", "10664": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010664.jpg", "10667": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010667.jpg", "11576": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011576.jpg", "11584": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011584.jpg", "11589": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011589.jpg", "11591": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011591.jpg", "11609": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011609.jpg", "12324": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012324.jpg", "13215": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013215.jpg", "13266": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013266.jpg", "13877": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013877.jpg", "14425": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014425.jpg", "14804": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014804.jpg", "14812": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014812.jpg", "14817": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014817.jpg", "14819": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014819.jpg", "14837": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014837.jpg", "14937": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014937.jpg", "14941": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014941.jpg", "14945": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014945.jpg", "14946": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014946.jpg", "14949": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014949.jpg", "14986": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014986.jpg", "14987": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014987.jpg", "14988": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014988.jpg", "15135": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015135.jpg", "16501": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016501.jpg", "17046": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017046.jpg", "17912": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017912.jpg", "18800": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018800.jpg", "18851": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018851.jpg", "19904": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019904.jpg", "20211": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020211.jpg", "21602": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021602.jpg", "21614": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021614.jpg", "21615": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021615.jpg", "21617": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021617.jpg", "21665": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021665.jpg", "21666": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021666.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000259.jpg": "...ns, often. partieularly. vulnerable to exploitation. epstein...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000331.jpg": "...ses often: ‘particularly vulnerable girls, were as ‘young: 4...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000343.jpg": "...uding: ‘some ofits most. vulnerable members, and : asignific...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000344.jpg": "...fhis  ‘ten ‘particularly vulnerable: to exploitation. “che d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000478.jpg": "...articularly  ie yah by  ‘vulnerable to: exploitation.” id. 9...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000483.jpg": "...t: could target: another vulnerable victim.” see  l3, ll35 (...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000493.jpg": "...ding those “particularly vulnerable to exploitation’ dkt, l,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000678.jpg": "...effrey epstein ak a very vulnerable place in my  ife; and wh...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000704.jpg": "...need to protect our most vulnerable to allou them a chance a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000712.jpg": "...o go.  23 he khew io was vulnerable, and he took advantage o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000713.jpg": "...an,  beings, making them vulnerable to pedophilic exploitati...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000790.jpg": "...articularly  ie yah by  ‘vulnerable to: exploitation.” id. 9...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000795.jpg": "...t: could target: another vulnerable victim.” see  l3, ll35 (...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000805.jpg": "...ding those “particularly vulnerable to exploitation’ dkt, l,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000986.jpg": "...deep:and lasting harm to vulnerable victims...at the heart:o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001293.jpg": "...tem makes him especially vulnerable  _  at s. he also argued...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001612.jpg": "...deep and lasting harm to vulnerable victims. at-theheart-of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002894.jpg": "...ses, .or as particularly-vulnerable:witnesses”). ‘that is pa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003348.jpg": "...t even knou -- had  very vulnerable v. ms. you had. all of t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004470.jpg": "...even knou -- had  very’ vulnerable v. ms., you had all of t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005634.jpg": "...n. to render the victims vulnerable to abuse, ‘to obscure th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005754.jpg": "...ularly case agents, are “vulnerable to:making “sweeping conc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005788.jpg": "...ren idler ‘the victims ‘vulnerable to, abuse, to ‘obscure t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005794.jpg": "...+o “render “ihe victims “vulnerable to abuse, , fo 5 obscure...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005795.jpg": "...“children ¢ are: more : vulnerable and because t  may-d do...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005802.jpg": "...?’ which. makes “victims vulnerable to, abuse,” arid builds...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005806.jpg": "...users that leave victims vulnerable to: coercion.  this ‘opi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005904.jpg": "...be ‘alone ‘with  ider:  ‘vulnerable and |  rents; and: hence...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005905.jpg": "...se ‘they. themselves are vulnerable and thus recognize these...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006226.jpg": "...that:perpetrators‘target vulnerable  is “a commonly. accepte...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006344.jpg": "...ming, fo :make the:minor vulnerable fo abuse.  second, that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006596.jpg": "...n. to render the victims vulnerable to abuse, ‘to obscure th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006691.jpg": "...ularly case agents, are “vulnerable to:making “sweeping conc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006713.jpg": "...ren idler ‘the victims ‘vulnerable to, abuse, to ‘obscure t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006719.jpg": "...+o “render “ihe victims “vulnerable to abuse, , fo 5 obscure...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006720.jpg": "...“children ¢ are: more : vulnerable and because t  may-d do...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006727.jpg": "...?’ which. makes “victims vulnerable to, abuse,” arid builds...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006731.jpg": "...users that leave victims vulnerable to: coercion.  this ‘opi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006829.jpg": "...be ‘alone ‘with  ider:  ‘vulnerable and |  rents; and: hence...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006830.jpg": "...se ‘they. themselves are vulnerable and thus recognize these...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007248.jpg": "...nt sbsarvation of highly vulnerable children among these chi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007249.jpg": "...tion can make ‘them mone vulnerable, but  ine \\  titi, mot s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007252.jpg": "...ances where they'xe more vulnerable to being targeted by off...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007289.jpg": "...omebody whe is. in this. vulnerable  poptilation?  a. l'm ne...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007290.jpg": "...6 to say, these are all  vulnerable peeple whe are more like...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007291.jpg": "...ings; correct?  o. well, vulnerable population?  a, vulnerab...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007476.jpg": "...erpetrators often target vulnerable wictinis. mot: at ll. th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007495.jpg": "...u: memory: ‘becomes more vulnerable to:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007938.jpg": "...nt sbsarvation of highly vulnerable children among these chi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007939.jpg": "...tion can make ‘them mone vulnerable, but  ine \\  titi, mot s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007942.jpg": "...ances where they'xe more vulnerable to being targeted by off...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007979.jpg": "...omebody whe is. in this. vulnerable  poptilation?  a. l'm ne...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007980.jpg": "...6 to say, these are all  vulnerable peeple whe are more like...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007981.jpg": "...ings; correct?  o. well, vulnerable population?  a, vulnerab...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008375.jpg": "...onship,  especially fora vulnerable victim. like the victim...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008952.jpg": "...ed started by. targeting vulnerable kids, like the four accu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008967.jpg": "...lieits,  often, the-most vulnerable and scorned. members ofi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010482.jpg": "...ng:  father. it:made her vulnerable to epstein, whom. she :m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010539.jpg": "...ing: devastating harm to vulnerable victims. she: should be:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010540.jpg": "...ised irreparable harm.to vulnerable children. her oun crimin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010544.jpg": "...the defendant identified vulnerable girls,  typically from,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010545.jpg": "...jane ‘was' particularly’ vulnerable, as ‘her. father  had ju...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010572.jpg": "...s criminal who preyed.on;vulnerable young girls and groomed:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010576.jpg": "...it children. and other:  vulnerable ‘people. ining them, fo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010577.jpg": "...the:defendant. preyed on vulnerable  young girls, manipulate...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010606.jpg": "...stein, atany cost to the vulnerable girls and women, upon wh...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010664.jpg": "...it children. and. other: vulnerable: people, they are,, in....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010667.jpg": "...stein, atany cost to the vulnerable girls and women, upon wh...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011576.jpg": "...ehitighally prey on. the vulnerable, young gixls fri  stuugg...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011584.jpg": "...rh ot ae  anid, fape the vulnerable.  sangle person shotld h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011589.jpg": "...ters at finding yourig,  vulnerable girls avd young women to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011591.jpg": "...wy  %  net theusands, of vulnerable garls afd young women. g...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011609.jpg": "...t young vigeams whs were vulnerable. once selected, ms. maxw...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012324.jpg": "...t walneerable ehildren,  vulnerable populations. we also kmo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013215.jpg": "...ed hi:  influence over a vulnerable minor child to engage in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013266.jpg": "...was wrong and she takes vulnerable young gifls and --  mr,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013877.jpg": "...that might make a child vulnerable t6 8e@xual, abuse; it se...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014425.jpg": "...ad to be a prety, young, vulnerable girl, that's who  they w...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014804.jpg": "...ehitighally prey on. the vulnerable, young gixls fri  stuugg...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014812.jpg": "...rh ot ae  anid, fape the vulnerable.  sangle person shotld h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014817.jpg": "...ters at finding yourig,  vulnerable girls avd young women to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014819.jpg": "...wy  %  net theusands, of vulnerable garls afd young women. g...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014837.jpg": "...t young vigeams whs were vulnerable. once selected, ms. maxw...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014937.jpg": "...tain groups who are more vulnerable and there's a higher pre...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014941.jpg": "...ade the individual jhore vulnerable to the  ways in whiaeh t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014945.jpg": "...nt observation of highly vulnerable children among those chi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014946.jpg": "...ation can make them more vulnerable, but i'm not sure what y...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014949.jpg": "...ances whene they'ne more vulnerable to being targeted by off...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014986.jpg": "...somebody who is in this vulnerable population?  a. im not s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014987.jpg": "...o to say, these are all. vulnerable people who are more like...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014988.jpg": "...g about. sure.  @. well, vulnerable population?  a. vulnerab...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015135.jpg": "...xwell. helped identify  ‘vulnerable girls! for abuse, target...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016501.jpg": "...that might make a child vulnerable t6 8e@xual, abuse; it se...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017046.jpg": "...ad to be a prety, young, vulnerable girl, that's who  they w...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017912.jpg": "...t walneerable ehildren,  vulnerable populations. we also kmo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018800.jpg": "...ed hi:  influence over a vulnerable minor child to engage in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018851.jpg": "...was wrong and she takes vulnerable young gifls and --  mr,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019904.jpg": "...deep:and lasting harm to vulnerable victims...at the heart:o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020211.jpg": "...tem makes him especially vulnerable  _  at s. he also argued...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021602.jpg": "...ntentionally prey on the vulnerable, young girls. from  iffe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021614.jpg": "...continte to prey of the vulnerable, e will net step standin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021615.jpg": "...sters at finding young,  vulnerable girls ano ‘young women t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021617.jpg": "...,; if  net theusands, of vulnerable girls and young women. o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021665.jpg": "...l and epstein identified vulnerable girls, typically from si...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021666.jpg": "...). jane was particilarly vulnerable, as, hex father had. jus..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "vulnerable" (105 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">259-259</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">331-331</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">343-344</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">478-483</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">493-493</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">678-678</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">704-704</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">712-713</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">790-795</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">805-805</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">986-986</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">1293-1293</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">1612-1612</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">2894-2894</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">3348-3348</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">4470-4470</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">5634-5634</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">5754-5754</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">5788-5788</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">5794-5795</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">5802-5806</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">5904-5905</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">6226-6226</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">6344-6344</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">6596-6596</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">6691-6691</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">6713-6713</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">6719-6720</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">6727-6731</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">6829-6830</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">7248-7252</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">7289-7291</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">7476-7476</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">7495-7495</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">7938-7942</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">7979-7981</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">8375-8375</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">8952-8952</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">8967-8967</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">10482-10482</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">10539-10545</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">10572-10577</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">10606-10606</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">10664-10667</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">11576-11576</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(45, 0); return false;">11584-11591</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(46, 0); return false;">11609-11609</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(47, 0); return false;">12324-12324</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(48, 0); return false;">13215-13215</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(49, 0); return false;">13266-13266</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(50, 0); return false;">13877-13877</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(51, 0); return false;">14425-14425</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(52, 0); return false;">14804-14804</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(53, 0); return false;">14812-14819</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(54, 0); return false;">14837-14837</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(55, 0); return false;">14937-14949</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(56, 0); return false;">14986-14988</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(57, 0); return false;">15135-15135</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(58, 0); return false;">16501-16501</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(59, 0); return false;">17046-17046</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(60, 0); return false;">17912-17912</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(61, 0); return false;">18800-18800</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(62, 0); return false;">18851-18851</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(63, 0); return false;">19904-19904</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(64, 0); return false;">20211-20211</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(65, 0); return false;">21602-21602</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(66, 0); return false;">21614-21617</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(67, 0); return false;">21665-21666</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

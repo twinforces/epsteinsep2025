@@ -1,0 +1,256 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "objective"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 653, "end": 653, "pages": [653]}, {"start": 687, "end": 687, "pages": [687]}, {"start": 2301, "end": 2306, "pages": [2301, 2304, 2306]}, {"start": 4218, "end": 4218, "pages": [4218]}, {"start": 4849, "end": 4849, "pages": [4849]}, {"start": 4884, "end": 4889, "pages": [4884, 4889]}, {"start": 5514, "end": 5516, "pages": [5514, 5515, 5516]}, {"start": 5639, "end": 5639, "pages": [5639]}, {"start": 6112, "end": 6117, "pages": [6112, 6117]}, {"start": 6183, "end": 6183, "pages": [6183]}, {"start": 6256, "end": 6256, "pages": [6256]}, {"start": 6476, "end": 6478, "pages": [6476, 6477, 6478]}, {"start": 6601, "end": 6601, "pages": [6601]}, {"start": 6637, "end": 6637, "pages": [6637]}, {"start": 6961, "end": 6961, "pages": [6961]}, {"start": 7194, "end": 7194, "pages": [7194]}, {"start": 7497, "end": 7497, "pages": [7497]}, {"start": 7884, "end": 7884, "pages": [7884]}, {"start": 8073, "end": 8073, "pages": [8073]}, {"start": 8475, "end": 8480, "pages": [8475, 8480]}, {"start": 8498, "end": 8512, "pages": [8498, 8501, 8502, 8503, 8505, 8509, 8512]}, {"start": 8559, "end": 8564, "pages": [8559, 8564]}, {"start": 8587, "end": 8589, "pages": [8587, 8589]}, {"start": 8639, "end": 8644, "pages": [8639, 8644]}, {"start": 8662, "end": 8676, "pages": [8662, 8665, 8666, 8667, 8669, 8673, 8676]}, {"start": 8725, "end": 8730, "pages": [8725, 8730]}, {"start": 8748, "end": 8762, "pages": [8748, 8751, 8752, 8753, 8755, 8759, 8762]}, {"start": 8948, "end": 8952, "pages": [8948, 8952]}, {"start": 9214, "end": 9214, "pages": [9214]}, {"start": 9546, "end": 9546, "pages": [9546]}, {"start": 9589, "end": 9589, "pages": [9589]}, {"start": 9595, "end": 9595, "pages": [9595]}, {"start": 9893, "end": 9893, "pages": [9893]}, {"start": 10281, "end": 10281, "pages": [10281]}, {"start": 10287, "end": 10287, "pages": [10287]}, {"start": 10374, "end": 10379, "pages": [10374, 10375, 10379]}, {"start": 10449, "end": 10449, "pages": [10449]}, {"start": 10464, "end": 10464, "pages": [10464]}, {"start": 10474, "end": 10474, "pages": [10474]}, {"start": 10480, "end": 10481, "pages": [10480, 10481]}, {"start": 10738, "end": 10738, "pages": [10738]}, {"start": 11187, "end": 11187, "pages": [11187]}, {"start": 14595, "end": 14598, "pages": [14595, 14598]}, {"start": 14613, "end": 14620, "pages": [14613, 14617, 14620]}, {"start": 14626, "end": 14626, "pages": [14626]}, {"start": 14891, "end": 14891, "pages": [14891]}, {"start": 14915, "end": 14915, "pages": [14915]}, {"start": 17216, "end": 17219, "pages": [17216, 17219]}, {"start": 17234, "end": 17241, "pages": [17234, 17238, 17241]}, {"start": 17247, "end": 17247, "pages": [17247]}, {"start": 20991, "end": 20996, "pages": [20991, 20992, 20996]}, {"start": 21096, "end": 21096, "pages": [21096]}, {"start": 21529, "end": 21529, "pages": [21529]}, {"start": 22094, "end": 22094, "pages": [22094]}];
+        const pageToPath = {"653": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000653.jpg", "687": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000687.jpg", "2301": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002301.jpg", "2304": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002304.jpg", "2306": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002306.jpg", "4218": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004218.jpg", "4849": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004849.jpg", "4884": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004884.jpg", "4889": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004889.jpg", "5514": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005514.jpg", "5515": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005515.jpg", "5516": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005516.jpg", "5639": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005639.jpg", "6112": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006112.jpg", "6117": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006117.jpg", "6183": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006183.jpg", "6256": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006256.jpg", "6476": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006476.jpg", "6477": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006477.jpg", "6478": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006478.jpg", "6601": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006601.jpg", "6637": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006637.jpg", "6961": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006961.jpg", "7194": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007194.jpg", "7497": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007497.jpg", "7884": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007884.jpg", "8073": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008073.jpg", "8475": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008475.jpg", "8480": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008480.jpg", "8498": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008498.jpg", "8501": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008501.jpg", "8502": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008502.jpg", "8503": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008503.jpg", "8505": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008505.jpg", "8509": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008509.jpg", "8512": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008512.jpg", "8559": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008559.jpg", "8564": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008564.jpg", "8587": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008587.jpg", "8589": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008589.jpg", "8639": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008639.jpg", "8644": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008644.jpg", "8662": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008662.jpg", "8665": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008665.jpg", "8666": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008666.jpg", "8667": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008667.jpg", "8669": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008669.jpg", "8673": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008673.jpg", "8676": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008676.jpg", "8725": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008725.jpg", "8730": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008730.jpg", "8748": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008748.jpg", "8751": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008751.jpg", "8752": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008752.jpg", "8753": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008753.jpg", "8755": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008755.jpg", "8759": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008759.jpg", "8762": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008762.jpg", "8948": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008948.jpg", "8952": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008952.jpg", "9214": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009214.jpg", "9546": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009546.jpg", "9589": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009589.jpg", "9595": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009595.jpg", "9893": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009893.jpg", "10281": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010281.jpg", "10287": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010287.jpg", "10374": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010374.jpg", "10375": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010375.jpg", "10379": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010379.jpg", "10449": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010449.jpg", "10464": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010464.jpg", "10474": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010474.jpg", "10480": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010480.jpg", "10481": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010481.jpg", "10738": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010738.jpg", "11187": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011187.jpg", "14595": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014595.jpg", "14598": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014598.jpg", "14613": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014613.jpg", "14617": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014617.jpg", "14620": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014620.jpg", "14626": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014626.jpg", "14891": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014891.jpg", "14915": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014915.jpg", "17216": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017216.jpg", "17219": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017219.jpg", "17234": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017234.jpg", "17238": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017238.jpg", "17241": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017241.jpg", "17247": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017247.jpg", "20991": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020991.jpg", "20992": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020992.jpg", "20996": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020996.jpg", "21096": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021096.jpg", "21529": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021529.jpg", "22094": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022094.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000653.jpg": "...f those  believed wth an objective basis that the deal was...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000687.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002301.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002304.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002306.jpg": "...ti. the indictment, the “objective” of the conspiracies was...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004218.jpg": "....s.c. §.2423(a), withthe objective.of transporting an :indi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004849.jpg": "...w  we  to “establish the objective improbability of so many...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004884.jpg": "...not. nor are there: any’ objective criteria that could be u...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004889.jpg": "...ces, where our equitable objective in remedying a due proce...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005514.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005515.jpg": "...ouledge. of the illegal ‘objective based.on ‘a-patern.and p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005516.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005639.jpg": "...rid fails to pointo some objective souree to shou that [she...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006112.jpg": "...te  at one ob,  ‘ersonie objective of thetha  ach of thesee...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006117.jpg": "...withya criminal offense objective; would’be  proved:  ‘o.p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006183.jpg": "...uired -meaning beyond an objective description : ‘of behavi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006256.jpg": "...uired -meaning beyond an objective description : ‘of behavi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006476.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006477.jpg": "...ouledge. of the illegal ‘objective based.on ‘a-patern.and p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006478.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006601.jpg": "...rid fails to pointo some objective souree to shou that [she...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006637.jpg": "....c. §.2422(a), with. the objective of'enticing one or: more...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006961.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007194.jpg": "...l  ep)  question from an objective perspective, and it invo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007497.jpg": "...uired -meaning beyond an objective description : ‘of behavi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007884.jpg": "...l  ep)  question from an objective perspective, and it invo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008073.jpg": "...uired -meaning beyond an objective description : ‘of behavi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008475.jpg": "...t the crime that was the objective of the conspiracy was ac...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008480.jpg": "...product of her conscious objective, thatzis,  ‘when she: ac...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008498.jpg": "...commited to further some objective of that conspiracy:  eac...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008501.jpg": "...with. a criminal offense objective would be  finally, ‘coun...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008502.jpg": "...x trafficking of minors. objective would be  ‘proved....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008503.jpg": "...operate if its utilawful objective. “willfully” and “knouin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008505.jpg": "...ntinwe uritil either its objective is,  accomplished. or th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008509.jpg": "...herefore  constitutes ai objective of the corispiracy:....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008512.jpg": "...he,  defendant knew the: objective of a‘conspiracy,, that i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008559.jpg": "...the:crime that was the  objective of the conspiracy was ac...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008564.jpg": "...produet of her conscious objective, that is,  when she aets...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008587.jpg": "...have been-her conscious objective: rather than a,product o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008589.jpg": "...ontinue-until either its objective is  ‘accomplished or the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008639.jpg": "...t the crime that was the objective of the conspiracy was ac...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008644.jpg": "...product of her conscious objective, thatzis,  ‘when she: ac...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008662.jpg": "...commited to further some objective of that conspiracy:  eac...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008665.jpg": "...with. a criminal  offers objective would be proved.  icipat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008666.jpg": "...uals under the ave of l8 objective would be proved....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008667.jpg": "...operate if its utilawful objective. “willfully” and “knouin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008669.jpg": "...ntinwe uritil either its objective is, accomplished. or the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008673.jpg": "...herefore  constitutes ai objective of the corispiracy:....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008676.jpg": "...he,  defendant knew the: objective of a‘conspiracy,, that i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008725.jpg": "...t the crime that was the objective of the conspiracy was ac...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008730.jpg": "...product of her conscious objective, thatzis,  ‘when she: ac...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008748.jpg": "...commited to further some objective of that conspiracy:  eac...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008751.jpg": "...with. a criminal  offers objective would be proved.  icipat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008752.jpg": "...uals under the ave of l8 objective would be proved....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008753.jpg": "...operate if its utilawful objective. “willfully” and “knouin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008755.jpg": "...ntinwe uritil either its objective is, accomplished. or the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008759.jpg": "...herefore  constitutes ai objective of the corispiracy:....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008762.jpg": "...he,  defendant knew the: objective of a‘conspiracy,, that i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008948.jpg": "...‘the samie  overarching’ objective, the same ¢ore:participa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008952.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009214.jpg": "...remains inthe:  wake of’ objective evidence of false voir d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009546.jpg": "...remains in.the wake of: objective evidence of false voirdi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009589.jpg": "...rticipants, and criminal objective’ docs  e  not negate the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009595.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009893.jpg": "...remains inthe:  wake of’ objective evidence of false voir d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010281.jpg": "...ed the  same overarching objective, the same cote participa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010287.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010374.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010375.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010379.jpg": "...ith anew “conspiratorial objective.” , miller, 584 f.  i  t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010449.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010464.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010474.jpg": "...ferently,. without. any: objective justification. follouing...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010480.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010481.jpg": "...of incarceration.  is ai objective matheme atical.  a7  ion...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010738.jpg": "...rig:  which viewed itany objective ligh  a  that led to-yea...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011187.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014595.jpg": "...t the crime that was the objective of the conspiracy was...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014598.jpg": "...product of her conscious objective; that is; when she acts...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014613.jpg": "...commited to further some objective of that  nspl racy :  ea...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014617.jpg": "...als under the age of  l8 objective would be proved. instrue...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014620.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014626.jpg": "...minal on constitutes an. objective of ee gonspiracy.  einst...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014891.jpg": "...=legal  question from an objective perspective, and it, inv...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014915.jpg": "...apacity is to provide an objective answer based upon. my ev...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017216.jpg": "...t the crime that was the objective of the conspiracy was...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017219.jpg": "...product of her conscious objective; that is; when she acts...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017234.jpg": "...commited to further some objective of that  nspl racy :  ea...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017238.jpg": "...als under the age of  l8 objective would be proved. instrue...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017241.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017247.jpg": "...minal on constitutes an. objective of ee gonspiracy.  einst...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020991.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020992.jpg": "...similarities, | o here.  objective  l48 :(2d.gir. l998) (ci...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020996.jpg": "...york because theultimate objective offthe conspiracy*was' t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021096.jpg": "...npa. reflects, epstein’s objective in negotiating the npa....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021529.jpg": "...remains: in-the wake of objective evidence of:false-voir d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022094.jpg": "...mply do not-constitu te “objective. evidence” warranting:..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "objective" (97 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">653-653</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">687-687</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">2301-2306</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">4218-4218</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">4849-4849</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">4884-4889</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">5514-5516</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">5639-5639</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">6112-6117</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">6183-6183</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">6256-6256</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">6476-6478</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">6601-6601</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">6637-6637</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">6961-6961</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">7194-7194</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">7497-7497</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">7884-7884</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">8073-8073</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">8475-8480</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">8498-8512</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">8559-8564</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">8587-8589</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">8639-8644</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">8662-8676</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">8725-8730</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">8748-8762</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">8948-8952</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">9214-9214</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">9546-9546</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">9589-9589</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">9595-9595</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">9893-9893</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">10281-10281</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">10287-10287</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">10374-10379</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">10449-10449</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">10464-10464</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">10474-10474</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">10480-10481</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">10738-10738</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">11187-11187</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">14595-14598</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">14613-14620</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">14626-14626</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(45, 0); return false;">14891-14891</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(46, 0); return false;">14915-14915</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(47, 0); return false;">17216-17219</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(48, 0); return false;">17234-17241</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(49, 0); return false;">17247-17247</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(50, 0); return false;">20991-20996</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(51, 0); return false;">21096-21096</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(52, 0); return false;">21529-21529</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(53, 0); return false;">22094-22094</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

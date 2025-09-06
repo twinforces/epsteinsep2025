@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "philadelphia"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 3622, "end": 3622, "pages": [3622]}, {"start": 4818, "end": 4822, "pages": [4818, 4820, 4822]}, {"start": 4832, "end": 4832, "pages": [4832]}, {"start": 7570, "end": 7570, "pages": [7570]}, {"start": 7582, "end": 7584, "pages": [7582, 7583, 7584]}, {"start": 7597, "end": 7597, "pages": [7597]}, {"start": 7631, "end": 7631, "pages": [7631]}, {"start": 7703, "end": 7703, "pages": [7703]}, {"start": 8162, "end": 8162, "pages": [8162]}, {"start": 21621, "end": 21621, "pages": [21621]}];
+        const pageToPath = {"3622": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003622.jpg", "4818": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004818.jpg", "4820": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004820.jpg", "4822": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004822.jpg", "4832": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004832.jpg", "7570": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007570.jpg", "7582": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007582.jpg", "7583": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007583.jpg", "7584": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007584.jpg", "7597": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007597.jpg", "7631": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007631.jpg", "7703": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007703.jpg", "8162": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008162.jpg", "21621": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021621.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003622.jpg": "...g blds, t  university in-philadelphia.. l received iy ph.d. in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004818.jpg": "...constand to. dinner at a philadelphia restaurant. she accepted...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004820.jpg": "...’s  police report to the philadelphia police department; which...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004822.jpg": "...ce in  civil atorneys in philadelphia, likely forthe purpose o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004832.jpg": "...e: contacted a lawyer in philadelphia prior‘to speaking with t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007570.jpg": "...e united states atorney, philadelphia, pennsylvania, in u.s. v...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007582.jpg": "...e  u.s. vv. john bennet (philadelphia, pennsylvania): testifie...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007583.jpg": "...d passenger corporation (philadelphia,  testified at trial, 8/...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007584.jpg": "...l, 9/5/oo  anta  - inc. (philadelphia; pennsylvania)  sma prev...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007597.jpg": "...versity of pennsylvania, philadelphia, pa;  dietz pe, martell...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007631.jpg": "...ychiatry: and the law.,, philadelphia, pennsylvania, october l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007703.jpg": "...4:  alk radio l2lo wpht, philadelphia: ebola as. bioterrorist...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008162.jpg": "...4:  alk radio l2lo wpht, philadelphia: ebola as. bioterrorist...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021621.jpg": "...me.  in l997 i moved. to philadelphia with the hopes of  mally..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "philadelphia" (14 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">3622-3622</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">4818-4822</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">4832-4832</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">7570-7570</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">7582-7584</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">7597-7597</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">7631-7631</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">7703-7703</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">8162-8162</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">21621-21621</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

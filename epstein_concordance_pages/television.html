@@ -1,0 +1,253 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "television"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 977, "end": 977, "pages": [977]}, {"start": 1176, "end": 1176, "pages": [1176]}, {"start": 1331, "end": 1331, "pages": [1331]}, {"start": 1347, "end": 1347, "pages": [1347]}, {"start": 1360, "end": 1360, "pages": [1360]}, {"start": 1461, "end": 1461, "pages": [1461]}, {"start": 1599, "end": 1599, "pages": [1599]}, {"start": 1686, "end": 1686, "pages": [1686]}, {"start": 1707, "end": 1707, "pages": [1707]}, {"start": 1715, "end": 1715, "pages": [1715]}, {"start": 1859, "end": 1859, "pages": [1859]}, {"start": 2195, "end": 2195, "pages": [2195]}, {"start": 2511, "end": 2511, "pages": [2511]}, {"start": 2902, "end": 2902, "pages": [2902]}, {"start": 5210, "end": 5213, "pages": [5210, 5213]}, {"start": 5272, "end": 5272, "pages": [5272]}, {"start": 5280, "end": 5280, "pages": [5280]}, {"start": 5320, "end": 5320, "pages": [5320]}, {"start": 6039, "end": 6039, "pages": [6039]}, {"start": 6241, "end": 6241, "pages": [6241]}, {"start": 6317, "end": 6317, "pages": [6317]}, {"start": 6326, "end": 6326, "pages": [6326]}, {"start": 7020, "end": 7020, "pages": [7020]}, {"start": 7575, "end": 7575, "pages": [7575]}, {"start": 7589, "end": 7589, "pages": [7589]}, {"start": 7602, "end": 7602, "pages": [7602]}, {"start": 8874, "end": 8874, "pages": [8874]}, {"start": 9105, "end": 9105, "pages": [9105]}, {"start": 9111, "end": 9111, "pages": [9111]}, {"start": 9662, "end": 9662, "pages": [9662]}, {"start": 9796, "end": 9796, "pages": [9796]}, {"start": 10583, "end": 10583, "pages": [10583]}, {"start": 10788, "end": 10788, "pages": [10788]}, {"start": 10817, "end": 10817, "pages": [10817]}, {"start": 10846, "end": 10846, "pages": [10846]}, {"start": 11078, "end": 11078, "pages": [11078]}, {"start": 12224, "end": 12224, "pages": [12224]}, {"start": 12241, "end": 12241, "pages": [12241]}, {"start": 12293, "end": 12293, "pages": [12293]}, {"start": 12837, "end": 12838, "pages": [12837, 12838]}, {"start": 13661, "end": 13661, "pages": [13661]}, {"start": 16286, "end": 16286, "pages": [16286]}, {"start": 17813, "end": 17813, "pages": [17813]}, {"start": 17830, "end": 17830, "pages": [17830]}, {"start": 17881, "end": 17881, "pages": [17881]}, {"start": 18423, "end": 18424, "pages": [18423, 18424]}, {"start": 19895, "end": 19895, "pages": [19895]}, {"start": 20094, "end": 20094, "pages": [20094]}, {"start": 20248, "end": 20248, "pages": [20248]}, {"start": 20264, "end": 20264, "pages": [20264]}, {"start": 20277, "end": 20277, "pages": [20277]}, {"start": 20379, "end": 20379, "pages": [20379]}, {"start": 20915, "end": 20915, "pages": [20915]}];
+        const pageToPath = {"977": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000977.jpg", "1176": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001176.jpg", "1331": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001331.jpg", "1347": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001347.jpg", "1360": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001360.jpg", "1461": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001461.jpg", "1599": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001599.jpg", "1686": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001686.jpg", "1707": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001707.jpg", "1715": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001715.jpg", "1859": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001859.jpg", "2195": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002195.jpg", "2511": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002511.jpg", "2902": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002902.jpg", "5210": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005210.jpg", "5213": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005213.jpg", "5272": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005272.jpg", "5280": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005280.jpg", "5320": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005320.jpg", "6039": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006039.jpg", "6241": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006241.jpg", "6317": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006317.jpg", "6326": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006326.jpg", "7020": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007020.jpg", "7575": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007575.jpg", "7589": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007589.jpg", "7602": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007602.jpg", "8874": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008874.jpg", "9105": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009105.jpg", "9111": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009111.jpg", "9662": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009662.jpg", "9796": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009796.jpg", "10583": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010583.jpg", "10788": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010788.jpg", "10817": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010817.jpg", "10846": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010846.jpg", "11078": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011078.jpg", "12224": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012224.jpg", "12241": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012241.jpg", "12293": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012293.jpg", "12837": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012837.jpg", "12838": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012838.jpg", "13661": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013661.jpg", "16286": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016286.jpg", "17813": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017813.jpg", "17830": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017830.jpg", "17881": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017881.jpg", "18423": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018423.jpg", "18424": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018424.jpg", "19895": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019895.jpg", "20094": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020094.jpg", "20248": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020248.jpg", "20264": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020264.jpg", "20277": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020277.jpg", "20379": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020379.jpg", "20915": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020915.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000977.jpg": "...: even. given. nunicrous television interviews on.news shous...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001176.jpg": "...use; and. has. her oun.  television: “those conditions set:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001331.jpg": "...h. exclusive access. toa television, a phone, two computers,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001347.jpg": "...space, socia ial leal, television, shoue  og  ul,, compute...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001360.jpg": "...computer, the laptop, a television, a phone on.  which to ‘...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001461.jpg": "...‘computer, telephone,.a television, and a shouer. (sec dkt....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001599.jpg": "...aught of press articles, television. specials, and social me...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001686.jpg": "...docuientaties and other television and film. productions, a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001707.jpg": "...to: the press, and other television arid filni prodictions....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001715.jpg": "...to: the press, and other television arid filni prodictions....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001859.jpg": "...space, socia ial leal, television, shoue  og  ul,, compute...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002195.jpg": "...use; and. has. her oun.  television: “those conditions sect:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002511.jpg": "...le books, podcasts, atid television setics  yailable to: ¢ a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002902.jpg": "...computer, the laptop, a television, a phone on.  which to ‘...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005210.jpg": "...ticles, books, podcasts, television shous,, and docuseries ‘...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005213.jpg": "...in the very: newspapers, television stations,  the jury pool...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005272.jpg": "...daily: ‘news, lp: radio television lat news association the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005280.jpg": "...zines, on. the radio or “television,  or ‘on the internet,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005320.jpg": "...to anything about it on, television,  the radio; or on podea...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006039.jpg": "...the internct:or'scen on television or heard about: on:socia...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006241.jpg": "...articles, news reports, ‘television shous,, documentaries, b...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006317.jpg": "...if  iternet: or: seen on television or heard about:on social...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006326.jpg": "...you. regularly watch any television. shous? if-so, what; sho...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007020.jpg": "...ines, on. the wadio o or television, ,or on the internet,  ‘...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007575.jpg": ".... phillip €. mcgraw, cbs television distribution group f/k/a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007589.jpg": ".... phillip c. mcgraw, cbs television, distribution group f/k/...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007602.jpg": "...:2l95,  l986.  dietz pe: television-inspired autoerotic asph...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008874.jpg": "...familiarity with, this: television program, other than havi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009105.jpg": "...last. week. do you watch television?  t hawe netflix, so io...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009111.jpg": "...‘in, an age of reality’ television in, which the “truc crim...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009662.jpg": "...r w. watching films.6 ot television prcgiea that relate: t ‘...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009796.jpg": "...last. week. do you watch television?  t hawe netflix, so io...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010583.jpg": "...d exclusive access to a, television, a desktop computer, a l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010788.jpg": "...ing ley our it friends,  television, or on, the ‘internet....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010817.jpg": "...gazines, on therradio or television, or-on the: internet.  d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010846.jpg": "...nay ‘on: the radio c ‘or television, or-on ‘the internet,  d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011078.jpg": "...gazines, on-the radio or television, or on the internet.  pn...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012224.jpg": "...'s the dif  a. aeting on television l8 aet real; ahd testify...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012241.jpg": "...ll time a& ah actor ih a television  q. eox hou many years r...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012293.jpg": "...eater, later on moye and television industry,  a me atic as...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012837.jpg": "...ublicly, you appeared on television  with regard to ‘your al...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012838.jpg": "...l who were featured on 4 television shou; correct?  q. talki...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013661.jpg": "...were you interviewed dn television?  a. 5 was.  o. dd you p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016286.jpg": "...were you interviewed dn television?  a. 5 was.  o. dd you p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017813.jpg": "...'s the dif  a. aeting on television l8 aet real; ahd testify...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017830.jpg": "...ll time a& ah actor ih a television  q. eox hou many years r...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017881.jpg": "...eater, later on moye and television industry,  a me atic as...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018423.jpg": "...ublicly, you appeared on television  with regard to ‘your al...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018424.jpg": "...l who were featured on 4 television shou; correct?  q. talki...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019895.jpg": "...: even. given. nunicrous television interviews on.news shous...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020094.jpg": "...use; and. has. her oun.  television: “those conditions set:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020248.jpg": "...h. exclusive access. toa television, a phone, two computers,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020264.jpg": "...space, socia ial leal, television, shoue  og  ul,, compute...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020277.jpg": "...computer, the laptop, a television, a phone on.  which to ‘...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020379.jpg": "...‘computer, telephone,.a television, and a shouer. (sec dkt....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020915.jpg": "...gazines, on.the.radio:or television, < “oron® the internet..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "television" (56 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">977-977</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1176-1176</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1331-1331</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">1347-1347</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">1360-1360</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">1461-1461</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">1599-1599</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">1686-1686</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">1707-1707</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">1715-1715</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">1859-1859</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">2195-2195</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">2511-2511</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">2902-2902</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">5210-5213</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">5272-5272</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">5280-5280</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">5320-5320</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">6039-6039</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">6241-6241</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">6317-6317</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">6326-6326</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">7020-7020</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">7575-7575</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">7589-7589</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">7602-7602</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">8874-8874</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">9105-9105</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">9111-9111</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">9662-9662</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">9796-9796</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">10583-10583</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">10788-10788</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">10817-10817</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">10846-10846</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">11078-11078</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">12224-12224</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">12241-12241</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">12293-12293</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">12837-12838</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">13661-13661</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">16286-16286</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">17813-17813</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">17830-17830</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">17881-17881</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(45, 0); return false;">18423-18424</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(46, 0); return false;">19895-19895</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(47, 0); return false;">20094-20094</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(48, 0); return false;">20248-20248</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(49, 0); return false;">20264-20264</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(50, 0); return false;">20277-20277</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(51, 0); return false;">20379-20379</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(52, 0); return false;">20915-20915</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

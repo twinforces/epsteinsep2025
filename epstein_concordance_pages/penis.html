@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "penis"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 4846, "end": 4846, "pages": [4846]}, {"start": 5881, "end": 5881, "pages": [5881]}, {"start": 6806, "end": 6806, "pages": [6806]}, {"start": 10546, "end": 10547, "pages": [10546, 10547]}, {"start": 10573, "end": 10573, "pages": [10573]}, {"start": 11280, "end": 11280, "pages": [11280]}, {"start": 11361, "end": 11361, "pages": [11361]}, {"start": 11533, "end": 11533, "pages": [11533]}, {"start": 11609, "end": 11609, "pages": [11609]}, {"start": 11955, "end": 11955, "pages": [11955]}, {"start": 12226, "end": 12226, "pages": [12226]}, {"start": 12802, "end": 12802, "pages": [12802]}, {"start": 13223, "end": 13223, "pages": [13223]}, {"start": 13249, "end": 13249, "pages": [13249]}, {"start": 13748, "end": 13749, "pages": [13748, 13749]}, {"start": 13759, "end": 13759, "pages": [13759]}, {"start": 13786, "end": 13786, "pages": [13786]}, {"start": 14761, "end": 14761, "pages": [14761]}, {"start": 14837, "end": 14837, "pages": [14837]}, {"start": 16373, "end": 16374, "pages": [16373, 16374]}, {"start": 16384, "end": 16384, "pages": [16384]}, {"start": 16411, "end": 16411, "pages": [16411]}, {"start": 17545, "end": 17545, "pages": [17545]}, {"start": 17815, "end": 17815, "pages": [17815]}, {"start": 18388, "end": 18388, "pages": [18388]}, {"start": 18808, "end": 18808, "pages": [18808]}, {"start": 18834, "end": 18834, "pages": [18834]}, {"start": 21602, "end": 21602, "pages": [21602]}, {"start": 21667, "end": 21670, "pages": [21667, 21670]}];
+        const pageToPath = {"4846": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004846.jpg", "5881": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005881.jpg", "6806": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006806.jpg", "10546": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010546.jpg", "10547": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010547.jpg", "10573": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010573.jpg", "11280": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011280.jpg", "11361": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011361.jpg", "11533": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011533.jpg", "11609": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011609.jpg", "11955": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011955.jpg", "12226": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012226.jpg", "12802": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012802.jpg", "13223": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013223.jpg", "13249": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013249.jpg", "13748": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013748.jpg", "13749": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013749.jpg", "13759": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013759.jpg", "13786": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013786.jpg", "14761": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014761.jpg", "14837": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014837.jpg", "16373": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016373.jpg", "16374": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016374.jpg", "16384": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016384.jpg", "16411": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016411.jpg", "17545": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017545.jpg", "17815": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017815.jpg", "18388": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018388.jpg", "18808": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018808.jpg", "18834": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018834.jpg", "21602": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021602.jpg", "21667": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021667.jpg", "21670": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021670.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004846.jpg": "...o find cosby forcing his penis into her mouth. she pass...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005881.jpg": "...ssib]  pare  ents (© |  penis  sr er ated.mo ‘ies  wee...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006806.jpg": "...ssib]  pare  ents (© |  penis  sr er ated.mo ‘ies  wee...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010546.jpg": "...about:touching-epstcin’s penis. (jd).  jane was l4 year...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010547.jpg": "...utifig, ict hand of. his penis and grabbig, kate’s brea...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010573.jpg": "...36d and hou he liked his penis totiched. the defendant...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011280.jpg": "...d not; ¢.2., feel, his  ‘penis: body generally against...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011361.jpg": "...,,c.g.,,fecl. his erect ‘penis.  body: generally agains...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011533.jpg": "...rolya's vaqgind with hig penis because hen trial testim...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011609.jpg": "...n hou to touch, his  gt  penis durang massages. the abu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011955.jpg": "...eezed, his, feet and his penis.  qo. approximately bou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012226.jpg": "...uched jeffrey epstein's  penis?  a. l4,  qo. can you de...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012802.jpg": "...h was 4 eeupheentisi for penis. hou demanding jeffrey w...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013223.jpg": "...ert. se he inserted his, penis inte her two.  times. du...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013249.jpg": "...ever touch mr. epstein\"s penis?  no.  t \\  a ip z  \"9;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013748.jpg": "...u did not feel an erect, penis in, your back?  a. i. di...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013749.jpg": "...ks correct?  a. an erect penis, i don't recall those wo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013759.jpg": "...around you, right?  any penis being pressed agaimsk yo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013786.jpg": "...bout jeffrey epstein\"'s. penis  oa goss exami nae  oun...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014761.jpg": "...rolya's vaqgind with hig penis because hen trial testim...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014837.jpg": "...n hou to touch, his  gt  penis durang massages. the abu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016373.jpg": "...u did not feel an erect, penis in, your back?  a. i. di...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016374.jpg": "...ks correct?  a. an erect penis, i don't recall those wo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016384.jpg": "...around you, right?  any penis being pressed agaimsk yo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016411.jpg": "...bout jeffrey epstein\"'s. penis  oa goss exami nae  oun...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017545.jpg": "...eezed, his, feet and his penis.  qo. approximately bou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017815.jpg": "...uched jeffrey epstein's  penis?  a. l4,  qo. can you de...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018388.jpg": "...h was 4 eeupheentisi for penis. hou demanding jeffrey w...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018808.jpg": "...ert. se he inserted his, penis inte her two.  times. du...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018834.jpg": "...ever touch mr. epstein\"s penis?  no.  t \\  a ip z  \"9;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021602.jpg": "...dle-aged man,  likes his penis to be touchea? what. kin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021667.jpg": "...about touching epstein’s penis. (tr.3o8-ll). jane was r...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021670.jpg": "...ing her vagina ‘with his penis. (tr.l545-47).  at frst,..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "penis" (33 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">4846-4846</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">5881-5881</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">6806-6806</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">10546-10547</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">10573-10573</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">11280-11280</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">11361-11361</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">11533-11533</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">11609-11609</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">11955-11955</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">12226-12226</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">12802-12802</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">13223-13223</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">13249-13249</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">13748-13749</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">13759-13759</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">13786-13786</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">14761-14761</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">14837-14837</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">16373-16374</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">16384-16384</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">16411-16411</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">17545-17545</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">17815-17815</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">18388-18388</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">18808-18808</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">18834-18834</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">21602-21602</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">21667-21670</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "petitioners"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 280, "end": 280, "pages": [280]}, {"start": 307, "end": 318, "pages": [307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318]}, {"start": 397, "end": 398, "pages": [397, 398]}, {"start": 2536, "end": 2539, "pages": [2536, 2538, 2539]}, {"start": 3182, "end": 3182, "pages": [3182]}, {"start": 3365, "end": 3365, "pages": [3365]}, {"start": 3431, "end": 3432, "pages": [3431, 3432]}, {"start": 3441, "end": 3446, "pages": [3441, 3444, 3445, 3446]}, {"start": 3482, "end": 3482, "pages": [3482]}, {"start": 4304, "end": 4304, "pages": [4304]}, {"start": 4487, "end": 4487, "pages": [4487]}, {"start": 4554, "end": 4554, "pages": [4554]}, {"start": 4563, "end": 4568, "pages": [4563, 4567, 4568]}, {"start": 4604, "end": 4604, "pages": [4604]}, {"start": 21180, "end": 21180, "pages": [21180]}, {"start": 21441, "end": 21446, "pages": [21441, 21446]}, {"start": 21482, "end": 21482, "pages": [21482]}];
+        const pageToPath = {"280": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000280.jpg", "307": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000307.jpg", "308": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000308.jpg", "309": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000309.jpg", "310": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000310.jpg", "311": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000311.jpg", "312": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000312.jpg", "313": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000313.jpg", "314": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000314.jpg", "315": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000315.jpg", "316": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000316.jpg", "317": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000317.jpg", "318": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000318.jpg", "397": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000397.jpg", "398": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000398.jpg", "2536": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002536.jpg", "2538": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002538.jpg", "2539": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002539.jpg", "3182": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003182.jpg", "3365": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003365.jpg", "3431": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003431.jpg", "3432": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003432.jpg", "3441": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003441.jpg", "3444": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003444.jpg", "3445": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003445.jpg", "3446": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003446.jpg", "3482": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003482.jpg", "4304": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004304.jpg", "4487": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004487.jpg", "4554": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004554.jpg", "4563": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004563.jpg", "4567": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004567.jpg", "4568": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004568.jpg", "4604": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004604.jpg", "21180": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021180.jpg", "21441": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021441.jpg", "21446": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021446.jpg", "21482": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021482.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000280.jpg": "...by: epstein. against the petitioners. epstein is: ‘thus. subj...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000307.jpg": "...urisdiction, because the petitioners lack standing to bring ‘...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000308.jpg": "...fied legal. relief that: petitioners have sought pursuant: to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000309.jpg": "...after consultation with, petitioners the united. states: dete...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000310.jpg": "...court ‘will ‘not provide petitioners with, anything: for the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000311.jpg": "...lf, seaeita  because the petitioners” claims are not constitu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000312.jpg": "...‘these proeeedings, the petitioners have: sought to set. asi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000313.jpg": "...rsonally conferred. with petitioners’ counsel and with. petit...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000314.jpg": "...mmited against | them.”  petitioners nonetheless, have. appea...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000315.jpg": "...deral, charges involving petitioners. have ever  srs mie ap:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000316.jpg": "...fied. im the agreement.  petitioners contend, that the cvra g...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000317.jpg": "...nothig preclides, petitioners: froni..doing, so, and t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000318.jpg": "...an order dismissing the: petitioners*:claims and these procee...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000397.jpg": "...ent.  mr. weinberg: ‘ihe petitioners are wigorously and ‘have...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000398.jpg": "...metion, agreed with the petitioners as to the nt. in net con...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002536.jpg": "..., two. \"years ‘while the petitioners pursued givil.  ‘cases:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002538.jpg": "...hai idle ihe case by the petitioners, and opposed by the gove...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002539.jpg": "...moot. \"amo  denied. the petitioners init req  asse tod “leg...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003182.jpg": "...ith the ‘court.  by the: petitioners, and opposed by l the: \"...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003365.jpg": "...cv tra, litigation, the petitioners ‘obtained from. epstein’...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003431.jpg": "...i iesoein se! ose bt at  petitioners  ecording, to an affidaw...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003432.jpg": "...ial facts:in support of: petitioners motion for-partial:summa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003441.jpg": "...victims.  l 2oo8, the f petitioners an ‘the cvra ee toa file...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003444.jpg": "...tion. ln addition , the: petitioners, sallezed ‘teat the g po...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003445.jpg": "...ict. court. granted. the petitioners’ motion. for. partial ru...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003446.jpg": "...e court: also denied the petitioners” request:for atorneys”...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003482.jpg": "...rticularly the two:cvra ‘petitioners. arid ‘the fwo, victims...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004304.jpg": "...tis: to. submit  by the: petitioners, and opposed by l the: \"...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004487.jpg": "...ev tra, litigation, the petitioners ‘obtained from. epstein’...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004554.jpg": "...rial factscin support of petitioners’ motion for partial:'sum...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004563.jpg": "...o’ the two ‘victims.  th petitioners a.copy’ -of  if any: ‘in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004567.jpg": "...trict court granted. the petitioners’ ‘motion. for. partial....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004568.jpg": "...dies, ae cording] y, the petitioners requested miultiple spec...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004604.jpg": "...rticularly the two:cvra ‘petitioners. arid ‘the fwo, victims...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021180.jpg": "...nt's action  cvra ‘case: petitioners motion ‘tor olated the:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021441.jpg": "...n not ihe npa. 372  the: petitioners with a copy: of  dered t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021446.jpg": "...e court also denied. the:petitioners” re s, finding t everhi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021482.jpg": "...ticutar ly the two cv ra petitioners and. the two vi  ception..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "petitioners" (38 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">280-280</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">307-318</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">397-398</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">2536-2539</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">3182-3182</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">3365-3365</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3431-3432</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">3441-3446</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">3482-3482</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">4304-4304</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">4487-4487</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">4554-4554</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">4563-4568</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">4604-4604</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">21180-21180</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">21441-21446</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">21482-21482</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

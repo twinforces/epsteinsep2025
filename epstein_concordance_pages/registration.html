@@ -1,0 +1,259 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "registration"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 274, "end": 276, "pages": [274, 276]}, {"start": 345, "end": 345, "pages": [345]}, {"start": 373, "end": 374, "pages": [373, 374]}, {"start": 392, "end": 392, "pages": [392]}, {"start": 413, "end": 418, "pages": [413, 418]}, {"start": 435, "end": 435, "pages": [435]}, {"start": 449, "end": 454, "pages": [449, 454]}, {"start": 474, "end": 477, "pages": [474, 477]}, {"start": 490, "end": 492, "pages": [490, 492]}, {"start": 530, "end": 530, "pages": [530]}, {"start": 547, "end": 554, "pages": [547, 549, 552, 553, 554]}, {"start": 786, "end": 789, "pages": [786, 789]}, {"start": 802, "end": 804, "pages": [802, 804]}, {"start": 2326, "end": 2326, "pages": [2326]}, {"start": 2825, "end": 2825, "pages": [2825]}, {"start": 2836, "end": 2838, "pages": [2836, 2837, 2838]}, {"start": 3157, "end": 3157, "pages": [3157]}, {"start": 3188, "end": 3188, "pages": [3188]}, {"start": 3256, "end": 3256, "pages": [3256]}, {"start": 3264, "end": 3268, "pages": [3264, 3265, 3267, 3268]}, {"start": 3277, "end": 3284, "pages": [3277, 3280, 3283, 3284]}, {"start": 3350, "end": 3350, "pages": [3350]}, {"start": 3362, "end": 3362, "pages": [3362]}, {"start": 3376, "end": 3376, "pages": [3376]}, {"start": 3383, "end": 3383, "pages": [3383]}, {"start": 3624, "end": 3642, "pages": [3624, 3626, 3627, 3629, 3631, 3632, 3633, 3635, 3636, 3638, 3642]}, {"start": 4310, "end": 4310, "pages": [4310]}, {"start": 4359, "end": 4359, "pages": [4359]}, {"start": 4377, "end": 4378, "pages": [4377, 4378]}, {"start": 4386, "end": 4389, "pages": [4386, 4387, 4389]}, {"start": 4399, "end": 4406, "pages": [4399, 4402, 4405, 4406]}, {"start": 4472, "end": 4473, "pages": [4472, 4473]}, {"start": 4484, "end": 4484, "pages": [4484]}, {"start": 4498, "end": 4498, "pages": [4498]}, {"start": 4505, "end": 4505, "pages": [4505]}, {"start": 4541, "end": 4541, "pages": [4541]}, {"start": 4554, "end": 4554, "pages": [4554]}, {"start": 4851, "end": 4851, "pages": [4851]}, {"start": 4868, "end": 4868, "pages": [4868]}, {"start": 7300, "end": 7300, "pages": [7300]}, {"start": 7560, "end": 7560, "pages": [7560]}, {"start": 7990, "end": 7990, "pages": [7990]}, {"start": 11162, "end": 11162, "pages": [11162]}, {"start": 11219, "end": 11219, "pages": [11219]}, {"start": 11481, "end": 11481, "pages": [11481]}, {"start": 11488, "end": 11494, "pages": [11488, 11491, 11493, 11494]}, {"start": 13396, "end": 13398, "pages": [13396, 13398]}, {"start": 18980, "end": 18982, "pages": [18980, 18982]}, {"start": 20481, "end": 20481, "pages": [20481]}, {"start": 21110, "end": 21110, "pages": [21110]}, {"start": 21156, "end": 21156, "pages": [21156]}, {"start": 21278, "end": 21281, "pages": [21278, 21281]}, {"start": 21374, "end": 21374, "pages": [21374]}, {"start": 23030, "end": 23030, "pages": [23030]}, {"start": 23119, "end": 23119, "pages": [23119]}];
+        const pageToPath = {"274": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000274.jpg", "276": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000276.jpg", "345": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000345.jpg", "373": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000373.jpg", "374": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000374.jpg", "392": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000392.jpg", "413": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000413.jpg", "418": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000418.jpg", "435": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000435.jpg", "449": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000449.jpg", "454": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000454.jpg", "474": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000474.jpg", "477": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000477.jpg", "490": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000490.jpg", "492": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000492.jpg", "530": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000530.jpg", "547": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000547.jpg", "549": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000549.jpg", "552": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000552.jpg", "553": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000553.jpg", "554": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000554.jpg", "786": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000786.jpg", "789": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000789.jpg", "802": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000802.jpg", "804": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000804.jpg", "2326": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002326.jpg", "2825": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002825.jpg", "2836": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002836.jpg", "2837": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002837.jpg", "2838": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002838.jpg", "3157": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003157.jpg", "3188": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003188.jpg", "3256": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003256.jpg", "3264": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003264.jpg", "3265": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003265.jpg", "3267": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003267.jpg", "3268": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003268.jpg", "3277": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003277.jpg", "3280": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003280.jpg", "3283": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003283.jpg", "3284": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003284.jpg", "3350": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003350.jpg", "3362": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003362.jpg", "3376": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003376.jpg", "3383": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003383.jpg", "3624": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003624.jpg", "3626": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003626.jpg", "3627": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003627.jpg", "3629": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003629.jpg", "3631": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003631.jpg", "3632": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003632.jpg", "3633": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003633.jpg", "3635": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003635.jpg", "3636": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003636.jpg", "3638": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003638.jpg", "3642": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003642.jpg", "4310": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004310.jpg", "4359": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004359.jpg", "4377": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004377.jpg", "4378": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004378.jpg", "4386": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004386.jpg", "4387": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004387.jpg", "4389": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004389.jpg", "4399": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004399.jpg", "4402": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004402.jpg", "4405": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004405.jpg", "4406": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004406.jpg", "4472": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004472.jpg", "4473": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004473.jpg", "4484": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004484.jpg", "4498": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004498.jpg", "4505": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004505.jpg", "4541": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004541.jpg", "4554": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004554.jpg", "4851": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004851.jpg", "4868": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004868.jpg", "7300": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007300.jpg", "7560": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007560.jpg", "7990": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007990.jpg", "11162": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011162.jpg", "11219": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011219.jpg", "11481": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011481.jpg", "11488": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011488.jpg", "11491": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011491.jpg", "11493": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011493.jpg", "11494": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011494.jpg", "13396": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013396.jpg", "13398": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013398.jpg", "18980": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018980.jpg", "18982": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018982.jpg", "20481": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020481.jpg", "21110": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021110.jpg", "21156": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021156.jpg", "21278": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021278.jpg", "21281": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021281.jpg", "21374": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021374.jpg", "23030": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00023030.jpg", "23119": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00023119.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000274.jpg": "...ith onerous sex offender registration requirements — pinpointi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000276.jpg": "...ulously reported.to: the registration authorities so. that the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000345.jpg": "...he defendant was desigt  registration requirements” ‘under the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000373.jpg": "...m at the louest tevel of registration.  he also registered in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000374.jpg": "...he. reason for voluntary registration, he wants to be complian...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000392.jpg": "...lleged victims.  lp}  he registration list, a2  pstein, did  a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000413.jpg": "...ost recent sex  offender registration, ne lists six residences...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000418.jpg": "...ixl, which would eequire registration, gompensation paid ‘to a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000435.jpg": "...out epstem’s new  mexico registration status, the state’s publ...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000449.jpg": "...ut epstein’s new  mexico registration, status, the state’s pub...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000454.jpg": "...mi epstein’ s ne mex ico-registration:  “bail, subrijissions,,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000474.jpg": "...‘with hisi  sex-offender registration. actually: decrease[s| a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000477.jpg": "...new mexico sex, offender registration ‘status. defense counsel...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000490.jpg": "...ions. ina sex offerider  registration act hearing:on january l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000492.jpg": ".... epstein’s sex. offense registration o: iniaterials, have bee...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000530.jpg": "...pect to the sex offender registration of the defendant in othe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000547.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000549.jpg": "...senn s cncads  offender registration.  what's. important is t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000552.jpg": "...york state sex offender registration.  ‘et  the thrust of tha...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000553.jpg": "...best. knouledge is that registration,  therefore,  within wee...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000554.jpg": "...ern was that the federal registration statute requires. that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000786.jpg": "...‘with hisi  sex-offender registration. actually: decrease[s| a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000789.jpg": "...new mexico sex, offender registration ‘status. defense counsel...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000802.jpg": "...ions. [ia sex offerider  registration act hearing:on january l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000804.jpg": ".... epstein’s sex. offense registration o: iniaterials, have bee...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002326.jpg": "...e jury plan tses:-voter  registration lists. as:the exclusive...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002825.jpg": "...ndomly  drawn-ftom voter‘registration:lists of the various cou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002836.jpg": "...ess “drawn from, voter,  registration lists” did not constitut...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002837.jpg": "...usive feliatice on voter registration lists:  constitutes syst...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002838.jpg": "...iving at her address: of registration.”  common, cause/new yor...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003157.jpg": "...e: at random, from voter registration, lists; sdny jury:  plan...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003188.jpg": "...on and. sexual offender :registration.  ements. ‘opr did: not!...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003256.jpg": "...t epstein,  sexual. o  r registration, argued that epstein wou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003264.jpg": "...tiaton an fons requiting registration as'a.sexual offender, wi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003265.jpg": "...quired.  sexual offender registration, resulted l in a i two-y...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003267.jpg": "...quiring sexual ofterider registration, slaining to-opr that ep...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003268.jpg": "...opr'thatsexual offender-registration““was a;common-occurrence...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003277.jpg": "...equired. sexual offender registration. epstein would ‘serve an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003280.jpg": "...quiring sexual. offender registration.  after receiving the fe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003283.jpg": "...ate the sexual offerider registration requirement  fer ls”? ”...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003284.jpg": "...“all arguments against: registration is a ‘sexual fender] in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003350.jpg": "...t a eetain: ‘plea. ‘with registration. that would make:sure th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003362.jpg": "...eration, sexu al o ender registration, and. a.  -and opr fo et...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003376.jpg": "...state o charge requiring registration at as. a l sexual offend...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003383.jpg": "...l resolution,  roffender registration andthe opportunity to >...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003624.jpg": "...election from the  voter registration. lists. ‘the:master jury...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003626.jpg": "...noveniber l,.2ol6 ‘voter registration, lists were used, to con...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003627.jpg": "...he sample from the voter registration. lists had been a.simple...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003629.jpg": "...l, was based onthe voter registration lists as. of november l,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003631.jpg": "...s! drawn from, the voter registration list such,that.every reg...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003632.jpg": "...election from, the voter registration lists:  re  randoily sel...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003633.jpg": "...jury wheel and the voter registration.  ration, lists. the  sa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003635.jpg": "...rl lago  es.in the voter registration,  ‘wheel. froni the vote...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003636.jpg": "...noveniber |,.2ol6 voter registration. lists. ? reasons 4 and....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003638.jpg": "...addresses, ofi the voter registration list likely preverited t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003642.jpg": "...e november l, 2ol6 voter-registration lists. houever, the issu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004310.jpg": "...on and. sexual offender :registration.  ements. ‘opr did: not!...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004359.jpg": "...in’s: incareeration; his registration as a ‘sexual, offender;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004377.jpg": "...tion and sexual offender registration, and. cree  to.a means f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004378.jpg": "...at epstein,  sexual o  r registration, argued that e srve a se...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004386.jpg": "...a an.offense requiring; registration asa.sexual offender, wit...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004387.jpg": "...equired. sexual offender registration, resulted l in a i two-...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004389.jpg": "...iring » sexual off tider registration; “was going ‘to. plead g...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004399.jpg": "...equired. sexual offender registration. epstein rent o) months...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004402.jpg": "...t. of (sexual, offender] registration. which:we should. not ag...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004405.jpg": "...ate the sexual offerider registration requirement  fori ls” »...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004406.jpg": "...“all arguments against: registration is a ‘sexual fender] in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004472.jpg": "...a certain, ‘plea. ‘with registration. that would make:sure th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004473.jpg": "...nse, no sexual. offender registration,  at aint latch ratan ba...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004484.jpg": "...ration, sexual, offender registration, and. a.  -and opr fo et...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004498.jpg": "...o charge  te  requiring registration as: a asexual offender....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004505.jpg": "...tages'ti solu  roffender registration andthe opportunity to >...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004541.jpg": "...no: sextial offeetider  registration. ‘opr found:n no ‘eviden...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004554.jpg": "...ion. concering the: tail registration: number for epstein’s....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004851.jpg": "...sion of the sex offender registration and notification act (“s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004868.jpg": "...ility of sexual offender registration obligations.  there, thr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007300.jpg": "...y regarded as the mental registration,  retention and reee6lle...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007560.jpg": "...tly on inactive status)  registration no. o4355o (cu rently ¢...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007990.jpg": "...y regarded as the mental registration,  retention and reee6lle...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011162.jpg": "...ts of the sex: ‘offender registration. and notification. act '...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011219.jpg": "...ccosdance with: sectidr  registration act l925  2.3.3 the cove...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011481.jpg": "...uested information. upon registration, the adinistrator will p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011488.jpg": "...ive date? jtine 25, 2o2o registration filing deadline: febrtia...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011491.jpg": "...the  through an \"online registration. process, described :in....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011493.jpg": "...ter, you must complete a registration form, seting: forth, you...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011494.jpg": "...cient information in the registration. for: w v the prog m: to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013396.jpg": "...h is the  the ainerat,.  registration nmumbes for q. and do th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013398.jpg": "...no)  registration nmtmber was n4o4cb  q. n...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018980.jpg": "...h is the  the ainerat,.  registration nmumbes for q. and do th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018982.jpg": "...no)  registration nmtmber was n4o4cb  q. n...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020481.jpg": "...ts of the sex: ‘offender registration. and notification. act '...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021110.jpg": "...ressed the sex  offender registration. and, notification act (...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021156.jpg": "...profation offic ender: ‘registration agen  zy‘in.the location...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021278.jpg": "...sing the sexual offender registration requirement  oa option,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021281.jpg": ".... set  to, tell him that registration was net a negotiable ter...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021374.jpg": "...the:sexual offender:registration prov ston.is:yet:another...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00023030.jpg": "...minate: the sexual offen registration. requirement, «<:  l.. t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00023119.jpg": "...ate ‘the sexual offender registration requirement  on the afig..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "registration" (98 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">274-276</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">345-345</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">373-374</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">392-392</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">413-418</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">435-435</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">449-454</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">474-477</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">490-492</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">530-530</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">547-554</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">786-789</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">802-804</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">2326-2326</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">2825-2825</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">2836-2838</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">3157-3157</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">3188-3188</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">3256-3256</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">3264-3268</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">3277-3284</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">3350-3350</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">3362-3362</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">3376-3376</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">3383-3383</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">3624-3642</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">4310-4310</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">4359-4359</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">4377-4378</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">4386-4389</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">4399-4406</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">4472-4473</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">4484-4484</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">4498-4498</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">4505-4505</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">4541-4541</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">4554-4554</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">4851-4851</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">4868-4868</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">7300-7300</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">7560-7560</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">7990-7990</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">11162-11162</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">11219-11219</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">11481-11481</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(45, 0); return false;">11488-11494</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(46, 0); return false;">13396-13398</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(47, 0); return false;">18980-18982</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(48, 0); return false;">20481-20481</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(49, 0); return false;">21110-21110</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(50, 0); return false;">21156-21156</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(51, 0); return false;">21278-21281</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(52, 0); return false;">21374-21374</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(53, 0); return false;">23030-23030</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(54, 0); return false;">23119-23119</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

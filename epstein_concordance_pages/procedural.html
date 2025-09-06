@@ -1,0 +1,253 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "procedural"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 25, "end": 25, "pages": [25]}, {"start": 990, "end": 990, "pages": [990]}, {"start": 1081, "end": 1081, "pages": [1081]}, {"start": 1257, "end": 1257, "pages": [1257]}, {"start": 1443, "end": 1443, "pages": [1443]}, {"start": 1616, "end": 1616, "pages": [1616]}, {"start": 1753, "end": 1753, "pages": [1753]}, {"start": 1825, "end": 1825, "pages": [1825]}, {"start": 1954, "end": 1954, "pages": [1954]}, {"start": 2106, "end": 2106, "pages": [2106]}, {"start": 2322, "end": 2325, "pages": [2322, 2325]}, {"start": 2411, "end": 2415, "pages": [2411, 2415]}, {"start": 2565, "end": 2565, "pages": [2565]}, {"start": 2783, "end": 2783, "pages": [2783]}, {"start": 2823, "end": 2823, "pages": [2823]}, {"start": 3018, "end": 3018, "pages": [3018]}, {"start": 3072, "end": 3072, "pages": [3072]}, {"start": 3333, "end": 3333, "pages": [3333]}, {"start": 4089, "end": 4089, "pages": [4089]}, {"start": 4411, "end": 4411, "pages": [4411]}, {"start": 4455, "end": 4455, "pages": [4455]}, {"start": 4815, "end": 4815, "pages": [4815]}, {"start": 4930, "end": 4930, "pages": [4930]}, {"start": 5238, "end": 5238, "pages": [5238]}, {"start": 5247, "end": 5247, "pages": [5247]}, {"start": 6201, "end": 6201, "pages": [6201]}, {"start": 7816, "end": 7816, "pages": [7816]}, {"start": 8830, "end": 8830, "pages": [8830]}, {"start": 8844, "end": 8844, "pages": [8844]}, {"start": 11407, "end": 11407, "pages": [11407]}, {"start": 13403, "end": 13403, "pages": [13403]}, {"start": 14874, "end": 14874, "pages": [14874]}, {"start": 18987, "end": 18987, "pages": [18987]}, {"start": 19195, "end": 19195, "pages": [19195]}, {"start": 19564, "end": 19564, "pages": [19564]}, {"start": 19641, "end": 19641, "pages": [19641]}, {"start": 19678, "end": 19678, "pages": [19678]}, {"start": 19684, "end": 19689, "pages": [19684, 19689]}, {"start": 19908, "end": 19908, "pages": [19908]}, {"start": 19999, "end": 19999, "pages": [19999]}, {"start": 20175, "end": 20175, "pages": [20175]}, {"start": 20361, "end": 20361, "pages": [20361]}, {"start": 20613, "end": 20613, "pages": [20613]}, {"start": 21052, "end": 21052, "pages": [21052]}, {"start": 21123, "end": 21123, "pages": [21123]}, {"start": 21144, "end": 21144, "pages": [21144]}, {"start": 21697, "end": 21697, "pages": [21697]}, {"start": 21736, "end": 21736, "pages": [21736]}, {"start": 21753, "end": 21753, "pages": [21753]}, {"start": 21818, "end": 21818, "pages": [21818]}, {"start": 21871, "end": 21871, "pages": [21871]}, {"start": 21901, "end": 21901, "pages": [21901]}, {"start": 25527, "end": 25527, "pages": [25527]}];
+        const pageToPath = {"25": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000025.jpg", "990": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000990.jpg", "1081": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001081.jpg", "1257": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001257.jpg", "1443": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001443.jpg", "1616": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001616.jpg", "1753": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001753.jpg", "1825": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001825.jpg", "1954": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001954.jpg", "2106": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002106.jpg", "2322": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002322.jpg", "2325": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002325.jpg", "2411": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002411.jpg", "2415": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002415.jpg", "2565": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002565.jpg", "2783": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002783.jpg", "2823": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002823.jpg", "3018": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003018.jpg", "3072": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003072.jpg", "3333": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003333.jpg", "4089": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004089.jpg", "4411": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004411.jpg", "4455": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004455.jpg", "4815": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004815.jpg", "4930": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004930.jpg", "5238": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005238.jpg", "5247": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005247.jpg", "6201": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006201.jpg", "7816": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007816.jpg", "8830": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008830.jpg", "8844": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008844.jpg", "11407": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011407.jpg", "13403": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013403.jpg", "14874": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014874.jpg", "18987": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018987.jpg", "19195": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019195.jpg", "19564": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019564.jpg", "19641": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019641.jpg", "19678": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019678.jpg", "19684": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019684.jpg", "19689": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019689.jpg", "19908": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019908.jpg", "19999": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019999.jpg", "20175": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020175.jpg", "20361": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020361.jpg", "20613": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020613.jpg", "21052": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021052.jpg", "21123": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021123.jpg", "21144": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021144.jpg", "21697": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021697.jpg", "21736": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021736.jpg", "21753": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021753.jpg", "21818": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021818.jpg", "21871": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021871.jpg", "21901": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021901.jpg", "25527": "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00025527.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000025.jpg": "...iew a. sentence for both procedural and substantive reasonab...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000990.jpg": "...ll of which-are legal or procedural. iw nature, and none of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001081.jpg": "...account. my poimt was a procedural one; that if is ret she...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001257.jpg": "...be ‘alloued.to tum that procedural sword ints a jurisdictio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001443.jpg": "...iar ‘with the factal aid procedural background of: this:case...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001616.jpg": "...allof which.are legal or-procedural.  ‘in, nature, and, none...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001753.jpg": "...t.  ‘relevant:facts and ‘procedural history,  3-the material...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001825.jpg": "...th, the  {qa raeest  te  procedural. history eal.  ane the i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001954.jpg": "...account. my poimt was a procedural one; that if is wot ‘bas...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002106.jpg": "...uld ‘have regard io ‘the procedural safeguards: that exist u...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002322.jpg": "...ueatenneeeseneneen 2  a. procedural history w....co...oceccs...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002325.jpg": "...l, ofthe indictient.  a. procedural history:  oni jute 29, 2...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002411.jpg": "...se bad  bp  eactual and: procedural background.|.....o....::...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002415.jpg": "...e and. six.  eactual and procedural background i. the underl...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002565.jpg": "...n, ‘thus undermining: a ‘procedural. system m that, has been...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002783.jpg": "...be ‘alloued.to tum that procedural sword into a jurisdictio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002823.jpg": "...i. procedural.history follouig an. ext...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003018.jpg": "...in completely different procedural postires, which iniplica...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003072.jpg": "...ed r teht.u statute, ora procedural rulc,. a. distriet.court...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003333.jpg": "...forereate substantive or:procedural.rights-for accused or-co...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004089.jpg": "...3d at l45=46, nor do the procedural. and statutory rules aff...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004411.jpg": "...lefkouitz assing along y procedural. questions  ; by: this t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004455.jpg": "...rereate “substantive or procedural: rights:for accused or:c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004815.jpg": "...nwealth.® |, factual and procedural history in the fall of 2...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004930.jpg": "...irregular, is granted ag procedural irregularities atendant...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005238.jpg": "...onsistent:withthe’rule’s procedural  yequirements. before ad...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005247.jpg": "...onsistent:withthe’rule’s procedural  yequirements. before ad...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006201.jpg": "...r its-priorrulings..  a. procedural history:  l, the court’s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007816.jpg": "...2l  child. witnesses and procedural fairness,.24 american.jo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008830.jpg": "...docketed, and nou on its procedural. and  substantive merits...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008844.jpg": "...docketed, and nou on its procedural. and  substantive merits...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011407.jpg": "...ut, without waiving'the: procedural. argument, witness jane-...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013403.jpg": "...dell: your honer, just a procedural point fox  this withesss...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014874.jpg": "...iew a. sentence for both procedural and substantive reasonab...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018987.jpg": "...dell: your honer, just a procedural point fox  this withesss...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019195.jpg": "...ineluding ensuring that procedural rights are respected and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019564.jpg": "...t.  ‘relevant:facts and ‘procedural history,  3-the material...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019641.jpg": "...in completely different procedural ‘pos- tures, which impli...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019678.jpg": "...th, the  {qa raeest  te  procedural. history eal.  ane the i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019684.jpg": "...th, the  {qa raeest  te  procedural. history eal.  ane the i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019689.jpg": "...th, the  {qa raeest  te  procedural. history eal.  ane the i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019908.jpg": "...ll of which-are legal or procedural. iw nature, and none of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019999.jpg": "...account. my poimt was a procedural one; that if is ret she...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020175.jpg": "...be ‘alloued.to tum that procedural sword ints a jurisdictio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020361.jpg": "...iar ‘with the factal aid procedural background of: this:case...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020613.jpg": "...tion of the evidence and procedural  ‘brief of:no more’thar...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021052.jpg": "...b. ‘procedural, errots:..........ccccec...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021123.jpg": "...ctively:  because it was procedural. id. at 89:l, but in. /:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021144.jpg": "...eview has two compon  §: procedural and substantive. jd. the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021697.jpg": "...ly, “the fact that a new procedural rules tituted | after |...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021736.jpg": "...a district court commits procedural error if, among: other t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021753.jpg": "...he adequacy of  g  fe |  procedural safeguards”) (quoting u:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021818.jpg": "...iew a. sentence for both procedural and substantive reasonab...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021871.jpg": "...iew a. sentence for both procedural and substantive reasonab...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021901.jpg": "...iew a. sentence for both procedural and substantive reasonab...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00025527.jpg": "...us:  ‘obse  bservation procedural: memorandumwhi atach her..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "procedural" (56 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">25-25</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">990-990</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1081-1081</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">1257-1257</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">1443-1443</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">1616-1616</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">1753-1753</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">1825-1825</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">1954-1954</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">2106-2106</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">2322-2325</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">2411-2415</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">2565-2565</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">2783-2783</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">2823-2823</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">3018-3018</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">3072-3072</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">3333-3333</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">4089-4089</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">4411-4411</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">4455-4455</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">4815-4815</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">4930-4930</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">5238-5238</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">5247-5247</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">6201-6201</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">7816-7816</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">8830-8830</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">8844-8844</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">11407-11407</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">13403-13403</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">14874-14874</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">18987-18987</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">19195-19195</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">19564-19564</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">19641-19641</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">19678-19678</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">19684-19689</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">19908-19908</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">19999-19999</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">20175-20175</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">20361-20361</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">20613-20613</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">21052-21052</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">21123-21123</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(45, 0); return false;">21144-21144</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(46, 0); return false;">21697-21697</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(47, 0); return false;">21736-21736</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(48, 0); return false;">21753-21753</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(49, 0); return false;">21818-21818</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(50, 0); return false;">21871-21871</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(51, 0); return false;">21901-21901</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(52, 0); return false;">25527-25527</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

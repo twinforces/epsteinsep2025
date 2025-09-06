@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "tremendous"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 411, "end": 411, "pages": [411]}, {"start": 521, "end": 521, "pages": [521]}, {"start": 668, "end": 668, "pages": [668]}, {"start": 3243, "end": 3243, "pages": [3243]}, {"start": 4365, "end": 4365, "pages": [4365]}, {"start": 4865, "end": 4871, "pages": [4865, 4866, 4871]}, {"start": 10603, "end": 10603, "pages": [10603]}, {"start": 10665, "end": 10665, "pages": [10665]}, {"start": 11803, "end": 11803, "pages": [11803]}, {"start": 12320, "end": 12320, "pages": [12320]}, {"start": 12507, "end": 12507, "pages": [12507]}, {"start": 12769, "end": 12769, "pages": [12769]}, {"start": 13214, "end": 13214, "pages": [13214]}, {"start": 17393, "end": 17393, "pages": [17393]}, {"start": 17908, "end": 17908, "pages": [17908]}, {"start": 18095, "end": 18095, "pages": [18095]}, {"start": 18355, "end": 18355, "pages": [18355]}, {"start": 18799, "end": 18799, "pages": [18799]}];
+        const pageToPath = {"411": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000411.jpg", "521": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000521.jpg", "668": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000668.jpg", "3243": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003243.jpg", "4365": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004365.jpg", "4865": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004865.jpg", "4866": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004866.jpg", "4871": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004871.jpg", "10603": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010603.jpg", "10665": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010665.jpg", "11803": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011803.jpg", "12320": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012320.jpg", "12507": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012507.jpg", "12769": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012769.jpg", "13214": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013214.jpg", "17393": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017393.jpg", "17908": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017908.jpg", "18095": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018095.jpg", "18355": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018355.jpg", "18799": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018799.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000411.jpg": "...n our submission, he has tremendous incentives to use those...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000521.jpg": "...for 4 defendant of  this tremendous means is hou much money...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000668.jpg": "...y weinberg made.  i have tremendous respect fog mr. weinberg...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003243.jpg": "...e. villafafia had. puta “tremendous” amount. of effort into...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004365.jpg": "...villafafia ‘had. put:a “tremendous” amount of effort into:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004865.jpg": "...ica. his discretion i is tremendous.” robert h. jackson, the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004866.jpg": "...rs are vested with such “tremendous” discretion and authorit...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004871.jpg": "...he prosecutor’  enjoys: “tremendous” diseretion to wield “th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010603.jpg": ".... t self: for b | t felt tremendous  elf for ese ‘predators...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010665.jpg": ".... t self: for b | t felt tremendous  elf for ese ‘predators...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011803.jpg": "...nd inside the gyi had a4 tremendous audio  system for workin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012320.jpg": "...e. certainly i learn a4  tremendous ameunt. erem the clients...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012507.jpg": "...he truth: i was having a tremendous pressure in my marriage....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012769.jpg": "...s oun book. rekrere ds a tremendous amount of  kandling that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013214.jpg": "...don\"t see that there is tremendous  prejudice in iteluding...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017393.jpg": "...nd inside the gyi had a4 tremendous audio  system for workin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017908.jpg": "...e. certainly i learn a4  tremendous ameunt. erem the clients...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018095.jpg": "...he truth: i was having a tremendous pressure in my marriage....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018355.jpg": "...s oun book. rekrere ds a tremendous amount of  kandling that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018799.jpg": "...don\"t see that there is tremendous  prejudice in iteluding..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "tremendous" (20 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">411-411</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">521-521</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">668-668</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3243-3243</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">4365-4365</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">4865-4871</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">10603-10603</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">10665-10665</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">11803-11803</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">12320-12320</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">12507-12507</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">12769-12769</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">13214-13214</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">17393-17393</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">17908-17908</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">18095-18095</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">18355-18355</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">18799-18799</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

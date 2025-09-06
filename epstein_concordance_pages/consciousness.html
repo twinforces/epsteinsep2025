@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "consciousness"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 3103, "end": 3108, "pages": [3103, 3108]}, {"start": 4818, "end": 4818, "pages": [4818]}, {"start": 4846, "end": 4846, "pages": [4846]}, {"start": 5407, "end": 5407, "pages": [5407]}, {"start": 5689, "end": 5700, "pages": [5689, 5691, 5694, 5695, 5696, 5697, 5698, 5700]}, {"start": 5865, "end": 5866, "pages": [5865, 5866]}, {"start": 5889, "end": 5889, "pages": [5889]}, {"start": 6190, "end": 6190, "pages": [6190]}, {"start": 6263, "end": 6263, "pages": [6263]}, {"start": 6374, "end": 6374, "pages": [6374]}, {"start": 6790, "end": 6791, "pages": [6790, 6791]}, {"start": 6814, "end": 6814, "pages": [6814]}, {"start": 7504, "end": 7504, "pages": [7504]}, {"start": 7548, "end": 7548, "pages": [7548]}, {"start": 8080, "end": 8080, "pages": [8080]}];
+        const pageToPath = {"3103": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003103.jpg", "3108": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003108.jpg", "4818": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004818.jpg", "4846": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004846.jpg", "5407": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005407.jpg", "5689": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005689.jpg", "5691": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005691.jpg", "5694": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005694.jpg", "5695": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005695.jpg", "5696": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005696.jpg", "5697": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005697.jpg", "5698": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005698.jpg", "5700": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005700.jpg", "5865": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005865.jpg", "5866": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005866.jpg", "5889": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005889.jpg", "6190": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006190.jpg", "6263": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006263.jpg", "6374": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006374.jpg", "6790": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006790.jpg", "6791": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006791.jpg", "6814": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006814.jpg", "7504": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007504.jpg", "7548": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007548.jpg", "8080": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008080.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003103.jpg": "...mpelling cvidenee of her consciousness of guilt as fo the offen...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003108.jpg": "...four as evidence of her consciousness of guilt:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004818.jpg": "...started slipping out of consciousness.  moments later, constan...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004846.jpg": "...she faded in and out of consciousness. at one point she came t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005407.jpg": "...in the general, public  consciousness,, but with their. friend...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005689.jpg": "...cin’s. death is proof of consciousness of «  conglusion...... c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005691.jpg": "...ime  yeriod. is proof of consciousness of guilt.  as ms, maxwel...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005694.jpg": "..., much less eviderice of consciousness of guilt. ‘ms....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005695.jpg": "...'  purported “flight” or consciousness of guilt lacks: any fact...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005696.jpg": "...ght; (2) from. flight:to consciousness of guilt; (3) .from cons...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005697.jpg": "...e‘that. it}was. proof of consciousness. of guilt: 2  at 424. th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005698.jpg": "...been. permited to argue ‘consciousness of guilt  on the basis o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005700.jpg": "...time-period is: proof of consciousness: of guilt.  dated: octob...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005865.jpg": "...eflects the defendant’s  consciousness of her “guilt. ( (see te...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005866.jpg": "...proof of.a defendant’s, consciousness of guilt (ste: gov't opp...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005889.jpg": "...:to. burst’ into: public:consciousness over the course of afew:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006190.jpg": "...ghts feclings, l [ves a, consciousness, or feta ee  aistpton of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006263.jpg": "...ghts feelings, l [ves a, consciousness, or feta ee  aistpton of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006374.jpg": "...in the general, public  consciousness,, but with their. friend...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006790.jpg": "...eflects the defendant’s  consciousness of her “guilt. ( (see te...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006791.jpg": "...proof of.a defendant’s, consciousness of guilt (ste: gov't opp...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006814.jpg": "...:to. burst’ into: public:consciousness over the course of afew:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007504.jpg": "...ghts feelings, l [ves a, consciousness, or feta ee  aistpton of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007548.jpg": "...e) | adelphi university, consciousness symp.»  “rats, ‘mighiean...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008080.jpg": "...ven’ feclings, l [ves a, consciousness, or feta ee  aistpton of..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "consciousness" (25 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">3103-3108</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">4818-4818</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">4846-4846</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">5407-5407</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">5689-5700</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">5865-5866</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">5889-5889</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">6190-6190</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">6263-6263</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">6374-6374</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">6790-6791</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">6814-6814</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">7504-7504</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">7548-7548</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">8080-8080</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

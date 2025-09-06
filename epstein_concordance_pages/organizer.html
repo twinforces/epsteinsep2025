@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "organizer"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 6049, "end": 6049, "pages": [6049]}, {"start": 10437, "end": 10437, "pages": [10437]}, {"start": 10560, "end": 10563, "pages": [10560, 10561, 10563]}, {"start": 21042, "end": 21042, "pages": [21042]}, {"start": 21146, "end": 21146, "pages": [21146]}, {"start": 21736, "end": 21736, "pages": [21736]}, {"start": 21774, "end": 21774, "pages": [21774]}];
+        const pageToPath = {"6049": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006049.jpg", "10437": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010437.jpg", "10560": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010560.jpg", "10561": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010561.jpg", "10563": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010563.jpg", "21042": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021042.jpg", "21146": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021146.jpg", "21736": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021736.jpg", "21774": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021774.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006049.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010437.jpg": "...ndant must-have been the organizer; leader, :manager, or....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010560.jpg": "...e the defendant was. the organizer or leader of a criminal...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010561.jpg": "...id  alla fate  been, the organizer, leader, matiager, or su...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010563.jpg": "...defendant ‘acted ‘asan, organizer and leader ofa massive:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021042.jpg": "...t  the defendant was an. organizer or leader; and (i) that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021146.jpg": "...dant must have been the: organizer, leader, manager, ‘or su...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021736.jpg": "...when a defendant was an “organizer or leader of 'a criminal...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021774.jpg": "...hat: ms. maxwell:was an “organizer or leader of  a ate ot a..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "organizer" (9 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">6049-6049</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">10437-10437</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">10560-10563</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">21042-21042</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">21146-21146</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">21736-21736</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">21774-21774</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

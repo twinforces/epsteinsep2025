@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "diagnosis"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 4965, "end": 4970, "pages": [4965, 4970]}, {"start": 5945, "end": 5945, "pages": [5945]}, {"start": 6186, "end": 6186, "pages": [6186]}, {"start": 6236, "end": 6236, "pages": [6236]}, {"start": 6259, "end": 6259, "pages": [6259]}, {"start": 6870, "end": 6870, "pages": [6870]}, {"start": 7500, "end": 7500, "pages": [7500]}, {"start": 7607, "end": 7607, "pages": [7607]}, {"start": 7673, "end": 7677, "pages": [7673, 7677]}, {"start": 7686, "end": 7694, "pages": [7686, 7691, 7694]}, {"start": 7701, "end": 7701, "pages": [7701]}, {"start": 8047, "end": 8047, "pages": [8047]}, {"start": 8076, "end": 8076, "pages": [8076]}, {"start": 8132, "end": 8136, "pages": [8132, 8136]}, {"start": 8145, "end": 8153, "pages": [8145, 8150, 8153]}, {"start": 8160, "end": 8160, "pages": [8160]}, {"start": 8179, "end": 8180, "pages": [8179, 8180]}, {"start": 10722, "end": 10722, "pages": [10722]}, {"start": 11142, "end": 11153, "pages": [11142, 11144, 11146, 11147, 11148, 11149, 11150, 11151, 11152, 11153]}, {"start": 25002, "end": 25003, "pages": [25002, 25003]}, {"start": 26300, "end": 26303, "pages": [26300, 26303]}];
+        const pageToPath = {"4965": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004965.jpg", "4970": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004970.jpg", "5945": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005945.jpg", "6186": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006186.jpg", "6236": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006236.jpg", "6259": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006259.jpg", "6870": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006870.jpg", "7500": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007500.jpg", "7607": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007607.jpg", "7673": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007673.jpg", "7677": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007677.jpg", "7686": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007686.jpg", "7691": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007691.jpg", "7694": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007694.jpg", "7701": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007701.jpg", "8047": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008047.jpg", "8076": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008076.jpg", "8132": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008132.jpg", "8136": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008136.jpg", "8145": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008145.jpg", "8150": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008150.jpg", "8153": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008153.jpg", "8160": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008160.jpg", "8179": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008179.jpg", "8180": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008180.jpg", "10722": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010722.jpg", "11142": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011142.jpg", "11144": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011144.jpg", "11146": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011146.jpg", "11147": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011147.jpg", "11148": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011148.jpg", "11149": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011149.jpg", "11150": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011150.jpg", "11151": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011151.jpg", "11152": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011152.jpg", "11153": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011153.jpg", "25002": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00025002.jpg", "25003": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00025003.jpg", "26300": "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00026300.jpg", "26303": "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00026303.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004965.jpg": "...fin reveals lung cancer. diagnosis  “advertisement  new yor...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004970.jpg": "...fin reveals lung: cancer diagnosis  governors ball dumps da...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005945.jpg": "...al abuse: dis scovery by diagnosis  = camer  londonk, brack...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006186.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006236.jpg": "...ply the: subject. of lay diagnosis. by\" the jury, as. dr. d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006259.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006870.jpg": "...al abuse: dis scovery by diagnosis  = camer  londonk, brack...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007500.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007607.jpg": "...w and a proposal for the diagnosis: of cordophilia,\" americ...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007673.jpg": "...the year for definition  diagnosis, and forensic: implicati...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007677.jpg": "...chapman mj: definition, diagnosis, and forensic: implicati...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007686.jpg": "...without ia psychiatric:  diagnosis in the united states, 2o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007691.jpg": "...gw: serotonin ‘syndrome: diagnosis, treatments and. societa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007694.jpg": "...aumatic stress disorder: diagnosis and application in ‘crim...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007701.jpg": "...time magar definition, diagnosis and forensic implication...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008047.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008076.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008132.jpg": "...the year for definition  diagnosis, and forensic: implicati...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008136.jpg": "...chapman mj: definition, diagnosis, and forensic: implicati...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008145.jpg": "...without ia psychiatric:  diagnosis in the united states, 2o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008150.jpg": "...gw: serotonin ‘syndrome: diagnosis, treatments and. societa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008153.jpg": "...aumatic stress disorder: diagnosis and application in ‘crim...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008160.jpg": "...time magar definition, diagnosis and forensic implication...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008179.jpg": "...courts admit an expert; diagnosis of a personality:  disor...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008180.jpg": "...offered no evidence that diagnosis without  any in-person i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010722.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011142.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011144.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011146.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011147.jpg": "...he defense points to the diagnosis. fr o™—~—sssssoscscsciss...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011148.jpg": "...l, at *2..  even :if'any diagnosis were probative, the cour...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011149.jpg": "...particular mental health diagnosis and. a witness’s  , diag...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011150.jpg": "...but excluding: a :formal diagnosis: of [hin ‘several. cases...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011151.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011152.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011153.jpg": "...were “made: for medical. diagnosis or treatment.” eed..r  f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00025002.jpg": "...trat ek s|  ‘precau  oa  diagnosis:  ses beets...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00025003.jpg": "...trat ek s|  ‘precau  oa  diagnosis:  ses beets...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00026300.jpg": "...trat ek s|  ‘precau  oa  diagnosis:  ses beets...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00026303.jpg": "...trat ek s|  ‘precau  oa  diagnosis:  ses beets  [rorne  ie..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "diagnosis" (40 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">4965-4970</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">5945-5945</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">6186-6186</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">6236-6236</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">6259-6259</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">6870-6870</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">7500-7500</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">7607-7607</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">7673-7677</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">7686-7694</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">7701-7701</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">8047-8047</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">8076-8076</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">8132-8136</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">8145-8153</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">8160-8160</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">8179-8180</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">10722-10722</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">11142-11153</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">25002-25003</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">26300-26303</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

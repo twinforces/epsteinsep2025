@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "miscellaneous"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 4930, "end": 4930, "pages": [4930]}, {"start": 7848, "end": 7848, "pages": [7848]}, {"start": 11219, "end": 11219, "pages": [11219]}, {"start": 13361, "end": 13361, "pages": [13361]}, {"start": 15208, "end": 15208, "pages": [15208]}, {"start": 18945, "end": 18945, "pages": [18945]}, {"start": 23443, "end": 23443, "pages": [23443]}, {"start": 27480, "end": 27480, "pages": [27480]}, {"start": 27512, "end": 27512, "pages": [27512]}];
+        const pageToPath = {"4930": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004930.jpg", "7848": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007848.jpg", "11219": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011219.jpg", "13361": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013361.jpg", "15208": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015208.jpg", "18945": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018945.jpg", "23443": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023443.jpg", "27480": "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027480.jpg", "27512": "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027512.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004930.jpg": "....mee. t directed.that.a, miscellaneous: docket nuiber be assign...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007848.jpg": "...edit  fests on unknoun . miscellaneous pouders) and controlled...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011219.jpg": "...in: vs) law: a property (miscellaneous: srroyisions) act. l994...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013361.jpg": "...:  e are not ehe kind of miscellaneous jotangs that are  at  a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015208.jpg": "...fluoride participation’ miscellaneous ‘hitps://sis:palmbeachsc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018945.jpg": "...:  e are not ehe kind of miscellaneous jotangs that are  at  a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023443.jpg": "...included-one torn sheet. miscellaneous: papers, and an mp3 play...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027480.jpg": "...nformaten  “pomwieey ,  “miscellaneous info:  assenge  etait  ‘...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027512.jpg": "...ita-vehicle information; miscellaneous hfs’  bsa  rta 9 pn eg e..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "miscellaneous" (9 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">4930-4930</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">7848-7848</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">11219-11219</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">13361-13361</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">15208-15208</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">18945-18945</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">23443-23443</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">27480-27480</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">27512-27512</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "undertaken"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 398, "end": 398, "pages": [398]}, {"start": 3304, "end": 3307, "pages": [3304, 3307]}, {"start": 3996, "end": 3996, "pages": [3996]}, {"start": 4052, "end": 4052, "pages": [4052]}, {"start": 4426, "end": 4429, "pages": [4426, 4429]}, {"start": 4887, "end": 4887, "pages": [4887]}, {"start": 5672, "end": 5672, "pages": [5672]}, {"start": 5729, "end": 5729, "pages": [5729]}, {"start": 6634, "end": 6634, "pages": [6634]}, {"start": 6666, "end": 6666, "pages": [6666]}, {"start": 9462, "end": 9462, "pages": [9462]}, {"start": 10141, "end": 10141, "pages": [10141]}, {"start": 15001, "end": 15001, "pages": [15001]}, {"start": 15037, "end": 15037, "pages": [15037]}, {"start": 20786, "end": 20786, "pages": [20786]}, {"start": 22052, "end": 22052, "pages": [22052]}];
+        const pageToPath = {"398": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000398.jpg", "3304": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003304.jpg", "3307": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003307.jpg", "3996": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003996.jpg", "4052": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004052.jpg", "4426": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004426.jpg", "4429": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004429.jpg", "4887": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004887.jpg", "5672": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005672.jpg", "5729": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005729.jpg", "6634": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006634.jpg", "6666": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006666.jpg", "9462": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009462.jpg", "10141": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010141.jpg", "15001": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015001.jpg", "15037": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015037.jpg", "20786": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020786.jpg", "22052": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022052.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000398.jpg": "...se prosecutions could be undertaken elsewhere. that's  nhak...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003304.jpg": "...: criminal ‘hief had not-undertaken the “in- -depth work; as...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003307.jpg": "...eebruary  nshoul not be undertaken against mr. eps  ban as...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003996.jpg": ".... maxwell, has already:  undertaken. a review'of the discove...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004052.jpg": "...-what investigation was ‘undertaken. in order fo determine t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004426.jpg": "...: criminal ‘hief had not-undertaken the “in- -depth work; as...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004429.jpg": "...osecul lon should net be undertaken against: mr, eps  ban as...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004887.jpg": "...ss inquiry that must be  undertaken: as: outlined above, a c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005672.jpg": "...s may:reflect. conduct  ‘undertaken, in furtheranec of the c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005729.jpg": "...s of'any i investigation undertaken: by the palm,  beach pol...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006634.jpg": "...ns may :reflect conduct ‘undertaken, in furtherance of the c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006666.jpg": "...s of'any i investigation undertaken: by the palm,  beach pol...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009462.jpg": "...legislative initiatives undertaken to:advance the: professi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010141.jpg": "...legislative initiatives undertaken to:advance the: professi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015001.jpg": ".... so that's what's being undertaken here, is this subjective...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015037.jpg": "...base fateh eee |s cente  undertaken of investigative holding...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020786.jpg": "...ions:may reflect;conduct-undertaken im furtherance ofthe  se...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022052.jpg": "...efforts were immediately undertaken and that;emergency medic..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "undertaken" (18 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">398-398</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">3304-3307</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">3996-3996</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">4052-4052</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">4426-4429</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">4887-4887</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">5672-5672</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">5729-5729</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">6634-6634</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">6666-6666</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">9462-9462</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">10141-10141</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">15001-15001</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">15037-15037</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">20786-20786</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">22052-22052</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

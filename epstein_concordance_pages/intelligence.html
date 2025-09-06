@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "intelligence"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 2822, "end": 2822, "pages": [2822]}, {"start": 3092, "end": 3092, "pages": [3092]}, {"start": 3371, "end": 3371, "pages": [3371]}, {"start": 3645, "end": 3645, "pages": [3645]}, {"start": 4493, "end": 4493, "pages": [4493]}, {"start": 5498, "end": 5498, "pages": [5498]}, {"start": 6460, "end": 6460, "pages": [6460]}, {"start": 7514, "end": 7514, "pages": [7514]}, {"start": 7553, "end": 7553, "pages": [7553]}, {"start": 7568, "end": 7568, "pages": [7568]}, {"start": 7614, "end": 7614, "pages": [7614]}, {"start": 7627, "end": 7628, "pages": [7627, 7628]}, {"start": 7643, "end": 7643, "pages": [7643]}, {"start": 7690, "end": 7690, "pages": [7690]}, {"start": 7699, "end": 7699, "pages": [7699]}, {"start": 8149, "end": 8149, "pages": [8149]}, {"start": 8158, "end": 8158, "pages": [8158]}, {"start": 10461, "end": 10461, "pages": [10461]}, {"start": 10491, "end": 10495, "pages": [10491, 10495]}, {"start": 11712, "end": 11712, "pages": [11712]}, {"start": 13325, "end": 13325, "pages": [13325]}, {"start": 13968, "end": 13968, "pages": [13968]}, {"start": 14055, "end": 14055, "pages": [14055]}, {"start": 16157, "end": 16157, "pages": [16157]}, {"start": 16592, "end": 16592, "pages": [16592]}, {"start": 16679, "end": 16679, "pages": [16679]}, {"start": 18909, "end": 18909, "pages": [18909]}, {"start": 22053, "end": 22053, "pages": [22053]}, {"start": 22088, "end": 22088, "pages": [22088]}];
+        const pageToPath = {"2822": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002822.jpg", "3092": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003092.jpg", "3371": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003371.jpg", "3645": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003645.jpg", "4493": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004493.jpg", "5498": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005498.jpg", "6460": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006460.jpg", "7514": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007514.jpg", "7553": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007553.jpg", "7568": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007568.jpg", "7614": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007614.jpg", "7627": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007627.jpg", "7628": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007628.jpg", "7643": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007643.jpg", "7690": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007690.jpg", "7699": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007699.jpg", "8149": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008149.jpg", "8158": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008158.jpg", "10461": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010461.jpg", "10491": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010491.jpg", "10495": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010495.jpg", "11712": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011712.jpg", "13325": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013325.jpg", "13968": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013968.jpg", "14055": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014055.jpg", "16157": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016157.jpg", "16592": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016592.jpg", "16679": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016679.jpg", "18909": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018909.jpg", "22053": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022053.jpg", "22088": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022088.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002822.jpg": "...oyee ‘of the:  ‘cential ‘intelligence agency. (“cia”) who.is c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003092.jpg": "...uotation marks’  ordiary intelligence would not think that:a q...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003371.jpg": "...as sena copa witness of “intelligence asset? or that ariyore—i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003645.jpg": "...vestigation, the central intelligence: agency,, the environmen...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004493.jpg": "...as sena copa witness of “intelligence asset? or that ariyore—i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005498.jpg": "...w of the average juror’s intelligence: if it-does not think, t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006460.jpg": "...w of the average juror’s intelligence: if it-does not think, t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007514.jpg": "...sophonou. inquir central intelligence: agency, 2oo5 2 o6. .  g...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007553.jpg": "...ch v  tedx- ere (central intelligence agency), va.  ‘radcliff...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007568.jpg": "...onsultant to the central intelligence agency in mrs. david orl...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007614.jpg": "...ment conference, central intelligence agency, mclean, virginia...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007627.jpg": "...tional homicide  central intelligence agency:  charlotesville-...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007628.jpg": "...d states secret service, intelligence division  united states...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007643.jpg": "...ber 4-5,. 2oo3  business intelligence advisors, bellevue, ‘wa,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007690.jpg": "...conventions and foreign intelligence surveillance act, florid...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007699.jpg": "...lepsy ‘circadian rhythm  intelligence quotient  simple learnin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008149.jpg": "...conventions and foreign intelligence surveillance act, florid...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008158.jpg": "...lepsy ‘circadian rhythm  intelligence quotient  simple learnin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010461.jpg": "...'s respect through their intelligence and:theiroun,hard work....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010491.jpg": "...'s respect through their‘intelligence and their oun hard work....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010495.jpg": "...ae ‘diligent-wor ; great:intelligence ‘great, managemen skills...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011712.jpg": "...btractiveness, chdrisma, intelligence, stdtus, charm. he gave...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013325.jpg": "...u, deseribe hex level of intelligence and educdtion?  a. she w...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013968.jpg": "...ret service, the central intelligence agency, the federal  bur...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014055.jpg": "...to ngtc, national crie  intelligence center. so we gan sec le...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016157.jpg": "...btractiveness, chdrisma, intelligence, stdtus, charm. he gave...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016592.jpg": "...ret service, the central intelligence agency, the federal  bur...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016679.jpg": "...to ngtc, national crie  intelligence center. so we gan sec le...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018909.jpg": "...u, deseribe hex level of intelligence and educdtion?  a. she w...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022053.jpg": "...oftabuse of the foreign: intelligence surveillance act during...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022088.jpg": "...resident and the central intelligence agency, even though. tho..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "intelligence" (31 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">2822-2822</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">3092-3092</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">3371-3371</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3645-3645</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">4493-4493</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">5498-5498</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">6460-6460</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">7514-7514</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">7553-7553</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">7568-7568</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">7614-7614</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">7627-7628</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">7643-7643</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">7690-7690</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">7699-7699</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">8149-8149</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">8158-8158</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">10461-10461</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">10491-10495</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">11712-11712</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">13325-13325</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">13968-13968</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">14055-14055</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">16157-16157</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">16592-16592</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">16679-16679</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">18909-18909</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">22053-22053</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">22088-22088</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "overnight"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 216, "end": 216, "pages": [216]}, {"start": 3291, "end": 3291, "pages": [3291]}, {"start": 3577, "end": 3577, "pages": [3577]}, {"start": 3949, "end": 3949, "pages": [3949]}, {"start": 4413, "end": 4413, "pages": [4413]}, {"start": 4968, "end": 4968, "pages": [4968]}, {"start": 12413, "end": 12413, "pages": [12413]}, {"start": 15320, "end": 15320, "pages": [15320]}, {"start": 15329, "end": 15334, "pages": [15329, 15332, 15334]}, {"start": 15348, "end": 15355, "pages": [15348, 15349, 15353, 15355]}, {"start": 15377, "end": 15380, "pages": [15377, 15378, 15379, 15380]}, {"start": 15397, "end": 15397, "pages": [15397]}, {"start": 15406, "end": 15406, "pages": [15406]}, {"start": 15421, "end": 15421, "pages": [15421]}, {"start": 15434, "end": 15439, "pages": [15434, 15439]}, {"start": 18001, "end": 18001, "pages": [18001]}, {"start": 21289, "end": 21289, "pages": [21289]}, {"start": 21909, "end": 21909, "pages": [21909]}, {"start": 21918, "end": 21918, "pages": [21918]}];
+        const pageToPath = {"216": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000216.jpg", "3291": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003291.jpg", "3577": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003577.jpg", "3949": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003949.jpg", "4413": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004413.jpg", "4968": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004968.jpg", "12413": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012413.jpg", "15320": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015320.jpg", "15329": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015329.jpg", "15332": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015332.jpg", "15334": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015334.jpg", "15348": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015348.jpg", "15349": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015349.jpg", "15353": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015353.jpg", "15355": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015355.jpg", "15377": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015377.jpg", "15378": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015378.jpg", "15379": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015379.jpg", "15380": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015380.jpg", "15397": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015397.jpg", "15406": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015406.jpg", "15421": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015421.jpg", "15434": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015434.jpg", "15439": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015439.jpg", "18001": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018001.jpg", "21289": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021289.jpg", "21909": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021909.jpg", "21918": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021918.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000216.jpg": "...f petitioner through the overnight next: day  federal. expr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003291.jpg": "...day, and, that he stayed overnight at: the  hap )2)(by-tela...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003577.jpg": "...leave the jet. and stay overnight at a hotel, do you have...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003949.jpg": "...nt to the mdc via fedex. overnight shipping, last ‘week, ha...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004413.jpg": "...day, and, that he stayed overnight at: the  bf  )2)(by-tela...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004968.jpg": "...er‘cell every l5 minutes overnight, preventing her  from sl...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012413.jpg": "...le to stay in that house overnight even.  though it. was st...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015320.jpg": "...ce: type: fedex!standard overnight = oarren indyke: jim moo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015329.jpg": "...ice'type: fedex:priority overnight  ‘recipient jeffrey’! |...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015332.jpg": "...icerlype, fedex:priority overnight jeffrey exepstein na: pr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015334.jpg": "...izone:  79l9742l3337\" y overnight  service! type fedexipr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015348.jpg": "...ice: type fedex.standard overnight ‘kate 'g maxewell  packa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015349.jpg": "...ce: type: fedex.priority'overnight ghislaine; maxwell linda...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015353.jpg": "...7728369o6 fedex:priority overnight  service’type: package-t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015355.jpg": "...nder. pe; fedex:priority overnight 'nicole.hesse type fedex...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015377.jpg": "...ice'type! fedex priority overnight jeffrey etepstein cc ~*:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015378.jpg": "...e’ type; ‘fedex!standard overnight  :the invoiceramount:  ‘...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015379.jpg": "...ce: type: fedex’standard overnight  package: type fedex’ t....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015380.jpg": "...ice'type; fedex:priority overnight jeffrey-ezepstein l. acc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015397.jpg": "...fro  recipient  fedex ty overnight fraces;goldman ‘gh blain...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015406.jpg": "...ce: type: fedex’standard overnight  package: type fedexenve...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015421.jpg": "...iceslype; fedex:standard overnight  al l58oo727 345l674lo/o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015434.jpg": "...based  d 837l69385oo2: y overnight  service’ type! fedex:pr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015439.jpg": "...recipient fedex.priority overnight bibonnet nigk.simmons: 8...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018001.jpg": "...le to stay in that house overnight even.  though it. was st...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021289.jpg": "...y, ‘and ‘that. he stayed overnight at. the  riminal procedu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021909.jpg": "...ho had commited suicide  overnight whale unobserved.  endiv...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021918.jpg": "...ports news.  4 a.m., the overnight stipervisor  briefly vis..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "overnight" (28 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">216-216</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">3291-3291</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">3577-3577</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3949-3949</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">4413-4413</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">4968-4968</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">12413-12413</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">15320-15320</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">15329-15334</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">15348-15355</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">15377-15380</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">15397-15397</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">15406-15406</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">15421-15421</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">15434-15439</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">18001-18001</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">21289-21289</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">21909-21909</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">21918-21918</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

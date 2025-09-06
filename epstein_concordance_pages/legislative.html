@@ -1,0 +1,214 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "legislative"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 447, "end": 447, "pages": [447]}, {"start": 1049, "end": 1049, "pages": [1049]}, {"start": 1922, "end": 1922, "pages": [1922]}, {"start": 2539, "end": 2539, "pages": [2539]}, {"start": 2660, "end": 2662, "pages": [2660, 2661, 2662]}, {"start": 2987, "end": 2993, "pages": [2987, 2989, 2991, 2993]}, {"start": 2999, "end": 2999, "pages": [2999]}, {"start": 3183, "end": 3183, "pages": [3183]}, {"start": 3205, "end": 3205, "pages": [3205]}, {"start": 3447, "end": 3447, "pages": [3447]}, {"start": 3658, "end": 3664, "pages": [3658, 3662, 3663, 3664]}, {"start": 3685, "end": 3686, "pages": [3685, 3686]}, {"start": 3701, "end": 3701, "pages": [3701]}, {"start": 4305, "end": 4305, "pages": [4305]}, {"start": 4569, "end": 4569, "pages": [4569]}, {"start": 7608, "end": 7608, "pages": [7608]}, {"start": 7670, "end": 7673, "pages": [7670, 7671, 7672, 7673]}, {"start": 7679, "end": 7679, "pages": [7679]}, {"start": 8129, "end": 8132, "pages": [8129, 8130, 8131, 8132]}, {"start": 8138, "end": 8138, "pages": [8138]}, {"start": 9462, "end": 9469, "pages": [9462, 9466, 9469]}, {"start": 10141, "end": 10148, "pages": [10141, 10145, 10148]}, {"start": 10371, "end": 10371, "pages": [10371]}, {"start": 10571, "end": 10571, "pages": [10571]}, {"start": 10594, "end": 10594, "pages": [10594]}, {"start": 10767, "end": 10767, "pages": [10767]}, {"start": 10825, "end": 10825, "pages": [10825]}, {"start": 11559, "end": 11560, "pages": [11559, 11560]}, {"start": 14787, "end": 14788, "pages": [14787, 14788]}, {"start": 19967, "end": 19967, "pages": [19967]}, {"start": 20613, "end": 20613, "pages": [20613]}, {"start": 20774, "end": 20774, "pages": [20774]}, {"start": 20988, "end": 20988, "pages": [20988]}, {"start": 21041, "end": 21041, "pages": [21041]}, {"start": 21108, "end": 21122, "pages": [21108, 21109, 21110, 21111, 21116, 21117, 21119, 21120, 21121, 21122]}, {"start": 21585, "end": 21585, "pages": [21585]}, {"start": 21688, "end": 21688, "pages": [21688]}, {"start": 21695, "end": 21697, "pages": [21695, 21696, 21697]}, {"start": 21790, "end": 21790, "pages": [21790]}, {"start": 23041, "end": 23041, "pages": [23041]}];
+        const pageToPath = {"447": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000447.jpg", "1049": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001049.jpg", "1922": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001922.jpg", "2539": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002539.jpg", "2660": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002660.jpg", "2661": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002661.jpg", "2662": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002662.jpg", "2987": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002987.jpg", "2989": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002989.jpg", "2991": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002991.jpg", "2993": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002993.jpg", "2999": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002999.jpg", "3183": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003183.jpg", "3205": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003205.jpg", "3447": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003447.jpg", "3658": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003658.jpg", "3662": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003662.jpg", "3663": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003663.jpg", "3664": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003664.jpg", "3685": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003685.jpg", "3686": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003686.jpg", "3701": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003701.jpg", "4305": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004305.jpg", "4569": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004569.jpg", "7608": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007608.jpg", "7670": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007670.jpg", "7671": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007671.jpg", "7672": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007672.jpg", "7673": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007673.jpg", "7679": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007679.jpg", "8129": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008129.jpg", "8130": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008130.jpg", "8131": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008131.jpg", "8132": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008132.jpg", "8138": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008138.jpg", "9462": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009462.jpg", "9466": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009466.jpg", "9469": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009469.jpg", "10141": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010141.jpg", "10145": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010145.jpg", "10148": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010148.jpg", "10371": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010371.jpg", "10571": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010571.jpg", "10594": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010594.jpg", "10767": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010767.jpg", "10825": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010825.jpg", "11559": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011559.jpg", "11560": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011560.jpg", "14787": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014787.jpg", "14788": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014788.jpg", "19967": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019967.jpg", "20613": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020613.jpg", "20774": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020774.jpg", "20988": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020988.jpg", "21041": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021041.jpg", "21108": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021108.jpg", "21109": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021109.jpg", "21110": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021110.jpg", "21111": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021111.jpg", "21116": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021116.jpg", "21117": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021117.jpg", "21119": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021119.jpg", "21120": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021120.jpg", "21121": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021121.jpg", "21122": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021122.jpg", "21585": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021585.jpg", "21688": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021688.jpg", "21695": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021695.jpg", "21696": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021696.jpg", "21697": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021697.jpg", "21790": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021790.jpg", "23041": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00023041.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000447.jpg": "...=on ‘its head. it defies legislative intent. it.thwarts.the p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001049.jpg": "...carefully susyeying the legislative  kistery and backgroufid...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001922.jpg": "...ng on to cite the senate legislative ‘history  that's being c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002539.jpg": "...nt of justice office of ‘legislative: affairs advised. senato...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002660.jpg": "...37: (l99o)).. here, the  legislative history‘leaves no doubt...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002661.jpg": "...statute, but:may look to legislative history:  see martin v.,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002662.jpg": "...before reje  cir; l985) (legislative histor  conference commi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002987.jpg": "...ime ofits enactment. the legislative-purpose: behind section...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002989.jpg": "...of the  statute and. the legislative history. later  ; 39l f....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002991.jpg": "...ct, and asserts'that:the legislative historystipports this in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002993.jpg": "...re to determine that the legislative intent behind, section....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002999.jpg": "...neerned a statute“ [t]he legislative history:of [which] empha...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003183.jpg": "...nt of justice office of ‘legislative: affairs advised. senato...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003205.jpg": "...tax division  office oe legislative  -criminal omsion  ‘bure...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003447.jpg": "...age: of the stafute, the legislative histor i and: previous c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003658.jpg": "...ent—improperly excluded. legislative history from. its analys...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003662.jpg": "...lysis.or consideratiomof legislative history), © ic fat  ol o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003663.jpg": "...he  the court riored the legislative, his  5 f, supp. 3d. at:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003664.jpg": "...rt incorrectly excluded, legislative history ‘from its  landg...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003685.jpg": "...: accords with a robust. legislative: history indicating that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003686.jpg": "...because’! the statufe’s legislative history: made: clear tha...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003701.jpg": "...urt ‘does not excced its legislative authorization. by: impos...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004305.jpg": "...nt of justice office of ‘legislative: affairs advised. senato...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004569.jpg": "...age: of the stafute, the legislative histor i and: previous c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007608.jpg": "...ealth, and human rights: legislative  national conference of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007670.jpg": "...land psychiatric society legislative commitee, maryland psych...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007671.jpg": "...try and the law  member, legislative issues‘ commitee, florid...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007672.jpg": "...he reference commitee b (legislative advocacy), ama interim...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007673.jpg": "...c books to video ‘games: legislative reliance: on “soft scien...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007679.jpg": "...ic books to video games: legislative reliance o on “soft scie...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008129.jpg": "...land psychiatric society legislative commitee, maryland psych...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008130.jpg": "...try and the law  member, legislative issues‘ commitee, florid...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008131.jpg": "...he reference commitee b (legislative advocacy), ama interim...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008132.jpg": "...c books to video ‘games: legislative reliance: on “soft scien...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008138.jpg": "...ic books to video games: legislative reliance o on “soft scie...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009462.jpg": "...nd] cfeative judicial or legislative initiatives undertaken t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009466.jpg": "...new york (l989-l992)  _ legislative eimployees sally 38).  :...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009469.jpg": "...,l99o (on the.subject of legislative:ethics).  abused childre...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010141.jpg": "...nd] cfeative judicial or legislative initiatives undertaken t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010145.jpg": "...new york (l989-l992)  _ legislative eimployees sally 38).  :...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010148.jpg": "...,l99o (on the.subject of legislative:ethics).  abused childre...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010371.jpg": "...t;  does not “exeeed its legislative authorization. by imposi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010571.jpg": "...erpretation of its: oun, legislative rules,” and. therefore:....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010594.jpg": "...ext, origin and. limited legislative history, the gv.ra. appl...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010767.jpg": "...gressional © ‘or r state legislative:commitee, licensing auth...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010825.jpg": "...ongressional ¢ or “state legislative commitee, licensing ‘aut...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011559.jpg": "...inding. ngr a seataered  legislative hastory override the cle...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011560.jpg": "...kground ,  further, ‘the legislative history quoted by the  d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014787.jpg": "...inding. ngr a seataered  legislative hastory override the cle...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014788.jpg": "...kground ,  further, ‘the legislative history quoted by the  d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019967.jpg": "...carefully susyeying the legislative  kistery and backgroufid...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020613.jpg": "...te  pean  . ve. gnd legislative history, while.others in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020774.jpg": "...conduet. ‘houever, the legislative’ history:makes clear. th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020988.jpg": "...rt  does not “exeecd.its legislative: authorization. by-impos...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021041.jpg": "...ding, nok can seatened.  legislative bhe @lear text, of the g...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021108.jpg": "...t” because of the wsla’s legislative history. al49. the distr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021109.jpg": "...idges looked, not to the legislative history of the wsla,  bu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021110.jpg": "...dentify a single page of legislative: history: supporting its...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021111.jpg": "...8-66, at.54:(2oo3). this legislative history: makes ‘no menti...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021116.jpg": "...age arial ql  “examinfe] legislative history to determine con...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021117.jpg": "...latiah v. ashcroft,  the legislative history of 2oo3*s amendm...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021119.jpg": "...ember are generally weak legislative  history evidence). inde...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021120.jpg": "...e  even. if the text and legislative history of § 3283 were u...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021121.jpg": "...ds  absence of some such legislative indication, such a. retr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021122.jpg": "...enerally coincide — with legislative and. public expectations...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021585.jpg": "...aing. nor gan scarberea  legislative history override the cle...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021688.jpg": "...‘to: undermine the cleaz legislative intent, maxwell argues:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021695.jpg": "...actment conduet}  legislative history confirms: this c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021696.jpg": "...han recog: nized, | “the legislative history: makes clear tha...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021697.jpg": "...“[e]ven. absent specific legislative. authorization, ” ap- pl...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021790.jpg": "...sion ‘was reinforced. by legislative history, namely, the inc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00023041.jpg": "...community ‘avireigure ut legislative ‘legal federal’ criminal..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "legislative" (72 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">447-447</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1049-1049</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1922-1922</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">2539-2539</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">2660-2662</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">2987-2993</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">2999-2999</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">3183-3183</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">3205-3205</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">3447-3447</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">3658-3664</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">3685-3686</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">3701-3701</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">4305-4305</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">4569-4569</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">7608-7608</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">7670-7673</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">7679-7679</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">8129-8132</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">8138-8138</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">9462-9469</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">10141-10148</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">10371-10371</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">10571-10571</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">10594-10594</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">10767-10767</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">10825-10825</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">11559-11560</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">14787-14788</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">19967-19967</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">20613-20613</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">20774-20774</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">20988-20988</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">21041-21041</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">21108-21122</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">21585-21585</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">21688-21688</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">21695-21697</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">21790-21790</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">23041-23041</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

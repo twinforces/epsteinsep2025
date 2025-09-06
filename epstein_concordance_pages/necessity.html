@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "necessity"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 928, "end": 928, "pages": [928]}, {"start": 1395, "end": 1395, "pages": [1395]}, {"start": 1522, "end": 1525, "pages": [1522, 1525]}, {"start": 1728, "end": 1728, "pages": [1728]}, {"start": 2931, "end": 2931, "pages": [2931]}, {"start": 3988, "end": 3988, "pages": [3988]}, {"start": 5239, "end": 5239, "pages": [5239]}, {"start": 5248, "end": 5248, "pages": [5248]}, {"start": 7055, "end": 7055, "pages": [7055]}, {"start": 9033, "end": 9033, "pages": [9033]}, {"start": 9724, "end": 9724, "pages": [9724]}, {"start": 19195, "end": 19198, "pages": [19195, 19198]}, {"start": 19225, "end": 19228, "pages": [19225, 19228]}, {"start": 19846, "end": 19846, "pages": [19846]}, {"start": 20313, "end": 20313, "pages": [20313]}, {"start": 21223, "end": 21223, "pages": [21223]}, {"start": 21766, "end": 21766, "pages": [21766]}];
+        const pageToPath = {"928": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000928.jpg", "1395": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001395.jpg", "1522": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001522.jpg", "1525": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001525.jpg", "1728": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001728.jpg", "2931": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002931.jpg", "3988": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003988.jpg", "5239": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005239.jpg", "5248": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005248.jpg", "7055": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007055.jpg", "9033": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009033.jpg", "9724": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009724.jpg", "19195": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019195.jpg", "19198": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019198.jpg", "19225": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019225.jpg", "19228": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019228.jpg", "19846": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019846.jpg", "20313": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020313.jpg", "21223": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021223.jpg", "21766": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021766.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000928.jpg": "...ntext. of evaluating the necessity of the defendant assisti...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001395.jpg": "...:of justice. despite its necessity, a continuance further p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001522.jpg": "...findings in. support of necessity for this partial closure...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001525.jpg": "...case,  particularly the necessity that this hearing be con...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001728.jpg": "...e rather than. anything: necessity to enisure that the mdc:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002931.jpg": "...of justice.  despite its necessity, a continuance further p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003988.jpg": "...ese circumstances is:  a-necessity for a:fair-trial. on. ch...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005239.jpg": "...or and argue against the necessity of any: in-camera hearin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005248.jpg": "...or and argue against the necessity of any: in-camera hearin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007055.jpg": "...will. in some cases, by necessity, t will reserve, of gour...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009033.jpg": "...l  jurors” and that the “necessity of truthful. answers by...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009724.jpg": "...l  jurors” and that the “necessity of truthful. answers by...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019195.jpg": "...findings in support. of necessity for this partial closure...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019198.jpg": "...ease,  particulagly the necessity that. thas heaning be co...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019225.jpg": "...findings in support. of necessity for this partial closure...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019228.jpg": "...ease,  particulagly the necessity that. thas heaning be co...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019846.jpg": "...ntext. of evaluating the necessity of the defendant assisti...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020313.jpg": "...:of justice. despite its necessity, a continuance further p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021223.jpg": "...she-wanted® without the necessity’ of meee process. ‘lewis...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021766.jpg": "...g excused for cause. the necessity of truthful answers. by..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "necessity" (20 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">928-928</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1395-1395</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1522-1525</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">1728-1728</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">2931-2931</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">3988-3988</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">5239-5239</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">5248-5248</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">7055-7055</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">9033-9033</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">9724-9724</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">19195-19198</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">19225-19228</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">19846-19846</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">20313-20313</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">21223-21223</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">21766-21766</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

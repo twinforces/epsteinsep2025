@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "perception"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 3240, "end": 3240, "pages": [3240]}, {"start": 3475, "end": 3475, "pages": [3475]}, {"start": 3482, "end": 3482, "pages": [3482]}, {"start": 4597, "end": 4597, "pages": [4597]}, {"start": 4604, "end": 4604, "pages": [4604]}, {"start": 4963, "end": 4963, "pages": [4963]}, {"start": 5899, "end": 5899, "pages": [5899]}, {"start": 5923, "end": 5923, "pages": [5923]}, {"start": 5949, "end": 5949, "pages": [5949]}, {"start": 6241, "end": 6248, "pages": [6241, 6244, 6248]}, {"start": 6284, "end": 6284, "pages": [6284]}, {"start": 6824, "end": 6824, "pages": [6824]}, {"start": 6848, "end": 6848, "pages": [6848]}, {"start": 6874, "end": 6874, "pages": [6874]}, {"start": 7610, "end": 7610, "pages": [7610]}, {"start": 8188, "end": 8188, "pages": [8188]}, {"start": 10602, "end": 10602, "pages": [10602]}, {"start": 10664, "end": 10664, "pages": [10664]}, {"start": 10709, "end": 10709, "pages": [10709]}, {"start": 11579, "end": 11579, "pages": [11579]}, {"start": 12309, "end": 12309, "pages": [12309]}, {"start": 12842, "end": 12842, "pages": [12842]}, {"start": 14368, "end": 14368, "pages": [14368]}, {"start": 14807, "end": 14807, "pages": [14807]}, {"start": 14999, "end": 14999, "pages": [14999]}, {"start": 15110, "end": 15110, "pages": [15110]}, {"start": 16990, "end": 16990, "pages": [16990]}, {"start": 17897, "end": 17897, "pages": [17897]}, {"start": 18428, "end": 18428, "pages": [18428]}, {"start": 21238, "end": 21238, "pages": [21238]}, {"start": 21435, "end": 21435, "pages": [21435]}, {"start": 21475, "end": 21475, "pages": [21475]}];
+        const pageToPath = {"3240": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003240.jpg", "3475": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003475.jpg", "3482": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003482.jpg", "4597": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004597.jpg", "4604": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004604.jpg", "4963": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004963.jpg", "5899": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005899.jpg", "5923": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005923.jpg", "5949": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005949.jpg", "6241": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006241.jpg", "6244": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006244.jpg", "6248": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006248.jpg", "6284": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006284.jpg", "6824": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006824.jpg", "6848": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006848.jpg", "6874": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006874.jpg", "7610": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007610.jpg", "8188": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008188.jpg", "10602": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010602.jpg", "10664": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010664.jpg", "10709": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010709.jpg", "11579": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011579.jpg", "12309": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012309.jpg", "12842": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012842.jpg", "14368": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014368.jpg", "14807": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014807.jpg", "14999": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014999.jpg", "15110": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015110.jpg", "16990": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016990.jpg", "17897": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017897.jpg", "18428": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018428.jpg", "21238": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021238.jpg", "21435": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021435.jpg", "21475": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021475.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003240.jpg": "...govecnment because of a. perception ‘that thes state charge...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003475.jpg": "...st added to thervictims’ perception. that: they: hadbeen. tr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003482.jpg": "...inis’ arid -the public’s perception of the mater is  that th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004597.jpg": "...t: added to thervictims’ perception. that: they: had been tr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004604.jpg": "...inis’ arid -the public’s perception of the mater is that the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004963.jpg": "...information that lends a perception by the public that.their...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005899.jpg": "...e edophile”. the public: perception, of a ‘paedophile sis  ®...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005923.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005949.jpg": "...ehavioural  teenager 5 s perception ‘ol be: ur ral and emoti...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006241.jpg": "...gencral, mater, memory; perception, and the fallibility:of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006244.jpg": "...regarding: memory and. perception. . 2, [t]he ¢ is no per...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006248.jpg": "...g cyewitness memory and. perception, expert).  excluditig a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006284.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006824.jpg": "...e edophile”. the public: perception, of a ‘paedophile sis  ®...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006848.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006874.jpg": "...ehavioural  teenager 5 s perception ‘ol be: ur ral and emoti...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007610.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008188.jpg": "...onyregarding memory” and perception may. be warranted, this...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010602.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010664.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010709.jpg": "...ll.compound. the public ‘perception. that: the conspiracy’sr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011579.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012309.jpg": "...hods, ethics, cognition, perception,.  forehsig psychology a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012842.jpg": "...oy ® a) o. ss  pon your ‘perception ef experiences;  a. well...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014368.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014807.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014999.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015110.jpg": "...very’  x reinforces the perception that the: victims are, a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016990.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017897.jpg": "...hods, ethics, cognition, perception,.  forehsig psychology a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018428.jpg": "...oy ® a) o. ss  pon your ‘perception ef experiences;  a. well...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021238.jpg": "...overnine;it because of a perception that thie state: cha ‘ci...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021435.jpg": "...d. opr.that-the: “public perception . . .that.we tried to hi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021475.jpg": "...dded. to the v  ictims\" “perception. ‘that‘they had: been tr..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "perception" (34 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">3240-3240</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">3475-3475</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">3482-3482</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">4597-4597</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">4604-4604</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">4963-4963</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">5899-5899</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">5923-5923</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">5949-5949</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">6241-6248</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">6284-6284</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">6824-6824</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">6848-6848</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">6874-6874</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">7610-7610</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">8188-8188</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">10602-10602</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">10664-10664</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">10709-10709</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">11579-11579</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">12309-12309</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">12842-12842</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">14368-14368</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">14807-14807</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">14999-14999</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">15110-15110</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">16990-16990</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">17897-17897</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">18428-18428</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">21238-21238</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">21435-21435</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">21475-21475</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

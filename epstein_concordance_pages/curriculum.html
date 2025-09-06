@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "curriculum"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 5629, "end": 5629, "pages": [5629]}, {"start": 5788, "end": 5788, "pages": [5788]}, {"start": 6181, "end": 6181, "pages": [6181]}, {"start": 6192, "end": 6193, "pages": [6192, 6193]}, {"start": 6254, "end": 6254, "pages": [6254]}, {"start": 6265, "end": 6266, "pages": [6265, 6266]}, {"start": 6591, "end": 6591, "pages": [6591]}, {"start": 6713, "end": 6713, "pages": [6713]}, {"start": 7198, "end": 7198, "pages": [7198]}, {"start": 7506, "end": 7507, "pages": [7506, 7507]}, {"start": 7556, "end": 7556, "pages": [7556]}, {"start": 7888, "end": 7888, "pages": [7888]}, {"start": 8071, "end": 8071, "pages": [8071]}, {"start": 8082, "end": 8083, "pages": [8082, 8083]}, {"start": 11192, "end": 11192, "pages": [11192]}, {"start": 13964, "end": 13964, "pages": [13964]}, {"start": 14014, "end": 14014, "pages": [14014]}, {"start": 16588, "end": 16588, "pages": [16588]}, {"start": 16638, "end": 16638, "pages": [16638]}];
+        const pageToPath = {"5629": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005629.jpg", "5788": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005788.jpg", "6181": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006181.jpg", "6192": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006192.jpg", "6193": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006193.jpg", "6254": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006254.jpg", "6265": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006265.jpg", "6266": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006266.jpg", "6591": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006591.jpg", "6713": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006713.jpg", "7198": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007198.jpg", "7506": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007506.jpg", "7507": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007507.jpg", "7556": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007556.jpg", "7888": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007888.jpg", "8071": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008071.jpg", "8082": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008082.jpg", "8083": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008083.jpg", "11192": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011192.jpg", "13964": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013964.jpg", "14014": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014014.jpg", "16588": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016588.jpg", "16638": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016638.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005629.jpg": "...: dr. ‘lisa-m. rocchio’s curriculum. vitae...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005788.jpg": "...l. seting.  oe generally curriculum, vitae, def, mof, 3 ex....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006181.jpg": "...tials are recited in her curriculum vitae: exhibit'a.  it is...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006192.jpg": "...all.  | cae. dr. hall ss curriculum witaci is atached a as e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006193.jpg": "...‘pace: university. ‘his. curriculum, vitae is atached.  ane...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006254.jpg": "...tials are recited in her curriculum vitae: exhibit'a.  it is...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006265.jpg": "...all.  | cae. dr. hall ss curriculum witaci is atached a as e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006266.jpg": "...‘pace: university. ‘his. curriculum, vitae is atached.  ane...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006591.jpg": "...: dr. ‘lisa-m. rocchio’s curriculum. vitae...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006713.jpg": "...l. seting.  oe generally curriculum, vitae, def, mof, 3 ex....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007198.jpg": "...hio; whet is that? a. my curriculum vitac.  q. does it accur...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007506.jpg": "...all.  | cae. dr. hall ss curriculum witaci is atached a as e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007507.jpg": "...‘pace: university. ‘his. curriculum, vitae is atached.  ratn...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007556.jpg": "...arkdietzassociates ‘com  curriculum vitae (july l5, 2o2l):...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007888.jpg": "...hio; whet is that? a. my curriculum vitac.  q. does it accur...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008071.jpg": "...tials are recited in her curriculum vitae: exhibit'a.  it is...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008082.jpg": "...all.  | cae. dr. hall ss curriculum witaci is atached a as e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008083.jpg": "...‘pace: university. ‘his. curriculum, vitae is atached.  ane...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011192.jpg": "...ng ‘are described in his curriculum vitae, which was: produc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013964.jpg": "...fatiliar with the ‘term “curriculum  @. andis the abbreviati...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014014.jpg": "...meh h  gconmtext of your curriculum tae, you remember that?...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016588.jpg": "...fatiliar with the ‘term “curriculum  @. andis the abbreviati...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016638.jpg": "...meh h  gconmtext of your curriculum tae, you remember that?..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "curriculum" (23 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">5629-5629</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">5788-5788</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">6181-6181</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">6192-6193</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">6254-6254</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">6265-6266</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">6591-6591</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">6713-6713</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">7198-7198</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">7506-7507</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">7556-7556</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">7888-7888</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">8071-8071</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">8082-8083</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">11192-11192</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">13964-13964</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">14014-14014</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">16588-16588</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">16638-16638</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

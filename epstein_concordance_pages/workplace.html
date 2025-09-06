@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "workplace"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 3647, "end": 3647, "pages": [3647]}, {"start": 7600, "end": 7600, "pages": [7600]}, {"start": 7612, "end": 7624, "pages": [7612, 7613, 7614, 7615, 7616, 7619, 7620, 7624]}, {"start": 7633, "end": 7650, "pages": [7633, 7634, 7635, 7636, 7637, 7638, 7640, 7641, 7642, 7643, 7644, 7645, 7646, 7647, 7648, 7649, 7650]}, {"start": 7687, "end": 7688, "pages": [7687, 7688]}, {"start": 8146, "end": 8147, "pages": [8146, 8147]}];
+        const pageToPath = {"3647": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003647.jpg", "7600": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007600.jpg", "7612": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007612.jpg", "7613": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007613.jpg", "7614": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007614.jpg", "7615": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007615.jpg", "7616": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007616.jpg", "7619": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007619.jpg", "7620": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007620.jpg", "7624": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007624.jpg", "7633": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007633.jpg", "7634": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007634.jpg", "7635": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007635.jpg", "7636": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007636.jpg", "7637": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007637.jpg", "7638": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007638.jpg", "7640": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007640.jpg", "7641": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007641.jpg", "7642": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007642.jpg", "7643": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007643.jpg", "7644": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007644.jpg", "7645": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007645.jpg", "7646": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007646.jpg", "7647": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007647.jpg", "7648": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007648.jpg", "7649": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007649.jpg", "7650": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007650.jpg", "7687": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007687.jpg", "7688": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007688.jpg", "8146": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008146.jpg", "8147": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008147.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003647.jpg": "..., andl e. katze _randotn workplace or  number one l o98,  m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007600.jpg": "...tz p; threat assessment, workplace. in: jamieson a, moensse...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007612.jpg": "...ay l3, l993.  dietz pe: “workplace violence,\" international...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007613.jpg": "...strial sect y workshop, “workplace violence- ‘strategies: t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007614.jpg": "...dietz pe: “changes: in workplace violence: the increasing...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007615.jpg": "...er ll, 2oo2.  dietz pe: “workplace violence prevention,” co...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007616.jpg": "...or in the community, the workplace,. and the media,” fennem...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007619.jpg": "....  l57.  august l5, 2o:  workplace: trends in private secto...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007620.jpg": "...to threat assessment and workplace  roundtable, twiter head...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007624.jpg": "...sachusets;  wright: il: “workplace violence: ‘strategies t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007633.jpg": "...threat assessment group® workplace violence prevention trai...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007634.jpg": "...ing video)  your role in workplace violence prevention (tra...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007635.jpg": "...ng course)  your role im workplace violence prevention (e-l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007636.jpg": "...threat assessment group® workplace violence  prevention cou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007637.jpg": "...go, il, april 6, l995.  “workplace violence in: an intensiv...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007638.jpg": "...“workplace violence 4? an intensive...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007640.jpg": "...ego, ca, april 7, l999  “workplace violence 7: an intensive...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007641.jpg": "...e; wa; april 3-4, 2ooo  “workplace violence 8: an intensive...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007642.jpg": "...on, dc, august l, 2ooo  “workplace violence 8 east: an inte...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007643.jpg": "...il; september ll, 2oo2  “workplace violence lo east,” toron...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007644.jpg": "...ne, february l5, 2oo5  “workplace violence l32 am intensiv...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007645.jpg": "...ca, december l-2, 2oo6  “workplace violence l5: an: intensi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007646.jpg": "...ca, july 28-29, 2olo:  “workplace violence l72 prevention...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007647.jpg": "...mental disorders in ‘the workplace, april l7; 2ol3  discove...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007648.jpg": "...h, ca,.april 3o, 2ol5.  “workplace violence advanced instrt...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007649.jpg": "...a, october l7-l8, 2ol6  “workplace violence advanced instru...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007650.jpg": "...cago; il, december l2,  “workplace violence advanced instru...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007687.jpg": "...cw, hall rcw, chapman m: workplace violence. american acade...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007688.jpg": "...oo2  hall rcw, hall rcw: workplace violence, school: shooti...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008146.jpg": "...cw, hall rcw, chapman m: workplace violence. american acade...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008147.jpg": "...oo2  hall rcw, hall rcw: workplace violence, school: shooti..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "workplace" (31 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">3647-3647</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">7600-7600</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">7612-7624</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">7633-7650</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">7687-7688</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">8146-8147</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

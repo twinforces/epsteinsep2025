@@ -1,0 +1,253 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "significance"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 925, "end": 925, "pages": [925]}, {"start": 1276, "end": 1276, "pages": [1276]}, {"start": 2329, "end": 2329, "pages": [2329]}, {"start": 3011, "end": 3011, "pages": [3011]}, {"start": 3276, "end": 3276, "pages": [3276]}, {"start": 3345, "end": 3345, "pages": [3345]}, {"start": 3363, "end": 3363, "pages": [3363]}, {"start": 3420, "end": 3420, "pages": [3420]}, {"start": 3474, "end": 3474, "pages": [3474]}, {"start": 4467, "end": 4467, "pages": [4467]}, {"start": 4485, "end": 4485, "pages": [4485]}, {"start": 4500, "end": 4500, "pages": [4500]}, {"start": 4542, "end": 4542, "pages": [4542]}, {"start": 4832, "end": 4832, "pages": [4832]}, {"start": 4874, "end": 4874, "pages": [4874]}, {"start": 5785, "end": 5785, "pages": [5785]}, {"start": 5809, "end": 5809, "pages": [5809]}, {"start": 6347, "end": 6347, "pages": [6347]}, {"start": 6710, "end": 6710, "pages": [6710]}, {"start": 6734, "end": 6734, "pages": [6734]}, {"start": 7172, "end": 7172, "pages": [7172]}, {"start": 7229, "end": 7229, "pages": [7229]}, {"start": 7235, "end": 7235, "pages": [7235]}, {"start": 7263, "end": 7263, "pages": [7263]}, {"start": 7332, "end": 7332, "pages": [7332]}, {"start": 7919, "end": 7919, "pages": [7919]}, {"start": 7925, "end": 7925, "pages": [7925]}, {"start": 7953, "end": 7953, "pages": [7953]}, {"start": 8022, "end": 8022, "pages": [8022]}, {"start": 8043, "end": 8047, "pages": [8043, 8047]}, {"start": 8057, "end": 8058, "pages": [8057, 8058]}, {"start": 8441, "end": 8441, "pages": [8441]}, {"start": 8450, "end": 8450, "pages": [8450]}, {"start": 8524, "end": 8524, "pages": [8524]}, {"start": 8609, "end": 8609, "pages": [8609]}, {"start": 8689, "end": 8689, "pages": [8689]}, {"start": 8775, "end": 8775, "pages": [8775]}, {"start": 9197, "end": 9197, "pages": [9197]}, {"start": 9876, "end": 9876, "pages": [9876]}, {"start": 10375, "end": 10375, "pages": [10375]}, {"start": 11151, "end": 11151, "pages": [11151]}, {"start": 11315, "end": 11317, "pages": [11315, 11317]}, {"start": 14926, "end": 14926, "pages": [14926]}, {"start": 14932, "end": 14932, "pages": [14932]}, {"start": 14960, "end": 14960, "pages": [14960]}, {"start": 15028, "end": 15031, "pages": [15028, 15029, 15031]}, {"start": 15090, "end": 15090, "pages": [15090]}, {"start": 15156, "end": 15156, "pages": [15156]}, {"start": 19843, "end": 19843, "pages": [19843]}, {"start": 20194, "end": 20194, "pages": [20194]}, {"start": 21246, "end": 21246, "pages": [21246]}, {"start": 21274, "end": 21274, "pages": [21274]}, {"start": 21343, "end": 21343, "pages": [21343]}];
+        const pageToPath = {"925": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000925.jpg", "1276": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001276.jpg", "2329": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002329.jpg", "3011": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003011.jpg", "3276": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003276.jpg", "3345": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003345.jpg", "3363": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003363.jpg", "3420": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003420.jpg", "3474": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003474.jpg", "4467": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004467.jpg", "4485": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004485.jpg", "4500": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004500.jpg", "4542": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004542.jpg", "4832": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004832.jpg", "4874": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004874.jpg", "5785": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005785.jpg", "5809": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005809.jpg", "6347": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006347.jpg", "6710": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006710.jpg", "6734": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006734.jpg", "7172": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007172.jpg", "7229": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007229.jpg", "7235": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007235.jpg", "7263": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007263.jpg", "7332": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007332.jpg", "7919": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007919.jpg", "7925": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007925.jpg", "7953": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007953.jpg", "8022": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008022.jpg", "8043": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008043.jpg", "8047": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008047.jpg", "8057": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008057.jpg", "8058": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008058.jpg", "8441": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008441.jpg", "8450": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008450.jpg", "8524": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008524.jpg", "8609": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008609.jpg", "8689": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008689.jpg", "8775": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008775.jpg", "9197": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009197.jpg", "9876": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009876.jpg", "10375": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010375.jpg", "11151": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011151.jpg", "11315": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011315.jpg", "11317": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011317.jpg", "14926": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014926.jpg", "14932": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014932.jpg", "14960": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014960.jpg", "15028": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015028.jpg", "15029": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015029.jpg", "15031": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015031.jpg", "15090": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015090.jpg", "15156": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015156.jpg", "19843": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019843.jpg", "20194": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020194.jpg", "21246": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021246.jpg", "21274": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021274.jpg", "21343": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021343.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000925.jpg": "...erstanding’ of the jegal significance of that historical,  fac...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001276.jpg": "...event of jurisdictional significance  ‘it confers, jurisdicti...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002329.jpg": "...easures,the, statistical significance ofa group's s‘underrepre...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003011.jpg": "...in light of the relative significance: of this: form. of evide...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003276.jpg": "...ter significance, na follou: -up p email,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003345.jpg": "...ch. motivations. of iore significance, aid as. diseussed more...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003363.jpg": "...fast meetin ng  of tiere significance for opr’s evaluation was...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003420.jpg": "...sti proses which. are of significance, fo'the iten: impact sta...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003474.jpg": "...nt information about its significance to their ‘oun. cases.”...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004467.jpg": "...ch  motivations. of more significance, and as, discussed more...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004485.jpg": "...oe fanrets fsas  of more significance for opr’s evaluation was...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004500.jpg": "...ecognized the-poteritial significance x s,, villafana, atempte...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004542.jpg": "...ms; cess: which ~are ‘of significance; to ‘the iften: impact s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004832.jpg": "...vidence. he also: placed significance on the fact that ms. con...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004874.jpg": "...legal significance of district atorney cast...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005785.jpg": "...chio’s opinion about the significance ofthe presence of third...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005809.jpg": "...hio’s opinion about, the significance of the presence of third...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006347.jpg": "...r rates and statistical. significance: |: isan. unusually: poo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006710.jpg": "...chio’s opinion about the significance ofthe presence of third...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006734.jpg": "...hio’s opinion about, the significance of the presence of third...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007172.jpg": "...is in, at that may have significance here  the gourt: ms. ste...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007229.jpg": "...the level of statistical significance.  ©. what is your takeaw...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007235.jpg": "...n't meet the statistical significance  in that study, all ef t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007263.jpg": "...atention tq and ataches significance to seme aspects qf an. e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007332.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007919.jpg": "...the level of statistical significance.  ©. what is your takeaw...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007925.jpg": "...n't meet the statistical significance  in that study, all ef t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007953.jpg": "...atention tq and ataches significance to seme aspects qf an. e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008022.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008043.jpg": "...a b ce any undiselosed, significance of dis h d  fact testini...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008047.jpg": "...sclosed. relevance, the “significance” of dr. hall’s: opinions...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008057.jpg": "...c. any undisclosed significance of dri hall’s. opinions....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008058.jpg": ".... hall  some undisclosed significance, his testimonyshould be...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008441.jpg": "...ly to thejury. given the significance-of closing  ang, se eras...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008450.jpg": "...ly to thejury. given the significance-of closing  ang, se eras...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008524.jpg": "...‘you. may not atach any significance to the fact that ms, max...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008609.jpg": "...you may not atach, any significance to the faet-that-ms. max...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008689.jpg": "...‘you. may not atach any significance to the fact that ms, max...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008775.jpg": "...‘you. may not atach any significance to the fact that ms, max...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009197.jpg": "...takes.  involved and the significance of the constitutional. r...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009876.jpg": "...takes.  involved and the significance of the constitutional. r...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010375.jpg": "...es has  bost  negligible significance. villa, 2ol4 wl 252ol3,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011151.jpg": "...all. will testify tothe “significance” of alleged victim 4°s d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011315.jpg": "...xplain. metadata and its significance: he will opine that» a....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011317.jpg": "...ing and.  explaining the significance of technical, ferms and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014926.jpg": "...igh level of statistical significance in agreement among varyi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014932.jpg": "...n't meet the statistical significance in that study; all of th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014960.jpg": "...atention to and ataches significance to some aspects of an ev...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015028.jpg": "...correct.  q. what is the significance, as fart as you @re conc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015029.jpg": "...urt: go ahead. a. so the significance of delayed disclosure as...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015031.jpg": "...ld was a .78 statistical significance or measure of agreement....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015090.jpg": "...actors and their precise significance niust be evalwated in th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015156.jpg": "...dresses the ‘present-day significance of the grand jury: mater...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019843.jpg": "...erstanding’ of the jegal significance of that historical,  fac...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020194.jpg": "...event of jurisdictional significance  ‘it confers, jurisdicti...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021246.jpg": "...ecognized the: potential significance: of obtaining the:missin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021274.jpg": "...: he:  _ofe ven, greater significance, in.  the entire © provi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021343.jpg": "...: affirmative  of more: \"significance and. as ; discussed ‘mor..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "significance" (58 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">925-925</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1276-1276</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">2329-2329</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3011-3011</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">3276-3276</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">3345-3345</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3363-3363</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">3420-3420</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">3474-3474</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">4467-4467</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">4485-4485</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">4500-4500</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">4542-4542</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">4832-4832</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">4874-4874</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">5785-5785</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">5809-5809</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">6347-6347</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">6710-6710</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">6734-6734</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">7172-7172</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">7229-7229</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">7235-7235</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">7263-7263</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">7332-7332</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">7919-7919</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">7925-7925</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">7953-7953</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">8022-8022</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">8043-8047</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">8057-8058</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">8441-8441</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">8450-8450</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">8524-8524</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">8609-8609</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">8689-8689</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">8775-8775</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">9197-9197</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">9876-9876</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">10375-10375</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">11151-11151</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">11315-11317</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">14926-14926</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">14932-14932</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">14960-14960</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(45, 0); return false;">15028-15031</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(46, 0); return false;">15090-15090</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(47, 0); return false;">15156-15156</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(48, 0); return false;">19843-19843</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(49, 0); return false;">20194-20194</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(50, 0); return false;">21246-21246</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(51, 0); return false;">21274-21274</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(52, 0); return false;">21343-21343</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

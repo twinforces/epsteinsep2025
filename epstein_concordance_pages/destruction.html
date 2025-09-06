@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "destruction"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 696, "end": 696, "pages": [696]}, {"start": 2376, "end": 2376, "pages": [2376]}, {"start": 3012, "end": 3012, "pages": [3012]}, {"start": 3981, "end": 3981, "pages": [3981]}, {"start": 4026, "end": 4026, "pages": [4026]}, {"start": 4035, "end": 4035, "pages": [4035]}, {"start": 4942, "end": 4942, "pages": [4942]}, {"start": 7677, "end": 7677, "pages": [7677]}, {"start": 7689, "end": 7689, "pages": [7689]}, {"start": 8136, "end": 8136, "pages": [8136]}, {"start": 8148, "end": 8148, "pages": [8148]}, {"start": 9605, "end": 9605, "pages": [9605]}];
+        const pageToPath = {"696": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000696.jpg", "2376": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002376.jpg", "3012": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003012.jpg", "3981": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003981.jpg", "4026": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004026.jpg", "4035": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004035.jpg", "4942": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004942.jpg", "7677": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007677.jpg", "7689": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007689.jpg", "8136": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008136.jpg", "8148": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008148.jpg", "9605": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009605.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000696.jpg": "...and te me that ali  this destruction has  ie, io  ; been, wro...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002376.jpg": "...affidawit confirming the destruction.  ‘this ‘protective orde...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003012.jpg": "...on in.this case that the.destruction. of the:records  astly,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003981.jpg": "...ect the defendants from. destruction. oraltcration, andthe:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004026.jpg": "...ting to the above  on or destruction of any electronic € iten...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004035.jpg": "...ting to the above  on or destruction of any electronic € iten...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004942.jpg": "...destruction of documents upon  neith...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007677.jpg": "...fects of weapons of mass destruction in first responders. in:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007689.jpg": "...ae: of f weapons of mass destruction  al, satellite:  hall rc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008136.jpg": "...fects of weapons of mass destruction in first responders. in:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008148.jpg": "...ae: of f weapons of mass destruction  al, satellite:  hall rc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009605.jpg": "...in this case: ‘that dhe destruction. o government or ‘truste..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "destruction" (12 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">696-696</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">2376-2376</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">3012-3012</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3981-3981</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">4026-4026</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">4035-4035</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">4942-4942</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">7677-7677</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">7689-7689</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">8136-8136</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">8148-8148</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">9605-9605</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

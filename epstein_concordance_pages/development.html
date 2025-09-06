@@ -1,0 +1,226 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "development"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 389, "end": 389, "pages": [389]}, {"start": 650, "end": 650, "pages": [650]}, {"start": 2913, "end": 2913, "pages": [2913]}, {"start": 3127, "end": 3127, "pages": [3127]}, {"start": 3190, "end": 3190, "pages": [3190]}, {"start": 3238, "end": 3238, "pages": [3238]}, {"start": 3373, "end": 3373, "pages": [3373]}, {"start": 3647, "end": 3647, "pages": [3647]}, {"start": 3696, "end": 3696, "pages": [3696]}, {"start": 4312, "end": 4312, "pages": [4312]}, {"start": 4372, "end": 4372, "pages": [4372]}, {"start": 4495, "end": 4495, "pages": [4495]}, {"start": 4889, "end": 4889, "pages": [4889]}, {"start": 5908, "end": 5908, "pages": [5908]}, {"start": 6351, "end": 6351, "pages": [6351]}, {"start": 6833, "end": 6833, "pages": [6833]}, {"start": 7518, "end": 7518, "pages": [7518]}, {"start": 7616, "end": 7616, "pages": [7616]}, {"start": 7685, "end": 7685, "pages": [7685]}, {"start": 7698, "end": 7699, "pages": [7698, 7699]}, {"start": 8062, "end": 8062, "pages": [8062]}, {"start": 8144, "end": 8144, "pages": [8144]}, {"start": 8157, "end": 8158, "pages": [8157, 8158]}, {"start": 8852, "end": 8852, "pages": [8852]}, {"start": 8900, "end": 8900, "pages": [8900]}, {"start": 10410, "end": 10416, "pages": [10410, 10414, 10416]}, {"start": 10502, "end": 10502, "pages": [10502]}, {"start": 10726, "end": 10726, "pages": [10726]}, {"start": 11419, "end": 11419, "pages": [11419]}, {"start": 12331, "end": 12331, "pages": [12331]}, {"start": 13268, "end": 13268, "pages": [13268]}, {"start": 14269, "end": 14269, "pages": [14269]}, {"start": 14336, "end": 14336, "pages": [14336]}, {"start": 14925, "end": 14925, "pages": [14925]}, {"start": 16892, "end": 16892, "pages": [16892]}, {"start": 16958, "end": 16958, "pages": [16958]}, {"start": 17919, "end": 17919, "pages": [17919]}, {"start": 18853, "end": 18853, "pages": [18853]}, {"start": 21248, "end": 21248, "pages": [21248]}, {"start": 21317, "end": 21317, "pages": [21317]}, {"start": 21445, "end": 21445, "pages": [21445]}, {"start": 22085, "end": 22085, "pages": [22085]}, {"start": 22101, "end": 22103, "pages": [22101, 22103]}, {"start": 23031, "end": 23031, "pages": [23031]}];
+        const pageToPath = {"389": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000389.jpg", "650": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000650.jpg", "2913": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002913.jpg", "3127": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003127.jpg", "3190": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003190.jpg", "3238": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003238.jpg", "3373": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003373.jpg", "3647": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003647.jpg", "3696": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003696.jpg", "4312": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004312.jpg", "4372": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004372.jpg", "4495": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004495.jpg", "4889": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004889.jpg", "5908": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005908.jpg", "6351": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006351.jpg", "6833": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006833.jpg", "7518": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007518.jpg", "7616": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007616.jpg", "7685": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007685.jpg", "7698": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007698.jpg", "7699": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007699.jpg", "8062": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008062.jpg", "8144": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008144.jpg", "8157": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008157.jpg", "8158": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008158.jpg", "8852": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008852.jpg", "8900": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008900.jpg", "10410": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010410.jpg", "10414": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010414.jpg", "10416": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010416.jpg", "10502": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010502.jpg", "10726": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010726.jpg", "11419": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011419.jpg", "12331": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012331.jpg", "13268": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013268.jpg", "14269": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014269.jpg", "14336": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014336.jpg", "14925": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014925.jpg", "16892": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016892.jpg", "16958": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016958.jpg", "17919": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017919.jpg", "18853": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018853.jpg", "21248": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021248.jpg", "21317": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021317.jpg", "21445": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021445.jpg", "22085": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022085.jpg", "22101": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022101.jpg", "22103": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022103.jpg", "23031": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00023031.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000389.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000650.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002913.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003127.jpg": "...ere they: are used fo @  development of the. illegal relation...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003190.jpg": "..., de ; ade veoarding the development anid, exec destribes thi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003238.jpg": "...t: facts surrounding the development-of the two-year. state p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003373.jpg": "...timate; interest in ‘the development of human trafficking ‘la...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003647.jpg": "...ent, of ousing and urban development, »may l993,  wels ssa se...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003696.jpg": "...ambiguots only afterthe development ofa full factial record...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004312.jpg": "..., de ; ade veoarding the development and, exes ution. of thie...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004372.jpg": "...t critical step :in. the development. of the npa. was the dec...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004495.jpg": "...nd legitimate inter the; development of human ‘trafficking ‘l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004889.jpg": "...‘to say the least, this development significantly weakened c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005908.jpg": "...s of theory. kniting and development. § pathways, model & sti...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006351.jpg": "...g functions through. the development  of trust. that:extrapol...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006833.jpg": "...s of theory. kniting and development. § pathways, model & sti...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007518.jpg": "...review: of j. tomek the development  ay : . - - =  sons, ltd...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007616.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007685.jpg": "...u, mckibben j: ti mor | development. 6f acute stress disorde...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007698.jpg": "...et's stages of cognitive development:  tanner stages of sexua...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007699.jpg": "...s stages of psychosocial development ego defenses  infant-dep...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008062.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008144.jpg": "...u, mckibben j: ti mor | development. 6f acute stress disorde...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008157.jpg": "...et's stages of cognitive development:  tanner stages of sexua...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008158.jpg": "...s stages of psychosocial development ego defenses  infant-dep...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008852.jpg": "...nced for further-factual development. should the court agree...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008900.jpg": "...nced for further-factual development. should the court agree...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010410.jpg": "...defendant points. to no development at trial-that: she belie...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010414.jpg": "...« event an,  intervening development occtrs between nou and s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010416.jpg": "...‘event-an,  intervening development: occurs between nou and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010502.jpg": "...f their l7  ‘sustainable development goals for 2ol5-3o..  atc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010726.jpg": "...orm the court ofa recent development which. may: require post...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011419.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012331.jpg": "...'ll be talkang about the development of the relationship amd...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013268.jpg": "...update ‘on, its. factual development. with regard to the witn...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014269.jpg": "...e we  additional factual development to be able to counter ‘t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014336.jpg": "...that is more  2  fe law development on this poiat  ; the cas...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014925.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016892.jpg": "...e we  additional factual development to be able to counter ‘t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016958.jpg": "...that is more  2  fe law development on this poiat  ; the cas...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017919.jpg": "...'ll be talkang about the development of the relationship amd...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018853.jpg": "...update ‘on, its. factual development. with regard to the witn...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021248.jpg": "...t ‘critical step in. the development of the  cantempor ancous...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021317.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021445.jpg": "...ng o, [th tesolution ‘at development l ro}  sta sores  t “onc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022085.jpg": "...(4) played a role in the development of prosecutorial strateg...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022101.jpg": "...4) played a-role: in the development of prosecutorial strateg...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022103.jpg": "...ou  played a role in the development of prosecitorral strateg...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00023031.jpg": ""};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "development" (49 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">389-389</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">650-650</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">2913-2913</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3127-3127</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">3190-3190</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">3238-3238</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3373-3373</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">3647-3647</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">3696-3696</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">4312-4312</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">4372-4372</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">4495-4495</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">4889-4889</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">5908-5908</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">6351-6351</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">6833-6833</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">7518-7518</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">7616-7616</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">7685-7685</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">7698-7699</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">8062-8062</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">8144-8144</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">8157-8158</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">8852-8852</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">8900-8900</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">10410-10416</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">10502-10502</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">10726-10726</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">11419-11419</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">12331-12331</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">13268-13268</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">14269-14269</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">14336-14336</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">14925-14925</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">16892-16892</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">16958-16958</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">17919-17919</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">18853-18853</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">21248-21248</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">21317-21317</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">21445-21445</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">22085-22085</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">22101-22103</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">23031-23031</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

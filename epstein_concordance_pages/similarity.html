@@ -1,0 +1,178 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "similarity"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1793, "end": 1793, "pages": [1793]}, {"start": 2304, "end": 2305, "pages": [2304, 2305]}, {"start": 3100, "end": 3100, "pages": [3100]}, {"start": 3128, "end": 3128, "pages": [3128]}, {"start": 3761, "end": 3761, "pages": [3761]}, {"start": 4277, "end": 4277, "pages": [4277]}, {"start": 4288, "end": 4288, "pages": [4288]}, {"start": 4713, "end": 4716, "pages": [4713, 4715, 4716]}, {"start": 4848, "end": 4855, "pages": [4848, 4850, 4855]}, {"start": 5679, "end": 5679, "pages": [5679]}, {"start": 6641, "end": 6641, "pages": [6641]}, {"start": 7225, "end": 7225, "pages": [7225]}, {"start": 7239, "end": 7239, "pages": [7239]}, {"start": 7915, "end": 7915, "pages": [7915]}, {"start": 7929, "end": 7929, "pages": [7929]}, {"start": 8926, "end": 8926, "pages": [8926]}, {"start": 9147, "end": 9148, "pages": [9147, 9148]}, {"start": 9589, "end": 9589, "pages": [9589]}, {"start": 9595, "end": 9595, "pages": [9595]}, {"start": 9826, "end": 9827, "pages": [9826, 9827]}, {"start": 10304, "end": 10304, "pages": [10304]}, {"start": 10310, "end": 10310, "pages": [10310]}, {"start": 10379, "end": 10381, "pages": [10379, 10381]}, {"start": 12691, "end": 12691, "pages": [12691]}, {"start": 14936, "end": 14936, "pages": [14936]}, {"start": 18278, "end": 18278, "pages": [18278]}, {"start": 20993, "end": 20998, "pages": [20993, 20996, 20998]}, {"start": 21129, "end": 21129, "pages": [21129]}];
+        const pageToPath = {"1793": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001793.jpg", "2304": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002304.jpg", "2305": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002305.jpg", "3100": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003100.jpg", "3128": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003128.jpg", "3761": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003761.jpg", "4277": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004277.jpg", "4288": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004288.jpg", "4713": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004713.jpg", "4715": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004715.jpg", "4716": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004716.jpg", "4848": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004848.jpg", "4850": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004850.jpg", "4855": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004855.jpg", "5679": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005679.jpg", "6641": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006641.jpg", "7225": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007225.jpg", "7239": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007239.jpg", "7915": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007915.jpg", "7929": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007929.jpg", "8926": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008926.jpg", "9147": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009147.jpg", "9148": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009148.jpg", "9589": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009589.jpg", "9595": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009595.jpg", "9826": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009826.jpg", "9827": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009827.jpg", "10304": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010304.jpg", "10310": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010310.jpg", "10379": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010379.jpg", "10381": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010381.jpg", "12691": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012691.jpg", "14936": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014936.jpg", "18278": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018278.jpg", "20993": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020993.jpg", "20996": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020996.jpg", "20998": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020998.jpg", "21129": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021129.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001793.jpg": "...e sions, o or given ‘the similarity ‘of ihe nature, of the....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002304.jpg": "...of  overlap of time; (4) similarity: of operation; (5) the e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002305.jpg": ".... see id. 4¥ land.  li.. similarity of operation.  sparagrap...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003100.jpg": "...sufficient to establish ‘similarity’ of offenses,  and cach...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003128.jpg": "...mal and acceptable. “the similarity sufficient. to admit evi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003761.jpg": "...ed: ‘participants; time; similarity of.  e-government has,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004277.jpg": "...pr.  report at'i-i). the similarity ofthe allegations presen...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004288.jpg": "...nt factors; namely:  (4) similarity of. operation; (5) the e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004713.jpg": "...’s. motion discusses the similarity’  to dismiss again, base...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004715.jpg": "...must first- analyze the similarity. between. the npa. and t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004716.jpg": "...ions when examining ‘the similarity or di ferences between....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004848.jpg": "...court reasoned that the: similarity and distinctiveness. of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004850.jpg": "...sely proportional to the similarity of the other crimes. or...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004855.jpg": "...ly proportional” to: the similarity between the prior bad ac...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005679.jpg": "...ment niust.  “identify a similarity or connection. between t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006641.jpg": "...rnment must  “identify a similarity or connection. between t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007225.jpg": "...our understanding of the similarity, the everlap and prevale...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007239.jpg": "...gain, there's nemarkable similarity in the impact. of those...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007915.jpg": "...our understanding of the similarity, the everlap and prevale...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007929.jpg": "...gain, there's nemarkable similarity in the impact. of those...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008926.jpg": "...eseees eceseeeees l9  2. similarity of operation, common, ob...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009147.jpg": "...neral,  proposition that similarity:of expericnees may give-...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009148.jpg": "...bias applies. based. ori similarity of  experiences, but: me...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009589.jpg": "...ipants, overlap of time, similarity  of operation, common. o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009595.jpg": "...im .of multiplicity.  6. similarity of operation, common obj...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009826.jpg": "...neral,  proposition that similarity:of expericnees may give-...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009827.jpg": "...bias applies. based. ori similarity of  experiences, but: me...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010304.jpg": "...ejected. the notion that similarity of conduct is a‘proper b...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010310.jpg": "...ruck. for‘eause.  as the similarity betweesi juror 5o's sexu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010379.jpg": "..., miller, 584 f.  i  the similarity-of-operations factor the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010381.jpg": "...hlighting: the degree of similarity: between each vietim-wit...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012691.jpg": "...sishent with that  as to similarity of items  t fuled before...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014936.jpg": "...gain; there's remarkable similarity in the impact of those b...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018278.jpg": "...sishent with that  as to similarity of items  t fuled before...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020993.jpg": "...dant  favor. see arauje  similarity of operations, counts th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020996.jpg": "...5l9 (e.d.n°y.'2oo8). the similarity-ofoperations: factor the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020998.jpg": "...ighting; “lhe: degree of similarity: between each victimswit...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021129.jpg": "...or cause: because of the similarity: of juror: 5o°s sexual a..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "similarity" (38 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1793-1793</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">2304-2305</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">3100-3100</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3128-3128</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">3761-3761</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">4277-4277</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">4288-4288</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">4713-4716</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">4848-4855</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">5679-5679</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">6641-6641</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">7225-7225</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">7239-7239</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">7915-7915</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">7929-7929</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">8926-8926</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">9147-9148</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">9589-9589</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">9595-9595</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">9826-9827</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">10304-10304</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">10310-10310</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">10379-10381</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">12691-12691</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">14936-14936</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">18278-18278</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">20993-20998</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">21129-21129</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

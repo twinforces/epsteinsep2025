@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "developmental"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 5900, "end": 5900, "pages": [5900]}, {"start": 5930, "end": 5930, "pages": [5930]}, {"start": 6825, "end": 6825, "pages": [6825]}, {"start": 6855, "end": 6855, "pages": [6855]}, {"start": 7529, "end": 7529, "pages": [7529]}, {"start": 7676, "end": 7676, "pages": [7676]}, {"start": 7698, "end": 7699, "pages": [7698, 7699]}, {"start": 8135, "end": 8135, "pages": [8135]}, {"start": 8157, "end": 8158, "pages": [8157, 8158]}, {"start": 14957, "end": 14957, "pages": [14957]}];
+        const pageToPath = {"5900": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005900.jpg", "5930": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005930.jpg", "6825": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006825.jpg", "6855": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006855.jpg", "7529": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007529.jpg", "7676": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007676.jpg", "7698": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007698.jpg", "7699": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007699.jpg", "8135": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008135.jpg", "8157": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008157.jpg", "8158": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008158.jpg", "14957": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014957.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005900.jpg": "...result. of adverse early developmental ‘xe eriences leave offe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005930.jpg": "...children. for examp sant developmental.¢  nalf ‘of the: gsa-te...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006825.jpg": "...result. of adverse early developmental ‘xe eriences leave offe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006855.jpg": "...children. for examp sant developmental.¢  nalf ‘of the: gsa-te...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007529.jpg": "...s of:  _ childhood abus  developmental perspectives. publi 4, l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007676.jpg": "...s, and young adults with developmental disabilities: a workbook...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007698.jpg": "...lou birth weight  early developmental milestones  piaget's sta...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007699.jpg": "...seet disorders pervasive developmental disorders neurotransmite...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008135.jpg": "...s, and young adults with developmental disabilities: a workbook...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008157.jpg": "...lou birth weight  early developmental milestones  piaget's sta...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008158.jpg": "...seet disorders pervasive developmental disorders neurotransmite...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014957.jpg": "...of it has to do with the developmental ife stage of  an adolesc..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "developmental" (12 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">5900-5900</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">5930-5930</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">6825-6825</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">6855-6855</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">7529-7529</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">7676-7676</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">7698-7699</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">8135-8135</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">8157-8158</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">14957-14957</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

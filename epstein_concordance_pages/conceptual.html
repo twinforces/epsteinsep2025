@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "conceptual"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 5796, "end": 5796, "pages": [5796]}, {"start": 5904, "end": 5904, "pages": [5904]}, {"start": 6288, "end": 6288, "pages": [6288]}, {"start": 6721, "end": 6721, "pages": [6721]}, {"start": 6829, "end": 6829, "pages": [6829]}, {"start": 7230, "end": 7230, "pages": [7230]}, {"start": 7598, "end": 7598, "pages": [7598]}, {"start": 7607, "end": 7607, "pages": [7607]}, {"start": 7920, "end": 7920, "pages": [7920]}, {"start": 14927, "end": 14927, "pages": [14927]}];
+        const pageToPath = {"5796": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005796.jpg", "5904": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005904.jpg", "6288": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006288.jpg", "6721": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006721.jpg", "6829": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006829.jpg", "7230": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007230.jpg", "7598": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007598.jpg", "7607": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007607.jpg", "7920": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007920.jpg", "14927": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014927.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005796.jpg": "...n child. sexual. abuse: ‘conceptual and.  measurement: issu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005904.jpg": "...2ooo) have developed. a, conceptual model ‘of hou child ‘sex...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006288.jpg": "...& thayer,  that: prec  2 conceptual elated.  ont id  may pes...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006721.jpg": "...n child. sexual. abuse: ‘conceptual and.  measurement: issu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006829.jpg": "...2ooo) have developed. a, conceptual model ‘of hou child ‘sex...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007230.jpg": "...e as well ag some of the conceptual and measurement issues t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007598.jpg": "...y the fbi: a preliminary conceptual model. in: forensic scie...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007607.jpg": "...y the fbi: a preliminary conceptual model,\" \" forensi is i l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007920.jpg": "...e as well ag some of the conceptual and measurement issues t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014927.jpg": "...as well as' some of the conceptual and measurement issues t..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "conceptual" (10 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">5796-5796</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">5904-5904</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">6288-6288</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">6721-6721</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">6829-6829</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">7230-7230</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">7598-7598</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">7607-7607</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">7920-7920</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">14927-14927</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

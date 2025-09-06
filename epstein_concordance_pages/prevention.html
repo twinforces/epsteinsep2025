@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "prevention"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 2109, "end": 2109, "pages": [2109]}, {"start": 2653, "end": 2653, "pages": [2653]}, {"start": 2660, "end": 2660, "pages": [2660]}, {"start": 5899, "end": 5899, "pages": [5899]}, {"start": 5908, "end": 5908, "pages": [5908]}, {"start": 5945, "end": 5945, "pages": [5945]}, {"start": 5954, "end": 5954, "pages": [5954]}, {"start": 6824, "end": 6824, "pages": [6824]}, {"start": 6833, "end": 6833, "pages": [6833]}, {"start": 6870, "end": 6870, "pages": [6870]}, {"start": 6879, "end": 6879, "pages": [6879]}, {"start": 7242, "end": 7242, "pages": [7242]}, {"start": 7559, "end": 7562, "pages": [7559, 7562]}, {"start": 7591, "end": 7591, "pages": [7591]}, {"start": 7598, "end": 7598, "pages": [7598]}, {"start": 7609, "end": 7617, "pages": [7609, 7613, 7615, 7616, 7617]}, {"start": 7633, "end": 7636, "pages": [7633, 7634, 7635, 7636]}, {"start": 7646, "end": 7650, "pages": [7646, 7647, 7648, 7649, 7650]}, {"start": 7675, "end": 7675, "pages": [7675]}, {"start": 7694, "end": 7697, "pages": [7694, 7697]}, {"start": 7932, "end": 7932, "pages": [7932]}, {"start": 8134, "end": 8134, "pages": [8134]}, {"start": 8153, "end": 8156, "pages": [8153, 8156]}, {"start": 14939, "end": 14939, "pages": [14939]}, {"start": 21117, "end": 21117, "pages": [21117]}];
+        const pageToPath = {"2109": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002109.jpg", "2653": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002653.jpg", "2660": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002660.jpg", "5899": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005899.jpg", "5908": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005908.jpg", "5945": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005945.jpg", "5954": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005954.jpg", "6824": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006824.jpg", "6833": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006833.jpg", "6870": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006870.jpg", "6879": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006879.jpg", "7242": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007242.jpg", "7559": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007559.jpg", "7562": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007562.jpg", "7591": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007591.jpg", "7598": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007598.jpg", "7609": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007609.jpg", "7613": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007613.jpg", "7615": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007615.jpg", "7616": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007616.jpg", "7617": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007617.jpg", "7633": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007633.jpg", "7634": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007634.jpg", "7635": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007635.jpg", "7636": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007636.jpg", "7646": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007646.jpg", "7647": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007647.jpg", "7648": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007648.jpg", "7649": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007649.jpg", "7650": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007650.jpg", "7675": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007675.jpg", "7694": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007694.jpg", "7697": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007697.jpg", "7932": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007932.jpg", "8134": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008134.jpg", "8153": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008153.jpg", "8156": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008156.jpg", "14939": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014939.jpg", "21117": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021117.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002109.jpg": "...nd ussoe ciated. suicide prevention) and. they:  form animpo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002653.jpg": "...ities  child. abduction, prevention act, h.r: lo4, o8th cong...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002660.jpg": "...vision.. child abduction prevention.act, h.r. llo4, lo8th:co...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005899.jpg": "...g, and ‘the; subsequent, prevention or ‘ending’ of abuse.  ‘...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005908.jpg": "...h a, specific: focus on. prevention, of” child, sexual abuse...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005945.jpg": "...9l alen goudena bp l99%. prevention. of: child al abuse:  ts...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005954.jpg": "...argued should  hat. in prevention, programs e: strenethein...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006824.jpg": "...g, and ‘the; subsequent, prevention or ‘ending’ of abuse.  ‘...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006833.jpg": "...h a, specific: focus on. prevention, of” child, sexual abuse...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006870.jpg": "...9l alen goudena bp l99%. prevention. of: child al abuse:  ts...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006879.jpg": "...argued should  hat. in prevention, programs e: strenethein...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007242.jpg": "...you might want to target prevention,  ia  fe6r exatiple, whe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007559.jpg": "...virginia center for the prevention of disease and injury  l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007562.jpg": "...:  accident analysis and prevention american_journal_of epid...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007591.jpg": "...ouning: epidemidlogy and prevention. american journal of pub...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007598.jpg": "...ker sp, dietz pe: injury prevention. in: the institute of me...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007609.jpg": "...tute's, llth annual loss prevention conference, tempe, arizo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007613.jpg": "...ensive one-day violence. prevention seminar designed for top...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007615.jpg": "...pe: “workplace violence prevention,” college and university...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007616.jpg": "..., october l4,  dietz p: “prevention of campus threats and vi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007617.jpg": "...tions for litigation and prevention,” butler pappas’ sexual...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007633.jpg": "...roup® workplace violence prevention training packages, video...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007634.jpg": "...ntal inesses and suicide prevention (training video) safe te...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007635.jpg": "...ntal inesses and suicide prevention (e-learning course);  sa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007636.jpg": "...oup® workplace violence  prevention courses taught by dr. di...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007646.jpg": "...“workplace violence l72 prevention of workplace misconduct...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007647.jpg": "...ar on workplace violence prevention,” washington, dc, septem...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007648.jpg": "...olence in the workplace: prevention, detection, dtid respons...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007649.jpg": "...acy's workplace violence prevention program” (with rochelle...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007650.jpg": "...ng in workplace violence prevention,” april 26-3o, 2o2l  fil...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007675.jpg": "...ve to florida's suicide: prevention. coordinating couneil (s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007694.jpg": ".... gaig initervertion and prevention summit florida gang inve...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007697.jpg": "...ficient (r)  l7; disease prevention  l8. reportable diseases...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007932.jpg": "...you might want to target prevention,  ia  fe6r exatiple, whe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008134.jpg": "...ve to florida's suicide: prevention. coordinating couneil (s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008153.jpg": ".... gaig initervertion and prevention summit florida gang inve...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008156.jpg": "...ficient (r)  l7; disease prevention  l8. reportable diseases...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014939.jpg": "...ou might. want to target prevention; for example, where ‘you...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021117.jpg": "...ection,  child abduction prevention act, h-r. llo4, lo8th co..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "prevention" (39 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">2109-2109</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">2653-2653</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">2660-2660</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">5899-5899</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">5908-5908</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">5945-5945</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">5954-5954</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">6824-6824</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">6833-6833</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">6870-6870</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">6879-6879</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">7242-7242</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">7559-7562</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">7591-7591</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">7598-7598</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">7609-7617</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">7633-7636</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">7646-7650</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">7675-7675</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">7694-7697</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">7932-7932</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">8134-8134</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">8153-8156</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">14939-14939</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">21117-21117</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

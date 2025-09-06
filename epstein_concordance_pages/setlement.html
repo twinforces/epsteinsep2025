@@ -1,0 +1,238 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "setlement"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 276, "end": 276, "pages": [276]}, {"start": 2358, "end": 2358, "pages": [2358]}, {"start": 2566, "end": 2566, "pages": [2566]}, {"start": 3290, "end": 3295, "pages": [3290, 3291, 3295]}, {"start": 3405, "end": 3405, "pages": [3405]}, {"start": 3461, "end": 3461, "pages": [3461]}, {"start": 4271, "end": 4271, "pages": [4271]}, {"start": 4412, "end": 4413, "pages": [4412, 4413]}, {"start": 4527, "end": 4527, "pages": [4527]}, {"start": 4583, "end": 4583, "pages": [4583]}, {"start": 4785, "end": 4785, "pages": [4785]}, {"start": 4831, "end": 4831, "pages": [4831]}, {"start": 4838, "end": 4838, "pages": [4838]}, {"start": 4858, "end": 4858, "pages": [4858]}, {"start": 4880, "end": 4880, "pages": [4880]}, {"start": 4889, "end": 4889, "pages": [4889]}, {"start": 4928, "end": 4928, "pages": [4928]}, {"start": 5445, "end": 5446, "pages": [5445, 5446]}, {"start": 5593, "end": 5593, "pages": [5593]}, {"start": 6412, "end": 6413, "pages": [6412, 6413]}, {"start": 6555, "end": 6555, "pages": [6555]}, {"start": 7093, "end": 7094, "pages": [7093, 7094]}, {"start": 7363, "end": 7363, "pages": [7363]}, {"start": 7397, "end": 7397, "pages": [7397]}, {"start": 7864, "end": 7864, "pages": [7864]}, {"start": 8371, "end": 8371, "pages": [8371]}, {"start": 8381, "end": 8381, "pages": [8381]}, {"start": 9183, "end": 9183, "pages": [9183]}, {"start": 9459, "end": 9459, "pages": [9459]}, {"start": 9470, "end": 9470, "pages": [9470]}, {"start": 9862, "end": 9862, "pages": [9862]}, {"start": 10138, "end": 10138, "pages": [10138]}, {"start": 10149, "end": 10149, "pages": [10149]}, {"start": 11421, "end": 11422, "pages": [11421, 11422]}, {"start": 11436, "end": 11438, "pages": [11436, 11437, 11438]}, {"start": 11480, "end": 11483, "pages": [11480, 11483]}, {"start": 11492, "end": 11500, "pages": [11492, 11496, 11500]}, {"start": 12100, "end": 12102, "pages": [12100, 12101, 12102]}, {"start": 12168, "end": 12170, "pages": [12168, 12169, 12170]}, {"start": 13664, "end": 13664, "pages": [13664]}, {"start": 14530, "end": 14530, "pages": [14530]}, {"start": 16289, "end": 16289, "pages": [16289]}, {"start": 17151, "end": 17151, "pages": [17151]}, {"start": 17689, "end": 17691, "pages": [17689, 17690, 17691]}, {"start": 17757, "end": 17759, "pages": [17757, 17758, 17759]}, {"start": 21288, "end": 21289, "pages": [21288, 21289]}, {"start": 21599, "end": 21599, "pages": [21599]}, {"start": 21779, "end": 21792, "pages": [21779, 21782, 21786, 21788, 21792]}];
+        const pageToPath = {"276": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000276.jpg", "2358": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002358.jpg", "2566": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002566.jpg", "3290": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003290.jpg", "3291": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003291.jpg", "3295": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003295.jpg", "3405": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003405.jpg", "3461": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003461.jpg", "4271": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004271.jpg", "4412": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004412.jpg", "4413": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004413.jpg", "4527": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004527.jpg", "4583": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004583.jpg", "4785": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004785.jpg", "4831": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004831.jpg", "4838": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004838.jpg", "4858": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004858.jpg", "4880": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004880.jpg", "4889": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004889.jpg", "4928": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004928.jpg", "5445": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005445.jpg", "5446": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005446.jpg", "5593": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005593.jpg", "6412": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006412.jpg", "6413": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006413.jpg", "6555": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006555.jpg", "7093": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007093.jpg", "7094": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007094.jpg", "7363": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007363.jpg", "7397": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007397.jpg", "7864": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007864.jpg", "8371": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008371.jpg", "8381": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008381.jpg", "9183": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009183.jpg", "9459": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009459.jpg", "9470": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009470.jpg", "9862": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009862.jpg", "10138": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010138.jpg", "10149": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010149.jpg", "11421": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011421.jpg", "11422": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011422.jpg", "11436": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011436.jpg", "11437": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011437.jpg", "11438": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011438.jpg", "11480": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011480.jpg", "11483": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011483.jpg", "11492": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011492.jpg", "11496": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011496.jpg", "11500": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011500.jpg", "12100": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012100.jpg", "12101": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012101.jpg", "12102": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012102.jpg", "12168": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012168.jpg", "12169": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012169.jpg", "12170": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012170.jpg", "13664": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013664.jpg", "14530": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014530.jpg", "16289": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016289.jpg", "17151": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017151.jpg", "17689": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017689.jpg", "17690": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017690.jpg", "17691": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017691.jpg", "17757": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017757.jpg", "17758": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017758.jpg", "17759": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017759.jpg", "21288": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021288.jpg", "21289": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021289.jpg", "21599": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021599.jpg", "21779": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021779.jpg", "21782": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021782.jpg", "21786": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021786.jpg", "21788": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021788.jpg", "21792": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021792.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000276.jpg": "...im immuni y and a global setlement ‘for offenses including...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002358.jpg": "...€. the setlement.and. boies schiller’s re...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002566.jpg": "...g the confidentiality of setlement discussions .of a.privat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003290.jpg": "...g la uits en. . behalf ¢ setlement-with’ epstein. lefkouitz...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003291.jpg": "...tes.”  tims] re ri » the setlement p process, we do. not -t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003295.jpg": "...as not an out. of’ court setlement. seems: that: th y gan’t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003405.jpg": "...tomey to exoreise  inary setlement  that even.just having a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003461.jpg": "...o “ discussion” phase of setlement negotiations;  moreover,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004271.jpg": "...up; to an. agreed-upon. setlement amount. accuser-4 took f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004412.jpg": "...eleeted atorney. and.the setlement process.”  , leter ‘to s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004413.jpg": "...ims] re vending th » the setlement p process. we dou not -t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004527.jpg": "...“of te idament,  inary ‘setlement  not  cg a that ever jus...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004583.jpg": "...a discussion” hase of, setlement negotiations;  efal, gis...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004785.jpg": "...e signing a confidential setlement agreement.  assistant: u...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004831.jpg": "...so as part:of the civil setlement: investigators.also bega...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004838.jpg": "...by] wanted in: the civil:setlement was a release from crimi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004858.jpg": "...egotiated a term: of the setlement agreement with constand...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004880.jpg": "...vil action, and led to‘a setlement for a significant  amoun...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004889.jpg": "...a.multi-  million dollar setlement. the end result was:exac...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004928.jpg": "...oth during and after the setlement:of the giuffre action, t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005445.jpg": "...ete  ved asubs staritial setlement:  ao  ‘participating yin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005446.jpg": "...ams, esate!  obtaining-a‘setlement, l e precluded ‘from:¢ a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005593.jpg": "...tion, terminated with, a.setlement. (see id. at 58); even....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006412.jpg": "...2 received a substantial setlement from the estate after pa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006413.jpg": "...lawsuit and obtaming.a setlement, the defense should be p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006555.jpg": "...tion, terminated with, a.setlement. (see id. at 58); even....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007093.jpg": "...ree o4(d) after a egivil setlement just has fo  ot  relevan...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007094.jpg": "...wasn't a party to those  setlement agreements. so, to the e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007363.jpg": "...purposes of’ securing; a setlement. similarly; the amount o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007397.jpg": "...nee their  nou-completed setlement: process.  victim met ep...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007864.jpg": "...ernational, c center for setlement of disputes (i sid)  mar...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008371.jpg": "...assman then, demanded. a setlement in, the eight figures. ‘...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008381.jpg": "...inally demanded a higher setlement. from the  evgp: as the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009183.jpg": "...id that:part’of the 2oo9 setlement: protecting ‘other‘poten...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009459.jpg": "...e art of  speak no evil: setlement apgreements:conditioned...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009470.jpg": "...inst a. connection witha setlement)  fenire, “ma yb the ; s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009862.jpg": "...id that:part’of the 2oo9 setlement: protecting ‘other‘poten...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010138.jpg": "...e art of  speak no evil: setlement apgreements:conditioned...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010149.jpg": "...inst a. connection witha setlement)  fenire, “ma yb the ; s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011421.jpg": "...stonal conduct ‘l.6.  3s setlement demands to ms. maxwell a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011422.jpg": "...additionally, whether a setlement. demand, would have been...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011436.jpg": ".... lo, 2ol7) (““but:when. setlement-related evidence is ‘rel...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011437.jpg": "...4o8 excludes evidence of setlement  offers only ifsuch evid...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011438.jpg": "...hat 'a-party lied during setlement negations ‘may be admiss...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011480.jpg": "...reviously entered into a setlement agreement. resolving a ¢...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011483.jpg": "...reviously entered into a setlement agreement with epstein a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011492.jpg": "...'to_submit_a_cop: of the setlement agreement to the program...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011496.jpg": "...nt mediation privileges, setlement privileges and. other’...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011500.jpg": "...reviously entered.into a setlement, agreement with epstein....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012100.jpg": "...sked for an eaght-liguye setlement instead,  ms; moe: yes;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012101.jpg": "...increased amount in the setlement  = os - ee) a ;  award,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012102.jpg": "...troduce civil litigation setlement. ts  — =  defense aware...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012168.jpg": "...rms relating to  a civil setlement.  pro the extent the def...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012169.jpg": "...at.  she received im the setlement. zi don't knou what's co...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012170.jpg": "...al issues related to the setlement  funds that are net proe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013664.jpg": "...ney.  qo. as part of the setlement that you received from t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014530.jpg": "...2o2o, okay. she gets, a  setlement with epstein, several hu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016289.jpg": "...ney.  qo. as part of the setlement that you received from t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017151.jpg": "...2o2o, okay. she gets, a  setlement with epstein, several hu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017689.jpg": "...sked for an eaght-liguye setlement instead,  ms; moe: yes;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017690.jpg": "...increased amount in the setlement  = os - ee) a ;  award,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017691.jpg": "...troduce civil litigation setlement. ts  — =  defense aware...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017757.jpg": "...rms relating to  a civil setlement.  pro the extent the def...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017758.jpg": "...at.  she received im the setlement. zi don't knou what's co...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017759.jpg": "...al issues related to the setlement  funds that are net proe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021288.jpg": "...epre:  lefkouitz argued  setlement uted epstei. teeouite ss...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021289.jpg": "...e aintment of s and the: setlement process. not  il fori im...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021599.jpg": "...urported pending divorce setlement. so iam  impose a:  i wi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021779.jpg": "...: i is based, ona final, setlement. of the case, the fully-...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021782.jpg": "...: i is based, ona final, setlement. of the case, the fully-...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021786.jpg": "...withdraw” “with pre adic setlement. of the case, the fully-...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021788.jpg": "...withdraw” “with pre adic setlement. of the case, the fully-...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021792.jpg": "...dice is based:on a-final setlement of the case, the-fully-e..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "setlement" (73 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">276-276</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">2358-2358</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">2566-2566</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3290-3295</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">3405-3405</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">3461-3461</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">4271-4271</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">4412-4413</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">4527-4527</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">4583-4583</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">4785-4785</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">4831-4831</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">4838-4838</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">4858-4858</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">4880-4880</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">4889-4889</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">4928-4928</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">5445-5446</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">5593-5593</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">6412-6413</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">6555-6555</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">7093-7094</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">7363-7363</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">7397-7397</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">7864-7864</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">8371-8371</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">8381-8381</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">9183-9183</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">9459-9459</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">9470-9470</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">9862-9862</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">10138-10138</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">10149-10149</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">11421-11422</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">11436-11438</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">11480-11483</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">11492-11500</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">12100-12102</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">12168-12170</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">13664-13664</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">14530-14530</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">16289-16289</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">17151-17151</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">17689-17691</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">17757-17759</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(45, 0); return false;">21288-21289</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(46, 0); return false;">21599-21599</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(47, 0); return false;">21779-21792</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

@@ -1,0 +1,232 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "reconsider"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 21, "end": 21, "pages": [21]}, {"start": 565, "end": 567, "pages": [565, 567]}, {"start": 1110, "end": 1110, "pages": [1110]}, {"start": 1153, "end": 1153, "pages": [1153]}, {"start": 1191, "end": 1191, "pages": [1191]}, {"start": 1236, "end": 1236, "pages": [1236]}, {"start": 1244, "end": 1244, "pages": [1244]}, {"start": 1294, "end": 1295, "pages": [1294, 1295]}, {"start": 1303, "end": 1303, "pages": [1303]}, {"start": 1455, "end": 1455, "pages": [1455]}, {"start": 1985, "end": 1985, "pages": [1985]}, {"start": 2172, "end": 2172, "pages": [2172]}, {"start": 2212, "end": 2212, "pages": [2212]}, {"start": 2735, "end": 2735, "pages": [2735]}, {"start": 2749, "end": 2749, "pages": [2749]}, {"start": 3284, "end": 3284, "pages": [3284]}, {"start": 4406, "end": 4406, "pages": [4406]}, {"start": 4721, "end": 4721, "pages": [4721]}, {"start": 4825, "end": 4825, "pages": [4825]}, {"start": 4834, "end": 4838, "pages": [4834, 4838]}, {"start": 4875, "end": 4877, "pages": [4875, 4876, 4877]}, {"start": 5020, "end": 5020, "pages": [5020]}, {"start": 6173, "end": 6176, "pages": [6173, 6176]}, {"start": 6201, "end": 6201, "pages": [6201]}, {"start": 7408, "end": 7408, "pages": [7408]}, {"start": 10414, "end": 10414, "pages": [10414]}, {"start": 11427, "end": 11427, "pages": [11427]}, {"start": 14870, "end": 14870, "pages": [14870]}, {"start": 19239, "end": 19239, "pages": [19239]}, {"start": 19414, "end": 19418, "pages": [19414, 19418]}, {"start": 19431, "end": 19431, "pages": [19431]}, {"start": 19594, "end": 19597, "pages": [19594, 19597]}, {"start": 19650, "end": 19653, "pages": [19650, 19653]}, {"start": 20028, "end": 20028, "pages": [20028]}, {"start": 20071, "end": 20071, "pages": [20071]}, {"start": 20109, "end": 20109, "pages": [20109]}, {"start": 20154, "end": 20154, "pages": [20154]}, {"start": 20162, "end": 20162, "pages": [20162]}, {"start": 20212, "end": 20213, "pages": [20212, 20213]}, {"start": 20221, "end": 20221, "pages": [20221]}, {"start": 20373, "end": 20373, "pages": [20373]}, {"start": 21350, "end": 21350, "pages": [21350]}, {"start": 21814, "end": 21814, "pages": [21814]}, {"start": 21867, "end": 21867, "pages": [21867]}, {"start": 21897, "end": 21897, "pages": [21897]}, {"start": 21986, "end": 21986, "pages": [21986]}];
+        const pageToPath = {"21": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000021.jpg", "565": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000565.jpg", "567": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000567.jpg", "1110": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001110.jpg", "1153": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001153.jpg", "1191": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001191.jpg", "1236": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001236.jpg", "1244": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001244.jpg", "1294": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001294.jpg", "1295": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001295.jpg", "1303": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001303.jpg", "1455": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001455.jpg", "1985": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001985.jpg", "2172": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002172.jpg", "2212": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002212.jpg", "2735": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002735.jpg", "2749": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002749.jpg", "3284": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003284.jpg", "4406": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004406.jpg", "4721": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004721.jpg", "4825": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004825.jpg", "4834": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004834.jpg", "4838": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004838.jpg", "4875": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004875.jpg", "4876": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004876.jpg", "4877": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004877.jpg", "5020": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005020.jpg", "6173": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006173.jpg", "6176": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006176.jpg", "6201": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006201.jpg", "7408": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007408.jpg", "10414": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010414.jpg", "11427": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011427.jpg", "14870": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014870.jpg", "19239": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019239.jpg", "19414": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019414.jpg", "19418": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019418.jpg", "19431": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019431.jpg", "19594": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019594.jpg", "19597": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019597.jpg", "19650": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019650.jpg", "19653": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019653.jpg", "20028": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020028.jpg", "20071": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020071.jpg", "20109": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020109.jpg", "20154": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020154.jpg", "20162": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020162.jpg", "20212": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020212.jpg", "20213": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020213.jpg", "20221": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020221.jpg", "20373": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020373.jpg", "21350": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021350.jpg", "21814": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021814.jpg", "21867": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021867.jpg", "21897": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021897.jpg", "21986": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021986.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000021.jpg": "...'s motion.  declined to reconsider its response and denied...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000565.jpg": "...or not. your honor would reconsider your strongly felt  leel...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000567.jpg": "...t: ‘i will consider and. reconsider.  on, etat pout, ei noti...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001110.jpg": "...ts inherent:authority to:reconsider‘its: oun decision: was....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001153.jpg": "...a  or that failure to, reconsider “would, constitute niani...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001191.jpg": "...s grounds for the courto reconsider its prior ruling:  the f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001236.jpg": "...proposed, conditions.  ‘reconsider its ca  vo. o2: er.'756...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001244.jpg": "...‘ pod  l¢ dant nis: go reconsider its! | ‘proposed. condit...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001294.jpg": "...reasons for the-court to reconsider  its. garlier release ne...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001295.jpg": "...l. ‘that is, a:motion.to reconsider is.an. “inappropriate: v...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001303.jpg": "...in. asking the court to reconsider its order granting mr....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001455.jpg": "...pariel of this court to reconsider its eatlier decision. to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001985.jpg": "...i. reconsider ‘ation of the court's ba...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002172.jpg": "...om  or that failure to, reconsider “would, constitute niani...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002212.jpg": ".... \"this,alot he. couirto-reconsider its  ocumientary: (corvo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002735.jpg": "...proposed, conditions.  ‘reconsider its ca  vo. o2: er.'756...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002749.jpg": "...‘ pod  l¢ dant nis: go reconsider its! | ‘proposed. condit...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003284.jpg": "...ly] be proud of. please: reconsider.and help ‘me geta fair r...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004406.jpg": "...lly be proud of. please: reconsider-and help ‘me geta fair r...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004721.jpg": "...r the  district court to reconsider its decision in light. o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004825.jpg": "...this mater that he will reconsider this decision should the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004834.jpg": "...at:  sti eb ados  e will reconsider this. decision should th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004838.jpg": "...this mater that he: will reconsider this decision should the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004875.jpg": "...ct, atorney gastor] will reconsider this decision should the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004876.jpg": "...this mater that he will reconsider this decision should the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004877.jpg": "...announced that he “will reconsider this decision should the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005020.jpg": "...ourts have diserction,te reconsider’prior rulings in, eri  2...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006173.jpg": "...eason, for the court to  reconsider its position and, grant...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006176.jpg": "...eason, for the court to  reconsider its position and, grant...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006201.jpg": "...tion to the defendant”:  reconsider this: cotirt’s, prior ba...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007408.jpg": "...e defense: is willing’to reconsider its position if the  ‘go...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010414.jpg": "...uses the government. fo  reconsider that:position.. such an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011427.jpg": "...,, this. court:need, not reconsider its decision. in pena, b...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014870.jpg": "...'s motion.  declined to reconsider its response and denied...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019239.jpg": "...denial of the motion,to reconsider.”); minpeco:s:a: v. cont...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019414.jpg": "...denial of the motion to reconsider.” ); minpeco's.a. ». gon...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019418.jpg": "...aving the opportunity to reconsider her decision in light of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019431.jpg": "...have the opportunity to reconsider her decision armed. with...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019594.jpg": "...denial of the motion to reconsider.”);, minpeco:s_a. v. con...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019597.jpg": "...a’s geting:the.chance-to reconsider her decision. in. light...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019650.jpg": "...r. 2oll). she might also reconsider whether ms. maxwell reas...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019653.jpg": "...er judge preska, should  reconsider her ordergiven [mss  max...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020028.jpg": "...ts inherent:authority to:reconsider‘its: oun decision: was....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020071.jpg": "...a  or that failure to, reconsider “would, constitute niani...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020109.jpg": "...s grounds for the courto reconsider its prior ruling:  the f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020154.jpg": "...proposed, conditions.  ‘reconsider its ca  vo. o2: er.'756...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020162.jpg": "...‘ pod  l¢ dant nis: go reconsider its! | ‘proposed. condit...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020212.jpg": "...reasons for the-court to reconsider  its. garlier release ne...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020213.jpg": "...l. ‘that is, a:motion.to reconsider is.an. “inappropriate: v...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020221.jpg": "...in. asking the court to reconsider its order granting mr....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020373.jpg": "...pariel of this court to reconsider its eatlier decision. to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021350.jpg": "...reconsider the prouision. acosta co...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021814.jpg": "...'s motion.  declined to reconsider its response and denied...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021867.jpg": "...'s motion.  declined to reconsider its response and denied...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021897.jpg": "...'s motion.  declined to reconsider its response and denied...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021986.jpg": "...asking for this court to reconsider that decision  and, pfoy..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "reconsider" (56 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">21-21</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">565-567</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1110-1110</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">1153-1153</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">1191-1191</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">1236-1236</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">1244-1244</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">1294-1295</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">1303-1303</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">1455-1455</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">1985-1985</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">2172-2172</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">2212-2212</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">2735-2735</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">2749-2749</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">3284-3284</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">4406-4406</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">4721-4721</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">4825-4825</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">4834-4838</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">4875-4877</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">5020-5020</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">6173-6176</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">6201-6201</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">7408-7408</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">10414-10414</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">11427-11427</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">14870-14870</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">19239-19239</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">19414-19418</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">19431-19431</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">19594-19597</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">19650-19653</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">20028-20028</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">20071-20071</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">20109-20109</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">20154-20154</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">20162-20162</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">20212-20213</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">20221-20221</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">20373-20373</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">21350-21350</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">21814-21814</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">21867-21867</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">21897-21897</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(45, 0); return false;">21986-21986</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

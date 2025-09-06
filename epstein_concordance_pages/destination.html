@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "destination"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 10396, "end": 10396, "pages": [10396]}, {"start": 11714, "end": 11714, "pages": [11714]}, {"start": 11798, "end": 11798, "pages": [11798]}, {"start": 11850, "end": 11850, "pages": [11850]}, {"start": 12864, "end": 12864, "pages": [12864]}, {"start": 13393, "end": 13393, "pages": [13393]}, {"start": 16159, "end": 16159, "pages": [16159]}, {"start": 17388, "end": 17388, "pages": [17388]}, {"start": 17440, "end": 17440, "pages": [17440]}, {"start": 18450, "end": 18450, "pages": [18450]}, {"start": 18977, "end": 18977, "pages": [18977]}, {"start": 21013, "end": 21013, "pages": [21013]}, {"start": 23418, "end": 23418, "pages": [23418]}];
+        const pageToPath = {"10396": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010396.jpg", "11714": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011714.jpg", "11798": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011798.jpg", "11850": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011850.jpg", "12864": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012864.jpg", "13393": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013393.jpg", "16159": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016159.jpg", "17388": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017388.jpg", "17440": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017440.jpg", "18450": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018450.jpg", "18977": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018977.jpg", "21013": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021013.jpg", "23418": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023418.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010396.jpg": "...was ambiguous as. to the destination of the hypothictical ret...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011714.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011798.jpg": "...d, bit if was a nkegular destination.  q. and why  did yeu gg...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011850.jpg": "...uld need to be given the destination where youre  a. y@s. tha...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012864.jpg": "...i apologize if e got the destination,  re  l.4, de you recall...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013393.jpg": "...ou the day you flew, the destination you were to, the flight...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016159.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017388.jpg": "...d, bit if was a nkegular destination.  q. and why  did yeu gg...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017440.jpg": "...uld need to be given the destination where youre  a. y@s. tha...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018450.jpg": "...i apologize if e got the destination,  re  l.4, de you recall...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018977.jpg": "...ou the day you flew, the destination you were to, the flight...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021013.jpg": "...was ambiguous as to the destination ofthe hypothetical. re s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023418.jpg": "...acronym “wab' within the destination/description portion ofth..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "destination" (13 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">10396-10396</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">11714-11714</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">11798-11798</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">11850-11850</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">12864-12864</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">13393-13393</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">16159-16159</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">17388-17388</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">17440-17440</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">18450-18450</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">18977-18977</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">21013-21013</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">23418-23418</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

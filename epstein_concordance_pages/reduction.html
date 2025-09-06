@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "reduction"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 490, "end": 490, "pages": [490]}, {"start": 802, "end": 802, "pages": [802]}, {"start": 1456, "end": 1456, "pages": [1456]}, {"start": 3269, "end": 3269, "pages": [3269]}, {"start": 4391, "end": 4391, "pages": [4391]}, {"start": 4505, "end": 4505, "pages": [4505]}, {"start": 4954, "end": 4954, "pages": [4954]}, {"start": 5849, "end": 5849, "pages": [5849]}, {"start": 6774, "end": 6774, "pages": [6774]}, {"start": 7820, "end": 7820, "pages": [7820]}, {"start": 10477, "end": 10477, "pages": [10477]}, {"start": 19630, "end": 19630, "pages": [19630]}, {"start": 20374, "end": 20374, "pages": [20374]}, {"start": 20642, "end": 20642, "pages": [20642]}, {"start": 20651, "end": 20651, "pages": [20651]}, {"start": 20669, "end": 20669, "pages": [20669]}, {"start": 21267, "end": 21267, "pages": [21267]}, {"start": 21821, "end": 21821, "pages": [21821]}, {"start": 21874, "end": 21874, "pages": [21874]}, {"start": 22060, "end": 22060, "pages": [22060]}];
+        const pageToPath = {"490": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000490.jpg", "802": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000802.jpg", "1456": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001456.jpg", "3269": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003269.jpg", "4391": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004391.jpg", "4505": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004505.jpg", "4954": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004954.jpg", "5849": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005849.jpg", "6774": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006774.jpg", "7820": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007820.jpg", "10477": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010477.jpg", "19630": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019630.jpg", "20374": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020374.jpg", "20642": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020642.jpg", "20651": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020651.jpg", "20669": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020669.jpg", "21267": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021267.jpg", "21821": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021821.jpg", "21874": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021874.jpg", "22060": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022060.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000490.jpg": "...stration. status ‘ftom,  reduction would have alloued mf. e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000802.jpg": "...stration. status ‘ftom,  reduction would have alloued mf. e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001456.jpg": "...fixed is by motion. for reduction of bail and appeal to th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003269.jpg": "...ls is possible ihat-the: reduction ‘was:connected to epstei...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004391.jpg": "...t.”  ls possible thathe: reduction. wastconnected. to: \\ ep...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004505.jpg": "...or an l8-month sentence, reduction off sixmonths fromr th ‘...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004954.jpg": "...sal, of an indictment or reduction  of charges, including a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005849.jpg": "...le: reliab  sod ct coal  reduction of the evidence, but by:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006774.jpg": "...le: reliab  sod ct coal  reduction of the evidence, but by:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007820.jpg": "...’s new pouer in sentence reduction, 5 criminal. justice 2 (...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010477.jpg": "...well-recognized sentence reduction  courts inthis district...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019630.jpg": "...nlike & request for bail reduction, houever, an. order deny...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020374.jpg": "...fixed is by motion. for reduction of bail and appeal to th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020642.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020651.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020669.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021267.jpg": "...ng with the state “was a-reduction.  wi, t6: cighteeh  ator...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021821.jpg": "...charges, are subject to: reduction:  * ‘be filed via cm/ecf...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021874.jpg": "...charges, are subject to: reduction:  * ‘be filed via cm/ecf...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022060.jpg": "...hey do notagree with the reduction.of annual leave slots; i..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "reduction" (20 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">490-490</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">802-802</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1456-1456</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3269-3269</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">4391-4391</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">4505-4505</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">4954-4954</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">5849-5849</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">6774-6774</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">7820-7820</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">10477-10477</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">19630-19630</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">20374-20374</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">20642-20642</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">20651-20651</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">20669-20669</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">21267-21267</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">21821-21821</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">21874-21874</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">22060-22060</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

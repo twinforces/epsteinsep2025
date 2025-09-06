@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "expansion"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1376, "end": 1376, "pages": [1376]}, {"start": 1390, "end": 1394, "pages": [1390, 1394]}, {"start": 1802, "end": 1802, "pages": [1802]}, {"start": 2665, "end": 2665, "pages": [2665]}, {"start": 2926, "end": 2930, "pages": [2926, 2928, 2930]}, {"start": 3043, "end": 3043, "pages": [3043]}, {"start": 3685, "end": 3685, "pages": [3685]}, {"start": 5220, "end": 5220, "pages": [5220]}, {"start": 20294, "end": 20294, "pages": [20294]}, {"start": 20308, "end": 20312, "pages": [20308, 20312]}, {"start": 20770, "end": 20770, "pages": [20770]}, {"start": 21120, "end": 21121, "pages": [21120, 21121]}, {"start": 21707, "end": 21707, "pages": [21707]}];
+        const pageToPath = {"1376": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001376.jpg", "1390": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001390.jpg", "1394": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001394.jpg", "1802": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001802.jpg", "2665": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002665.jpg", "2926": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002926.jpg", "2928": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002928.jpg", "2930": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002930.jpg", "3043": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003043.jpg", "3685": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003685.jpg", "5220": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005220.jpg", "20294": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020294.jpg", "20308": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020308.jpg", "20312": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020312.jpg", "20770": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020770.jpg", "21120": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021120.jpg", "21121": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021121.jpg", "21707": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021707.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001376.jpg": "...‘trial because of thre ¢ expansion l of the « conspiracy ‘t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001390.jpg": "...e. this is a significait expansion of the case:againist ms....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001394.jpg": "...vestigation. the delayed expansion.of its prosecution and i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001802.jpg": "...e defense” ‘s * proposed expansion of br ay would be sweepi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002665.jpg": "...roactive application ofa expansion ofan individual’s; cxpos...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002926.jpg": "...e. this is a significant expansion of the case again:  ms....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002928.jpg": "...rimes. houever, with the expansion, ofthe charges to includ...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002930.jpg": "...tigation.  the: delayed. expansion. of its: prosecution. an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003043.jpg": "...on. d wholly unsupported expansion of  the law. ‘because ma...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003685.jpg": "...offense. that linguistic expansion indicates congress.  tha...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005220.jpg": "...issues that-require: an expansion of traditional.  ‘voir d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020294.jpg": "...‘trial because of thre ¢ expansion l of the « conspiracy ‘t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020308.jpg": "...e. this is a significait expansion of the case:againist ms....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020312.jpg": "...vestigation. the delayed expansion.of its prosecution and i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020770.jpg": "...ffense. ‘that linguistic:expansion, indicates gongre  ‘inte...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021120.jpg": "...at 655-56 (holding that expansion of securities, fraud. st...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021121.jpg": "...circuit observed that an expansion of a statute of  limitat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021707.jpg": "...e offense’—a “linguistic expansion” that. ‘shous congress's..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "expansion" (18 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1376-1376</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1390-1394</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1802-1802</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">2665-2665</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">2926-2930</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">3043-3043</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3685-3685</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">5220-5220</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">20294-20294</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">20308-20312</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">20770-20770</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">21120-21121</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">21707-21707</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

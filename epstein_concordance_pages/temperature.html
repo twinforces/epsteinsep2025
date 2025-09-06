@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "temperature"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1543, "end": 1543, "pages": [1543]}, {"start": 6059, "end": 6059, "pages": [6059]}, {"start": 6332, "end": 6332, "pages": [6332]}, {"start": 7388, "end": 7388, "pages": [7388]}, {"start": 8035, "end": 8035, "pages": [8035]}, {"start": 10472, "end": 10472, "pages": [10472]}, {"start": 11837, "end": 11837, "pages": [11837]}, {"start": 17427, "end": 17427, "pages": [17427]}, {"start": 19251, "end": 19251, "pages": [19251]}, {"start": 19269, "end": 19269, "pages": [19269]}, {"start": 20393, "end": 20393, "pages": [20393]}, {"start": 20454, "end": 20454, "pages": [20454]}, {"start": 20687, "end": 20687, "pages": [20687]}, {"start": 20698, "end": 20698, "pages": [20698]}];
+        const pageToPath = {"1543": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001543.jpg", "6059": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006059.jpg", "6332": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006332.jpg", "7388": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007388.jpg", "8035": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008035.jpg", "10472": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010472.jpg", "11837": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011837.jpg", "17427": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017427.jpg", "19251": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019251.jpg", "19269": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019269.jpg", "20393": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020393.jpg", "20454": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020454.jpg", "20687": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020687.jpg", "20698": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020698.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001543.jpg": "...te the questionnaire and temperature ‘screening: at an.entry...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006059.jpg": "...rition, exposure'to cold temperature, daily’  humiliation. if...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006332.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007388.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008035.jpg": "...ors must also have their temperature taken when they arrive a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010472.jpg": "...led because of the col temperature ¢ in her ecll, was remov...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011837.jpg": "...y cold if, hene, gan the temperature be pisen just a litle?...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017427.jpg": "...y cold if, hene, gan the temperature be pisen just a litle?...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019251.jpg": "...pears al c ‘pro ig pl d ‘temperature taken when they-arrive a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019269.jpg": "...pears al c ‘pro ig pl d ‘temperature taken when they-arrive a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020393.jpg": "...iteds ¥ persons will  ti temperature aiken ‘when nihey ath eo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020454.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020687.jpg": "....ranyone who appe  their temperature taken:when they ¢ arr  d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020698.jpg": ""};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "temperature" (14 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1543-1543</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">6059-6059</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">6332-6332</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">7388-7388</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">8035-8035</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">10472-10472</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">11837-11837</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">17427-17427</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">19251-19251</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">19269-19269</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">20393-20393</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">20454-20454</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">20687-20687</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">20698-20698</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

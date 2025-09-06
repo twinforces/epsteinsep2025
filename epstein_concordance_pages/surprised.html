@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "surprised"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 643, "end": 643, "pages": [643]}, {"start": 726, "end": 726, "pages": [726]}, {"start": 1036, "end": 1036, "pages": [1036]}, {"start": 1909, "end": 1909, "pages": [1909]}, {"start": 3125, "end": 3125, "pages": [3125]}, {"start": 3299, "end": 3299, "pages": [3299]}, {"start": 3367, "end": 3367, "pages": [3367]}, {"start": 3409, "end": 3409, "pages": [3409]}, {"start": 3566, "end": 3566, "pages": [3566]}, {"start": 4421, "end": 4421, "pages": [4421]}, {"start": 4531, "end": 4531, "pages": [4531]}, {"start": 4834, "end": 4834, "pages": [4834]}, {"start": 4995, "end": 4996, "pages": [4995, 4996]}, {"start": 5002, "end": 5003, "pages": [5002, 5003]}, {"start": 5600, "end": 5600, "pages": [5600]}, {"start": 6562, "end": 6562, "pages": [6562]}, {"start": 8298, "end": 8298, "pages": [8298]}, {"start": 10236, "end": 10236, "pages": [10236]}, {"start": 10341, "end": 10343, "pages": [10341, 10343]}, {"start": 10401, "end": 10402, "pages": [10401, 10402]}, {"start": 12237, "end": 12237, "pages": [12237]}, {"start": 12302, "end": 12302, "pages": [12302]}, {"start": 13004, "end": 13004, "pages": [13004]}, {"start": 13027, "end": 13027, "pages": [13027]}, {"start": 13624, "end": 13624, "pages": [13624]}, {"start": 13642, "end": 13642, "pages": [13642]}, {"start": 16249, "end": 16249, "pages": [16249]}, {"start": 16267, "end": 16267, "pages": [16267]}, {"start": 17826, "end": 17826, "pages": [17826]}, {"start": 17890, "end": 17890, "pages": [17890]}, {"start": 18590, "end": 18590, "pages": [18590]}, {"start": 18612, "end": 18612, "pages": [18612]}, {"start": 19954, "end": 19954, "pages": [19954]}, {"start": 20961, "end": 20963, "pages": [20961, 20963]}, {"start": 21018, "end": 21020, "pages": [21018, 21019, 21020]}, {"start": 21720, "end": 21720, "pages": [21720]}];
+        const pageToPath = {"643": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000643.jpg", "726": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000726.jpg", "1036": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001036.jpg", "1909": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001909.jpg", "3125": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003125.jpg", "3299": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003299.jpg", "3367": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003367.jpg", "3409": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003409.jpg", "3566": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003566.jpg", "4421": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004421.jpg", "4531": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004531.jpg", "4834": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004834.jpg", "4995": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004995.jpg", "4996": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004996.jpg", "5002": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005002.jpg", "5003": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005003.jpg", "5600": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005600.jpg", "6562": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006562.jpg", "8298": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008298.jpg", "10236": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010236.jpg", "10341": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010341.jpg", "10343": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010343.jpg", "10401": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010401.jpg", "10402": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010402.jpg", "12237": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012237.jpg", "12302": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012302.jpg", "13004": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013004.jpg", "13027": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013027.jpg", "13624": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013624.jpg", "13642": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013642.jpg", "16249": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016249.jpg", "16267": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016267.jpg", "17826": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017826.jpg", "17890": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017890.jpg", "18590": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018590.jpg", "18612": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018612.jpg", "19954": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019954.jpg", "20961": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020961.jpg", "20963": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020963.jpg", "21018": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021018.jpg", "21019": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021019.jpg", "21020": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021020.jpg", "21720": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021720.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000643.jpg": "...it. ls true. ti was also surprised that that aspect was  no...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000726.jpg": "...in -related:cases. iwas: surprised to learn that very recen...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001036.jpg": "...——  the court: == id was surprised that that. inferniat ton...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001909.jpg": "...-—  the court: == id was surprised that that. inferniat ton...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003125.jpg": "...n. moreox ver, in. both  surprised a at tivial, which, w wa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003299.jpg": "...heir {charge — am thus + surprised to 5 read  idqu: ers tha...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003367.jpg": "...and the emails  that: : “surprised tos see hi ww nie she ‘w...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003409.jpg": "...ncerned that her not get surprised by all, this’ oa 3oo:  c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003566.jpg": "...ould be very shocked and surprised iff that were true.  q....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004421.jpg": "...ddressed. to  am thus. + surprised ‘to > read  idqu: ers th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004531.jpg": "...oncerned that he not get surprised. by all. this. call. on....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004834.jpg": ".... ferman, but would, be- surprised if he: did not.  mr. cas...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004995.jpg": "...that the defense will be surprised at-trial by a profision...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004996.jpg": "...endant is. likely to: be surprised. by the identity of co-c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005002.jpg": "...that the defense will be surprised at-trial by a profision...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005003.jpg": "...endant is. likely to: be surprised. by the identity of co-c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005600.jpg": "...e.  defense would-not be:surprised at trial. and because: o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006562.jpg": "...e.  defense would-not be:surprised at trial. and because: o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008298.jpg": "...asking if you would be  surprised by that?  mr. pagliucga:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010236.jpg": "...lling this out, were you surprised  ths questionnaire asked...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010341.jpg": "...genuinely and completely surprised. to learn that the quest...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010343.jpg": "...ror 5o said he was, ict “surprised” at-the-tinie, but. only...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010401.jpg": "...claims she was unfairly surprised by its introduction. for...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010402.jpg": "...endant was not unfairly. surprised. of  prejudiced. see.kap...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012237.jpg": "...eks ago, right? maybe it surprised you.  there's media goev...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012302.jpg": "...: your honexr, i'm quite surprised defense  eounsel is fiak...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013004.jpg": "...ms. moe: your h6enor, im surprised by all three of those ar...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013027.jpg": "...indicated, we're guite surprised to receive the defendant...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013624.jpg": "...ae, ae oe  a. twas very surprised. i was very nervous, and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013642.jpg": "...a  pression that she was surprised to see ‘you, or did  she...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016249.jpg": "...ae, ae oe  a. twas very surprised. i was very nervous, and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016267.jpg": "...a  pression that she was surprised to see ‘you, or did  she...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017826.jpg": "...eks ago, right? maybe it surprised you.  there's media goev...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017890.jpg": "...: your honexr, i'm quite surprised defense  eounsel is fiak...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018590.jpg": "...ms. moe: your h6enor, im surprised by all three of those ar...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018612.jpg": "...indicated, we're guite surprised to receive the defendant...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019954.jpg": "...——  the court: == id was surprised that that. inferniat ton...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020961.jpg": "...ine ely and com pletely: surprised fo: learn.that ‘the:  so...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020963.jpg": "...uror.5o:said herwas: not“surprised” at the time; but only s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021018.jpg": "...claims she was unfairly surprised ‘by'its introduction. fo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021019.jpg": "...ir  continuance when. ¢  surprised.or’  prejudiced. see.kap...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021020.jpg": "...adduced atrial unfairly surprised or prejudiced.the; defen...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021720.jpg": "...nuinely and. completely. surprised to learn. that the quest..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "surprised" (43 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">643-643</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">726-726</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1036-1036</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">1909-1909</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">3125-3125</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">3299-3299</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3367-3367</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">3409-3409</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">3566-3566</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">4421-4421</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">4531-4531</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">4834-4834</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">4995-4996</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">5002-5003</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">5600-5600</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">6562-6562</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">8298-8298</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">10236-10236</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">10341-10343</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">10401-10402</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">12237-12237</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">12302-12302</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">13004-13004</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">13027-13027</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">13624-13624</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">13642-13642</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">16249-16249</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">16267-16267</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">17826-17826</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">17890-17890</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">18590-18590</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">18612-18612</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">19954-19954</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">20961-20963</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">21018-21020</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">21720-21720</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

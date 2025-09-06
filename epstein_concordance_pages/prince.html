@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "prince"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1761, "end": 1761, "pages": [1761]}, {"start": 2594, "end": 2594, "pages": [2594]}, {"start": 3880, "end": 3880, "pages": [3880]}, {"start": 4875, "end": 4875, "pages": [4875]}, {"start": 9175, "end": 9175, "pages": [9175]}, {"start": 9183, "end": 9183, "pages": [9183]}, {"start": 9854, "end": 9854, "pages": [9854]}, {"start": 9862, "end": 9862, "pages": [9862]}, {"start": 14502, "end": 14502, "pages": [14502]}, {"start": 17123, "end": 17123, "pages": [17123]}, {"start": 19572, "end": 19572, "pages": [19572]}, {"start": 20874, "end": 20874, "pages": [20874]}];
+        const pageToPath = {"1761": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001761.jpg", "2594": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002594.jpg", "3880": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003880.jpg", "4875": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004875.jpg", "9175": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009175.jpg", "9183": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009183.jpg", "9854": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009854.jpg", "9862": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009862.jpg", "14502": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014502.jpg", "17123": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017123.jpg", "19572": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019572.jpg", "20874": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020874.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001761.jpg": "...more iny  = alam feuer, “prince andrew and u.s> prosecut...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002594.jpg": "...t: reasoned, because the prince himself“was not: involve...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003880.jpg": "...t the government and the prince  intendeed to: immunize...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004875.jpg": "...ss ¢  le legal rules and prince  investigation and‘  an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009175.jpg": "...nald trump. us economy’ ‘prince harry’ meghan:markle wor...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009183.jpg": "...as'l/..  the‘6l-year-old prince-vehemently.denies the cl...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009854.jpg": "...nald trump. us economy’ ‘prince harry’ meghan:markle wor...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009862.jpg": "...as'l/..  the‘6l-year-old prince-vehemently.denies the cl...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014502.jpg": "...she said she flew with.  prince andrew, flor example, an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017123.jpg": "...she said she flew with.  prince andrew, flor example, an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019572.jpg": "...more iny  = alan feuer, “prince andrew and u.s> prosecut...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020874.jpg": "...onald teump us’ ‘econemy prince’ ‘harty meghan, markle,..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "prince" (12 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1761-1761</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">2594-2594</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">3880-3880</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">4875-4875</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">9175-9175</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">9183-9183</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">9854-9854</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">9862-9862</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">14502-14502</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">17123-17123</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">19572-19572</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">20874-20874</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

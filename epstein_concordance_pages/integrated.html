@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "integrated"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1722, "end": 1722, "pages": [1722]}, {"start": 5900, "end": 5904, "pages": [5900, 5904]}, {"start": 6825, "end": 6829, "pages": [6825, 6829]}, {"start": 11618, "end": 11618, "pages": [11618]}, {"start": 13305, "end": 13305, "pages": [13305]}, {"start": 14846, "end": 14846, "pages": [14846]}, {"start": 18889, "end": 18889, "pages": [18889]}, {"start": 21644, "end": 21644, "pages": [21644]}];
+        const pageToPath = {"1722": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001722.jpg", "5900": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005900.jpg", "5904": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005904.jpg", "6825": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006825.jpg", "6829": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006829.jpg", "11618": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011618.jpg", "13305": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013305.jpg", "14846": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014846.jpg", "18889": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018889.jpg", "21644": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021644.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001722.jpg": "...dant should not be fully integrated ‘into the dorm- -style a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005900.jpg": "...e, namely 'e  barbaree’s integrated. theory  lo); and. hall...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005904.jpg": ".... tn. a‘position ot and ‘integrated in, anenyironment where;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006825.jpg": "...e, namely 'e  barbaree’s integrated. theory  lo); and. hall...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006829.jpg": ".... tn. a‘position ot and ‘integrated in, anenyironment where;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011618.jpg": "...rai; which is the female integrated  treatment preguam, to a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013305.jpg": "...that when records, are integrated and relied on by a coipa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014846.jpg": "...rai; which is the female integrated  treatment preguam, to a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018889.jpg": "...that when records, are integrated and relied on by a coipa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021644.jpg": "...am, ‘which is the female integrated  treatment program, to a..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "integrated" (10 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1722-1722</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">5900-5904</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">6825-6829</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">11618-11618</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">13305-13305</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">14846-14846</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">18889-18889</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">21644-21644</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

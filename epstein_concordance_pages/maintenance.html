@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "maintenance"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1363, "end": 1363, "pages": [1363]}, {"start": 1709, "end": 1709, "pages": [1709]}, {"start": 1717, "end": 1717, "pages": [1717]}, {"start": 2518, "end": 2518, "pages": [2518]}, {"start": 2905, "end": 2905, "pages": [2905]}, {"start": 5909, "end": 5909, "pages": [5909]}, {"start": 6834, "end": 6834, "pages": [6834]}, {"start": 7667, "end": 7667, "pages": [7667]}, {"start": 8126, "end": 8126, "pages": [8126]}, {"start": 11741, "end": 11741, "pages": [11741]}, {"start": 11757, "end": 11757, "pages": [11757]}, {"start": 12294, "end": 12294, "pages": [12294]}, {"start": 13080, "end": 13080, "pages": [13080]}, {"start": 13371, "end": 13371, "pages": [13371]}, {"start": 13390, "end": 13392, "pages": [13390, 13392]}, {"start": 16186, "end": 16186, "pages": [16186]}, {"start": 16202, "end": 16202, "pages": [16202]}, {"start": 17882, "end": 17882, "pages": [17882]}, {"start": 18665, "end": 18665, "pages": [18665]}, {"start": 18955, "end": 18955, "pages": [18955]}, {"start": 18974, "end": 18976, "pages": [18974, 18976]}, {"start": 20280, "end": 20280, "pages": [20280]}];
+        const pageToPath = {"1363": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001363.jpg", "1709": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001709.jpg", "1717": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001717.jpg", "2518": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002518.jpg", "2905": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002905.jpg", "5909": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005909.jpg", "6834": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006834.jpg", "7667": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007667.jpg", "8126": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008126.jpg", "11741": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011741.jpg", "11757": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011757.jpg", "12294": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012294.jpg", "13080": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013080.jpg", "13371": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013371.jpg", "13390": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013390.jpg", "13392": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013392.jpg", "16186": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016186.jpg", "16202": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016202.jpg", "17882": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017882.jpg", "18665": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018665.jpg", "18955": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018955.jpg", "18974": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018974.jpg", "18976": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018976.jpg", "20280": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020280.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001363.jpg": "...n the city-has.conducted:maintenance:near the mdg, the water...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001709.jpg": "...houers: i choose between maintenance of i ‘participating in h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001717.jpg": "...houers: i choose between maintenance of i ‘participating in h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002518.jpg": "...gn,  implementation and, maintenance of the security camera,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002905.jpg": "...n the city-has.conducted:maintenance:near the mdg, the water...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005909.jpg": "...eory ofthe euology: and. maintenance of deviant sexwa prefere...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006834.jpg": "...eory ofthe euology: and. maintenance of deviant sexwa prefere...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007667.jpg": "...ensic: psy hiatry,, 735, maintenance of'certification  forens...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008126.jpg": "...ensic: psy hiatry,, 735, maintenance of'certification  forens...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011741.jpg": "...haridled, the airneraft maintenance sceheedtiling. q. in oth...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011757.jpg": "...h ‘the house. schedtling maintenance, lawn cane. if there was...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012294.jpg": "...e schoel. @. hou did the maintenance of those records work in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013080.jpg": "...ument.  palm beach house maintenance.  you read that, please....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013371.jpg": "...and take care of various maintenance isssues, monitor what wa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013390.jpg": "...uld have ‘fo go doun for maintenance every year; usually typi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013392.jpg": "...log, it was really.  f6r maintenance proeedures, t had about....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016186.jpg": "...haridled, the airneraft maintenance sceheedtiling. q. in oth...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016202.jpg": "...ith ‘the hous seheatling maintenance, lawi cane. if there was...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017882.jpg": "...e schoel. @. hou did the maintenance of those records work in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018665.jpg": "...ument.  palm beach house maintenance.  you read that, please....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018955.jpg": "...and take care of various maintenance isssues, monitor what wa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018974.jpg": "...uld have ‘fo go doun for maintenance every year; usually typi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018976.jpg": "...log, it was really.  f6r maintenance proeedures, t had about....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020280.jpg": "...n the city-has.conducted:maintenance:near the mdg, the water..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "maintenance" (24 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1363-1363</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1709-1709</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1717-1717</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">2518-2518</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">2905-2905</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">5909-5909</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">6834-6834</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">7667-7667</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">8126-8126</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">11741-11741</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">11757-11757</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">12294-12294</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">13080-13080</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">13371-13371</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">13390-13392</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">16186-16186</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">16202-16202</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">17882-17882</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">18665-18665</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">18955-18955</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">18974-18976</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">20280-20280</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

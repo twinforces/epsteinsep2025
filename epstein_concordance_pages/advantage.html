@@ -1,0 +1,241 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "advantage"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 651, "end": 651, "pages": [651]}, {"start": 664, "end": 664, "pages": [664]}, {"start": 712, "end": 716, "pages": [712, 716]}, {"start": 1043, "end": 1043, "pages": [1043]}, {"start": 1764, "end": 1764, "pages": [1764]}, {"start": 1916, "end": 1916, "pages": [1916]}, {"start": 2353, "end": 2353, "pages": [2353]}, {"start": 2513, "end": 2513, "pages": [2513]}, {"start": 2522, "end": 2527, "pages": [2522, 2523, 2525, 2527]}, {"start": 2914, "end": 2914, "pages": [2914]}, {"start": 3003, "end": 3003, "pages": [3003]}, {"start": 3014, "end": 3020, "pages": [3014, 3015, 3017, 3018, 3020]}, {"start": 3165, "end": 3165, "pages": [3165]}, {"start": 3243, "end": 3243, "pages": [3243]}, {"start": 3332, "end": 3332, "pages": [3332]}, {"start": 3339, "end": 3339, "pages": [3339]}, {"start": 3361, "end": 3361, "pages": [3361]}, {"start": 3371, "end": 3371, "pages": [3371]}, {"start": 3383, "end": 3383, "pages": [3383]}, {"start": 4271, "end": 4271, "pages": [4271]}, {"start": 4365, "end": 4365, "pages": [4365]}, {"start": 4454, "end": 4454, "pages": [4454]}, {"start": 4461, "end": 4461, "pages": [4461]}, {"start": 4483, "end": 4483, "pages": [4483]}, {"start": 4493, "end": 4493, "pages": [4493]}, {"start": 4726, "end": 4726, "pages": [4726]}, {"start": 4818, "end": 4818, "pages": [4818]}, {"start": 5386, "end": 5386, "pages": [5386]}, {"start": 5602, "end": 5602, "pages": [5602]}, {"start": 6564, "end": 6564, "pages": [6564]}, {"start": 6956, "end": 6956, "pages": [6956]}, {"start": 6989, "end": 6994, "pages": [6989, 6994]}, {"start": 9607, "end": 9609, "pages": [9607, 9608, 9609]}, {"start": 10404, "end": 10404, "pages": [10404]}, {"start": 10461, "end": 10461, "pages": [10461]}, {"start": 11208, "end": 11208, "pages": [11208]}, {"start": 11749, "end": 11749, "pages": [11749]}, {"start": 13536, "end": 13536, "pages": [13536]}, {"start": 16194, "end": 16194, "pages": [16194]}, {"start": 19120, "end": 19120, "pages": [19120]}, {"start": 19446, "end": 19446, "pages": [19446]}, {"start": 19550, "end": 19550, "pages": [19550]}, {"start": 19575, "end": 19575, "pages": [19575]}, {"start": 19663, "end": 19663, "pages": [19663]}, {"start": 19961, "end": 19961, "pages": [19961]}, {"start": 21021, "end": 21021, "pages": [21021]}, {"start": 21359, "end": 21361, "pages": [21359, 21361]}, {"start": 21381, "end": 21381, "pages": [21381]}, {"start": 21591, "end": 21591, "pages": [21591]}];
+        const pageToPath = {"651": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000651.jpg", "664": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000664.jpg", "712": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000712.jpg", "716": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000716.jpg", "1043": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001043.jpg", "1764": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001764.jpg", "1916": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001916.jpg", "2353": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002353.jpg", "2513": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002513.jpg", "2522": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002522.jpg", "2523": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002523.jpg", "2525": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002525.jpg", "2527": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002527.jpg", "2914": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002914.jpg", "3003": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003003.jpg", "3014": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003014.jpg", "3015": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003015.jpg", "3017": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003017.jpg", "3018": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003018.jpg", "3020": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003020.jpg", "3165": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003165.jpg", "3243": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003243.jpg", "3332": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003332.jpg", "3339": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003339.jpg", "3361": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003361.jpg", "3371": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003371.jpg", "3383": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003383.jpg", "4271": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004271.jpg", "4365": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004365.jpg", "4454": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004454.jpg", "4461": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004461.jpg", "4483": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004483.jpg", "4493": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004493.jpg", "4726": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004726.jpg", "4818": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004818.jpg", "5386": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005386.jpg", "5602": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005602.jpg", "6564": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006564.jpg", "6956": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006956.jpg", "6989": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006989.jpg", "6994": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006994.jpg", "9607": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009607.jpg", "9608": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009608.jpg", "9609": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009609.jpg", "10404": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010404.jpg", "10461": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010461.jpg", "11208": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011208.jpg", "11749": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011749.jpg", "13536": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013536.jpg", "16194": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016194.jpg", "19120": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019120.jpg", "19446": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019446.jpg", "19550": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019550.jpg", "19575": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019575.jpg", "19663": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019663.jpg", "19961": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019961.jpg", "21021": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021021.jpg", "21359": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021359.jpg", "21361": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021361.jpg", "21381": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021381.jpg", "21591": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021591.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000651.jpg": "...no)  advantage of them.  unless the cou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000664.jpg": "...u, and we wanted bo take advantage of the 6ppertunaty to sa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000712.jpg": "...vulnerable, and he took advantage of that poor  24, girl,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000716.jpg": "...‘tein targeted and took. advantage of me, a young  gitl; wh...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001043.jpg": "...bused my trust, and toek advantage of :my  ywalnerabiliey m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001764.jpg": "...ls” to seek “95l &  an. ‘advantage l in. their efforts-to d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001916.jpg": "...bused my trust, and toek advantage of :my  yvulnerabilivey...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002353.jpg": "...overnment:then took full advantage, [t |...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002513.jpg": "...delay to gain. tactical advantage  l,4o4 u.s. at 324.  al...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002522.jpg": "...nts: who wanted. to take advantage of mr. epstein’s  vulner...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002523.jpg": "...ess ‘to gain a tactical. advantage.  lorandum in support of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002525.jpg": "...has been.to:its tactical advantage to allou as much. negati...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002527.jpg": "...tood to gain a-tactical, advantage: by delaying; the indict...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002914.jpg": "...to gain, sonic strategic advantage: has ino basis tn.  faet...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003003.jpg": "...any:  ‘sort of tactical, advantage. the government; obtaine...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003014.jpg": "...gain a tactical.  fee.  ‘advantage over'the defendant. see,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003015.jpg": "...he  ‘gain. a a strategic advantage. here, as in l vasgo, ‘a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003017.jpg": "...y to obtain. a tactical. advantage. see, &g:, pierre-loius,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003018.jpg": "...tment'to gain a tactical advantage and, did so throvgh stra...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003020.jpg": "...: ?  some prosecutorial. advantage.” pierre-louis, 2ol%  de...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003165.jpg": "...achieve: some: perceived advantage. rather, it:sought.a.tim...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003243.jpg": "...sfy us ‘takes away: that advantage. if you make: it seem li...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003332.jpg": "...s not: required. “to pre advantage that might be realized f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003339.jpg": "...r “mo, pre 38 for “every advantage that: might bs be realiz...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003361.jpg": "...ao: abandoning ‘the: .n ‘advantage ‘from, his. continued, e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003371.jpg": "...is sentetice to, his oun advantage. the npa. flied on state...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003383.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004271.jpg": "...nt. accuser-4 took full  advantage of the npa; she received...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004365.jpg": "...sfy us ‘takes away: that advantage. if you make: it seem li...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004454.jpg": "...is not: required “to p  advantage that might be realized f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004461.jpg": "...y: “to; press for every: advantage that might: be realized....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004483.jpg": "...gained l no substantial advantage from, his. continued, en...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004493.jpg": "...is senteice ‘to, his oun advantage. the npa. relied on stat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004726.jpg": "...to gain. some strategic advantage has no basis in, fact. t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004818.jpg": "...ask him: why: he took.  advantage of her when she was. und...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005386.jpg": "...esol a = f  unreasonable advantage and it-should not be cou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005602.jpg": "...some ‘unfair taeticall, advantage: ‘has ‘been, sought. 3...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006564.jpg": "...some ‘unfair taeticall, advantage: ‘has ‘been, sought. 3...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006956.jpg": "...rge a conspiracy to take advantage: of rule 8ol(d)\\(2)(e).”...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006989.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006994.jpg": "...surely have some sort of advantage.  the extent we have a j...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009607.jpg": "...al  fendant. see, ¢.g..  advantage oy«  a.defendant. must d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009608.jpg": "...rnment-to, gait tactical advantage over the aectised.” (cit...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009609.jpg": "...to gain, some strategie: advantage  has no basis’ in, fact,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010404.jpg": "...ment to: gain a tactical advantage: over the:  vy. alameh;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010461.jpg": "...‘exhibit a.  take advantage, of her innate wood natu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011208.jpg": "....  the defense an unfair advantage”); u  cane ska utente  t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011749.jpg": "...ally:  a. well, the best advantage ls yeu leave whea. you....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013536.jpg": "...the court wants to take advantage of  ee a st z ate a et e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016194.jpg": "...ally:  a. well, the best advantage ls yeu leave whea. you....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019120.jpg": "...the court wants to take advantage of  ee a st z ate a et e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019446.jpg": "...ht disc  gain, an unfair advantage by. acquiring as much, i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019550.jpg": "...iats she eat mine to her advantage | int civil iediseavery....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019575.jpg": "...ls” to seek “95l &  an. ‘advantage l in. their efforts-to d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019663.jpg": "...a civil case to gain an advantage. ms. maxwells requested,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019961.jpg": "...bused my trust, and toek advantage of :my  ywalnerabiliey m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021021.jpg": "...tional delay fortactieal advantage.  “the court therefore:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021359.jpg": "...ained. no suibstantial.  advantage: from his continued entr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021361.jpg": "...though thie: ¥ ised,- vs advantage,. the fevision, concerte...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021381.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021591.jpg": "...ehe money’  c3)  taking advantage of  a victim\"s ‘financia..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "advantage" (61 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">651-651</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">664-664</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">712-716</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">1043-1043</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">1764-1764</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">1916-1916</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">2353-2353</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">2513-2513</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">2522-2527</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">2914-2914</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">3003-3003</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">3014-3020</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">3165-3165</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">3243-3243</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">3332-3332</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">3339-3339</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">3361-3361</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">3371-3371</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">3383-3383</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">4271-4271</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">4365-4365</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">4454-4454</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">4461-4461</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">4483-4483</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">4493-4493</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">4726-4726</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">4818-4818</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">5386-5386</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">5602-5602</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">6564-6564</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">6956-6956</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">6989-6994</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">9607-9609</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">10404-10404</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">10461-10461</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">11208-11208</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">11749-11749</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">13536-13536</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">16194-16194</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">19120-19120</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">19446-19446</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">19550-19550</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">19575-19575</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">19663-19663</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">19961-19961</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(45, 0); return false;">21021-21021</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(46, 0); return false;">21359-21361</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(47, 0); return false;">21381-21381</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(48, 0); return false;">21591-21591</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

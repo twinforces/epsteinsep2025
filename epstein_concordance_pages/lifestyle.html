@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "lifestyle"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 352, "end": 352, "pages": [352]}, {"start": 954, "end": 954, "pages": [954]}, {"start": 991, "end": 992, "pages": [991, 992]}, {"start": 1033, "end": 1033, "pages": [1033]}, {"start": 1113, "end": 1113, "pages": [1113]}, {"start": 1223, "end": 1223, "pages": [1223]}, {"start": 1495, "end": 1495, "pages": [1495]}, {"start": 1585, "end": 1585, "pages": [1585]}, {"start": 1617, "end": 1618, "pages": [1617, 1618]}, {"start": 1906, "end": 1906, "pages": [1906]}, {"start": 1989, "end": 1989, "pages": [1989]}, {"start": 2537, "end": 2537, "pages": [2537]}, {"start": 4500, "end": 4500, "pages": [4500]}, {"start": 5314, "end": 5314, "pages": [5314]}, {"start": 5780, "end": 5780, "pages": [5780]}, {"start": 5860, "end": 5860, "pages": [5860]}, {"start": 6324, "end": 6324, "pages": [6324]}, {"start": 6699, "end": 6699, "pages": [6699]}, {"start": 6785, "end": 6785, "pages": [6785]}, {"start": 9103, "end": 9103, "pages": [9103]}, {"start": 9794, "end": 9794, "pages": [9794]}, {"start": 10542, "end": 10542, "pages": [10542]}, {"start": 10585, "end": 10585, "pages": [10585]}, {"start": 11698, "end": 11698, "pages": [11698]}, {"start": 11712, "end": 11712, "pages": [11712]}, {"start": 11730, "end": 11731, "pages": [11730, 11731]}, {"start": 12521, "end": 12521, "pages": [12521]}, {"start": 14451, "end": 14451, "pages": [14451]}, {"start": 14481, "end": 14481, "pages": [14481]}, {"start": 14494, "end": 14495, "pages": [14494, 14495]}, {"start": 14538, "end": 14538, "pages": [14538]}, {"start": 16143, "end": 16143, "pages": [16143]}, {"start": 16157, "end": 16157, "pages": [16157]}, {"start": 16175, "end": 16176, "pages": [16175, 16176]}, {"start": 17072, "end": 17072, "pages": [17072]}, {"start": 17102, "end": 17102, "pages": [17102]}, {"start": 17115, "end": 17116, "pages": [17115, 17116]}, {"start": 17159, "end": 17159, "pages": [17159]}, {"start": 18108, "end": 18108, "pages": [18108]}, {"start": 19872, "end": 19872, "pages": [19872]}, {"start": 19909, "end": 19910, "pages": [19909, 19910]}, {"start": 19951, "end": 19951, "pages": [19951]}, {"start": 20031, "end": 20031, "pages": [20031]}, {"start": 20141, "end": 20141, "pages": [20141]}, {"start": 21603, "end": 21603, "pages": [21603]}];
+        const pageToPath = {"352": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000352.jpg", "954": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000954.jpg", "991": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000991.jpg", "992": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000992.jpg", "1033": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001033.jpg", "1113": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001113.jpg", "1223": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001223.jpg", "1495": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001495.jpg", "1585": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001585.jpg", "1617": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001617.jpg", "1618": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001618.jpg", "1906": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001906.jpg", "1989": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001989.jpg", "2537": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002537.jpg", "4500": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004500.jpg", "5314": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005314.jpg", "5780": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005780.jpg", "5860": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005860.jpg", "6324": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006324.jpg", "6699": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006699.jpg", "6785": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006785.jpg", "9103": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009103.jpg", "9794": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009794.jpg", "10542": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010542.jpg", "10585": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010585.jpg", "11698": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011698.jpg", "11712": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011712.jpg", "11730": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011730.jpg", "11731": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011731.jpg", "12521": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012521.jpg", "14451": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014451.jpg", "14481": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014481.jpg", "14494": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014494.jpg", "14495": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014495.jpg", "14538": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014538.jpg", "16143": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016143.jpg", "16157": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016157.jpg", "16175": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016175.jpg", "16176": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016176.jpg", "17072": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017072.jpg", "17102": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017102.jpg", "17115": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017115.jpg", "17116": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017116.jpg", "17159": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017159.jpg", "18108": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018108.jpg", "19872": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019872.jpg", "19909": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019909.jpg", "19910": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019910.jpg", "19951": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019951.jpg", "20031": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020031.jpg", "20141": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020141.jpg", "21603": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021603.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000352.jpg": "...sfendanit’ ‘s transient lifestyle, his tack of ‘fan yo or...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000954.jpg": "...e of defendant’s current lifestyle. in:particular, the defe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000991.jpg": "...resources, and transient lifestyle:all make her a risk.of f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000992.jpg": "...ithe-privileged lifestyle she has maintained forth...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001033.jpg": "...an't make  sense of thug lifestyle and this set of financia...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001113.jpg": "...a tootless, “transient” lifestyle (dkt. 4 at 9),,ms. maxwe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001223.jpg": "...defendant’s “transient” lifestyle; dit. no. 4 at:9; was’ b...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001495.jpg": "...e:of defendant’s current lifestyle. in particular, the:defe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001585.jpg": "...d, epstein’s wealth. and lifestyle. on august.lo, 2ol9, eps...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001617.jpg": "...esotirees, and transient lifestyle all make hera risk of fl...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001618.jpg": "...the privileged, lifestyle she has maintained for t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001906.jpg": "...nse eh ne he ee car eat  lifestyle that. she has been lavin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001989.jpg": "...a rootless, “transient” lifestyle (dk 4 at 9); ms: maxwell...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002537.jpg": "...le to resume his. lavish lifestyle, largely avoiding the in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004500.jpg": "...n, lived a. multi-state’ lifestyle; it was reasonable to as...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005314.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005780.jpg": "...emicrits arid refledts'a lifestyle that many: jtirors. may...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005860.jpg": "...t:prejudicial.as to her “lifestyle”:(def.. mot. l3 at:3), b...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006324.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006699.jpg": "...tements and. reflects: a lifestyle: that: many. jurors  ‘un...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006785.jpg": "...t:prejudicial.as to her “lifestyle”:(def.. mot. l3 at:3), b...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009103.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009794.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010542.jpg": "...stein. beyond the lawish lifestyle that she cnjoyed side-by...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010585.jpg": "...e share in-his luxurious lifestyle:of mansions, house staff...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011698.jpg": "...a means, \"fo support her lifestyle, a way for the defendant...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011712.jpg": "...background, €o6mfertable lifestyle, status — they whay be t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011730.jpg": "...fe  he  irb  a jet-seter lifestyle. before meeting ghislain...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011731.jpg": "...past; lived a dangerous lifestyle, was wsaing  drugs duram...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012521.jpg": "...that jefifrey epstein\"s lifestyle and that. the way that h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014451.jpg": "...bout epstein\"s luxurious lifestyle and all ef the perks tha...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014481.jpg": "...ate  gharaeter, om his, lifestyle; 6n ais flaws, aid they...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014494.jpg": "...she weeded to stay an a lifestyle to whach  =  she had bec...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014495.jpg": "...3os, that she meeds this lifestyle, so she's just walling...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014538.jpg": "...o maintain her jet-setex lifestyle.  they've also suggested...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016143.jpg": "...a means, \"fo support her lifestyle, a way for the defendant...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016157.jpg": "...background, €o6mfertable lifestyle, status — they whay be t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016175.jpg": "...fe  he  irb  a jet-seter lifestyle. before meeting ghislain...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016176.jpg": "...past; lived a dangerous lifestyle, was wsaing  drugs duram...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017072.jpg": "...bout epstein\"s luxurious lifestyle and all ef the perks tha...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017102.jpg": "...ate  gharaeter, om his, lifestyle; 6n ais flaws, aid they...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017115.jpg": "...she weeded to stay an a lifestyle to whach  =  she had bec...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017116.jpg": "...3os, that she meeds this lifestyle, so she's just walling...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017159.jpg": "...o maintain her jet-setex lifestyle.  they've also suggested...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018108.jpg": "...that jefifrey epstein\"s lifestyle and that. the way that h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019872.jpg": "...e of defendant’s current lifestyle. in:particular, the defe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019909.jpg": "...resources, and transient lifestyle:all make her a risk.of f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019910.jpg": "...ithe-privileged lifestyle she has maintained forth...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019951.jpg": "...an't make  sense of thug lifestyle and this set of financia...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020031.jpg": "...a tootless, “transient” lifestyle (dkt. 4 at 9),,ms. maxwe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020141.jpg": "...defendant’s “transient” lifestyle; dit. no. 4 at:9; was’ b...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021603.jpg": "...ed. toa live a luxurteus lifestyle jet-setbing around. the..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "lifestyle" (52 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">352-352</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">954-954</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">991-992</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">1033-1033</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">1113-1113</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">1223-1223</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">1495-1495</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">1585-1585</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">1617-1618</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">1906-1906</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">1989-1989</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">2537-2537</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">4500-4500</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">5314-5314</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">5780-5780</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">5860-5860</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">6324-6324</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">6699-6699</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">6785-6785</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">9103-9103</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">9794-9794</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">10542-10542</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">10585-10585</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">11698-11698</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">11712-11712</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">11730-11731</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">12521-12521</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">14451-14451</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">14481-14481</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">14494-14495</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">14538-14538</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">16143-16143</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">16157-16157</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">16175-16176</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">17072-17072</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">17102-17102</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">17115-17116</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">17159-17159</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">18108-18108</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">19872-19872</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">19909-19910</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">19951-19951</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">20031-20031</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">20141-20141</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">21603-21603</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

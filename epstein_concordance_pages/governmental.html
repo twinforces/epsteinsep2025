@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "governmental"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 308, "end": 308, "pages": [308]}, {"start": 2513, "end": 2513, "pages": [2513]}, {"start": 2554, "end": 2554, "pages": [2554]}, {"start": 3059, "end": 3059, "pages": [3059]}, {"start": 3622, "end": 3622, "pages": [3622]}, {"start": 4161, "end": 4161, "pages": [4161]}, {"start": 4796, "end": 4796, "pages": [4796]}, {"start": 4804, "end": 4804, "pages": [4804]}, {"start": 5367, "end": 5367, "pages": [5367]}, {"start": 10480, "end": 10480, "pages": [10480]}, {"start": 10718, "end": 10718, "pages": [10718]}, {"start": 10767, "end": 10767, "pages": [10767]}, {"start": 10825, "end": 10825, "pages": [10825]}, {"start": 20923, "end": 20923, "pages": [20923]}, {"start": 21203, "end": 21203, "pages": [21203]}, {"start": 22087, "end": 22089, "pages": [22087, 22089]}, {"start": 23041, "end": 23041, "pages": [23041]}];
+        const pageToPath = {"308": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000308.jpg", "2513": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002513.jpg", "2554": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002554.jpg", "3059": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003059.jpg", "3622": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003622.jpg", "4161": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004161.jpg", "4796": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004796.jpg", "4804": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004804.jpg", "5367": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005367.jpg", "10480": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010480.jpg", "10718": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010718.jpg", "10767": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010767.jpg", "10825": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010825.jpg", "20923": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020923.jpg", "21203": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021203.jpg", "22087": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022087.jpg", "22089": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022089.jpg", "23041": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00023041.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000308.jpg": "...inearceration: — ‘or the governmental.  this.court need nof re...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002513.jpg": "...:  = lg ot.  us. at 79l. governmental delay caused by “siniste...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002554.jpg": "...warrant requirenicnt, a governmental search ‘is unconstitutro...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003059.jpg": "...ifth,amendment . . . ls: governmental.  nelly, 479 u.s. at l7o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003622.jpg": "...n.retained by: nunverous governmental. private,  organizations...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004161.jpg": "...to: deter ti  nlaw hil,  governmental conduct.and to protect.j...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004796.jpg": "...oena as a, sanction, for governmental misconduct. she contends...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004804.jpg": "...ence as, a sanction. for governmental misconduct.  the court i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005367.jpg": "...licensing authorily; ‘or governmental agency, or been.question...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010480.jpg": "...that the purpose of the governmental action. is punishment an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010718.jpg": "..., high-profile enablers: governmental institutions, politician...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010767.jpg": "...licensing authority, or governmental agency, or been  questio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010825.jpg": "...licensing ‘authority, or governmental. agency, or been questio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020923.jpg": "...corigressional, or’: st governmental agency, or been e, of; l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021203.jpg": "...unsel,  office of inter (governmental, and public: uason  us,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022087.jpg": "...? particular case or the governmental agencics jointly-involve...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022089.jpg": "...rtvof a process by which governmental deersions  aid policies...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00023041.jpg": "...ce of inter. . .  —— \" ; governmental ic! . :  ne | re -antrus..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "governmental" (18 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">308-308</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">2513-2513</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">2554-2554</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3059-3059</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">3622-3622</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">4161-4161</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">4796-4796</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">4804-4804</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">5367-5367</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">10480-10480</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">10718-10718</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">10767-10767</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">10825-10825</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">20923-20923</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">21203-21203</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">22087-22089</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">23041-23041</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

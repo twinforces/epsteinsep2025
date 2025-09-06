@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "gates"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 3378, "end": 3378, "pages": [3378]}, {"start": 4803, "end": 4803, "pages": [4803]}, {"start": 7828, "end": 7828, "pages": [7828]}, {"start": 11500, "end": 11500, "pages": [11500]}, {"start": 11542, "end": 11542, "pages": [11542]}, {"start": 11940, "end": 11940, "pages": [11940]}, {"start": 14770, "end": 14770, "pages": [14770]}, {"start": 17530, "end": 17530, "pages": [17530]}, {"start": 21568, "end": 21568, "pages": [21568]}, {"start": 27666, "end": 27666, "pages": [27666]}];
+        const pageToPath = {"3378": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003378.jpg", "4803": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004803.jpg", "7828": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007828.jpg", "11500": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011500.jpg", "11542": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011542.jpg", "11940": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011940.jpg", "14770": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014770.jpg", "17530": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017530.jpg", "21568": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021568.jpg", "27666": "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027666.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003378.jpg": "...ata ealtat bets seas we gates tants  83  ') provides;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004803.jpg": "...ll3: (quoting, /minaisl: gates, 462'u.s  .. judge: mema...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007828.jpg": "...sition)  doriald eugefie gates v. ‘the district of colu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011500.jpg": "...ane fato we an sassi tee gates ahhs al ay  selecti the....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011542.jpg": "...d to shou that, any  he  gates  gonspirater teok an aet...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011940.jpg": "...und it. and these giant. gates...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014770.jpg": "...d to shou that, any  he  gates  gonspirater teok an aet...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017530.jpg": "...und it. and these giant. gates...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021568.jpg": "...n between those: specic  gates.  @ the s6rspiraey ter...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027666.jpg": ".../oplhl lx44o8/b,  oo ae gates  \\/ss af oo6 f 2ofeb-4...."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "gates" (10 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">3378-3378</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">4803-4803</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">7828-7828</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">11500-11500</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">11542-11542</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">11940-11940</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">14770-14770</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">17530-17530</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">21568-21568</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">27666-27666</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

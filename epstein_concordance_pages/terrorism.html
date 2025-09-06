@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "terrorism"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1524, "end": 1524, "pages": [1524]}, {"start": 1838, "end": 1840, "pages": [1838, 1840]}, {"start": 2104, "end": 2104, "pages": [2104]}, {"start": 7609, "end": 7609, "pages": [7609]}, {"start": 7678, "end": 7680, "pages": [7678, 7680]}, {"start": 7687, "end": 7689, "pages": [7687, 7688, 7689]}, {"start": 7828, "end": 7828, "pages": [7828]}, {"start": 8137, "end": 8139, "pages": [8137, 8139]}, {"start": 8146, "end": 8148, "pages": [8146, 8147, 8148]}, {"start": 10471, "end": 10471, "pages": [10471]}, {"start": 19197, "end": 19197, "pages": [19197]}, {"start": 19227, "end": 19227, "pages": [19227]}, {"start": 21109, "end": 21109, "pages": [21109]}];
+        const pageToPath = {"1524": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001524.jpg", "1838": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001838.jpg", "1840": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001840.jpg", "2104": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002104.jpg", "7609": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007609.jpg", "7678": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007678.jpg", "7680": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007680.jpg", "7687": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007687.jpg", "7688": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007688.jpg", "7689": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007689.jpg", "7828": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007828.jpg", "8137": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008137.jpg", "8139": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008139.jpg", "8146": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008146.jpg", "8147": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008147.jpg", "8148": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008148.jpg", "10471": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010471.jpg", "19197": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019197.jpg", "19227": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019227.jpg", "21109": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021109.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001524.jpg": "...and preventing terrorism).  b... second, the cour...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001838.jpg": "...ve unitzin. the toted of terrorism al ‘eapital murder andi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001840.jpg": "...ve unitzin. the toted of terrorism al ‘eapital murder andi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002104.jpg": "...: l9 extof international terrorism,  *“ex tradition. act 2o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007609.jpg": "...pe: \"product tampering: terrorism or madness?\", annual edu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007678.jpg": "...: psychiatric effects of terrorism: : sion terrorism: v  (e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007680.jpg": "...66, 2ol2.  4l. hall rgw: terrorism, in & yelopedia: of immi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007687.jpg": "...999  hall rcw, hall rcw: terrorism: its: aftermath and. lon...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007688.jpg": "...ool  hall rcw, hall rcw: terrorism, bioterrorism and assaul...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007689.jpg": "...o3  hall. rcw, hall rcw: terrorism, eehtie and peychiatric...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007828.jpg": "...r — november ‘l4  2oo3.  terrorism ‘and, civil liberties. —...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008137.jpg": "...: psychiatric effects of terrorism: : sion terrorism: v  (e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008139.jpg": "...66, 2ol2.  4l. hall rgw: terrorism, in & yelopedia: of immi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008146.jpg": "...999  hall rcw, hall rcw: terrorism: its: aftermath and. lon...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008147.jpg": "...ool  hall rcw, hall rcw: terrorism, bioterrorism and assaul...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008148.jpg": "...o3  hall. rcw, hall rcw: terrorism, eehtie and peychiatric...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010471.jpg": "...for inmates charged with terrorism offenses. a. further ‘ch...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019197.jpg": "...and preventing terrorism)...  b. second, the cour...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019227.jpg": "...and preventing terrorism)...  b. second, the cour...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021109.jpg": "...nated the statute of  n. terrorism offen:  resulted. in, or..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "terrorism" (20 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1524-1524</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1838-1840</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">2104-2104</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">7609-7609</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">7678-7680</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">7687-7689</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">7828-7828</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">8137-8139</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">8146-8148</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">10471-10471</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">19197-19197</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">19227-19227</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">21109-21109</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

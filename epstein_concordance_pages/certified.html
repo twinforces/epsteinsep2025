@@ -1,0 +1,217 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "certified"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 500, "end": 500, "pages": [500]}, {"start": 560, "end": 560, "pages": [560]}, {"start": 812, "end": 817, "pages": [812, 817]}, {"start": 876, "end": 876, "pages": [876]}, {"start": 1226, "end": 1226, "pages": [1226]}, {"start": 2072, "end": 2072, "pages": [2072]}, {"start": 2101, "end": 2101, "pages": [2101]}, {"start": 2120, "end": 2120, "pages": [2120]}, {"start": 2249, "end": 2249, "pages": [2249]}, {"start": 4075, "end": 4075, "pages": [4075]}, {"start": 6033, "end": 6033, "pages": [6033]}, {"start": 6055, "end": 6055, "pages": [6055]}, {"start": 6182, "end": 6182, "pages": [6182]}, {"start": 6255, "end": 6255, "pages": [6255]}, {"start": 7401, "end": 7403, "pages": [7401, 7402, 7403]}, {"start": 7496, "end": 7496, "pages": [7496]}, {"start": 7667, "end": 7668, "pages": [7667, 7668]}, {"start": 7832, "end": 7832, "pages": [7832]}, {"start": 8072, "end": 8072, "pages": [8072]}, {"start": 8126, "end": 8127, "pages": [8126, 8127]}, {"start": 9739, "end": 9739, "pages": [9739]}, {"start": 11161, "end": 11161, "pages": [11161]}, {"start": 11819, "end": 11819, "pages": [11819]}, {"start": 12762, "end": 12762, "pages": [12762]}, {"start": 13867, "end": 13867, "pages": [13867]}, {"start": 15537, "end": 15537, "pages": [15537]}, {"start": 16491, "end": 16491, "pages": [16491]}, {"start": 17409, "end": 17409, "pages": [17409]}, {"start": 18348, "end": 18348, "pages": [18348]}, {"start": 19263, "end": 19263, "pages": [19263]}, {"start": 19715, "end": 19715, "pages": [19715]}, {"start": 19770, "end": 19770, "pages": [19770]}, {"start": 20144, "end": 20144, "pages": [20144]}, {"start": 20480, "end": 20480, "pages": [20480]}, {"start": 20486, "end": 20486, "pages": [20486]}, {"start": 20512, "end": 20512, "pages": [20512]}, {"start": 20636, "end": 20636, "pages": [20636]}, {"start": 21155, "end": 21155, "pages": [21155]}, {"start": 21921, "end": 21921, "pages": [21921]}, {"start": 23461, "end": 23461, "pages": [23461]}, {"start": 33157, "end": 33157, "pages": [33157]}];
+        const pageToPath = {"500": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000500.jpg", "560": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000560.jpg", "812": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000812.jpg", "817": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000817.jpg", "876": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000876.jpg", "1226": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001226.jpg", "2072": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002072.jpg", "2101": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002101.jpg", "2120": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002120.jpg", "2249": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002249.jpg", "4075": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004075.jpg", "6033": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006033.jpg", "6055": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006055.jpg", "6182": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006182.jpg", "6255": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006255.jpg", "7401": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007401.jpg", "7402": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007402.jpg", "7403": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007403.jpg", "7496": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007496.jpg", "7667": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007667.jpg", "7668": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007668.jpg", "7832": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007832.jpg", "8072": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008072.jpg", "8126": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008126.jpg", "8127": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008127.jpg", "9739": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009739.jpg", "11161": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011161.jpg", "11819": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011819.jpg", "12762": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012762.jpg", "13867": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013867.jpg", "15537": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015537.jpg", "16491": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016491.jpg", "17409": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017409.jpg", "18348": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018348.jpg", "19263": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019263.jpg", "19715": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019715.jpg", "19770": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019770.jpg", "20144": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020144.jpg", "20480": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020480.jpg", "20486": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020486.jpg", "20512": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020512.jpg", "20636": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020636.jpg", "21155": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021155.jpg", "21921": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021921.jpg", "23461": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023461.jpg", "33157": "Prod 01_20250822/VOL00001/IMAGES/IMAGES012/DOJ-OGR-00033157.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000500.jpg": "...supported by: audited or certified financial statements, in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000560.jpg": "...ssets, not audited, not. certified, and not very detailed...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000812.jpg": "...supported by-audited or certified financial  statements, i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000817.jpg": "...t.  ‘reeord on. appeal = certified. list  _ record on. appe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000876.jpg": "..._. record on appeal. = certified, list  _, record on appe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001226.jpg": "...the defendant retained a certified fraud examiner aid a for...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002072.jpg": "...ge-in l997. have been a ‘certified fraud examiner (cfe)  oo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002101.jpg": "...ere the high  ‘court has certified that the decision, ihvlv...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002120.jpg": "...uest. some requests are, certified within. days; in, other...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002249.jpg": "...he defendant: retained a certified fraud. examiner and a fo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004075.jpg": "...that: are: & loaded and certified b the us. atorney! § off...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006033.jpg": "...tly-to the defendant:via certified mail.  in, accordance wi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006055.jpg": "...rt-is directed to send a certified copy ofthis order, to-th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006182.jpg": "...try: he ‘has been. board certified in ‘psychiatry by the am...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006255.jpg": "...try: he ‘has been. board certified in ‘psychiatry by the am...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007401.jpg": "...produced to, the defense certified copics of the birth cert...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007402.jpg": "...4), that list includes:  certified copies of public records...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007403.jpg": "...:self-authenticating if “certified. as correct byz ; «» the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007496.jpg": "...try: he ‘has been. board certified in ‘psychiatry by the am...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007667.jpg": "...or forensic: psychiatry  certified forensic physician ameri...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007668.jpg": "...ourse. www:mocatest.org. certified by.  =f  d.  ziad | nasr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007832.jpg": "...ursuit:com:  specialized certified. computer:hacking'forens...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008072.jpg": "...try: he ‘has been. board certified in ‘psychiatry by the am...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008126.jpg": "...or forensic: psychiatry  certified forensic physician ameri...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008127.jpg": "...ourse. www:mocatest.org. certified by.  =f  d.  ziad | nasr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009739.jpg": "....a); juror ‘no. ‘5o also certified, under the penalty of pe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011161.jpg": "...ous:  o  ——  at , with a.certified copy:of this: judgment....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011819.jpg": "...l is a4 true afd correet certified copy of a birth  cextifi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012762.jpg": "...hotoes\" probative  . see certified enviszonmental sexvices,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013867.jpg": "...egistry and has obtained certified gopies of the land reqis...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015537.jpg": "...ll is a trie:and correct certified copy ofa birth certifica...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016491.jpg": "...egistry and has obtained certified gopies of the land reqis...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017409.jpg": "...l is a4 true afd correet certified copy of a birth  cextifi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018348.jpg": "...hotoes\" probative  . see certified enviszonmental sexvices,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019263.jpg": "...t. ‘record on, appeal. = certified, list  ‘record. of appea...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019715.jpg": "..._. record on appeal. = certified, list  _, record on appe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019770.jpg": "..._. record on appeal. = certified, list  _, record on appe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020144.jpg": "...the defendant retained a certified fraud examiner aid a for...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020480.jpg": "...ous:  o  ——  at , with a.certified copy:of this: judgment....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020486.jpg": "...rt.  ‘record on appeal = certified, list  record on appeal...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020512.jpg": "...for, or confidential |  ‘certified indoxed record on appeal...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020636.jpg": "...eit to usca cee nei ¢).. certified idexed record 6: fi es a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021155.jpg": "...delivered on  . |, matha certified copy. of this,  by:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021921.jpg": "...erm  noel and. “lhomas:  certified, on an. mcc ‘count slip,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023461.jpg": "...oig found also created, certified,.and submited false docu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES012/DOJ-OGR-00033157.jpg": "...r  “jason s.weiss  board certified. criminal trial. atorney..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "certified" (46 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">500-500</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">560-560</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">812-817</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">876-876</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">1226-1226</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">2072-2072</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">2101-2101</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">2120-2120</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">2249-2249</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">4075-4075</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">6033-6033</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">6055-6055</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">6182-6182</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">6255-6255</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">7401-7403</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">7496-7496</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">7667-7668</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">7832-7832</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">8072-8072</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">8126-8127</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">9739-9739</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">11161-11161</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">11819-11819</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">12762-12762</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">13867-13867</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">15537-15537</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">16491-16491</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">17409-17409</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">18348-18348</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">19263-19263</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">19715-19715</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">19770-19770</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">20144-20144</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">20480-20480</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">20486-20486</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">20512-20512</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">20636-20636</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">21155-21155</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">21921-21921</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">23461-23461</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">33157-33157</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

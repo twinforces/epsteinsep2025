@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "dictionary"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 2431, "end": 2431, "pages": [2431]}, {"start": 3092, "end": 3092, "pages": [3092]}, {"start": 4222, "end": 4222, "pages": [4222]}, {"start": 4885, "end": 4885, "pages": [4885]}, {"start": 5226, "end": 5226, "pages": [5226]}, {"start": 5837, "end": 5837, "pages": [5837]}, {"start": 6762, "end": 6762, "pages": [6762]}, {"start": 8464, "end": 8464, "pages": [8464]}, {"start": 8548, "end": 8548, "pages": [8548]}, {"start": 8628, "end": 8628, "pages": [8628]}, {"start": 8714, "end": 8714, "pages": [8714]}, {"start": 10421, "end": 10421, "pages": [10421]}, {"start": 10441, "end": 10441, "pages": [10441]}, {"start": 11265, "end": 11265, "pages": [11265]}, {"start": 14587, "end": 14587, "pages": [14587]}, {"start": 17208, "end": 17208, "pages": [17208]}];
+        const pageToPath = {"2431": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002431.jpg", "3092": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003092.jpg", "4222": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004222.jpg", "4885": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004885.jpg", "5226": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005226.jpg", "5837": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005837.jpg", "6762": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006762.jpg", "8464": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008464.jpg", "8548": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008548.jpg", "8628": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008628.jpg", "8714": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008714.jpg", "10421": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010421.jpg", "10441": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010441.jpg", "11265": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011265.jpg", "14587": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014587.jpg", "17208": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017208.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002431.jpg": "...99.” also as defined in; dictionary:  2ooos, may refer'to:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003092.jpg": "...sex' toy, oxford english dictionary ‘online;  hitips://wiw.c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004222.jpg": "...rriani-webster’s, legal  dictionary detines. “sexual. abuse”...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004885.jpg": "...es are inadequate.” mai  dictionary l425 (8th ed. 2oo4) (def...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005226.jpg": "...at trial.” black’s law. dictionary(l-lth ed. 2ol9).  eto oe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005837.jpg": "...ae ath reiets ole a ee  dictionary.” esquivel-quintana vy....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006762.jpg": "...ae ath reiets ole a ee  dictionary.” esquivel-quintana vy....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008464.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008548.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008628.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008714.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010421.jpg": "...ies  meriam-webster:com. dictionary, merriam-webster, litps:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010441.jpg": "...49)l2, 24, 2  webster’s dictionary:defines the word.“entice...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011265.jpg": "...at trial.” black’s law. dictionary(l-lth ed. 2ol9).  eto oe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014587.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017208.jpg": ""};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "dictionary" (16 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">2431-2431</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">3092-3092</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">4222-4222</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">4885-4885</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">5226-5226</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">5837-5837</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">6762-6762</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">8464-8464</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">8548-8548</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">8628-8628</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">8714-8714</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">10421-10421</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">10441-10441</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">11265-11265</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">14587-14587</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">17208-17208</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

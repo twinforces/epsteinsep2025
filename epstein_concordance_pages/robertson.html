@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "robertson"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 928, "end": 929, "pages": [928, 929]}, {"start": 1290, "end": 1305, "pages": [1290, 1291, 1292, 1293, 1294, 1296, 1297, 1298, 1299, 1300, 1301, 1302, 1303, 1304, 1305]}, {"start": 19846, "end": 19847, "pages": [19846, 19847]}, {"start": 20208, "end": 20223, "pages": [20208, 20209, 20210, 20211, 20212, 20214, 20215, 20216, 20217, 20218, 20219, 20220, 20221, 20222, 20223]}];
+        const pageToPath = {"928": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000928.jpg", "929": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000929.jpg", "1290": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001290.jpg", "1291": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001291.jpg", "1292": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001292.jpg", "1293": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001293.jpg", "1294": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001294.jpg", "1296": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001296.jpg", "1297": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001297.jpg", "1298": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001298.jpg", "1299": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001299.jpg", "1300": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001300.jpg", "1301": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001301.jpg", "1302": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001302.jpg", "1303": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001303.jpg", "1304": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001304.jpg", "1305": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001305.jpg", "19846": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019846.jpg", "19847": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019847.jpg", "20208": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020208.jpg", "20209": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020209.jpg", "20210": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020210.jpg", "20211": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020211.jpg", "20212": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020212.jpg", "20214": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020214.jpg", "20215": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020215.jpg", "20216": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020216.jpg", "20217": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020217.jpg", "20218": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020218.jpg", "20219": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020219.jpg", "20220": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020220.jpg", "20221": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020221.jpg", "20222": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020222.jpg", "20223": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020223.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000928.jpg": "...o2l).* the defendant in -robertson. was charged with “frigh...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000929.jpg": "...ore compelling case than robertson for temporary release un...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001290.jpg": "...united states'v. dashawn robertson, gase number l7-cr-o2949...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001291.jpg": "...n the defendant dashawn ‘robertson’s motion to sider motion...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001292.jpg": "...se order. doc. 298.  me. robertson is, charged i 4 ‘three-c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001293.jpg": "...were not sure that, mr. robertson's new: atorneys would be...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001294.jpg": "...d:reasonably asstite mr. robertson's appeararice or thesafe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001296.jpg": "...hen the court detied mr. robertson release last  eet with h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001297.jpg": "...l).  here, although, mr. robertson is: subject toa presumpt...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001298.jpg": "...ctors weigh against mr. -robertson’s release,  they do ‘not...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001299.jpg": "...with regard to mr. robertson’s history and. character...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001300.jpg": "...s accotnt or to link mr. robertson to the alleged contact....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001301.jpg": "...ired by ‘l8 u:  ill, mr. robertson’s release is  under l8'u...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001302.jpg": "...in:this ease. and if-mr. robertson.is convicted on all. cha...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001303.jpg": "...e able to meet with mr.  robertson.in-person, unobstructed...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001304.jpg": "...adee available ‘for [mr. robertson] to: ni  atorneys. to pr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001305.jpg": "...day ‘for. the:  danube  robertson, the proposal, involving...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019846.jpg": "...o2l).* the defendant in -robertson. was charged with “frigh...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019847.jpg": "...ore compelling case than robertson for temporary release un...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020208.jpg": "...united states'v. dashawn robertson, gase number l7-cr-o2949...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020209.jpg": "...n the defendant dashawn ‘robertson’s motion to sider motion...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020210.jpg": "...se order. doc. 298.  me. robertson is, charged i 4 ‘three-c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020211.jpg": "...were not sure that, mr. robertson's new: atorneys would be...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020212.jpg": "...d:reasonably asstite mr. robertson's appeararice or thesafe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020214.jpg": "...hen the court detied mr. robertson release last  eet with h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020215.jpg": "...l).  here, although, mr. robertson is: subject toa presumpt...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020216.jpg": "...ctors weigh against mr. -robertson’s release,  they do ‘not...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020217.jpg": "...with regard to mr. robertson’s history and. character...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020218.jpg": "...s accotnt or to link mr. robertson to the alleged contact....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020219.jpg": "...ired by ‘l8 u:  ill, mr. robertson’s release is  under l8'u...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020220.jpg": "...in:this ease. and if-mr. robertson.is convicted on all. cha...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020221.jpg": "...e able to meet with mr.  robertson.in-person, unobstructed...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020222.jpg": "...made available ‘for [mr. robertson] to: ni  atorneys. to pr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020223.jpg": "...day ‘for. the:  danube  robertson, the proposal, involving..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "robertson" (34 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">928-929</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1290-1305</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">19846-19847</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">20208-20223</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

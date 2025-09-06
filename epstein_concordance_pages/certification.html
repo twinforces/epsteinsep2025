@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "certification"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1874, "end": 1874, "pages": [1874]}, {"start": 2120, "end": 2120, "pages": [2120]}, {"start": 7403, "end": 7405, "pages": [7403, 7404, 7405]}, {"start": 7560, "end": 7560, "pages": [7560]}, {"start": 7648, "end": 7650, "pages": [7648, 7649, 7650]}, {"start": 7684, "end": 7684, "pages": [7684]}, {"start": 7832, "end": 7832, "pages": [7832]}, {"start": 8143, "end": 8143, "pages": [8143]}, {"start": 8267, "end": 8267, "pages": [8267]}, {"start": 20591, "end": 20591, "pages": [20591]}, {"start": 20600, "end": 20600, "pages": [20600]}, {"start": 22070, "end": 22070, "pages": [22070]}];
+        const pageToPath = {"1874": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001874.jpg", "2120": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002120.jpg", "7403": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007403.jpg", "7404": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007404.jpg", "7405": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007405.jpg", "7560": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007560.jpg", "7648": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007648.jpg", "7649": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007649.jpg", "7650": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007650.jpg", "7684": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007684.jpg", "7832": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007832.jpg", "8143": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008143.jpg", "8267": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008267.jpg", "20591": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020591.jpg", "20600": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020600.jpg", "22070": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022070.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001874.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002120.jpg": "...it,  preliminary stages  certification of the extradition. requ...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007403.jpg": "...script, which includes 4 certification. by the court.  reporter...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007404.jpg": "...d. on a.court:reporter’s certification that jt contained.a,“tru...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007405.jpg": "...vid. 9o2(l)(a). and each certification bears. a “signature purp...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007560.jpg": "...edicine and surgery) and certification (psychiatry):  l978-l988...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007648.jpg": "...advanced instruction and certification,” newport beach, ca,, an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007649.jpg": "...advanced instruction and certification,  newport beach, ca, apr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007650.jpg": "...advanced instruction and certification,”  hosted by allstate, n...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007684.jpg": "...ll rcw: where is' board. certification going: southlanes, newsl...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007832.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008143.jpg": "...ll rcw: where is' board. certification going: southlanes, newsl...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008267.jpg": "...lified. witness, or by a certification. that complies with rule...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020591.jpg": "..._  (party/designation)  certification  ve  (2), lave renewed...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020600.jpg": "...mins, p:c.  (name/fitm)  certification  t certify, that:  lam a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022070.jpg": ""};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "certification" (16 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1874-1874</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">2120-2120</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">7403-7405</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">7560-7560</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">7648-7650</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">7684-7684</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">7832-7832</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">8143-8143</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">8267-8267</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">20591-20591</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">20600-20600</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">22070-22070</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "recreation"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1331, "end": 1331, "pages": [1331]}, {"start": 1361, "end": 1361, "pages": [1361]}, {"start": 1382, "end": 1382, "pages": [1382]}, {"start": 1709, "end": 1709, "pages": [1709]}, {"start": 1717, "end": 1717, "pages": [1717]}, {"start": 2903, "end": 2903, "pages": [2903]}, {"start": 4778, "end": 4778, "pages": [4778]}, {"start": 10583, "end": 10583, "pages": [10583]}, {"start": 20248, "end": 20248, "pages": [20248]}, {"start": 20278, "end": 20278, "pages": [20278]}, {"start": 20300, "end": 20300, "pages": [20300]}];
+        const pageToPath = {"1331": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001331.jpg", "1361": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001361.jpg", "1382": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001382.jpg", "1709": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001709.jpg", "1717": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001717.jpg", "2903": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002903.jpg", "4778": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004778.jpg", "10583": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010583.jpg", "20248": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020248.jpg", "20278": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020278.jpg", "20300": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020300.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001331.jpg": "...egular access to outdoor recreation; the thirteen hours per...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001361.jpg": "...tion, she is'scarched f  recreation. area. mdg staff also co...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001382.jpg": "...twocomputers. recreation. eye masks. but the gove...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001709.jpg": "...used by ms. maxwell for recreation, exercise, and personal...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001717.jpg": "...used by ms. maxwell for recreation, exercise, and personal...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002903.jpg": "...tion, she is'scarched f  recreation. area. mdg staff also co...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004778.jpg": "...s spain te ru ons osucil recreation, time if sheswishes.  th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010583.jpg": "...defendant-had access to recreation time and-programming,, a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020248.jpg": "...egular access to outdoor recreation; the thirteen hours per...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020278.jpg": "...tion, she is'scarched f  recreation. area. mdg staff also co...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020300.jpg": "...two computers. recreation. eye masks. but the gove..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "recreation" (11 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1331-1331</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1361-1361</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1382-1382</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">1709-1709</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">1717-1717</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">2903-2903</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">4778-4778</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">10583-10583</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">20248-20248</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">20278-20278</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">20300-20300</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

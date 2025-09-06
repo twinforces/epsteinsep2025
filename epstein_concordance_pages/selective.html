@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "selective"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 3050, "end": 3050, "pages": [3050]}, {"start": 3330, "end": 3330, "pages": [3330]}, {"start": 3755, "end": 3755, "pages": [3755]}, {"start": 3884, "end": 3884, "pages": [3884]}, {"start": 4151, "end": 4151, "pages": [4151]}, {"start": 4452, "end": 4452, "pages": [4452]}, {"start": 4876, "end": 4876, "pages": [4876]}, {"start": 5429, "end": 5429, "pages": [5429]}, {"start": 5505, "end": 5505, "pages": [5505]}, {"start": 5589, "end": 5589, "pages": [5589]}, {"start": 6396, "end": 6396, "pages": [6396]}, {"start": 6467, "end": 6467, "pages": [6467]}, {"start": 6551, "end": 6551, "pages": [6551]}, {"start": 14191, "end": 14191, "pages": [14191]}, {"start": 16814, "end": 16814, "pages": [16814]}, {"start": 21997, "end": 21997, "pages": [21997]}, {"start": 22064, "end": 22064, "pages": [22064]}, {"start": 22072, "end": 22072, "pages": [22072]}, {"start": 22091, "end": 22095, "pages": [22091, 22092, 22093, 22095]}, {"start": 22105, "end": 22105, "pages": [22105]}];
+        const pageToPath = {"3050": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003050.jpg", "3330": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003330.jpg", "3755": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003755.jpg", "3884": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003884.jpg", "4151": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004151.jpg", "4452": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004452.jpg", "4876": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004876.jpg", "5429": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005429.jpg", "5505": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005505.jpg", "5589": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005589.jpg", "6396": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006396.jpg", "6467": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006467.jpg", "6551": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006551.jpg", "14191": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014191.jpg", "16814": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016814.jpg", "21997": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021997.jpg", "22064": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022064.jpg", "22072": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022072.jpg", "22091": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022091.jpg", "22092": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022092.jpg", "22093": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022093.jpg", "22095": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022095.jpg", "22105": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022105.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003050.jpg": "...sed solely on..her useof selective  snippets front a lone d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003330.jpg": "...to. register ‘with the: selective service system. the peti...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003755.jpg": "...convenient. this-lype-of selective disclosure by:one party’...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003884.jpg": "...arguing that the npa’s selective use of language limiting...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004151.jpg": "...ed solely on. her use of selective  ‘snippets from a lone.d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004452.jpg": "...to. register ‘with the: selective service system. the peti...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004876.jpg": "...orse the ‘trial court’s: selective e interpretation of d.a....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005429.jpg": "...der ing vindictive  and, selective prosecution claims). sue...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005505.jpg": "...ors’ motives are  ion,” “selective prosecution,” or “outrag...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005589.jpg": "...blished a vitidictive or selective prose m. ud). that is,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006396.jpg": "...der ing vindictive  and, selective prosecution claims). sue...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006467.jpg": "...ors’ motives are  ion,” “selective prosecution,” or “outrag...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006551.jpg": "...blished a vitidictive or selective prose m. ud). that is,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014191.jpg": "...‘to ‘the grand jury.  q. selective ones; right? q. you chos...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016814.jpg": "...o the grand jury.  lo q. selective ones; right?  int © ee (...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021997.jpg": "...for dismissal, ‘bascd on selective  prosecution: if suecess...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022064.jpg": "...material in support-of a selective prosecution claim .........", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022072.jpg": "...he indictment ‘based.on “selective prosecution.” (conf. tr....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022091.jpg": "...burden * in support ofa selective prosecution  thomas. sec...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022092.jpg": "...e  a deferdant clainitig selective proscetition mustpresent...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022093.jpg": "...that: would relate to a. selective: :procession. or “discri...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022095.jpg": "...first required-prong:  . selective prosecution claim, must-...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022105.jpg": "...iscovery'on ‘a. claim of selective prosecution must shou‘so..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "selective" (23 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">3050-3050</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">3330-3330</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">3755-3755</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3884-3884</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">4151-4151</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">4452-4452</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">4876-4876</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">5429-5429</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">5505-5505</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">5589-5589</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">6396-6396</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">6467-6467</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">6551-6551</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">14191-14191</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">16814-16814</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">21997-21997</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">22064-22064</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">22072-22072</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">22091-22095</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">22105-22105</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

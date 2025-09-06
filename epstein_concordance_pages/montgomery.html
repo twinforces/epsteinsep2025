@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "montgomery"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 4814, "end": 4814, "pages": [4814]}, {"start": 4820, "end": 4843, "pages": [4820, 4824, 4828, 4830, 4832, 4834, 4835, 4839, 4843]}, {"start": 4886, "end": 4887, "pages": [4886, 4887]}, {"start": 7573, "end": 7573, "pages": [7573]}, {"start": 7674, "end": 7674, "pages": [7674]}, {"start": 7690, "end": 7693, "pages": [7690, 7693]}, {"start": 7853, "end": 7853, "pages": [7853]}, {"start": 8133, "end": 8133, "pages": [8133]}, {"start": 8149, "end": 8152, "pages": [8149, 8152]}];
+        const pageToPath = {"4814": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004814.jpg", "4820": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004820.jpg", "4824": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004824.jpg", "4828": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004828.jpg", "4830": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004830.jpg", "4832": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004832.jpg", "4834": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004834.jpg", "4835": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004835.jpg", "4839": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004839.jpg", "4843": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004843.jpg", "4886": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004886.jpg", "4887": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004887.jpg", "7573": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007573.jpg", "7674": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007674.jpg", "7690": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007690.jpg", "7693": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007693.jpg", "7853": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007853.jpg", "8133": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008133.jpg", "8149": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008149.jpg", "8152": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008152.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004814.jpg": "...ember 25, 2ol8: of the : montgomery court of common william...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004820.jpg": "...am police: department in montgomery county, where gosby’s re...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004824.jpg": "...in cheltenham tounship, montgomery county.  a. 3l year old...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004828.jpg": "...and  was’ serving as ‘a montgomery county commissioner. he:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004830.jpg": "...le in any prosecution in montgomery county  for the incident...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004832.jpg": "...ultimately teferred to: montgomery county: the lack of a pr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004834.jpg": "...inding legal analysis in montgomery’ county. he testified th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004835.jpg": "...sed on ‘other victims in montgomery ( ‘county or perjury:  h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004839.jpg": "...was not-for anv erie in montgomery county for all time. itw...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004843.jpg": "...l court kept the case in montgomery county, but.agreed that:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004886.jpg": "...:  nt  of compelling the montgomery county district atorney'...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004887.jpg": "...was’ fully within. his  montgomery ‘gounty, w ull hi  autho...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007573.jpg": "...ssouri, in u.s. v.. lisa montgomery’ (alleged fetus abductio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007674.jpg": "...amin kramer: district l9 montgomery county; maryland. hearin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007690.jpg": "...hiatric society meeting, montgomery, al, april 24; 2olo.  ha...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007693.jpg": "...physicians association, montgomery, al, april 24, 2ol5...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007853.jpg": "...sham, k.., laporte, g:., montgomery; bi ology to investigate...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008133.jpg": "...amin kramer: district l9 montgomery county; maryland. hearin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008149.jpg": "...hiatric society meeting, montgomery, al, april 24; 2olo.  ha...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008152.jpg": "...physicians association, montgomery, al, april 24, 2ol5..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "montgomery" (20 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">4814-4814</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">4820-4843</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">4886-4887</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">7573-7573</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">7674-7674</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">7690-7693</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">7853-7853</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">8133-8133</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">8149-8152</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

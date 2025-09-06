@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "medication"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 4762, "end": 4762, "pages": [4762]}, {"start": 5284, "end": 5284, "pages": [5284]}, {"start": 5330, "end": 5330, "pages": [5330]}, {"start": 7024, "end": 7024, "pages": [7024]}, {"start": 7682, "end": 7682, "pages": [7682]}, {"start": 7693, "end": 7696, "pages": [7693, 7696]}, {"start": 8141, "end": 8141, "pages": [8141]}, {"start": 8152, "end": 8155, "pages": [8152, 8155]}, {"start": 9666, "end": 9666, "pages": [9666]}, {"start": 10763, "end": 10763, "pages": [10763]}, {"start": 13138, "end": 13139, "pages": [13138, 13139]}, {"start": 13237, "end": 13237, "pages": [13237]}, {"start": 14383, "end": 14383, "pages": [14383]}, {"start": 17005, "end": 17005, "pages": [17005]}, {"start": 18723, "end": 18724, "pages": [18723, 18724]}, {"start": 18822, "end": 18822, "pages": [18822]}, {"start": 23408, "end": 23408, "pages": [23408]}, {"start": 23443, "end": 23446, "pages": [23443, 23446]}, {"start": 23463, "end": 23463, "pages": [23463]}, {"start": 24130, "end": 24130, "pages": [24130]}, {"start": 26089, "end": 26089, "pages": [26089]}, {"start": 26169, "end": 26169, "pages": [26169]}];
+        const pageToPath = {"4762": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004762.jpg", "5284": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005284.jpg", "5330": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005330.jpg", "7024": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007024.jpg", "7682": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007682.jpg", "7693": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007693.jpg", "7696": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007696.jpg", "8141": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008141.jpg", "8152": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008152.jpg", "8155": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008155.jpg", "9666": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009666.jpg", "10763": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010763.jpg", "13138": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013138.jpg", "13139": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013139.jpg", "13237": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013237.jpg", "14383": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014383.jpg", "17005": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017005.jpg", "18723": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018723.jpg", "18724": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018724.jpg", "18822": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018822.jpg", "23408": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023408.jpg", "23443": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023443.jpg", "23446": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023446.jpg", "23463": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023463.jpg", "24130": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00024130.jpg", "26089": "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00026089.jpg", "26169": "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00026169.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004762.jpg": "...ary, with ag water,  no: medication, and l  see eos ct  wasn...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005284.jpg": "...ion.  are you taking any medication which would:prevent you...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005330.jpg": "...ain:  are you fakingzany medication: which. would prevent yo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007024.jpg": "...e  r  are you taking any medication which would ‘preventryou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007682.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007693.jpg": "...o, ca, october'24, 2ol3  medication: your ‘ma c e mel 6 it....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007696.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008141.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008152.jpg": "...o, ca, october'24, 2ol3  medication: your ‘ma c e mel 6 it....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008155.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009666.jpg": "....  ~ re \"youtaking any t medication which would preven  tova...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010763.jpg": "...e <> <<  ou taking rgany medication which would prevent you!...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013138.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013139.jpg": "...oned two sther types, ge medication. what were  those for?...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013237.jpg": "...a. that. was my anxiety medication.  qo. you were using alc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014383.jpg": "...harge er the very slight medication e've proposed.  mr. emer...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017005.jpg": "...harge er the very slight medication e've proposed.  mr. emer...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018723.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018724.jpg": "...oned two sther types, ge medication. what were  those for?...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018822.jpg": "...a. that. was my anxiety medication.  qo. you were using alc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023408.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023443.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023446.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023463.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00024130.jpg": "...‘ccompared'to:new:an  ‘medication  es  order betail  sss...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00026089.jpg": "...8: cutrant:  preacertyl  medication  idiscontinuellypes wher...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00026169.jpg": ""};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "medication" (27 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">4762-4762</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">5284-5284</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">5330-5330</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">7024-7024</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">7682-7682</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">7693-7696</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">8141-8141</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">8152-8155</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">9666-9666</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">10763-10763</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">13138-13139</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">13237-13237</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">14383-14383</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">17005-17005</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">18723-18724</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">18822-18822</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">23408-23408</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">23443-23446</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">23463-23463</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">24130-24130</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">26089-26089</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">26169-26169</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "privileged"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 992, "end": 992, "pages": [992]}, {"start": 1415, "end": 1415, "pages": [1415]}, {"start": 1618, "end": 1618, "pages": [1618]}, {"start": 2557, "end": 2557, "pages": [2557]}, {"start": 2566, "end": 2566, "pages": [2566]}, {"start": 3027, "end": 3027, "pages": [3027]}, {"start": 3781, "end": 3781, "pages": [3781]}, {"start": 3857, "end": 3857, "pages": [3857]}, {"start": 3974, "end": 3976, "pages": [3974, 3976]}, {"start": 4201, "end": 4201, "pages": [4201]}, {"start": 4744, "end": 4746, "pages": [4744, 4745, 4746]}, {"start": 6429, "end": 6429, "pages": [6429]}, {"start": 8239, "end": 8243, "pages": [8239, 8240, 8241, 8242, 8243]}, {"start": 8365, "end": 8381, "pages": [8365, 8368, 8370, 8371, 8375, 8376, 8377, 8379, 8381]}, {"start": 8988, "end": 8988, "pages": [8988]}, {"start": 8998, "end": 8998, "pages": [8998]}, {"start": 9060, "end": 9060, "pages": [9060]}, {"start": 9751, "end": 9751, "pages": [9751]}, {"start": 11441, "end": 11441, "pages": [11441]}, {"start": 11720, "end": 11723, "pages": [11720, 11723]}, {"start": 12173, "end": 12176, "pages": [12173, 12174, 12176]}, {"start": 13274, "end": 13274, "pages": [13274]}, {"start": 13862, "end": 13862, "pages": [13862]}, {"start": 16165, "end": 16168, "pages": [16165, 16168]}, {"start": 16486, "end": 16486, "pages": [16486]}, {"start": 17762, "end": 17765, "pages": [17762, 17763, 17765]}, {"start": 18859, "end": 18859, "pages": [18859]}, {"start": 19358, "end": 19358, "pages": [19358]}, {"start": 19381, "end": 19381, "pages": [19381]}, {"start": 19631, "end": 19631, "pages": [19631]}, {"start": 19910, "end": 19910, "pages": [19910]}, {"start": 20333, "end": 20333, "pages": [20333]}, {"start": 21175, "end": 21175, "pages": [21175]}, {"start": 23013, "end": 23013, "pages": [23013]}];
+        const pageToPath = {"992": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000992.jpg", "1415": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001415.jpg", "1618": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001618.jpg", "2557": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002557.jpg", "2566": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002566.jpg", "3027": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003027.jpg", "3781": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003781.jpg", "3857": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003857.jpg", "3974": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003974.jpg", "3976": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003976.jpg", "4201": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004201.jpg", "4744": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004744.jpg", "4745": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004745.jpg", "4746": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004746.jpg", "6429": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006429.jpg", "8239": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008239.jpg", "8240": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008240.jpg", "8241": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008241.jpg", "8242": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008242.jpg", "8243": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008243.jpg", "8365": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008365.jpg", "8368": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008368.jpg", "8370": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008370.jpg", "8371": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008371.jpg", "8375": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008375.jpg", "8376": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008376.jpg", "8377": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008377.jpg", "8379": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008379.jpg", "8381": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008381.jpg", "8988": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008988.jpg", "8998": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008998.jpg", "9060": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009060.jpg", "9751": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009751.jpg", "11441": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011441.jpg", "11720": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011720.jpg", "11723": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011723.jpg", "12173": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012173.jpg", "12174": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012174.jpg", "12176": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012176.jpg", "13274": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013274.jpg", "13862": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013862.jpg", "16165": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016165.jpg", "16168": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016168.jpg", "16486": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016486.jpg", "17762": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017762.jpg", "17763": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017763.jpg", "17765": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017765.jpg", "18859": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018859.jpg", "19358": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019358.jpg", "19381": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019381.jpg", "19631": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019631.jpg", "19910": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019910.jpg", "20333": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020333.jpg", "21175": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021175.jpg", "23013": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00023013.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000992.jpg": "...ithe-privileged lifestyle she has mainta...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001415.jpg": "...xwell’s lawyers: “those [privileged] materials that defense...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001618.jpg": "...the privileged, lifestyle she has maint...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002557.jpg": "...hat are relevant and non-privileged,”  renders the subpoena....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002566.jpg": "...milarly  aeanes eo 9.95  privileged position with.respecto i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003027.jpg": "...subpoenas  fequested non-privileged documents relatingts gin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003781.jpg": "...s private,-confidential, privileged  form:ilic records-take....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003857.jpg": "....¥. l998) (holding that “privileged.  ed ry\" fa vanes ‘or ‘t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003974.jpg": "...f refused:to produce: as privileged “approx: 57”  doctiments...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003976.jpg": "...inadmissible hearsay or-privileged information. /d. at.*2....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004201.jpg": "...ndividually: logging all privileged responsive doctimentsiwo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004744.jpg": "...ned under favorable and  privileged conditions. each time; t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004745.jpg": "...ms. maxwell. cannot have privileged communications with. her...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004746.jpg": "...and are interfering with privileged. atorney-client,  ‘inapp...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006429.jpg": "...and. material, normally privileged. t  called‘upon, to dete...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008239.jpg": "...ovided legal advice: are privileged. “they were? (l) between...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008240.jpg": "...fidential, and so:is not-privileged., such a rule is.not the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008241.jpg": "...ient eommunications are: privileged, and. ‘the atorney’s. ad...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008242.jpg": ".... ‘by ‘atempting to use ‘privileged.  injecting the atorney-...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008243.jpg": "...iai. to divalge :flrther privileged communications with jane...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008365.jpg": "...se:the: answers are: not privileged, ‘this  tara ae sn genre...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008368.jpg": "...rily discloses otherwise privileged information to the gover...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008370.jpg": "...gory of relevant:and non-privileged.testimony mr. glassman....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008371.jpg": "...ane’s statement is ‘not ‘privileged because it-was. not “int...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008375.jpg": "...en. if not :implicating ‘privileged, forcing: an.  atorney t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008376.jpg": "...ted to  relevant and non-privileged information, risks, disr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008377.jpg": "...—to the-extent it is not privileged....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008379.jpg": "...mony, too, would not be  privileged, but:itis irrelevant.and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008381.jpg": "...d, glassman had, certain-privileged. conversations  that aff...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008988.jpg": "...of confidential or privileged information. united stat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008998.jpg": "...disclosure  of allegedly privileged materials. may: interven...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009060.jpg": "...disclosure of allegedly-privileged materials may: intervene...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009751.jpg": "...disclosure of allegedly-privileged materials may: intervene...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011441.jpg": "...gh the returns might be: privileged, saying’ “cases demonstr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011720.jpg": "...relyi.  thoese are net.  privileged convers atd.ons.  the go...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011723.jpg": "...interrogatories, are net privileged. the communications in....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012173.jpg": "...torney and elient. tee's privileged,  right? and you\"re argu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012174.jpg": "...is his wiew is  this ls privileged and he'd like to confer...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012176.jpg": "...6f that d6bviduesly l6s privileged. ms. menninger: it is, u...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013274.jpg": "...'t belaeve ‘that  that's privileged because there l5 n@ comm...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013862.jpg": "...isd, and the bemnddry to privileged communications can be cd...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016165.jpg": "...relyi.  thoese are net.  privileged convers atd.ons.  the go...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016168.jpg": "...interrogatories, are net privileged. the communications in....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016486.jpg": "...isd, and the bemnddry to privileged communications can be cd...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017762.jpg": "...torney and elient. tee's privileged,  right? and you\"re argu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017763.jpg": "...is his wiew is  this ls privileged and he'd like to confer...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017765.jpg": "...6f that d6bviduesly l6s privileged. ms. menninger: it is, u...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018859.jpg": "...'t belaeve ‘that  that's privileged because there l5 n@ comm...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019358.jpg": "...that orders to disclose privileged information. are not imm...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019381.jpg": "...that orders to disclose privileged information. are not imm...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019631.jpg": "...hat orders: to disclose ‘privileged information are not imme...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019910.jpg": "...ithe-privileged lifestyle she has mainta...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020333.jpg": "...xwell’s lawyers: “those [privileged] materials that defense...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021175.jpg": "...port contains.sensitive, privileged, and privacy act protect...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00023013.jpg": "...report contains sens  et privileged, and. d privacy..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "privileged" (55 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">992-992</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1415-1415</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1618-1618</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">2557-2557</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">2566-2566</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">3027-3027</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3781-3781</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">3857-3857</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">3974-3976</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">4201-4201</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">4744-4746</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">6429-6429</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">8239-8243</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">8365-8381</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">8988-8988</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">8998-8998</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">9060-9060</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">9751-9751</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">11441-11441</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">11720-11723</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">12173-12176</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">13274-13274</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">13862-13862</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">16165-16168</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">16486-16486</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">17762-17765</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">18859-18859</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">19358-19358</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">19381-19381</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">19631-19631</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">19910-19910</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">20333-20333</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">21175-21175</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">23013-23013</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "demonstration"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1738, "end": 1738, "pages": [1738]}, {"start": 1779, "end": 1784, "pages": [1779, 1784]}, {"start": 1832, "end": 1832, "pages": [1832]}, {"start": 5796, "end": 5796, "pages": [5796]}, {"start": 6721, "end": 6721, "pages": [6721]}, {"start": 7511, "end": 7511, "pages": [7511]}, {"start": 19555, "end": 19555, "pages": [19555]}, {"start": 22100, "end": 22100, "pages": [22100]}];
+        const pageToPath = {"1738": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001738.jpg", "1779": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001779.jpg", "1784": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001784.jpg", "1832": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001832.jpg", "5796": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005796.jpg", "6721": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006721.jpg", "7511": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007511.jpg", "19555": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019555.jpg", "22100": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022100.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001738.jpg": "...on i is rebutable ‘upon. demonstration that: suppression “ls es...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001779.jpg": "...on.a particular factual. demonstration of potential harm, eb 4...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001784.jpg": "..., particular fe factual’ demonstration of potetitial: harm, imi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001832.jpg": "...on.a particular factual. demonstration of potential harm, eb 4...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005796.jpg": ".... that is‘a-sufficient.  demonstration. of “hou the expert came...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006721.jpg": ".... that is‘a-sufficient.  demonstration. of “hou the expert came...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007511.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019555.jpg": "...on i is rebutable ‘upon. demonstration that: suppression “ls es...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022100.jpg": "...orward some:“‘compelling demonstration to:  the contrary” by po..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "demonstration" (9 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1738-1738</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1779-1784</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1832-1832</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">5796-5796</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">6721-6721</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">7511-7511</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">19555-19555</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">22100-22100</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "logistical"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1541, "end": 1542, "pages": [1541, 1542]}, {"start": 2887, "end": 2888, "pages": [2887, 2888]}, {"start": 3000, "end": 3000, "pages": [3000]}, {"start": 3842, "end": 3842, "pages": [3842]}, {"start": 3994, "end": 3994, "pages": [3994]}, {"start": 6333, "end": 6333, "pages": [6333]}, {"start": 6353, "end": 6353, "pages": [6353]}, {"start": 6705, "end": 6708, "pages": [6705, 6708]}, {"start": 7009, "end": 7009, "pages": [7009]}, {"start": 7053, "end": 7053, "pages": [7053]}, {"start": 7064, "end": 7064, "pages": [7064]}, {"start": 7160, "end": 7160, "pages": [7160]}, {"start": 7182, "end": 7185, "pages": [7182, 7185]}, {"start": 7872, "end": 7875, "pages": [7872, 7875]}, {"start": 9551, "end": 9551, "pages": [9551]}, {"start": 12003, "end": 12003, "pages": [12003]}, {"start": 12745, "end": 12745, "pages": [12745]}, {"start": 13172, "end": 13172, "pages": [13172]}, {"start": 13854, "end": 13854, "pages": [13854]}, {"start": 14879, "end": 14882, "pages": [14879, 14882]}, {"start": 15083, "end": 15083, "pages": [15083]}, {"start": 15096, "end": 15096, "pages": [15096]}, {"start": 15142, "end": 15142, "pages": [15142]}, {"start": 16479, "end": 16479, "pages": [16479]}, {"start": 17593, "end": 17593, "pages": [17593]}, {"start": 18332, "end": 18332, "pages": [18332]}, {"start": 18757, "end": 18757, "pages": [18757]}, {"start": 19252, "end": 19252, "pages": [19252]}, {"start": 19270, "end": 19270, "pages": [19270]}, {"start": 19699, "end": 19699, "pages": [19699]}, {"start": 19722, "end": 19722, "pages": [19722]}];
+        const pageToPath = {"1541": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001541.jpg", "1542": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001542.jpg", "2887": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002887.jpg", "2888": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002888.jpg", "3000": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003000.jpg", "3842": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003842.jpg", "3994": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003994.jpg", "6333": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006333.jpg", "6353": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006353.jpg", "6705": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006705.jpg", "6708": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006708.jpg", "7009": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007009.jpg", "7053": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007053.jpg", "7064": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007064.jpg", "7160": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007160.jpg", "7182": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007182.jpg", "7185": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007185.jpg", "7872": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007872.jpg", "7875": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007875.jpg", "9551": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009551.jpg", "12003": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012003.jpg", "12745": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012745.jpg", "13172": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013172.jpg", "13854": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013854.jpg", "14879": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014879.jpg", "14882": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014882.jpg", "15083": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015083.jpg", "15096": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015096.jpg", "15142": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015142.jpg", "16479": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016479.jpg", "17593": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017593.jpg", "18332": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018332.jpg", "18757": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018757.jpg", "19252": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019252.jpg", "19270": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019270.jpg", "19699": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019699.jpg", "19722": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019722.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001541.jpg": "...rt by:  that appropriate logistical, arrangements can be:mad...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001542.jpg": "...uly l4, 2o2o, due fo the logistical, issues:  proceeding, th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002887.jpg": "...son. the court is making logistical arrangenierits and will...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002888.jpg": "...aignment requires, sonic logistical arrangements which may:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003000.jpg": "...ces! ‘would, ehcounter:  logistical. and. constitutional. ob...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003842.jpg": "...ease .  that appropriate logistical. arrangements can: be:ma...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003994.jpg": "...information (actual. and logistical): combined with the age...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006333.jpg": "...parties regarding these logistical considerations. beeause...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006353.jpg": "...parties regarding these logistical considerations. beeause...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006705.jpg": "...ion, to it as. you. make logistical arrangements for ‘the tr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006708.jpg": "...ention to it as you make logistical arrangements for the tri...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007009.jpg": "...l issue that  this, l6 a logistical questien. that goes to m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007053.jpg": "...er he  some additional logistical issues......", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007064.jpg": "...a jolnt proposal for any logistical issues related te this f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007160.jpg": "...u,  the cqurt: erere are logistical issues we abe deading  w...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007182.jpg": "...ed tq do with respect to logistical issues and daubert here...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007185.jpg": "...e panties have any other logistical maters or  questions to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007872.jpg": "...ed tq do with respect to logistical issues and daubert here...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007875.jpg": "...e panties have any other logistical maters or  questions to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009551.jpg": "...a completcirecord of non-logistical juror’communications. ‘t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012003.jpg": "...xamination, other ‘than, logistical  = bic oarts at bd eh bs...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012745.jpg": "...son, he's ‘on cross, so  logistical coordination with ‘the g...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013172.jpg": "...to speak with her about logistical maters, i said  at that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013854.jpg": "...ing said, there ls still logistical things that, in, our  \"o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014879.jpg": "...d to do with mespect. to logistical issues and daubert hene...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014882.jpg": "...e parties hawe any other logistical matexs ox  questions to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015083.jpg": "...ere provides additional, logistical instructions for any ‘su...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015096.jpg": "...l);  dkt..8ol (providing logistical instructions, for-such l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015142.jpg": "...rt provided:victims:with logistical. instructions: forthe: s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016479.jpg": "...ing said, there ls still logistical things that, in, our  \"o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017593.jpg": "...xamination, other ‘than, logistical  = bic oarts at bd eh bs...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018332.jpg": "...son, he's ‘on cross, so  logistical coordination with ‘the g...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018757.jpg": "...to speak with her about logistical maters, i said  at that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019252.jpg": "...ourt involv  appropriate logistical. arrangements ¢ can be m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019270.jpg": "...ourt involv  appropriate logistical. arrangements ¢ can be m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019699.jpg": "...uly 4 2o2o. due o torthe logistical issues inv i! ed i in ‘e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019722.jpg": "...uly 4 2o2o. due o torthe logistical issues inv i! ed i in ‘e..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "logistical" (37 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1541-1542</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">2887-2888</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">3000-3000</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3842-3842</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">3994-3994</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">6333-6333</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">6353-6353</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">6705-6708</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">7009-7009</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">7053-7053</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">7064-7064</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">7160-7160</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">7182-7185</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">7872-7875</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">9551-9551</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">12003-12003</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">12745-12745</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">13172-13172</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">13854-13854</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">14879-14882</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">15083-15083</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">15096-15096</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">15142-15142</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">16479-16479</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">17593-17593</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">18332-18332</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">18757-18757</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">19252-19252</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">19270-19270</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">19699-19699</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">19722-19722</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

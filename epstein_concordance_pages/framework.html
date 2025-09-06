@@ -1,0 +1,235 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "framework"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1163, "end": 1163, "pages": [1163]}, {"start": 1184, "end": 1184, "pages": [1184]}, {"start": 1748, "end": 1748, "pages": [1748]}, {"start": 1852, "end": 1852, "pages": [1852]}, {"start": 1863, "end": 1863, "pages": [1863]}, {"start": 2144, "end": 2144, "pages": [2144]}, {"start": 2182, "end": 2182, "pages": [2182]}, {"start": 2203, "end": 2203, "pages": [2203]}, {"start": 2542, "end": 2542, "pages": [2542]}, {"start": 2659, "end": 2659, "pages": [2659]}, {"start": 2827, "end": 2827, "pages": [2827]}, {"start": 2988, "end": 2988, "pages": [2988]}, {"start": 3096, "end": 3096, "pages": [3096]}, {"start": 3113, "end": 3113, "pages": [3113]}, {"start": 3191, "end": 3191, "pages": [3191]}, {"start": 3659, "end": 3666, "pages": [3659, 3662, 3666]}, {"start": 3687, "end": 3687, "pages": [3687]}, {"start": 4308, "end": 4313, "pages": [4308, 4313]}, {"start": 4458, "end": 4458, "pages": [4458]}, {"start": 4799, "end": 4799, "pages": [4799]}, {"start": 4982, "end": 4982, "pages": [4982]}, {"start": 5915, "end": 5918, "pages": [5915, 5917, 5918]}, {"start": 5929, "end": 5933, "pages": [5929, 5933]}, {"start": 6840, "end": 6843, "pages": [6840, 6842, 6843]}, {"start": 6854, "end": 6858, "pages": [6854, 6858]}, {"start": 7068, "end": 7068, "pages": [7068]}, {"start": 8399, "end": 8399, "pages": [8399]}, {"start": 8969, "end": 8969, "pages": [8969]}, {"start": 10273, "end": 10277, "pages": [10273, 10277]}, {"start": 10372, "end": 10372, "pages": [10372]}, {"start": 15009, "end": 15009, "pages": [15009]}, {"start": 15153, "end": 15153, "pages": [15153]}, {"start": 19259, "end": 19259, "pages": [19259]}, {"start": 19329, "end": 19329, "pages": [19329]}, {"start": 19441, "end": 19441, "pages": [19441]}, {"start": 19448, "end": 19448, "pages": [19448]}, {"start": 19559, "end": 19559, "pages": [19559]}, {"start": 20081, "end": 20081, "pages": [20081]}, {"start": 20102, "end": 20102, "pages": [20102]}, {"start": 20772, "end": 20772, "pages": [20772]}, {"start": 20817, "end": 20817, "pages": [20817]}, {"start": 20989, "end": 20989, "pages": [20989]}, {"start": 21115, "end": 21115, "pages": [21115]}, {"start": 21124, "end": 21124, "pages": [21124]}, {"start": 21185, "end": 21185, "pages": [21185]}, {"start": 21334, "end": 21334, "pages": [21334]}, {"start": 21692, "end": 21692, "pages": [21692]}];
+        const pageToPath = {"1163": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001163.jpg", "1184": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001184.jpg", "1748": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001748.jpg", "1852": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001852.jpg", "1863": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001863.jpg", "2144": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002144.jpg", "2182": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002182.jpg", "2203": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002203.jpg", "2542": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002542.jpg", "2659": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002659.jpg", "2827": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002827.jpg", "2988": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002988.jpg", "3096": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003096.jpg", "3113": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003113.jpg", "3191": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003191.jpg", "3659": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003659.jpg", "3662": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003662.jpg", "3666": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003666.jpg", "3687": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003687.jpg", "4308": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004308.jpg", "4313": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004313.jpg", "4458": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004458.jpg", "4799": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004799.jpg", "4982": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004982.jpg", "5915": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005915.jpg", "5917": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005917.jpg", "5918": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005918.jpg", "5929": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005929.jpg", "5933": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005933.jpg", "6840": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006840.jpg", "6842": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006842.jpg", "6843": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006843.jpg", "6854": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006854.jpg", "6858": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006858.jpg", "7068": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007068.jpg", "8399": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008399.jpg", "8969": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008969.jpg", "10273": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010273.jpg", "10277": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010277.jpg", "10372": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010372.jpg", "15009": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015009.jpg", "15153": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015153.jpg", "19259": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019259.jpg", "19329": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019329.jpg", "19441": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019441.jpg", "19448": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019448.jpg", "19559": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019559.jpg", "20081": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020081.jpg", "20102": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020102.jpg", "20772": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020772.jpg", "20817": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020817.jpg", "20989": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020989.jpg", "21115": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021115.jpg", "21124": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021124.jpg", "21185": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021185.jpg", "21334": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021334.jpg", "21692": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021692.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001163.jpg": "...er deviated outside the  framework ¢  al omim mant  the ‘in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001184.jpg": "..., '2oo4 trans osing the: framework decision, of june l3) l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001748.jpg": "...ause exists. within this framework, the federal rules, of c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001852.jpg": "...ors” :in. the common law framework or “higher values” in th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001863.jpg": "...mmen | law  without ted  framework or “higher values” in th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002144.jpg": "...e eee ‘arrest: warrant: ‘framework decision. of | l3 june:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002182.jpg": "...er deviated outside the  framework ¢  al omim mant  the ‘in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002203.jpg": "..., '2oo4 trans osing the: framework decision, of june l3) l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002542.jpg": "...nt: te: opr’s analytical framework: when opr conclud ss tha...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002659.jpg": "....  ‘iculated, a two-step framework to. evaluate the ‘propos...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002827.jpg": "...s the sixth afriendment: framework, there is:a critical dif...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002988.jpg": "...step one ofthe  twozpart framework, for determining ‘whethe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003096.jpg": "...around the: calibrated framework: for discovery ‘in. crim...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003113.jpg": "...m the usual. sufficicicy framework” where. defendant “cites...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003191.jpg": "...iew of 'opr’s analytical framework... cceeseneeeneeneenees...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003659.jpg": "...dgraf is the appropriate framework, for  are bona cant bh y...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003662.jpg": "...graf is  the appropriate framework—nor can it, given the se...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003666.jpg": "...ovide the correct legal. framework for. the application. of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003687.jpg": "...6). the ‘suprem: wo-step framework to determine whether a f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004308.jpg": "...d ss that  jae sl ee.  | framework:  ‘ursuant: te: opr’s  a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004313.jpg": "...iew of ‘opr’s analytical framework... ccc eecceeeneeneeneee...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004458.jpg": ".... good fi h, a  tem  al framework, an, ; atomne  pt to  np...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004799.jpg": "...cxtent she offers any  ¢ framework inher reply, it ls! that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004982.jpg": "...5l. u.s. 244, 28o (l994) framework  and, concluded that the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005915.jpg": "...es) based onia coding fi framework  assessed were years: of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005917.jpg": "...: using a.agg.a’s (2oo4) framework. —  vetfying behavora nd...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005918.jpg": "...a curtura, y competent: framework for:csa,  d sdostirecqie...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005929.jpg": "...closely aligned. logical framework that impede: ‘gsa disclo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005933.jpg": "...on planning lf fake ‘i v-framework (kit ieley’ &. stogdon,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006840.jpg": "...es) based onia coding fi framework  assessed were years: of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006842.jpg": "...: using a.agg.a’s (2oo4) framework. —  vetfying behavora nd...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006843.jpg": "...a curtura, y competent: framework for:csa,  d sdostirecqie...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006854.jpg": "...closely aligned. logical framework that impede: ‘gsa disclo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006858.jpg": "...on planning lf fake ‘i v-framework (kit ieley’ &. stogdon,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007068.jpg": "...(l974).  with this legal framework. in mind, and. in. light...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008399.jpg": "...(l974).  with this legal framework. in mind, and. in. light...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008969.jpg": "...for hou to devise a fair framework for addressing and:decid...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010273.jpg": "...within the proper legal. framework: and to reach a rational...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010277.jpg": "...within the proper legal framework ‘and, to reach a, ration...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010372.jpg": "...pplics 4 barden-shifting framework. the  defendant earries:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015009.jpg": "...re universally accepted  framework for these pre-offense be...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015153.jpg": "...7@  g “raig'suppli es a. framework: for: evaluating whether...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019259.jpg": "...use exists. ‘within this framework, the federal rules, of c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019329.jpg": "...use exists. ‘within this framework, the federal rules, of c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019441.jpg": "...use exists. ‘within this framework, the federal rules, of c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019448.jpg": "...in an. “intervention”  ‘framework, which;would, require an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019559.jpg": "...use exists. within this: framework, the federal rules, of c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020081.jpg": "...er deviated outside the  framework ¢  al omim mant  the ‘in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020102.jpg": "..., '2oo4 trans osing the: framework decision, of june l3) l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020772.jpg": "...has set outa ‘two-step ‘framework to: determine:whether a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020817.jpg": "...,, 5 lu.s. 244, 28o.994) framework:  and concluded:that‘the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020989.jpg": "...ies sta-burden-shifting ‘framework: the  initial burden of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021115.jpg": "...must follou a two-step framework to assess whether an act...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021124.jpg": "...framework;, or examined §3283°s le...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021185.jpg": "...fthe: npa. ‘under opr’s. framework oper ie the develon requ...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021334.jpg": "...2o2, ta this vreard, or framework: j is similarto a. stand...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021692.jpg": "...der ihe: lan lor af framework. the 2oo3 amendment. pro..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "framework" (57 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1163-1163</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1184-1184</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1748-1748</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">1852-1852</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">1863-1863</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">2144-2144</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">2182-2182</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">2203-2203</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">2542-2542</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">2659-2659</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">2827-2827</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">2988-2988</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">3096-3096</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">3113-3113</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">3191-3191</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">3659-3666</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">3687-3687</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">4308-4313</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">4458-4458</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">4799-4799</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">4982-4982</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">5915-5918</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">5929-5933</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">6840-6843</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">6854-6858</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">7068-7068</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">8399-8399</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">8969-8969</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">10273-10277</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">10372-10372</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">15009-15009</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">15153-15153</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">19259-19259</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">19329-19329</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">19441-19441</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">19448-19448</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">19559-19559</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">20081-20081</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">20102-20102</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">20772-20772</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">20817-20817</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">20989-20989</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">21115-21115</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">21124-21124</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">21185-21185</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(45, 0); return false;">21334-21334</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(46, 0); return false;">21692-21692</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

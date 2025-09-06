@@ -1,0 +1,313 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "preference"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 575, "end": 575, "pages": [575]}, {"start": 1028, "end": 1028, "pages": [1028]}, {"start": 1566, "end": 1566, "pages": [1566]}, {"start": 1880, "end": 1880, "pages": [1880]}, {"start": 1901, "end": 1901, "pages": [1901]}, {"start": 2544, "end": 2544, "pages": [2544]}, {"start": 2829, "end": 2829, "pages": [2829]}, {"start": 2848, "end": 2848, "pages": [2848]}, {"start": 3084, "end": 3085, "pages": [3084, 3085]}, {"start": 3188, "end": 3188, "pages": [3188]}, {"start": 3241, "end": 3241, "pages": [3241]}, {"start": 3280, "end": 3280, "pages": [3280]}, {"start": 3592, "end": 3594, "pages": [3592, 3593, 3594]}, {"start": 4310, "end": 4310, "pages": [4310]}, {"start": 4363, "end": 4363, "pages": [4363]}, {"start": 4402, "end": 4402, "pages": [4402]}, {"start": 5837, "end": 5839, "pages": [5837, 5839]}, {"start": 5909, "end": 5909, "pages": [5909]}, {"start": 6045, "end": 6045, "pages": [6045]}, {"start": 6762, "end": 6764, "pages": [6762, 6764]}, {"start": 6834, "end": 6834, "pages": [6834]}, {"start": 7010, "end": 7010, "pages": [7010]}, {"start": 7125, "end": 7136, "pages": [7125, 7127, 7128, 7130, 7134, 7136]}, {"start": 7293, "end": 7293, "pages": [7293]}, {"start": 7424, "end": 7424, "pages": [7424]}, {"start": 7440, "end": 7443, "pages": [7440, 7441, 7442, 7443]}, {"start": 7535, "end": 7535, "pages": [7535]}, {"start": 7983, "end": 7983, "pages": [7983]}, {"start": 8257, "end": 8257, "pages": [8257]}, {"start": 8467, "end": 8467, "pages": [8467]}, {"start": 8631, "end": 8631, "pages": [8631]}, {"start": 8717, "end": 8717, "pages": [8717]}, {"start": 9622, "end": 9622, "pages": [9622]}, {"start": 10543, "end": 10543, "pages": [10543]}, {"start": 11777, "end": 11777, "pages": [11777]}, {"start": 12036, "end": 12037, "pages": [12036, 12037]}, {"start": 12236, "end": 12236, "pages": [12236]}, {"start": 12537, "end": 12540, "pages": [12537, 12540]}, {"start": 12756, "end": 12756, "pages": [12756]}, {"start": 12942, "end": 12942, "pages": [12942]}, {"start": 13270, "end": 13270, "pages": [13270]}, {"start": 13536, "end": 13536, "pages": [13536]}, {"start": 13551, "end": 13558, "pages": [13551, 13553, 13554, 13558]}, {"start": 13587, "end": 13587, "pages": [13587]}, {"start": 13840, "end": 13840, "pages": [13840]}, {"start": 14004, "end": 14004, "pages": [14004]}, {"start": 14413, "end": 14413, "pages": [14413]}, {"start": 14459, "end": 14459, "pages": [14459]}, {"start": 14589, "end": 14589, "pages": [14589]}, {"start": 14737, "end": 14737, "pages": [14737]}, {"start": 16465, "end": 16465, "pages": [16465]}, {"start": 16628, "end": 16628, "pages": [16628]}, {"start": 17034, "end": 17034, "pages": [17034]}, {"start": 17080, "end": 17080, "pages": [17080]}, {"start": 17210, "end": 17210, "pages": [17210]}, {"start": 17353, "end": 17353, "pages": [17353]}, {"start": 17367, "end": 17367, "pages": [17367]}, {"start": 17625, "end": 17626, "pages": [17625, 17626]}, {"start": 17825, "end": 17825, "pages": [17825]}, {"start": 18124, "end": 18127, "pages": [18124, 18127]}, {"start": 18342, "end": 18342, "pages": [18342]}, {"start": 18528, "end": 18528, "pages": [18528]}, {"start": 18855, "end": 18855, "pages": [18855]}, {"start": 19120, "end": 19120, "pages": [19120]}, {"start": 19134, "end": 19141, "pages": [19134, 19136, 19137, 19141]}, {"start": 19170, "end": 19170, "pages": [19170]}, {"start": 19475, "end": 19475, "pages": [19475]}, {"start": 19675, "end": 19675, "pages": [19675]}, {"start": 19946, "end": 19946, "pages": [19946]}, {"start": 20717, "end": 20717, "pages": [20717]}, {"start": 21742, "end": 21742, "pages": [21742]}, {"start": 25023, "end": 25023, "pages": [25023]}, {"start": 25058, "end": 25058, "pages": [25058]}];
+        const pageToPath = {"575": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000575.jpg", "1028": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001028.jpg", "1566": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001566.jpg", "1880": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001880.jpg", "1901": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001901.jpg", "2544": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002544.jpg", "2829": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002829.jpg", "2848": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002848.jpg", "3084": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003084.jpg", "3085": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003085.jpg", "3188": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003188.jpg", "3241": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003241.jpg", "3280": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003280.jpg", "3592": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003592.jpg", "3593": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003593.jpg", "3594": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003594.jpg", "4310": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004310.jpg", "4363": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004363.jpg", "4402": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004402.jpg", "5837": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005837.jpg", "5839": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005839.jpg", "5909": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005909.jpg", "6045": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006045.jpg", "6762": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006762.jpg", "6764": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006764.jpg", "6834": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006834.jpg", "7010": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007010.jpg", "7125": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007125.jpg", "7127": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007127.jpg", "7128": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007128.jpg", "7130": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007130.jpg", "7134": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007134.jpg", "7136": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007136.jpg", "7293": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007293.jpg", "7424": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007424.jpg", "7440": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007440.jpg", "7441": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007441.jpg", "7442": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007442.jpg", "7443": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007443.jpg", "7535": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007535.jpg", "7983": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007983.jpg", "8257": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008257.jpg", "8467": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008467.jpg", "8631": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008631.jpg", "8717": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008717.jpg", "9622": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009622.jpg", "10543": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010543.jpg", "11777": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011777.jpg", "12036": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012036.jpg", "12037": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012037.jpg", "12236": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012236.jpg", "12537": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012537.jpg", "12540": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012540.jpg", "12756": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012756.jpg", "12942": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012942.jpg", "13270": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013270.jpg", "13536": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013536.jpg", "13551": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013551.jpg", "13553": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013553.jpg", "13554": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013554.jpg", "13558": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013558.jpg", "13587": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013587.jpg", "13840": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013840.jpg", "14004": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014004.jpg", "14413": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014413.jpg", "14459": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014459.jpg", "14589": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014589.jpg", "14737": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014737.jpg", "16465": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016465.jpg", "16628": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016628.jpg", "17034": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017034.jpg", "17080": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017080.jpg", "17210": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017210.jpg", "17353": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017353.jpg", "17367": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017367.jpg", "17625": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017625.jpg", "17626": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017626.jpg", "17825": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017825.jpg", "18124": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018124.jpg", "18127": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018127.jpg", "18342": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018342.jpg", "18528": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018528.jpg", "18855": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018855.jpg", "19120": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019120.jpg", "19134": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019134.jpg", "19136": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019136.jpg", "19137": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019137.jpg", "19141": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019141.jpg", "19170": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019170.jpg", "19475": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019475.jpg", "19675": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019675.jpg", "19946": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019946.jpg", "20717": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020717.jpg", "21742": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021742.jpg", "25023": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00025023.jpg", "25058": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00025058.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000575.jpg": "...appear to cancede has a preference for undenaged girls. thi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001028.jpg": "...n, a man who ‘sk  with a preference for undernaged. ginls. t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001566.jpg": "...g that. he had a, sexual preference for underage girls and t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001880.jpg": "...we defer ta the court's preference.  the court: we ane conc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001901.jpg": "...stein, a man who  with a preference for underaged. ginls. th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002544.jpg": "...n erimes resulted in his preference fora.  ‘state-based. res...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002829.jpg": "...t the “second,  stated a preference for'the use of oie wheel...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002848.jpg": "...ng that he had a  sexual preference for underage girls and t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003084.jpg": "...epstein : had.a.“‘sexual preference for: underage: ‘minors,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003085.jpg": "...erepstcin. had a:sexual. preference for'underage girls.. mor...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003188.jpg": "...‘crimes resulted in his: preference fora.  state ‘based, res...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003241.jpg": ".... the 6nd, “there was, a preference: for deferring to the st...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003280.jpg": "...kouitz about the defense preference for a “state charges- on...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003592.jpg": "...us  epstein had a sexual preference for underage  mr. pagliu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003593.jpg": "...eppst@ih. had a ssextial preference for tiderage  minors? mr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003594.jpg": "...rey epstein had a sexual preference  for underage minoxs? mr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004310.jpg": "...‘crimes resulted in his: preference fora.  “rt  sstate- ‘bas...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004363.jpg": ".... the 6nd, “there was, a preference: for deferring to the st...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004402.jpg": "...kouitz about the defense preference for a “state charges- on...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005837.jpg": "..., knouledge of epstein’s preference for girls, tinder the ag...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005839.jpg": "...thstanding the defense’s preference to the contrary. (gov't...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005909.jpg": "...tenance of deviant sexwa preference and’ behavior: in w bl....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006045.jpg": "...:. ‘9 or lo. but have a  preference for nov. lo. please advi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006762.jpg": "..., knouledge of epstein’s preference for girls, tinder the ag...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006764.jpg": "...thstanding the defense’s preference to the contrary. (gov't...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006834.jpg": "...tenance of deviant sexwa preference and’ behavior: in w bl....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007010.jpg": "...r. ihe govennment has no preference and defens to what, the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007125.jpg": "...fendant's knouledge in's preference for very young girls, th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007127.jpg": "...ness gf a gertain sexual preference for girls under the age...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007128.jpg": "...r knheouledge about his  preference for very yo  fe = af  t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007130.jpg": "...riou  that epstein had a preference for underage girls ex hi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007134.jpg": "...we ‘framed it was about preference for girls undex  =  ahd...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007136.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007293.jpg": "...inly  published and made preference eso grooming.  qo. and y...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007424.jpg": "...pstein’  had: ‘a sexual. preference: for women. much younger...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007440.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007441.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007442.jpg": "...pstein’s alleged “sexual preference” for young girls: and/ms...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007443.jpg": "...way establish a“‘sexual preference” forwnderage gitls. more...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007535.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007983.jpg": "...inly  published and made preference eso grooming.  qo. and y...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008257.jpg": "...on't have a4 particular  preference, but i think we would li...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008467.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008631.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008717.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009622.jpg": "...utweighs the:defendant’s preference for tar  adjournment. so...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010543.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011777.jpg": "...'t change the plans, our preference would be, not. frankly t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012036.jpg": "...thik. defense counsel's preference was to do that at a side...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012037.jpg": "...uss it...  ehe court: my preference would be fox you to conf...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012236.jpg": "...youn honor. l think our  preference would be f6r jane to be...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012537.jpg": "...ectly speaks to a s@xual preference for underage ginls and i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012540.jpg": "...ould that be the court's preference? i'd be happy to do dt a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012756.jpg": "...honer, the government's preference  is it would. occur befo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012942.jpg": "...olgirl outfits and had a preference for  people dressed that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013270.jpg": "...the government, has. ne preference  wegh those ewe dates an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013536.jpg": "...he court: j don't have a preference. ji just wanted  ir  ss...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013551.jpg": "...tate that testimony. our preference ls te publish this with...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013553.jpg": "...ence ta this ¢a4se, sut  preference would be --  the gourt:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013554.jpg": "...honor, if the court's . preference is for  us t6, without a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013558.jpg": "...the government have any preference 6f views of  mr. rohrbac...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013587.jpg": "...r honoxs, but our joint  preference would be t6 be hedrd if...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013840.jpg": "...ust defer te the court's preference 6n tailing.  i think if...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014004.jpg": "...nd i  =  kati, of. so my preference would be tg@ tiake aut t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014413.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014459.jpg": "...pstein had a  we  sexual preference for schoolginls.. and. a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014589.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014737.jpg": "...monday if that ls thein preference.  the court: ‘well, i wi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016465.jpg": "...ust defer te the court's preference 6n tailing.  i think if...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016628.jpg": "...nd i  =  kati, of. so my preference would be tg@ tiake aut t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017034.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017080.jpg": "...pstein had a  we  sexual preference for schoolginls.. and. a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017210.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017353.jpg": "...monday if that ls thein preference.  the court: ‘well, i wi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017367.jpg": "...'t change the plans, our preference would be, not. frankly t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017625.jpg": "...thik. defense counsel's preference was to do that at a side...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017626.jpg": "...uss it...  ehe court: my preference would be fox you to conf...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017825.jpg": "...youn honor. l think our  preference would be f6r jane to be...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018124.jpg": "...ectly speaks to a s@xual preference for underage ginls and i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018127.jpg": "...ould that be the court's preference? i'd be happy to do dt a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018342.jpg": "...honer, the government's preference  is it would. occur befo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018528.jpg": "...olgirl outfits and had a preference for  people dressed that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018855.jpg": "...the government, has. ne preference  wegh those ewe dates an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019120.jpg": "...he court: j don't have a preference. ji just wanted  ir  ss...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019134.jpg": "...tate that testimony. our preference ls te publish this with...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019136.jpg": "...ence ta this ¢a4se, sut  preference would be --  the gourt:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019137.jpg": "...honor, if the court's . preference is for  us t6, without a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019141.jpg": "...the government have any preference 6f views of  mr. rohrbac...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019170.jpg": "...r honoxs, but our joint  preference would be t6 be hedrd if...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019475.jpg": "...g that. he had a, sexual preference for underage girls and t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019675.jpg": "...ellant  an atorney whose preference depends on whether other...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019946.jpg": "...n, a man who ‘sk  with a preference for undernaged. ginls. t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020717.jpg": "...earing outwe hs, the def preference for an adj ournment. so...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021742.jpg": "...:  ; an atorney: whose . preference depends ‘on whether othe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00025023.jpg": "...shit pretere  quarterly: preference: made for:4 ll  srsa eed...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00025058.jpg": "...¢  awatclt  rch os ate:  preference:  sa  tor  fe ee..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "preference" (96 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">575-575</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1028-1028</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1566-1566</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">1880-1880</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">1901-1901</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">2544-2544</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">2829-2829</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">2848-2848</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">3084-3085</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">3188-3188</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">3241-3241</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">3280-3280</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">3592-3594</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">4310-4310</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">4363-4363</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">4402-4402</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">5837-5839</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">5909-5909</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">6045-6045</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">6762-6764</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">6834-6834</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">7010-7010</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">7125-7136</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">7293-7293</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">7424-7424</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">7440-7443</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">7535-7535</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">7983-7983</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">8257-8257</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">8467-8467</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">8631-8631</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">8717-8717</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">9622-9622</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">10543-10543</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">11777-11777</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">12036-12037</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">12236-12236</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">12537-12540</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">12756-12756</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">12942-12942</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">13270-13270</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">13536-13536</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">13551-13558</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">13587-13587</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">13840-13840</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(45, 0); return false;">14004-14004</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(46, 0); return false;">14413-14413</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(47, 0); return false;">14459-14459</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(48, 0); return false;">14589-14589</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(49, 0); return false;">14737-14737</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(50, 0); return false;">16465-16465</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(51, 0); return false;">16628-16628</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(52, 0); return false;">17034-17034</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(53, 0); return false;">17080-17080</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(54, 0); return false;">17210-17210</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(55, 0); return false;">17353-17353</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(56, 0); return false;">17367-17367</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(57, 0); return false;">17625-17626</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(58, 0); return false;">17825-17825</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(59, 0); return false;">18124-18127</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(60, 0); return false;">18342-18342</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(61, 0); return false;">18528-18528</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(62, 0); return false;">18855-18855</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(63, 0); return false;">19120-19120</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(64, 0); return false;">19134-19141</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(65, 0); return false;">19170-19170</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(66, 0); return false;">19475-19475</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(67, 0); return false;">19675-19675</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(68, 0); return false;">19946-19946</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(69, 0); return false;">20717-20717</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(70, 0); return false;">21742-21742</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(71, 0); return false;">25023-25023</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(72, 0); return false;">25058-25058</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

@@ -1,0 +1,271 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "detective"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 375, "end": 375, "pages": [375]}, {"start": 406, "end": 407, "pages": [406, 407]}, {"start": 436, "end": 436, "pages": [436]}, {"start": 450, "end": 450, "pages": [450]}, {"start": 555, "end": 555, "pages": [555]}, {"start": 640, "end": 640, "pages": [640]}, {"start": 752, "end": 753, "pages": [752, 753]}, {"start": 2479, "end": 2492, "pages": [2479, 2484, 2486, 2487, 2489, 2492]}, {"start": 2518, "end": 2519, "pages": [2518, 2519]}, {"start": 3007, "end": 3010, "pages": [3007, 3008, 3010]}, {"start": 3216, "end": 3219, "pages": [3216, 3219]}, {"start": 3434, "end": 3434, "pages": [3434]}, {"start": 3691, "end": 3692, "pages": [3691, 3692]}, {"start": 4338, "end": 4341, "pages": [4338, 4341]}, {"start": 4556, "end": 4556, "pages": [4556]}, {"start": 4814, "end": 4814, "pages": [4814]}, {"start": 4824, "end": 4825, "pages": [4824, 4825]}, {"start": 4832, "end": 4834, "pages": [4832, 4834]}, {"start": 5417, "end": 5417, "pages": [5417]}, {"start": 5437, "end": 5437, "pages": [5437]}, {"start": 5720, "end": 5720, "pages": [5720]}, {"start": 5731, "end": 5733, "pages": [5731, 5733]}, {"start": 5771, "end": 5771, "pages": [5771]}, {"start": 5858, "end": 5858, "pages": [5858]}, {"start": 6384, "end": 6384, "pages": [6384]}, {"start": 6404, "end": 6404, "pages": [6404]}, {"start": 6657, "end": 6657, "pages": [6657]}, {"start": 6668, "end": 6670, "pages": [6668, 6670]}, {"start": 6783, "end": 6783, "pages": [6783]}, {"start": 7071, "end": 7071, "pages": [7071]}, {"start": 7149, "end": 7149, "pages": [7149]}, {"start": 7593, "end": 7593, "pages": [7593]}, {"start": 8402, "end": 8402, "pages": [8402]}, {"start": 11521, "end": 11521, "pages": [11521]}, {"start": 11667, "end": 11667, "pages": [11667]}, {"start": 12634, "end": 12634, "pages": [12634]}, {"start": 12643, "end": 12643, "pages": [12643]}, {"start": 12698, "end": 12700, "pages": [12698, 12700]}, {"start": 12710, "end": 12710, "pages": [12710]}, {"start": 12728, "end": 12731, "pages": [12728, 12731]}, {"start": 12739, "end": 12739, "pages": [12739]}, {"start": 12979, "end": 12979, "pages": [12979]}, {"start": 14113, "end": 14114, "pages": [14113, 14114]}, {"start": 14174, "end": 14180, "pages": [14174, 14179, 14180]}, {"start": 14749, "end": 14749, "pages": [14749]}, {"start": 15068, "end": 15069, "pages": [15068, 15069]}, {"start": 16112, "end": 16112, "pages": [16112]}, {"start": 16736, "end": 16737, "pages": [16736, 16737]}, {"start": 16797, "end": 16803, "pages": [16797, 16802, 16803]}, {"start": 18221, "end": 18221, "pages": [18221]}, {"start": 18230, "end": 18230, "pages": [18230]}, {"start": 18285, "end": 18287, "pages": [18285, 18287]}, {"start": 18297, "end": 18297, "pages": [18297]}, {"start": 18315, "end": 18318, "pages": [18315, 18318]}, {"start": 18326, "end": 18326, "pages": [18326]}, {"start": 18565, "end": 18565, "pages": [18565]}, {"start": 20776, "end": 20776, "pages": [20776]}, {"start": 21217, "end": 21217, "pages": [21217]}, {"start": 21547, "end": 21547, "pages": [21547]}];
+        const pageToPath = {"375": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000375.jpg", "406": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000406.jpg", "407": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000407.jpg", "436": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000436.jpg", "450": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000450.jpg", "555": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000555.jpg", "640": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000640.jpg", "752": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000752.jpg", "753": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000753.jpg", "2479": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002479.jpg", "2484": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002484.jpg", "2486": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002486.jpg", "2487": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002487.jpg", "2489": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002489.jpg", "2492": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002492.jpg", "2518": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002518.jpg", "2519": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002519.jpg", "3007": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003007.jpg", "3008": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003008.jpg", "3010": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003010.jpg", "3216": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003216.jpg", "3219": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003219.jpg", "3434": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003434.jpg", "3691": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003691.jpg", "3692": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003692.jpg", "4338": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004338.jpg", "4341": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004341.jpg", "4556": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004556.jpg", "4814": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004814.jpg", "4824": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004824.jpg", "4825": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004825.jpg", "4832": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004832.jpg", "4834": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004834.jpg", "5417": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005417.jpg", "5437": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005437.jpg", "5720": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005720.jpg", "5731": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005731.jpg", "5733": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005733.jpg", "5771": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005771.jpg", "5858": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005858.jpg", "6384": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006384.jpg", "6404": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006404.jpg", "6657": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006657.jpg", "6668": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006668.jpg", "6670": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006670.jpg", "6783": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006783.jpg", "7071": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007071.jpg", "7149": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007149.jpg", "7593": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007593.jpg", "8402": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008402.jpg", "11521": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011521.jpg", "11667": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011667.jpg", "12634": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012634.jpg", "12643": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012643.jpg", "12698": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012698.jpg", "12700": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012700.jpg", "12710": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012710.jpg", "12728": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012728.jpg", "12731": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012731.jpg", "12739": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012739.jpg", "12979": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012979.jpg", "14113": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014113.jpg", "14114": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014114.jpg", "14174": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014174.jpg", "14179": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014179.jpg", "14180": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014180.jpg", "14749": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014749.jpg", "15068": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015068.jpg", "15069": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015069.jpg", "16112": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016112.jpg", "16736": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016736.jpg", "16737": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016737.jpg", "16797": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016797.jpg", "16802": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016802.jpg", "16803": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016803.jpg", "18221": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018221.jpg", "18230": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018230.jpg", "18285": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018285.jpg", "18287": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018287.jpg", "18297": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018297.jpg", "18315": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018315.jpg", "18318": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018318.jpg", "18326": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018326.jpg", "18565": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018565.jpg", "20776": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020776.jpg", "21217": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021217.jpg", "21547": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021547.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000375.jpg": "...at a depositien from the detective who headed this investig...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000406.jpg": "...agent amanda young, fbi detective paul. byrne; nypd...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000407.jpg": "...young of the f,b.li, and detective patil byrne, nypd task f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000436.jpg": "...ate new mexico official, detective deborah anaya, when. he...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000450.jpg": "...te new mexico. official, detective deborah anaya, when, he...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000555.jpg": "...f an incident report: of detective recarcy fasom ‘the  palm...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000640.jpg": "...nda young of the fbi and detective paul  bysne of the nypd....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000752.jpg": ".... an ebi agent.  and the detective from. the new. york. cit...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000753.jpg": "...ury procecdings atid. a  detective with the ny who was  iw...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002479.jpg": "...sition of a doe.  258-4, detective recarey\"s deposition. un...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002484.jpg": "...d.  338-6. exeerpts from detective reegarey\"s deposition....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002486.jpg": "...main ‘sealed except. for detective  recarey.  34o. ation of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002487.jpg": "...ke6e6p s6aled.  34o-6. detective recaney's deposition. un...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002489.jpg": "...369-ll. excerpts: from detective recarey's deposition. sa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002492.jpg": "...nduet. shall re  tem, 3. detective recarey' s unsealeed;  o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002518.jpg": "...ewa the ladictimenit. d. detective “eseph recarey’  n, may’...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002519.jpg": "...anybody: jd: at 278-79. detective reearcy was the: individ...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003007.jpg": "...peculates that:casey and detective recarey, who‘passed. awa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003008.jpg": "...blish.  that casey: and. detective recarey would. have test...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003010.jpg": "...that detective recarey might have testi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003216.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003219.jpg": "...camera. videotapes, the detective believed epstein may: ha...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003434.jpg": "...-the leter to the te ad detective so he could “confirnm.th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003691.jpg": "...his ‘case, and.a police: detective who investigated epstein...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003692.jpg": "...imony she stig gests the detective tight. have offered—that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004338.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004341.jpg": "...camera. videotapes, the detective believed epstein may: ha...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004556.jpg": "...the ictce to the te sad detective so he could “contirni-th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004814.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004824.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004825.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004832.jpg": "...gation along with county detective richard peffall and dete...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004834.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005417.jpg": "...r cross examination of a detective regarding the kings coun...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005437.jpg": "...grounds that: the lead. detective from the palm ‘beach, po...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005720.jpg": "...ment that was given 'to, detective recarey. it. the documen...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005731.jpg": "...the property department: detective: recarey is dead, and no...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005733.jpg": "...s :instifficient)..  il. detective ve recarey's. ik bsence...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005771.jpg": "...4 a:3d 6o2, 6l:7  zacks  detective to refer to the complain...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005858.jpg": "...he original custodian—.  detective: carey—is dead, (id. at....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006384.jpg": "...r cross examination of a detective regarding the kings coun...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006404.jpg": "...grounds that: the lead. detective from the palm ‘beach, po...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006657.jpg": "...ment that was given 'to, detective recarey. it. the documen...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006668.jpg": "...the property department: detective: recarey is dead, and no...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006670.jpg": "...s :instifficient)..  il. detective ve recarey's. ik bsence...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006783.jpg": "...he original custodian—.  detective: carey—is dead, (id. at....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007071.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007149.jpg": "...wentory from a deceased detective that, doesn't have  foun...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007593.jpg": "..., harry b, hazelwood rr: detective magazines: pornography:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008402.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011521.jpg": "...l agent amanda young and detective and paul byrie  ehe cour...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011667.jpg": "...ecialist of the fbi, and detective paul byrme of the nypd,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012634.jpg": "...people. the maim one was detective  eph, regarey, adw decea...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012643.jpg": "...at the begqunhang  where detective recarey reads. aloud, en...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012698.jpg": "...ould ask for permissi6n  detective byrne to bring the exhib...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012700.jpg": "...for permission to  have detective byrne come forward and p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012710.jpg": "...q. you were not the lead detective on that investigation;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012728.jpg": "...eant george frick (ph.), detective joseph recarey,  detecti...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012731.jpg": "...the  a. le located ome, detective dix located a couple o£...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012739.jpg": "...f 2oo3; you and a fellou detective...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012979.jpg": "...@. you were not the lead detective on, that investigation;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014113.jpg": "...at.  during the process, detective byrne kept calling mr. h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014114.jpg": "...ate representation as to detective byxne, and i, again, wot...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014174.jpg": "...tuters ahd your partner, detective byrnes, about -- with ja...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014179.jpg": "...r partner, mr. byrne  6r detective byrhey right?  o. but yo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014180.jpg": "..., this one was writen by detective byrne, but you  signed o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014749.jpg": "...l agent amanda young and detective and paul byrie  ehe cour...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015068.jpg": ".... an ebi agent.  and the detective from. the new. york. cit...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015069.jpg": "...ury procecdings atid. a  detective with the ny who was  iw...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016112.jpg": "...ecialist of the fbi, and detective paul byrme of the nypd,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016736.jpg": "...at.  during the process, detective byrne kept calling mr. h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016737.jpg": "...ate representation as to detective byxne, and i, again, wot...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016797.jpg": "...tuters ahd your partner, detective byrnes, about -- with ja...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016802.jpg": "...r partner, mr. byrne  6r detective byrhey right?  o. but yo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016803.jpg": "..., this one was writen by detective byrne, but you  signed o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018221.jpg": "...people. the maim one was detective  eph, regarey, adw decea...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018230.jpg": "...at the begqunhang  where detective recarey reads. aloud, en...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018285.jpg": "...ould ask for permissi6n  detective byrne to bring the exhib...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018287.jpg": "...for permission to  have detective byrne come forward and p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018297.jpg": "...q. you were not the lead detective on that investigation;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018315.jpg": "...eant george frick (ph.), detective joseph recarey,  detecti...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018318.jpg": "...the  a. le located ome, detective dix located a couple o£...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018326.jpg": "...f 2oo3; you and a fellou detective...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018565.jpg": "...@. you were not the lead detective on, that investigation;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020776.jpg": "...this case, and a‘police: detective:who-investigated epstein...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021217.jpg": "...o har the  ouever,, the detective acknouledge od,  tf  >...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021547.jpg": "...agent amanda young ane  detective. and paul byrne:  ms. st..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "detective" (87 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">375-375</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">406-407</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">436-436</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">450-450</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">555-555</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">640-640</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">752-753</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">2479-2492</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">2518-2519</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">3007-3010</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">3216-3219</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">3434-3434</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">3691-3692</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">4338-4341</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">4556-4556</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">4814-4814</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">4824-4825</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">4832-4834</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">5417-5417</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">5437-5437</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">5720-5720</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">5731-5733</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">5771-5771</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">5858-5858</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">6384-6384</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">6404-6404</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">6657-6657</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">6668-6670</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">6783-6783</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">7071-7071</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">7149-7149</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">7593-7593</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">8402-8402</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">11521-11521</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">11667-11667</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">12634-12634</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">12643-12643</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">12698-12700</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">12710-12710</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">12728-12731</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">12739-12739</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">12979-12979</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">14113-14114</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">14174-14180</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">14749-14749</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(45, 0); return false;">15068-15069</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(46, 0); return false;">16112-16112</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(47, 0); return false;">16736-16737</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(48, 0); return false;">16797-16803</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(49, 0); return false;">18221-18221</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(50, 0); return false;">18230-18230</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(51, 0); return false;">18285-18287</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(52, 0); return false;">18297-18297</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(53, 0); return false;">18315-18318</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(54, 0); return false;">18326-18326</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(55, 0); return false;">18565-18565</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(56, 0); return false;">20776-20776</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(57, 0); return false;">21217-21217</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(58, 0); return false;">21547-21547</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

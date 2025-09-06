@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "structured"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 5915, "end": 5915, "pages": [5915]}, {"start": 5926, "end": 5927, "pages": [5926, 5927]}, {"start": 5947, "end": 5947, "pages": [5947]}, {"start": 6840, "end": 6840, "pages": [6840]}, {"start": 6851, "end": 6852, "pages": [6851, 6852]}, {"start": 6872, "end": 6872, "pages": [6872]}, {"start": 7311, "end": 7311, "pages": [7311]}, {"start": 7410, "end": 7410, "pages": [7410]}, {"start": 8001, "end": 8001, "pages": [8001]}, {"start": 9037, "end": 9037, "pages": [9037]}, {"start": 9728, "end": 9728, "pages": [9728]}, {"start": 10230, "end": 10230, "pages": [10230]}, {"start": 10342, "end": 10342, "pages": [10342]}, {"start": 11671, "end": 11671, "pages": [11671]}, {"start": 14885, "end": 14885, "pages": [14885]}, {"start": 16116, "end": 16116, "pages": [16116]}];
+        const pageToPath = {"5915": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005915.jpg", "5926": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005926.jpg", "5927": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005927.jpg", "5947": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005947.jpg", "6840": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006840.jpg", "6851": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006851.jpg", "6852": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006852.jpg", "6872": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006872.jpg", "7311": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007311.jpg", "7410": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007410.jpg", "8001": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008001.jpg", "9037": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009037.jpg", "9728": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009728.jpg", "10230": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010230.jpg", "10342": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010342.jpg", "11671": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011671.jpg", "14885": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014885.jpg", "16116": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016116.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005915.jpg": "...yet mi d'se osuree. sem structured nterv’ews based on the:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005926.jpg": "...f es, jas: we: fas from structured ntery ews ‘wrth the ch d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005927.jpg": "...ns: among:  ‘varsab es  ‘structured te ephione  nterv-ews, t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005947.jpg": "...ute. wre ci lei using; a structured. inte ample: of 323) hel...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006840.jpg": "...yet mi d'se osuree. sem structured nterv’ews based on the:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006851.jpg": "...f es, jas: we: fas from structured ntery ews ‘wrth the ch d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006852.jpg": "...ns: among:  ‘varsab es  ‘structured te ephione  nterv-ews, t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006872.jpg": "...ute. wre ci lei using; a structured. inte ample: of 323) hel...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007311.jpg": "...lt was dons  2  ein, 2a structured way, though. it, wasn't...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007410.jpg": "...funding in the guise of structured setlements:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008001.jpg": "...lt was dons  2  ein, 2a structured way, though. it, wasn't...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009037.jpg": "...2d cir. l997); gutor who structured ‘financial transactions...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009728.jpg": "...2d cir. l997); gutor who structured ‘financial transactions...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010230.jpg": "...e questionnaire that are structured with similar yes self, y...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010342.jpg": "...that many questions were structured. like: question, 48,  as...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011671.jpg": "...y the witness. and :  is structured with counsel table seree...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014885.jpg": "...ogy.  in addition to the structured coursework, we, during t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016116.jpg": "...y the witness. and :  is structured with counsel table seree..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "structured" (18 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">5915-5915</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">5926-5927</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">5947-5947</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">6840-6840</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">6851-6852</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">6872-6872</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">7311-7311</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">7410-7410</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">8001-8001</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">9037-9037</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">9728-9728</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">10230-10230</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">10342-10342</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">11671-11671</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">14885-14885</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">16116-16116</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

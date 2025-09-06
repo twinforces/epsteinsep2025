@@ -1,0 +1,259 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "enforeement"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 339, "end": 339, "pages": [339]}, {"start": 1501, "end": 1501, "pages": [1501]}, {"start": 2160, "end": 2160, "pages": [2160]}, {"start": 2518, "end": 2518, "pages": [2518]}, {"start": 2559, "end": 2559, "pages": [2559]}, {"start": 2568, "end": 2568, "pages": [2568]}, {"start": 2590, "end": 2590, "pages": [2590]}, {"start": 2685, "end": 2685, "pages": [2685]}, {"start": 3009, "end": 3009, "pages": [3009]}, {"start": 3030, "end": 3030, "pages": [3030]}, {"start": 3203, "end": 3203, "pages": [3203]}, {"start": 3243, "end": 3243, "pages": [3243]}, {"start": 3444, "end": 3444, "pages": [3444]}, {"start": 3460, "end": 3460, "pages": [3460]}, {"start": 3546, "end": 3546, "pages": [3546]}, {"start": 3552, "end": 3552, "pages": [3552]}, {"start": 4307, "end": 4307, "pages": [4307]}, {"start": 4325, "end": 4325, "pages": [4325]}, {"start": 4365, "end": 4365, "pages": [4365]}, {"start": 4445, "end": 4445, "pages": [4445]}, {"start": 4582, "end": 4582, "pages": [4582]}, {"start": 4607, "end": 4607, "pages": [4607]}, {"start": 5291, "end": 5291, "pages": [5291]}, {"start": 5299, "end": 5299, "pages": [5299]}, {"start": 5399, "end": 5399, "pages": [5399]}, {"start": 5751, "end": 5754, "pages": [5751, 5754]}, {"start": 5787, "end": 5787, "pages": [5787]}, {"start": 5996, "end": 5996, "pages": [5996]}, {"start": 6182, "end": 6182, "pages": [6182]}, {"start": 6255, "end": 6255, "pages": [6255]}, {"start": 6366, "end": 6366, "pages": [6366]}, {"start": 6688, "end": 6691, "pages": [6688, 6691]}, {"start": 6712, "end": 6712, "pages": [6712]}, {"start": 6921, "end": 6921, "pages": [6921]}, {"start": 7305, "end": 7305, "pages": [7305]}, {"start": 7415, "end": 7415, "pages": [7415]}, {"start": 7496, "end": 7496, "pages": [7496]}, {"start": 7995, "end": 7995, "pages": [7995]}, {"start": 8072, "end": 8072, "pages": [8072]}, {"start": 8105, "end": 8105, "pages": [8105]}, {"start": 8120, "end": 8120, "pages": [8120]}, {"start": 8390, "end": 8394, "pages": [8390, 8394]}, {"start": 9682, "end": 9682, "pages": [9682]}, {"start": 11269, "end": 11269, "pages": [11269]}, {"start": 12147, "end": 12147, "pages": [12147]}, {"start": 15152, "end": 15152, "pages": [15152]}, {"start": 15159, "end": 15159, "pages": [15159]}, {"start": 17736, "end": 17736, "pages": [17736]}, {"start": 19174, "end": 19174, "pages": [19174]}, {"start": 19204, "end": 19204, "pages": [19204]}, {"start": 20705, "end": 20705, "pages": [20705]}, {"start": 20935, "end": 20935, "pages": [20935]}, {"start": 21075, "end": 21075, "pages": [21075]}, {"start": 21281, "end": 21281, "pages": [21281]}, {"start": 22079, "end": 22079, "pages": [22079]}];
+        const pageToPath = {"339": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000339.jpg", "1501": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001501.jpg", "2160": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002160.jpg", "2518": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002518.jpg", "2559": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002559.jpg", "2568": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002568.jpg", "2590": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002590.jpg", "2685": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002685.jpg", "3009": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003009.jpg", "3030": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003030.jpg", "3203": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003203.jpg", "3243": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003243.jpg", "3444": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003444.jpg", "3460": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003460.jpg", "3546": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003546.jpg", "3552": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003552.jpg", "4307": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004307.jpg", "4325": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004325.jpg", "4365": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004365.jpg", "4445": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004445.jpg", "4582": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004582.jpg", "4607": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004607.jpg", "5291": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005291.jpg", "5299": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005299.jpg", "5399": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005399.jpg", "5751": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005751.jpg", "5754": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005754.jpg", "5787": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005787.jpg", "5996": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005996.jpg", "6182": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006182.jpg", "6255": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006255.jpg", "6366": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006366.jpg", "6688": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006688.jpg", "6691": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006691.jpg", "6712": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006712.jpg", "6921": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006921.jpg", "7305": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007305.jpg", "7415": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007415.jpg", "7496": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007496.jpg", "7995": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007995.jpg", "8072": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008072.jpg", "8105": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008105.jpg", "8120": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008120.jpg", "8390": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008390.jpg", "8394": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008394.jpg", "9682": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009682.jpg", "11269": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011269.jpg", "12147": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012147.jpg", "15152": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015152.jpg", "15159": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015159.jpg", "17736": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017736.jpg", "19174": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019174.jpg", "19204": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019204.jpg", "20705": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020705.jpg", "20935": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020935.jpg", "21075": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021075.jpg", "21281": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021281.jpg", "22079": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022079.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000339.jpg": "...sistance ‘it f with. law enforeement.” indeed, the: victim. r...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001501.jpg": "...‘to: any authorized law enforeement officer  ¥ou.are command...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002160.jpg": "...erests ‘of those: resi  ‘enforeement or judicial efficiency’...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002518.jpg": "...ses and,  instructed.law enforeement personnel. and civilian:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002559.jpg": "...erately exelnded.a,  law enforeement except  i. while the pro...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002568.jpg": "...berately:eveluded'a. law-enforeement.exception.  (morcover, m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002590.jpg": "...the interpretation and. enforeement:of such.agreements on th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002685.jpg": "...nvgrime control and law enforeement.act:of l.994, pl lo3- ia...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003009.jpg": "...ial riatle are hee cant  enforeement ‘until. they met with th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003030.jpg": "...erials requested by: law enforeement:without permission. of t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003203.jpg": "...deral prosecutors, j jaw enforeement persone’:  an ond ard fe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003243.jpg": "...nnigral flon and customs enforeement], the victims, and‘me. t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003444.jpg": "...proceeding; impacted the enforeement: of the  o.ls:and,united...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003460.jpg": "...y  reed  x federal law: enforeement '  mt  another requiring...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003546.jpg": "...ainst a ‘legitimate law: enforeement:nced for the information...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003552.jpg": "...against a jegitimate law enforeement-nced, for the  enforceme...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004307.jpg": "...ppllogranys  rar}  l aw: enforeement ‘to: o-epenvan: nw estig...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004325.jpg": "...ede al plosecuides, faw' enforeement persone’:  it practives,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004365.jpg": "...nnigral flon and customs enforeement], the victims, and‘me. t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004445.jpg": "...on:  i  le ‘federal, law enforeement riorities; l9o:  des tal...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004582.jpg": "...rney: for  x federal law enforeement ' sncles to provide cert...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004607.jpg": "...emergency etition. for. enforeement of her rightsunderthe: c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005291.jpg": "...friend. workin, law, law enforeement, the justice system, or...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005299.jpg": "...e any: opinion about the enforeement ofthe: federal. sex traf...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005399.jpg": "...iting an, undercover law enforeement officer to testify under...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005751.jpg": "...inion.testimony from.law enforeement officers without  €rimin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005754.jpg": "...not only: from ‘the law enforeement witnesses: the g governm...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005787.jpg": "...atory statements, or law enforeement ‘expert. ‘testimony: in....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005996.jpg": "...s not: noticed. any: law enforeement officers as experts and,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006182.jpg": "...racticing atorneys, law: enforeement officers, psychiatry-res...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006255.jpg": "...racticing atorneys, law: enforeement officers, psychiatry-res...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006366.jpg": "...iting an, undercover law enforeement officer to testify under...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006688.jpg": "...inion.testimony from.law enforeement officers without  crimin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006691.jpg": "...not only: from ‘the law enforeement witnesses: the g governm...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006712.jpg": "...atory statements, or law enforeement ‘expert. ‘testimony: in....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006921.jpg": "...s not: noticed. any: law enforeement officers as experts and,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007305.jpg": "...-- \"also worked with  5  enforeement™ —- on, perpetrators ef...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007415.jpg": "...es, likely added. by law enforeement after they scized the bo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007496.jpg": "...racticing atorneys, law: enforeement officers, psychiatry-res...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007995.jpg": "...-- \"also worked with  5  enforeement™ —- on, perpetrators ef...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008072.jpg": "...racticing atorneys, law: enforeement officers, psychiatry-res...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008105.jpg": "...ri yr statements to law: enforeement did, not: implicate ms....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008120.jpg": "...istent statements:to law enforeement (see opp. l.6) docs. not...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008390.jpg": "...as a plain  clothes law enforeement: officer, eiting l in, s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008394.jpg": "...xamifiation of the law  ‘enforeement witnesses, houever, ‘the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009682.jpg": "...s casermay\"in jude’ taw “enforeement “witnesses. would you \\...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011269.jpg": "...efense to eall those [aw:enforeement officers. and-significan...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012147.jpg": "...e te report this tg law  enforeement; right? we talked abdeut...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015152.jpg": "...witness testimony of law enforeement:  agents. none involved....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015159.jpg": "...e still alive  both, law enforeement agents. ‘who festified....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017736.jpg": "...e te report this tg law  enforeement; right? we talked abdeut...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019174.jpg": "...‘to; any authorized law enforeement officer  )u are commande...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019204.jpg": "...‘to; any authorized law enforeement officer  )u are commande...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020705.jpg": "...ece smber. 2o2ll re liww enforeement witness ‘testimony: docu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020935.jpg": "...a juror inthis‘oase’?  7 enforeement  ok au tua ee ratan a el...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021075.jpg": "...l. the conditions to the enforeement of the agreement, includ...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021281.jpg": "...rischer infor med,  law enforeement te fh at any point durin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022079.jpg": "...pervisory lapses and the enforeement/interpretation of bop...."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "enforeement" (58 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">339-339</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1501-1501</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">2160-2160</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">2518-2518</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">2559-2559</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">2568-2568</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">2590-2590</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">2685-2685</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">3009-3009</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">3030-3030</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">3203-3203</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">3243-3243</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">3444-3444</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">3460-3460</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">3546-3546</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">3552-3552</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">4307-4307</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">4325-4325</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">4365-4365</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">4445-4445</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">4582-4582</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">4607-4607</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">5291-5291</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">5299-5299</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">5399-5399</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">5751-5754</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">5787-5787</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">5996-5996</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">6182-6182</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">6255-6255</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">6366-6366</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">6688-6691</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">6712-6712</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">6921-6921</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">7305-7305</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">7415-7415</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">7496-7496</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">7995-7995</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">8072-8072</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">8105-8105</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">8120-8120</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">8390-8394</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">9682-9682</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">11269-11269</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">12147-12147</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(45, 0); return false;">15152-15152</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(46, 0); return false;">15159-15159</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(47, 0); return false;">17736-17736</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(48, 0); return false;">19174-19174</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(49, 0); return false;">19204-19204</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(50, 0); return false;">20705-20705</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(51, 0); return false;">20935-20935</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(52, 0); return false;">21075-21075</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(53, 0); return false;">21281-21281</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(54, 0); return false;">22079-22079</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

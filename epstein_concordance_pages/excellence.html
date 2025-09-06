@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "excellence"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 7603, "end": 7603, "pages": [7603]}, {"start": 7614, "end": 7614, "pages": [7614]}, {"start": 7624, "end": 7624, "pages": [7624]}, {"start": 7849, "end": 7849, "pages": [7849]}, {"start": 14655, "end": 14655, "pages": [14655]}, {"start": 17276, "end": 17276, "pages": [17276]}];
+        const pageToPath = {"7603": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007603.jpg", "7614": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007614.jpg", "7624": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007624.jpg", "7849": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007849.jpg", "14655": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014655.jpg", "17276": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017276.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007603.jpg": "...: review of \"heritage of excellence: the johns hopkins  medi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007614.jpg": "...address: \"the quest for excellence | ine forensic psychiatr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007624.jpg": "...dietz p: “the quest for excellence in forensic psychiatry,”...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007849.jpg": "...fb] director’s award of excellence: for outstanding: scient...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014655.jpg": "...th professionalasm, and  excellence and l learned a lot from...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017276.jpg": "...th professionalasm, and  excellence and l learned a lot from..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "excellence" (6 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">7603-7603</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">7614-7614</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">7624-7624</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">7849-7849</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">14655-14655</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">17276-17276</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

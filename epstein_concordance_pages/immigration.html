@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "immigration"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 496, "end": 496, "pages": [496]}, {"start": 568, "end": 568, "pages": [568]}, {"start": 808, "end": 808, "pages": [808]}, {"start": 3000, "end": 3000, "pages": [3000]}, {"start": 3271, "end": 3272, "pages": [3271, 3272]}, {"start": 3282, "end": 3282, "pages": [3282]}, {"start": 3342, "end": 3342, "pages": [3342]}, {"start": 3388, "end": 3388, "pages": [3388]}, {"start": 3669, "end": 3669, "pages": [3669]}, {"start": 3684, "end": 3686, "pages": [3684, 3686]}, {"start": 4393, "end": 4394, "pages": [4393, 4394]}, {"start": 4404, "end": 4404, "pages": [4404]}, {"start": 4464, "end": 4464, "pages": [4464]}, {"start": 4510, "end": 4510, "pages": [4510]}, {"start": 5121, "end": 5121, "pages": [5121]}, {"start": 5143, "end": 5143, "pages": [5143]}, {"start": 5165, "end": 5165, "pages": [5165]}, {"start": 8379, "end": 8379, "pages": [8379]}, {"start": 8940, "end": 8940, "pages": [8940]}, {"start": 12818, "end": 12818, "pages": [12818]}, {"start": 12869, "end": 12869, "pages": [12869]}, {"start": 12885, "end": 12885, "pages": [12885]}, {"start": 14058, "end": 14058, "pages": [14058]}, {"start": 14088, "end": 14089, "pages": [14088, 14089]}, {"start": 16682, "end": 16682, "pages": [16682]}, {"start": 16712, "end": 16713, "pages": [16712, 16713]}, {"start": 18404, "end": 18404, "pages": [18404]}, {"start": 18455, "end": 18455, "pages": [18455]}, {"start": 18471, "end": 18471, "pages": [18471]}, {"start": 20769, "end": 20771, "pages": [20769, 20771]}, {"start": 21100, "end": 21100, "pages": [21100]}, {"start": 21280, "end": 21280, "pages": [21280]}];
+        const pageToPath = {"496": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000496.jpg", "568": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000568.jpg", "808": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000808.jpg", "3000": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003000.jpg", "3271": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003271.jpg", "3272": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003272.jpg", "3282": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003282.jpg", "3342": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003342.jpg", "3388": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003388.jpg", "3669": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003669.jpg", "3684": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003684.jpg", "3686": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003686.jpg", "4393": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004393.jpg", "4394": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004394.jpg", "4404": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004404.jpg", "4464": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004464.jpg", "4510": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004510.jpg", "5121": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005121.jpg", "5143": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005143.jpg", "5165": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005165.jpg", "8379": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008379.jpg", "8940": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008940.jpg", "12818": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012818.jpg", "12869": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012869.jpg", "12885": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012885.jpg", "14058": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014058.jpg", "14088": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014088.jpg", "14089": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014089.jpg", "16682": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016682.jpg", "16712": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016712.jpg", "16713": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016713.jpg", "18404": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018404.jpg", "18455": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018455.jpg", "18471": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018471.jpg", "20769": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020769.jpg", "20771": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020771.jpg", "21100": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021100.jpg", "21280": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021280.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000496.jpg": "...ever presented it to any immigration or-customs authority. th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000568.jpg": "...o my lawyer beeause the  immigration. authorities are going t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000808.jpg": "...ever presented it to any immigration or-customs authority. th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003000.jpg": "...present. punishment: or immigration consequences! ‘would, eh...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003271.jpg": "...tion. . . . further, no: immigration. proceeding will ‘be ins...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003272.jpg": "...conneefion. with, their immigration paperwork, sand i think...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003282.jpg": "...rojected the “proposed. immigration language.  rather, withi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003342.jpg": "...n any: way: encouraging] immigration. authoritics to it immi:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003388.jpg": "...se: proposal concerting ‘immigration. consequences did mot ‘a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003669.jpg": "...ngto do with sentencing, immigration, or prior convictions, t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003684.jpg": "...uate  waite  ictions for immigration,  prior c  united states...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003686.jpg": "...false statenicrits at an immigration hearing,  was not subjec...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004393.jpg": "...ion. .. . . further, no: immigration. proceeding will ‘be ins...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004394.jpg": "...conneefion. with, their immigration paperwork, sand i think...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004404.jpg": "...d. rejected the proposed immigration language..  ontent, touh...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004464.jpg": "...any: ‘way: encouraging] immigration. authoritics to { immi:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004510.jpg": "...e: proposal soncernitig ‘immigration. consequences did mot ‘a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005121.jpg": "...rable. young women with. immigration problems, medical proble...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005143.jpg": "...rable: young women with. immigration problems, medical proble...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005165.jpg": "...rable: young women with. immigration problems, medical proble...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008379.jpg": "...of any kind.  about her immigration. status, nor could. the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008940.jpg": "...conspiracy to changethe: immigration status of'anialicn, ‘but...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012818.jpg": "...etings.  q. what is your immigration status?  a. it af in sta...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012869.jpg": "..., the  o)  issue of your immigration status was raised, wasn'...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012885.jpg": "...t will happen  with your immigration status,  ps}  a. yes. my...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014058.jpg": "...ked abeut at the primary immigration line as epposed te the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014088.jpg": "...le on. the ground at the immigration sites, not from the airl...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014089.jpg": "...sing at a sate  ln, €@a, immigration line at. an alrport, fag...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016682.jpg": "...ked abeut at the primary immigration line as epposed te the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016712.jpg": "...le on. the ground at the immigration sites, not from the airl...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016713.jpg": "...sing at a sate  ln, €@a, immigration line at. an alrport, fag...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018404.jpg": "...etings.  q. what is your immigration status?  a. it af in sta...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018455.jpg": "..., the  o)  issue of your immigration status was raised, wasn'...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018471.jpg": "...t will happen  with your immigration status,  ps}  a. yes. my...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020769.jpg": "...‘prior, convictions for, immigration.and sentencing purposes....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020771.jpg": "...fa ‘ise statements at an immigration: ‘he caring;  case; the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021100.jpg": "...ent promise not to bring immigration proceedings against epst...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021280.jpg": "...ejected the: ‘pe spaced’ immigration. language.  3  rosecute..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "immigration" (38 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">496-496</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">568-568</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">808-808</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3000-3000</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">3271-3272</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">3282-3282</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3342-3342</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">3388-3388</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">3669-3669</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">3684-3686</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">4393-4394</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">4404-4404</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">4464-4464</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">4510-4510</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">5121-5121</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">5143-5143</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">5165-5165</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">8379-8379</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">8940-8940</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">12818-12818</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">12869-12869</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">12885-12885</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">14058-14058</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">14088-14089</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">16682-16682</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">16712-16713</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">18404-18404</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">18455-18455</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">18471-18471</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">20769-20771</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">21100-21100</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">21280-21280</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

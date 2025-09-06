@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "impressed"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 717, "end": 717, "pages": [717]}, {"start": 11942, "end": 11942, "pages": [11942]}, {"start": 12121, "end": 12122, "pages": [12121, 12122]}, {"start": 13885, "end": 13885, "pages": [13885]}, {"start": 16509, "end": 16509, "pages": [16509]}, {"start": 17532, "end": 17532, "pages": [17532]}, {"start": 17710, "end": 17711, "pages": [17710, 17711]}];
+        const pageToPath = {"717": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000717.jpg", "11942": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011942.jpg", "12121": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012121.jpg", "12122": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012122.jpg", "13885": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013885.jpg", "16509": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016509.jpg", "17532": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017532.jpg", "17710": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017710.jpg", "17711": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017711.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000717.jpg": "...ain, when he told me hou impressed he wag with my personal...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011942.jpg": "...g, well, t am -- tm very impressed  with your daughter and,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012121.jpg": "...all, saying you were mot impressed?  is  ne  the gourt: ti...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012122.jpg": "...oday that ‘you were not  impressed when. you. first went ‘t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013885.jpg": "...h, the waitress and i've impressed upon  ker that she shoul...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016509.jpg": "...h, the waitress and i've impressed upon  ker that she shoul...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017532.jpg": "...g, well, t am -- tm very impressed  with your daughter and,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017710.jpg": "...all, saying you were mot impressed?  is  ne  the gourt: ti...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017711.jpg": "...oday that ‘you were not  impressed when. you. first went ‘t..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "impressed" (9 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">717-717</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">11942-11942</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">12121-12122</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">13885-13885</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">16509-16509</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">17532-17532</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">17710-17711</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "discrimination"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 2827, "end": 2827, "pages": [2827]}, {"start": 2839, "end": 2839, "pages": [2839]}, {"start": 3622, "end": 3622, "pages": [3622]}, {"start": 3647, "end": 3647, "pages": [3647]}, {"start": 5657, "end": 5657, "pages": [5657]}, {"start": 6292, "end": 6292, "pages": [6292]}, {"start": 6619, "end": 6619, "pages": [6619]}, {"start": 8467, "end": 8467, "pages": [8467]}, {"start": 8551, "end": 8551, "pages": [8551]}, {"start": 8631, "end": 8631, "pages": [8631]}, {"start": 8717, "end": 8717, "pages": [8717]}, {"start": 9138, "end": 9138, "pages": [9138]}, {"start": 9817, "end": 9817, "pages": [9817]}, {"start": 10326, "end": 10326, "pages": [10326]}, {"start": 10352, "end": 10352, "pages": [10352]}, {"start": 14589, "end": 14589, "pages": [14589]}, {"start": 17210, "end": 17210, "pages": [17210]}, {"start": 20946, "end": 20946, "pages": [20946]}, {"start": 20972, "end": 20972, "pages": [20972]}, {"start": 21698, "end": 21698, "pages": [21698]}];
+        const pageToPath = {"2827": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002827.jpg", "2839": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002839.jpg", "3622": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003622.jpg", "3647": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003647.jpg", "5657": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005657.jpg", "6292": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006292.jpg", "6619": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006619.jpg", "8467": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008467.jpg", "8551": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008551.jpg", "8631": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008631.jpg", "8717": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008717.jpg", "9138": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009138.jpg", "9817": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009817.jpg", "10326": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010326.jpg", "10352": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010352.jpg", "14589": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014589.jpg", "17210": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017210.jpg", "20946": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020946.jpg", "20972": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020972.jpg", "21698": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021698.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002827.jpg": "...must allege ‘intentional discrimination by the jury'selection sy...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002839.jpg": "...ence shouing intentional discrimination). therefore, the.defenda...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003622.jpg": "...e analysis of employment discrimination issues.  ‘since receivin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003647.jpg": "...statistical, evidence of discrimination. if the treatinent of mo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005657.jpg": "...d colleectiveaction: ist discrimination. in h. landrinegand e. ....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006292.jpg": "...gation to be mindful ef discrimination face ihe aecused.. furth...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006619.jpg": "...nd collectiveaction: ist discrimination. in h. landrinegand e. ....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008467.jpg": "...arge your duties without discrimination. thus, itwould. be impro...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008551.jpg": "...arge your:duties without discrimination. “thus, it would be: imp...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008631.jpg": "...arge your duties without discrimination. thus, itwould. be impro...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008717.jpg": "...arge your duties without discrimination. thus, itwould. be impro...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009138.jpg": "...ed ofi a jury if ari age discrimination case: to avenge himself...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009817.jpg": "...cled:on a jiry if. aiage discrimination case: to avenge himself...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010326.jpg": "...aitist.serve fairly. ll. discrimination-cases. and, survivors of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010352.jpg": "...n discriminated against  discrimination. trials.  may  so the cr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014589.jpg": "...harge  your gwees withot discrimination.  thws, it would be imsr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017210.jpg": "...harge  your gwees withot discrimination.  thws, it would be imsr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020946.jpg": "...riminated against ser in discrimination cases. and  survivors of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020972.jpg": "....fraud:trials and. indi  discrimination. trials.  so: the critic...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021698.jpg": "...38  certain discrimination claims; and, held that a..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "discrimination" (20 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">2827-2827</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">2839-2839</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">3622-3622</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3647-3647</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">5657-5657</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">6292-6292</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">6619-6619</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">8467-8467</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">8551-8551</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">8631-8631</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">8717-8717</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">9138-9138</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">9817-9817</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">10326-10326</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">10352-10352</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">14589-14589</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">17210-17210</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">20946-20946</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">20972-20972</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">21698-21698</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

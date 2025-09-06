@@ -1,0 +1,178 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "contributed"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 6, "end": 6, "pages": [6]}, {"start": 1563, "end": 1563, "pages": [1563]}, {"start": 2545, "end": 2545, "pages": [2545]}, {"start": 2843, "end": 2843, "pages": [2843]}, {"start": 3094, "end": 3094, "pages": [3094]}, {"start": 3189, "end": 3189, "pages": [3189]}, {"start": 3466, "end": 3466, "pages": [3466]}, {"start": 3481, "end": 3484, "pages": [3481, 3484]}, {"start": 4311, "end": 4311, "pages": [4311]}, {"start": 4588, "end": 4588, "pages": [4588]}, {"start": 4603, "end": 4606, "pages": [4603, 4606]}, {"start": 5211, "end": 5211, "pages": [5211]}, {"start": 5953, "end": 5953, "pages": [5953]}, {"start": 6878, "end": 6878, "pages": [6878]}, {"start": 7002, "end": 7002, "pages": [7002]}, {"start": 10598, "end": 10598, "pages": [10598]}, {"start": 14855, "end": 14855, "pages": [14855]}, {"start": 19472, "end": 19472, "pages": [19472]}, {"start": 19614, "end": 19614, "pages": [19614]}, {"start": 20736, "end": 20736, "pages": [20736]}, {"start": 21187, "end": 21187, "pages": [21187]}, {"start": 21363, "end": 21363, "pages": [21363]}, {"start": 21484, "end": 21484, "pages": [21484]}, {"start": 21799, "end": 21799, "pages": [21799]}, {"start": 21852, "end": 21852, "pages": [21852]}, {"start": 21882, "end": 21882, "pages": [21882]}, {"start": 23474, "end": 23474, "pages": [23474]}, {"start": 23490, "end": 23490, "pages": [23490]}];
+        const pageToPath = {"6": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000006.jpg", "1563": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001563.jpg", "2545": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002545.jpg", "2843": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002843.jpg", "3094": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003094.jpg", "3189": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003189.jpg", "3466": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003466.jpg", "3481": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003481.jpg", "3484": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003484.jpg", "4311": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004311.jpg", "4588": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004588.jpg", "4603": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004603.jpg", "4606": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004606.jpg", "5211": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005211.jpg", "5953": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005953.jpg", "6878": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006878.jpg", "7002": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007002.jpg", "10598": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010598.jpg", "14855": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014855.jpg", "19472": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019472.jpg", "19614": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019614.jpg", "20736": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020736.jpg", "21187": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021187.jpg", "21363": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021363.jpg", "21484": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021484.jpg", "21799": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021799.jpg", "21852": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021852.jpg", "21882": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021882.jpg", "23474": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023474.jpg", "23490": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023490.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000006.jpg": "...nated, facilitated, and. contributed to jeffrey epstein’s sex...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001563.jpg": "...sisted, facilitated, and contributed to jeffrey epstein’s abu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002545.jpg": "...leading ste victims ‘and contributed i fo. victim.  ‘frustrat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002843.jpg": "...isted, facilitated, and  contributed to jeffrey epstein’s abu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003094.jpg": "...isted, facilitated, and ‘contributed to” epstein’s sexual abu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003189.jpg": "...ed to :interactions that contributed. to  : government was ‘i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003466.jpg": "...nthe subsequent et ters contributed to victims’ > and the pu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003481.jpg": "...federal.  investigation contributed. to: the likelihood that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003484.jpg": "...an, and. villafafia also contributed to the ‘problems. the go...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004311.jpg": "...ed to :interactions that contributed. to victims’ fei : gover...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004588.jpg": "...n.the subsequent. icters contributed-to victims’ and the publ...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004603.jpg": "...e federal. investigation contributed. to: the likelihood that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004606.jpg": "...an, and. villafafia also contributed to the ‘problems. the go...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005211.jpg": "...‘the media and have  not contributed fo the polluting effect-...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005953.jpg": "...en to.  “loser  took at  contributed, significantly to the: p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006878.jpg": "...en to.  “loser  took at  contributed, significantly to the: p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007002.jpg": "...it de not think that. i contributed to the problem before....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010598.jpg": "...that: very wel may ‘have contributed.to tion: ye paone by ell...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014855.jpg": "...nated, facilitated, and. contributed to jeffrey epstein’s sex...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019472.jpg": "...sisted, facilitated, and contributed to jeffrey epstein’s abu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019614.jpg": "...isted, ‘facilitated, and contributed to, jeffrey ep- stein’s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020736.jpg": "...2oo4, maxwell assisted,  contributed tq jeffrey epstein’s abu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021187.jpg": "...ading t the: victimseand contributed: tor vietim.  investigat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021363.jpg": "...ed, th ice e erved. of r contributed. to statc:officials deci...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021484.jpg": "...s and “other witnesses, contributed ‘to: ‘the problems. liti...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021799.jpg": "...nated, facilitated, and. contributed to jeffrey epstein’s sex...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021852.jpg": "...nated, facilitated, and. contributed to jeffrey epstein’s sex...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021882.jpg": "...nated, facilitated, and. contributed to jeffrey epstein’s sex...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023474.jpg": "...round in the shu, which :contributed to-the shu staff's failu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023490.jpg": "...doctimenteed report all contributed to. an environment: in w..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "contributed" (30 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">6-6</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1563-1563</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">2545-2545</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">2843-2843</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">3094-3094</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">3189-3189</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3466-3466</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">3481-3484</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">4311-4311</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">4588-4588</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">4603-4606</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">5211-5211</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">5953-5953</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">6878-6878</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">7002-7002</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">10598-10598</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">14855-14855</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">19472-19472</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">19614-19614</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">20736-20736</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">21187-21187</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">21363-21363</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">21484-21484</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">21799-21799</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">21852-21852</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">21882-21882</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">23474-23474</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">23490-23490</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

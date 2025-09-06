@@ -1,0 +1,199 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "incomplete"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 904, "end": 909, "pages": [904, 906, 909]}, {"start": 1224, "end": 1226, "pages": [1224, 1225, 1226]}, {"start": 1307, "end": 1310, "pages": [1307, 1310]}, {"start": 1328, "end": 1328, "pages": [1328]}, {"start": 1447, "end": 1447, "pages": [1447]}, {"start": 1810, "end": 1810, "pages": [1810]}, {"start": 2247, "end": 2249, "pages": [2247, 2249]}, {"start": 3639, "end": 3639, "pages": [3639]}, {"start": 3835, "end": 3835, "pages": [3835]}, {"start": 3977, "end": 3977, "pages": [3977]}, {"start": 4239, "end": 4239, "pages": [4239]}, {"start": 4886, "end": 4886, "pages": [4886]}, {"start": 5814, "end": 5814, "pages": [5814]}, {"start": 6190, "end": 6190, "pages": [6190]}, {"start": 6204, "end": 6204, "pages": [6204]}, {"start": 6263, "end": 6263, "pages": [6263]}, {"start": 6739, "end": 6739, "pages": [6739]}, {"start": 7231, "end": 7231, "pages": [7231]}, {"start": 7504, "end": 7504, "pages": [7504]}, {"start": 7620, "end": 7620, "pages": [7620]}, {"start": 7921, "end": 7921, "pages": [7921]}, {"start": 8080, "end": 8080, "pages": [8080]}, {"start": 8955, "end": 8955, "pages": [8955]}, {"start": 9605, "end": 9605, "pages": [9605]}, {"start": 11434, "end": 11434, "pages": [11434]}, {"start": 11482, "end": 11482, "pages": [11482]}, {"start": 11495, "end": 11495, "pages": [11495]}, {"start": 14928, "end": 14928, "pages": [14928]}, {"start": 19822, "end": 19827, "pages": [19822, 19824, 19827]}, {"start": 20142, "end": 20144, "pages": [20142, 20143, 20144]}, {"start": 20225, "end": 20228, "pages": [20225, 20228]}, {"start": 20245, "end": 20245, "pages": [20245]}, {"start": 20365, "end": 20365, "pages": [20365]}, {"start": 21912, "end": 21912, "pages": [21912]}, {"start": 23446, "end": 23446, "pages": [23446]}];
+        const pageToPath = {"904": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000904.jpg", "906": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000906.jpg", "909": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000909.jpg", "1224": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001224.jpg", "1225": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001225.jpg", "1226": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001226.jpg", "1307": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001307.jpg", "1310": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001310.jpg", "1328": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001328.jpg", "1447": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001447.jpg", "1810": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001810.jpg", "2247": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002247.jpg", "2249": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002249.jpg", "3639": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003639.jpg", "3835": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003835.jpg", "3977": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003977.jpg", "4239": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004239.jpg", "4886": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004886.jpg", "5814": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005814.jpg", "6190": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006190.jpg", "6204": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006204.jpg", "6263": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006263.jpg", "6739": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006739.jpg", "7231": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007231.jpg", "7504": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007504.jpg", "7620": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007620.jpg", "7921": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007921.jpg", "8080": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008080.jpg", "8955": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008955.jpg", "9605": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009605.jpg", "11434": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011434.jpg", "11482": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011482.jpg", "11495": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011495.jpg", "14928": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014928.jpg", "19822": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019822.jpg", "19824": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019824.jpg", "19827": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019827.jpg", "20142": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020142.jpg", "20143": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020143.jpg", "20144": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020144.jpg", "20225": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020225.jpg", "20228": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020228.jpg", "20245": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020245.jpg", "20365": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020365.jpg", "21912": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021912.jpg", "23446": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023446.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000904.jpg": "...r the follouing reason:  incomplete service vinden ov, io su...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000906.jpg": "...be jalt'o tee appellant  incomplete service vinden ov, 9 sub...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000909.jpg": "...the follouing, reason:  incomplete service vinden ov, 9 sub...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001224.jpg": "...ant’s patem of providing incomplete or erroneous information...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001225.jpg": "...‘services were: woefully incomplete. that lack of'candor rai...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001226.jpg": "...eating was tindisputedly incomplete,. and as'the court:ioted...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001307.jpg": "...oa ari incorrect address incomplete service (anders vr € 9 s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001310.jpg": "...: docunient d6es: riot,  incomplete service vinden ov, io su...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001328.jpg": "...services  were woefully incomplete. ‘t or  et it lack of ca...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001447.jpg": "...*s  “patern of providing incomplete or erroneous information...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001810.jpg": "...mdg thus far‘has ‘been. incomplete and:portions: are: still...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002247.jpg": "...nt's patern of providing incomplete or erroneous information...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002249.jpg": "...aring was. tindisputedly incomplete, and. as the: gourt:note...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003639.jpg": "...naire was mailed. to the incomplete:  altermative iailing ad...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003835.jpg": "...e from kida  4, 369,,is, incomplete.;the'court in.k  plains...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003977.jpg": "...iunication with bsf was. incomplete and. ertirely  approved...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004239.jpg": "...fied several redacted or incomplete documents:that:  were! p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004886.jpg": "...er curiam) (enforcing an incomplete agreement based upon det...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005814.jpg": "...d, on their delayed, and incomplete reports of abuse.” (cita...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006190.jpg": "...y: adding details to.an. incomplete: memory! that would make...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006204.jpg": "...t's “patern of providing incomplete or erroneous information...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006263.jpg": "...y: adding details to.an. incomplete: memory! that would make...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006739.jpg": "...d, on their delayed, and incomplete reports of abuse.” (cita...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007231.jpg": "...this?  a. i think it.\"s incomplete and i disagree with the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007504.jpg": "...y: adding details to.an. incomplete: memory! that would make...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007620.jpg": "...995 to december 2ooo are incomplete as a result of a hard-:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007921.jpg": "...this?  a. i think it.\"s incomplete and i disagree with the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008080.jpg": "...y: adding details to.an. incomplete: memory! that would make...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008955.jpg": "...avid rodgers, which were incomplete and.  male.” rodgers and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009605.jpg": "...se: ‘the flight logs are incomplete. (jd). in so arguing, th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011434.jpg": "...‘claimant submits. “an incomplete or defi cient-claim, the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011482.jpg": "...‘a claimant submit  fan’ incomplete or deficient claim, the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011495.jpg": "...r will contact  ubmit an incomplete or defiei  if you s you...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014928.jpg": "...o this?  a. i think it's incomplete and i disagree with the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019822.jpg": "...r the follouing reason:  incomplete service vinden ov, io su...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019824.jpg": "...be jalt'o tee appellant  incomplete service vinden ov, 9 sub...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019827.jpg": "...the follouing, reason:  incomplete service vinden ov, 9 sub...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020142.jpg": "...ant’s patem of providing incomplete or erroneous information...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020143.jpg": "...‘services were: woefully incomplete. that lack of'candor rai...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020144.jpg": "...eating was tindisputedly incomplete,. and as'the court:ioted...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020225.jpg": "...oa ari incorrect address incomplete service (anders vr € 9 s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020228.jpg": "...: docunient d6es: riot,  incomplete service vinden ov, io su...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020245.jpg": "...services  were woefully incomplete. ‘t or  et it lack of ca...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020365.jpg": "...*s  “patern of providing incomplete or erroneous information...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021912.jpg": "...a  “clean” the count.  incomplete; them the dnstle  ’  te...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023446.jpg": "...when there: has: been am incomplete ‘com pression as: oppose..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "incomplete" (46 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">904-909</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1224-1226</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1307-1310</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">1328-1328</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">1447-1447</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">1810-1810</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">2247-2249</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">3639-3639</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">3835-3835</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">3977-3977</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">4239-4239</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">4886-4886</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">5814-5814</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">6190-6190</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">6204-6204</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">6263-6263</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">6739-6739</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">7231-7231</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">7504-7504</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">7620-7620</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">7921-7921</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">8080-8080</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">8955-8955</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">9605-9605</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">11434-11434</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">11482-11482</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">11495-11495</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">14928-14928</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">19822-19827</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">20142-20144</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">20225-20228</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">20245-20245</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">20365-20365</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">21912-21912</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">23446-23446</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

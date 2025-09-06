@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "theoretical"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 993, "end": 993, "pages": [993]}, {"start": 1258, "end": 1258, "pages": [1258]}, {"start": 1619, "end": 1619, "pages": [1619]}, {"start": 2426, "end": 2426, "pages": [2426]}, {"start": 5466, "end": 5466, "pages": [5466]}, {"start": 5795, "end": 5795, "pages": [5795]}, {"start": 5898, "end": 5898, "pages": [5898]}, {"start": 6428, "end": 6428, "pages": [6428]}, {"start": 6720, "end": 6720, "pages": [6720]}, {"start": 6823, "end": 6823, "pages": [6823]}, {"start": 7317, "end": 7317, "pages": [7317]}, {"start": 7591, "end": 7591, "pages": [7591]}, {"start": 8007, "end": 8007, "pages": [8007]}, {"start": 11434, "end": 11434, "pages": [11434]}, {"start": 14577, "end": 14577, "pages": [14577]}, {"start": 15014, "end": 15014, "pages": [15014]}, {"start": 17198, "end": 17198, "pages": [17198]}, {"start": 19628, "end": 19628, "pages": [19628]}, {"start": 19911, "end": 19911, "pages": [19911]}, {"start": 20176, "end": 20176, "pages": [20176]}];
+        const pageToPath = {"993": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000993.jpg", "1258": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001258.jpg", "1619": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001619.jpg", "2426": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002426.jpg", "5466": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005466.jpg", "5795": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005795.jpg", "5898": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005898.jpg", "6428": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006428.jpg", "6720": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006720.jpg", "6823": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006823.jpg", "7317": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007317.jpg", "7591": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007591.jpg", "8007": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008007.jpg", "11434": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011434.jpg", "14577": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014577.jpg", "15014": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015014.jpg", "17198": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017198.jpg", "19628": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019628.jpg", "19911": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019911.jpg", "20176": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020176.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000993.jpg": "...e to flee fat beyond the theoretical possibility of a:charge:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001258.jpg": "...and ‘thereby remove any ‘theoretical. bar'to this court’s. ju...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001619.jpg": "...e to flee far beyond the theoretical possibility.of-a:charge...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002426.jpg": "...ion  ‘as to the age of a theoretical. person, and asked for t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005466.jpg": "...n  advisory ruling on, a theoretical affirmative defense that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005795.jpg": "...87, 292- 93 2oo6  3  and theoretical. ons siderations.\" 3  “c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005898.jpg": "...literature and theoretical. considerations  ro lazy...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006428.jpg": "...n  advisory ruling on, a theoretical affirmative defense that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006720.jpg": "...87, 292- 93 2oo6  3  and theoretical. ons siderations.\" 3  “c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006823.jpg": "...literature and theoretical. considerations  ro lazy...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007317.jpg": "...6f literature arid  ss  theoretical considerations.\" do you...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007591.jpg": "...mics of schizophrenia: a theoretical synthesis. child psychia...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008007.jpg": "...6f literature arid  ss  theoretical considerations.\" do you...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011434.jpg": "...nce:  does not depend on theoretical evidentiary altermatives...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014577.jpg": "...ad-libbed, made up, some theoretical questions that  she\"d li...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015014.jpg": "...review of literature and theoretical considerations.\" do you...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017198.jpg": "...ad-libbed, made up, some theoretical questions that  she\"d li...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019628.jpg": "...es her appeal. the only: theoretical harm might be prejudicia...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019911.jpg": "...e to flee fat beyond the theoretical possibility of a:charge:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020176.jpg": "...and ‘thereby remove any ‘theoretical. bar'to this court’s. ju..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "theoretical" (20 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">993-993</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1258-1258</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1619-1619</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">2426-2426</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">5466-5466</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">5795-5795</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">5898-5898</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">6428-6428</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">6720-6720</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">6823-6823</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">7317-7317</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">7591-7591</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">8007-8007</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">11434-11434</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">14577-14577</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">15014-15014</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">17198-17198</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">19628-19628</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">19911-19911</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">20176-20176</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "friendship"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 6, "end": 6, "pages": [6]}, {"start": 1565, "end": 1565, "pages": [1565]}, {"start": 2844, "end": 2844, "pages": [2844]}, {"start": 6894, "end": 6894, "pages": [6894]}, {"start": 7673, "end": 7673, "pages": [7673]}, {"start": 8132, "end": 8132, "pages": [8132]}, {"start": 10501, "end": 10501, "pages": [10501]}, {"start": 10510, "end": 10510, "pages": [10510]}, {"start": 12844, "end": 12844, "pages": [12844]}, {"start": 12850, "end": 12850, "pages": [12850]}, {"start": 13834, "end": 13834, "pages": [13834]}, {"start": 14855, "end": 14855, "pages": [14855]}, {"start": 16459, "end": 16459, "pages": [16459]}, {"start": 18430, "end": 18430, "pages": [18430]}, {"start": 18436, "end": 18436, "pages": [18436]}, {"start": 19474, "end": 19474, "pages": [19474]}, {"start": 20737, "end": 20737, "pages": [20737]}, {"start": 21635, "end": 21635, "pages": [21635]}, {"start": 21799, "end": 21799, "pages": [21799]}, {"start": 21852, "end": 21852, "pages": [21852]}, {"start": 21882, "end": 21882, "pages": [21882]}];
+        const pageToPath = {"6": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000006.jpg", "1565": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001565.jpg", "2844": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002844.jpg", "6894": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006894.jpg", "7673": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007673.jpg", "8132": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008132.jpg", "10501": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010501.jpg", "10510": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010510.jpg", "12844": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012844.jpg", "12850": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012850.jpg", "13834": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013834.jpg", "14855": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014855.jpg", "16459": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016459.jpg", "18430": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018430.jpg", "18436": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018436.jpg", "19474": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019474.jpg", "20737": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020737.jpg", "21635": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021635.jpg", "21799": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021799.jpg", "21852": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021852.jpg", "21882": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021882.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000006.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001565.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002844.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006894.jpg": "...she would not  need.her friendship or access to jeffrey: ep...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007673.jpg": "...vider for fl. top does:  friendship award reci¢  ient, flori...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008132.jpg": "...vider for fl. top does:  friendship award reci¢  ient, flori...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010501.jpg": "...an enduring  capacitytor friendship, a warm heart, ahd the a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010510.jpg": "...,  isupport.and lifelong friendship: for her remains unchang...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012844.jpg": "...you've had ah gn-ad-off friendship of dating situaton  with...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012850.jpg": "...as someone who you had a friendship withy  g6lprfeet ?  a. a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013834.jpg": "...he defendant developed a friendship...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014855.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016459.jpg": "...he defendant developed a friendship...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018430.jpg": "...you've had ah gn-ad-off friendship of dating situaton  with...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018436.jpg": "...as someone who you had a friendship withy  g6lprfeet ?  a. a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019474.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020737.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021635.jpg": "...ms. maxwell cultivated a friendship with ‘her; took her to m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021799.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021852.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021882.jpg": ""};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "friendship" (21 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">6-6</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1565-1565</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">2844-2844</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">6894-6894</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">7673-7673</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">8132-8132</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">10501-10501</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">10510-10510</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">12844-12844</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">12850-12850</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">13834-13834</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">14855-14855</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">16459-16459</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">18430-18430</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">18436-18436</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">19474-19474</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">20737-20737</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">21635-21635</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">21799-21799</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">21852-21852</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">21882-21882</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

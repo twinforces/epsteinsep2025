@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "distributed"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1118, "end": 1118, "pages": [1118]}, {"start": 1649, "end": 1650, "pages": [1649, 1650]}, {"start": 1672, "end": 1673, "pages": [1672, 1673]}, {"start": 1691, "end": 1692, "pages": [1691, 1692]}, {"start": 1994, "end": 1994, "pages": [1994]}, {"start": 2399, "end": 2399, "pages": [2399]}, {"start": 2464, "end": 2464, "pages": [2464]}, {"start": 4378, "end": 4378, "pages": [4378]}, {"start": 5274, "end": 5274, "pages": [5274]}, {"start": 6049, "end": 6049, "pages": [6049]}, {"start": 6173, "end": 6176, "pages": [6173, 6176]}, {"start": 7515, "end": 7515, "pages": [7515]}, {"start": 11455, "end": 11455, "pages": [11455]}, {"start": 11471, "end": 11471, "pages": [11471]}, {"start": 19304, "end": 19305, "pages": [19304, 19305]}, {"start": 19504, "end": 19505, "pages": [19504, 19505]}, {"start": 19523, "end": 19524, "pages": [19523, 19524]}, {"start": 19535, "end": 19536, "pages": [19535, 19536]}, {"start": 20036, "end": 20036, "pages": [20036]}];
+        const pageToPath = {"1118": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001118.jpg", "1649": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001649.jpg", "1650": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001650.jpg", "1672": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001672.jpg", "1673": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001673.jpg", "1691": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001691.jpg", "1692": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001692.jpg", "1994": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001994.jpg", "2399": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002399.jpg", "2464": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002464.jpg", "4378": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004378.jpg", "5274": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005274.jpg", "6049": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006049.jpg", "6173": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006173.jpg", "6176": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006176.jpg", "7515": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007515.jpg", "11455": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011455.jpg", "11471": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011471.jpg", "19304": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019304.jpg", "19305": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019305.jpg", "19504": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019504.jpg", "19505": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019505.jpg", "19523": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019523.jpg", "19524": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019524.jpg", "19535": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019535.jpg", "19536": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019536.jpg", "20036": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020036.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001118.jpg": "...assets in the trust were-distributed.to ms. maxwell’s spouse...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001649.jpg": "...hall not be disclosed or distributed in any  fern by ‘the def...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001650.jpg": "...l not be further copied, distributed, or otherwise transmited...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001672.jpg": "...hall not be disclosed 6r distributed in any form by the defen...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001673.jpg": "...l net be further copied, distributed, or otherwise transmited...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001691.jpg": "...hall not be disclosed 6r distributed in any form by the defen...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001692.jpg": "...l net be further copied, distributed, or otherwise transmited...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001994.jpg": "...), allassets ‘in.  ‘were distributed to ms. maxwell’s spouse’...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002399.jpg": "...retrieve all previously distributed copies from any ‘recipie...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002464.jpg": "...retrieve all previously distributed copies from any ‘recipie...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004378.jpg": "...m: sheet, and ‘willafaia distributed a fed  euidelines calcul...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005274.jpg": "...ires will be copied and. distributed to defense counsel. byth...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006049.jpg": "...iten. questionnaires are distributed.  ‘based on the court’s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006173.jpg": "...enee  questionnaires are-distributed; (dkt.:  on top: of the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006176.jpg": "...enee  questionnaires are-distributed; (dkt.:  on top: of the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007515.jpg": "...l., &a  68). massed vs. distributed practice in ih of balncu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011455.jpg": "...by,, exchanged with, or distributed. by:  26  the program.”...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011471.jpg": "...by, exchanged with and. distributed by the program.  l2. wit...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019304.jpg": "...hall not be disclosed 6r distributed in any form by the defen...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019305.jpg": "...l net be further copied, distributed, or otherwise transmited...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019504.jpg": "...hall not be disclosed or distributed in any form by the defen...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019505.jpg": "...l not be further copied, distributed, or otherwise transmited...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019523.jpg": "...hall not be disclosed 6r distributed in any form by the defen...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019524.jpg": "...l net be further copied, distributed, or otherwise transmited...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019535.jpg": "...hall not be disclosed 6r distributed in any form by the defen...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019536.jpg": "...l net be further copied, distributed, or otherwise transmited...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020036.jpg": "...assets in the trust were-distributed.to ms. maxwell’s spouse..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "distributed" (27 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1118-1118</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1649-1650</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1672-1673</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">1691-1692</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">1994-1994</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">2399-2399</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">2464-2464</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">4378-4378</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">5274-5274</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">6049-6049</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">6173-6176</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">7515-7515</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">11455-11455</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">11471-11471</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">19304-19305</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">19504-19505</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">19523-19524</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">19535-19536</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">20036-20036</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

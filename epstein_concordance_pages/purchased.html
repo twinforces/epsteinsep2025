@@ -1,0 +1,244 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "purchased"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 716, "end": 716, "pages": [716]}, {"start": 992, "end": 996, "pages": [992, 996]}, {"start": 1618, "end": 1622, "pages": [1618, 1622]}, {"start": 3982, "end": 3982, "pages": [3982]}, {"start": 4013, "end": 4013, "pages": [4013]}, {"start": 4100, "end": 4100, "pages": [4100]}, {"start": 4820, "end": 4820, "pages": [4820]}, {"start": 5698, "end": 5698, "pages": [5698]}, {"start": 5881, "end": 5881, "pages": [5881]}, {"start": 6806, "end": 6806, "pages": [6806]}, {"start": 11729, "end": 11729, "pages": [11729]}, {"start": 11751, "end": 11751, "pages": [11751]}, {"start": 11783, "end": 11786, "pages": [11783, 11786]}, {"start": 11806, "end": 11807, "pages": [11806, 11807]}, {"start": 11886, "end": 11886, "pages": [11886]}, {"start": 12498, "end": 12498, "pages": [12498]}, {"start": 12557, "end": 12560, "pages": [12557, 12560]}, {"start": 13620, "end": 13620, "pages": [13620]}, {"start": 13644, "end": 13644, "pages": [13644]}, {"start": 13668, "end": 13670, "pages": [13668, 13670]}, {"start": 13868, "end": 13868, "pages": [13868]}, {"start": 13960, "end": 13960, "pages": [13960]}, {"start": 14116, "end": 14116, "pages": [14116]}, {"start": 14262, "end": 14262, "pages": [14262]}, {"start": 14475, "end": 14475, "pages": [14475]}, {"start": 14539, "end": 14539, "pages": [14539]}, {"start": 16174, "end": 16174, "pages": [16174]}, {"start": 16196, "end": 16196, "pages": [16196]}, {"start": 16245, "end": 16245, "pages": [16245]}, {"start": 16269, "end": 16269, "pages": [16269]}, {"start": 16293, "end": 16295, "pages": [16293, 16295]}, {"start": 16492, "end": 16492, "pages": [16492]}, {"start": 16584, "end": 16584, "pages": [16584]}, {"start": 16739, "end": 16739, "pages": [16739]}, {"start": 16885, "end": 16885, "pages": [16885]}, {"start": 17096, "end": 17096, "pages": [17096]}, {"start": 17160, "end": 17160, "pages": [17160]}, {"start": 17373, "end": 17376, "pages": [17373, 17376]}, {"start": 17396, "end": 17397, "pages": [17396, 17397]}, {"start": 17476, "end": 17476, "pages": [17476]}, {"start": 18086, "end": 18086, "pages": [18086]}, {"start": 18144, "end": 18147, "pages": [18144, 18147]}, {"start": 19910, "end": 19914, "pages": [19910, 19914]}, {"start": 20403, "end": 20403, "pages": [20403]}, {"start": 20448, "end": 20448, "pages": [20448]}, {"start": 20457, "end": 20457, "pages": [20457]}, {"start": 20471, "end": 20471, "pages": [20471]}, {"start": 20504, "end": 20504, "pages": [20504]}, {"start": 20549, "end": 20549, "pages": [20549]}, {"start": 20558, "end": 20558, "pages": [20558]}];
+        const pageToPath = {"716": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000716.jpg", "992": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000992.jpg", "996": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000996.jpg", "1618": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001618.jpg", "1622": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001622.jpg", "3982": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003982.jpg", "4013": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004013.jpg", "4100": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004100.jpg", "4820": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004820.jpg", "5698": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005698.jpg", "5881": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005881.jpg", "6806": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006806.jpg", "11729": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011729.jpg", "11751": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011751.jpg", "11783": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011783.jpg", "11786": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011786.jpg", "11806": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011806.jpg", "11807": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011807.jpg", "11886": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011886.jpg", "12498": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012498.jpg", "12557": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012557.jpg", "12560": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012560.jpg", "13620": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013620.jpg", "13644": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013644.jpg", "13668": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013668.jpg", "13670": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013670.jpg", "13868": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013868.jpg", "13960": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013960.jpg", "14116": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014116.jpg", "14262": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014262.jpg", "14475": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014475.jpg", "14539": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014539.jpg", "16174": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016174.jpg", "16196": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016196.jpg", "16245": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016245.jpg", "16269": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016269.jpg", "16293": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016293.jpg", "16295": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016295.jpg", "16492": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016492.jpg", "16584": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016584.jpg", "16739": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016739.jpg", "16885": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016885.jpg", "17096": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017096.jpg", "17160": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017160.jpg", "17373": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017373.jpg", "17376": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017376.jpg", "17396": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017396.jpg", "17397": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017397.jpg", "17476": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017476.jpg", "18086": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018086.jpg", "18144": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018144.jpg", "18147": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018147.jpg", "19910": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019910.jpg", "19914": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019914.jpg", "20403": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020403.jpg", "20448": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020448.jpg", "20457": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020457.jpg", "20471": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020471.jpg", "20504": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020504.jpg", "20549": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020549.jpg", "20558": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020558.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000716.jpg": "...s act-ions placed me, @  purchased a gun and. drove myself...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000992.jpg": "...me.as. the llc that had: purchased ‘the new hampshire prope...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000996.jpg": "...new. hampshire that was purchased formore:  property-in ca...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001618.jpg": "...e as the llc that. had.  purchased the new hathpshire prope...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001622.jpg": "...ew hamipshire:that' was, purchased:for more  than. $f milli...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003982.jpg": "...nce,, boots purportedly: purchased. by epstein.  for allege...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004013.jpg": "...tein. and, the defendant purchased fo  farmer and ‘various...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004100.jpg": "...fo seck-a-pair of boots:purchased by the:defendant. and je...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004820.jpg": "...pe recorder that she had purchased. during ‘this: conversat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005698.jpg": "...xwell nor her spouse had purchased a plane ticket; nor was...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005881.jpg": "...ehontins).  reyes  cy  > purchased. by tiate nonsextdl ‘com...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006806.jpg": "...ehontins).  reyes  cy  > purchased. by tiate nonsextdl ‘com...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011729.jpg": "...oots she claims epstein, purchased for ker te6 wear in. the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011751.jpg": "...n. st. and then later on purchased 4 seeaond 4  at's mext d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011783.jpg": "...hat  a sey  needed te be purchased for all of the propertie...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011786.jpg": "...e ranch == his ranch was purchased in approximately l994. i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011806.jpg": "...ah. h$l25.. mr. epstein purchased that. he had that arrera...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011807.jpg": "...til first, helicopter he purchased, one heliceprer..  q. an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011886.jpg": "...s it roughly \"97 when he purchased the property?  a. it. wa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012498.jpg": "...ssages beeause they were purchased by ms. maxwell.  mr. pag...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012557.jpg": "...rental property that you purchased in 2ool fon $lo5,ooo for...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012560.jpg": "...2oo2, you and your wate purchased a multifamily residentia...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013620.jpg": "...went to his home. he had purchased  tickets for us to atend...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013644.jpg": "...en rn os ee os yo  were purchased for ‘you?  a, it wag —-...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013668.jpg": "...anding that mr. epstein, purchased your  or  plane ticket f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013670.jpg": "...lseeved that mr. epstear purchased ‘you a ticket  it  le co...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013868.jpg": "...brove when. ms. maxwell purchased the horie, but the defen...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013960.jpg": "...nger who the ticket. was purchased.  ‘£ ot ?  be re o. ‘)...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014116.jpg": "...he fact  nti. after she  purchased the  apartment. ms. come...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014262.jpg": "...hee  util, she ewhed at; purchased it, and then oued at, an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014475.jpg": "...he court:  ether lt was. purchased,  t, l8 uniske the @asi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014539.jpg": "...well was kasically being purchased to facilitate  s6xxtal a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016174.jpg": "...oots she claims epstein, purchased for ker te6 wear in. the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016196.jpg": "...n. st. and then later on purchased 4 seeaond 4  at's mext d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016245.jpg": "...went to his home. he had purchased  tickets for us to atend...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016269.jpg": "...en rn os ee os yo  were purchased for ‘you?  a, it wag —-...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016293.jpg": "...anding that mr. epstein, purchased your  or  plane ticket f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016295.jpg": "...lseeved that mr. epstear purchased ‘you a ticket  it  le co...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016492.jpg": "...brove when. ms. maxwell purchased the horie, but the defen...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016584.jpg": "...nger who the ticket. was purchased.  ‘£ ot ?  be re o. ‘)...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016739.jpg": "...he fact  nti. after she  purchased the  apartment. ms. come...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016885.jpg": "...hee  util, she ewhed at; purchased it, and then oued at, an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017096.jpg": "...he court:  ether lt was. purchased,  t, l8 uniske the @asi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017160.jpg": "...well was kasically being purchased to facilitate  s6xxtal a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017373.jpg": "...hat  a sey  needed te be purchased for all of the propertie...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017376.jpg": "...e ranch == his ranch was purchased in approximately l994. i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017396.jpg": "...ah. h$l25.. mr. epstein purchased that. he had that arrera...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017397.jpg": "...til first, helicopter he purchased, one heliceprer..  q. an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017476.jpg": "...s it roughly \"97 when he purchased the property?  a. it. wa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018086.jpg": "...ssages beeause they were purchased by ms. maxwell.  mr. pag...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018144.jpg": "...rental property that you purchased in 2ool fon $lo5,ooo for...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018147.jpg": "...2oo2, you and your wate purchased a multifamily residentia...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019910.jpg": "...me.as. the llc that had: purchased ‘the new hampshire prope...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019914.jpg": "...new. hampshire that was purchased formore:  property-in ca...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020403.jpg": "...public terminal or’  my  purchased through. the uit. report...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020448.jpg": "...rney”  llo2l bor tra . ; purchased through. the court \"repu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020457.jpg": "...urt public ter minal or “purchased if eraser. pt  l/ or: o2...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020471.jpg": "...rt public terminal ‘cor “purchased throug xh, (tray ctiber...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020504.jpg": "...ie, terminal or’  ga b.  purchased through. the -ourt. repo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020549.jpg": "...j ‘moore, (2.] ) 8o5 :  purchased through. the ‘court repo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020558.jpg": "...ourt public ter minal or purchased  transcript  l2 2o) o2l...."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "purchased" (61 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">716-716</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">992-996</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1618-1622</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3982-3982</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">4013-4013</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">4100-4100</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">4820-4820</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">5698-5698</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">5881-5881</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">6806-6806</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">11729-11729</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">11751-11751</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">11783-11786</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">11806-11807</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">11886-11886</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">12498-12498</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">12557-12560</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">13620-13620</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">13644-13644</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">13668-13670</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">13868-13868</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">13960-13960</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">14116-14116</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">14262-14262</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">14475-14475</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">14539-14539</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">16174-16174</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">16196-16196</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">16245-16245</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">16269-16269</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">16293-16295</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">16492-16492</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">16584-16584</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">16739-16739</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">16885-16885</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">17096-17096</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">17160-17160</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">17373-17376</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">17396-17397</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">17476-17476</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">18086-18086</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">18144-18147</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">19910-19914</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">20403-20403</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">20448-20448</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(45, 0); return false;">20457-20457</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(46, 0); return false;">20471-20471</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(47, 0); return false;">20504-20504</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(48, 0); return false;">20549-20549</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(49, 0); return false;">20558-20558</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "affiliated"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 3545, "end": 3545, "pages": [3545]}, {"start": 3551, "end": 3551, "pages": [3551]}, {"start": 3974, "end": 3974, "pages": [3974]}, {"start": 5138, "end": 5138, "pages": [5138]}, {"start": 5160, "end": 5160, "pages": [5160]}, {"start": 8319, "end": 8319, "pages": [8319]}, {"start": 11501, "end": 11501, "pages": [11501]}, {"start": 11630, "end": 11630, "pages": [11630]}];
+        const pageToPath = {"3545": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003545.jpg", "3551": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003551.jpg", "3974": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003974.jpg", "5138": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005138.jpg", "5160": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005160.jpg", "8319": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008319.jpg", "11501": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011501.jpg", "11630": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011630.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003545.jpg": "...an nand should  a ays  . affiliated em ins. co., l54 ipo rec...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003551.jpg": "...an nand should  a ays  . affiliated em ins. co., l54 ipo rec...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003974.jpg": "...hom-the agent is: or-was affiliated; d. the, case cinumber a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005138.jpg": "...of wwith which you.were affiliated at the-time the document...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005160.jpg": "...irm ‘with which you-were affiliated at the-time the document...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008319.jpg": "...instrtutsen 6 kave been affiliated with that  ak least. ome...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011501.jpg": "...code. houever, no one.  affiliated with the program ‘will p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011630.jpg": "...instrtutsen 6 kave been affiliated with that  ak least. ome..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "affiliated" (8 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">3545-3545</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">3551-3551</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">3974-3974</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">5138-5138</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">5160-5160</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">8319-8319</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">11501-11501</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">11630-11630</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

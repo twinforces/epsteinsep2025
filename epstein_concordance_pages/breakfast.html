@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "breakfast"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 2544, "end": 2544, "pages": [2544]}, {"start": 3188, "end": 3188, "pages": [3188]}, {"start": 3197, "end": 3197, "pages": [3197]}, {"start": 3291, "end": 3293, "pages": [3291, 3292, 3293]}, {"start": 3354, "end": 3354, "pages": [3354]}, {"start": 3362, "end": 3365, "pages": [3362, 3363, 3364, 3365]}, {"start": 3486, "end": 3486, "pages": [3486]}, {"start": 4310, "end": 4310, "pages": [4310]}, {"start": 4319, "end": 4319, "pages": [4319]}, {"start": 4413, "end": 4415, "pages": [4413, 4414, 4415]}, {"start": 4476, "end": 4476, "pages": [4476]}, {"start": 4484, "end": 4487, "pages": [4484, 4485, 4486, 4487]}, {"start": 4608, "end": 4608, "pages": [4608]}, {"start": 6038, "end": 6038, "pages": [6038]}, {"start": 6315, "end": 6315, "pages": [6315]}, {"start": 10543, "end": 10543, "pages": [10543]}, {"start": 11738, "end": 11738, "pages": [11738]}, {"start": 11763, "end": 11763, "pages": [11763]}, {"start": 12003, "end": 12003, "pages": [12003]}, {"start": 12440, "end": 12441, "pages": [12440, 12441]}, {"start": 14413, "end": 14413, "pages": [14413]}, {"start": 16183, "end": 16183, "pages": [16183]}, {"start": 16208, "end": 16208, "pages": [16208]}, {"start": 17034, "end": 17034, "pages": [17034]}, {"start": 17593, "end": 17593, "pages": [17593]}, {"start": 18028, "end": 18029, "pages": [18028, 18029]}, {"start": 21195, "end": 21195, "pages": [21195]}, {"start": 21289, "end": 21291, "pages": [21289, 21291]}, {"start": 21360, "end": 21362, "pages": [21360, 21361, 21362]}, {"start": 21919, "end": 21919, "pages": [21919]}, {"start": 23368, "end": 23368, "pages": [23368]}, {"start": 23437, "end": 23438, "pages": [23437, 23438]}];
+        const pageToPath = {"2544": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002544.jpg", "3188": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003188.jpg", "3197": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003197.jpg", "3291": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003291.jpg", "3292": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003292.jpg", "3293": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003293.jpg", "3354": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003354.jpg", "3362": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003362.jpg", "3363": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003363.jpg", "3364": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003364.jpg", "3365": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003365.jpg", "3486": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003486.jpg", "4310": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004310.jpg", "4319": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004319.jpg", "4413": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004413.jpg", "4414": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004414.jpg", "4415": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004415.jpg", "4476": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004476.jpg", "4484": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004484.jpg", "4485": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004485.jpg", "4486": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004486.jpg", "4487": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004487.jpg", "4608": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004608.jpg", "6038": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006038.jpg", "6315": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006315.jpg", "10543": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010543.jpg", "11738": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011738.jpg", "11763": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011763.jpg", "12003": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012003.jpg", "12440": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012440.jpg", "12441": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012441.jpg", "14413": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014413.jpg", "16183": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016183.jpg", "16208": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016208.jpg", "17034": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017034.jpg", "17593": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017593.jpg", "18028": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018028.jpg", "18029": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018029.jpg", "21195": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021195.jpg", "21289": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021289.jpg", "21291": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021291.jpg", "21360": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021360.jpg", "21361": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021361.jpg", "21362": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021362.jpg", "21919": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021919.jpg", "23368": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023368.jpg", "23437": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023437.jpg", "23438": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023438.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002544.jpg": "...e seng g that: acosta’s “breakfast meeting” with one:  re...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003188.jpg": "...!  2 that: axcosta’s  s “breakfast meeting  ‘anificant de d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003197.jpg": "...al favorable to epi over breakfast with defense counsel .....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003291.jpg": "...orney lefkouitz meet for breakfast:  tec acosta, was: previ...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003292.jpg": "...r : two weeks after the ‘breakfast meeting, lefkouitz: repr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003293.jpg": "...t, immediately after the breakfast, acosta. phoned ‘sloman,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003354.jpg": "...e ane october l2, 2 3oo7 breakfast meeting with lefkouitz,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003362.jpg": "...: of the october i, 2oo7 breakfast meeting that:  } _ aven...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003363.jpg": "...ions continued after the breakfast meeting indicates that a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003364.jpg": "...ng. ! ta said during the breakfast meeting: -al ig ze evide...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003365.jpg": "...costa’s october l2,.2oo7 breakfast meeting with lefkouitz,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003486.jpg": "...lishing:that.acosta’s:. “breakfast mectin of epstein’ s def...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004310.jpg": "...ot!  g'that acosta’ ss! “breakfast meeting’  ‘anificant de...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004319.jpg": "...al fayorable to ene over breakfast with defense counsel .....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004413.jpg": "...orney lefkouitz meet for breakfast:  cel acosta, was: previ...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004414.jpg": "...tod two weeks after the ‘breakfast mecting, lefkouitz: repr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004415.jpg": "...t, immediately after the breakfast, acosta. phoned ‘sloman,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004476.jpg": "...li's october ‘l2, ‘2oo7 breakfast: meeting with ‘lefkouitz...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004484.jpg": "...of the october l2, 2oo7 breakfast. meeting that insel jay...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004485.jpg": "...ions continued after the breakfast mecting indicates that a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004486.jpg": "...ase.  ‘a said during the breakfast meeting. al ng d evidene...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004487.jpg": "...sta’s ‘october l'2,.2oo7 breakfast meeting: with lefkouitz,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004608.jpg": "...lishing:that.acosta’s:. “breakfast mectin of epstein’ s def...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006038.jpg": "...courthouse: cach, day:. breakfast,  snacks, and lunch will...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006315.jpg": "...e courthouse: cach. day. breakfast,  snacks, and. lunch wil...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010543.jpg": "...tein and the defendant’s breakfast: preferences, and. the ‘...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011738.jpg": "...earlier than eat.  and. breakfast. and the like 86 that we...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011763.jpg": "...for you, we'll have some breakfast atems and shacks. please...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012003.jpg": "...ive in time to grab some breakfast and get  ry!  (jury not...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012440.jpg": "...nstructions. for serving breakfast for mr. epstein  and ms....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012441.jpg": "...ld ‘you. need to prepare breakfast?  a. sometimes l needed...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014413.jpg": "...: what to sexve them for breakfast, hou to arrange heir des...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016183.jpg": "...earlier than eat.  and. breakfast. and the like 86 that we...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016208.jpg": "...for you, we'll have some breakfast atems and shacks. please...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017034.jpg": "...: what to sexve them for breakfast, hou to arrange heir des...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017593.jpg": "...ive in time to grab some breakfast and get  ry!  (jury not...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018028.jpg": "...nstructions. for serving breakfast for mr. epstein  and ms....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018029.jpg": "...ld ‘you. need to prepare breakfast?  a. sometimes l needed...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021195.jpg": "...orable-to: “epstein over breakfast with defense f. millafat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021289.jpg": "...rney. lefkouitz/meet for breakfast:  on.thesmorning afterhi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021291.jpg": "...’s description. of their breakfast meeting discu comer pe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021360.jpg": "...avocable to-epstein over breakfast-with deferise counsel  -...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021361.jpg": "...breakfast mostng sloman it in-j  a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021362.jpg": "...ates. \"fier the: october breakfast: meeting, sloman, and. v...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021919.jpg": "...walked up t6 dana  serve breakfast. kt  ivated in the shu....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023368.jpg": "...ated in order'to deliver breakfast to inmates through the f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023437.jpg": "...ating that a delivery of breakfast  carts had arrived at'th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023438.jpg": "...time he atempted to  ver breakfast to epstein atapproximate..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "breakfast" (48 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">2544-2544</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">3188-3188</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">3197-3197</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3291-3293</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">3354-3354</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">3362-3365</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3486-3486</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">4310-4310</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">4319-4319</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">4413-4415</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">4476-4476</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">4484-4487</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">4608-4608</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">6038-6038</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">6315-6315</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">10543-10543</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">11738-11738</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">11763-11763</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">12003-12003</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">12440-12441</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">14413-14413</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">16183-16183</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">16208-16208</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">17034-17034</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">17593-17593</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">18028-18029</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">21195-21195</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">21289-21291</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">21360-21362</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">21919-21919</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">23368-23368</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">23437-23438</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

@@ -1,0 +1,184 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "personality"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 3366, "end": 3366, "pages": [3366]}, {"start": 4488, "end": 4488, "pages": [4488]}, {"start": 6186, "end": 6190, "pages": [6186, 6188, 6189, 6190]}, {"start": 6209, "end": 6209, "pages": [6209]}, {"start": 6219, "end": 6219, "pages": [6219]}, {"start": 6233, "end": 6235, "pages": [6233, 6235]}, {"start": 6259, "end": 6263, "pages": [6259, 6261, 6262, 6263]}, {"start": 6280, "end": 6280, "pages": [6280]}, {"start": 7289, "end": 7289, "pages": [7289]}, {"start": 7500, "end": 7504, "pages": [7500, 7502, 7503, 7504]}, {"start": 7634, "end": 7634, "pages": [7634]}, {"start": 7680, "end": 7681, "pages": [7680, 7681]}, {"start": 7700, "end": 7701, "pages": [7700, 7701]}, {"start": 7979, "end": 7979, "pages": [7979]}, {"start": 8076, "end": 8080, "pages": [8076, 8078, 8079, 8080]}, {"start": 8139, "end": 8140, "pages": [8139, 8140]}, {"start": 8159, "end": 8160, "pages": [8159, 8160]}, {"start": 8179, "end": 8184, "pages": [8179, 8183, 8184]}, {"start": 8523, "end": 8523, "pages": [8523]}, {"start": 8608, "end": 8608, "pages": [8608]}, {"start": 8688, "end": 8688, "pages": [8688]}, {"start": 8774, "end": 8774, "pages": [8774]}, {"start": 10523, "end": 10523, "pages": [10523]}, {"start": 12048, "end": 12048, "pages": [12048]}, {"start": 13383, "end": 13383, "pages": [13383]}, {"start": 13527, "end": 13527, "pages": [13527]}, {"start": 14986, "end": 14986, "pages": [14986]}, {"start": 17637, "end": 17637, "pages": [17637]}, {"start": 18967, "end": 18967, "pages": [18967]}, {"start": 19111, "end": 19111, "pages": [19111]}];
+        const pageToPath = {"3366": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003366.jpg", "4488": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004488.jpg", "6186": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006186.jpg", "6188": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006188.jpg", "6189": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006189.jpg", "6190": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006190.jpg", "6209": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006209.jpg", "6219": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006219.jpg", "6233": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006233.jpg", "6235": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006235.jpg", "6259": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006259.jpg", "6261": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006261.jpg", "6262": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006262.jpg", "6263": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006263.jpg", "6280": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006280.jpg", "7289": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007289.jpg", "7500": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007500.jpg", "7502": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007502.jpg", "7503": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007503.jpg", "7504": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007504.jpg", "7634": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007634.jpg", "7680": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007680.jpg", "7681": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007681.jpg", "7700": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007700.jpg", "7701": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007701.jpg", "7979": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007979.jpg", "8076": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008076.jpg", "8078": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008078.jpg", "8079": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008079.jpg", "8080": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008080.jpg", "8139": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008139.jpg", "8140": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008140.jpg", "8159": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008159.jpg", "8160": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008160.jpg", "8179": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008179.jpg", "8183": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008183.jpg", "8184": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008184.jpg", "8523": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008523.jpg", "8608": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008608.jpg", "8688": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008688.jpg", "8774": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008774.jpg", "10523": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010523.jpg", "12048": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012048.jpg", "13383": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013383.jpg", "13527": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013527.jpg", "14986": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014986.jpg", "17637": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017637.jpg", "18967": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018967.jpg", "19111": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019111.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003366.jpg": "...ese emails reflected her personality and her conititmerit to;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004488.jpg": "...ese eiails flected hor + personality and er ‘sornimiten it o,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006186.jpg": "...s: flawed ‘by: enduring: personality traits familiar:to psych...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006188.jpg": "...gins  y disorder ls.  qt personality: disorder:  antisocial....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006189.jpg": "...rty for some  histrionic personality. disorders diagnos for h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006190.jpg": "...' spliting off oftmnemor personality identi yc  rtions. thus,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006209.jpg": "...tempt to flee given her ‘personality’ profile and, determinat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006219.jpg": "...ouer over t  “borderline personality.disorder™: *[a]n individ...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006233.jpg": "...rate <ircumstances and.  personality-traits, with:no shouing-...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006235.jpg": "...w  m  m, dissogiation,  personality: disorder, ‘histrior  an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006259.jpg": "...s: flawed ‘by: enduring: personality traits familiar:to psych...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006261.jpg": "...gins  y disorder ls.  qt personality: disorder:  antisocial....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006262.jpg": "...rty for some  histrionic personality. disorders diagnos for h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006263.jpg": "...' spliting off oftmnemor personality identi yc  rtions. thus,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006280.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007289.jpg": "...en specific research on  personality diserder and risk ge wig...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007500.jpg": "...s: flawed ‘by: enduring: personality traits familiar:to psych...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007502.jpg": "...gins  y disorder ls.  qt personality: disorder:  antisocial....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007503.jpg": "...rty for some  histrionic personality. disorders diagnos for h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007504.jpg": "...' spliting off oftmnemor personality identi yc  rtions. thus,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007634.jpg": "...(training video)  ress, personality disorder, and substance...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007680.jpg": "...erspectives on faking in personality assessment. ziegler m,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007681.jpg": "...nadaptive and adaptive.  personality: a feasibility study. sa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007700.jpg": "...omatoform disorders  9l. personality...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007701.jpg": "...97.  4.oo.  ‘gluster b personality disorders  cluster c per...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007979.jpg": "...en specific research on  personality diserder and risk ge wig...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008076.jpg": "...s: flawed ‘by: enduring: personality traits familiar:to psych...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008078.jpg": "...gins  y disorder ls.  qt personality: disorder:  antisocial....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008079.jpg": "...rty for some  histrionic personality. disorders diagnos for h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008080.jpg": "...' spliting off oftmnemor personality identi yc  rtions. thus,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008139.jpg": "...erspectives on faking in personality assessm  , erson: ment....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008140.jpg": "...nadaptive and adaptive.  personality: a feasibility study. sa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008159.jpg": "...omatoform disorders  9l. personality...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008160.jpg": "...97.  4.oo.  ‘gluster b personality disorders  cluster c per...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008179.jpg": "...derlinc,, and histrionic-personality disorders” that “alloued...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008183.jpg": "...im? from an, academic :  personality disorder, del notiee at....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008184.jpg": "...intoxication, or severe personality disorders. that cause ha...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008523.jpg": "...maxwell hhas.a, criminal personality or bad character. the! e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008608.jpg": ".... maxwell has a eriminal:personality: or bad:character. the e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008688.jpg": "...maxwell hhas.a, criminal personality or bad character. the! e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008774.jpg": "...maxwell hhas.a, criminal personality or bad character. the! e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010523.jpg": "...n t  [s. maxw il bas the personality chatacte:  4ndication. t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012048.jpg": "...has their 6wh individual personality and talent;  but all the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013383.jpg": "..., very energetic, great. personality.  q. what, lf£ dny, atee...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013527.jpg": "...y that she kad. a great  personality; rigk  qt  oqward, ghisl...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014986.jpg": "...“!  res  q. hou about a personality disorder?  a. i\"m sorry;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017637.jpg": "...has their 6wh individual personality and talent;  but all the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018967.jpg": "..., very energetic, great. personality.  q. what, lf£ dny, atee...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019111.jpg": "...y that she kad. a great  personality; rigk  qt  oqward, ghisl..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "personality" (49 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">3366-3366</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">4488-4488</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">6186-6190</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">6209-6209</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">6219-6219</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">6233-6235</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">6259-6263</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">6280-6280</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">7289-7289</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">7500-7504</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">7634-7634</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">7680-7681</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">7700-7701</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">7979-7979</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">8076-8080</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">8139-8140</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">8159-8160</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">8179-8184</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">8523-8523</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">8608-8608</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">8688-8688</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">8774-8774</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">10523-10523</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">12048-12048</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">13383-13383</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">13527-13527</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">14986-14986</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">17637-17637</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">18967-18967</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">19111-19111</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

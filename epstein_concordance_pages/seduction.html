@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "seduction"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 5637, "end": 5637, "pages": [5637]}, {"start": 5795, "end": 5795, "pages": [5795]}, {"start": 5889, "end": 5893, "pages": [5889, 5890, 5892, 5893]}, {"start": 5977, "end": 5977, "pages": [5977]}, {"start": 6215, "end": 6215, "pages": [6215]}, {"start": 6299, "end": 6303, "pages": [6299, 6300, 6302, 6303]}, {"start": 6599, "end": 6599, "pages": [6599]}, {"start": 6720, "end": 6720, "pages": [6720]}, {"start": 6814, "end": 6818, "pages": [6814, 6815, 6817, 6818]}, {"start": 6902, "end": 6902, "pages": [6902]}, {"start": 7236, "end": 7237, "pages": [7236, 7237]}, {"start": 7926, "end": 7927, "pages": [7926, 7927]}, {"start": 14933, "end": 14934, "pages": [14933, 14934]}];
+        const pageToPath = {"5637": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005637.jpg", "5795": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005795.jpg", "5889": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005889.jpg", "5890": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005890.jpg", "5892": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005892.jpg", "5893": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005893.jpg", "5977": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005977.jpg", "6215": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006215.jpg", "6299": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006299.jpg", "6300": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006300.jpg", "6302": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006302.jpg", "6303": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006303.jpg", "6599": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006599.jpg", "6720": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006720.jpg", "6814": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006814.jpg", "6815": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006815.jpg", "6817": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006817.jpg", "6818": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006818.jpg", "6902": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006902.jpg", "7236": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007236.jpg", "7237": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007237.jpg", "7926": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007926.jpg", "7927": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007927.jpg", "14933": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014933.jpg", "14934": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014934.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005637.jpg": "...s ‘what the “grooming or seduction ‘process: usually  out t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005795.jpg": "...ee ‘dietz, “grooming and seduction,” 33 j. o  testimon  i |...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005889.jpg": "...the history of the term “seduction” in the context: of chil...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005890.jpg": "...keywo. rds  grooming and seduction  in. ‘the dev, clepment...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005892.jpg": "....threatiot castration, a seduction, an actual.view-: 6 si¢s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005893.jpg": "...“as exposing: oneself  “seduction” :may: mean, different s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005977.jpg": "...tiolesters engage in a “seduction stage” aon cae’ a sen ao...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006215.jpg": "...etz,. 2. “grooming and. seduction” 83 i, interpersonal len...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006299.jpg": "...page.2 of:  grooming and seduction  journals: sagepubrcomio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006300.jpg": "...keywo. rds  grooming and seduction  in. ‘the dev, clepment...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006302.jpg": "....threatiot castration, a seduction, an actual.view-: 6 si¢s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006303.jpg": "...a “as exposing: oneself  seduction” may: mean,difterent, sp...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006599.jpg": "...s ‘what the “grooming or seduction ‘process: usually  out t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006720.jpg": "...ee ‘dietz, “grooming and seduction,” 33 j. o  testimon  i |...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006814.jpg": "...the history of the term “seduction” in the context: of chil...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006815.jpg": "...keywo. rds  grooming and seduction  in. ‘the dev, clepment...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006817.jpg": "....threatiot castration, a seduction, an actual.view-: 6 si¢s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006818.jpg": "...“as exposing: oneself  “seduction” :may: mean, different s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006902.jpg": "...tiolesters engage in a “seduction stage” aon cae’ a sen ao...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007236.jpg": "...ed, as well as the term, seduction, to describe: this commo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007237.jpg": "...the texms grooming and, seduction refer to a patern of beh...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007926.jpg": "...ed, as well as the term, seduction, to describe: this commo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007927.jpg": "...the texms grooming and, seduction refer to a patern of beh...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014933.jpg": "...sed, as well as the term seduction; to deseibe this cdimonl...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014934.jpg": "...t the terms grooming and seduction wefer to a patern, of be..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "seduction" (25 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">5637-5637</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">5795-5795</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">5889-5893</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">5977-5977</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">6215-6215</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">6299-6303</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">6599-6599</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">6720-6720</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">6814-6818</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">6902-6902</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">7236-7237</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">7926-7927</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">14933-14934</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

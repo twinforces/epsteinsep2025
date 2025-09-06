@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "undergraduate"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 7187, "end": 7187, "pages": [7187]}, {"start": 7320, "end": 7320, "pages": [7320]}, {"start": 7833, "end": 7833, "pages": [7833]}, {"start": 7849, "end": 7849, "pages": [7849]}, {"start": 7877, "end": 7877, "pages": [7877]}, {"start": 8010, "end": 8010, "pages": [8010]}, {"start": 12367, "end": 12367, "pages": [12367]}, {"start": 12380, "end": 12381, "pages": [12380, 12381]}, {"start": 14884, "end": 14884, "pages": [14884]}, {"start": 15017, "end": 15017, "pages": [15017]}, {"start": 17955, "end": 17955, "pages": [17955]}, {"start": 17968, "end": 17969, "pages": [17968, 17969]}, {"start": 21620, "end": 21620, "pages": [21620]}];
+        const pageToPath = {"7187": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007187.jpg", "7320": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007320.jpg", "7833": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007833.jpg", "7849": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007849.jpg", "7877": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007877.jpg", "8010": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008010.jpg", "12367": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012367.jpg", "12380": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012380.jpg", "12381": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012381.jpg", "14884": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014884.jpg", "15017": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015017.jpg", "17955": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017955.jpg", "17968": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017968.jpg", "17969": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017969.jpg", "21620": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021620.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007187.jpg": "...d., did, you receive an, undergraduate  degree?  a. ie have a2...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007320.jpg": "...ere were a total of 393  undergraduate students who were provid...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007833.jpg": "...appointments - honors:  undergraduate degree.  graduated in ma...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007849.jpg": "...d death investigation to undergraduate and.@ oraduate studenis...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007877.jpg": "...d., did, you receive an, undergraduate  degree?  a. ie have a2...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008010.jpg": "...ere were a total of 393  undergraduate students who were provid...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012367.jpg": "...ctually, there weere 395 undergraduate studenits at johh jay:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012380.jpg": "...providing ‘these to 393 undergraduate students?  @. and the si...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012381.jpg": "...given toe these 393  l  undergraduate students to weview, corb...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014884.jpg": "...h.d., did you receive an undergraduate degree? a. i have a bach...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015017.jpg": "...ng professionals a list, undergraduate students a list ef poten...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017955.jpg": "...ctually, there weere 395 undergraduate studenits at johh jay:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017968.jpg": "...providing ‘these to 393 undergraduate students?  @. and the si...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017969.jpg": "...given toe these 393  l  undergraduate students to weview, corb...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021620.jpg": "...not. ao  so without. my undergraduate degree, so i declined it..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "undergraduate" (15 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">7187-7187</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">7320-7320</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">7833-7833</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">7849-7849</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">7877-7877</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">8010-8010</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">12367-12367</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">12380-12381</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">14884-14884</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">15017-15017</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">17955-17955</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">17968-17969</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">21620-21620</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

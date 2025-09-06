@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "commonwealth"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 360, "end": 364, "pages": [360, 364]}, {"start": 386, "end": 386, "pages": [386]}, {"start": 569, "end": 569, "pages": [569]}, {"start": 1130, "end": 1130, "pages": [1130]}, {"start": 2006, "end": 2006, "pages": [2006]}, {"start": 2114, "end": 2114, "pages": [2114]}, {"start": 4815, "end": 4815, "pages": [4815]}, {"start": 4823, "end": 4824, "pages": [4823, 4824]}, {"start": 4831, "end": 4872, "pages": [4831, 4832, 4836, 4837, 4839, 4840, 4842, 4843, 4844, 4848, 4849, 4850, 4851, 4852, 4853, 4854, 4855, 4857, 4858, 4860, 4861, 4863, 4864, 4865, 4866, 4867, 4868, 4869, 4871, 4872]}, {"start": 4878, "end": 4892, "pages": [4878, 4880, 4883, 4884, 4885, 4886, 4887, 4888, 4889, 4891, 4892]}, {"start": 7402, "end": 7402, "pages": [7402]}, {"start": 7570, "end": 7573, "pages": [7570, 7571, 7573]}, {"start": 7582, "end": 7582, "pages": [7582]}, {"start": 9117, "end": 9117, "pages": [9117]}];
+        const pageToPath = {"360": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000360.jpg", "364": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000364.jpg", "386": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000386.jpg", "569": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000569.jpg", "1130": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001130.jpg", "2006": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002006.jpg", "2114": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002114.jpg", "4815": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004815.jpg", "4823": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004823.jpg", "4824": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004824.jpg", "4831": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004831.jpg", "4832": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004832.jpg", "4836": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004836.jpg", "4837": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004837.jpg", "4839": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004839.jpg", "4840": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004840.jpg", "4842": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004842.jpg", "4843": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004843.jpg", "4844": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004844.jpg", "4848": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004848.jpg", "4849": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004849.jpg", "4850": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004850.jpg", "4851": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004851.jpg", "4852": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004852.jpg", "4853": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004853.jpg", "4854": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004854.jpg", "4855": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004855.jpg", "4857": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004857.jpg", "4858": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004858.jpg", "4860": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004860.jpg", "4861": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004861.jpg", "4863": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004863.jpg", "4864": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004864.jpg", "4865": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004865.jpg", "4866": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004866.jpg", "4867": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004867.jpg", "4868": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004868.jpg", "4869": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004869.jpg", "4871": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004871.jpg", "4872": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004872.jpg", "4878": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004878.jpg", "4880": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004880.jpg", "4883": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004883.jpg", "4884": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004884.jpg", "4885": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004885.jpg", "4886": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004886.jpg", "4887": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004887.jpg", "4888": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004888.jpg", "4889": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004889.jpg", "4891": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004891.jpg", "4892": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004892.jpg", "7402": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007402.jpg", "7570": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007570.jpg", "7571": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007571.jpg", "7573": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007573.jpg", "7582": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007582.jpg", "9117": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009117.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000360.jpg": "...nding of the bar, of the commonwealth,  of massachusets. and h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000364.jpg": "...nding of the bar, of the commonwealth,  of massachusets. and h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000386.jpg": "...tanding ofthe ‘bar ofthe commonwealth  “weinberg, .  2o8 park...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000569.jpg": "...ast an my state, the  i  commonwealth, of massachusets, there'...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001130.jpg": "...xpert'consultant to the: commonwealth:secretariat on‘ internat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002006.jpg": "...xpert consiltant'to, the commonwealth secretariat on internati...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002114.jpg": "...expert consultant to the commonwealth,  independent review‘of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004815.jpg": "...stor decided ‘that ‘the ‘commonwealth would. decline to prosec...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004823.jpg": "...used against:him by the commonwealth., mr. castor would later...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004824.jpg": "...king it as the sovereign commonwealth of pennsylvania.and, in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004831.jpg": "...ed, | was “s off’ on the commonwealth not bei ng able to.use a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004832.jpg": "...pacity on behalf of the ‘commonwealth—that cosby would not be...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004836.jpg": ".... “that was: for us (the commonwealth)to promise not to prosec...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004837.jpg": "...sed with anyone from the commonwealth or anyone representing [...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004839.jpg": "...that his] binding of the commonwealth not to  phresecte cosby...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004840.jpg": "...n promised cosbythat the commonwealth  would not prosecute him...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004842.jpg": "...legal basis to:estop the commonwealth from prosecuting cosby....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004843.jpg": "...stitutio!  l% later, the commonwealth  would introduce portion...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004844.jpg": "...f’ the second trial, the commonwealth filed a motion seeking t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004848.jpg": "...).  7 id. at 97 (quoting commonwealth v. tyson, ll9 a.3d 353,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004849.jpg": "...saylor’s concurrence in commonwealth v.  “theory of‘ logical...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004850.jpg": "...at has  id.at 98 (citing commonwealth vv. luktisch, 68o a.2d 8...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004851.jpg": "...een witnesses, that the: commonwealth requested. /d: the court...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004852.jpg": "...ntence in all  respects. commonwealth v. eespy, 224 a.3d:372 (...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004853.jpg": "...ses.  before ‘trial, the commonwealth sought to introduce evid...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004854.jpg": "....” jd. at:  4o5 (quoting commonwealth v.. shively, 424 a.2d l2...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004855.jpg": "...ed offense. jd. (quoting commonwealth v.. aikens; 99o a:2d ll8...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004857.jpg": "...legally binding in this commonwealth.” id:  the superior cour...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004858.jpg": "...nvestigation. thus, the ‘commonwealth argued, and the superior...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004860.jpg": "...l deposition testimony?  commonwealth v: cosby; 236 a:3d lo45...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004861.jpg": "...ing bodies. o’rourke v.  commonwealth, 778 a.2d ll94, ll99 (pa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004863.jpg": "...secute cosby’to bind the commonwealth permanently, provided no...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004864.jpg": "...forever  hand, the rece  commonwealth from prosecuting cosby i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004865.jpg": "...stem. as we explained in commonwealth v.. clancy, l92 a.3d 44...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004866.jpg": "...fundamental fairness: in commonwealth v. zuber; 353.a.2d 44l (...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004867.jpg": "...fic promise made by ‘the commonwealth,” which ultimately turne...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004868.jpg": "...arid by this court. see commonwealth v: martinez, l47  a.83d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004869.jpg": "...iting santobello, zuber, commonwealth v. hainesworth,  82: a:3...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004871.jpg": "...ns of due process., see: commonwealth v: sims, 9l9 a.2d'93l,,9...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004872.jpg": "...‘fair play and decency.” commonwealth v. kratsas, 764.a.2d  2o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004878.jpg": "...pt of ordered liberty in commonwealth v. taylor, 23o a:3d lo5o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004880.jpg": "...84 u.s. 436, 473 (l966); commonwealth v. dulaney, 295 a.2d 328...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004883.jpg": "...and as suggested by the commonwealth, then reasonableness. wo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004884.jpg": "...ecision on behalf of the commonwealth, district atorney. casto...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004885.jpg": "...d executed plea bargain. commonwealth v. spence, 627 a.2d ll76...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004886.jpg": "...relied. upon the offer); commonwealth v. mcsorley, 485 a.2d l5...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004887.jpg": "...ce purported to bind the commonwealth in a non-prosecution  se...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004888.jpg": "...ances would permit: the ‘commonwealth to extract: incriminatin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004889.jpg": "...ffered by cosby to the  ‘commonwealth’s. use of the deposition...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004891.jpg": "...cutions on behalf of the commonwealth, and to decide whether a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004892.jpg": "...discretion vested in our commonwealth’s prosecutors, houever v...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007402.jpg": "...: that: bears:  distict, commonwealth, tetitory, « or: insula...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007570.jpg": "...county, massachusets, in commonwealth v. john salvi  wpe nice...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007571.jpg": "...county, pennsylvania, in commonwealth v..  john dupont (murder...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007573.jpg": "...am ‘county, virginia, in commonwealth of virginia, v. john all...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007582.jpg": "...fied at trial, l2/l8/96  commonwealth of pa v. john dupont (me...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009117.jpg": "...nvietions. see  ward. v. commonwealth  997) (feversitg convict..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "commonwealth" (57 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">360-364</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">386-386</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">569-569</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">1130-1130</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">2006-2006</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">2114-2114</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">4815-4815</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">4823-4824</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">4831-4872</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">4878-4892</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">7402-7402</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">7570-7573</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">7582-7582</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">9117-9117</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

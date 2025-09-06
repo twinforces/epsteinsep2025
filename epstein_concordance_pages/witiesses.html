@@ -1,0 +1,238 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "witiesses"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 768, "end": 768, "pages": [768]}, {"start": 1666, "end": 1666, "pages": [1666]}, {"start": 1702, "end": 1702, "pages": [1702]}, {"start": 1788, "end": 1788, "pages": [1788]}, {"start": 1797, "end": 1797, "pages": [1797]}, {"start": 2698, "end": 2699, "pages": [2698, 2699]}, {"start": 2709, "end": 2709, "pages": [2709]}, {"start": 2926, "end": 2926, "pages": [2926]}, {"start": 2970, "end": 2970, "pages": [2970]}, {"start": 3945, "end": 3945, "pages": [3945]}, {"start": 3972, "end": 3972, "pages": [3972]}, {"start": 3994, "end": 3994, "pages": [3994]}, {"start": 4258, "end": 4258, "pages": [4258]}, {"start": 4724, "end": 4724, "pages": [4724]}, {"start": 5430, "end": 5430, "pages": [5430]}, {"start": 5483, "end": 5483, "pages": [5483]}, {"start": 5506, "end": 5506, "pages": [5506]}, {"start": 5751, "end": 5751, "pages": [5751]}, {"start": 5858, "end": 5858, "pages": [5858]}, {"start": 5996, "end": 6000, "pages": [5996, 6000]}, {"start": 6348, "end": 6348, "pages": [6348]}, {"start": 6397, "end": 6397, "pages": [6397]}, {"start": 6468, "end": 6468, "pages": [6468]}, {"start": 6688, "end": 6688, "pages": [6688]}, {"start": 6921, "end": 6925, "pages": [6921, 6925]}, {"start": 6951, "end": 6951, "pages": [6951]}, {"start": 7454, "end": 7454, "pages": [7454]}, {"start": 8188, "end": 8188, "pages": [8188]}, {"start": 8357, "end": 8357, "pages": [8357]}, {"start": 8463, "end": 8463, "pages": [8463]}, {"start": 8627, "end": 8627, "pages": [8627]}, {"start": 8713, "end": 8713, "pages": [8713]}, {"start": 9600, "end": 9601, "pages": [9600, 9601]}, {"start": 10285, "end": 10285, "pages": [10285]}, {"start": 10408, "end": 10408, "pages": [10408]}, {"start": 10747, "end": 10747, "pages": [10747]}, {"start": 11320, "end": 11320, "pages": [11320]}, {"start": 11343, "end": 11343, "pages": [11343]}, {"start": 12769, "end": 12769, "pages": [12769]}, {"start": 14097, "end": 14097, "pages": [14097]}, {"start": 14434, "end": 14434, "pages": [14434]}, {"start": 15162, "end": 15162, "pages": [15162]}, {"start": 16721, "end": 16721, "pages": [16721]}, {"start": 17055, "end": 17055, "pages": [17055]}, {"start": 18355, "end": 18355, "pages": [18355]}, {"start": 19517, "end": 19517, "pages": [19517]}, {"start": 19546, "end": 19546, "pages": [19546]}, {"start": 21999, "end": 21999, "pages": [21999]}];
+        const pageToPath = {"768": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000768.jpg", "1666": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001666.jpg", "1702": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001702.jpg", "1788": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001788.jpg", "1797": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001797.jpg", "2698": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002698.jpg", "2699": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002699.jpg", "2709": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002709.jpg", "2926": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002926.jpg", "2970": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002970.jpg", "3945": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003945.jpg", "3972": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003972.jpg", "3994": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003994.jpg", "4258": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004258.jpg", "4724": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004724.jpg", "5430": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005430.jpg", "5483": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005483.jpg", "5506": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005506.jpg", "5751": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005751.jpg", "5858": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005858.jpg", "5996": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005996.jpg", "6000": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006000.jpg", "6348": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006348.jpg", "6397": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006397.jpg", "6468": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006468.jpg", "6688": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006688.jpg", "6921": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006921.jpg", "6925": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006925.jpg", "6951": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006951.jpg", "7454": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007454.jpg", "8188": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008188.jpg", "8357": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008357.jpg", "8463": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008463.jpg", "8627": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008627.jpg", "8713": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008713.jpg", "9600": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009600.jpg", "9601": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009601.jpg", "10285": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010285.jpg", "10408": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010408.jpg", "10747": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010747.jpg", "11320": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011320.jpg", "11343": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011343.jpg", "12769": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012769.jpg", "14097": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014097.jpg", "14434": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014434.jpg", "15162": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015162.jpg", "16721": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016721.jpg", "17055": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017055.jpg", "18355": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018355.jpg", "19517": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019517.jpg", "19546": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019546.jpg", "21999": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021999.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000768.jpg": "...ts, of the:  b. whether ‘witiesses to the grand jury: trans...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001666.jpg": "...er “by m ma  l ident fy. witiesses who have +lo : ide tific...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001702.jpg": "...erence alleged wictis of witiesses who have spoketi on the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001788.jpg": "...pcachmicnt riatetial for witiesses it’ expects to call at....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001797.jpg": "...evidence front nurierous;witiesses wlio have fever asseted...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002698.jpg": "...the idefitities, of the-witiesses wio have accused, ms., m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002699.jpg": "...not: identify:  relevant witiesses or docuinerits. that she...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002709.jpg": "...init  aches prosecition witiesses. jd. at 674,  trickler v...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002926.jpg": "...related t  226 separate. witiesses whoni the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002970.jpg": "...e usao-sdel ititerviewed witiesses i, other  states—ineludi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003945.jpg": "...eries will. cornice from witiesses atid. exhibits that  thi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003972.jpg": "...im 2 and potential trial witiesses virginia gitffre and mar...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003994.jpg": "...stigation, or pereipient witiesses., there are two good tea...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004258.jpg": "...— e 6 ws  ‘fisk to these witiesses.. any privacy conccifis...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004724.jpg": "...eath ofecrtain potential witiesses; failing memories, or lo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005430.jpg": "...eir truth. for: exaiple, witiesses will testify abotit mino...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005483.jpg": "...e dentities sey various: witiesses; re | vine ss he fs mad...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005506.jpg": "...|_| ie says that “other witiesses are expected to-testify...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005751.jpg": "...beeatise law ciforcemcnt witiesses often. offer  ruthfulnes...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005858.jpg": "...t intends. to  call live witiesses to establish the authent...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005996.jpg": "...t wants to call them a8. witiesses. resp. at 83 24.  citing...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006000.jpg": "...position that the court, witiesses, atid parties, sh  than:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006348.jpg": "...from  yr  specific fact witiesses. nimeelj, 4l4 f.3d at 39...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006397.jpg": "...eir truth. for: exaiple, witiesses will testify abotit mino...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006468.jpg": "...|_| ie says that “other witiesses are expected to-testify...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006688.jpg": "...beeatise law ciforcemcnt witiesses often. offer  ruthfulnes...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006921.jpg": "...t wants to call them a8. witiesses. resp. at 83 24.  citing...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006925.jpg": "...position that the court, witiesses, atid parties, sh  than:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006951.jpg": "...exaet likeness of those witiesses could be drawn and subse...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007454.jpg": "...sist of the testimony of witiesses.as. well as documents an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008188.jpg": "...ross-  cxamitiation. ask witiesses about activities. or eve...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008357.jpg": "...ati. 6rder of the first. witiesses”” tr..2276. ‘the cout or...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008463.jpg": "...that questions  put to: witiesses, although they can, prov...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008627.jpg": "...that questions  put to: witiesses, although they can, prov...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008713.jpg": "...that questions  put to: witiesses, although they can, prov...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009600.jpg": "...adiee 2: as to; {hese w: witiesses, fin ‘din ng s that ihe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009601.jpg": "...:v. scala, 388 fe.  that witiesses, “if alive, would give t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010285.jpg": "...the l99o8 aid oic of the witiesses testified. dbout ‘conduc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010408.jpg": "...estimony of those listed witiesses who were not.called, cou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010747.jpg": "...rests here belong to the witiesses theniselves, none of who...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011320.jpg": "...nd two. other govermerit witiesses (mat aid  tms. maxwell m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011343.jpg": "...that three ofthe defense witiesses, which we have separatel...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012769.jpg": "..., i\"ve certainly see6eh, witiesses pestify with ‘their  ato...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014097.jpg": "...we thought we would have witiesses.  lon  so who refiaids i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014434.jpg": "...well did. with the other witiesses at this trial, and the l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015162.jpg": "...testimony by firsthatid witiesses to cverits of obvious pu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016721.jpg": "...we thought we would have witiesses.  lon  so who refiaids i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017055.jpg": "...well did. with the other witiesses at this trial, and the l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018355.jpg": "..., i\"ve certainly see6eh, witiesses pestify with ‘their  ato...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019517.jpg": "...a “benefit”  l ident fy. witiesses who have +lo : identific...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019546.jpg": "...erence alleged wictis of witiesses who have spoketi on the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021999.jpg": "...the teed ‘to, interview witiesses,, as noted above, the go..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "witiesses" (52 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">768-768</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1666-1666</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1702-1702</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">1788-1788</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">1797-1797</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">2698-2699</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">2709-2709</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">2926-2926</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">2970-2970</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">3945-3945</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">3972-3972</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">3994-3994</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">4258-4258</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">4724-4724</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">5430-5430</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">5483-5483</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">5506-5506</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">5751-5751</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">5858-5858</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">5996-6000</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">6348-6348</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">6397-6397</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">6468-6468</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">6688-6688</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">6921-6925</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">6951-6951</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">7454-7454</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">8188-8188</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">8357-8357</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">8463-8463</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">8627-8627</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">8713-8713</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">9600-9601</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">10285-10285</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">10408-10408</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">10747-10747</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">11320-11320</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">11343-11343</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">12769-12769</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">14097-14097</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">14434-14434</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">15162-15162</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">16721-16721</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">17055-17055</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">18355-18355</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(45, 0); return false;">19517-19517</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(46, 0); return false;">19546-19546</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(47, 0); return false;">21999-21999</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

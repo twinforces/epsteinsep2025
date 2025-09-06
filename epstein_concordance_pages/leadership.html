@@ -1,0 +1,205 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "leadership"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 24, "end": 26, "pages": [24, 25, 26]}, {"start": 1007, "end": 1007, "pages": [1007]}, {"start": 1880, "end": 1880, "pages": [1880]}, {"start": 3349, "end": 3349, "pages": [3349]}, {"start": 4471, "end": 4471, "pages": [4471]}, {"start": 5656, "end": 5656, "pages": [5656]}, {"start": 6618, "end": 6618, "pages": [6618]}, {"start": 7203, "end": 7205, "pages": [7203, 7205]}, {"start": 7256, "end": 7256, "pages": [7256]}, {"start": 7649, "end": 7650, "pages": [7649, 7650]}, {"start": 7691, "end": 7695, "pages": [7691, 7695]}, {"start": 7893, "end": 7895, "pages": [7893, 7895]}, {"start": 7946, "end": 7946, "pages": [7946]}, {"start": 8150, "end": 8154, "pages": [8150, 8154]}, {"start": 10560, "end": 10565, "pages": [10560, 10565]}, {"start": 11546, "end": 11552, "pages": [11546, 11548, 11549, 11550, 11552]}, {"start": 11561, "end": 11561, "pages": [11561]}, {"start": 12319, "end": 12319, "pages": [12319]}, {"start": 14774, "end": 14780, "pages": [14774, 14776, 14777, 14778, 14780]}, {"start": 14789, "end": 14789, "pages": [14789]}, {"start": 14874, "end": 14875, "pages": [14874, 14875]}, {"start": 14900, "end": 14902, "pages": [14900, 14901, 14902]}, {"start": 14953, "end": 14953, "pages": [14953]}, {"start": 17907, "end": 17907, "pages": [17907]}, {"start": 19925, "end": 19925, "pages": [19925]}, {"start": 21032, "end": 21034, "pages": [21032, 21034]}, {"start": 21042, "end": 21043, "pages": [21042, 21043]}, {"start": 21572, "end": 21578, "pages": [21572, 21575, 21578]}, {"start": 21586, "end": 21586, "pages": [21586]}, {"start": 21736, "end": 21736, "pages": [21736]}, {"start": 21774, "end": 21774, "pages": [21774]}, {"start": 21817, "end": 21819, "pages": [21817, 21818, 21819]}, {"start": 21870, "end": 21872, "pages": [21870, 21871, 21872]}, {"start": 21900, "end": 21902, "pages": [21900, 21901, 21902]}, {"start": 22034, "end": 22036, "pages": [22034, 22036]}, {"start": 22105, "end": 22105, "pages": [22105]}, {"start": 23490, "end": 23492, "pages": [23490, 23492]}];
+        const pageToPath = {"24": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000024.jpg", "25": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000025.jpg", "26": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000026.jpg", "1007": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001007.jpg", "1880": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001880.jpg", "3349": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003349.jpg", "4471": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004471.jpg", "5656": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005656.jpg", "6618": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006618.jpg", "7203": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007203.jpg", "7205": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007205.jpg", "7256": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007256.jpg", "7649": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007649.jpg", "7650": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007650.jpg", "7691": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007691.jpg", "7695": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007695.jpg", "7893": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007893.jpg", "7895": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007895.jpg", "7946": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007946.jpg", "8150": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008150.jpg", "8154": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008154.jpg", "10560": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010560.jpg", "10565": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010565.jpg", "11546": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011546.jpg", "11548": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011548.jpg", "11549": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011549.jpg", "11550": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011550.jpg", "11552": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011552.jpg", "11561": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011561.jpg", "12319": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012319.jpg", "14774": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014774.jpg", "14776": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014776.jpg", "14777": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014777.jpg", "14778": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014778.jpg", "14780": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014780.jpg", "14789": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014789.jpg", "14874": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014874.jpg", "14875": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014875.jpg", "14900": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014900.jpg", "14901": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014901.jpg", "14902": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014902.jpg", "14953": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014953.jpg", "17907": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017907.jpg", "19925": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019925.jpg", "21032": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021032.jpg", "21034": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021034.jpg", "21042": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021042.jpg", "21043": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021043.jpg", "21572": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021572.jpg", "21575": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021575.jpg", "21578": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021578.jpg", "21586": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021586.jpg", "21736": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021736.jpg", "21774": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021774.jpg", "21817": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021817.jpg", "21818": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021818.jpg", "21819": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021819.jpg", "21870": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021870.jpg", "21871": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021871.jpg", "21872": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021872.jpg", "21900": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021900.jpg", "21901": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021901.jpg", "21902": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021902.jpg", "22034": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022034.jpg", "22036": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022036.jpg", "22105": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022105.jpg", "23490": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023490.jpg", "23492": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023492.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000024.jpg": "...ourterred. in applying a leadership  sentencing enhancement...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000025.jpg": "...espect to the four-level leadership enhancement, the di. cou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000026.jpg": "...not err in applying the  leadership enhancement.  with respe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001007.jpg": "...uld assume the executive leadership of the offtice...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001880.jpg": "...uld assume the executive leadership of the office...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003349.jpg": "...on addressed ‘under his: leadership, and which. influenced h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004471.jpg": "...sion addressed under his leadership, and which. influenced h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005656.jpg": "...onal: train  2olo-2ol2: ‘leadership institute for women,in p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006618.jpg": "...onal: train  2olo-2ol2: ‘leadership institute for women.in p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007203.jpg": "...old?  q. what ane those leadership positions that you  a. d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007205.jpg": "...q. have yeu sserved in a leadership position. with other pro...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007256.jpg": "...knou that they end up in leadership  re6les in various kinds...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007649.jpg": "...allstate, 2-day senior leadership team training, chicago,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007650.jpg": "...nw nel  allstate; senior leadership training, chicago; il, d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007691.jpg": "...sheriff's office senior leadership team, orlando, fl, novem...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007695.jpg": "...da psychiatric society's leadership conference, jensen beach...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007893.jpg": "...old?  q. what ane those leadership positions that you  a. d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007895.jpg": "...q. have yeu sserved in a leadership position. with other pro...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007946.jpg": "...knou that they end up in leadership  re6les in various kinds...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008150.jpg": "...sheriff's office senior leadership team, orlando, fl, novem...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008154.jpg": "...da psychiatric society's leadership conference, jensen beach...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010560.jpg": "...e ata  b. the four-point leadership enhancement applies:  §3...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010565.jpg": "...in ‘the schenic. for the leadership ‘enhaneement‘to apply, t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011546.jpg": "...ve a question about the  leadership enhancement, as i said,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011548.jpg": "...offense over whom ms. |  leadership: role, ms; moe: yes; y6u...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011549.jpg": "...len.  ehe gourt: and the leadership over her as apposed to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011550.jpg": "...ld report, that  she has leadership. of that person; that sh...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011552.jpg": "...prewide @ basas for that leadership enhancement.  the gourt:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011561.jpg": "...e defendant retained her leadership  position, as evideneed...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012319.jpg": "...9  to: o <  6u hold ary leadership positions for those  a....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014774.jpg": "...ve a question about the  leadership enhancement, as i said,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014776.jpg": "...offense over whom ms. |  leadership: role, ms; moe: yes; y6u...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014777.jpg": "...len.  ehe gourt: and the leadership over her as apposed to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014778.jpg": "...ld report, that  she has leadership. of that person; that sh...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014780.jpg": "...prewide @ basas for that leadership enhancement.  the gourt:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014789.jpg": "...e defendant retained her leadership  position, as evideneed...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014874.jpg": "...espect to the four-level leadership enhancement, the di. cou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014875.jpg": "...not err in applying the  leadership enhancement.  with respe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014900.jpg": "...4  @. do ‘you held any leadership positions with those org...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014901.jpg": "...eve those are my current leadership reles. ive  held others...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014902.jpg": "...@. have you served in a leadership position with other prof...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014953.jpg": "...knou that they end up in leadership roles; in various kinds...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017907.jpg": "...9  to: o <  6u hold ary leadership positions for those  a....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019925.jpg": "...uld assume the executive leadership of the offtice...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021032.jpg": "...o  de would gudliaty for leadership. the, court: and there\"s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021034.jpg": "...provide a basis for that leadership enhancement.  the court:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021042.jpg": "...offense levels  £6% her leadership nole in a ¢eriminal acti...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021043.jpg": "...e defendant retained her leadership  pesitien, as evidenced...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021572.jpg": "...guidelines must. apply.  leadership enhancement, as i said,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021575.jpg": "...en..  the court: ang the leadership over her as opposed to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021578.jpg": "...prouide aibasas for that leadership enhancement .  the court...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021586.jpg": "...the application  for her leadership tole in a cramindl activ...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021736.jpg": "...ap- plying a four-level leadership enhancement under  § 3bl...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021774.jpg": "...on to apply a four-level leadership enhancement under sectio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021817.jpg": "...ourterred. in applying a leadership  sentencing enhancement...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021818.jpg": "...espect to the four-level leadership enhancement, the di. cou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021819.jpg": "...not err in applying the  leadership enhancement.  with respe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021870.jpg": "...ourterred. in applying a leadership  sentencing enhancement...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021871.jpg": "...espect to the four-level leadership enhancement, the di. cou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021872.jpg": "...not err in applying the  leadership enhancement.  with respe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021900.jpg": "...ourterred. in applying a leadership  sentencing enhancement...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021901.jpg": "...espect to the four-level leadership enhancement, the di. cou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021902.jpg": "...not err in applying the  leadership enhancement.  with respe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022034.jpg": "...d acquiescence  by. the: leadership of the bop;,3) made as a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022036.jpg": "...nd acquiescence  by the: leadership of the bop; and 3) is th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022105.jpg": "...ional facilities, or bop leadership’s tolerance: of such-pra...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023490.jpg": "...ats steter  do} .and bop leadership to address the chronic p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023492.jpg": "...e need for do} a and bop leadership:to address'them...."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "leadership" (68 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">24-26</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1007-1007</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1880-1880</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3349-3349</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">4471-4471</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">5656-5656</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">6618-6618</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">7203-7205</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">7256-7256</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">7649-7650</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">7691-7695</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">7893-7895</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">7946-7946</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">8150-8154</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">10560-10565</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">11546-11552</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">11561-11561</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">12319-12319</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">14774-14780</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">14789-14789</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">14874-14875</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">14900-14902</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">14953-14953</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">17907-17907</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">19925-19925</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">21032-21034</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">21042-21043</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">21572-21578</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">21586-21586</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">21736-21736</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">21774-21774</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">21817-21819</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">21870-21872</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">21900-21902</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">22034-22036</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">22105-22105</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">23490-23492</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

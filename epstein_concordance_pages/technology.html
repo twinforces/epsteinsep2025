@@ -1,0 +1,178 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "technology"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1007, "end": 1013, "pages": [1007, 1009, 1013]}, {"start": 1520, "end": 1520, "pages": [1520]}, {"start": 1880, "end": 1886, "pages": [1880, 1882, 1886]}, {"start": 4794, "end": 4794, "pages": [4794]}, {"start": 6192, "end": 6192, "pages": [6192]}, {"start": 6265, "end": 6265, "pages": [6265]}, {"start": 7506, "end": 7506, "pages": [7506]}, {"start": 7603, "end": 7603, "pages": [7603]}, {"start": 7627, "end": 7627, "pages": [7627]}, {"start": 7646, "end": 7646, "pages": [7646]}, {"start": 7691, "end": 7692, "pages": [7691, 7692]}, {"start": 7838, "end": 7838, "pages": [7838]}, {"start": 7850, "end": 7854, "pages": [7850, 7854]}, {"start": 7868, "end": 7868, "pages": [7868]}, {"start": 8082, "end": 8082, "pages": [8082]}, {"start": 8150, "end": 8151, "pages": [8150, 8151]}, {"start": 10494, "end": 10497, "pages": [10494, 10497]}, {"start": 10693, "end": 10693, "pages": [10693]}, {"start": 12682, "end": 12682, "pages": [12682]}, {"start": 13894, "end": 13894, "pages": [13894]}, {"start": 14004, "end": 14004, "pages": [14004]}, {"start": 16518, "end": 16518, "pages": [16518]}, {"start": 16628, "end": 16628, "pages": [16628]}, {"start": 18269, "end": 18269, "pages": [18269]}, {"start": 19193, "end": 19193, "pages": [19193]}, {"start": 19223, "end": 19223, "pages": [19223]}, {"start": 19925, "end": 19931, "pages": [19925, 19927, 19931]}, {"start": 22133, "end": 22134, "pages": [22133, 22134]}];
+        const pageToPath = {"1007": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001007.jpg", "1009": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001009.jpg", "1013": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001013.jpg", "1520": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001520.jpg", "1880": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001880.jpg", "1882": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001882.jpg", "1886": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001886.jpg", "4794": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004794.jpg", "6192": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006192.jpg", "6265": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006265.jpg", "7506": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007506.jpg", "7603": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007603.jpg", "7627": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007627.jpg", "7646": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007646.jpg", "7691": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007691.jpg", "7692": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007692.jpg", "7838": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007838.jpg", "7850": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007850.jpg", "7854": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007854.jpg", "7868": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007868.jpg", "8082": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008082.jpg", "8150": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008150.jpg", "8151": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008151.jpg", "10494": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010494.jpg", "10497": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010497.jpg", "10693": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010693.jpg", "12682": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012682.jpg", "13894": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013894.jpg", "14004": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014004.jpg", "16518": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016518.jpg", "16628": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016628.jpg", "18269": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018269.jpg", "19193": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019193.jpg", "19223": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019223.jpg", "19925": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019925.jpg", "19927": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019927.jpg", "19931": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019931.jpg", "22133": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022133.jpg", "22134": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022134.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001007.jpg": "...fficulty with any of the technology, you can. let semeone th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001009.jpg": "...ay difficuley  with the technology, please let me knou righ...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001013.jpg": "...y, given, the safety and technology limitations,  there ave...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001520.jpg": "...tions of videoconference technology, public and media access...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001880.jpg": "...tfieulty with any of the technology, you can. let semeone th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001882.jpg": "...ay difficulty  with the technology, please let me knou righ...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001886.jpg": "...y, given, the safety and technology limitatsons,  ba  i  the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004794.jpg": "...e :garpenter  ‘where new technology: has ‘alloued police to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006192.jpg": "...nginecring and. software:technology. he: holds bachelor! s:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006265.jpg": "...nginecring and. software:technology. he: holds bachelor! s:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007506.jpg": "...nginecring and. software:technology. he: holds bachelor! s:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007603.jpg": "...nsider threat. security: technology & design, october 2oo8,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007627.jpg": "...apter, institute of food technology  children's institute in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007646.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007691.jpg": "...cteristics, paterns, and technology: internet grimes: agains...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007692.jpg": "...tion and prosecution of’ technology-facilitated crimes again...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007838.jpg": "....  kara hughes v. ‘titan‘technology partners, ltd.  retained...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007850.jpg": "...for the forensic  %  jet technology and forensic exaititiati...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007854.jpg": "...uestioned. izing inkjet: technology: and. toner,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007868.jpg": "...analysis:  institute of technology; noveniber.2oo9,, june;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008082.jpg": "...nginecring and. software:technology. he: holds bachelor! s:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008150.jpg": "...cteristics, paterns, and technology: internet grimes: agains...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008151.jpg": "...tion and prosecution of’ technology-facilitated crimes again...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010494.jpg": "...or of physics and art.&. technology, for 34 years. we‘have t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010497.jpg": "...st search engines, and a technology pioneer of the world eco...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010693.jpg": "...che fashion institure of technology and then wor  a the fash...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012682.jpg": "...'s not feasible with the technology that....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013894.jpg": "...e ceo of a small startup technology  q. and hou did, you fin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014004.jpg": "....ll.sbe able to  get the technology set up. today, bhut. he...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016518.jpg": "...e ceo of a small startup technology  q. and hou did, you fin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016628.jpg": "....ll.sbe able to  get the technology set up. today, bhut. he...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018269.jpg": "...'s not feasible with the technology that....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019193.jpg": "...ons of  videoconference technology,  public and media aeces...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019223.jpg": "...ons of  videoconference technology,  public and media aeces...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019925.jpg": "...fficulty with any of the technology, you can. let semeone th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019927.jpg": "...ay difficuley  with the technology, please let me knou righ...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019931.jpg": "...y, given, the safety and technology limitations,  there ave...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022133.jpg": "...iable: videoconferencing technology.  5/25/2o2l oo can date...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022134.jpg": "...iable: videoconferencing technology.  5/25/2o2l  date..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "technology" (39 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1007-1013</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1520-1520</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1880-1886</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">4794-4794</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">6192-6192</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">6265-6265</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">7506-7506</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">7603-7603</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">7627-7627</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">7646-7646</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">7691-7692</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">7838-7838</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">7850-7854</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">7868-7868</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">8082-8082</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">8150-8151</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">10494-10497</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">10693-10693</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">12682-12682</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">13894-13894</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">14004-14004</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">16518-16518</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">16628-16628</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">18269-18269</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">19193-19193</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">19223-19223</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">19925-19931</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">22133-22134</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

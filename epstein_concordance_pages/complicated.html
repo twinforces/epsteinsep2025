@@ -1,0 +1,232 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "complicated"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 335, "end": 335, "pages": [335]}, {"start": 1077, "end": 1077, "pages": [1077]}, {"start": 1248, "end": 1248, "pages": [1248]}, {"start": 2294, "end": 2294, "pages": [2294]}, {"start": 2753, "end": 2753, "pages": [2753]}, {"start": 3908, "end": 3908, "pages": [3908]}, {"start": 3944, "end": 3944, "pages": [3944]}, {"start": 4082, "end": 4082, "pages": [4082]}, {"start": 4089, "end": 4089, "pages": [4089]}, {"start": 4192, "end": 4192, "pages": [4192]}, {"start": 4716, "end": 4717, "pages": [4716, 4717]}, {"start": 4822, "end": 4822, "pages": [4822]}, {"start": 5425, "end": 5425, "pages": [5425]}, {"start": 6392, "end": 6392, "pages": [6392]}, {"start": 7076, "end": 7076, "pages": [7076]}, {"start": 7091, "end": 7091, "pages": [7091]}, {"start": 7160, "end": 7160, "pages": [7160]}, {"start": 7233, "end": 7233, "pages": [7233]}, {"start": 7923, "end": 7923, "pages": [7923]}, {"start": 8407, "end": 8407, "pages": [8407]}, {"start": 8440, "end": 8440, "pages": [8440]}, {"start": 8449, "end": 8449, "pages": [8449]}, {"start": 9116, "end": 9116, "pages": [9116]}, {"start": 12360, "end": 12360, "pages": [12360]}, {"start": 12483, "end": 12483, "pages": [12483]}, {"start": 12861, "end": 12861, "pages": [12861]}, {"start": 13209, "end": 13209, "pages": [13209]}, {"start": 13286, "end": 13286, "pages": [13286]}, {"start": 13551, "end": 13556, "pages": [13551, 13552, 13556]}, {"start": 13868, "end": 13868, "pages": [13868]}, {"start": 14112, "end": 14113, "pages": [14112, 14113]}, {"start": 14355, "end": 14355, "pages": [14355]}, {"start": 14670, "end": 14670, "pages": [14670]}, {"start": 14930, "end": 14930, "pages": [14930]}, {"start": 16492, "end": 16492, "pages": [16492]}, {"start": 16735, "end": 16736, "pages": [16735, 16736]}, {"start": 16977, "end": 16977, "pages": [16977]}, {"start": 17290, "end": 17290, "pages": [17290]}, {"start": 17948, "end": 17948, "pages": [17948]}, {"start": 18071, "end": 18071, "pages": [18071]}, {"start": 18447, "end": 18447, "pages": [18447]}, {"start": 18794, "end": 18794, "pages": [18794]}, {"start": 18870, "end": 18870, "pages": [18870]}, {"start": 19134, "end": 19139, "pages": [19134, 19135, 19139]}, {"start": 19995, "end": 19995, "pages": [19995]}, {"start": 20166, "end": 20166, "pages": [20166]}];
+        const pageToPath = {"335": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000335.jpg", "1077": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001077.jpg", "1248": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001248.jpg", "2294": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002294.jpg", "2753": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002753.jpg", "3908": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003908.jpg", "3944": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003944.jpg", "4082": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004082.jpg", "4089": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004089.jpg", "4192": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004192.jpg", "4716": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004716.jpg", "4717": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004717.jpg", "4822": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004822.jpg", "5425": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005425.jpg", "6392": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006392.jpg", "7076": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007076.jpg", "7091": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007091.jpg", "7160": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007160.jpg", "7233": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007233.jpg", "7923": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007923.jpg", "8407": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008407.jpg", "8440": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008440.jpg", "8449": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008449.jpg", "9116": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009116.jpg", "12360": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012360.jpg", "12483": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012483.jpg", "12861": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012861.jpg", "13209": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013209.jpg", "13286": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013286.jpg", "13551": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013551.jpg", "13552": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013552.jpg", "13556": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013556.jpg", "13868": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013868.jpg", "14112": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014112.jpg", "14113": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014113.jpg", "14355": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014355.jpg", "14670": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014670.jpg", "14930": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014930.jpg", "16492": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016492.jpg", "16735": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016735.jpg", "16736": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016736.jpg", "16977": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016977.jpg", "17290": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017290.jpg", "17948": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017948.jpg", "18071": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018071.jpg", "18447": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018447.jpg", "18794": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018794.jpg", "18870": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018870.jpg", "19134": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019134.jpg", "19135": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019135.jpg", "19139": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019139.jpg", "19995": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019995.jpg", "20166": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020166.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000335.jpg": "...is typically.a lengthy, complicated, and. expensive process,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001077.jpg": "...sive fesources may be in complicated banking  records, at aba...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001248.jpg": "...process | is s lengthy,  complicated. and time-consuming. and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002294.jpg": "...ly involve litigating: a complicated defamation. action-withi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002753.jpg": "...process | is s lengthy,  complicated. and time-consuming. and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003908.jpg": "...ch inevitably: itivolves:complicated. discussions,and evidenc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003944.jpg": "...involve[d] litigating a complicated defamation‘action within...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004082.jpg": "...ed.trial preparation,and complicated  ira, defense counsel, m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004089.jpg": "...t, will be voluminous or complicated.  government’s position...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004192.jpg": "...t stopped. the faets are complicated, there are  i ind epstei...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004716.jpg": "...dnd there.are: of course complicated :considerations when exa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004717.jpg": "...ed—a.  ‘be analytically: complicated —when  > applies at:  al...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004822.jpg": "...cosby..  alleged assault complicated any effort to: secure a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005425.jpg": "...investigative context is complicated and a topic of'public in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006392.jpg": "...investigative context is complicated and a topic of'public in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007076.jpg": "...se, ls controversial and complicated and i; ids  backgreund....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007091.jpg": "...bility to g6 through the complicated set of sometimes overlap...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007160.jpg": "...istical process which is complicated,  tapa we.  is that fon...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007233.jpg": "...social, science, it's a complicated phenomenon. you're never...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007923.jpg": "...social, science, it's a complicated phenomenon. you're never...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008407.jpg": "...se, ls controversial and complicated and i; ids  backgreund....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008440.jpg": "...both parties agree that complicated logisties—including cith...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008449.jpg": "...both parti¢s agree that complicated logisties—including cith...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009116.jpg": "...ffenses are particularly complicated-because jurors.may: poss...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012360.jpg": "...he answer jis, a lawvele complicated becatse  ehe gourt: ji g...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012483.jpg": "...n, which may ibe a ditle complicated.  ats  t wasn*t your j66...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012861.jpg": "...at they:  were somewhat, complicated. do ‘you. remember that?...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013209.jpg": "...it dida\"t seem to be too complicated to me.  the gourt: okay....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013286.jpg": "...voids lss8ues ‘that were complicated regarding new mexice law...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013551.jpg": "...and that helps draw out complicated document comparators and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013552.jpg": "...: one, loo6 you've get a complicated, extensive set of  recor...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013556.jpg": "...ficers whg are analyzing complicated  data trider loo6 provid...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013868.jpg": "...u knew, l5oo. it's avery complicated  ain of title dn ‘the uk...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014112.jpg": "...ed it to be just far too complicated....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014113.jpg": "...that it would be far too complicated.  t would alse add, 4& i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014355.jpg": "...s where it gets a litle  complicated, your honor. i medan, i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014670.jpg": "...answer l5 4 latlle more complicated. than ——  the court: ‘we...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014930.jpg": "...social, science, it's a complicated phenomenon. you're never...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016492.jpg": "...u knew, l5oo. it's avery complicated  ain of title dn ‘the uk...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016735.jpg": "...ed it to be just far too complicated....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016736.jpg": "...that it would be far too complicated.  t would alse add, 4& i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016977.jpg": "...s where it gets a litle  complicated, your honor. i medan, i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017290.jpg": "...answer l5 4 latlle more complicated. than ——  the court: ‘we...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017948.jpg": "...he answer jis, a lawvele complicated becatse  ehe gourt: ji g...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018071.jpg": "...n, which may ibe a ditle complicated.  ats  t wasn*t your j66...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018447.jpg": "...at they:  were somewhat, complicated. do ‘you. remember that?...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018794.jpg": "...it dida\"t seem to be too complicated to me.  the gourt: okay....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018870.jpg": "...voids lss8ues ‘that were complicated regarding new mexice law...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019134.jpg": "...and that helps draw out complicated document comparators and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019135.jpg": "...: one, loo6 you've get a complicated, extensive set of  recor...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019139.jpg": "...ficers whg are analyzing complicated  data trider loo6 provid...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019995.jpg": "...sive fesources may be in complicated banking  records, at aba...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020166.jpg": "...process | is s lengthy,  complicated. and time-consuming. and..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "complicated" (53 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">335-335</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1077-1077</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1248-1248</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">2294-2294</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">2753-2753</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">3908-3908</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3944-3944</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">4082-4082</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">4089-4089</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">4192-4192</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">4716-4717</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">4822-4822</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">5425-5425</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">6392-6392</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">7076-7076</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">7091-7091</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">7160-7160</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">7233-7233</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">7923-7923</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">8407-8407</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">8440-8440</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">8449-8449</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">9116-9116</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">12360-12360</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">12483-12483</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">12861-12861</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">13209-13209</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">13286-13286</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">13551-13556</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">13868-13868</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">14112-14113</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">14355-14355</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">14670-14670</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">14930-14930</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">16492-16492</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">16735-16736</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">16977-16977</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">17290-17290</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">17948-17948</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">18071-18071</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">18447-18447</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">18794-18794</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">18870-18870</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">19134-19139</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">19995-19995</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(45, 0); return false;">20166-20166</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

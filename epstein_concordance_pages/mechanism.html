@@ -1,0 +1,193 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "mechanism"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 2355, "end": 2355, "pages": [2355]}, {"start": 2495, "end": 2495, "pages": [2495]}, {"start": 3179, "end": 3179, "pages": [3179]}, {"start": 3237, "end": 3237, "pages": [3237]}, {"start": 3362, "end": 3363, "pages": [3362, 3363]}, {"start": 3375, "end": 3375, "pages": [3375]}, {"start": 3418, "end": 3420, "pages": [3418, 3420]}, {"start": 3435, "end": 3435, "pages": [3435]}, {"start": 4042, "end": 4042, "pages": [4042]}, {"start": 4301, "end": 4301, "pages": [4301]}, {"start": 4359, "end": 4359, "pages": [4359]}, {"start": 4484, "end": 4485, "pages": [4484, 4485]}, {"start": 4497, "end": 4497, "pages": [4497]}, {"start": 4540, "end": 4542, "pages": [4540, 4542]}, {"start": 4557, "end": 4557, "pages": [4557]}, {"start": 4582, "end": 4582, "pages": [4582]}, {"start": 4874, "end": 4874, "pages": [4874]}, {"start": 4889, "end": 4889, "pages": [4889]}, {"start": 5033, "end": 5033, "pages": [5033]}, {"start": 5901, "end": 5901, "pages": [5901]}, {"start": 6182, "end": 6182, "pages": [6182]}, {"start": 6236, "end": 6236, "pages": [6236]}, {"start": 6826, "end": 6826, "pages": [6826]}, {"start": 7173, "end": 7173, "pages": [7173]}, {"start": 7526, "end": 7526, "pages": [7526]}, {"start": 7602, "end": 7602, "pages": [7602]}, {"start": 8287, "end": 8287, "pages": [8287]}, {"start": 8390, "end": 8390, "pages": [8390]}, {"start": 11498, "end": 11498, "pages": [11498]}, {"start": 21369, "end": 21369, "pages": [21369]}, {"start": 21381, "end": 21381, "pages": [21381]}, {"start": 21429, "end": 21429, "pages": [21429]}, {"start": 21486, "end": 21486, "pages": [21486]}];
+        const pageToPath = {"2355": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002355.jpg", "2495": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002495.jpg", "3179": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003179.jpg", "3237": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003237.jpg", "3362": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003362.jpg", "3363": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003363.jpg", "3375": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003375.jpg", "3418": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003418.jpg", "3420": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003420.jpg", "3435": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003435.jpg", "4042": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004042.jpg", "4301": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004301.jpg", "4359": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004359.jpg", "4484": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004484.jpg", "4485": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004485.jpg", "4497": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004497.jpg", "4540": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004540.jpg", "4542": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004542.jpg", "4557": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004557.jpg", "4582": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004582.jpg", "4874": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004874.jpg", "4889": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004889.jpg", "5033": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005033.jpg", "5901": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005901.jpg", "6182": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006182.jpg", "6236": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006236.jpg", "6826": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006826.jpg", "7173": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007173.jpg", "7526": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007526.jpg", "7602": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007602.jpg", "8287": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008287.jpg", "8390": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008390.jpg", "11498": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011498.jpg", "21369": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021369.jpg", "21381": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021381.jpg", "21429": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021429.jpg", "21486": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021486.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002355.jpg": "...tive:  order included.a, mechanism for one party'to challen...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002495.jpg": "...ts  ebyeeted. is there a mechanism by which we can address...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003179.jpg": "...er “and d ncreed, to 2 a mechanism throu hi which. v victim...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003237.jpg": "...‘sexual, offender; and a mechanism to: proy, ide ‘for the v...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003362.jpg": "...: mprisonment; and. 3) a mechanism. netary damages from e s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003363.jpg": "...ddendum. relating ‘tothe mechanism. for selection of: the a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003375.jpg": "...prosectition through a. mechanism that relied eompletely-o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003418.jpg": "...fund would provide a mi mechanism for.compensating'thervic...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003420.jpg": "...should, have ‘their oun, mechanism.” at the timesof:the eps...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003435.jpg": "...ms]  . the: restitution, mechanism that ‘we had set;  sloma...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004042.jpg": "...ss .:is not: the proper  mechanism ‘for pursuing that. ‘rat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004301.jpg": "...er “and d ncreed, to 2 a mechanism throu hi which. v victim...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004359.jpg": "...‘sexual, offender; and a mechanism,te provide forthe:  wit...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004484.jpg": "...: mprisonment; and. 3) a mechanism. ictims ‘could obtain mo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004485.jpg": "...ndum. relating ‘to. the :mechanism. for selection ofthe ato...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004497.jpg": "...prosectition through a. mechanism ‘that relied eompletely-...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004540.jpg": "...fund would provide a mi mechanism for compensating'thervic...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004542.jpg": "...should, have ‘their oun, mechanism.” at the timesof:the eps...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004557.jpg": "...ims] . the: restitution, mechanism that ‘we had set  sloman...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004582.jpg": "...2.  houever, it: itp no mechanism for a:  - like the ‘cvra...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004874.jpg": "...ot made for the purpose  mechanism to-do so.  _the dissent...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004889.jpg": "...amendment rights as. a mechanism and a lever to aid, cons...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005033.jpg": "...l7(c):is not the proper  mechanism ‘for discovery from:thir...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005901.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006182.jpg": "...e. shi will : plain t ie mechanism by which. false and/or...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006236.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006826.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007173.jpg": "...k there meeds to be some mechanism  eveher iff a fedex gome...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007526.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007602.jpg": "...summer l977.  dietz pe: mechanism of rapists’ arousal. med...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008287.jpg": "...mechanism by which you kept electr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008390.jpg": "...e.  ‘citing § l78l as a. mechanism, for a criminal defendan...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011498.jpg": "...document.authentication, mechanism acceptable i in'that cou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021369.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021381.jpg": "...ntages‘to a: negotiated  mechanism n. for the victims ‘to:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021429.jpg": "...‘be bi oad.”  being a* ‘mechanism(]® to ensure that.victim...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021486.jpg": "...demenit.  was a. flawed: mechanism for. sa istying the fede..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "mechanism" (37 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">2355-2355</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">2495-2495</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">3179-3179</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3237-3237</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">3362-3363</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">3375-3375</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3418-3420</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">3435-3435</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">4042-4042</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">4301-4301</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">4359-4359</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">4484-4485</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">4497-4497</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">4540-4542</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">4557-4557</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">4582-4582</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">4874-4874</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">4889-4889</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">5033-5033</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">5901-5901</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">6182-6182</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">6236-6236</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">6826-6826</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">7173-7173</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">7526-7526</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">7602-7602</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">8287-8287</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">8390-8390</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">11498-11498</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">21369-21369</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">21381-21381</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">21429-21429</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">21486-21486</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

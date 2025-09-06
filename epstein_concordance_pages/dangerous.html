@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "dangerous"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 437, "end": 437, "pages": [437]}, {"start": 452, "end": 452, "pages": [452]}, {"start": 965, "end": 965, "pages": [965]}, {"start": 1137, "end": 1137, "pages": [1137]}, {"start": 1589, "end": 1589, "pages": [1589]}, {"start": 2013, "end": 2013, "pages": [2013]}, {"start": 4773, "end": 4773, "pages": [4773]}, {"start": 5903, "end": 5903, "pages": [5903]}, {"start": 6828, "end": 6828, "pages": [6828]}, {"start": 7530, "end": 7530, "pages": [7530]}, {"start": 7594, "end": 7601, "pages": [7594, 7599, 7601]}, {"start": 7613, "end": 7617, "pages": [7613, 7617]}, {"start": 7816, "end": 7816, "pages": [7816]}, {"start": 7825, "end": 7825, "pages": [7825]}, {"start": 10422, "end": 10422, "pages": [10422]}, {"start": 10431, "end": 10434, "pages": [10431, 10433, 10434]}, {"start": 10465, "end": 10465, "pages": [10465]}, {"start": 10477, "end": 10477, "pages": [10477]}, {"start": 10572, "end": 10572, "pages": [10572]}, {"start": 10607, "end": 10607, "pages": [10607]}, {"start": 10668, "end": 10668, "pages": [10668]}, {"start": 11553, "end": 11554, "pages": [11553, 11554]}, {"start": 11731, "end": 11731, "pages": [11731]}, {"start": 14781, "end": 14782, "pages": [14781, 14782]}, {"start": 16176, "end": 16176, "pages": [16176]}, {"start": 19883, "end": 19883, "pages": [19883]}, {"start": 20055, "end": 20055, "pages": [20055]}, {"start": 21035, "end": 21036, "pages": [21035, 21036]}, {"start": 21580, "end": 21580, "pages": [21580]}];
+        const pageToPath = {"437": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000437.jpg", "452": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000452.jpg", "965": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000965.jpg", "1137": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001137.jpg", "1589": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001589.jpg", "2013": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002013.jpg", "4773": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004773.jpg", "5903": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005903.jpg", "6828": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006828.jpg", "7530": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007530.jpg", "7594": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007594.jpg", "7599": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007599.jpg", "7601": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007601.jpg", "7613": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007613.jpg", "7617": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007617.jpg", "7816": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007816.jpg", "7825": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007825.jpg", "10422": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010422.jpg", "10431": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010431.jpg", "10433": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010433.jpg", "10434": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010434.jpg", "10465": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010465.jpg", "10477": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010477.jpg", "10572": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010572.jpg", "10607": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010607.jpg", "10668": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010668.jpg", "11553": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011553.jpg", "11554": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011554.jpg", "11731": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011731.jpg", "14781": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014781.jpg", "14782": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014782.jpg", "16176": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016176.jpg", "19883": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019883.jpg", "20055": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020055.jpg", "21035": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021035.jpg", "21036": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021036.jpg", "21580": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021580.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000437.jpg": "...the event of travel to  dangerous. areas, only to be prese...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000452.jpg": "...n the event of travel to dangerous: areas, only to be prese...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000965.jpg": "...ed. and-extraordinarily  dangerous” threat that justi  ying...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001137.jpg": "...x ‘to supervise:the:most:dangerous.inmates.in the federal s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001589.jpg": "...d. and extraordinarily:  dangerous” threat that: justities...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002013.jpg": "...x:to  supervise the:most dangerous inniates in the federal...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004773.jpg": "...struuctive device of any dangerous wedpon. there  abe hq cx...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005903.jpg": "...6b) gets3, entitlenvents dangerous world: 3l ey and, mature...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006828.jpg": "...6b) gets3, entitlenvents dangerous world: 3l ey and, mature...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007530.jpg": "..., e.f. (2ooo) the: most. dangerous: book: psachology loday,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007594.jpg": "...- l274, l987.  dietz pes dangerous informations product rap...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007599.jpg": "...etz pe: defenses against dangerous people when arrest and c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007601.jpg": "...abel gg, sadoff rl: \"the dangerous myth of the > typical ra...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007613.jpg": "...ng with the potentially: dangerous: employee in the workpla...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007617.jpg": "...le beach, : \\  dietz p: “dangerous: del isione: national di...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007816.jpg": "...w 479  (2oo9).  the most dangerous pouer of the prosecutor...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007825.jpg": "...mber'4, 2oll).  the most dangerous pouer of the prosecutor...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010422.jpg": "...er § 4b l.5 (repeat and, dangerous scx offender against min...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010431.jpg": "...cable to'a““repeat and.  dangerous sex. offender against mi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010433.jpg": "...nces. on:these: sorts of dangerous,  repeat sexual. offende...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010434.jpg": "...ply, ms. maxwell is:not “dangerous” and.thiere: is no  risk...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010465.jpg": ".... ms. ‘maxwell :is not a dangerous,  a ‘normal,  ‘criminal...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010477.jpg": "....maxwell was:  suicidal, dangerous, violent, or in:need, of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010572.jpg": "...ing, sophisticated, aid, dangerous criminal who preyed.on;v...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010607.jpg": "...a hard time identifying dangerous people or situations.  j...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010668.jpg": "...a hard time identifying dangerous people or situations.  i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011553.jpg": "...neement for repeated and dangerous sex offenders.  seta  th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011554.jpg": "...uideline is reeepeat and dangerous sex offenders. lehat exp...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011731.jpg": "...4 treubled past; lived a dangerous lifestyle, was wsaing  d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014781.jpg": "...neement for repeated and dangerous sex offenders.  seta  th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014782.jpg": "...uideline is reeepeat and dangerous sex offenders. lehat exp...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016176.jpg": "...4 treubled past; lived a dangerous lifestyle, was wsaing  d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019883.jpg": "...ed. and-extraordinarily  dangerous” threat that justi  ying...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020055.jpg": "...x ‘to supervise:the:most:dangerous.inmates.in the federal s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021035.jpg": "...ement. for. repeated and dangerous sex, offender's.  the co...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021036.jpg": "...hou ‘to interpret what. dangerous means. it means; someone...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021580.jpg": "...n  hou to interpret what dangerous means. ‘it means someone..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "dangerous" (37 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">437-437</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">452-452</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">965-965</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">1137-1137</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">1589-1589</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">2013-2013</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">4773-4773</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">5903-5903</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">6828-6828</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">7530-7530</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">7594-7601</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">7613-7617</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">7816-7816</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">7825-7825</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">10422-10422</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">10431-10434</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">10465-10465</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">10477-10477</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">10572-10572</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">10607-10607</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">10668-10668</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">11553-11554</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">11731-11731</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">14781-14782</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">16176-16176</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">19883-19883</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">20055-20055</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">21035-21036</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">21580-21580</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

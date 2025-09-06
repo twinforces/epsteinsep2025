@@ -1,0 +1,217 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "implement"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1343, "end": 1344, "pages": [1343, 1344]}, {"start": 1458, "end": 1458, "pages": [1458]}, {"start": 1709, "end": 1709, "pages": [1709]}, {"start": 1717, "end": 1717, "pages": [1717]}, {"start": 1835, "end": 1836, "pages": [1835, 1836]}, {"start": 2085, "end": 2085, "pages": [2085]}, {"start": 3069, "end": 3070, "pages": [3069, 3070]}, {"start": 3302, "end": 3302, "pages": [3302]}, {"start": 3339, "end": 3339, "pages": [3339]}, {"start": 3371, "end": 3371, "pages": [3371]}, {"start": 3395, "end": 3395, "pages": [3395]}, {"start": 3447, "end": 3447, "pages": [3447]}, {"start": 3458, "end": 3458, "pages": [3458]}, {"start": 3474, "end": 3474, "pages": [3474]}, {"start": 4461, "end": 4461, "pages": [4461]}, {"start": 4493, "end": 4493, "pages": [4493]}, {"start": 4517, "end": 4517, "pages": [4517]}, {"start": 4569, "end": 4569, "pages": [4569]}, {"start": 4580, "end": 4580, "pages": [4580]}, {"start": 5213, "end": 5213, "pages": [5213]}, {"start": 5274, "end": 5274, "pages": [5274]}, {"start": 5400, "end": 5400, "pages": [5400]}, {"start": 6180, "end": 6180, "pages": [6180]}, {"start": 6367, "end": 6367, "pages": [6367]}, {"start": 7175, "end": 7175, "pages": [7175]}, {"start": 7610, "end": 7610, "pages": [7610]}, {"start": 7841, "end": 7841, "pages": [7841]}, {"start": 10471, "end": 10476, "pages": [10471, 10476]}, {"start": 10543, "end": 10543, "pages": [10543]}, {"start": 10750, "end": 10750, "pages": [10750]}, {"start": 11470, "end": 11474, "pages": [11470, 11474]}, {"start": 13560, "end": 13560, "pages": [13560]}, {"start": 19143, "end": 19143, "pages": [19143]}, {"start": 20260, "end": 20261, "pages": [20260, 20261]}, {"start": 20376, "end": 20376, "pages": [20376]}, {"start": 20446, "end": 20446, "pages": [20446]}, {"start": 20547, "end": 20547, "pages": [20547]}, {"start": 21369, "end": 21369, "pages": [21369]}, {"start": 21439, "end": 21439, "pages": [21439]}, {"start": 23231, "end": 23231, "pages": [23231]}, {"start": 23477, "end": 23485, "pages": [23477, 23480, 23483, 23485]}];
+        const pageToPath = {"1343": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001343.jpg", "1344": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001344.jpg", "1458": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001458.jpg", "1709": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001709.jpg", "1717": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001717.jpg", "1835": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001835.jpg", "1836": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001836.jpg", "2085": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002085.jpg", "3069": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003069.jpg", "3070": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003070.jpg", "3302": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003302.jpg", "3339": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003339.jpg", "3371": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003371.jpg", "3395": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003395.jpg", "3447": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003447.jpg", "3458": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003458.jpg", "3474": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003474.jpg", "4461": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004461.jpg", "4493": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004493.jpg", "4517": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004517.jpg", "4569": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004569.jpg", "4580": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004580.jpg", "5213": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005213.jpg", "5274": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005274.jpg", "5400": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005400.jpg", "6180": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006180.jpg", "6367": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006367.jpg", "7175": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007175.jpg", "7610": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007610.jpg", "7841": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007841.jpg", "10471": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010471.jpg", "10476": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010476.jpg", "10543": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010543.jpg", "10750": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010750.jpg", "11470": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011470.jpg", "11474": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011474.jpg", "13560": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013560.jpg", "19143": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019143.jpg", "20260": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020260.jpg", "20261": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020261.jpg", "20376": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020376.jpg", "20446": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020446.jpg", "20547": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020547.jpg", "21369": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021369.jpg", "21439": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021439.jpg", "23231": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00023231.jpg", "23477": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023477.jpg", "23480": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023480.jpg", "23483": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023483.jpg", "23485": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023485.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001343.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001344.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001458.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001709.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001717.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001835.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001836.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002085.jpg": "...for‘her. safety that we implement: certain security protoc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003069.jpg": "...generally: reluctant to. implement,” and. that the court wo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003070.jpg": "...pervisory -pouers,, “to  implement.a remedy for violation,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003302.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003339.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003371.jpg": "...on state authorities to implement its key-terms, leading:t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003395.jpg": "...y general.to:devclop and implement: such guidelines. victim...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003447.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003458.jpg": "...rpretation. in. ines to: implement the cvra,  ee ae ae!  in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003474.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004461.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004493.jpg": "...on state authorities to implement its key-terms, leading:t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004517.jpg": "...y general.to:devclop and implement:s such guidelines victim...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004569.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004580.jpg": "...rpretation. in. tes, to: implement the cvra.  ee ae ae!  in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005213.jpg": "...ry: pouers and ‘diseret  implement;protocols designed to ob...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005274.jpg": "...nference, the court will implement:  the ‘follouing ‘proced...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005400.jpg": "...ires district: courts to implement procedures. to  enstite...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006180.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006367.jpg": "...ires district: courts to implement procedures. to  enstite...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007175.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007610.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007841.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010471.jpg": "...ith an inch-long; finger implement until given ‘a normal. t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010476.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010543.jpg": "...dant helped. author and. implement. ‘a.  household. manual,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010750.jpg": "...doctients. and 4 writing implement, te  varden represented...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011470.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011474.jpg": "...to have: been. asked. to implement this: ‘important program...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013560.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019143.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020260.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020261.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020376.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020446.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020547.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021369.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021439.jpg": "...'a.n minor  wrposes “of: implement ng  vide. mr. epstein’s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00023231.jpg": "...oa congre odes velop and implement. os, 96: stat: l248 (l98...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023477.jpg": "...bop.  l. the bop'should implement.a process for assigning...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023480.jpg": "...<ontinte to develop and implement plans to address stat in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023483.jpg": "...on.-on ee the bop should implement a-proce l ena for except...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023485.jpg": ""};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "implement" (50 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1343-1344</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1458-1458</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1709-1709</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">1717-1717</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">1835-1836</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">2085-2085</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3069-3070</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">3302-3302</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">3339-3339</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">3371-3371</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">3395-3395</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">3447-3447</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">3458-3458</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">3474-3474</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">4461-4461</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">4493-4493</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">4517-4517</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">4569-4569</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">4580-4580</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">5213-5213</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">5274-5274</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">5400-5400</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">6180-6180</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">6367-6367</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">7175-7175</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">7610-7610</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">7841-7841</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">10471-10476</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">10543-10543</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">10750-10750</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">11470-11474</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">13560-13560</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">19143-19143</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">20260-20261</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">20376-20376</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">20446-20446</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">20547-20547</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">21369-21369</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">21439-21439</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">23231-23231</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">23477-23485</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

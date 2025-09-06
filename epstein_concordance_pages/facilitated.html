@@ -1,0 +1,226 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "facilitated"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 6, "end": 6, "pages": [6]}, {"start": 259, "end": 259, "pages": [259]}, {"start": 344, "end": 344, "pages": [344]}, {"start": 488, "end": 497, "pages": [488, 493, 497]}, {"start": 503, "end": 503, "pages": [503]}, {"start": 659, "end": 659, "pages": [659]}, {"start": 700, "end": 700, "pages": [700]}, {"start": 800, "end": 809, "pages": [800, 805, 809]}, {"start": 815, "end": 815, "pages": [815]}, {"start": 1192, "end": 1192, "pages": [1192]}, {"start": 1399, "end": 1399, "pages": [1399]}, {"start": 1563, "end": 1567, "pages": [1563, 1567]}, {"start": 2843, "end": 2848, "pages": [2843, 2848]}, {"start": 2908, "end": 2908, "pages": [2908]}, {"start": 3094, "end": 3094, "pages": [3094]}, {"start": 3835, "end": 3835, "pages": [3835]}, {"start": 4276, "end": 4276, "pages": [4276]}, {"start": 5760, "end": 5760, "pages": [5760]}, {"start": 5811, "end": 5811, "pages": [5811]}, {"start": 6621, "end": 6621, "pages": [6621]}, {"start": 6736, "end": 6736, "pages": [6736]}, {"start": 6958, "end": 6961, "pages": [6958, 6961]}, {"start": 7254, "end": 7254, "pages": [7254]}, {"start": 7691, "end": 7692, "pages": [7691, 7692]}, {"start": 7944, "end": 7944, "pages": [7944]}, {"start": 8150, "end": 8151, "pages": [8150, 8151]}, {"start": 10376, "end": 10376, "pages": [10376]}, {"start": 10542, "end": 10542, "pages": [10542]}, {"start": 11437, "end": 11437, "pages": [11437]}, {"start": 14855, "end": 14855, "pages": [14855]}, {"start": 14951, "end": 14951, "pages": [14951]}, {"start": 15104, "end": 15104, "pages": [15104]}, {"start": 19451, "end": 19451, "pages": [19451]}, {"start": 19472, "end": 19476, "pages": [19472, 19475, 19476]}, {"start": 19614, "end": 19614, "pages": [19614]}, {"start": 20110, "end": 20110, "pages": [20110]}, {"start": 20317, "end": 20317, "pages": [20317]}, {"start": 20736, "end": 20741, "pages": [20736, 20739, 20741]}, {"start": 20993, "end": 20993, "pages": [20993]}, {"start": 21269, "end": 21269, "pages": [21269]}, {"start": 21662, "end": 21662, "pages": [21662]}, {"start": 21799, "end": 21799, "pages": [21799]}, {"start": 21852, "end": 21852, "pages": [21852]}, {"start": 21882, "end": 21882, "pages": [21882]}];
+        const pageToPath = {"6": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000006.jpg", "259": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000259.jpg", "344": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000344.jpg", "488": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000488.jpg", "493": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000493.jpg", "497": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000497.jpg", "503": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000503.jpg", "659": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000659.jpg", "700": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000700.jpg", "800": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000800.jpg", "805": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000805.jpg", "809": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000809.jpg", "815": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000815.jpg", "1192": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001192.jpg", "1399": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001399.jpg", "1563": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001563.jpg", "1567": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001567.jpg", "2843": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002843.jpg", "2848": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002848.jpg", "2908": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002908.jpg", "3094": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003094.jpg", "3835": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003835.jpg", "4276": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004276.jpg", "5760": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005760.jpg", "5811": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005811.jpg", "6621": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006621.jpg", "6736": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006736.jpg", "6958": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006958.jpg", "6961": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006961.jpg", "7254": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007254.jpg", "7691": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007691.jpg", "7692": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007692.jpg", "7944": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007944.jpg", "8150": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008150.jpg", "8151": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008151.jpg", "10376": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010376.jpg", "10542": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010542.jpg", "11437": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011437.jpg", "14855": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014855.jpg", "14951": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014951.jpg", "15104": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015104.jpg", "19451": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019451.jpg", "19472": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019472.jpg", "19475": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019475.jpg", "19476": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019476.jpg", "19614": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019614.jpg", "20110": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020110.jpg", "20317": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020317.jpg", "20736": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020736.jpg", "20739": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020739.jpg", "20741": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020741.jpg", "20993": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020993.jpg", "21269": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021269.jpg", "21662": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021662.jpg", "21799": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021799.jpg", "21852": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021852.jpg", "21882": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021882.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000006.jpg": "...ne maxwell. coordinated, facilitated, and. contributed to jef...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000259.jpg": "...oyees and asseciates who facilitated his conduct by, among ot...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000344.jpg": "...oyees and associates who facilitated his, exploit by, aitiori...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000488.jpg": "...r identified,  employees facilitated. the defendant's traffic...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000493.jpg": "...oyees and associates who facilitated  t i & y : i e  mantce:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000497.jpg": "...yees and associates  who facilitated his exploitation of mino...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000503.jpg": "...yees and associates, who facilitated his exploitation, of min...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000659.jpg": "...uments that. would. have facilitated ard furthered our effort...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000700.jpg": "...way, bwt dlso actively  facilitated and participated in his...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000800.jpg": "...r identified,  employees facilitated. the defendant's traffic...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000805.jpg": "...oyees and associates who facilitated  t i & y : i e  mantce:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000809.jpg": "...yees and associates  who facilitated his exploitation of mino...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000815.jpg": "...yees and associates, who facilitated his exploitation, of min...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001192.jpg": "...e'solely, from  nouingly facilitated or participated in epste...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001399.jpg": "...video conferencitig has facilitated on-going conimufication...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001563.jpg": "...l997, maxwell assisted, facilitated, and contributed to jeff...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001567.jpg": "...maxwell, the defendant, facilitated  jeffixey epstein’ s s t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002843.jpg": "...2oo4, maxwell assisted, facilitated, and  contributed to jef...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002848.jpg": "...counter.  the defendant, facilitated  jeffrey epstein’s acces...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002908.jpg": "...video conferencitig has facilitated on-going conimufication...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003094.jpg": "...he: defendant “assisted, facilitated, and ‘contributed to” ep...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003835.jpg": "...that-these:  ‘assisted, facilitated,.contributcd, recruit,-8...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004276.jpg": "...hat m  maxwell allegedly-facilitated that abuse. (s2 tndictrn...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005760.jpg": "...nor does it allege:  of, facilitated, or participated :in an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005811.jpg": "...al abuse; of:minors, (2) facilitated that abuse through her p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006621.jpg": "...!  {areli, l997),  e ion.facilitated.at:the national mecting...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006736.jpg": "...al abuse; of:minors, (2) facilitated that abuse through her p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006958.jpg": "...s, which his: employees ‘facilitated. as ‘part, of ‘that: con...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006961.jpg": "...'s objectives] would. be facilitated by the acquital. of all...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007254.jpg": "...hat trustworthiness that facilitated.  ehe witness; lm not aw...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007691.jpg": "...rosecution of'technology-facilitated ghild sexual exploitatio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007692.jpg": "...osecution of’ technology-facilitated crimes against children....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007944.jpg": "...hat trustworthiness that facilitated.  ehe witness; lm not aw...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008150.jpg": "...rosecution of'technology-facilitated ghild sexual exploitatio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008151.jpg": "...osecution of’ technology-facilitated crimes against children....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010376.jpg": "...eferidanit grootied arid facilitated the sexual abuse: of  mi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010542.jpg": "...a decade, the: defendant facilitated, and,  participated in t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011437.jpg": "...rrinent’s, €  ‘accusers, facilitated thcir. abuse, .and consp...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014855.jpg": "...ne maxwell. coordinated, facilitated, and. contributed to jef...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014951.jpg": "...at. trustworthiness that facilitated the abuse’?  the witness...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015104.jpg": "...‘who paiticipated in aid facilitated these unspeakable atroci...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019451.jpg": "...ation, and that maxwell. facilitated epstein’s abusive condue...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019472.jpg": "...l997, maxwell assisted, facilitated, and contributed to jeff...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019475.jpg": "...maxwell, the defendant, facilitated jeffrey epstein’s access...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019476.jpg": "...maxwell, the defendant, facilitated  f  jeffixey epstein’ s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019614.jpg": "...97, maxwell,  assisted, ‘facilitated, and contributed to, jef...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020110.jpg": "...e'solely, from  nouingly facilitated or participated in epste...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020317.jpg": "...video conferencitig has facilitated on-going conimufication...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020736.jpg": "...94, up to and including  facilitated; and  at least, in or ab...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020739.jpg": "...maxweli:, the defendant, facilitated  jeffrey epstein’ s acce...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020741.jpg": "...maxwell», the deferdant, facilitated  resulting abuse of mino...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020993.jpg": "...he defendant groomed-and facilitated the sexual abuse  ‘minor...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021269.jpg": "...stants who had allege ly facilitated, epstein, iri his heie....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021662.jpg": "...rse of a decade, maxwell facilitated.  and participated in th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021799.jpg": "...ne maxwell. coordinated, facilitated, and. contributed to jef...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021852.jpg": "...ne maxwell. coordinated, facilitated, and. contributed to jef...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021882.jpg": "...ne maxwell. coordinated, facilitated, and. contributed to jef..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "facilitated" (57 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">6-6</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">259-259</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">344-344</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">488-497</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">503-503</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">659-659</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">700-700</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">800-809</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">815-815</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">1192-1192</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">1399-1399</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">1563-1567</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">2843-2848</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">2908-2908</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">3094-3094</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">3835-3835</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">4276-4276</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">5760-5760</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">5811-5811</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">6621-6621</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">6736-6736</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">6958-6961</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">7254-7254</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">7691-7692</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">7944-7944</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">8150-8151</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">10376-10376</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">10542-10542</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">11437-11437</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">14855-14855</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">14951-14951</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">15104-15104</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">19451-19451</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">19472-19476</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">19614-19614</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">20110-20110</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">20317-20317</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">20736-20741</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">20993-20993</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">21269-21269</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">21662-21662</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">21799-21799</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">21852-21852</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">21882-21882</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

@@ -1,0 +1,220 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "gentleman"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 2469, "end": 2469, "pages": [2469]}, {"start": 5321, "end": 5321, "pages": [5321]}, {"start": 6159, "end": 6159, "pages": [6159]}, {"start": 7456, "end": 7456, "pages": [7456]}, {"start": 8536, "end": 8536, "pages": [8536]}, {"start": 8621, "end": 8621, "pages": [8621]}, {"start": 8701, "end": 8701, "pages": [8701]}, {"start": 8787, "end": 8787, "pages": [8787]}, {"start": 11683, "end": 11683, "pages": [11683]}, {"start": 11730, "end": 11730, "pages": [11730]}, {"start": 12042, "end": 12042, "pages": [12042]}, {"start": 12728, "end": 12728, "pages": [12728]}, {"start": 12826, "end": 12826, "pages": [12826]}, {"start": 14408, "end": 14415, "pages": [14408, 14410, 14415]}, {"start": 14424, "end": 14449, "pages": [14424, 14428, 14433, 14438, 14439, 14444, 14447, 14449]}, {"start": 14455, "end": 14460, "pages": [14455, 14456, 14459, 14460]}, {"start": 14470, "end": 14474, "pages": [14470, 14474]}, {"start": 14482, "end": 14483, "pages": [14482, 14483]}, {"start": 14524, "end": 14524, "pages": [14524]}, {"start": 14563, "end": 14563, "pages": [14563]}, {"start": 14571, "end": 14571, "pages": [14571]}, {"start": 14581, "end": 14581, "pages": [14581]}, {"start": 14649, "end": 14649, "pages": [14649]}, {"start": 14742, "end": 14744, "pages": [14742, 14744]}, {"start": 16128, "end": 16128, "pages": [16128]}, {"start": 16175, "end": 16175, "pages": [16175]}, {"start": 17029, "end": 17036, "pages": [17029, 17031, 17036]}, {"start": 17045, "end": 17070, "pages": [17045, 17049, 17054, 17059, 17060, 17065, 17068, 17070]}, {"start": 17076, "end": 17081, "pages": [17076, 17077, 17080, 17081]}, {"start": 17091, "end": 17095, "pages": [17091, 17095]}, {"start": 17103, "end": 17104, "pages": [17103, 17104]}, {"start": 17145, "end": 17145, "pages": [17145]}, {"start": 17184, "end": 17184, "pages": [17184]}, {"start": 17192, "end": 17192, "pages": [17192]}, {"start": 17202, "end": 17202, "pages": [17202]}, {"start": 17270, "end": 17270, "pages": [17270]}, {"start": 17358, "end": 17360, "pages": [17358, 17360]}, {"start": 17631, "end": 17631, "pages": [17631]}, {"start": 18315, "end": 18315, "pages": [18315]}, {"start": 18412, "end": 18412, "pages": [18412]}, {"start": 24358, "end": 24358, "pages": [24358]}, {"start": 24407, "end": 24407, "pages": [24407]}];
+        const pageToPath = {"2469": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002469.jpg", "5321": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005321.jpg", "6159": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006159.jpg", "7456": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007456.jpg", "8536": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008536.jpg", "8621": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008621.jpg", "8701": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008701.jpg", "8787": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008787.jpg", "11683": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011683.jpg", "11730": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011730.jpg", "12042": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012042.jpg", "12728": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012728.jpg", "12826": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012826.jpg", "14408": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014408.jpg", "14410": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014410.jpg", "14415": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014415.jpg", "14424": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014424.jpg", "14428": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014428.jpg", "14433": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014433.jpg", "14438": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014438.jpg", "14439": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014439.jpg", "14444": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014444.jpg", "14447": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014447.jpg", "14449": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014449.jpg", "14455": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014455.jpg", "14456": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014456.jpg", "14459": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014459.jpg", "14460": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014460.jpg", "14470": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014470.jpg", "14474": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014474.jpg", "14482": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014482.jpg", "14483": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014483.jpg", "14524": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014524.jpg", "14563": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014563.jpg", "14571": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014571.jpg", "14581": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014581.jpg", "14649": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014649.jpg", "14742": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014742.jpg", "14744": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014744.jpg", "16128": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016128.jpg", "16175": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016175.jpg", "17029": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017029.jpg", "17031": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017031.jpg", "17036": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017036.jpg", "17045": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017045.jpg", "17049": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017049.jpg", "17054": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017054.jpg", "17059": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017059.jpg", "17060": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017060.jpg", "17065": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017065.jpg", "17068": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017068.jpg", "17070": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017070.jpg", "17076": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017076.jpg", "17077": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017077.jpg", "17080": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017080.jpg", "17081": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017081.jpg", "17091": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017091.jpg", "17095": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017095.jpg", "17103": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017103.jpg", "17104": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017104.jpg", "17145": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017145.jpg", "17184": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017184.jpg", "17192": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017192.jpg", "17202": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017202.jpg", "17270": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017270.jpg", "17358": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017358.jpg", "17360": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017360.jpg", "17631": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017631.jpg", "18315": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018315.jpg", "18412": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018412.jpg", "24358": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00024358.jpg", "24407": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00024407.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002469.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005321.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006159.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007456.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008536.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008621.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008701.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008787.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011683.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011730.jpg": "...prominent oldex british gentleman. kate was above the age...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012042.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012728.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012826.jpg": "...l?  the older proeminent gentleman with whei, you had. beeh...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014408.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014410.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014415.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014424.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014428.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014433.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014438.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014439.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014444.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014447.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014449.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014455.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014456.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014459.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014460.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014470.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014474.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014482.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014483.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014524.jpg": "...from the one prontinent gentleman to  the next, jeffrey ep...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014563.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014571.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014581.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014649.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014742.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014744.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016128.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016175.jpg": "...prominent oldex british gentleman. kate was above the age...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017029.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017031.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017036.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017045.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017049.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017054.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017059.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017060.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017065.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017068.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017070.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017076.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017077.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017080.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017081.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017091.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017095.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017103.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017104.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017145.jpg": "...from the one prontinent gentleman to  the next, jeffrey ep...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017184.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017192.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017202.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017270.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017358.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017360.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017631.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018315.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018412.jpg": "...l?  the older proeminent gentleman with whei, you had. beeh...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00024358.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00024407.jpg": ""};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "gentleman" (72 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">2469-2469</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">5321-5321</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">6159-6159</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">7456-7456</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">8536-8536</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">8621-8621</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">8701-8701</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">8787-8787</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">11683-11683</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">11730-11730</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">12042-12042</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">12728-12728</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">12826-12826</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">14408-14415</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">14424-14449</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">14455-14460</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">14470-14474</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">14482-14483</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">14524-14524</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">14563-14563</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">14571-14571</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">14581-14581</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">14649-14649</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">14742-14744</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">16128-16128</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">16175-16175</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">17029-17036</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">17045-17070</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">17076-17081</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">17091-17095</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">17103-17104</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">17145-17145</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">17184-17184</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">17192-17192</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">17202-17202</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">17270-17270</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">17358-17360</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">17631-17631</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">18315-18315</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">18412-18412</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">24358-24358</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">24407-24407</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

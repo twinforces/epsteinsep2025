@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "behavioral"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 4771, "end": 4771, "pages": [4771]}, {"start": 5639, "end": 5639, "pages": [5639]}, {"start": 5662, "end": 5662, "pages": [5662]}, {"start": 5808, "end": 5808, "pages": [5808]}, {"start": 6601, "end": 6601, "pages": [6601]}, {"start": 6624, "end": 6624, "pages": [6624]}, {"start": 6733, "end": 6733, "pages": [6733]}, {"start": 7227, "end": 7229, "pages": [7227, 7229]}, {"start": 7268, "end": 7268, "pages": [7268]}, {"start": 7510, "end": 7513, "pages": [7510, 7513]}, {"start": 7521, "end": 7521, "pages": [7521]}, {"start": 7540, "end": 7540, "pages": [7540]}, {"start": 7556, "end": 7563, "pages": [7556, 7557, 7558, 7562, 7563]}, {"start": 7591, "end": 7592, "pages": [7591, 7592]}, {"start": 7598, "end": 7598, "pages": [7598]}, {"start": 7605, "end": 7617, "pages": [7605, 7609, 7612, 7616, 7617]}, {"start": 7630, "end": 7631, "pages": [7630, 7631]}, {"start": 7666, "end": 7668, "pages": [7666, 7667, 7668]}, {"start": 7678, "end": 7678, "pages": [7678]}, {"start": 7917, "end": 7919, "pages": [7917, 7919]}, {"start": 7958, "end": 7958, "pages": [7958]}, {"start": 8125, "end": 8127, "pages": [8125, 8126, 8127]}, {"start": 8137, "end": 8137, "pages": [8137]}, {"start": 10473, "end": 10473, "pages": [10473]}, {"start": 10523, "end": 10523, "pages": [10523]}, {"start": 14924, "end": 14926, "pages": [14924, 14926]}, {"start": 14965, "end": 14965, "pages": [14965]}];
+        const pageToPath = {"4771": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004771.jpg", "5639": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005639.jpg", "5662": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005662.jpg", "5808": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005808.jpg", "6601": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006601.jpg", "6624": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006624.jpg", "6733": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006733.jpg", "7227": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007227.jpg", "7229": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007229.jpg", "7268": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007268.jpg", "7510": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007510.jpg", "7513": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007513.jpg", "7521": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007521.jpg", "7540": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007540.jpg", "7556": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007556.jpg", "7557": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007557.jpg", "7558": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007558.jpg", "7562": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007562.jpg", "7563": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007563.jpg", "7591": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007591.jpg", "7592": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007592.jpg", "7598": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007598.jpg", "7605": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007605.jpg", "7609": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007609.jpg", "7612": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007612.jpg", "7616": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007616.jpg", "7617": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007617.jpg", "7630": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007630.jpg", "7631": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007631.jpg", "7666": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007666.jpg", "7667": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007667.jpg", "7668": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007668.jpg", "7678": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007678.jpg", "7917": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007917.jpg", "7919": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007919.jpg", "7958": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007958.jpg", "8125": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008125.jpg", "8126": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008126.jpg", "8127": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008127.jpg", "8137": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008137.jpg", "10473": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010473.jpg", "10523": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010523.jpg", "14924": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014924.jpg", "14926": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014926.jpg", "14965": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014965.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004771.jpg": "...rtieipate ih a ¢egnitave behavioral  treatment program undex...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005639.jpg": "...testimony‘ ‘“about:the: behavioral paterns of child...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005662.jpg": "...physicians: corporation behavioral health’network:  2ol4 pr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005808.jpg": "...ties in.  nships or-with behavioral control, and.d  this. op...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006601.jpg": "...testimony‘ ‘“about:the: behavioral paterns of child...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006624.jpg": "...physicians: corporation behavioral health\"network:  2ol4 pr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006733.jpg": "...ties in.  nships or-with behavioral control, and.d  this. op...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007227.jpg": "...ied a number of specific behavioral. and cbservable strategi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007229.jpg": "..., there is'a list of the behavioral and the observable and m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007268.jpg": "...t and trained  ls te use behavioral deseriptoxns of what i'm...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007510.jpg": "...or advanced study in the behavioral scicices, stanford, l978...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007513.jpg": "...8l-85  res rare. int the behavioral and soeial sciences, l98...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007521.jpg": "...ing processes in memory: behavioral and brain sciences, 7,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007540.jpg": "...s ‘in.alil i generation. behavioral sciences...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007556.jpg": "...priv eee to. ) mitigate behavioral risks.)  l987- forensic;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007557.jpg": "...tment. of psychiatry and behavioral sciences, johns hopkins...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007558.jpg": "...professor of law and of behavioral medicine  and psychiatry...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007562.jpg": "...ences:  editorial board, behavioral sciences and the law.  a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007563.jpg": "...al of the history:of the behavioral sciences. journal_of ner...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007591.jpg": "...z pe: medicinee and the  behavioral sciences: the johns, hop...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007592.jpg": "...s aw: sexual fatalities: behavioral reconstruction in equivo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007598.jpg": "..., grenell rg (eds.): the behavioral and social sciences and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007605.jpg": "...me eee ne a  dietz pe: \"behavioral aspects of vehicular vio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007609.jpg": "....  dietz pe: \"preserving behavioral evidence,\" national food...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007612.jpg": "...dietz pe, ressler rk: \"behavioral aspects of crime investi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007616.jpg": "...june 29, 2oo7  dietz p: “behavioral aspects of notice, negli...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007617.jpg": "...june 26, 2oo8  dietz ps “behavioral warnings of atacks on pu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007630.jpg": "...uman aggression unit of “behavioral : ces in medicine\" (psyc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007631.jpg": "...nts  the, department. of behavioral medicine and psyct iatry...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007666.jpg": "...46:  - of psychiatry and behavioral neurosciences  universit...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007667.jpg": "...ent: of psychi jatry and behavioral sciences’  rena.  baltim...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007668.jpg": "...south florida college of behavioral and coniminity sciences,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007678.jpg": "...tals.and pharmacological/behavioral treatment.of agitation;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007917.jpg": "...ied a number of specific behavioral. and cbservable strategi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007919.jpg": "..., there is'a list of the behavioral and the observable and m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007958.jpg": "...t and trained  ls te use behavioral deseriptoxns of what i'm...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008125.jpg": "...46:  - of psychiatry and behavioral neurosciences  universit...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008126.jpg": "...ent: of psychi jatry and behavioral sciences’  rena.  baltim...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008127.jpg": "...south florida college of behavioral and coniminity sciences,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008137.jpg": "...tals.and pharmacological/behavioral treatment.of agitation;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010473.jpg": "...rtment of psychiatry and-behavioral sciences new york medica...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010523.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014924.jpg": "...ied a number of specifac behavioral, and observable  strateg...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014926.jpg": "..., there is a list of the behavioral and the observable arid...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014965.jpg": "...ht and trained is to use behavioral descriptors of what i'm..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "behavioral" (45 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">4771-4771</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">5639-5639</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">5662-5662</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">5808-5808</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">6601-6601</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">6624-6624</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">6733-6733</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">7227-7229</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">7268-7268</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">7510-7513</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">7521-7521</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">7540-7540</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">7556-7563</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">7591-7592</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">7598-7598</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">7605-7617</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">7630-7631</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">7666-7668</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">7678-7678</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">7917-7919</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">7958-7958</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">8125-8127</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">8137-8137</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">10473-10473</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">10523-10523</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">14924-14926</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">14965-14965</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

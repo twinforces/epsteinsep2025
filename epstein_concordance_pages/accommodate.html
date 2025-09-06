@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "accommodate"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 609, "end": 609, "pages": [609]}, {"start": 617, "end": 617, "pages": [617]}, {"start": 647, "end": 647, "pages": [647]}, {"start": 846, "end": 846, "pages": [846]}, {"start": 884, "end": 884, "pages": [884]}, {"start": 1012, "end": 1012, "pages": [1012]}, {"start": 1304, "end": 1305, "pages": [1304, 1305]}, {"start": 1395, "end": 1395, "pages": [1395]}, {"start": 1561, "end": 1562, "pages": [1561, 1562]}, {"start": 1885, "end": 1885, "pages": [1885]}, {"start": 2831, "end": 2831, "pages": [2831]}, {"start": 2931, "end": 2931, "pages": [2931]}, {"start": 3164, "end": 3164, "pages": [3164]}, {"start": 3842, "end": 3842, "pages": [3842]}, {"start": 3990, "end": 3990, "pages": [3990]}, {"start": 4119, "end": 4119, "pages": [4119]}, {"start": 4940, "end": 4940, "pages": [4940]}, {"start": 6975, "end": 6975, "pages": [6975]}, {"start": 7011, "end": 7011, "pages": [7011]}, {"start": 8239, "end": 8239, "pages": [8239]}, {"start": 8321, "end": 8321, "pages": [8321]}, {"start": 9617, "end": 9617, "pages": [9617]}, {"start": 11632, "end": 11632, "pages": [11632]}, {"start": 11777, "end": 11777, "pages": [11777]}, {"start": 13024, "end": 13024, "pages": [13024]}, {"start": 13817, "end": 13817, "pages": [13817]}, {"start": 16442, "end": 16442, "pages": [16442]}, {"start": 17367, "end": 17367, "pages": [17367]}, {"start": 18609, "end": 18609, "pages": [18609]}, {"start": 19465, "end": 19465, "pages": [19465]}, {"start": 19752, "end": 19752, "pages": [19752]}, {"start": 19778, "end": 19778, "pages": [19778]}, {"start": 19802, "end": 19802, "pages": [19802]}, {"start": 19930, "end": 19930, "pages": [19930]}, {"start": 20222, "end": 20223, "pages": [20222, 20223]}, {"start": 20313, "end": 20313, "pages": [20313]}];
+        const pageToPath = {"609": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000609.jpg", "617": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000617.jpg", "647": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000647.jpg", "846": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000846.jpg", "884": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000884.jpg", "1012": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001012.jpg", "1304": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001304.jpg", "1305": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001305.jpg", "1395": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001395.jpg", "1561": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001561.jpg", "1562": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001562.jpg", "1885": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001885.jpg", "2831": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002831.jpg", "2931": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002931.jpg", "3164": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003164.jpg", "3842": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003842.jpg", "3990": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003990.jpg", "4119": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004119.jpg", "4940": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004940.jpg", "6975": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006975.jpg", "7011": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007011.jpg", "8239": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008239.jpg", "8321": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008321.jpg", "9617": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009617.jpg", "11632": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011632.jpg", "11777": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011777.jpg", "13024": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013024.jpg", "13817": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013817.jpg", "16442": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016442.jpg", "17367": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017367.jpg", "18609": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018609.jpg", "19465": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019465.jpg", "19752": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019752.jpg", "19778": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019778.jpg", "19802": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019802.jpg", "19930": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019930.jpg", "20222": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020222.jpg", "20223": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020223.jpg", "20313": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020313.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000609.jpg": "...nt date, or l'm happy to accommodate you wath another  for th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000617.jpg": "...the trial date, i could accommodate eather june 6r sepreembe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000647.jpg": "...nal, jjustice system to  accommodate the rights of crime vict...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000846.jpg": "...’ ane ; | { a request to accommodate alleged victims members|...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000884.jpg": "...’ ane ; | { a request to accommodate alleged victims members|...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001012.jpg": "...istancing, it gan safely accommodate 6o people, the court has...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001304.jpg": "...isits, and will work to. accommodate in-person. visits betwee...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001305.jpg": "...ut that it will “work to accommodate’ in-person visits: betwe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001395.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001561.jpg": "...n. these-phone lines can accommodate approximately 5oo caller...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001562.jpg": "...f  there is a request to.accommodate: alleged victims ‘or fam...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001885.jpg": "...tancing,  it gan. safely accommodate 6o people, the court has...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002831.jpg": "...for the transfer“‘was to accommodate ‘trial congestion.in  yi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002931.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003164.jpg": "...e tral. in.  retrial “to accommodate ‘trial congestion in ‘th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003842.jpg": "...822. this phone line can.accommodate approximately.-4,ooo cal...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003990.jpg": "...l.  it;was' scheduled:to accommodate the 2-week july l2 trial...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004119.jpg": "...the holiday: season.  to accommodate the governments vaguely...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004940.jpg": "...ective order in ofdef to accommodate the. grand jury  subpoen...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006975.jpg": "...d a phone: line that can accommodate up. to 4,ooo callers, wh...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007011.jpg": "...we woulda.'t be able £6  accommodate in-person presence for t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008239.jpg": "...d, therefore may “bou to accommodate other legitimate interes...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008321.jpg": "...efore 6f after, you! ll  accommodate that. but otherwise, l d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009617.jpg": "...that was rescheduled to, accommodate «commencement. of ms. ma...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011632.jpg": "...efore 6f after, you! ll  accommodate that. but otherwise, l d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011777.jpg": "...be to keep the juser and accommodate  jufer's travel plans, y...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013024.jpg": "...all him out  of order to accommodate that. but we can see hou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013817.jpg": "...e had e6notigh space fo  accommodate that many students and h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016442.jpg": "...e had e6notigh space fo  accommodate that many students and h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017367.jpg": "...be to keep the juser and accommodate  jufer's travel plans, y...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018609.jpg": "...all him out  of order to accommodate that. but we can see hou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019465.jpg": "...these phone. lines :can.accommodate: approximately: §oo.call...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019752.jpg": "...’ ane ; | { a request to accommodate alleged victims members|...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019778.jpg": "...’ ane ; | { a request to accommodate alleged victims members|...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019802.jpg": "...’ ane ; | { a request to accommodate alleged victims members|...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019930.jpg": "...istaneing, it gan safely accommodate 6o people, the court has...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020222.jpg": "...isits, and will work to. accommodate in-person. visits betwee...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020223.jpg": "...ut that it will “work to accommodate’ in-person visits: betwe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020313.jpg": ""};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "accommodate" (39 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">609-609</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">617-617</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">647-647</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">846-846</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">884-884</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">1012-1012</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">1304-1305</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">1395-1395</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">1561-1562</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">1885-1885</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">2831-2831</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">2931-2931</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">3164-3164</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">3842-3842</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">3990-3990</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">4119-4119</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">4940-4940</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">6975-6975</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">7011-7011</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">8239-8239</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">8321-8321</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">9617-9617</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">11632-11632</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">11777-11777</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">13024-13024</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">13817-13817</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">16442-16442</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">17367-17367</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">18609-18609</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">19465-19465</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">19752-19752</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">19778-19778</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">19802-19802</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">19930-19930</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">20222-20223</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">20313-20313</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

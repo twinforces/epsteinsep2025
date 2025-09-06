@@ -1,0 +1,220 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "phenomenon"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 276, "end": 276, "pages": [276]}, {"start": 544, "end": 544, "pages": [544]}, {"start": 5630, "end": 5630, "pages": [5630]}, {"start": 5639, "end": 5639, "pages": [5639]}, {"start": 5750, "end": 5750, "pages": [5750]}, {"start": 5810, "end": 5810, "pages": [5810]}, {"start": 5898, "end": 5900, "pages": [5898, 5900]}, {"start": 5908, "end": 5908, "pages": [5908]}, {"start": 5983, "end": 5983, "pages": [5983]}, {"start": 6351, "end": 6351, "pages": [6351]}, {"start": 6592, "end": 6592, "pages": [6592]}, {"start": 6601, "end": 6601, "pages": [6601]}, {"start": 6687, "end": 6687, "pages": [6687]}, {"start": 6735, "end": 6735, "pages": [6735]}, {"start": 6823, "end": 6825, "pages": [6823, 6825]}, {"start": 6833, "end": 6833, "pages": [6833]}, {"start": 6908, "end": 6908, "pages": [6908]}, {"start": 7210, "end": 7210, "pages": [7210]}, {"start": 7222, "end": 7222, "pages": [7222]}, {"start": 7233, "end": 7233, "pages": [7233]}, {"start": 7245, "end": 7256, "pages": [7245, 7248, 7249, 7254, 7255, 7256]}, {"start": 7304, "end": 7307, "pages": [7304, 7307]}, {"start": 7317, "end": 7318, "pages": [7317, 7318]}, {"start": 7490, "end": 7490, "pages": [7490]}, {"start": 7900, "end": 7900, "pages": [7900]}, {"start": 7912, "end": 7912, "pages": [7912]}, {"start": 7923, "end": 7923, "pages": [7923]}, {"start": 7935, "end": 7946, "pages": [7935, 7938, 7939, 7944, 7945, 7946]}, {"start": 7994, "end": 7997, "pages": [7994, 7997]}, {"start": 8007, "end": 8008, "pages": [8007, 8008]}, {"start": 8179, "end": 8179, "pages": [8179]}, {"start": 12345, "end": 12345, "pages": [12345]}, {"start": 12363, "end": 12363, "pages": [12363]}, {"start": 14907, "end": 14907, "pages": [14907]}, {"start": 14919, "end": 14919, "pages": [14919]}, {"start": 14930, "end": 14930, "pages": [14930]}, {"start": 14945, "end": 14953, "pages": [14945, 14946, 14951, 14952, 14953]}, {"start": 15001, "end": 15001, "pages": [15001]}, {"start": 15014, "end": 15015, "pages": [15014, 15015]}, {"start": 15029, "end": 15029, "pages": [15029]}, {"start": 17933, "end": 17933, "pages": [17933]}, {"start": 17951, "end": 17951, "pages": [17951]}];
+        const pageToPath = {"276": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000276.jpg", "544": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000544.jpg", "5630": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005630.jpg", "5639": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005639.jpg", "5750": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005750.jpg", "5810": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005810.jpg", "5898": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005898.jpg", "5900": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005900.jpg", "5908": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005908.jpg", "5983": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005983.jpg", "6351": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006351.jpg", "6592": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006592.jpg", "6601": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006601.jpg", "6687": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006687.jpg", "6735": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006735.jpg", "6823": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006823.jpg", "6825": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006825.jpg", "6833": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006833.jpg", "6908": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006908.jpg", "7210": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007210.jpg", "7222": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007222.jpg", "7233": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007233.jpg", "7245": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007245.jpg", "7248": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007248.jpg", "7249": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007249.jpg", "7254": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007254.jpg", "7255": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007255.jpg", "7256": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007256.jpg", "7304": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007304.jpg", "7307": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007307.jpg", "7317": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007317.jpg", "7318": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007318.jpg", "7490": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007490.jpg", "7900": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007900.jpg", "7912": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007912.jpg", "7923": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007923.jpg", "7935": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007935.jpg", "7938": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007938.jpg", "7939": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007939.jpg", "7944": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007944.jpg", "7945": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007945.jpg", "7946": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007946.jpg", "7994": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007994.jpg", "7997": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007997.jpg", "8007": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008007.jpg", "8008": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008008.jpg", "8179": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008179.jpg", "12345": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012345.jpg", "12363": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012363.jpg", "14907": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014907.jpg", "14919": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014919.jpg", "14930": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014930.jpg", "14945": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014945.jpg", "14946": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014946.jpg", "14951": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014951.jpg", "14952": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014952.jpg", "14953": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014953.jpg", "15001": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015001.jpg", "15014": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015014.jpg", "15015": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015015.jpg", "15029": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015029.jpg", "17933": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017933.jpg", "17951": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017951.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000276.jpg": "...ng is ‘a:more recent: t: phenomenon, ‘that: is distinct ‘fro...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000544.jpg": "...ation.  m  this is not a phenomenon when we hear in this) ca...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005630.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005639.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005750.jpg": "...has recognized that this:phenomenon,has led-to significant p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005810.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005898.jpg": "...n crablistied about, the phenomenon: of, sexual grooming. ba...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005900.jpg": "...e ito account.  for the ‘phenomenon of sexital grooming. urn...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005908.jpg": "...sexualdbuse neglect.the phenomenon. the main reason for*thi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005983.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006351.jpg": "...d. sc  the hearing, this phenomenon is ‘not i  abuse ai  nd....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006592.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006601.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006687.jpg": "...has recognized that this:phenomenon,has led-to significant p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006735.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006823.jpg": "...n crablistied about, the phenomenon: of, sexual grooming. ba...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006825.jpg": "...e ito account.  for the ‘phenomenon of sexital grooming. urn...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006833.jpg": "...sexualdbuse neglect.the phenomenon. the main reason for*thi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006908.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007210.jpg": "...s to commonly recognized phenomenon  and, strategies, tactic...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007222.jpg": "...racterizing these commen phenomenon, the common phenomenon ....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007233.jpg": "...ence, it's a complicated phenomenon. you're never going te g...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007245.jpg": "...when we're studying any phenomenon, l want. te look,  at th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007248.jpg": "...t can substantiate this  phenomenon.  q. hou does what. you'...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007249.jpg": "...sexual conduct on, the  phenomenon. of! grooming; you under...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007254.jpg": "...any discussion. ‘of that phenomenon in  the lateerature, spe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007255.jpg": "...hin the  lateradture the phenomenon. of what. kinds 6f thing...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007256.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007304.jpg": "...t it's investigating the phenomenon of  predatory alienation...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007307.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007317.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007318.jpg": "...graven says that. this  phenomenon, o£ grooming ds litle  u...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007490.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007900.jpg": "...s to commonly recognized phenomenon  and, strategies, tactic...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007912.jpg": "...racterizing these commen phenomenon, the common phenomenon ....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007923.jpg": "...ence, it's a complicated phenomenon. you're never going te g...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007935.jpg": "...when we're studying any phenomenon, l want. te look,  at th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007938.jpg": "...t can substantiate this  phenomenon.  q. hou does what. you'...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007939.jpg": "...sexual conduct on, the  phenomenon. of! grooming; you under...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007944.jpg": "...any discussion. ‘of that phenomenon in  the lateerature, spe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007945.jpg": "...hin the  lateradture the phenomenon. of what. kinds 6f thing...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007946.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007994.jpg": "...t it's investigating the phenomenon of  predatory alienation...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007997.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008007.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008008.jpg": "...graven says that. this  phenomenon, o£ grooming ds litle  u...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008179.jpg": "...on on the existence ofa  phenomenon called. “the-halo cffeet...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012345.jpg": "...nionly.  ies  recognized phenomenon within the literatube th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012363.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014907.jpg": "...s to commonly recognized phenomenon and strategies; tactics,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014919.jpg": "...acterizing these common. phenomenon, the common  phenomenon...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014930.jpg": "...atern of behavior or any phenomenon within the social, scien...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014945.jpg": "...at can substantiate this phenomenon.  @. hou does what: you'...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014946.jpg": "...r sexual ¢enduet of the  phenomenon, off grooming, you under...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014951.jpg": "...any discussion. of that. phenomenon in the literature, speci...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014952.jpg": "...a se af  ikerature ‘the phenomenon of what kinds of things,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014953.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015001.jpg": "...t it's investigating the phenomenon of predatory alienfation...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015014.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015015.jpg": "...aven says that this  ir  phenomenon of grooming i6 litle = \"...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015029.jpg": "...ing that. it is a common phenomenon that is observed in the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017933.jpg": "...nionly.  ies  recognized phenomenon within the literatube th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017951.jpg": ""};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "phenomenon" (63 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">276-276</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">544-544</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">5630-5630</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">5639-5639</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">5750-5750</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">5810-5810</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">5898-5900</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">5908-5908</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">5983-5983</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">6351-6351</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">6592-6592</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">6601-6601</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">6687-6687</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">6735-6735</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">6823-6825</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">6833-6833</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">6908-6908</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">7210-7210</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">7222-7222</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">7233-7233</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">7245-7256</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">7304-7307</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">7317-7318</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">7490-7490</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">7900-7900</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">7912-7912</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">7923-7923</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">7935-7946</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">7994-7997</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">8007-8008</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">8179-8179</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">12345-12345</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">12363-12363</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">14907-14907</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">14919-14919</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">14930-14930</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">14945-14953</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">15001-15001</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">15014-15015</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">15029-15029</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">17933-17933</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">17951-17951</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

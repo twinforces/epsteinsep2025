@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "environmental"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 3645, "end": 3645, "pages": [3645]}, {"start": 5912, "end": 5912, "pages": [5912]}, {"start": 6837, "end": 6837, "pages": [6837]}, {"start": 7620, "end": 7620, "pages": [7620]}, {"start": 7628, "end": 7628, "pages": [7628]}, {"start": 7856, "end": 7856, "pages": [7856]}, {"start": 10460, "end": 10460, "pages": [10460]}, {"start": 11612, "end": 11612, "pages": [11612]}, {"start": 14840, "end": 14840, "pages": [14840]}];
+        const pageToPath = {"3645": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003645.jpg", "5912": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005912.jpg", "6837": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006837.jpg", "7620": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007620.jpg", "7628": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007628.jpg", "7856": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007856.jpg", "10460": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010460.jpg", "11612": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011612.jpg", "14840": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014840.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003645.jpg": "...ns. in addition. to  pe  environmental. cases ‘involving: stati...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005912.jpg": "...e research'is needed ‘on environmental, ‘contextual, and.cultur...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006837.jpg": "...e research'is needed ‘on environmental, ‘contextual, and.cultur...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007620.jpg": "...ce violence,” industrial environmental association conference,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007628.jpg": "...division of forensic and environmental pathology:  state bar of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007856.jpg": "...g. the effects of vommon environmental, v.ariables:on the  am a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010460.jpg": "...eans into a non-profit: ‘environmental. organization, ‘lhe: ‘le...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011612.jpg": "...aged in sofie  including environmental conservation and,  we ss...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014840.jpg": "...aged in sofie  including environmental conservation and,  we ss..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "environmental" (9 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">3645-3645</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">5912-5912</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">6837-6837</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">7620-7620</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">7628-7628</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">7856-7856</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">10460-10460</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">11612-11612</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">14840-14840</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

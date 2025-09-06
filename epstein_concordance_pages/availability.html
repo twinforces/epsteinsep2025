@@ -1,0 +1,241 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "availability"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1450, "end": 1450, "pages": [1450]}, {"start": 1457, "end": 1457, "pages": [1457]}, {"start": 1846, "end": 1849, "pages": [1846, 1849]}, {"start": 1967, "end": 1967, "pages": [1967]}, {"start": 2324, "end": 2324, "pages": [2324]}, {"start": 2918, "end": 2918, "pages": [2918]}, {"start": 3160, "end": 3160, "pages": [3160]}, {"start": 3330, "end": 3330, "pages": [3330]}, {"start": 3452, "end": 3452, "pages": [3452]}, {"start": 3470, "end": 3470, "pages": [3470]}, {"start": 3490, "end": 3490, "pages": [3490]}, {"start": 3950, "end": 3950, "pages": [3950]}, {"start": 4452, "end": 4452, "pages": [4452]}, {"start": 4574, "end": 4574, "pages": [4574]}, {"start": 4612, "end": 4612, "pages": [4612]}, {"start": 4771, "end": 4771, "pages": [4771]}, {"start": 4878, "end": 4878, "pages": [4878]}, {"start": 5204, "end": 5204, "pages": [5204]}, {"start": 5282, "end": 5282, "pages": [5282]}, {"start": 7022, "end": 7022, "pages": [7022]}, {"start": 8298, "end": 8298, "pages": [8298]}, {"start": 8430, "end": 8430, "pages": [8430]}, {"start": 9664, "end": 9664, "pages": [9664]}, {"start": 10761, "end": 10761, "pages": [10761]}, {"start": 10819, "end": 10819, "pages": [10819]}, {"start": 10848, "end": 10848, "pages": [10848]}, {"start": 11022, "end": 11022, "pages": [11022]}, {"start": 11322, "end": 11322, "pages": [11322]}, {"start": 14004, "end": 14004, "pages": [14004]}, {"start": 14141, "end": 14141, "pages": [14141]}, {"start": 14402, "end": 14402, "pages": [14402]}, {"start": 14673, "end": 14673, "pages": [14673]}, {"start": 16628, "end": 16628, "pages": [16628]}, {"start": 16764, "end": 16764, "pages": [16764]}, {"start": 17023, "end": 17023, "pages": [17023]}, {"start": 17293, "end": 17293, "pages": [17293]}, {"start": 19325, "end": 19325, "pages": [19325]}, {"start": 19353, "end": 19353, "pages": [19353]}, {"start": 19376, "end": 19376, "pages": [19376]}, {"start": 19624, "end": 19624, "pages": [19624]}, {"start": 19645, "end": 19645, "pages": [19645]}, {"start": 19675, "end": 19675, "pages": [19675]}, {"start": 20368, "end": 20368, "pages": [20368]}, {"start": 20375, "end": 20375, "pages": [20375]}, {"start": 20917, "end": 20917, "pages": [20917]}, {"start": 21741, "end": 21742, "pages": [21741, 21742]}, {"start": 21998, "end": 21998, "pages": [21998]}, {"start": 22006, "end": 22006, "pages": [22006]}, {"start": 22119, "end": 22119, "pages": [22119]}];
+        const pageToPath = {"1450": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001450.jpg", "1457": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001457.jpg", "1846": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001846.jpg", "1849": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001849.jpg", "1967": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001967.jpg", "2324": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002324.jpg", "2918": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002918.jpg", "3160": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003160.jpg", "3330": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003330.jpg", "3452": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003452.jpg", "3470": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003470.jpg", "3490": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003490.jpg", "3950": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003950.jpg", "4452": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004452.jpg", "4574": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004574.jpg", "4612": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004612.jpg", "4771": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004771.jpg", "4878": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004878.jpg", "5204": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005204.jpg", "5282": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005282.jpg", "7022": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007022.jpg", "8298": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008298.jpg", "8430": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008430.jpg", "9664": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009664.jpg", "10761": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010761.jpg", "10819": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010819.jpg", "10848": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010848.jpg", "11022": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011022.jpg", "11322": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011322.jpg", "14004": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014004.jpg", "14141": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014141.jpg", "14402": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014402.jpg", "14673": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014673.jpg", "16628": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016628.jpg", "16764": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016764.jpg", "17023": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017023.jpg", "17293": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017293.jpg", "19325": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019325.jpg", "19353": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019353.jpg", "19376": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019376.jpg", "19624": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019624.jpg", "19645": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019645.jpg", "19675": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019675.jpg", "20368": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020368.jpg", "20375": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020375.jpg", "20917": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020917.jpg", "21741": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021741.jpg", "21742": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021742.jpg", "21998": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021998.jpg", "22006": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022006.jpg", "22119": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022119.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001450.jpg": "...ch surveillance, and the availability of an. appropriate eye c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001457.jpg": "...n mtervening ¢  law, the availability of'new evidence, or the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001846.jpg": "...e individuals. given-the availability:of redacted. filings, th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001849.jpg": "...(subject:to. the court’s availability)  per the court's order,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001967.jpg": "...urt=appointed  euibe the availability ef legal, phone  mediato...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002324.jpg": "...temporarily limited the availability of grand juries in. the:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002918.jpg": "...29, 2o2ll to corvey its availability fora call to diseuss som...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003160.jpg": "...ith. substantially: less availability than before the pandemic...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003330.jpg": "...nge to. prosectitor’s de availability of immunity: for the: de...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003452.jpg": "...medical or soc  (c) ‘the availability of any: restitution or:o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003470.jpg": "...by: state ‘plea and. the availability of s$) 2255 relief, also...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003490.jpg": "...s kot by the | usaq; the availability’ © of acosta’: sent ; em...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003950.jpg": ".... by the:  pandemic, the availability of: vaccines fo all adul...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004452.jpg": "...nge to. prosectitor’s de availability of immunity: for the: de...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004574.jpg": "...medical or soc  (c) ‘the availability of any: restitution or.:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004612.jpg": "...s kot by the | usaq; the availability of testes ent email,  .o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004771.jpg": "...ility to pay ox ‘ihe  ¥  availability of thard=party payrienit...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004878.jpg": "...to criminal maters. its availability “does: not turn upon the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005204.jpg": "...memulg otal, uy:  ‘swith availability beyond.the christmas hol...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005282.jpg": "...november l9; 2o2l. your availability  during that:week-will b...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007022.jpg": "...november l9, 2o2l. your availability  during thaty will be re...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008298.jpg": "...n £ was these,  based on availability.  q. would it surprise y...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008430.jpg": "...e for the  ‘on the equal availability: of ‘witnesses.  respect...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009664.jpg": "...y: ‘gelection from:  our availability.  november l9, 2o24;  no...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010761.jpg": "...november l9, 2o2l. your availability during: that-week will b...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010819.jpg": "...lection from. 2o2l. your availability:  wage 4  tuesday, novem...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010848.jpg": "...november’ l9, 2o2l. your availability during that-week will be...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011022.jpg": "...('p  ao  meo  availability  the: trial, is expected...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011322.jpg": "...ing their willingness or availability to:  testify beeause: of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014004.jpg": "...everdell: bit as to his, availability, we were  able to make c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014141.jpg": "...ae or re ie on eee a ee  availability of ge6 logation data, pe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014402.jpg": "...at. and we've sorted the availability  °. ot  the  @ ls  fom t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014673.jpg": "...tion that  lamitss their availability to tse ve in total. so i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016628.jpg": "...everdell: bit as to his, availability, we were  able to make c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016764.jpg": "...e re ee om eee ee ea be  availability of ge6 logation data, pe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017023.jpg": "...at. and we've sorted the availability  °. ot  the  @ ls  fom t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017293.jpg": "...tion that  lamitss their availability to tse ve in total. so i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019325.jpg": "...alang process due to the availability  of “eritac¢al new infor...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019353.jpg": "...558  criminal, case; the availability: of post-judgment relief...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019376.jpg": "...558  criminal, case; the availability: of post-judgment relief...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019624.jpg": ".... ina criminal case, the availability of post- judgment relief...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019645.jpg": ".... failure to updat about availability when:  deciding an motio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019675.jpg": "...failure to update about availability when deciding a motion t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020368.jpg": "...ch surveillance, and the availability of an. appropriate eye c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020375.jpg": "...n mtervening ¢  law, the availability of'new evidence, or the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020917.jpg": "...will ‘be: called back f availability.  tuesda: rs jy november...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021741.jpg": "...failure to update about availability when  deciding a a motio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021742.jpg": "...iting of any change: in  availability.. the court may consider...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021998.jpg": "...he government ‘has no  § availability, the requested.  ey w  o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022006.jpg": "...because of  the €6urt.'s availability at that time. that's als...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022119.jpg": "...regarding: the parties” availability for trial. in. ‘the thir..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "availability" (51 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1450-1450</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1457-1457</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1846-1849</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">1967-1967</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">2324-2324</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">2918-2918</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3160-3160</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">3330-3330</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">3452-3452</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">3470-3470</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">3490-3490</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">3950-3950</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">4452-4452</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">4574-4574</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">4612-4612</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">4771-4771</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">4878-4878</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">5204-5204</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">5282-5282</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">7022-7022</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">8298-8298</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">8430-8430</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">9664-9664</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">10761-10761</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">10819-10819</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">10848-10848</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">11022-11022</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">11322-11322</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">14004-14004</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">14141-14141</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">14402-14402</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">14673-14673</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">16628-16628</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">16764-16764</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">17023-17023</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">17293-17293</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">19325-19325</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">19353-19353</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">19376-19376</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">19624-19624</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">19645-19645</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">19675-19675</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">20368-20368</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">20375-20375</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">20917-20917</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(45, 0); return false;">21741-21742</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(46, 0); return false;">21998-21998</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(47, 0); return false;">22006-22006</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(48, 0); return false;">22119-22119</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

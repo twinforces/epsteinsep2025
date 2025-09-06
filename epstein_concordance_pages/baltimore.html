@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "baltimore"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 4973, "end": 4973, "pages": [4973]}, {"start": 5658, "end": 5658, "pages": [5658]}, {"start": 6620, "end": 6620, "pages": [6620]}, {"start": 7564, "end": 7564, "pages": [7564]}, {"start": 7598, "end": 7598, "pages": [7598]}, {"start": 7618, "end": 7626, "pages": [7618, 7621, 7626]}, {"start": 7667, "end": 7667, "pages": [7667]}, {"start": 7687, "end": 7695, "pages": [7687, 7689, 7690, 7695]}, {"start": 8126, "end": 8126, "pages": [8126]}, {"start": 8146, "end": 8154, "pages": [8146, 8148, 8149, 8154]}];
+        const pageToPath = {"4973": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004973.jpg", "5658": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005658.jpg", "6620": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006620.jpg", "7564": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007564.jpg", "7598": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007598.jpg", "7618": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007618.jpg", "7621": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007621.jpg", "7626": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007626.jpg", "7667": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007667.jpg", "7687": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007687.jpg", "7689": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007689.jpg", "7690": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007690.jpg", "7695": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007695.jpg", "8126": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008126.jpg", "8146": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008146.jpg", "8148": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008148.jpg", "8149": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008149.jpg", "8154": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008154.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004973.jpg": "...ee wd smears so? rd  the baltimore sun sun sentinel of fla....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005658.jpg": "...umatic siress studies,  ‘baltimore: md  cnt  ‘rocchio, l.m....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006620.jpg": "...umatic siress studies,  ‘baltimore: md  lent  ‘rocehio, l.m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007564.jpg": "...an, loth annual meeting, baltimore, maryland, october 25=28...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007598.jpg": "...dic ical,  health care.. baltimore: williams & wilkins, l97...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007618.jpg": "...hns  hopkins university, baltimore, md, april 24, 2ol3.  di...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007621.jpg": "...psychiatry and the law, baltimore, maryland, october 27,.l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007626.jpg": "...psychiatry and the law, baltimore, md, october 29, 2oo9....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007667.jpg": "...baltirnore/johns hopkins baltimore, maryland  psychi: tric...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007687.jpg": "...aw, l999 annual meeting, baltimore, md, october: l5,l999  h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007689.jpg": "...department of medicine, baltimore, md, june 2, 2oo5:  hall...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007690.jpg": "...psychiatry and the law, baltimore, md; october 29, 2oo9  h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007695.jpg": "...2o;,2ol9:  ede pa fone  baltimore, md. oetobi 56, ol9...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008126.jpg": "...baltirnore/johns hopkins baltimore, maryland  psychi: tric...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008146.jpg": "...aw, l999 annual meeting, baltimore, md, october: l5,l999  h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008148.jpg": "...department of medicine, baltimore, md, june 2, 2oo5:  hall...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008149.jpg": "...psychiatry and the law, baltimore, md; october 29, 2oo9  h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008154.jpg": "...2o;,2ol9:  ede pa fone  baltimore, md. oetobi 56, ol9..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "baltimore" (18 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">4973-4973</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">5658-5658</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">6620-6620</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">7564-7564</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">7598-7598</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">7618-7626</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">7667-7667</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">7687-7695</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">8126-8126</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">8146-8154</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

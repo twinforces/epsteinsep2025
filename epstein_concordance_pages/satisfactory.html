@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "satisfactory"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 3157, "end": 3157, "pages": [3157]}, {"start": 4472, "end": 4472, "pages": [4472]}, {"start": 5695, "end": 5696, "pages": [5695, 5696]}, {"start": 11484, "end": 11484, "pages": [11484]}, {"start": 19277, "end": 19277, "pages": [19277]}, {"start": 20601, "end": 20601, "pages": [20601]}, {"start": 20617, "end": 20617, "pages": [20617]}, {"start": 22128, "end": 22128, "pages": [22128]}];
+        const pageToPath = {"3157": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003157.jpg", "4472": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004472.jpg", "5695": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005695.jpg", "5696": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005696.jpg", "11484": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011484.jpg", "19277": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019277.jpg", "20601": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020601.jpg", "20617": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020617.jpg", "22128": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022128.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003157.jpg": "...eal infirmity, to render satisfactory jury service} or  } has....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004472.jpg": "...i ont in, the npa as a. satisfactory result, but.if was: dequ...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005695.jpg": "...nseiousness of guilt, “a satisfactory:  xist from which, the j...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005696.jpg": "...ment carinot establish a satisfactory factial.predicate for th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011484.jpg": "...full release, in.a farm satisfactory to the estate, of all  p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019277.jpg": "...ription &.dates):  wiake satisfactory arrangements with  lame)...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020601.jpg": "...y certify trat will make satisfactory arrangements with  (coun...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020617.jpg": "...:certify that) will make-satisfactory arrangements witht (coun...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022128.jpg": "...your good. bchavior and satisfactory compliance are  as follo..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "satisfactory" (9 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">3157-3157</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">4472-4472</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">5695-5696</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">11484-11484</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">19277-19277</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">20601-20601</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">20617-20617</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">22128-22128</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

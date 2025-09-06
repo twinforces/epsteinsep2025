@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "convenience"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 2285, "end": 2285, "pages": [2285]}, {"start": 5843, "end": 5843, "pages": [5843]}, {"start": 5928, "end": 5928, "pages": [5928]}, {"start": 6768, "end": 6768, "pages": [6768]}, {"start": 6853, "end": 6853, "pages": [6853]}, {"start": 7456, "end": 7456, "pages": [7456]}, {"start": 8536, "end": 8536, "pages": [8536]}, {"start": 8701, "end": 8701, "pages": [8701]}, {"start": 8787, "end": 8787, "pages": [8787]}, {"start": 10848, "end": 10848, "pages": [10848]}, {"start": 11305, "end": 11305, "pages": [11305]}, {"start": 13442, "end": 13442, "pages": [13442]}, {"start": 14649, "end": 14649, "pages": [14649]}, {"start": 16128, "end": 16128, "pages": [16128]}, {"start": 17270, "end": 17270, "pages": [17270]}, {"start": 19026, "end": 19026, "pages": [19026]}, {"start": 21094, "end": 21094, "pages": [21094]}];
+        const pageToPath = {"2285": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002285.jpg", "5843": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005843.jpg", "5928": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005928.jpg", "6768": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006768.jpg", "6853": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006853.jpg", "7456": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007456.jpg", "8536": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008536.jpg", "8701": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008701.jpg", "8787": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008787.jpg", "10848": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010848.jpg", "11305": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011305.jpg", "13442": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013442.jpg", "14649": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014649.jpg", "16128": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016128.jpg", "17270": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017270.jpg", "19026": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019026.jpg", "21094": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021094.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002285.jpg": "...8ls. to promote: “tral  ‘convenience and. cconomy: of judicia...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005843.jpg": "...l, emel melan lae 2 ia)  convenience of the defense. the gove...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005928.jpg": "...mp! pling for-the:m« art-convenience ¢ based, itially | conce...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006768.jpg": "...l, emel melan lae 2 ia)  convenience of the defense. the gove...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006853.jpg": "...mp! pling for-the:m« art-convenience ¢ based, itially | conce...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007456.jpg": "...e than. others, so; as a convenience to you, i  may excuse yo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008536.jpg": "...been:prepared. for your convenience. after-you havereached....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008701.jpg": "...been:prepared. for your convenience. after-you havereached....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008787.jpg": "...been:prepared. for your convenience. after-you havereached....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010848.jpg": "...ancial hard ip  en; unit convenience ‘or ‘in | hare of jury s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011305.jpg": "...-the relevant.  3  ' for convenience, ther ‘proposed in  see...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013442.jpg": "..., let's gall we 2oo4 for convenience, ‘you were flying pramar...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014649.jpg": "...been prepared for ‘your convenience.  after you've reached y...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016128.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017270.jpg": "...been prepared for ‘your convenience.  after you've reached y...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019026.jpg": "..., let's gall we 2oo4 for convenience, ‘you were flying pramar...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021094.jpg": "...circuit info a forum of convenience: ‘for fhe government to..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "convenience" (17 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">2285-2285</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">5843-5843</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">5928-5928</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">6768-6768</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">6853-6853</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">7456-7456</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">8536-8536</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">8701-8701</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">8787-8787</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">10848-10848</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">11305-11305</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">13442-13442</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">14649-14649</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">16128-16128</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">17270-17270</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">19026-19026</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">21094-21094</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

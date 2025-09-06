@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "broadcast"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 3850, "end": 3850, "pages": [3850]}, {"start": 4817, "end": 4817, "pages": [4817]}, {"start": 5207, "end": 5212, "pages": [5207, 5210, 5211, 5212]}, {"start": 5575, "end": 5575, "pages": [5575]}, {"start": 6537, "end": 6537, "pages": [6537]}, {"start": 7702, "end": 7702, "pages": [7702]}, {"start": 8034, "end": 8034, "pages": [8034]}, {"start": 8161, "end": 8161, "pages": [8161]}, {"start": 8499, "end": 8499, "pages": [8499]}, {"start": 8583, "end": 8583, "pages": [8583]}, {"start": 8663, "end": 8663, "pages": [8663]}, {"start": 8749, "end": 8749, "pages": [8749]}, {"start": 10451, "end": 10451, "pages": [10451]}, {"start": 21132, "end": 21132, "pages": [21132]}];
+        const pageToPath = {"3850": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003850.jpg", "4817": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004817.jpg", "5207": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005207.jpg", "5210": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005210.jpg", "5211": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005211.jpg", "5212": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005212.jpg", "5575": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005575.jpg", "6537": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006537.jpg", "7702": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007702.jpg", "8034": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008034.jpg", "8161": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008161.jpg", "8499": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008499.jpg", "8583": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008583.jpg", "8663": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008663.jpg", "8749": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008749.jpg", "10451": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010451.jpg", "21132": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021132.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003850.jpg": "...ly*publicized, in print, broadcast.and online media,  both...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004817.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005207.jpg": "...and. on-line sites; :in. broadcast...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005210.jpg": "...ave been published ‘and. broadcast concerningthis case sinc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005211.jpg": "...cntari¢s, published. and broadcast about ms. maxwell, epste...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005212.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005575.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006537.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007702.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008034.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008161.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008499.jpg": "...; :nor.do they publicly: broadcast their. plans....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008583.jpg": "...ic, nor do they publicly broadcast-their plans....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008663.jpg": "...; :nor.do they publicly: broadcast their. plans....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008749.jpg": "...; :nor.do they publicly: broadcast their. plans....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010451.jpg": "...nd voluminous: dozens of broadcast:  documentaries, tens of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021132.jpg": "...the juror, on. his. oun, broadcast his experiences and the..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "broadcast" (17 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">3850-3850</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">4817-4817</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">5207-5212</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">5575-5575</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">6537-6537</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">7702-7702</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">8034-8034</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">8161-8161</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">8499-8499</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">8583-8583</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">8663-8663</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">8749-8749</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">10451-10451</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">21132-21132</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

@@ -1,0 +1,244 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "hampshire"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 844, "end": 844, "pages": [844]}, {"start": 882, "end": 882, "pages": [882]}, {"start": 917, "end": 917, "pages": [917]}, {"start": 935, "end": 935, "pages": [935]}, {"start": 954, "end": 954, "pages": [954]}, {"start": 992, "end": 996, "pages": [992, 996]}, {"start": 1029, "end": 1033, "pages": [1029, 1033]}, {"start": 1063, "end": 1063, "pages": [1063]}, {"start": 1124, "end": 1124, "pages": [1124]}, {"start": 1159, "end": 1159, "pages": [1159]}, {"start": 1169, "end": 1169, "pages": [1169]}, {"start": 1211, "end": 1211, "pages": [1211]}, {"start": 1495, "end": 1497, "pages": [1495, 1497]}, {"start": 1522, "end": 1522, "pages": [1522]}, {"start": 1529, "end": 1531, "pages": [1529, 1531]}, {"start": 1618, "end": 1618, "pages": [1618]}, {"start": 1902, "end": 1902, "pages": [1902]}, {"start": 1936, "end": 1936, "pages": [1936]}, {"start": 2001, "end": 2001, "pages": [2001]}, {"start": 2178, "end": 2178, "pages": [2178]}, {"start": 2188, "end": 2188, "pages": [2188]}, {"start": 2234, "end": 2234, "pages": [2234]}, {"start": 2247, "end": 2247, "pages": [2247]}, {"start": 5693, "end": 5698, "pages": [5693, 5698]}, {"start": 5849, "end": 5849, "pages": [5849]}, {"start": 6774, "end": 6774, "pages": [6774]}, {"start": 7837, "end": 7837, "pages": [7837]}, {"start": 9042, "end": 9042, "pages": [9042]}, {"start": 9733, "end": 9733, "pages": [9733]}, {"start": 10453, "end": 10453, "pages": [10453]}, {"start": 10578, "end": 10578, "pages": [10578]}, {"start": 19195, "end": 19195, "pages": [19195]}, {"start": 19225, "end": 19225, "pages": [19225]}, {"start": 19232, "end": 19234, "pages": [19232, 19233, 19234]}, {"start": 19463, "end": 19463, "pages": [19463]}, {"start": 19698, "end": 19698, "pages": [19698]}, {"start": 19721, "end": 19721, "pages": [19721]}, {"start": 19750, "end": 19750, "pages": [19750]}, {"start": 19776, "end": 19776, "pages": [19776]}, {"start": 19800, "end": 19800, "pages": [19800]}, {"start": 19835, "end": 19835, "pages": [19835]}, {"start": 19853, "end": 19853, "pages": [19853]}, {"start": 19872, "end": 19872, "pages": [19872]}, {"start": 19910, "end": 19914, "pages": [19910, 19914]}, {"start": 19947, "end": 19951, "pages": [19947, 19951]}, {"start": 19981, "end": 19981, "pages": [19981]}, {"start": 20042, "end": 20042, "pages": [20042]}, {"start": 20077, "end": 20077, "pages": [20077]}, {"start": 20087, "end": 20087, "pages": [20087]}, {"start": 20129, "end": 20129, "pages": [20129]}];
+        const pageToPath = {"844": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000844.jpg", "882": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000882.jpg", "917": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000917.jpg", "935": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000935.jpg", "954": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000954.jpg", "992": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000992.jpg", "996": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000996.jpg", "1029": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001029.jpg", "1033": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001033.jpg", "1063": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001063.jpg", "1124": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001124.jpg", "1159": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001159.jpg", "1169": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001169.jpg", "1211": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001211.jpg", "1495": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001495.jpg", "1497": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001497.jpg", "1522": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001522.jpg", "1529": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001529.jpg", "1531": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001531.jpg", "1618": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001618.jpg", "1902": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001902.jpg", "1936": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001936.jpg", "2001": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002001.jpg", "2178": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002178.jpg", "2188": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002188.jpg", "2234": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002234.jpg", "2247": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002247.jpg", "5693": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005693.jpg", "5698": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005698.jpg", "5849": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005849.jpg", "6774": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006774.jpg", "7837": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007837.jpg", "9042": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009042.jpg", "9733": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009733.jpg", "10453": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010453.jpg", "10578": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010578.jpg", "19195": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019195.jpg", "19225": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019225.jpg", "19232": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019232.jpg", "19233": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019233.jpg", "19234": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019234.jpg", "19463": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019463.jpg", "19698": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019698.jpg", "19721": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019721.jpg", "19750": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019750.jpg", "19776": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019776.jpg", "19800": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019800.jpg", "19835": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019835.jpg", "19853": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019853.jpg", "19872": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019872.jpg", "19910": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019910.jpg", "19914": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019914.jpg", "19947": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019947.jpg", "19951": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019951.jpg", "19981": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019981.jpg", "20042": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020042.jpg", "20077": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020077.jpg", "20087": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020087.jpg", "20129": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020129.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000844.jpg": "...baceeteet ts . alah et  ‘hampshire. (jm) (ent fered: o7/o6/...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000882.jpg": "...baceeteet ts . alah et  ‘hampshire. (jm) (ent fered: o7/o6/...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000917.jpg": "...ng peacefully in her new hampshire home and was in contact,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000935.jpg": "..., her  oun. home in. new hampshire. she was in. touch. with...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000954.jpg": "...property acquired in an hampshire; an area to which’she‘ha...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000992.jpg": "...remote: property in new: hampshire-on the morning: of july...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000996.jpg": "...ek:at:a property in new. hampshire that was purchased formo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001029.jpg": "...nd, most recently to new hampshire, which l  io  will dad...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001033.jpg": "...hat.  transaction in new hampshire. the real estate agent t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001063.jpg": "...extra time in, the  new hampshire :prison befiore being tr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001124.jpg": "...ed into the house in new hampshire in, decemiber2ol9; she r...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001159.jpg": "...issue living alone wit  hampshire, which undercuts any sug...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001169.jpg": "...-to’ purchase’ the:new: “hampshire ‘property: “where the’...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001211.jpg": "...dant:was.arrested in new hampshire: onjuly’8,.2o2o, the gov...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001495.jpg": ".....llc) in bradford, new: hampshire, an area to‘which, she h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001497.jpg": "...sted in: bradford, sw we hampshire on, the charges containe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001522.jpg": "...st announced case in new hampshire on march 2,  2o2o, the s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001529.jpg": "...court  district. of new: hampshire  notice. of electronic f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001531.jpg": "...court  district: of new: hampshire:  notice. of electronic...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001618.jpg": "...the defendant athe new: hampshire property, in rotations....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001902.jpg": "...nd, most recently to new hampshire, which l  io  will dd  o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001936.jpg": "...extra time in, the  new hampshire :prison befiore being tr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002001.jpg": "...n that,  sidence in, new hampshire, on.the eve of the one-y...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002178.jpg": "...issue living alone wit  hampshire, which undercuts any sug...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002188.jpg": "...sed to:purchase.the new ‘hampshire property where ithe -def...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002234.jpg": "...ant was arrested, in new hampshire.  onjuly. 8, 2o2o, the g...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002247.jpg": "...esentation that: the new hampshire: property’was: ouned bya...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005693.jpg": "...everitually setle in new hampshire—where she  remained cont...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005698.jpg": "...e same residence in, new hampshire for seven, months— a, lo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005849.jpg": "...of credit”? perry v. new hampshire, 565 us. 228, 237 (2ol2)...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006774.jpg": "...of credit”? perry v. new hampshire, 565 us. 228, 237 (2ol2)...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007837.jpg": "...nashville, division. new hampshire insurance co: vs. blackj...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009042.jpg": "...e.” /d:,.at 96. the new  hampshire supreme ‘court affirmed....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009733.jpg": "...e.” /d:,.at 96. the new  hampshire supreme ‘court affirmed....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010453.jpg": "...xwell”s;presencesin. new hampshire:  val ‘harnv and.  ‘was....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010578.jpg": "...e home she ouned, in new hampshire was. ouned, by’ a corpor...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019195.jpg": "...st announced case im new hampshire on march 2, 2o2o; the st...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019225.jpg": "...st announced case im new hampshire on march 2, 2o2o; the st...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019232.jpg": "...dearing  district of new.hampshire  notice of electronic fi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019233.jpg": "...court: district of neew-hampshire  notice ‘of electronic f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019234.jpg": "...court: district of new:-hampshire  notice of electronic fi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019463.jpg": "...ls areca ae he fete 2a  hampshire (jm): (entered: o7/o6/2o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019698.jpg": "...s ass  = district of new-hampshire. (jm); (entered: o7/o6/2...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019721.jpg": "...s ass  = district of new-hampshire. (jm); (entered: o7/o6/2...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019750.jpg": "...baceeteet ts . alah et  ‘hampshire. (jm) (ent fered: o7/o6/...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019776.jpg": "...baceeteet ts . alah et  ‘hampshire. (jm) (ent fered: o7/o6/...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019800.jpg": "...baceeteet ts . alah et  ‘hampshire. (jm) (ent fered: o7/o6/...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019835.jpg": "...ng peacefully in her new hampshire home and was in contact,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019853.jpg": "..., her  oun. home in. new hampshire. she was in. touch. with...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019872.jpg": "...property acquired in an hampshire; an area to which’she‘ha...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019910.jpg": "...remote: property in new: hampshire-on the morning: of july...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019914.jpg": "...ek:at:a property in new. hampshire that was purchased formo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019947.jpg": "...nd, most recently to new hampshire, which l  io  will dad...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019951.jpg": "...hat.  transaction in new hampshire. the real estate agent t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019981.jpg": "...extra time in, the  new hampshire :prison befiore being tr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020042.jpg": "...ed into the house in new hampshire in, decemiber2ol9; she r...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020077.jpg": "...issue living alone wit  hampshire, which undercuts any sug...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020087.jpg": "...-to’ purchase’ the:new: “hampshire ‘property: “where the’...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020129.jpg": "...dant:was.arrested in new hampshire: onjuly’8,.2o2o, the gov..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "hampshire" (59 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">844-844</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">882-882</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">917-917</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">935-935</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">954-954</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">992-996</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">1029-1033</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">1063-1063</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">1124-1124</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">1159-1159</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">1169-1169</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">1211-1211</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">1495-1497</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">1522-1522</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">1529-1531</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">1618-1618</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">1902-1902</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">1936-1936</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">2001-2001</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">2178-2178</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">2188-2188</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">2234-2234</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">2247-2247</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">5693-5698</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">5849-5849</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">6774-6774</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">7837-7837</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">9042-9042</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">9733-9733</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">10453-10453</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">10578-10578</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">19195-19195</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">19225-19225</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">19232-19234</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">19463-19463</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">19698-19698</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">19721-19721</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">19750-19750</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">19776-19776</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">19800-19800</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">19835-19835</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">19853-19853</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">19872-19872</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">19910-19914</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">19947-19951</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(45, 0); return false;">19981-19981</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(46, 0); return false;">20042-20042</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(47, 0); return false;">20077-20077</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(48, 0); return false;">20087-20087</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(49, 0); return false;">20129-20129</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

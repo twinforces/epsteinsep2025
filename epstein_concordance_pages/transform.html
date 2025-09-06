@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "transform"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1462, "end": 1462, "pages": [1462]}, {"start": 3038, "end": 3038, "pages": [3038]}, {"start": 3057, "end": 3057, "pages": [3057]}, {"start": 3692, "end": 3692, "pages": [3692]}, {"start": 4792, "end": 4792, "pages": [4792]}, {"start": 5853, "end": 5853, "pages": [5853]}, {"start": 6778, "end": 6778, "pages": [6778]}, {"start": 7422, "end": 7422, "pages": [7422]}, {"start": 7848, "end": 7848, "pages": [7848]}, {"start": 10456, "end": 10456, "pages": [10456]}, {"start": 20380, "end": 20380, "pages": [20380]}, {"start": 21074, "end": 21074, "pages": [21074]}];
+        const pageToPath = {"1462": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001462.jpg", "3038": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003038.jpg", "3057": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003057.jpg", "3692": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003692.jpg", "4792": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004792.jpg", "5853": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005853.jpg", "6778": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006778.jpg", "7422": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007422.jpg", "7848": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007848.jpg", "10456": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010456.jpg", "20380": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020380.jpg", "21074": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021074.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001462.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003038.jpg": "...indell test [ ] does not;transform.  a protective order int...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003057.jpg": "...incrinination. does not.-transform that choiee ifito 4 fift...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003692.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004792.jpg": "...e protective orderishou  transform her carlicr deposition t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005853.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006778.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007422.jpg": "...assage, groom, them, and.transform the massages into sexual...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007848.jpg": "...as an expert: witness.  transform, infrared spectroscopy;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010456.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020380.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021074.jpg": ""};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "transform" (12 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1462-1462</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">3038-3038</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">3057-3057</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3692-3692</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">4792-4792</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">5853-5853</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">6778-6778</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">7422-7422</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">7848-7848</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">10456-10456</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">20380-20380</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">21074-21074</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

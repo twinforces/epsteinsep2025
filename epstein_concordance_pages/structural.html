@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "structural"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 3447, "end": 3447, "pages": [3447]}, {"start": 4569, "end": 4569, "pages": [4569]}, {"start": 7515, "end": 7515, "pages": [7515]}, {"start": 7699, "end": 7699, "pages": [7699]}, {"start": 8158, "end": 8158, "pages": [8158]}, {"start": 8221, "end": 8221, "pages": [8221]}, {"start": 8856, "end": 8856, "pages": [8856]}, {"start": 8904, "end": 8904, "pages": [8904]}, {"start": 8967, "end": 8967, "pages": [8967]}, {"start": 9031, "end": 9031, "pages": [9031]}, {"start": 9209, "end": 9209, "pages": [9209]}, {"start": 9220, "end": 9220, "pages": [9220]}, {"start": 9722, "end": 9722, "pages": [9722]}, {"start": 9888, "end": 9888, "pages": [9888]}, {"start": 9899, "end": 9899, "pages": [9899]}, {"start": 12761, "end": 12761, "pages": [12761]}, {"start": 18347, "end": 18347, "pages": [18347]}, {"start": 21755, "end": 21755, "pages": [21755]}];
+        const pageToPath = {"3447": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003447.jpg", "4569": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004569.jpg", "7515": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007515.jpg", "7699": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007699.jpg", "8158": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008158.jpg", "8221": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008221.jpg", "8856": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008856.jpg", "8904": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008904.jpg", "8967": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008967.jpg", "9031": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009031.jpg", "9209": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009209.jpg", "9220": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009220.jpg", "9722": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009722.jpg", "9888": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009888.jpg", "9899": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009899.jpg", "12761": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012761.jpg", "18347": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018347.jpg", "21755": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021755.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003447.jpg": "...cvra’s text, history; or structural ‘underpit interpretation...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004569.jpg": "...cvra’s text, history; or structural ‘underpit interpretation...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007515.jpg": "...f. a ananalyst is of fhe structural var cle iat dete  comput...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007699.jpg": "...tertransference freud's ‘structural theory of the mind ‘oedi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008158.jpg": "...tertransference freud's ‘structural theory of the mind ‘oedi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008221.jpg": "...ted tiger, or photos of' structural features of’ epstcin’s....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008856.jpg": "...rial. and.to remedy the  structural error that occurred duri...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008904.jpg": "...rial. and.to remedy the  structural error that occurred duri...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008967.jpg": "...jurors is, a furdaichtal structural prerequisite for ehsurin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009031.jpg": "...r deliberates on.a jury, structural error occurs, and.a  new...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009209.jpg": "...tually serves  ona jury, structural, error:occu the juror di...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009220.jpg": "...-rights and. constituted structural, reversible error: this:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009722.jpg": "...r deliberates on.a jury, structural error occurs, and.a  new...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009888.jpg": "...tually serves  ona jury, structural, error:occu the juror di...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009899.jpg": "...-rights and. constituted structural, reversible error: this:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012761.jpg": "...ress 6n the wall are fot structural 6r unmeveable, they den\"...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018347.jpg": "...ress 6n the wall are fot structural 6r unmeveable, they den\"...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021755.jpg": "...(al78), (2)  contains a structural. separation of this clau..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "structural" (18 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">3447-3447</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">4569-4569</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">7515-7515</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">7699-7699</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">8158-8158</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">8221-8221</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">8856-8856</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">8904-8904</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">8967-8967</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">9031-9031</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">9209-9209</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">9220-9220</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">9722-9722</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">9888-9888</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">9899-9899</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">12761-12761</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">18347-18347</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">21755-21755</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "conjunction"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 350, "end": 350, "pages": [350]}, {"start": 926, "end": 926, "pages": [926]}, {"start": 1218, "end": 1220, "pages": [1218, 1220]}, {"start": 2241, "end": 2243, "pages": [2241, 2243]}, {"start": 2663, "end": 2663, "pages": [2663]}, {"start": 2712, "end": 2712, "pages": [2712]}, {"start": 3665, "end": 3666, "pages": [3665, 3666]}, {"start": 3696, "end": 3696, "pages": [3696]}, {"start": 3997, "end": 3997, "pages": [3997]}, {"start": 5791, "end": 5791, "pages": [5791]}, {"start": 6716, "end": 6716, "pages": [6716]}, {"start": 7842, "end": 7842, "pages": [7842]}, {"start": 8309, "end": 8309, "pages": [8309]}, {"start": 8833, "end": 8833, "pages": [8833]}, {"start": 10754, "end": 10754, "pages": [10754]}, {"start": 19844, "end": 19844, "pages": [19844]}, {"start": 20136, "end": 20138, "pages": [20136, 20138]}, {"start": 20781, "end": 20781, "pages": [20781]}, {"start": 21389, "end": 21389, "pages": [21389]}];
+        const pageToPath = {"350": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000350.jpg", "926": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000926.jpg", "1218": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001218.jpg", "1220": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001220.jpg", "2241": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002241.jpg", "2243": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002243.jpg", "2663": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002663.jpg", "2712": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002712.jpg", "3665": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003665.jpg", "3666": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003666.jpg", "3696": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003696.jpg", "3997": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003997.jpg", "5791": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005791.jpg", "6716": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006716.jpg", "7842": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007842.jpg", "8309": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008309.jpg", "8833": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008833.jpg", "10754": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010754.jpg", "19844": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019844.jpg", "20136": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020136.jpg", "20138": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020138.jpg", "20781": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020781.jpg", "21389": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021389.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000350.jpg": "...ally  this; distiet— in. conjunction. with: the: strength oft...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000926.jpg": "...t *2 (s.d.n.y. mar.  in. conjunction with detainee’s right to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001218.jpg": "...evidence she submited in conjunction with her motion rebut:th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001220.jpg": "...in a leter'submited: in conjunction tothe  governitient’s op...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002241.jpg": "...evidence she submited in conjunction with her motion rebut th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002243.jpg": "...in. a leter submited, in conjunction to the  ¥ prohibits” the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002663.jpg": "...,  toussie.“ate tead in, conjunction,” courts “must ifiterpre...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002712.jpg": "...ist of government ¥  in, conjunction with:ms. maxwells reques...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003665.jpg": "...court read. landgraf‘in conjunction not. only. with. ‘loussi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003666.jpg": "...s' applying landgraf gin conjunction with, housste and.flnghi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003696.jpg": "...estions ‘and answers, in.conjunction:with the government's. e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003997.jpg": "...w in, the courthouse in, conjunction: with the prosecution ‘a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005791.jpg": "...lonc—or experience: ‘in. conjunction. with. other knouledge,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006716.jpg": "...lonc—or experience: ‘in. conjunction. with. other knouledge,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007842.jpg": "...ential investigations in conjunction with kostelanetz & fink’...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008309.jpg": "...esses to demonstrate, in conjunction with otherevidence, that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008833.jpg": "...s.and exhibits ‘filed‘in conjunction with. this ‘motion. shou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010754.jpg": "...s.and exhibits ‘filed‘in conjunction with. this ‘motion. shou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019844.jpg": "...t *2 (s.d.n.y. mar.  in. conjunction with detainee’s right to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020136.jpg": "...evidence she submited in conjunction with her motion rebut:th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020138.jpg": "...in a leter'submited: in conjunction tothe  governitient’s op...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020781.jpg": "...estions and answers, in, conjunction, with the 'government’s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021389.jpg": "...r 4. ane + sh ( i be din conjunction | with the:  and conclus..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "conjunction" (23 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">350-350</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">926-926</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1218-1220</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">2241-2243</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">2663-2663</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">2712-2712</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3665-3666</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">3696-3696</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">3997-3997</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">5791-5791</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">6716-6716</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">7842-7842</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">8309-8309</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">8833-8833</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">10754-10754</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">19844-19844</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">20136-20138</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">20781-20781</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">21389-21389</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

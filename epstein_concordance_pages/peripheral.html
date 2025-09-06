@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "peripheral"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 7263, "end": 7263, "pages": [7263]}, {"start": 7953, "end": 7953, "pages": [7953]}, {"start": 10275, "end": 10275, "pages": [10275]}, {"start": 14044, "end": 14044, "pages": [14044]}, {"start": 14470, "end": 14470, "pages": [14470]}, {"start": 14568, "end": 14573, "pages": [14568, 14570, 14572, 14573]}, {"start": 14960, "end": 14960, "pages": [14960]}, {"start": 16668, "end": 16668, "pages": [16668]}, {"start": 17091, "end": 17091, "pages": [17091]}, {"start": 17189, "end": 17194, "pages": [17189, 17191, 17193, 17194]}];
+        const pageToPath = {"7263": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007263.jpg", "7953": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007953.jpg", "10275": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010275.jpg", "14044": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014044.jpg", "14470": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014470.jpg", "14568": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014568.jpg", "14570": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014570.jpg", "14572": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014572.jpg", "14573": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014573.jpg", "14960": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014960.jpg", "16668": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016668.jpg", "17091": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017091.jpg", "17189": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017189.jpg", "17191": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017191.jpg", "17193": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017193.jpg", "17194": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017194.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007263.jpg": "...n. but thear meriory for peripheral details, we knou; ean  a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007953.jpg": "...n. but thear meriory for peripheral details, we knou; ean  a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010275.jpg": "...e reading of the jury:  “peripheral or irrelevant: issucs,,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014044.jpg": "...may forget. some of the peripheral details of a trauma e6ve...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014470.jpg": "...tight forget seme 6f the peripheral details, but the  the tr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014568.jpg": "...ies of trauma are solid. peripheral details  make at a litie...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014570.jpg": "...ven though some of thos  peripheral details @6t jumbled, the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014572.jpg": "...e is veny focused on the peripheral deta,  that get ixed up...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014573.jpg": "...ls the defination. of a peripheral detail.  ad why l5 the d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014960.jpg": "...m. but, their memory for peripheral, details, we knou, can...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016668.jpg": "...may forget. some of the peripheral details of a trauma e6ve...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017091.jpg": "...tight forget seme 6f the peripheral details, but the  the tr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017189.jpg": "...ies of trauma are solid. peripheral details  make at a litie...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017191.jpg": "...ven though some of thos  peripheral details @6t jumbled, the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017193.jpg": "...e is veny focused on the peripheral deta,  that get ixed up...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017194.jpg": "...ls the defination. of a peripheral detail.  ad why l5 the d..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "peripheral" (16 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">7263-7263</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">7953-7953</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">10275-10275</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">14044-14044</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">14470-14470</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">14568-14573</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">14960-14960</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">16668-16668</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">17091-17091</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">17189-17194</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

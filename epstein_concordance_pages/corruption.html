@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "corruption"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 2149, "end": 2149, "pages": [2149]}, {"start": 2291, "end": 2291, "pages": [2291]}, {"start": 3107, "end": 3107, "pages": [3107]}, {"start": 3196, "end": 3196, "pages": [3196]}, {"start": 3343, "end": 3343, "pages": [3343]}, {"start": 3351, "end": 3351, "pages": [3351]}, {"start": 3530, "end": 3530, "pages": [3530]}, {"start": 4318, "end": 4318, "pages": [4318]}, {"start": 4447, "end": 4447, "pages": [4447]}, {"start": 4465, "end": 4465, "pages": [4465]}, {"start": 4473, "end": 4473, "pages": [4473]}, {"start": 7653, "end": 7653, "pages": [7653]}, {"start": 7823, "end": 7823, "pages": [7823]}, {"start": 7829, "end": 7829, "pages": [7829]}, {"start": 21756, "end": 21756, "pages": [21756]}];
+        const pageToPath = {"2149": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002149.jpg", "2291": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002291.jpg", "3107": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003107.jpg", "3196": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003196.jpg", "3343": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003343.jpg", "3351": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003351.jpg", "3530": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003530.jpg", "4318": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004318.jpg", "4447": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004447.jpg", "4465": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004465.jpg", "4473": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004473.jpg", "7653": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007653.jpg", "7823": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007823.jpg", "7829": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007829.jpg", "21756": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021756.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002149.jpg": "...iaundesing, bribery and corruption, misappropriation ‘of*pu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002291.jpg": "...irs: agent and. separate corruption  counts); mian, 2oo9 wl...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003107.jpg": "...racy froni.a  “separate” corruption, conspiracy  (e:d: pa. j...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003196.jpg": "...te  evidence of griminal corruption such as: . ‘illegal. pol...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003343.jpg": "...ncovered no evidence:of. corruption. such. ‘as s bribery, gr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003351.jpg": "...er improper influenees.  corruption, a  ein ts opr. consider...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003530.jpg": "...g:with someone in.public corruption about.the: february 29,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004318.jpg": "...vidence: of. griminal al corruption, such as: . ‘illegal. po...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004447.jpg": "...s’ in, the incompetence, corruption, intimidation, or “undue...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004465.jpg": "...ncovered no evidence:of. corruption. such. ‘as s bribery, gr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004473.jpg": "...r influen f  ee ee en a  corruption, a  ‘motivation ‘was. th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007653.jpg": "...96): double blind (l996) corruption (l996)  : survivor (l996...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007823.jpg": "...uffington-post, may2ol2  corruption, bribery; ‘and. the quid...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007829.jpg": "...murder; kidnapping; and corruption. cases. ‘conducted major...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021756.jpg": "...were] il in luenced by: corruption, bias, or other improper..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "corruption" (15 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">2149-2149</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">2291-2291</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">3107-3107</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3196-3196</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">3343-3343</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">3351-3351</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3530-3530</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">4318-4318</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">4447-4447</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">4465-4465</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">4473-4473</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">7653-7653</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">7823-7823</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">7829-7829</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">21756-21756</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

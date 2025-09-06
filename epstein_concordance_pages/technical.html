@@ -1,0 +1,232 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "technical"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1139, "end": 1139, "pages": [1139]}, {"start": 1175, "end": 1176, "pages": [1175, 1176]}, {"start": 1392, "end": 1392, "pages": [1392]}, {"start": 1814, "end": 1814, "pages": [1814]}, {"start": 1820, "end": 1820, "pages": [1820]}, {"start": 1830, "end": 1830, "pages": [1830]}, {"start": 2014, "end": 2014, "pages": [2014]}, {"start": 2100, "end": 2100, "pages": [2100]}, {"start": 2194, "end": 2195, "pages": [2194, 2195]}, {"start": 2828, "end": 2828, "pages": [2828]}, {"start": 2838, "end": 2841, "pages": [2838, 2839, 2840, 2841]}, {"start": 2928, "end": 2928, "pages": [2928]}, {"start": 3688, "end": 3688, "pages": [3688]}, {"start": 5633, "end": 5633, "pages": [5633]}, {"start": 5643, "end": 5643, "pages": [5643]}, {"start": 5824, "end": 5824, "pages": [5824]}, {"start": 6235, "end": 6235, "pages": [6235]}, {"start": 6595, "end": 6595, "pages": [6595]}, {"start": 6605, "end": 6605, "pages": [6605]}, {"start": 6749, "end": 6749, "pages": [6749]}, {"start": 7650, "end": 7657, "pages": [7650, 7654, 7657]}, {"start": 7845, "end": 7848, "pages": [7845, 7848]}, {"start": 8066, "end": 8066, "pages": [8066]}, {"start": 8173, "end": 8173, "pages": [8173]}, {"start": 8181, "end": 8181, "pages": [8181]}, {"start": 10333, "end": 10333, "pages": [10333]}, {"start": 10472, "end": 10472, "pages": [10472]}, {"start": 11184, "end": 11184, "pages": [11184]}, {"start": 11317, "end": 11317, "pages": [11317]}, {"start": 11544, "end": 11544, "pages": [11544]}, {"start": 12636, "end": 12640, "pages": [12636, 12640]}, {"start": 13401, "end": 13401, "pages": [13401]}, {"start": 13887, "end": 13892, "pages": [13887, 13892]}, {"start": 14113, "end": 14113, "pages": [14113]}, {"start": 14772, "end": 14772, "pages": [14772]}, {"start": 16511, "end": 16516, "pages": [16511, 16516]}, {"start": 16736, "end": 16736, "pages": [16736]}, {"start": 18223, "end": 18227, "pages": [18223, 18227]}, {"start": 18985, "end": 18985, "pages": [18985]}, {"start": 20057, "end": 20057, "pages": [20057]}, {"start": 20093, "end": 20094, "pages": [20093, 20094]}, {"start": 20310, "end": 20310, "pages": [20310]}, {"start": 20953, "end": 20953, "pages": [20953]}, {"start": 20973, "end": 20973, "pages": [20973]}, {"start": 21566, "end": 21566, "pages": [21566]}, {"start": 21714, "end": 21714, "pages": [21714]}];
+        const pageToPath = {"1139": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001139.jpg", "1175": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001175.jpg", "1176": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001176.jpg", "1392": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001392.jpg", "1814": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001814.jpg", "1820": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001820.jpg", "1830": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001830.jpg", "2014": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002014.jpg", "2100": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002100.jpg", "2194": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002194.jpg", "2195": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002195.jpg", "2828": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002828.jpg", "2838": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002838.jpg", "2839": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002839.jpg", "2840": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002840.jpg", "2841": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002841.jpg", "2928": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002928.jpg", "3688": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003688.jpg", "5633": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005633.jpg", "5643": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005643.jpg", "5824": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005824.jpg", "6235": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006235.jpg", "6595": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006595.jpg", "6605": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006605.jpg", "6749": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006749.jpg", "7650": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007650.jpg", "7654": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007654.jpg", "7657": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007657.jpg", "7845": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007845.jpg", "7848": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007848.jpg", "8066": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008066.jpg", "8173": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008173.jpg", "8181": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008181.jpg", "10333": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010333.jpg", "10472": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010472.jpg", "11184": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011184.jpg", "11317": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011317.jpg", "11544": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011544.jpg", "12636": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012636.jpg", "12640": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012640.jpg", "13401": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013401.jpg", "13887": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013887.jpg", "13892": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013892.jpg", "14113": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014113.jpg", "14772": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014772.jpg", "16511": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016511.jpg", "16516": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016516.jpg", "16736": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016736.jpg", "18223": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018223.jpg", "18227": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018227.jpg", "18985": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018985.jpg", "20057": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020057.jpg", "20093": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020093.jpg", "20094": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020094.jpg", "20310": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020310.jpg", "20953": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020953.jpg", "20973": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020973.jpg", "21566": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021566.jpg", "21714": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021714.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001139.jpg": "...ntained:some:of the same technical problems:and. sixth ands...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001175.jpg": "...tiple: steps: to address technical. difficulties the defend...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001176.jpg": "...as’ been prejudiced ‘by ‘technical, difficulti  temporarily...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001392.jpg": "...n:discovery: because: of technical ‘issues withthe laptop,....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001814.jpg": "...p lain gone to: sign  ut technical issues  counsel regar ni...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001820.jpg": "...of discovery, caused by technical ‘constraints’ on, the pa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001830.jpg": "...of discovery, caused by technical ‘constraints’ on, the pa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002014.jpg": "...acce ptable. delays and: technical. p  coverythat the.g gov...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002100.jpg": "...request  meets ‘eriain, technical requiremenis™*; (6) whet...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002194.jpg": "...tiple: steps: to address technical. difficulties the defend...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002195.jpg": "...as’ been prejudiced ‘by ‘technical, difficulti  temporarily...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002828.jpg": "...wl 43l458, at *4. “mere technical violations” of the issa,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002838.jpg": "...courthouses, and. (2) a technical. gliteh.i in the white p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002839.jpg": "...788 f.2d  at,87o., “mere technical yiolations:of the proced...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002840.jpg": "...he-defect-was. merely a “technical, violation” of the  jssa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002841.jpg": ".... that it was ‘merely :a technical violation). in suri, the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002928.jpg": "...n discovery: because: of technical. issues with. the |i  ‘o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003688.jpg": "...hat the higher education technical amendments of [99:l, pub...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005633.jpg": "...d to all “scientific;,’ “technical,” or ‘other specialized?...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005643.jpg": ".... based on  “scientific, technical, or-other specialized kn...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005824.jpg": "...relevant; evidence: on, technical grounds.”  'l5)). accord...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006235.jpg": "...rooted in. scientific or technical expertl sc, are inadmiss...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006595.jpg": "...d to all “scientific;,’ “technical,” or ‘other specialized?...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006605.jpg": ".... based on  “scientific, technical, or-other specialized kn...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006749.jpg": "...relevant; evidence: on, technical grounds.”  'l5)). accord...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007650.jpg": "...law & order'(tv series) (technical advisor - l69 episodes)...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007654.jpg": "...inal intent (tv series) (technical advisor - lo8 episodes)...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007657.jpg": "...murder one (tv series) (technical advisor- l episode)  - c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007845.jpg": "...essmenits, sit sutveys,, technical surveillance counter mea...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007848.jpg": "...vienna, va (o9/98-ol/99) technical specialist  duties: serv...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008066.jpg": ".... on, their “scientific, technical; or other:  specialized....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008173.jpg": "...2.  ou;  s. scientific, technical, or other speci  - ees...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008181.jpg": "...rooted in scientific or technical expertise, are inadmissi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010333.jpg": "...long; security line and.technical. issues with. the court*...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010472.jpg": "...encour  red, persistent technical issues reviewing electro...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011184.jpg": "...the-irivesti gative  his technical, knouledge. for instance...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011317.jpg": "...ning the significance of technical, ferms and concepts ‘for...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011544.jpg": "...l -- again, this is veny technical -— if lt'\"s. october and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012636.jpg": "....  deal with some of the technical issues.  the gourt:  may...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012640.jpg": "...and we'll deal wath the technical preparations  a ree bs i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013401.jpg": "...see gll59b, which is the technical mame, but it's  rimarily...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013887.jpg": "...you can draw on. and the technical  tama pe eh bm  people h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013892.jpg": "...the court: pdu'sing for technical issues. thank you.  aman...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014113.jpg": "...while ‘there were sone  technical. challenges, we were pre...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014772.jpg": "...l -- again, this is veny technical -— if lt'\"s. october and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016511.jpg": "...you can draw on. and the technical  tama pe eh bm  people h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016516.jpg": "...the court: pdu'sing for technical issues. thank you.  aman...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016736.jpg": "...while ‘there were sone  technical. challenges, we were pre...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018223.jpg": "....  deal with some of the technical issues.  the gourt:  may...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018227.jpg": "...and we'll deal wath the technical preparations  a ree bs i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018985.jpg": "...see gll59b, which is the technical mame, but it's  rimarily...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020057.jpg": "...ntained:some:of the same technical problems:and. sixth ands...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020093.jpg": "...tiple: steps: to address technical. difficulties the defend...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020094.jpg": "...as’ been prejudiced ‘by ‘technical, difficulti  temporarily...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020310.jpg": "...n:discovery: because: of technical ‘issues withthe laptop,....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020953.jpg": "...a longssecurity linezand technical. issues. with the court’...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020973.jpg": "...on of bei  selected, the technical-issues ‘and ensuing;long...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021566.jpg": "...very important and. its technical -- this whole  scusslon...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021714.jpg": "...ecurity: lines and after technical,issues with. the instruc..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "technical" (59 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1139-1139</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1175-1176</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1392-1392</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">1814-1814</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">1820-1820</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">1830-1830</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">2014-2014</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">2100-2100</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">2194-2195</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">2828-2828</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">2838-2841</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">2928-2928</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">3688-3688</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">5633-5633</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">5643-5643</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">5824-5824</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">6235-6235</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">6595-6595</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">6605-6605</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">6749-6749</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">7650-7657</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">7845-7848</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">8066-8066</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">8173-8173</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">8181-8181</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">10333-10333</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">10472-10472</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">11184-11184</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">11317-11317</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">11544-11544</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">12636-12640</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">13401-13401</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">13887-13892</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">14113-14113</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">14772-14772</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">16511-16516</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">16736-16736</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">18223-18227</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">18985-18985</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">20057-20057</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">20093-20094</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">20310-20310</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">20953-20953</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">20973-20973</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">21566-21566</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(45, 0); return false;">21714-21714</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

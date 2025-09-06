@@ -1,0 +1,217 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "administrative"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 518, "end": 518, "pages": [518]}, {"start": 548, "end": 548, "pages": [548]}, {"start": 554, "end": 554, "pages": [554]}, {"start": 1072, "end": 1072, "pages": [1072]}, {"start": 1293, "end": 1293, "pages": [1293]}, {"start": 1945, "end": 1945, "pages": [1945]}, {"start": 2085, "end": 2085, "pages": [2085]}, {"start": 2540, "end": 2540, "pages": [2540]}, {"start": 2831, "end": 2831, "pages": [2831]}, {"start": 3329, "end": 3330, "pages": [3329, 3330]}, {"start": 3474, "end": 3474, "pages": [3474]}, {"start": 3487, "end": 3487, "pages": [3487]}, {"start": 3685, "end": 3685, "pages": [3685]}, {"start": 4451, "end": 4452, "pages": [4451, 4452]}, {"start": 4596, "end": 4596, "pages": [4596]}, {"start": 4609, "end": 4612, "pages": [4609, 4612]}, {"start": 6978, "end": 6978, "pages": [6978]}, {"start": 7165, "end": 7165, "pages": [7165]}, {"start": 7192, "end": 7192, "pages": [7192]}, {"start": 7556, "end": 7559, "pages": [7556, 7559]}, {"start": 7580, "end": 7580, "pages": [7580]}, {"start": 7588, "end": 7588, "pages": [7588]}, {"start": 7837, "end": 7837, "pages": [7837]}, {"start": 7882, "end": 7882, "pages": [7882]}, {"start": 10474, "end": 10474, "pages": [10474]}, {"start": 11350, "end": 11352, "pages": [11350, 11352]}, {"start": 11503, "end": 11503, "pages": [11503]}, {"start": 12237, "end": 12237, "pages": [12237]}, {"start": 12312, "end": 12312, "pages": [12312]}, {"start": 17826, "end": 17826, "pages": [17826]}, {"start": 17900, "end": 17900, "pages": [17900]}, {"start": 19990, "end": 19990, "pages": [19990]}, {"start": 20211, "end": 20211, "pages": [20211]}, {"start": 21392, "end": 21392, "pages": [21392]}, {"start": 21909, "end": 21909, "pages": [21909]}, {"start": 22033, "end": 22033, "pages": [22033]}, {"start": 22050, "end": 22050, "pages": [22050]}, {"start": 22073, "end": 22073, "pages": [22073]}, {"start": 23372, "end": 23375, "pages": [23372, 23375]}, {"start": 23388, "end": 23388, "pages": [23388]}, {"start": 23445, "end": 23445, "pages": [23445]}];
+        const pageToPath = {"518": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000518.jpg", "548": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000548.jpg", "554": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000554.jpg", "1072": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001072.jpg", "1293": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001293.jpg", "1945": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001945.jpg", "2085": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002085.jpg", "2540": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002540.jpg", "2831": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002831.jpg", "3329": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003329.jpg", "3330": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003330.jpg", "3474": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003474.jpg", "3487": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003487.jpg", "3685": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003685.jpg", "4451": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004451.jpg", "4452": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004452.jpg", "4596": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004596.jpg", "4609": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004609.jpg", "4612": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004612.jpg", "6978": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006978.jpg", "7165": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007165.jpg", "7192": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007192.jpg", "7556": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007556.jpg", "7559": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007559.jpg", "7580": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007580.jpg", "7588": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007588.jpg", "7837": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007837.jpg", "7882": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007882.jpg", "10474": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010474.jpg", "11350": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011350.jpg", "11352": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011352.jpg", "11503": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011503.jpg", "12237": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012237.jpg", "12312": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012312.jpg", "17826": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017826.jpg", "17900": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017900.jpg", "19990": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019990.jpg", "20211": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020211.jpg", "21392": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021392.jpg", "21909": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021909.jpg", "22033": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022033.jpg", "22050": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022050.jpg", "22073": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022073.jpg", "23372": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023372.jpg", "23375": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023375.jpg", "23388": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023388.jpg", "23445": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023445.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000518.jpg": "...particular and administrative er legal proce  the one...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000548.jpg": "...mind —- judge pickholkz  administrative  ihstanege said that a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000554.jpg": "...tdton or a letex or  the administrative agency to respond.  this...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001072.jpg": "...access in, some forum of administrative seg., apparently  becaus...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001293.jpg": "...t  mater of: superseding administrative order 2o-mg-oooo4-49, 2l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001945.jpg": "...access in, some forum of administrative seg., apparent.ly  becau...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002085.jpg": "...providing  security: and administrative support for ms. ghislain...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002540.jpg": "...ir supervisors, and. fbi administrative: personnel;  atorneys: a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002831.jpg": "...division is  based’ on, administrative feasibility. see allen,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003329.jpg": ".... include cy stipulated. administrative deportation, orders’ in,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003330.jpg": "...cwable under the federal administrative procedure act, 5 u.s.c....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003474.jpg": "...en elevated. from a rote administrative task to a major area of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003487.jpg": "...es were sent ae ait vebl administrative er riployeo who  eee sea...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003685.jpg": "...‘promotes judicial and administrative efficieney by“precluding...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004451.jpg": ".... include cy stipulated. administrative deportation, orders’ in,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004452.jpg": "...cwable under the federal administrative procedure act, 5 u.s.c §...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004596.jpg": "...en elevated. from a rote administrative task to a major area of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004609.jpg": "...were sent ey, ari i fbi administrative er — who  “the subjec  y...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004612.jpg": "...sta, as well as numerous administrative staff, about the cma gay...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006978.jpg": "...osal te  effectuate that administrative task of gopying the comp...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007165.jpg": "...th peshect to che second administrative ihen,  the government. h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007192.jpg": "....wimg both, ¢linieal and administrative stat, provadaing  6edure...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007556.jpg": "...administrative offices:  29o6 ‘lafayete...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007559.jpg": "...alifornia,  hospital and administrative appointments:  l978-l982...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007580.jpg": "...california) testified at administrative hearing, 6/2' l/95:  jer...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007588.jpg": "...adena, ca). testified at administrative hearing, 7/25/o8  cam. s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007837.jpg": "...te-of colorado office of administrative courts harriet:smith vs....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007882.jpg": "....wimg both, ¢linieal and administrative stat, provadaing  6edure...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010474.jpg": "...hich she ‘must file an.  administrative remedy....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011350.jpg": "...quiry into. professional administrative:procecdings against-anto...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011352.jpg": "...who pleaded. guilty to ‘administrative: charges brought by: the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011503.jpg": "...to criminal, ;  vil, or administrative penalties....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012237.jpg": "...he sery.  i'm sorry, fwo administrative maters before we bring...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012312.jpg": "...ing and supervisiang the administrative and  clinical staff, fom...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017826.jpg": "...he sery.  i'm sorry, fwo administrative maters before we bring...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017900.jpg": "...ing and supervisiang the administrative and  clinical staff, fom...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019990.jpg": "...access in, some forum of administrative seg., apparently  becaus...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020211.jpg": "...t  mater of: superseding administrative order 2o-mg-oooo4-49, 2l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021392.jpg": "...forded ¢ ins stand 2 by: administrative compan to: the: departme...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021909.jpg": "...s: and ene  ds a federal administrative detention,  uf  facility...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022033.jpg": "...arding the discipline or administrative  a  adjudication of'any...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022050.jpg": "...e‘in & ciminal, civil:or administrative: proceeding.  i relinqui...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022073.jpg": "...rding, the discipline or administrative adjudication. of any: ot...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023372.jpg": "...mcc new’york isa federal administrative detention facility opera...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023375.jpg": "...nmate: can: be placed in administrative detention status, includ...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023388.jpg": "...new york is: a: federal administrative detention facility opera...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023445.jpg": "...hat i  it was: more ofan administrative mater ratherthan a secu..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "administrative" (47 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">518-518</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">548-548</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">554-554</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">1072-1072</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">1293-1293</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">1945-1945</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">2085-2085</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">2540-2540</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">2831-2831</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">3329-3330</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">3474-3474</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">3487-3487</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">3685-3685</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">4451-4452</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">4596-4596</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">4609-4612</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">6978-6978</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">7165-7165</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">7192-7192</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">7556-7559</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">7580-7580</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">7588-7588</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">7837-7837</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">7882-7882</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">10474-10474</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">11350-11352</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">11503-11503</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">12237-12237</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">12312-12312</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">17826-17826</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">17900-17900</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">19990-19990</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">20211-20211</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">21392-21392</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">21909-21909</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">22033-22033</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">22050-22050</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">22073-22073</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">23372-23375</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">23388-23388</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">23445-23445</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

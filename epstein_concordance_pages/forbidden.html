@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "forbidden"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 5287, "end": 5287, "pages": [5287]}, {"start": 6894, "end": 6894, "pages": [6894]}, {"start": 7027, "end": 7027, "pages": [7027]}, {"start": 10795, "end": 10795, "pages": [10795]}, {"start": 10824, "end": 10824, "pages": [10824]}, {"start": 14387, "end": 14387, "pages": [14387]}, {"start": 17009, "end": 17009, "pages": [17009]}, {"start": 22091, "end": 22091, "pages": [22091]}];
+        const pageToPath = {"5287": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005287.jpg", "6894": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006894.jpg", "7027": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007027.jpg", "10795": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010795.jpg", "10824": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010824.jpg", "14387": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014387.jpg", "17009": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017009.jpg", "22091": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022091.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005287.jpg": "...ose. “that i l8s you are forbidden from consuming-a anly ne...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006894.jpg": "...is, exactly the  idence forbidden by rule 4o4(b).  +f cade...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007027.jpg": "...ose. that i l8s ‘you are forbidden frorh 8 consuming: aily...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010795.jpg": "...rpose.. that is, you are forbidden from consuming atiy news...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010824.jpg": "...r. any purpose. ‘th: are forbidden from consuming any: news...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014387.jpg": "...the lave as to what teve forbidden, or that may become nece...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017009.jpg": "...the lave as to what teve forbidden, or that may become nece...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022091.jpg": "...: fhe charge for reasons forbidden by’  the constitution.”..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "forbidden" (8 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">5287-5287</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">6894-6894</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">7027-7027</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">10795-10795</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">10824-10824</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">14387-14387</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">17009-17009</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">22091-22091</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

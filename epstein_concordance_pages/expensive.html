@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "expensive"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 335, "end": 335, "pages": [335]}, {"start": 1904, "end": 1904, "pages": [1904]}, {"start": 12387, "end": 12387, "pages": [12387]}, {"start": 12917, "end": 12917, "pages": [12917]}, {"start": 17975, "end": 17975, "pages": [17975]}, {"start": 18503, "end": 18503, "pages": [18503]}];
+        const pageToPath = {"335": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000335.jpg", "1904": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001904.jpg", "12387": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012387.jpg", "12917": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012917.jpg", "17975": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017975.jpg", "18503": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018503.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000335.jpg": "...ngthy, complicated, and. expensive process, and the possibi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001904.jpg": "...om and has, 4 history of expensive international travel, sh...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012387.jpg": "...rked for mr.  laties  == expensive and. 6xteensivee renovat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012917.jpg": "...th in. the past may have expensive assets that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017975.jpg": "...rked for mr.  laties  == expensive and. 6xteensivee renovat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018503.jpg": "...th in. the past may have expensive assets that..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "expensive" (6 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">335-335</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1904-1904</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">12387-12387</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">12917-12917</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">17975-17975</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">18503-18503</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

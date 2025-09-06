@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "probability"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 479, "end": 479, "pages": [479]}, {"start": 791, "end": 791, "pages": [791]}, {"start": 869, "end": 869, "pages": [869]}, {"start": 1217, "end": 1217, "pages": [1217]}, {"start": 1279, "end": 1279, "pages": [1279]}, {"start": 2240, "end": 2240, "pages": [2240]}, {"start": 2772, "end": 2772, "pages": [2772]}, {"start": 3626, "end": 3626, "pages": [3626]}, {"start": 3632, "end": 3633, "pages": [3632, 3633]}, {"start": 3956, "end": 3956, "pages": [3956]}, {"start": 5271, "end": 5271, "pages": [5271]}, {"start": 5995, "end": 5995, "pages": [5995]}, {"start": 6920, "end": 6920, "pages": [6920]}, {"start": 7461, "end": 7461, "pages": [7461]}, {"start": 7599, "end": 7599, "pages": [7599]}, {"start": 8511, "end": 8512, "pages": [8511, 8512]}, {"start": 8595, "end": 8596, "pages": [8595, 8596]}, {"start": 8675, "end": 8676, "pages": [8675, 8676]}, {"start": 8761, "end": 8762, "pages": [8761, 8762]}, {"start": 8831, "end": 8831, "pages": [8831]}, {"start": 8845, "end": 8845, "pages": [8845]}, {"start": 8856, "end": 8857, "pages": [8856, 8857]}, {"start": 8904, "end": 8905, "pages": [8904, 8905]}, {"start": 14629, "end": 14629, "pages": [14629]}, {"start": 15143, "end": 15143, "pages": [15143]}, {"start": 17250, "end": 17250, "pages": [17250]}, {"start": 20135, "end": 20135, "pages": [20135]}, {"start": 20197, "end": 20197, "pages": [20197]}, {"start": 22100, "end": 22100, "pages": [22100]}];
+        const pageToPath = {"479": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000479.jpg", "791": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000791.jpg", "869": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000869.jpg", "1217": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001217.jpg", "1279": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001279.jpg", "2240": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002240.jpg", "2772": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002772.jpg", "3626": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003626.jpg", "3632": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003632.jpg", "3633": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003633.jpg", "3956": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003956.jpg", "5271": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005271.jpg", "5995": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005995.jpg", "6920": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006920.jpg", "7461": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007461.jpg", "7599": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007599.jpg", "8511": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008511.jpg", "8512": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008512.jpg", "8595": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008595.jpg", "8596": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008596.jpg", "8675": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008675.jpg", "8676": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008676.jpg", "8761": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008761.jpg", "8762": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008762.jpg", "8831": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008831.jpg", "8845": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008845.jpg", "8856": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008856.jpg", "8857": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008857.jpg", "8904": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008904.jpg", "8905": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008905.jpg", "14629": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014629.jpg", "15143": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015143.jpg", "17250": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017250.jpg", "20135": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020135.jpg", "20197": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020197.jpg", "22100": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022100.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000479.jpg": "...here there is, a strong  probability that a, person will comm...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000791.jpg": "...here there is, a strong  probability that a, person will comm...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000869.jpg": "...ght, and.that. “a strong probability arises’ that no form of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001217.jpg": "...ght, and that “a ‘strong:probability arises’ that no form of:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001279.jpg": "...ght, and.that. “a strong probability arises’ that no form of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002240.jpg": "...ight, and that “a strong probability’ arises” that no: form....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002772.jpg": "...ght, and.that. “a strong probability arises’ that no form of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003626.jpg": "...population has an,equal;probability: of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003632.jpg": "...lectionuriderweights the probability of selection from the co...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003633.jpg": "...not. assuming that the  probability of being randomily selec...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003956.jpg": "...h “thete is 4 reasonable probability that, had the evideries...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005271.jpg": "...ere ‘ls ‘a.  substantial probability-that:the defendants righ...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005995.jpg": "...here,[ ____] had a high probability of'picking ms. maxwell....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006920.jpg": "...here,[ ____] had a high probability of'picking ms. maxwell....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007461.jpg": "...roa it  to minimize the probability of any such improper com...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007599.jpg": "...t  dani erousness? probability and prediction,  of eos...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008511.jpg": "...that there was.a, high. ‘probability a crime was being: commi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008512.jpg": "....that-there: ‘was'a high probability that a goal, of the cons...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008595.jpg": "...cee a tar iat aones sae  probability a. crime was ‘being comm...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008596.jpg": "...here is an.  was a. high.probability’that a goal ofthe conspi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008675.jpg": "...that there was.a, high. ‘probability a crime was being: commi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008676.jpg": "....that-there: ‘was'a high probability that a goal, of the cons...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008761.jpg": "...that there was.a, high. ‘probability a crime was being: commi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008762.jpg": "....that-there: ‘was'a high probability that a goal, of the cons...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008831.jpg": "...there is!  a substantial probability:of harm, to 4 compelling...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008845.jpg": "...there is!  a substantial probability:of harm, to 4 compelling...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008856.jpg": "...a.substantial,  ‘  a,  ‘probability. that the defendant's ri...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008857.jpg": "...ced if  is a substantial probability  5  the motion is unseal...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008904.jpg": "...a.substantial,  ‘  a,  ‘probability. that the defendant's ri...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008905.jpg": "...ced if  is a substantial probability  5  the motions unsealed...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014629.jpg": "...d that. ehefe was a high probability ‘that a  geal ef the con...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015143.jpg": "...trial when there was ‘no probability of guilt.  . the court h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017250.jpg": "...d that. ehefe was a high probability ‘that a  geal ef the con...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020135.jpg": "...ght, and that “a ‘strong:probability arises’ that no form of:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020197.jpg": "...ght, and.that. “a strong probability arises’ that no form of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022100.jpg": "...disclesure, a reasonable probability will. exist that the out..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "probability" (36 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">479-479</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">791-791</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">869-869</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">1217-1217</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">1279-1279</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">2240-2240</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">2772-2772</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">3626-3626</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">3632-3633</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">3956-3956</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">5271-5271</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">5995-5995</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">6920-6920</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">7461-7461</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">7599-7599</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">8511-8512</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">8595-8596</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">8675-8676</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">8761-8762</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">8831-8831</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">8845-8845</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">8856-8857</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">8904-8905</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">14629-14629</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">15143-15143</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">17250-17250</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">20135-20135</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">20197-20197</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">22100-22100</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

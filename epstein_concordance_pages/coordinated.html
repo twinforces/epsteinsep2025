@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "coordinated"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 6, "end": 6, "pages": [6]}, {"start": 2368, "end": 2368, "pages": [2368]}, {"start": 2599, "end": 2599, "pages": [2599]}, {"start": 3474, "end": 3474, "pages": [3474]}, {"start": 4596, "end": 4596, "pages": [4596]}, {"start": 5224, "end": 5224, "pages": [5224]}, {"start": 9624, "end": 9624, "pages": [9624]}, {"start": 10524, "end": 10524, "pages": [10524]}, {"start": 13783, "end": 13783, "pages": [13783]}, {"start": 14855, "end": 14855, "pages": [14855]}, {"start": 16408, "end": 16408, "pages": [16408]}, {"start": 20534, "end": 20534, "pages": [20534]}, {"start": 21099, "end": 21099, "pages": [21099]}, {"start": 21474, "end": 21474, "pages": [21474]}, {"start": 21799, "end": 21799, "pages": [21799]}, {"start": 21852, "end": 21852, "pages": [21852]}, {"start": 21882, "end": 21882, "pages": [21882]}];
+        const pageToPath = {"6": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000006.jpg", "2368": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002368.jpg", "2599": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002599.jpg", "3474": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003474.jpg", "4596": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004596.jpg", "5224": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005224.jpg", "9624": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009624.jpg", "10524": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010524.jpg", "13783": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013783.jpg", "14855": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014855.jpg", "16408": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016408.jpg", "20534": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020534.jpg", "21099": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021099.jpg", "21474": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021474.jpg", "21799": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021799.jpg", "21852": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021852.jpg", "21882": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021882.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000006.jpg": "...ndant ghislaine maxwell. coordinated, facilitated, and. contr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002368.jpg": "...s office had, iti. fact, coordinated with [___] prior  tothe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002599.jpg": "...:  new: york, reflect.a, coordinated.  contact with witnesses...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003474.jpg": "...‘was short. ‘madthe usa coordinated wath the: state atorney:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004596.jpg": "...was short. ‘had:the usa© coordinated swath: thi state atorney...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005224.jpg": "...alleged-victims:will, be coordinated between the vietiny witn...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009624.jpg": "...wish-to atend. will be:  coordinated between, the victim, wit...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010524.jpg": ".... ‘victim access:will be coordinated. between. the vietim wit...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013783.jpg": "...ned.  q. annie, have you coordinated your testimony with any...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014855.jpg": "...ndant ghislaine maxwell. coordinated, facilitated, and. contr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016408.jpg": "...ned.  q. annie, have you coordinated your testimony with any...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020534.jpg": "...alleged ainanal eer ‘be coordinated be ween. the victim wire...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021099.jpg": "...a coordinated effort that transcended....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021474.jpg": "...department.  could haye coordinated:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021799.jpg": "...ndant ghislaine maxwell. coordinated, facilitated, and. contr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021852.jpg": "...ndant ghislaine maxwell. coordinated, facilitated, and. contr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021882.jpg": "...ndant ghislaine maxwell. coordinated, facilitated, and. contr..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "coordinated" (17 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">6-6</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">2368-2368</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">2599-2599</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3474-3474</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">4596-4596</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">5224-5224</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">9624-9624</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">10524-10524</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">13783-13783</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">14855-14855</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">16408-16408</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">20534-20534</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">21099-21099</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">21474-21474</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">21799-21799</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">21852-21852</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">21882-21882</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

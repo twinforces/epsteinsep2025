@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "reputation"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 636, "end": 636, "pages": [636]}, {"start": 1048, "end": 1048, "pages": [1048]}, {"start": 1868, "end": 1868, "pages": [1868]}, {"start": 3023, "end": 3023, "pages": [3023]}, {"start": 3692, "end": 3692, "pages": [3692]}, {"start": 4865, "end": 4865, "pages": [4865]}, {"start": 4953, "end": 4953, "pages": [4953]}, {"start": 5442, "end": 5442, "pages": [5442]}, {"start": 5518, "end": 5518, "pages": [5518]}, {"start": 6409, "end": 6409, "pages": [6409]}, {"start": 6445, "end": 6445, "pages": [6445]}, {"start": 6480, "end": 6480, "pages": [6480]}, {"start": 9216, "end": 9216, "pages": [9216]}, {"start": 9895, "end": 9895, "pages": [9895]}, {"start": 10450, "end": 10450, "pages": [10450]}, {"start": 10458, "end": 10458, "pages": [10458]}, {"start": 10491, "end": 10491, "pages": [10491]}, {"start": 11347, "end": 11347, "pages": [11347]}, {"start": 14028, "end": 14028, "pages": [14028]}, {"start": 15159, "end": 15159, "pages": [15159]}, {"start": 16652, "end": 16652, "pages": [16652]}, {"start": 19966, "end": 19966, "pages": [19966]}, {"start": 20777, "end": 20777, "pages": [20777]}, {"start": 21209, "end": 21209, "pages": [21209]}];
+        const pageToPath = {"636": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000636.jpg", "1048": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001048.jpg", "1868": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001868.jpg", "3023": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003023.jpg", "3692": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003692.jpg", "4865": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004865.jpg", "4953": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004953.jpg", "5442": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005442.jpg", "5518": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005518.jpg", "6409": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006409.jpg", "6445": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006445.jpg", "6480": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006480.jpg", "9216": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009216.jpg", "9895": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009895.jpg", "10450": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010450.jpg", "10458": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010458.jpg", "10491": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010491.jpg", "11347": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011347.jpg", "14028": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014028.jpg", "15159": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015159.jpg", "16652": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016652.jpg", "19966": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019966.jpg", "20777": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020777.jpg", "21209": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021209.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000636.jpg": "...off  had his career and reputation destroyed by oig, state....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001048.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001868.jpg": "...air. the bop’s tarnished reputation by y placin x ‘ms. maxwe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003023.jpg": "...er damaging a sexual.  , reputation. and, credibility: to ca...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003692.jpg": "...e has' transformed. her  reputation from that: of epstcin’s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004865.jpg": "...ited states § atorneys.  reputation than any: other: person...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004953.jpg": "...ng on her “character and reputation,” the “possibility ofa....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005442.jpg": "...imony about the person’s reputation. or by’  testimony: in t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005518.jpg": "...r or ‘character‘trait by reputation or opinion, which, :if o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006409.jpg": "...imony about the person’s reputation. or by’  testimony: in t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006445.jpg": "...ught.and offered. of her reputation. for-veracity:in. her :o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006480.jpg": "...r or ‘character‘trait by reputation or opinion, which, :if o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009216.jpg": "...erest, as opposed to bad reputation, the exanifier is not bo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009895.jpg": "...erest, as opposed to bad reputation, the exanifier is not bo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010450.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010458.jpg": "...‘permanently damage‘his reputation. the l97os were-difficul...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010491.jpg": "...d exemplary grades.and a reputation as a.serious, student. l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011347.jpg": "....  rule 6o8 states:  (a) reputation or ‘opinion, evi dence,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014028.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015159.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016652.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019966.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020777.jpg": "...ase has transiformed-her reputation from that of epstein’s ‘...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021209.jpg": "...cites s his * ‘national reputation for, the aggressive: def..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "reputation" (24 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">636-636</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1048-1048</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1868-1868</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3023-3023</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">3692-3692</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">4865-4865</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">4953-4953</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">5442-5442</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">5518-5518</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">6409-6409</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">6445-6445</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">6480-6480</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">9216-9216</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">9895-9895</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">10450-10450</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">10458-10458</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">10491-10491</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">11347-11347</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">14028-14028</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">15159-15159</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">16652-16652</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">19966-19966</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">20777-20777</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">21209-21209</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

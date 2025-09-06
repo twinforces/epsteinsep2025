@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "consolidate"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1825, "end": 1826, "pages": [1825, 1826]}, {"start": 19276, "end": 19276, "pages": [19276]}, {"start": 19282, "end": 19289, "pages": [19282, 19283, 19284, 19285, 19287, 19288, 19289]}, {"start": 19295, "end": 19301, "pages": [19295, 19300, 19301]}, {"start": 19345, "end": 19345, "pages": [19345]}, {"start": 19360, "end": 19368, "pages": [19360, 19362, 19363, 19364, 19365, 19368]}, {"start": 19383, "end": 19388, "pages": [19383, 19385, 19386, 19387, 19388]}, {"start": 19394, "end": 19399, "pages": [19394, 19397, 19399]}, {"start": 19413, "end": 19413, "pages": [19413]}, {"start": 19585, "end": 19588, "pages": [19585, 19586, 19587, 19588]}, {"start": 19605, "end": 19605, "pages": [19605]}, {"start": 19656, "end": 19657, "pages": [19656, 19657]}, {"start": 19672, "end": 19672, "pages": [19672]}, {"start": 19678, "end": 19678, "pages": [19678]}, {"start": 19684, "end": 19690, "pages": [19684, 19685, 19689, 19690]}];
+        const pageToPath = {"1825": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001825.jpg", "1826": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001826.jpg", "19276": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019276.jpg", "19282": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019282.jpg", "19283": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019283.jpg", "19284": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019284.jpg", "19285": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019285.jpg", "19287": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019287.jpg", "19288": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019288.jpg", "19289": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019289.jpg", "19295": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019295.jpg", "19300": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019300.jpg", "19301": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019301.jpg", "19345": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019345.jpg", "19360": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019360.jpg", "19362": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019362.jpg", "19363": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019363.jpg", "19364": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019364.jpg", "19365": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019365.jpg", "19368": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019368.jpg", "19383": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019383.jpg", "19385": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019385.jpg", "19386": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019386.jpg", "19387": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019387.jpg", "19388": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019388.jpg", "19394": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019394.jpg", "19397": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019397.jpg", "19399": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019399.jpg", "19413": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019413.jpg", "19585": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019585.jpg", "19586": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019586.jpg", "19587": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019587.jpg", "19588": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019588.jpg", "19605": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019605.jpg", "19656": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019656.jpg", "19657": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019657.jpg", "19672": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019672.jpg", "19678": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019678.jpg", "19684": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019684.jpg", "19685": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019685.jpg", "19689": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019689.jpg", "19690": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019690.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001825.jpg": "...»s. maxwell’s motion to. consolidate on. the grounds that fhe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001826.jpg": "...us tel  thet motions ‘to consolidate this appeal with, the  e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019276.jpg": "...o short:t ng a motion to consolidate: this: case with no. 2o:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019282.jpg": "...ted ‘states v.. maxwell  consolidate under seal  etsousht:  s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019283.jpg": "...ile unredacted motion to consolidate under seal  morgan and f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019284.jpg": "...l’s unredacted motion to consolidate explains this situation....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019285.jpg": "...consolidate in the criminal appeal u...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019287.jpg": "...motion for: (o consolidate appeals _ united ‘states...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019288.jpg": "...ine maxwell’s motion. to consolidate appeals...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019289.jpg": "...well moves this gourt to consolidate  od  united states ». ma...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019295.jpg": "...gument this court should consolidate the appeal of judge: pre...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019300.jpg": "...asons, this court should consolidate united states 4. maxwell...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019301.jpg": "...ine maxwell’s. motion to consolidate appeal to:all counsel of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019345.jpg": "...n to maxwell’s motion to consolidate this appeal with the app...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019360.jpg": "...maxwell’s tiotioni, to.  consolidate, it is not. entirely cle...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019362.jpg": "...veni  be:— her motion to consolidate the appeal in this crimi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019363.jpg": "...er. maxwell’s motion. to consolidate offers :no coherent  exp...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019364.jpg": "...ver, maxwell’s motion to consolidate is a transparent atempt...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019365.jpg": "...ant maxwell’s request to consolidate these appeals. according...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019368.jpg": "...n to maxwell’s motion to consolidate this appeal with the app...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019383.jpg": "...maxwell’s tiotioni, to.  consolidate, it is not. entirely cle...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019385.jpg": "...veni  be:— her motion to consolidate the appeal in this crimi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019386.jpg": "...er. maxwell’s motion. to consolidate offers :no coherent  exp...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019387.jpg": "...ver, maxwell’s motion to consolidate is a transparent atempt...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019388.jpg": "...ant maxwell’s request to consolidate these appeals. according...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019394.jpg": "...opposition to: motion to consolidate p pp...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019397.jpg": "...moreover, the: motion to consolidate.is not an.atempt to circ...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019399.jpg": "...opposition to. motion to consolidate with the court via cm/ec...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019413.jpg": "...ms. maxwell has moved to consolidate both appeals. that motio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019585.jpg": "...tion  to the: motion: to consolidate; and'(2) leave :not to:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019586.jpg": "...osition to the motion to consolidate (filed...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019587.jpg": "...ll has filed a motion to consolidate both appeals. oral argum...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019588.jpg": "...consolidate. appendix volume:2, houe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019605.jpg": "...n.ms. maxwells motion to consolidate, the judges ‘in. the sou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019656.jpg": "...ms. maxwell’s motion to consolidate, in which the government...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019657.jpg": "...doe, 6o, her motion to:  consolidate, doe. l7, and the reply:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019672.jpg": "...l has filed a. motion to consolidate.both appeals. the.unreda...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019678.jpg": "...»s. maxwell’s motion to. consolidate on. the grounds that fhe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019684.jpg": "...»s. maxwell’s motion to. consolidate on. the grounds that fhe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019685.jpg": "...us tel  thet motions ‘to consolidate this appeal with, the  e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019689.jpg": "...»s. maxwell’s motion to. consolidate on. the grounds that fhe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019690.jpg": "...us tel  thet motions ‘to consolidate this appeal with, the  e..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "consolidate" (42 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1825-1826</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">19276-19276</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">19282-19289</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">19295-19301</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">19345-19345</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">19360-19368</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">19383-19388</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">19394-19399</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">19413-19413</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">19585-19588</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">19605-19605</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">19656-19657</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">19672-19672</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">19678-19678</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">19684-19690</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "hypothesis"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 279, "end": 279, "pages": [279]}, {"start": 5644, "end": 5644, "pages": [5644]}, {"start": 6191, "end": 6191, "pages": [6191]}, {"start": 6264, "end": 6264, "pages": [6264]}, {"start": 6606, "end": 6606, "pages": [6606]}, {"start": 7218, "end": 7218, "pages": [7218]}, {"start": 7333, "end": 7333, "pages": [7333]}, {"start": 7483, "end": 7483, "pages": [7483]}, {"start": 7505, "end": 7505, "pages": [7505]}, {"start": 7697, "end": 7697, "pages": [7697]}, {"start": 7908, "end": 7908, "pages": [7908]}, {"start": 8023, "end": 8023, "pages": [8023]}, {"start": 8081, "end": 8081, "pages": [8081]}, {"start": 8156, "end": 8156, "pages": [8156]}, {"start": 13985, "end": 13985, "pages": [13985]}, {"start": 14915, "end": 14915, "pages": [14915]}, {"start": 16609, "end": 16609, "pages": [16609]}];
+        const pageToPath = {"279": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000279.jpg", "5644": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005644.jpg", "6191": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006191.jpg", "6264": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006264.jpg", "6606": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006606.jpg", "7218": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007218.jpg", "7333": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007333.jpg", "7483": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007483.jpg", "7505": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007505.jpg", "7697": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007697.jpg", "7908": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007908.jpg", "8023": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008023.jpg", "8081": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008081.jpg", "8156": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008156.jpg", "13985": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013985.jpg", "14915": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014915.jpg", "16609": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016609.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000279.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005644.jpg": "...t.... is not:a testable: hypothesis.” schneider, 2o.lo wl, 3...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006191.jpg": "...ure did not support the. hypothesis that eiotional. distress...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006264.jpg": "...ure did not support the. hypothesis that eiotional. distress...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006606.jpg": "...t.... is not:a testable: hypothesis.” schneider, 2o.lo wl, 3...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007218.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007333.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007483.jpg": "...re does not; support the hypothesis that emotional distress...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007505.jpg": "...ure did not support the. hypothesis that eiotional. distress...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007697.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007908.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008023.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008081.jpg": "...ure did not support the. hypothesis that eiotional. distress...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008156.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013985.jpg": "...= fos foie sat cetad  a hypothesis about what might have ma...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014915.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016609.jpg": "...= fos foie sat cetad  a hypothesis about what might have ma..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "hypothesis" (17 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">279-279</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">5644-5644</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">6191-6191</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">6264-6264</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">6606-6606</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">7218-7218</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">7333-7333</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">7483-7483</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">7505-7505</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">7697-7697</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">7908-7908</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">8023-8023</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">8081-8081</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">8156-8156</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">13985-13985</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">14915-14915</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">16609-16609</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

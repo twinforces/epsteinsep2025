@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "porn"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 2991, "end": 2991, "pages": [2991]}, {"start": 5879, "end": 5879, "pages": [5879]}, {"start": 6804, "end": 6804, "pages": [6804]}, {"start": 7519, "end": 7519, "pages": [7519]}, {"start": 7568, "end": 7568, "pages": [7568]}, {"start": 14511, "end": 14511, "pages": [14511]}, {"start": 17132, "end": 17132, "pages": [17132]}];
+        const pageToPath = {"2991": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002991.jpg", "5879": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005879.jpg", "6804": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006804.jpg", "7519": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007519.jpg", "7568": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007568.jpg", "14511": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014511.jpg", "17132": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017132.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002991.jpg": "...everal of the: “virtwal. porn’ provisions if  this bil...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005879.jpg": "...rut ry are  te use of ‘porn —_ ‘ 5 ually: sinsitize...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006804.jpg": "...rut ry are  te use of ‘porn —_ ‘ 5 ually: sinsitize...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007519.jpg": "...erlbat unt  ‘nennion sar porn en ce lx. ¥ hillsdale,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007568.jpg": "...tion of new_york (dial-a-porn case? 2nd circuit opinio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014511.jpg": "...n. l994 with walls being porn doui. she never told you...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017132.jpg": "...n. l994 with walls being porn doui. she never told you..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "porn" (7 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">2991-2991</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">5879-5879</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">6804-6804</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">7519-7519</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">7568-7568</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">14511-14511</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">17132-17132</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

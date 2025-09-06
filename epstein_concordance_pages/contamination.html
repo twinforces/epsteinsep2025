@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "contamination"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 6061, "end": 6061, "pages": [6061]}, {"start": 6210, "end": 6210, "pages": [6210]}, {"start": 14017, "end": 14017, "pages": [14017]}, {"start": 14043, "end": 14043, "pages": [14043]}, {"start": 14546, "end": 14546, "pages": [14546]}, {"start": 16641, "end": 16641, "pages": [16641]}, {"start": 16667, "end": 16667, "pages": [16667]}, {"start": 17167, "end": 17167, "pages": [17167]}];
+        const pageToPath = {"6061": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006061.jpg", "6210": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006210.jpg", "14017": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014017.jpg", "14043": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014043.jpg", "14546": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014546.jpg", "16641": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016641.jpg", "16667": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016667.jpg", "17167": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017167.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006061.jpg": "...or  further demonstrate contamination and collusion.from vario...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006210.jpg": "...d thathey: ““demonstrate:contamination. and collusion.  from: v...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014017.jpg": "...nat vor?  a. bost-event. contamination would be a situation whe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014043.jpg": "...sceptible ta post=event  contamination, ‘than, adultis, right?...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014546.jpg": "...o  is, and it ga cause a contamination sr a diss supplementatio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016641.jpg": "...nat vor?  a. bost-event. contamination would be a situation whe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016667.jpg": "...sceptible ta post=event  contamination, ‘than, adultis, right?...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017167.jpg": "...o  is, and it ga cause a contamination sr a diss supplementatio..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "contamination" (8 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">6061-6061</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">6210-6210</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">14017-14017</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">14043-14043</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">14546-14546</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">16641-16641</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">16667-16667</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">17167-17167</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

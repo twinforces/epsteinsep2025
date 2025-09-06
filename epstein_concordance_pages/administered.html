@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "administered"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 2073, "end": 2073, "pages": [2073]}, {"start": 2813, "end": 2813, "pages": [2813]}, {"start": 3277, "end": 3280, "pages": [3277, 3280]}, {"start": 3313, "end": 3313, "pages": [3313]}, {"start": 4399, "end": 4402, "pages": [4399, 4402]}, {"start": 4435, "end": 4435, "pages": [4435]}, {"start": 5274, "end": 5274, "pages": [5274]}, {"start": 11467, "end": 11478, "pages": [11467, 11470, 11475, 11478]}, {"start": 11725, "end": 11725, "pages": [11725]}, {"start": 16170, "end": 16170, "pages": [16170]}];
+        const pageToPath = {"2073": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002073.jpg", "2813": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002813.jpg", "3277": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003277.jpg", "3280": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003280.jpg", "3313": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003313.jpg", "4399": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004399.jpg", "4402": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004402.jpg", "4435": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004435.jpg", "5274": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005274.jpg", "11467": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011467.jpg", "11470": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011470.jpg", "11475": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011475.jpg", "11478": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011478.jpg", "11725": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011725.jpg", "16170": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016170.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002073.jpg": "...amp!  ‘ompliance;program administered. by: the:  capers we ape...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002813.jpg": "...dependent claims program administered. by: n’s estate, l ls a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003277.jpg": "...g creation. of 2 a trust administered by the state court..  ie...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003280.jpg": "...the bs toa trust “fund. administered ‘by the state court, but...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003313.jpg": "...riff's office. both were administered bythe sheriffs offices....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004399.jpg": "...ereation ‘ofa a “trust. administered by the state court..  ie...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004402.jpg": "...the bs toa trust “fund. administered ‘by the state court, but...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004435.jpg": "...riff's office. both were administered by'the sheriff's office....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005274.jpg": "...ing questionnaire willbe administered on’ november 4,5, and. l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011467.jpg": "...ion-alternative program. administered by the u.s. department o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011470.jpg": "...ntly informed the way |  administered the program and approach...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011475.jpg": "...ies. the program will be administered by ms. feldman (the “adm...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011478.jpg": "...nt and will in no way be administered, controlled or  overseen...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011725.jpg": "...of the same folks  that administered the september llth compe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016170.jpg": "...of the same folks  that administered the september llth compe..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "administered" (15 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">2073-2073</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">2813-2813</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">3277-3280</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3313-3313</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">4399-4402</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">4435-4435</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">5274-5274</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">11467-11478</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">11725-11725</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">16170-16170</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

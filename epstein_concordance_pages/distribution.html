@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "distribution"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1395, "end": 1395, "pages": [1395]}, {"start": 4856, "end": 4856, "pages": [4856]}, {"start": 5867, "end": 5867, "pages": [5867]}, {"start": 6792, "end": 6792, "pages": [6792]}, {"start": 7575, "end": 7575, "pages": [7575]}, {"start": 7589, "end": 7589, "pages": [7589]}, {"start": 7697, "end": 7697, "pages": [7697]}, {"start": 8156, "end": 8156, "pages": [8156]}, {"start": 8947, "end": 8947, "pages": [8947]}, {"start": 20313, "end": 20313, "pages": [20313]}];
+        const pageToPath = {"1395": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001395.jpg", "4856": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004856.jpg", "5867": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005867.jpg", "6792": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006792.jpg", "7575": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007575.jpg", "7589": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007589.jpg", "7697": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007697.jpg", "8156": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008156.jpg", "8947": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008947.jpg", "20313": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020313.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001395.jpg": "...y selection beyond early distribution of questionnaires to:pro...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004856.jpg": "...vacuum, cosby’s, use and distribution of a ‘then-legal ‘party...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005867.jpg": "...partner in the narcotics distribution: conspiracy: garcia, 4l3...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006792.jpg": "...partner in the narcotics distribution: conspiracy: garcia, 4l3...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007575.jpg": ".... mcgraw, cbs television distribution group f/k/a/ cbs paramou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007589.jpg": "...mcgraw, cbs television, distribution group f/k/a/ cbs paramou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007697.jpg": "...8. bias  9: statistical distribution  lo. statistical hypothe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008156.jpg": "...8. bias  9: statistical distribution  lo. statistical hypothe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008947.jpg": "...t  evidence of marijuana distribution. and may: have modified...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020313.jpg": "...y selection beyond early distribution of questionnaires to:pro..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "distribution" (10 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1395-1395</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">4856-4856</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">5867-5867</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">6792-6792</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">7575-7575</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">7589-7589</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">7697-7697</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">8156-8156</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">8947-8947</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">20313-20313</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

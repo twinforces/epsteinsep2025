@@ -1,0 +1,250 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "departure"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 3260, "end": 3260, "pages": [3260]}, {"start": 3385, "end": 3385, "pages": [3385]}, {"start": 3677, "end": 3677, "pages": [3677]}, {"start": 3696, "end": 3696, "pages": [3696]}, {"start": 4019, "end": 4019, "pages": [4019]}, {"start": 4028, "end": 4028, "pages": [4028]}, {"start": 4255, "end": 4255, "pages": [4255]}, {"start": 4382, "end": 4382, "pages": [4382]}, {"start": 4507, "end": 4507, "pages": [4507]}, {"start": 4817, "end": 4817, "pages": [4817]}, {"start": 6233, "end": 6233, "pages": [6233]}, {"start": 7414, "end": 7414, "pages": [7414]}, {"start": 8296, "end": 8296, "pages": [8296]}, {"start": 10428, "end": 10428, "pages": [10428]}, {"start": 10561, "end": 10561, "pages": [10561]}, {"start": 11573, "end": 11573, "pages": [11573]}, {"start": 11844, "end": 11850, "pages": [11844, 11848, 11850]}, {"start": 12416, "end": 12416, "pages": [12416]}, {"start": 13392, "end": 13392, "pages": [13392]}, {"start": 14074, "end": 14075, "pages": [14074, 14075]}, {"start": 14801, "end": 14801, "pages": [14801]}, {"start": 15041, "end": 15041, "pages": [15041]}, {"start": 15799, "end": 15799, "pages": [15799]}, {"start": 15811, "end": 15816, "pages": [15811, 15816]}, {"start": 15831, "end": 15832, "pages": [15831, 15832]}, {"start": 15839, "end": 15841, "pages": [15839, 15840, 15841]}, {"start": 15852, "end": 15852, "pages": [15852]}, {"start": 15860, "end": 15860, "pages": [15860]}, {"start": 15873, "end": 15877, "pages": [15873, 15877]}, {"start": 15891, "end": 15891, "pages": [15891]}, {"start": 15910, "end": 15913, "pages": [15910, 15912, 15913]}, {"start": 15965, "end": 15965, "pages": [15965]}, {"start": 15993, "end": 16000, "pages": [15993, 15995, 16000]}, {"start": 16015, "end": 16015, "pages": [16015]}, {"start": 16025, "end": 16025, "pages": [16025]}, {"start": 16031, "end": 16031, "pages": [16031]}, {"start": 16698, "end": 16699, "pages": [16698, 16699]}, {"start": 17434, "end": 17440, "pages": [17434, 17438, 17440]}, {"start": 18004, "end": 18004, "pages": [18004]}, {"start": 18976, "end": 18976, "pages": [18976]}, {"start": 20762, "end": 20762, "pages": [20762]}, {"start": 21084, "end": 21084, "pages": [21084]}, {"start": 21320, "end": 21320, "pages": [21320]}, {"start": 21599, "end": 21599, "pages": [21599]}, {"start": 21750, "end": 21753, "pages": [21750, 21753]}, {"start": 21842, "end": 21842, "pages": [21842]}, {"start": 23096, "end": 23096, "pages": [23096]}, {"start": 23420, "end": 23420, "pages": [23420]}, {"start": 23443, "end": 23443, "pages": [23443]}, {"start": 27384, "end": 27410, "pages": [27384, 27385, 27386, 27387, 27390, 27391, 27392, 27393, 27394, 27395, 27396, 27397, 27398, 27401, 27403, 27404, 27405, 27406, 27409, 27410]}, {"start": 27620, "end": 27620, "pages": [27620]}, {"start": 27628, "end": 27628, "pages": [27628]}];
+        const pageToPath = {"3260": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003260.jpg", "3385": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003385.jpg", "3677": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003677.jpg", "3696": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003696.jpg", "4019": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004019.jpg", "4028": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004028.jpg", "4255": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004255.jpg", "4382": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004382.jpg", "4507": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004507.jpg", "4817": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004817.jpg", "6233": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006233.jpg", "7414": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007414.jpg", "8296": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008296.jpg", "10428": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010428.jpg", "10561": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010561.jpg", "11573": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011573.jpg", "11844": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011844.jpg", "11848": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011848.jpg", "11850": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011850.jpg", "12416": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012416.jpg", "13392": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013392.jpg", "14074": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014074.jpg", "14075": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014075.jpg", "14801": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014801.jpg", "15041": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015041.jpg", "15799": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015799.jpg", "15811": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015811.jpg", "15816": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015816.jpg", "15831": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015831.jpg", "15832": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015832.jpg", "15839": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015839.jpg", "15840": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015840.jpg", "15841": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015841.jpg", "15852": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015852.jpg", "15860": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015860.jpg", "15873": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015873.jpg", "15877": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015877.jpg", "15891": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015891.jpg", "15910": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015910.jpg", "15912": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015912.jpg", "15913": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015913.jpg", "15965": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015965.jpg", "15993": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015993.jpg", "15995": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015995.jpg", "16000": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016000.jpg", "16015": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016015.jpg", "16025": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016025.jpg", "16031": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016031.jpg", "16698": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016698.jpg", "16699": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016699.jpg", "17434": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017434.jpg", "17438": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017438.jpg", "17440": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017440.jpg", "18004": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018004.jpg", "18976": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018976.jpg", "20762": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020762.jpg", "21084": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021084.jpg", "21320": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021320.jpg", "21599": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021599.jpg", "21750": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021750.jpg", "21753": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021753.jpg", "21842": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021842.jpg", "23096": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00023096.jpg", "23420": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023420.jpg", "23443": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023443.jpg", "27384": "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027384.jpg", "27385": "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027385.jpg", "27386": "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027386.jpg", "27387": "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027387.jpg", "27390": "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027390.jpg", "27391": "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027391.jpg", "27392": "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027392.jpg", "27393": "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027393.jpg", "27394": "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027394.jpg", "27395": "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027395.jpg", "27396": "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027396.jpg", "27397": "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027397.jpg", "27398": "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027398.jpg", "27401": "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027401.jpg", "27403": "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027403.jpg", "27404": "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027404.jpg", "27405": "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027405.jpg", "27406": "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027406.jpg", "27409": "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027409.jpg", "27410": "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027410.jpg", "27620": "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027620.jpg", "27628": "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027628.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003260.jpg": "...o: do with his impending departure fromthe usao....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003385.jpg": "...oman. after menchel’s s$ departure.  concerns and, objectio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003677.jpg": "...nspirators marks a.stark departure from normal  vision appe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003696.jpg": "...o  cireumstances justify departure: from,this general rule....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004019.jpg": "...e legal. confererice aid departure of counsel, the etiards...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004028.jpg": "...e legal. confererice aid departure of counsel, the etiards...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004255.jpg": "...ficant—and. ‘unwarranted—departure fromthe practices in thi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004382.jpg": "...: do with his impending: departure from the esao....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004507.jpg": "...‘sloman. after menchel’s departure.  ils, ‘but often, infor...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004817.jpg": "...n of gonstand’s planned  departure from temple..  constand...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006233.jpg": ".... at 7)  is a-remarkable departure from permissible practic...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007414.jpg": "...nati es  mr rodriguez”’s departure. mr. rodriguez worked, f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008296.jpg": "...k was cyeated, post.  my departure, so i couldn\"t explain w...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010428.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010561.jpg": "...participants. an upward. departure may: be: warranted, houe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011573.jpg": "...an appropriate basis for departure  mh (q.  do wot  8 2  fg...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011844.jpg": "...r that would, appeax for departure.  @. and you uld talk, t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011848.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011850.jpg": "...ven. roughly the tame of departure?  qo. and you would need...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012416.jpg": "...ut it was also before my departure.  qo. was it. sometime w...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013392.jpg": "...iber, y6u would have the departure, the  a si at) cp i: fe)...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014074.jpg": "...might of that, deploc is departure location. that is the ai...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014075.jpg": "...rival, legation, and the departure loeation. @. that, all c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014801.jpg": "...an appropriate basis for departure  mh (q.  do wot  8 2  fg...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015041.jpg": "...r  any reason, after the departure or death. of a: previous...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015799.jpg": "...st t et) —  ‘points “of departure. &. arrival _ | [- a rem...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015811.jpg": "...m  ; ; | pine points: of departure & arriva | date: | aircr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015816.jpg": "...rarer a s uc points: of. departure &: arrival. | } a i ‘ ir...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015831.jpg": "...ire “ ti ‘points of af t departure. & arrival &, mies fight...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015832.jpg": "...ee =  os)  '|' points of departure & arrival, _|||miles:/|...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015839.jpg": "...| -airraft |” points’ of departure & arrival | om | se\" (nu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015840.jpg": "...ke i] area i) /polnts'of departure’ & aivat th nites! i[ fi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015841.jpg": "...ee —_——\"  ’ wy points of departure & arrival, m  ee ee a  i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015852.jpg": "...e ne ||. points ts of if departure & & arrival rf temarks;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015860.jpg": "...e ee teen =  a 4 poner t departure & arrival ip entation ma...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015873.jpg": "...,  aircraft || points of departure & arrival i) mites\" | fn...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015877.jpg": "...a eee ret at  ui ints of departure & arrival ~ i sites: flo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015891.jpg": "...alraran a ap ‘points of departure & ar anivat | miles | fl...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015910.jpg": "...gss  oy  i ~— paints ‘of departure & a anival (| mites: fri...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015912.jpg": "...if alrcrait) jpelnts of departure & arrival _ miles: [etn...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015913.jpg": "...tatake | 'airrat ponts f departure & arial if es [right | r...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015965.jpg": "...alrraft i , points of of departure & a ‘arrival. 4 maes! i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015993.jpg": "...te et  “i ‘points of of departure & arrival a mies' flight...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015995.jpg": "...e =e  a er  [points of f departure & anival ~ =| mies: flig...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016000.jpg": "...comng ef  5 “| points of departure & anivall || mies fligh...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016015.jpg": "...ae avg  [aiea [points of departure & anivat |] mi  ‘identif...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016025.jpg": "...ea)  aber , a [points of departure, & arrival, “t  une ee...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016031.jpg": "...make: l4) arora ponts of departure & apival | mies, right |...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016698.jpg": "...might of that, deploc is departure location. that is the ai...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016699.jpg": "...rival, legation, and the departure loeation. @. that, all c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017434.jpg": "...r that would, appeax for departure.  @. and you uld talk, t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017438.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017440.jpg": "...ven. roughly the tame of departure?  qo. and you would need...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018004.jpg": "...ut it was also before my departure.  qo. was it. sometime w...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018976.jpg": "...iber, y6u would have the departure, the  a si at) cp i: fe)...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020762.jpg": "...nspirators marks a stark departure from normal.  practice:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021084.jpg": "...plain or acknouledge its departure from this longstanding d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021320.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021599.jpg": "...an appropriate basis for departure  from the advisory range...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021750.jpg": "...‘reasons for its upward departure. l8 u.s.c. section  the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021753.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021842.jpg": "...lain or acknouledge its. departure from this longstanding d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00023096.jpg": "...: do with his impending: departure fromthe usao....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023420.jpg": "...mate-d due to inmate 3s, departure and the requirement that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023443.jpg": "...ellmate after inmate 3's departure and rounds and counts: h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027384.jpg": "...arrivalicocation  k@eb  departure:location: i lf pb  conf....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027385.jpg": "...al time arrivalicocation departure: date departure:location...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027386.jpg": "...of lravel  sen ve. oer  departure’date?. departure vocatio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027387.jpg": "...tomsiand:  page:s'of l:  departure vocation?  re  doj-ogr-...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027390.jpg": "...l time.  jeparture: date departure:location:  listof travel...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027391.jpg": "...tomsiand:  page:s'of l:  departure vocation?  ; — gere —| :...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027392.jpg": "...al time arrivalicocation departure: date departure:location...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027393.jpg": "...37 kpbt  mode.of travel  departure: location:  ae es  listo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027394.jpg": "...ail ie  arrivalicocation departure: date departure:location...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027395.jpg": "...tail. #!  kpbt  n222oe  departure: location:  ae es  listo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027396.jpg": "...223l74593 tail.d#! ne  ¢ departure:location: s le taist  li...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027397.jpg": "...’ time. arrival'cocation departure: date |s2fl 9/28: l758 k...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027398.jpg": "...age:s'of l:  sek ser ue  departure’ oate?. departure vocati...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027401.jpg": "...ah om  . departs: dates. departure vocations  te ts  ane co...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027403.jpg": "...page:t'of l:  saw eay,  departure vocations  re  doj-ogr-...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027404.jpg": "...time.  :arrivalicocation departure: date departure:location...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027405.jpg": "...tomsiand:  page:s'of l:  departure vocation?  shouing 4 rec...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027406.jpg": "...l.# ||  arrivalicocation departure: date departure:location...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027409.jpg": "...l728  :arrivalitocation departure: date departure:location...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027410.jpg": "...l:  sen v, tenens reat,  departure’datey. departure vocatio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027620.jpg": "...are  28 rx made to the! departure elt..::losep/jvdesk/6]...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027628.jpg": "...o a/7 rx are made to the departure elt,  -losep/jvdesk/6]..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "departure" (87 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">3260-3260</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">3385-3385</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">3677-3677</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3696-3696</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">4019-4019</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">4028-4028</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">4255-4255</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">4382-4382</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">4507-4507</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">4817-4817</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">6233-6233</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">7414-7414</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">8296-8296</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">10428-10428</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">10561-10561</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">11573-11573</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">11844-11850</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">12416-12416</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">13392-13392</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">14074-14075</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">14801-14801</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">15041-15041</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">15799-15799</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">15811-15816</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">15831-15832</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">15839-15841</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">15852-15852</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">15860-15860</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">15873-15877</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">15891-15891</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">15910-15913</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">15965-15965</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">15993-16000</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">16015-16015</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">16025-16025</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">16031-16031</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">16698-16699</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">17434-17440</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">18004-18004</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">18976-18976</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">20762-20762</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">21084-21084</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">21320-21320</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">21599-21599</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">21750-21753</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(45, 0); return false;">21842-21842</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(46, 0); return false;">23096-23096</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(47, 0); return false;">23420-23420</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(48, 0); return false;">23443-23443</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(49, 0); return false;">27384-27410</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(50, 0); return false;">27620-27620</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(51, 0); return false;">27628-27628</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

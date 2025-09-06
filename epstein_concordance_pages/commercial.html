@@ -1,0 +1,289 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "commercial"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 268, "end": 268, "pages": [268]}, {"start": 342, "end": 342, "pages": [342]}, {"start": 375, "end": 375, "pages": [375]}, {"start": 2860, "end": 2862, "pages": [2860, 2861, 2862]}, {"start": 2979, "end": 2979, "pages": [2979]}, {"start": 3141, "end": 3141, "pages": [3141]}, {"start": 3506, "end": 3506, "pages": [3506]}, {"start": 4274, "end": 4279, "pages": [4274, 4279]}, {"start": 4290, "end": 4290, "pages": [4290]}, {"start": 4628, "end": 4628, "pages": [4628]}, {"start": 5501, "end": 5501, "pages": [5501]}, {"start": 5532, "end": 5532, "pages": [5532]}, {"start": 5998, "end": 5998, "pages": [5998]}, {"start": 6014, "end": 6016, "pages": [6014, 6016]}, {"start": 6052, "end": 6052, "pages": [6052]}, {"start": 6104, "end": 6106, "pages": [6104, 6106]}, {"start": 6463, "end": 6463, "pages": [6463]}, {"start": 6494, "end": 6494, "pages": [6494]}, {"start": 6923, "end": 6923, "pages": [6923]}, {"start": 6939, "end": 6941, "pages": [6939, 6941]}, {"start": 7107, "end": 7107, "pages": [7107]}, {"start": 7129, "end": 7129, "pages": [7129]}, {"start": 7360, "end": 7361, "pages": [7360, 7361]}, {"start": 7439, "end": 7439, "pages": [7439]}, {"start": 7603, "end": 7603, "pages": [7603]}, {"start": 8488, "end": 8493, "pages": [8488, 8489, 8492, 8493]}, {"start": 8573, "end": 8576, "pages": [8573, 8576]}, {"start": 8652, "end": 8657, "pages": [8652, 8653, 8656, 8657]}, {"start": 8738, "end": 8743, "pages": [8738, 8739, 8742, 8743]}, {"start": 8954, "end": 8956, "pages": [8954, 8955, 8956]}, {"start": 9578, "end": 9580, "pages": [9578, 9580]}, {"start": 9591, "end": 9591, "pages": [9591]}, {"start": 10373, "end": 10373, "pages": [10373]}, {"start": 10393, "end": 10395, "pages": [10393, 10395]}, {"start": 10440, "end": 10440, "pages": [10440]}, {"start": 11416, "end": 11416, "pages": [11416]}, {"start": 11564, "end": 11567, "pages": [11564, 11565, 11567]}, {"start": 11740, "end": 11740, "pages": [11740]}, {"start": 12052, "end": 12052, "pages": [12052]}, {"start": 12809, "end": 12809, "pages": [12809]}, {"start": 13504, "end": 13504, "pages": [13504]}, {"start": 13912, "end": 13912, "pages": [13912]}, {"start": 14424, "end": 14424, "pages": [14424]}, {"start": 14456, "end": 14463, "pages": [14456, 14461, 14463]}, {"start": 14499, "end": 14499, "pages": [14499]}, {"start": 14514, "end": 14514, "pages": [14514]}, {"start": 14606, "end": 14608, "pages": [14606, 14607, 14608]}, {"start": 14792, "end": 14795, "pages": [14792, 14793, 14795]}, {"start": 16185, "end": 16185, "pages": [16185]}, {"start": 16536, "end": 16536, "pages": [16536]}, {"start": 17045, "end": 17045, "pages": [17045]}, {"start": 17077, "end": 17084, "pages": [17077, 17082, 17084]}, {"start": 17120, "end": 17120, "pages": [17120]}, {"start": 17135, "end": 17135, "pages": [17135]}, {"start": 17227, "end": 17229, "pages": [17227, 17228, 17229]}, {"start": 17641, "end": 17641, "pages": [17641]}, {"start": 18395, "end": 18395, "pages": [18395]}, {"start": 19088, "end": 19088, "pages": [19088]}, {"start": 20754, "end": 20754, "pages": [20754]}, {"start": 20990, "end": 20991, "pages": [20990, 20991]}, {"start": 21001, "end": 21002, "pages": [21001, 21002]}, {"start": 21010, "end": 21012, "pages": [21010, 21012]}, {"start": 21506, "end": 21506, "pages": [21506]}, {"start": 21590, "end": 21593, "pages": [21590, 21591, 21593]}, {"start": 21677, "end": 21677, "pages": [21677]}];
+        const pageToPath = {"268": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000268.jpg", "342": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000342.jpg", "375": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000375.jpg", "2860": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002860.jpg", "2861": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002861.jpg", "2862": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002862.jpg", "2979": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002979.jpg", "3141": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003141.jpg", "3506": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003506.jpg", "4274": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004274.jpg", "4279": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004279.jpg", "4290": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004290.jpg", "4628": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004628.jpg", "5501": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005501.jpg", "5532": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005532.jpg", "5998": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005998.jpg", "6014": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006014.jpg", "6016": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006016.jpg", "6052": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006052.jpg", "6104": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006104.jpg", "6106": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006106.jpg", "6463": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006463.jpg", "6494": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006494.jpg", "6923": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006923.jpg", "6939": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006939.jpg", "6941": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006941.jpg", "7107": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007107.jpg", "7129": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007129.jpg", "7360": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007360.jpg", "7361": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007361.jpg", "7439": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007439.jpg", "7603": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007603.jpg", "8488": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008488.jpg", "8489": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008489.jpg", "8492": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008492.jpg", "8493": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008493.jpg", "8573": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008573.jpg", "8576": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008576.jpg", "8652": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008652.jpg", "8653": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008653.jpg", "8656": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008656.jpg", "8657": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008657.jpg", "8738": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008738.jpg", "8739": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008739.jpg", "8742": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008742.jpg", "8743": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008743.jpg", "8954": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008954.jpg", "8955": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008955.jpg", "8956": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008956.jpg", "9578": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009578.jpg", "9580": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009580.jpg", "9591": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009591.jpg", "10373": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010373.jpg", "10393": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010393.jpg", "10395": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010395.jpg", "10440": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010440.jpg", "11416": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011416.jpg", "11564": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011564.jpg", "11565": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011565.jpg", "11567": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011567.jpg", "11740": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011740.jpg", "12052": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012052.jpg", "12809": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012809.jpg", "13504": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013504.jpg", "13912": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013912.jpg", "14424": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014424.jpg", "14456": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014456.jpg", "14461": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014461.jpg", "14463": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014463.jpg", "14499": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014499.jpg", "14514": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014514.jpg", "14606": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014606.jpg", "14607": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014607.jpg", "14608": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014608.jpg", "14792": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014792.jpg", "14793": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014793.jpg", "14795": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014795.jpg", "16185": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016185.jpg", "16536": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016536.jpg", "17045": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017045.jpg", "17077": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017077.jpg", "17082": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017082.jpg", "17084": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017084.jpg", "17120": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017120.jpg", "17135": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017135.jpg", "17227": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017227.jpg", "17228": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017228.jpg", "17229": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017229.jpg", "17641": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017641.jpg", "18395": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018395.jpg", "19088": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019088.jpg", "20754": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020754.jpg", "20990": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020990.jpg", "20991": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020991.jpg", "21001": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021001.jpg", "21002": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021002.jpg", "21010": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021010.jpg", "21012": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021012.jpg", "21506": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021506.jpg", "21590": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021590.jpg", "21591": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021591.jpg", "21593": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021593.jpg", "21677": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021677.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000268.jpg": "...gatised to engage in, a commercial sex act, and  did aid af...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000342.jpg": "...liers and. consumers of. commercial acts. see,@@, wnited sta...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000375.jpg": "...the board's write up was commercial conduct. at] of’ the all...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002860.jpg": "...be gaused to engage in a commercial sex act, if. violation...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002861.jpg": "...be caused to engage in a commercial sex  act, and did aid an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002862.jpg": "...engage im at least. one commercial sex act with jeffrey  ep...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002979.jpg": "...aprecments differ :froni commercial. contracts in meanitgfil...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003141.jpg": "...eecive |  $l. records of commercial met were > unavailable e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003506.jpg": "...; if violation of title  commercial sex act as defined in [8...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004274.jpg": "...e:caused to ‘engage ina  commercial sex; act” in violation o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004279.jpg": "...[accuser-4] to engage in commercial, sex acts knouing that s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004290.jpg": "...e phrase “to €ngage in a commercial sex act,” itis not neces...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004628.jpg": "...caused, to engage’ it a  commercial sex act:as defined in 'l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005501.jpg": "...accuser-4] to engage in. commercial. sex. acts: knouing that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005532.jpg": "...caused to engage. ini a commercial sex act as: defined in l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005998.jpg": "...s “scxual. activity” and“commercial sex  act” are broad, eno...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006014.jpg": "...be caused to engage  in commercial sex acts, to wit, englis...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006016.jpg": "...be caused to engage in ‘commercial sex aets, §o wit, englis...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006052.jpg": "...‘commitee: of the commercial and federal. litigation...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006104.jpg": "...meth  spite  gage:in‘a ‘commercial 'sex:acts  > on 4s. net...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006106.jpg": "...cepa gece ofthe coro ee  commercial, and {he-gov ‘imentvadd...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006463.jpg": "...accuser-4] to engage in. commercial. sex. acts: knouing that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006494.jpg": "...caused to engage. ini a commercial sex act as: defined in l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006923.jpg": "...s “scxual. activity” and“commercial sex  act” are broad, eno...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006939.jpg": "...be caused to engage  in commercial sex acts, to wit, englis...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006941.jpg": "...be caused to engage in ‘commercial sex aets, §o wit, englis...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007107.jpg": "...ge in illegal, sex  ‘the commercial sex act  x 5 q wy a3) oq...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007129.jpg": "...nts, the issue is about. commercial sex  acts im exchange fo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007360.jpg": "...caused ‘to engage in. a commercial sex: act\" ‘in  vidlation...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007361.jpg": "...engage in at least one: commercial. sex act with jeffrey ep...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007439.jpg": "...d. girls  ‘to engage: in commercial sex acts”; and. (2) “eps...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007603.jpg": "...\"clinical toxicology of commercial products:  acute poisoni...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008488.jpg": "...e caused. to engage ina  commercial sex, act” i8 guilty ofa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008489.jpg": "...:caused:to engage :in.a ‘commercial sex.act; and  eourth: th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008492.jpg": "...aused. to, engage ‘in. a commercial. sex. act.  the term, “c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008493.jpg": "...purpose. of engaging in:commercial ‘sex  and otherwise affe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008573.jpg": "...be caused t6 cngage ina commercial. sex'act; and  fourth: ‘...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008576.jpg": "...be caused fo engage ina  commercial sex act.  the term “comm...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008652.jpg": "...catised to engage in a  commercial. sex.act” is guilty: of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008653.jpg": "...e caused:to engage in, a commercial sex. act? and fourth: th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008656.jpg": "...e caused.to efigage in.a commercial, sex, act.  ‘the terin “...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008657.jpg": "...purpose: of engaging, in commercial sex  acts was economie i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008738.jpg": "...catised to engage in a  commercial. sex.act” is guilty: of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008739.jpg": "...e caused:to engage in, a commercial sex. act? and fourth: th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008742.jpg": "...e caused.to efigage in.a commercial, sex, act.  ‘the terin “...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008743.jpg": "...purpose: of engaging, in commercial sex  acts was economie i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008954.jpg": "...engage in a. commercial stx act. ifthe “grooming...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008955.jpg": "...le, the defense could,  ‘commercial plane tickets for people...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008956.jpg": "...light: on.the number of commercial flights:that: jane ‘took...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009578.jpg": "...he sometimes traveled on commercial flights)). if'it was tha...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009580.jpg": "...arranged.an-unidentified commercial:return flight:for which...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009591.jpg": "...eas count five concerned commercial sex ‘acts:with victims,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010373.jpg": "...e age’ of' eighteen: for commercial sex: acts that ‘affect i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010393.jpg": "...hat while: she “mainly”  commercial flights. /d:,at 3l6: she...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010395.jpg": "...’s private ‘plane and on commercial, carriers. ‘the note did...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010440.jpg": "...ation, to: engage jin, a commercial sex: act: or’prohibited....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011416.jpg": "...5 l55 cal, ‘rptr:393].)  commercial ‘standard  -client’ conf...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011564.jpg": "...he minor to  engage if a commercial sex act. t overrule the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011565.jpg": "...erted with the aim of a  commercial. sex act, it dees met ap...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011567.jpg": "...nduly influenced into a  commercial sex: aet. 26l.l (b) (4)...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011740.jpg": "...e tramsport. pilot and a commercial instrument...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012052.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012809.jpg": "...vel?  a, i. traveled on. commercial planes,  a. i'm net alwa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013504.jpg": "...plane, she'd nave to fly commercial, hot on  that share of}...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013912.jpg": "...you help azurange those commercial elightis? a. yess  age c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014424.jpg": "...he flew to new york, of  commercial flights, but also im the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014456.jpg": "...new york, jane  flew on commercial ‘flights and also on, th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014461.jpg": "...ercial sex aet.  lene, a commercial sex: det just mean’s a s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014463.jpg": "...that she could engage im commercial sex acks.  in, furtheran...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014499.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014514.jpg": "...remembers her going t@ a commercial @inport, there is no  re...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014606.jpg": "...e gaused t6 eagage in a  commercial sexi act. the term \"comm...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014607.jpg": "...articipant in performing commercial sex acts when. she was...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014608.jpg": "...e purpose of engaging if commercial sex acts was economic in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014792.jpg": "...he minor to  engage if a commercial sex act. t overrule the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014793.jpg": "...erted with the aim of a  commercial. sex act, it dees met ap...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014795.jpg": "...nduly influenced into a  commercial sex: aet. 26l.l (b) (4)...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016185.jpg": "...e tramsport. pilot and a commercial instrument...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016536.jpg": "...you help azurange those commercial elightis? a. yess  age c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017045.jpg": "...he flew to new york, of  commercial flights, but also im the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017077.jpg": "...new york, jane  flew on commercial ‘flights and also on, th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017082.jpg": "...ercial sex aet.  lene, a commercial sex: det just mean’s a s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017084.jpg": "...that she could engage im commercial sex acks.  in, furtheran...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017120.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017135.jpg": "...remembers her going t@ a commercial @inport, there is no  re...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017227.jpg": "...e gaused t6 eagage in a  commercial sexi act. the term \"comm...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017228.jpg": "...articipant in performing commercial sex acts when. she was...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017229.jpg": "...e purpose of engaging if commercial sex acts was economic in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017641.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018395.jpg": "...vel?  a, i. traveled on. commercial planes,  a. i'm net alwa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019088.jpg": "...plane, she'd nave to fly commercial, hot on  that share of}...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020754.jpg": "...be caused to engage in a commercial sex  i i  a did atid aid...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020990.jpg": "...the age: feighte cen for:commercial sex acts ‘that affect in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020991.jpg": "...while gount:eive charges commercial sexual activity, with a:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021001.jpg": "...ethad trouble geting ona commercial  flight beeause she did...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021002.jpg": "...interstate commerce; or  commercial.sex act; and.¢  efendant...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021010.jpg": "...’plane,, she:also took:  commercial :flights. dd. at?  ed th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021012.jpg": "...private  ‘plane and, on. commercial. carriers. “thernote did...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021506.jpg": "...calised to. engage in a commercial.s sex. act as s defined...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021590.jpg": "...e minor to  engage in. a commercial sex. act. i overrule the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021591.jpg": "...erted with the aim of a  commercial sex act; it coes not app...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021593.jpg": "...nduly influwenced into a commercial act. 26l.l. (i) (4) (b)....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021677.jpg": "...ficantly different from. commercial. contracts.”). it. is do..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "commercial" (103 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">268-268</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">342-342</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">375-375</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">2860-2862</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">2979-2979</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">3141-3141</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3506-3506</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">4274-4279</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">4290-4290</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">4628-4628</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">5501-5501</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">5532-5532</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">5998-5998</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">6014-6016</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">6052-6052</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">6104-6106</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">6463-6463</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">6494-6494</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">6923-6923</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">6939-6941</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">7107-7107</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">7129-7129</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">7360-7361</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">7439-7439</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">7603-7603</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">8488-8493</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">8573-8576</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">8652-8657</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">8738-8743</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">8954-8956</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">9578-9580</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">9591-9591</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">10373-10373</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">10393-10395</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">10440-10440</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">11416-11416</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">11564-11567</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">11740-11740</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">12052-12052</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">12809-12809</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">13504-13504</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">13912-13912</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">14424-14424</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">14456-14463</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">14499-14499</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(45, 0); return false;">14514-14514</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(46, 0); return false;">14606-14608</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(47, 0); return false;">14792-14795</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(48, 0); return false;">16185-16185</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(49, 0); return false;">16536-16536</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(50, 0); return false;">17045-17045</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(51, 0); return false;">17077-17084</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(52, 0); return false;">17120-17120</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(53, 0); return false;">17135-17135</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(54, 0); return false;">17227-17229</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(55, 0); return false;">17641-17641</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(56, 0); return false;">18395-18395</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(57, 0); return false;">19088-19088</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(58, 0); return false;">20754-20754</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(59, 0); return false;">20990-20991</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(60, 0); return false;">21001-21002</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(61, 0); return false;">21010-21012</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(62, 0); return false;">21506-21506</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(63, 0); return false;">21590-21593</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(64, 0); return false;">21677-21677</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

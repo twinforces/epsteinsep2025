@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "malpractice"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 7569, "end": 7569, "pages": [7569]}, {"start": 7678, "end": 7683, "pages": [7678, 7683]}, {"start": 7690, "end": 7690, "pages": [7690]}, {"start": 7696, "end": 7698, "pages": [7696, 7698]}, {"start": 8137, "end": 8142, "pages": [8137, 8142]}, {"start": 8149, "end": 8149, "pages": [8149]}, {"start": 8155, "end": 8157, "pages": [8155, 8157]}, {"start": 9472, "end": 9472, "pages": [9472]}, {"start": 10151, "end": 10151, "pages": [10151]}];
+        const pageToPath = {"7569": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007569.jpg", "7678": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007678.jpg", "7683": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007683.jpg", "7690": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007690.jpg", "7696": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007696.jpg", "7698": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007698.jpg", "8137": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008137.jpg", "8142": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008142.jpg", "8149": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008149.jpg", "8155": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008155.jpg", "8157": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008157.jpg", "9472": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009472.jpg", "10151": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010151.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007569.jpg": "...on  of false memories is malpractice)  consultant to the offi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007678.jpg": "...esnick pu: psychotherapy malpractice: new pitfalls. journal o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007683.jpg": "...an s; hall rcw: avoiding malpractice while treating depressio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007690.jpg": "...cw: avoiding psychiatric malpractice in a litigious: environm...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007696.jpg": "...)  trauss a. insanity by malpractice: a mock trial exploring...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007698.jpg": "...ions to confidentiality  malpractice  good samaritan law  eth...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008137.jpg": "...esnick pu: psychotherapy malpractice: new pitfalls. journal o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008142.jpg": "...an s; hall rcw: avoiding malpractice while treating depressio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008149.jpg": "...cw: avoiding psychiatric malpractice in a litigious: environm...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008155.jpg": "...)  trauss a. insanity by malpractice: a mock trial exploring...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008157.jpg": "...ions to confidentiality  malpractice  good samaritan law  eth...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009472.jpg": "...port,,  yf interest. in. malpractice cases,” new\" york: profe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010151.jpg": "...port,,  yf interest. in. malpractice cases,” new\" york: profe..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "malpractice" (13 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">7569-7569</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">7678-7683</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">7690-7690</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">7696-7698</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">8137-8142</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">8149-8149</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">8155-8157</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">9472-9472</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">10151-10151</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

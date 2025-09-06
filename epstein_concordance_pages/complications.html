@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "complications"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1177, "end": 1177, "pages": [1177]}, {"start": 1325, "end": 1325, "pages": [1325]}, {"start": 1340, "end": 1340, "pages": [1340]}, {"start": 2196, "end": 2196, "pages": [2196]}, {"start": 2699, "end": 2699, "pages": [2699]}, {"start": 7676, "end": 7677, "pages": [7676, 7677]}, {"start": 8135, "end": 8136, "pages": [8135, 8136]}, {"start": 8260, "end": 8260, "pages": [8260]}, {"start": 11125, "end": 11127, "pages": [11125, 11127]}, {"start": 12102, "end": 12102, "pages": [12102]}, {"start": 17691, "end": 17691, "pages": [17691]}, {"start": 20095, "end": 20095, "pages": [20095]}, {"start": 20242, "end": 20242, "pages": [20242]}, {"start": 20257, "end": 20257, "pages": [20257]}, {"start": 20848, "end": 20848, "pages": [20848]}];
+        const pageToPath = {"1177": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001177.jpg", "1325": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001325.jpg", "1340": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001340.jpg", "2196": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002196.jpg", "2699": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002699.jpg", "7676": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007676.jpg", "7677": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007677.jpg", "8135": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008135.jpg", "8136": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008136.jpg", "8260": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008260.jpg", "11125": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011125.jpg", "11127": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011127.jpg", "12102": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012102.jpg", "17691": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017691.jpg", "20095": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020095.jpg", "20242": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020242.jpg", "20257": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020257.jpg", "20848": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020848.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001177.jpg": "...e heerat greater riskvof complications...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001325.jpg": "...at heightened, risk of ‘complications. from. covid-l9.° (d, at...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001340.jpg": "...t ree es  mere  risk, of complications from. covid=l9 (ex. dvat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002196.jpg": "...e heerat greater riskvof complications...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002699.jpg": "...!9 pandemic adds further complications and. obstacles to'trial...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007676.jpg": "...ogical and neurological: complications of lindanee pois: ig. ps...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007677.jpg": "...medical and psychiatric complications of bombings and biologic...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008135.jpg": "...ogical and neurological: complications of lindanee pois: ig. ps...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008136.jpg": "...medical and psychiatric complications of bombings and biologic...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008260.jpg": "...overnment. these is some complications  with this l58uee. but....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011125.jpg": "...= and  developed serious complications as @ result of that incl...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011127.jpg": "...and ‘that if ‘this parti complications of the paraplegia that l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012102.jpg": "...admit, there may be some complications, but i'd like to knou th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017691.jpg": "...admit, there may be some complications, but i'd like to knou th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020095.jpg": "...e heerat greater riskvof complications...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020242.jpg": "...at heightened, risk of ‘complications. from. covid-l9.° (d, at...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020257.jpg": "...t ree es  mere  risk, of complications from. covid=l9 (ex. dvat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020848.jpg": "..., sarring any scheduling complications, they should expect an...."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "complications" (18 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1177-1177</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1325-1325</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1340-1340</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">2196-2196</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">2699-2699</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">7676-7677</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">8135-8136</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">8260-8260</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">11125-11127</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">12102-12102</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">17691-17691</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">20095-20095</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">20242-20242</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">20257-20257</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">20848-20848</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

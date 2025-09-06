@@ -1,0 +1,316 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "qualified"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 214, "end": 216, "pages": [214, 216]}, {"start": 501, "end": 501, "pages": [501]}, {"start": 813, "end": 813, "pages": [813]}, {"start": 2326, "end": 2330, "pages": [2326, 2327, 2328, 2329, 2330]}, {"start": 2825, "end": 2830, "pages": [2825, 2829, 2830]}, {"start": 2836, "end": 2836, "pages": [2836]}, {"start": 3158, "end": 3159, "pages": [3158, 3159]}, {"start": 3166, "end": 3171, "pages": [3166, 3167, 3168, 3171]}, {"start": 3622, "end": 3632, "pages": [3622, 3623, 3624, 3625, 3626, 3628, 3630, 3631, 3632]}, {"start": 3638, "end": 3642, "pages": [3638, 3639, 3640, 3641, 3642]}, {"start": 3770, "end": 3770, "pages": [3770]}, {"start": 3858, "end": 3858, "pages": [3858]}, {"start": 3980, "end": 3980, "pages": [3980]}, {"start": 5751, "end": 5751, "pages": [5751]}, {"start": 5787, "end": 5787, "pages": [5787]}, {"start": 5793, "end": 5798, "pages": [5793, 5798]}, {"start": 5816, "end": 5816, "pages": [5816]}, {"start": 5978, "end": 5978, "pages": [5978]}, {"start": 6046, "end": 6046, "pages": [6046]}, {"start": 6167, "end": 6167, "pages": [6167]}, {"start": 6182, "end": 6182, "pages": [6182]}, {"start": 6228, "end": 6228, "pages": [6228]}, {"start": 6255, "end": 6255, "pages": [6255]}, {"start": 6344, "end": 6344, "pages": [6344]}, {"start": 6688, "end": 6688, "pages": [6688]}, {"start": 6712, "end": 6712, "pages": [6712]}, {"start": 6718, "end": 6723, "pages": [6718, 6723]}, {"start": 6741, "end": 6741, "pages": [6741]}, {"start": 6903, "end": 6903, "pages": [6903]}, {"start": 6987, "end": 6988, "pages": [6987, 6988]}, {"start": 7208, "end": 7208, "pages": [7208]}, {"start": 7470, "end": 7472, "pages": [7470, 7471, 7472]}, {"start": 7486, "end": 7486, "pages": [7486]}, {"start": 7496, "end": 7496, "pages": [7496]}, {"start": 7898, "end": 7898, "pages": [7898]}, {"start": 8068, "end": 8072, "pages": [8068, 8072]}, {"start": 8090, "end": 8094, "pages": [8090, 8094]}, {"start": 8173, "end": 8174, "pages": [8173, 8174]}, {"start": 8253, "end": 8253, "pages": [8253]}, {"start": 8267, "end": 8267, "pages": [8267]}, {"start": 8826, "end": 8826, "pages": [8826]}, {"start": 8854, "end": 8859, "pages": [8854, 8859]}, {"start": 8902, "end": 8907, "pages": [8902, 8907]}, {"start": 9125, "end": 9129, "pages": [9125, 9127, 9129]}, {"start": 9141, "end": 9141, "pages": [9141]}, {"start": 9157, "end": 9157, "pages": [9157]}, {"start": 9804, "end": 9808, "pages": [9804, 9805, 9808]}, {"start": 9820, "end": 9820, "pages": [9820]}, {"start": 9836, "end": 9836, "pages": [9836]}, {"start": 10293, "end": 10293, "pages": [10293]}, {"start": 10302, "end": 10302, "pages": [10302]}, {"start": 10330, "end": 10331, "pages": [10330, 10331]}, {"start": 10598, "end": 10598, "pages": [10598]}, {"start": 11126, "end": 11126, "pages": [11126]}, {"start": 11132, "end": 11132, "pages": [11132]}, {"start": 11181, "end": 11181, "pages": [11181]}, {"start": 11233, "end": 11233, "pages": [11233]}, {"start": 11247, "end": 11247, "pages": [11247]}, {"start": 12320, "end": 12320, "pages": [12320]}, {"start": 12361, "end": 12361, "pages": [12361]}, {"start": 13358, "end": 13358, "pages": [13358]}, {"start": 14673, "end": 14673, "pages": [14673]}, {"start": 14905, "end": 14905, "pages": [14905]}, {"start": 14982, "end": 14982, "pages": [14982]}, {"start": 17293, "end": 17293, "pages": [17293]}, {"start": 17908, "end": 17908, "pages": [17908]}, {"start": 17949, "end": 17949, "pages": [17949]}, {"start": 18942, "end": 18942, "pages": [18942]}, {"start": 19657, "end": 19657, "pages": [19657]}, {"start": 20951, "end": 20951, "pages": [20951]}, {"start": 21133, "end": 21133, "pages": [21133]}, {"start": 21708, "end": 21711, "pages": [21708, 21710, 21711]}, {"start": 21773, "end": 21773, "pages": [21773]}, {"start": 23484, "end": 23484, "pages": [23484]}];
+        const pageToPath = {"214": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000214.jpg", "216": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000216.jpg", "501": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000501.jpg", "813": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000813.jpg", "2326": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002326.jpg", "2327": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002327.jpg", "2328": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002328.jpg", "2329": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002329.jpg", "2330": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002330.jpg", "2825": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002825.jpg", "2829": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002829.jpg", "2830": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002830.jpg", "2836": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002836.jpg", "3158": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003158.jpg", "3159": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003159.jpg", "3166": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003166.jpg", "3167": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003167.jpg", "3168": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003168.jpg", "3171": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003171.jpg", "3622": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003622.jpg", "3623": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003623.jpg", "3624": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003624.jpg", "3625": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003625.jpg", "3626": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003626.jpg", "3628": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003628.jpg", "3630": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003630.jpg", "3631": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003631.jpg", "3632": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003632.jpg", "3638": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003638.jpg", "3639": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003639.jpg", "3640": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003640.jpg", "3641": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003641.jpg", "3642": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003642.jpg", "3770": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003770.jpg", "3858": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003858.jpg", "3980": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003980.jpg", "5751": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005751.jpg", "5787": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005787.jpg", "5793": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005793.jpg", "5798": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005798.jpg", "5816": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005816.jpg", "5978": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005978.jpg", "6046": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006046.jpg", "6167": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006167.jpg", "6182": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006182.jpg", "6228": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006228.jpg", "6255": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006255.jpg", "6344": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006344.jpg", "6688": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006688.jpg", "6712": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006712.jpg", "6718": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006718.jpg", "6723": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006723.jpg", "6741": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006741.jpg", "6903": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006903.jpg", "6987": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006987.jpg", "6988": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006988.jpg", "7208": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007208.jpg", "7470": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007470.jpg", "7471": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007471.jpg", "7472": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007472.jpg", "7486": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007486.jpg", "7496": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007496.jpg", "7898": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007898.jpg", "8068": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008068.jpg", "8072": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008072.jpg", "8090": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008090.jpg", "8094": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008094.jpg", "8173": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008173.jpg", "8174": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008174.jpg", "8253": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008253.jpg", "8267": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008267.jpg", "8826": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008826.jpg", "8854": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008854.jpg", "8859": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008859.jpg", "8902": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008902.jpg", "8907": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008907.jpg", "9125": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009125.jpg", "9127": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009127.jpg", "9129": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009129.jpg", "9141": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009141.jpg", "9157": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009157.jpg", "9804": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009804.jpg", "9805": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009805.jpg", "9808": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009808.jpg", "9820": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009820.jpg", "9836": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009836.jpg", "10293": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010293.jpg", "10302": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010302.jpg", "10330": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010330.jpg", "10331": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010331.jpg", "10598": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010598.jpg", "11126": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011126.jpg", "11132": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011132.jpg", "11181": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011181.jpg", "11233": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011233.jpg", "11247": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011247.jpg", "12320": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012320.jpg", "12361": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012361.jpg", "13358": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013358.jpg", "14673": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014673.jpg", "14905": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014905.jpg", "14982": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014982.jpg", "17293": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017293.jpg", "17908": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017908.jpg", "17949": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017949.jpg", "18942": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018942.jpg", "19657": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019657.jpg", "20951": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020951.jpg", "21133": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021133.jpg", "21708": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021708.jpg", "21710": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021710.jpg", "21711": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021711.jpg", "21773": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021773.jpg", "23484": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023484.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000214.jpg": "...york: ‘no. olbr6oo4935  qualified in, ri hmond county ‘com...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000216.jpg": "...ew york no. olbr6oo4935  qualified. in richmond county gomm...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000501.jpg": "...ts, it  experieneed, and qualified:professionals fromthe u....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000813.jpg": "...ts, it  experieneed, and qualified:professionals fromthe u....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002326.jpg": "...ays. jd. art. tile. ‘the qualified. jury. wh  els comprise’...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002327.jpg": "...er’ wheels, two separate qualified jury wheels are:maintain...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002328.jpg": "...d. as constituted, the:  qualified jury-wheels area proper...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002329.jpg": "...hiatan.division. and the qualified wheel. for white plaitis...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002330.jpg": "...whether‘the white plains qualified jury wheel  is compared...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002825.jpg": "...e whether a  ‘person is. qualified t6 serve-on'a jury. jd....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002829.jpg": "...s  that the white plains qualified wheel:is the relevant ju...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002830.jpg": "...eel and the white plains qualified, wheel”*because the  def...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002836.jpg": "...overnment  white piains. qualified wheel. is used as the re...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003158.jpg": "...ferred, ” comprise ‘the: qualified jury’ wheeels—one for se...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003159.jpg": "...white plairis master (or qualified) wheels to the wotitig,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003166.jpg": "...ornatnt  white: plains ‘qualified.  ns qualified wheel.  “...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003167.jpg": "...ts:were in the ¢  of the qualified wheel aid, therefore, th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003168.jpg": "...ticed to the stibset, of qualified jtirors contained. in th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003171.jpg": "...white plais.:qualified, wheel is; coniprised of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003622.jpg": "...he  masterjury wheel and qualified jurywheel, drawn for use...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003623.jpg": "...presefitation betweeithe qualified jury wheel and the conmi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003624.jpg": "...the comnitnity arid the qualified jury wheel. 6. the first...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003625.jpg": "...masterjury wheel.and the qualified jury wheel is impacted-b...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003626.jpg": "...rtin. also compared the: qualified jury wheel for white pla...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003628.jpg": "...aire and are found.to be qualified as  jurors are placed on...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003630.jpg": "...he deniographics of  the qualified jury wheel, we find that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003631.jpg": "...ire arid are fotid to be qualified as a juror, unless grant...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003632.jpg": "...e “sample frame” issue.  qualified jury wheeel. vs master j...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003638.jpg": "...ast step:in greating the qualified jury wheel is the select...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003639.jpg": "...and made it;  onto: the qualified jury wheel. at the same...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003640.jpg": "...e likely to be found not qualified as.a  and/or ‘they are m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003641.jpg": "...ican on the white plains qualified jury wheel.and the.estim...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003642.jpg": "...the deniographies of the qualified jury wheel. if  he:had d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003770.jpg": "...yovheel and ‘hence. its: qualified.jury: avheelwill be sign...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003858.jpg": "...d parties: who are well, qualified  to assert. any objectio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003980.jpg": "...quires the services of a qualified. forensic document: cxam...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005751.jpg": "...says:  a witness. who ls qualified a$ an expert by kr ioule...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005787.jpg": "...t has given. notice ofa. qualified expert whorwill. provide...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005793.jpg": "...t that: dr. recchio is a.qualified expert: nor could she: d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005798.jpg": "...t that dir. rocchio: is ‘qualified to be an ‘expert on this...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005816.jpg": "...ee that dr. rocchio is a qualified. expert. ‘her opinions....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005978.jpg": "...st that di. roechio isa  qualified expert.” resp. at 9, to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006046.jpg": "...d. by  government; endo  qualified experts: in the -field.,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006167.jpg": "...cated, although. only 4o qualified. jurors are needed, for‘...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006182.jpg": "...4o years of  reviously: qualified as anvexpert in psychiat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006228.jpg": "...n expert niay be uniqely qualified, by experience to assist...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006255.jpg": "...ig\" in feren  reviously: qualified as anvexpert in psychiat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006344.jpg": "...refore finds dr, roechio qualified as an, expert...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006688.jpg": "...says:  a witness. who ls qualified a$ an expert by kr ioule...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006712.jpg": "...t has given. notice ofa. qualified expert whorwill. provide...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006718.jpg": "...t that: dr. recchio is a.qualified expert: nor could she: d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006723.jpg": "...t that dir. rocchio: is ‘qualified to be an ‘expert on this...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006741.jpg": "...ee that dr. rocchio is a qualified. expert. ‘her opinions....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006903.jpg": "...st that di. roechio isa  qualified expert.” resp. at 9, to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006987.jpg": "...torres and the number of qualified jurors  that, i will, nu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006988.jpg": "...de we have that panel of qualified jurors. come back  of, t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007208.jpg": "...y times’?  is  were you. qualified as an, expert. when. you...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007470.jpg": "...and loftus are supremely qualified-in, their respe  an  arc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007471.jpg": "...a yl ee  re qualified, this court should deny...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007472.jpg": "...agrees that dr. dietz is qualified to: offer expert: opinio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007486.jpg": "...f memory.  she has: been qualified. as. an expert and. test...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007496.jpg": "...ig\" in feren  reviously: qualified as anvexpert in psychiat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007898.jpg": "...y times’?  is  were you. qualified as an, expert. when. you...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008068.jpg": "...that ‘these experts are qualified to ise: the methodology,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008072.jpg": "...ig\" in feren  reviously: qualified as anvexpert in psychiat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008090.jpg": "...’s expert witnesses are: qualified.  and. because their opi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008094.jpg": "...that:a witness must be: qualified to offer:expert:  opinio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008173.jpg": "...:rule:  a witness who is qualified as an-cxpert by ktiouled...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008174.jpg": "...rates, dr, dietz is well-qualified.to speak; on, a, range ‘...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008253.jpg": "...we cam get, to 5o to 6o qualified jurors. ay questions?  m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008267.jpg": "...the custodian or another qualified. witness, or by a certif...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008826.jpg": "...t's deliberations”).  “a qualified first: amendment. right...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008854.jpg": "...outweighs the public’s: qualified-right: of aceess to the:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008859.jpg": "...outweighs the public’s: qualified:right of aceess to the d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008902.jpg": "...outweighs the public’s: qualified-right: of aceess to the:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008907.jpg": "...outweighs the public’s: qualified:right of aceess to the d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009125.jpg": "...al.  sit dire, the court qualified 58 jutois. nov. l8, 2o2l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009127.jpg": "...fifty-cight jurors were qualified. at:the conelusion.of vo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009129.jpg": "...r 5o was-one of the: 58: qualified prospective jurors and w...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009141.jpg": "...s ‘who; were: ultimately qualified,  > nto net  eight juror...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009157.jpg": "...l abuse,.and. they ‘were qualified as jurors. without: obje...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009804.jpg": "...:58 individuals who-were qualified to serve as jurors, eigh...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009805.jpg": "...rors.who-were ultimately-qualified ‘who had answered questi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009808.jpg": "...r 5o was-one of the: 58: qualified prospective jurors and w...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009820.jpg": "...s ‘who; were: ultimately qualified,  > nto net  eight juror...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009836.jpg": "...l abuse,.and. they ‘were qualified as jurors. without: obje...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010293.jpg": "...se and. were nonctheless qualified as jurors ‘without any o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010302.jpg": "...individuals. who, were qualified. te serve as jirors, eig...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010330.jpg": "...court instructed the nou:qualified juror'te return on the m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010331.jpg": "...was. ofe of fifty-eight qualified  one of the twelve delib...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010598.jpg": "...rdless ‘of whether they: qualified. under the  vee,  3, ann...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011126.jpg": "...at medical experts to be qualified as experts will be calle...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011132.jpg": "...tates:  a. witness whois qualified as ani expert: by knoule...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011181.jpg": "...opinion”).  flatley ‘was qualified as'an expert.in some of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011233.jpg": "...2oo5) (deseribing  the “qualified first amendment-right to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011247.jpg": "...essary delay of having a qualified forensic; doeunicit exam...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012320.jpg": "...i do deem dr. rocehio so qualified.  ms. pombrantz: thank....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012361.jpg": "...necessaxnily, you knou, qualified as an expect. the court:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013358.jpg": "...of the document. to be  qualified within the meaning of ru...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014673.jpg": "...t think it  needs. to be qualified.  ms; gomey: your homer,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014905.jpg": "...ore?  t have.  were, you qualified as an expert, when you t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014982.jpg": "...of those cases were you qualified as an expert  on. ‘groom...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017293.jpg": "...t think it  needs. to be qualified.  ms; gomey: your homer,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017908.jpg": "...i do deem dr. rocehio so qualified.  ms. pombrantz: thank....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017949.jpg": "...necessaxnily, you knou, qualified as an expect. the court:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018942.jpg": "...of the document. to be  qualified within the meaning of ru...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019657.jpg": "...ample, in. balancing the qualified first: amendment presump...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020951.jpg": "...o was onevof fifty-eight qualified  of her strikes  jurors,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021133.jpg": "...ry for which he was, not qualified.\" 3 and, third, , questi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021708.jpg": "...ine whether an of- fense qualified for a provision ... that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021710.jpg": "...gainst maxwell. and. was qualified to serve as a. juror. ju...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021711.jpg": "...l3;  2 twelve of the 58 qualified prospective jurors in- d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021773.jpg": "...ermine if he was to be a qualified juror. the court, imacce...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023484.jpg": "...es at its prisons.  sinh qualified  ex pr jority and bop ha..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "qualified" (114 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">214-216</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">501-501</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">813-813</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">2326-2330</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">2825-2830</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">2836-2836</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3158-3159</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">3166-3171</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">3622-3632</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">3638-3642</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">3770-3770</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">3858-3858</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">3980-3980</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">5751-5751</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">5787-5787</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">5793-5798</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">5816-5816</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">5978-5978</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">6046-6046</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">6167-6167</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">6182-6182</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">6228-6228</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">6255-6255</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">6344-6344</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">6688-6688</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">6712-6712</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">6718-6723</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">6741-6741</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">6903-6903</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">6987-6988</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">7208-7208</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">7470-7472</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">7486-7486</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">7496-7496</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">7898-7898</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">8068-8072</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">8090-8094</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">8173-8174</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">8253-8253</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">8267-8267</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">8826-8826</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">8854-8859</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">8902-8907</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">9125-9129</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">9141-9141</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(45, 0); return false;">9157-9157</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(46, 0); return false;">9804-9808</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(47, 0); return false;">9820-9820</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(48, 0); return false;">9836-9836</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(49, 0); return false;">10293-10293</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(50, 0); return false;">10302-10302</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(51, 0); return false;">10330-10331</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(52, 0); return false;">10598-10598</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(53, 0); return false;">11126-11126</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(54, 0); return false;">11132-11132</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(55, 0); return false;">11181-11181</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(56, 0); return false;">11233-11233</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(57, 0); return false;">11247-11247</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(58, 0); return false;">12320-12320</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(59, 0); return false;">12361-12361</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(60, 0); return false;">13358-13358</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(61, 0); return false;">14673-14673</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(62, 0); return false;">14905-14905</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(63, 0); return false;">14982-14982</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(64, 0); return false;">17293-17293</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(65, 0); return false;">17908-17908</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(66, 0); return false;">17949-17949</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(67, 0); return false;">18942-18942</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(68, 0); return false;">19657-19657</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(69, 0); return false;">20951-20951</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(70, 0); return false;">21133-21133</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(71, 0); return false;">21708-21711</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(72, 0); return false;">21773-21773</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(73, 0); return false;">23484-23484</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

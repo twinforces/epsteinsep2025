@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "withdrawal"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 729, "end": 729, "pages": [729]}, {"start": 1221, "end": 1221, "pages": [1221]}, {"start": 2244, "end": 2244, "pages": [2244]}, {"start": 3294, "end": 3294, "pages": [3294]}, {"start": 6188, "end": 6188, "pages": [6188]}, {"start": 6219, "end": 6219, "pages": [6219]}, {"start": 6261, "end": 6261, "pages": [6261]}, {"start": 6958, "end": 6958, "pages": [6958]}, {"start": 7502, "end": 7502, "pages": [7502]}, {"start": 7701, "end": 7703, "pages": [7701, 7703]}, {"start": 8078, "end": 8078, "pages": [8078]}, {"start": 8160, "end": 8162, "pages": [8160, 8162]}, {"start": 11544, "end": 11544, "pages": [11544]}, {"start": 14285, "end": 14285, "pages": [14285]}, {"start": 14772, "end": 14772, "pages": [14772]}, {"start": 15125, "end": 15125, "pages": [15125]}, {"start": 16908, "end": 16908, "pages": [16908]}, {"start": 20139, "end": 20139, "pages": [20139]}, {"start": 21269, "end": 21269, "pages": [21269]}];
+        const pageToPath = {"729": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000729.jpg", "1221": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001221.jpg", "2244": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002244.jpg", "3294": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003294.jpg", "6188": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006188.jpg", "6219": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006219.jpg", "6261": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006261.jpg", "6958": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006958.jpg", "7502": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007502.jpg", "7701": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007701.jpg", "7703": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007703.jpg", "8078": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008078.jpg", "8160": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008160.jpg", "8162": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008162.jpg", "11544": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011544.jpg", "14285": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014285.jpg", "14772": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014772.jpg", "15125": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015125.jpg", "16908": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016908.jpg", "20139": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020139.jpg", "21269": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021269.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000729.jpg": "...se eee “. = a ‘notice of withdrawal of 7 ‘gloria. allred and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001221.jpg": "...a and:may: be‘subject'to withdrawal.”): united states v: st*...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002244.jpg": "...and:may: be subjcct;to, withdrawal.”); united states v. str...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003294.jpg": "...to be “a:rescission, or withdrawal from the terms of the: ‘...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006188.jpg": "...ng x the side effects of withdrawal. from a. substance: may’...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006219.jpg": "...gt he: side lleals of f withdrawal  orobable or  fantisoei...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006261.jpg": "...ng x the side effects of withdrawal. from a. substance: may’...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006958.jpg": "...s.in.2oo4.,  vidence: of withdrawal  aienie bes aeee ain  y...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007502.jpg": "...ng x the side effects of withdrawal. from a. substance: may’...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007701.jpg": "...stance abuse  ‘substance withdrawal  signs and'symptoms of s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007703.jpg": "...(pa). anabolic steroids withdrawal.  , 2ol3:  january l  ht...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008078.jpg": "...ng x the side effects of withdrawal. from a. substance: may’...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008160.jpg": "...stance abuse  ‘substance withdrawal  signs and'symptoms of s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008162.jpg": "...(pa). anabolic steroids withdrawal.  , 2ol3:  january l  ht...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011544.jpg": "...t's busden, to establish withdrawal irom an ongoing  e6nspir...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014285.jpg": "...just for the record, the withdrawal of the request to issue...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014772.jpg": "...t's busden, to establish withdrawal irom an ongoing  e6nspir...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015125.jpg": "...nd she consents:to hmf’s-withdrawal ‘from this. mater:  ary...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016908.jpg": "...just for the record, the withdrawal of the request to issue...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020139.jpg": "...a and:may: be‘subject'to withdrawal.”): united states v: st*...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021269.jpg": "...al, process] will t be © withdrawal ‘upon the  : “ia. while..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "withdrawal" (21 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">729-729</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1221-1221</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">2244-2244</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3294-3294</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">6188-6188</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">6219-6219</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">6261-6261</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">6958-6958</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">7502-7502</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">7701-7703</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">8078-8078</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">8160-8162</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">11544-11544</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">14285-14285</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">14772-14772</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">15125-15125</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">16908-16908</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">20139-20139</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">21269-21269</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

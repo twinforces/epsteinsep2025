@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "supervisory"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 281, "end": 281, "pages": [281]}, {"start": 625, "end": 625, "pages": [625]}, {"start": 737, "end": 737, "pages": [737]}, {"start": 2470, "end": 2470, "pages": [2470]}, {"start": 2711, "end": 2711, "pages": [2711]}, {"start": 3070, "end": 3072, "pages": [3070, 3071, 3072]}, {"start": 3223, "end": 3223, "pages": [3223]}, {"start": 3245, "end": 3245, "pages": [3245]}, {"start": 3328, "end": 3328, "pages": [3328]}, {"start": 3400, "end": 3400, "pages": [3400]}, {"start": 3407, "end": 3407, "pages": [3407]}, {"start": 4160, "end": 4163, "pages": [4160, 4161, 4163]}, {"start": 4326, "end": 4326, "pages": [4326]}, {"start": 4450, "end": 4450, "pages": [4450]}, {"start": 4462, "end": 4462, "pages": [4462]}, {"start": 4797, "end": 4797, "pages": [4797]}, {"start": 6996, "end": 6996, "pages": [6996]}, {"start": 11553, "end": 11553, "pages": [11553]}, {"start": 13608, "end": 13608, "pages": [13608]}, {"start": 14781, "end": 14781, "pages": [14781]}, {"start": 15145, "end": 15145, "pages": [15145]}, {"start": 16233, "end": 16233, "pages": [16233]}, {"start": 19296, "end": 19296, "pages": [19296]}, {"start": 21035, "end": 21035, "pages": [21035]}, {"start": 21092, "end": 21092, "pages": [21092]}, {"start": 21195, "end": 21195, "pages": [21195]}, {"start": 21205, "end": 21205, "pages": [21205]}, {"start": 21221, "end": 21221, "pages": [21221]}, {"start": 21353, "end": 21353, "pages": [21353]}, {"start": 21408, "end": 21408, "pages": [21408]}, {"start": 21574, "end": 21579, "pages": [21574, 21579]}, {"start": 21593, "end": 21593, "pages": [21593]}, {"start": 21737, "end": 21737, "pages": [21737]}, {"start": 22030, "end": 22030, "pages": [22030]}, {"start": 22037, "end": 22037, "pages": [22037]}, {"start": 22068, "end": 22068, "pages": [22068]}, {"start": 22077, "end": 22079, "pages": [22077, 22079]}, {"start": 23418, "end": 23418, "pages": [23418]}];
+        const pageToPath = {"281": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000281.jpg", "625": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000625.jpg", "737": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000737.jpg", "2470": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002470.jpg", "2711": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002711.jpg", "3070": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003070.jpg", "3071": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003071.jpg", "3072": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003072.jpg", "3223": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003223.jpg", "3245": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003245.jpg", "3328": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003328.jpg", "3400": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003400.jpg", "3407": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003407.jpg", "4160": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004160.jpg", "4161": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004161.jpg", "4163": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004163.jpg", "4326": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004326.jpg", "4450": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004450.jpg", "4462": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004462.jpg", "4797": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004797.jpg", "6996": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006996.jpg", "11553": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011553.jpg", "13608": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013608.jpg", "14781": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014781.jpg", "15145": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015145.jpg", "16233": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016233.jpg", "19296": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019296.jpg", "21035": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021035.jpg", "21092": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021092.jpg", "21195": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021195.jpg", "21205": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021205.jpg", "21221": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021221.jpg", "21353": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021353.jpg", "21408": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021408.jpg", "21574": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021574.jpg", "21579": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021579.jpg", "21593": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021593.jpg", "21737": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021737.jpg", "22030": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022030.jpg", "22037": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022037.jpg", "22068": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022068.jpg", "22077": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022077.jpg", "22079": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022079.jpg", "23418": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023418.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000281.jpg": "...f. ‘lorida, along, swith supervisory-and line prosecutors fio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000625.jpg": "...xecutive 4 adam johnson, supervisory’ staff atorney mcc micha...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000737.jpg": "...te, based upon a court's supervisory authority over gre and j...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002470.jpg": "...exercise of its inherent supervisory pouers. the documents at...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002711.jpg": "...se’their discretion, and-supervisory pouer to:  urge the prod...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003070.jpg": "...three: purposes for the supervisory -pouers,, “to  implement...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003071.jpg": "...e under its ‘inherent or supervisory authority, ‘the supreme...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003072.jpg": "...dence by invoking. their supervisory authority. corisistert w...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003223.jpg": "...-communications to; the; supervisory chain aboverthe immediat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003245.jpg": "...d.a history of resisting supervisory authority”*that warrante...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003328.jpg": "...he mostiserious, readil  supervisory autho ity in: -ertain ar...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003400.jpg": "...:in: the e st caseefile  supervisory authority. ever. the; fb...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003407.jpg": "...ey who assumed toure’ ‘s supervisory t told, opr that he: did...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004160.jpg": "...l. courts may use  their supervisory: pouer in, some ‘circums...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004161.jpg": "...he eall. for the ‘courts supervisory pouer. under the[] circu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004163.jpg": "...supervisory pouer... . is at its, st...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004326.jpg": "...ency squad, headed bya a supervisory. special agent. ebi re y...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004450.jpg": "...stances”  or“designated. supervisory atom ) lination, would,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004462.jpg": "...e, ashcroft: designated. supervisory. atorney” maya ! { plea....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004797.jpg": "...xereise of its inherent, supervisory pouer instead, the court...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006996.jpg": "...coure ves gisghetion and supervisory  pouer, we will prouide...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011553.jpg": "...ans nothing in terms  e£ supervisory authority.  cep)  i  the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013608.jpg": "...es) 4  by mr. rohrbach:  supervisory trivestigator broun, wot...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014781.jpg": "...ans nothing in terms  e£ supervisory authority.  cep)  i  the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015145.jpg": "...3d at.  district court’s supervisory authority ove  ‘£2:  lo2...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016233.jpg": "...es) 4  by mr. rohrbach:  supervisory trivestigator broun, wot...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019296.jpg": "...fashion. this court has. supervisory jurisdiction over the  o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021035.jpg": "...f ene point  . she ‘had  supervisory authority over kellen an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021092.jpg": "...of  jonstitutional. and supervisory concerns require holding...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021195.jpg": "...‘not:exercise sufficient supervisory. review: overthe process...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021205.jpg": "...ie ‘was: s part of ‘the: supervisory t team, ‘that iat oversa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021221.jpg": "...ir-communications io the supervisory...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021353.jpg": "...mer.  cer  thvestbative  supervisory, aus ja.conversation she...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021408.jpg": "...r. that: no ‘one in hee: supervisory chain. expr essed ia.  t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021574.jpg": "...om ms. maxwell exercised supervisory or  ms. mob: ‘yes; ‘your...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021579.jpg": "...and. the gefendant had a supervisory:  woll over kellen.  pre...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021593.jpg": "...4 points because of the supervisory fole iff ah sxtensive  c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021737.jpg": "...ether: maxwell exercised supervisory atithority over:  kellen...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022030.jpg": "...es,  staffing shortages, supervisory. lapses. and the enforce...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022037.jpg": "...er bop employees, and/or supervisory personnel.  houever, ine...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022068.jpg": "...f staffirig issues ‘aid, supervisory lapses, and that he:was...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022077.jpg": "...ion. of: bop’ policies,  supervisory: lapses, and. instances...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022079.jpg": "...ues, staffing shortages, supervisory lapses and the enforeeme...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023418.jpg": "...a celimate.  's death,.a supervisory staff atorney  | hin tha..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "supervisory" (44 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">281-281</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">625-625</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">737-737</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">2470-2470</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">2711-2711</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">3070-3072</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3223-3223</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">3245-3245</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">3328-3328</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">3400-3400</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">3407-3407</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">4160-4163</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">4326-4326</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">4450-4450</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">4462-4462</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">4797-4797</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">6996-6996</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">11553-11553</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">13608-13608</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">14781-14781</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">15145-15145</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">16233-16233</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">19296-19296</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">21035-21035</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">21092-21092</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">21195-21195</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">21205-21205</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">21221-21221</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">21353-21353</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">21408-21408</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">21574-21579</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">21593-21593</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">21737-21737</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">22030-22030</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">22037-22037</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">22068-22068</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">22077-22079</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">23418-23418</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

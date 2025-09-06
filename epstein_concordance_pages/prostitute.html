@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "prostitute"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 718, "end": 718, "pages": [718]}, {"start": 3277, "end": 3277, "pages": [3277]}, {"start": 3580, "end": 3580, "pages": [3580]}, {"start": 5792, "end": 5792, "pages": [5792]}, {"start": 6239, "end": 6239, "pages": [6239]}, {"start": 6717, "end": 6717, "pages": [6717]}, {"start": 7476, "end": 7476, "pages": [7476]}, {"start": 12353, "end": 12353, "pages": [12353]}, {"start": 17941, "end": 17941, "pages": [17941]}, {"start": 21425, "end": 21425, "pages": [21425]}];
+        const pageToPath = {"718": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000718.jpg", "3277": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003277.jpg", "3580": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003580.jpg", "5792": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005792.jpg", "6239": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006239.jpg", "6717": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006717.jpg", "7476": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007476.jpg", "12353": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012353.jpg", "17941": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017941.jpg", "21425": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021425.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000718.jpg": "...id  mere than. a teenage prostitute. i was his slave.  l tad...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003277.jpg": "...a. l berson to become a prostitute, i. violation. of blorid...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003580.jpg": "...ired -- had an  underage prostitute.  q« so knoulag that, do...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005792.jpg": "...psychology:of the pimp:-prostitute relationship,” including...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006239.jpg": "...e: on.grooming, the pimp-prostitute relationship, delayed....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006717.jpg": "...psychology:of the pimp:-prostitute relationship,” including...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007476.jpg": "...literature on. the pimp-prostitute relationship.”  ‘mot. at...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012353.jpg": "...comparable to the pimp-prostitute context in which groomin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017941.jpg": "...comparable to the pimp-prostitute context in which groomin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021425.jpg": "...“wereigoingto-be called: prostitute:  ‘ opr  lafaia.  ted, u..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "prostitute" (10 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">718-718</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">3277-3277</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">3580-3580</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">5792-5792</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">6239-6239</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">6717-6717</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">7476-7476</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">12353-12353</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">17941-17941</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">21425-21425</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

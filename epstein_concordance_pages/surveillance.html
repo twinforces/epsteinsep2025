@@ -1,0 +1,238 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "surveillance"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 654, "end": 654, "pages": [654]}, {"start": 1287, "end": 1287, "pages": [1287]}, {"start": 1399, "end": 1399, "pages": [1399]}, {"start": 1427, "end": 1431, "pages": [1427, 1430, 1431]}, {"start": 1438, "end": 1439, "pages": [1438, 1439]}, {"start": 1450, "end": 1450, "pages": [1450]}, {"start": 1458, "end": 1458, "pages": [1458]}, {"start": 1745, "end": 1745, "pages": [1745]}, {"start": 1838, "end": 1840, "pages": [1838, 1840]}, {"start": 1867, "end": 1867, "pages": [1867]}, {"start": 2518, "end": 2518, "pages": [2518]}, {"start": 2557, "end": 2558, "pages": [2557, 2558]}, {"start": 2729, "end": 2729, "pages": [2729]}, {"start": 2908, "end": 2908, "pages": [2908]}, {"start": 3219, "end": 3219, "pages": [3219]}, {"start": 4018, "end": 4018, "pages": [4018]}, {"start": 4025, "end": 4027, "pages": [4025, 4027]}, {"start": 4034, "end": 4034, "pages": [4034]}, {"start": 4054, "end": 4060, "pages": [4054, 4055, 4058, 4059, 4060]}, {"start": 4107, "end": 4108, "pages": [4107, 4108]}, {"start": 4130, "end": 4130, "pages": [4130]}, {"start": 4341, "end": 4341, "pages": [4341]}, {"start": 4500, "end": 4500, "pages": [4500]}, {"start": 6056, "end": 6056, "pages": [6056]}, {"start": 7690, "end": 7690, "pages": [7690]}, {"start": 7822, "end": 7822, "pages": [7822]}, {"start": 7842, "end": 7845, "pages": [7842, 7845]}, {"start": 8149, "end": 8149, "pages": [8149]}, {"start": 10469, "end": 10474, "pages": [10469, 10470, 10474]}, {"start": 20205, "end": 20205, "pages": [20205]}, {"start": 20317, "end": 20317, "pages": [20317]}, {"start": 20345, "end": 20349, "pages": [20345, 20348, 20349]}, {"start": 20356, "end": 20357, "pages": [20356, 20357]}, {"start": 20368, "end": 20368, "pages": [20368]}, {"start": 20376, "end": 20376, "pages": [20376]}, {"start": 20421, "end": 20421, "pages": [20421]}, {"start": 20522, "end": 20522, "pages": [20522]}, {"start": 20661, "end": 20661, "pages": [20661]}, {"start": 21376, "end": 21376, "pages": [21376]}, {"start": 21915, "end": 21919, "pages": [21915, 21917, 21919]}, {"start": 21994, "end": 21995, "pages": [21994, 21995]}, {"start": 22037, "end": 22037, "pages": [22037]}, {"start": 22053, "end": 22053, "pages": [22053]}, {"start": 22070, "end": 22075, "pages": [22070, 22072, 22075]}, {"start": 23448, "end": 23448, "pages": [23448]}, {"start": 23463, "end": 23463, "pages": [23463]}, {"start": 23477, "end": 23477, "pages": [23477]}, {"start": 23490, "end": 23490, "pages": [23490]}];
+        const pageToPath = {"654": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000654.jpg", "1287": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001287.jpg", "1399": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001399.jpg", "1427": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001427.jpg", "1430": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001430.jpg", "1431": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001431.jpg", "1438": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001438.jpg", "1439": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001439.jpg", "1450": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001450.jpg", "1458": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001458.jpg", "1745": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001745.jpg", "1838": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001838.jpg", "1840": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001840.jpg", "1867": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001867.jpg", "2518": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002518.jpg", "2557": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002557.jpg", "2558": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002558.jpg", "2729": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002729.jpg", "2908": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002908.jpg", "3219": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003219.jpg", "4018": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004018.jpg", "4025": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004025.jpg", "4027": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004027.jpg", "4034": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004034.jpg", "4054": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004054.jpg", "4055": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004055.jpg", "4058": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004058.jpg", "4059": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004059.jpg", "4060": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004060.jpg", "4107": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004107.jpg", "4108": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004108.jpg", "4130": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004130.jpg", "4341": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004341.jpg", "4500": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004500.jpg", "6056": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006056.jpg", "7690": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007690.jpg", "7822": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007822.jpg", "7842": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007842.jpg", "7845": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007845.jpg", "8149": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008149.jpg", "10469": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010469.jpg", "10470": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010470.jpg", "10474": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010474.jpg", "20205": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020205.jpg", "20317": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020317.jpg", "20345": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020345.jpg", "20348": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020348.jpg", "20349": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020349.jpg", "20356": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020356.jpg", "20357": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020357.jpg", "20368": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020368.jpg", "20376": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020376.jpg", "20421": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020421.jpg", "20522": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020522.jpg", "20661": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020661.jpg", "21376": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021376.jpg", "21915": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021915.jpg", "21917": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021917.jpg", "21919": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021919.jpg", "21994": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021994.jpg", "21995": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021995.jpg", "22037": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022037.jpg", "22053": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022053.jpg", "22070": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022070.jpg", "22072": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022072.jpg", "22075": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022075.jpg", "23448": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023448.jpg", "23463": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023463.jpg", "23477": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023477.jpg", "23490": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023490.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000654.jpg": "...f gcotnse, are the video surveillance tapes, obviously we assu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001287.jpg": "...xwell. is: under.24-hour surveillance: ‘by: ‘two to: six. guar...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001399.jpg": "...plexiglass divider-under surveillance of ‘three guards. and a-...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001427.jpg": "...ims that the  flashlight surveillance in, maxwell’s eyes is di...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001430.jpg": "...el: to: cover chet cyes  surveillance & (except wher giards :...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001431.jpg": "...ons by ting the md light surveillance of ms; maxwell, or  just...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001438.jpg": "...he l5-minute: flashlight surveillance that.is causing:  as.. m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001439.jpg": "...well’s segregation. atid surveillance go way beyond the concer...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001450.jpg": "...ation.of what flashlight surveillance the mdc conducts on. max...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001458.jpg": "...r to modify its nightime surveillance ‘procedures or fo justif...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001745.jpg": "...ed the: court-wit  defen surveillance measures, are motivated...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001838.jpg": "...n-stop. in- -cell.camera surveillance, ms. maxwell’s sleep: is...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001840.jpg": "...n-stop. in- -cell.camera surveillance, ms. maxwell’s  sleep: i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001867.jpg": ".... maxwell is ‘under 24/7 surveillance by: a. cadre of officers...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002518.jpg": "...ims  hiniself, reviewed, surveillance footage of the epstein,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002557.jpg": "...itrary” pouerand “police surveillance” that is, “too  permeati...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002558.jpg": "...a too ‘permeating police surveillance.” jd, at:22l4 (quoting b...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002729.jpg": "...xwell ‘is: under.24-hour surveillance’! by: ‘two to six. guard...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002908.jpg": "...plexiglass divider-under surveillance of ‘three guards. and a-...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003219.jpg": "...computer  equipment and. surveillance camera. videotapes, the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004018.jpg": "...wid6o, and captured on. surveillance cameras affixed.within t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004025.jpg": "...ference as: captured on. surveillance:  ares = ney  cameras fo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004027.jpg": "...and video, and caper oni surveillance cameras affixed-within t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004034.jpg": "...ference as: captured on. surveillance:  ares = ney  cameras fo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004054.jpg": "...el: to: cover chet cyes  surveillance & (except wher giards :...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004055.jpg": "...ons by ting the md light surveillance of ms; maxwell, or  just...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004058.jpg": "...el: to: cover chet cyes  surveillance & (except wher giards :...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004059.jpg": "...md ‘inut  ¢ ainute light surveillance of ms. maxwell. or justi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004060.jpg": "...e retenti ion that did,  surveillance footage\" but: srotably d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004107.jpg": "...he l5-minute: flashlight surveillance that.is causing:  as.. m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004108.jpg": "...well’s segregation. atid surveillance go way beyond the concer...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004130.jpg": "...ims that the  flashlight surveillance in, maxwell’s eyes is di...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004341.jpg": "...computer ‘equipment and, surveillance camera. videotapes, the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004500.jpg": ".... eee 2 + cee | ie ae  surveillance images in ight have shou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006056.jpg": "...s. maxwell does not. the surveillance rivals. seeties of dr....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007690.jpg": "...and foreign intelligence surveillance act, florida psychiatric...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007822.jpg": "...y: watching; you ---gps. surveillance. in the supreme court; h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007842.jpg": "...ments, site surveys ‘and surveillance :at numerous: gosr: offi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007845.jpg": "...sit sutveys,, technical surveillance counter measures:  unite...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008149.jpg": "...and foreign intelligence surveillance act, florida psychiatric...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010469.jpg": "...il monitored. by video:  surveillance. hersectirity detail rot...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010470.jpg": "...nmate, under continuous: surveillance by:  subjeeted 6  a dail...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010474.jpg": "...cted to  an anti-suicide surveillance regime even though she h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020205.jpg": "...xwell. is: under.24-hour surveillance: ‘by: ‘two to: six. guar...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020317.jpg": "...plexiglass divider-under surveillance of ‘three guards. and a-...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020345.jpg": "...ims that the  flashlight surveillance in, maxwell’s eyes is di...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020348.jpg": "...el: to: cover chet cyes  surveillance & (except wher giards :...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020349.jpg": "...ons by ting the md light surveillance of ms; maxwell, or  just...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020356.jpg": "...he l5-minute: flashlight surveillance that.is causing:  as.. m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020357.jpg": "...well’s segregation. atid surveillance go way beyond the concer...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020368.jpg": "...ation.of what flashlight surveillance the mdc conducts on. max...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020376.jpg": "...r to modify its nightime surveillance ‘procedures or fo justif...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020421.jpg": "...subjected to flasl ight surveillance every, l5:minutes t? or...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020522.jpg": "...subjected to flasl ight surveillance every, l5:minutes t? or...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020661.jpg": "...n te als  ‘maxwell's § n surveillance ol ; maxwe lot ustrfy th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021376.jpg": "...ociated with those:  the surveillance  his “home;  etontialiy...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021915.jpg": "...one a  and  terns] video surveillance  shu. as video from the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021917.jpg": "...ounts in. the shu.  ideo surveillance system, noel and thomas...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021919.jpg": "...ose  confirmed by wwideo surveillance, no one  no: one conduct...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021994.jpg": "...ooooooll, there is video surveillance  eavturine 8 sevarate ca...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021995.jpg": "...icated, that those video surveillance files will be turned ove...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022037.jpg": "...sked with,  watching the surveillance: cameras. prestmably, th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022053.jpg": "...he foreign: intelligence surveillance act during the trump-rus...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022070.jpg": "...ers‘used by\"  follouing: surveillance video for  noel arid, th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022072.jpg": "...lated. to the mcc  video surveillance system. and additional s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022075.jpg": "...eds. of hotirs of video: surveillance going: back to july 5,.2...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023448.jpg": "...mcc new york  all video: surveillance: from mcc: new. york's c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023463.jpg": "...we also noted that the surveillance camera in: the l tier  p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023477.jpg": "...onal cameras to bolster ‘surveillance. houever, ‘as reported i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023490.jpg": "...sure i its video camera: surveillance, system. th  also: requi..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "surveillance" (70 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">654-654</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1287-1287</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1399-1399</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">1427-1431</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">1438-1439</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">1450-1450</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">1458-1458</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">1745-1745</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">1838-1840</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">1867-1867</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">2518-2518</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">2557-2558</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">2729-2729</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">2908-2908</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">3219-3219</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">4018-4018</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">4025-4027</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">4034-4034</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">4054-4060</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">4107-4108</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">4130-4130</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">4341-4341</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">4500-4500</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">6056-6056</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">7690-7690</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">7822-7822</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">7842-7845</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">8149-8149</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">10469-10474</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">20205-20205</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">20317-20317</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">20345-20349</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">20356-20357</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">20368-20368</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">20376-20376</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">20421-20421</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">20522-20522</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">20661-20661</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">21376-21376</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">21915-21919</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">21994-21995</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">22037-22037</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">22053-22053</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">22070-22075</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">23448-23448</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(45, 0); return false;">23463-23463</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(46, 0); return false;">23477-23477</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(47, 0); return false;">23490-23490</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

@@ -1,0 +1,238 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "increased"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 966, "end": 967, "pages": [966, 967]}, {"start": 1263, "end": 1263, "pages": [1263]}, {"start": 1391, "end": 1391, "pages": [1391]}, {"start": 1450, "end": 1450, "pages": [1450]}, {"start": 1590, "end": 1591, "pages": [1590, 1591]}, {"start": 1710, "end": 1718, "pages": [1710, 1713, 1718]}, {"start": 1727, "end": 1727, "pages": [1727]}, {"start": 1743, "end": 1743, "pages": [1743]}, {"start": 2066, "end": 2066, "pages": [2066]}, {"start": 2789, "end": 2789, "pages": [2789]}, {"start": 3626, "end": 3626, "pages": [3626]}, {"start": 3637, "end": 3637, "pages": [3637]}, {"start": 5207, "end": 5207, "pages": [5207]}, {"start": 5637, "end": 5637, "pages": [5637]}, {"start": 5904, "end": 5904, "pages": [5904]}, {"start": 5912, "end": 5912, "pages": [5912]}, {"start": 5942, "end": 5943, "pages": [5942, 5943]}, {"start": 6292, "end": 6292, "pages": [6292]}, {"start": 6599, "end": 6599, "pages": [6599]}, {"start": 6829, "end": 6829, "pages": [6829]}, {"start": 6837, "end": 6837, "pages": [6837]}, {"start": 6867, "end": 6868, "pages": [6867, 6868]}, {"start": 7240, "end": 7240, "pages": [7240]}, {"start": 7930, "end": 7930, "pages": [7930]}, {"start": 10340, "end": 10340, "pages": [10340]}, {"start": 10425, "end": 10425, "pages": [10425]}, {"start": 10554, "end": 10558, "pages": [10554, 10558]}, {"start": 11558, "end": 11560, "pages": [11558, 11560]}, {"start": 11568, "end": 11568, "pages": [11568]}, {"start": 12101, "end": 12101, "pages": [12101]}, {"start": 12340, "end": 12340, "pages": [12340]}, {"start": 14786, "end": 14788, "pages": [14786, 14788]}, {"start": 14796, "end": 14796, "pages": [14796]}, {"start": 14937, "end": 14937, "pages": [14937]}, {"start": 15013, "end": 15013, "pages": [15013]}, {"start": 17690, "end": 17690, "pages": [17690]}, {"start": 17928, "end": 17928, "pages": [17928]}, {"start": 19884, "end": 19885, "pages": [19884, 19885]}, {"start": 20181, "end": 20181, "pages": [20181]}, {"start": 20309, "end": 20309, "pages": [20309]}, {"start": 20368, "end": 20368, "pages": [20368]}, {"start": 20960, "end": 20960, "pages": [20960]}, {"start": 21038, "end": 21040, "pages": [21038, 21040]}, {"start": 21582, "end": 21582, "pages": [21582]}, {"start": 21593, "end": 21593, "pages": [21593]}, {"start": 21698, "end": 21698, "pages": [21698]}, {"start": 21995, "end": 21995, "pages": [21995]}, {"start": 22053, "end": 22056, "pages": [22053, 22056]}];
+        const pageToPath = {"966": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000966.jpg", "967": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000967.jpg", "1263": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001263.jpg", "1391": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001391.jpg", "1450": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001450.jpg", "1590": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001590.jpg", "1591": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001591.jpg", "1710": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001710.jpg", "1713": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001713.jpg", "1718": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001718.jpg", "1727": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001727.jpg", "1743": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001743.jpg", "2066": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002066.jpg", "2789": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002789.jpg", "3626": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003626.jpg", "3637": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003637.jpg", "5207": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005207.jpg", "5637": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005637.jpg", "5904": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005904.jpg", "5912": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005912.jpg", "5942": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005942.jpg", "5943": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005943.jpg", "6292": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006292.jpg", "6599": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006599.jpg", "6829": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006829.jpg", "6837": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006837.jpg", "6867": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006867.jpg", "6868": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006868.jpg", "7240": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007240.jpg", "7930": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007930.jpg", "10340": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010340.jpg", "10425": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010425.jpg", "10554": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010554.jpg", "10558": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010558.jpg", "11558": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011558.jpg", "11560": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011560.jpg", "11568": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011568.jpg", "12101": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012101.jpg", "12340": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012340.jpg", "14786": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014786.jpg", "14788": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014788.jpg", "14796": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014796.jpg", "14937": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014937.jpg", "15013": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015013.jpg", "17690": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017690.jpg", "17928": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017928.jpg", "19884": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019884.jpg", "19885": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019885.jpg", "20181": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020181.jpg", "20309": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020309.jpg", "20368": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020368.jpg", "20960": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020960.jpg", "21038": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021038.jpg", "21040": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021040.jpg", "21582": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021582.jpg", "21593": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021593.jpg", "21698": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021698.jpg", "21995": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021995.jpg", "22053": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022053.jpg", "22056": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022056.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000966.jpg": "...tied to: couid-l9 have :increased. by’73' percent.' indeed...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000967.jpg": "...respectively.” the increased spread among“prisons mea...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001263.jpg": "...‘bri izing: of th ‘has. increased significantly: since: he...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001391.jpg": "...vestigate; indeed,,ithas increased it.  itds also disingenu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001450.jpg": "...s net on. suicide watch, increased frequency of  nightime m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001590.jpg": "...ion. in stephens, the ¢  increased dramatically, as there h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001591.jpg": "...the increased spread among prisons mea...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001710.jpg": "...e be given significantly increased. access to a ‘computer t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001713.jpg": "...an  general p well swith increased access ‘to the discovery...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001718.jpg": "...e be given significantly increased. access to a ‘computer t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001727.jpg": "...t and. gave ms. maxwell. increased. ‘access: to: the discov...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001743.jpg": "...and to-prouide her with, increased access to'the discovery...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002066.jpg": "...uity: ‘balances::clearly increased. fron the time of the di...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002789.jpg": "...‘bri izing: of th ‘has. increased significantly: since: he...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003626.jpg": "...l5% to 3.64%.  hispanics increased. froni |  t... mr. marti...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003637.jpg": "...} ury wheel ‘would. fave increased ye ¢  3, o5l ‘tot 6. ‘in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005207.jpg": "...ms. maxwe  significantly increased the likelihood. that ‘pr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005637.jpg": "...their trust and. obtain. increased. aceess to the potential...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005904.jpg": "...ich hei gives themselves increased ‘opportunities;to abuse;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005912.jpg": "...‘sexual! victimization, increased’ knouledge-:on: both the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005942.jpg": "...tements’  ‘education and increased awareness are. needed on...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005943.jpg": "...r: children n may’ be at increased tisk for some adverse: ‘...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006292.jpg": "...ilt anne ad,  ¥ be al an increased  enjune tion.  ommunic...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006599.jpg": "...their trust and. obtain. increased. aceess to the potential...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006829.jpg": "...ich hei gives themselves increased ‘opportunities;to abuse;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006837.jpg": "...‘sexual! victimization, increased’ knouledge-:on: both the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006867.jpg": "...tements’  ‘education and increased awareness are. needed on...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006868.jpg": "...r: children n may’ be at increased tisk for some adverse: ‘...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007240.jpg": "...at factors contribute to increased risk of higher vulnerabi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007930.jpg": "...at factors contribute to increased risk of higher vulnerabi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010340.jpg": "...ctions. contintied, and ‘increased, as he. neared the end o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010425.jpg": "...gardless of whether the  increased penalty resulted from.a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010554.jpg": "...ere the: guidelines have increased. after the offense: cond...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010558.jpg": "...ion, have, sinee further increased, the applicable  penalti...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011558.jpg": "...at the effense level, is increased by five if:  one; the 6f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011560.jpg": "...dant. says that congress increased guidelines. sentences fo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011568.jpg": "...total offense  level ig increased by 5 from 32 te 37. 4bl,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012101.jpg": "...tion is, did you seek an increased amount in the setlement...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012340.jpg": "...lf any, place a child at increased risk  of beang sextally...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014786.jpg": "...at the effense level, is increased by five if:  one; the 6f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014788.jpg": "...dant. says that congress increased guidelines. sentences fo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014796.jpg": "...total offense  level ig increased by 5 from 32 te 37. 4bl,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014937.jpg": "...at factors contribute to increased risk. or higher vulnerab...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015013.jpg": "...t involve isolation and  increased dependency and things di...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017690.jpg": "...tion is, did you seek an increased amount in the setlement...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017928.jpg": "...lf any, place a child at increased risk  of beang sextally...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019884.jpg": "...tied to: couid-l9 have :increased. by’73' percent.' indeed...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019885.jpg": "...respectively.” the increased spread among“prisons mea...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020181.jpg": "...‘bri izing: of th ‘has. increased significantly: since: he...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020309.jpg": "...vestigate; indeed,,ithas increased it.  itds also disingenu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020368.jpg": "...s net on. suicide watch, increased frequency of  nightime m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020960.jpg": "...ractions: continued, and.increased, sche neared. the endof*...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021038.jpg": "...6f because it seeks an. increased punishment; the  governm...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021040.jpg": "...at. the offense level is increased ‘oy five i2:  one, the o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021582.jpg": "...if  because it seeks an increased punishment, the  governm...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021593.jpg": "...6, the offense level is: increased by 2 because they were...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021698.jpg": "...ssed. by els ther party, increased. neither ‘party’s: labil...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021995.jpg": "...the additional discovery increased the global discovery bat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022053.jpg": "...s:‘cabinet position amid increased scrutiny-of the sweethea...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022056.jpg": "...icers, had continuoisly” increased: ‘there’ were i l2, 2896..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "increased" (60 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">966-967</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1263-1263</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1391-1391</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">1450-1450</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">1590-1591</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">1710-1718</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">1727-1727</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">1743-1743</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">2066-2066</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">2789-2789</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">3626-3626</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">3637-3637</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">5207-5207</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">5637-5637</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">5904-5904</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">5912-5912</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">5942-5943</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">6292-6292</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">6599-6599</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">6829-6829</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">6837-6837</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">6867-6868</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">7240-7240</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">7930-7930</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">10340-10340</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">10425-10425</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">10554-10558</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">11558-11560</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">11568-11568</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">12101-12101</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">12340-12340</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">14786-14788</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">14796-14796</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">14937-14937</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">15013-15013</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">17690-17690</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">17928-17928</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">19884-19885</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">20181-20181</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">20309-20309</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">20368-20368</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">20960-20960</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">21038-21040</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">21582-21582</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">21593-21593</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(45, 0); return false;">21698-21698</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(46, 0); return false;">21995-21995</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(47, 0); return false;">22053-22056</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

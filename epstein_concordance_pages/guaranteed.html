@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "guaranteed"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 3430, "end": 3430, "pages": [3430]}, {"start": 3772, "end": 3772, "pages": [3772]}, {"start": 4552, "end": 4552, "pages": [4552]}, {"start": 7824, "end": 7824, "pages": [7824]}, {"start": 8918, "end": 8918, "pages": [8918]}, {"start": 9065, "end": 9065, "pages": [9065]}, {"start": 9756, "end": 9756, "pages": [9756]}, {"start": 15321, "end": 15321, "pages": [15321]}, {"start": 15336, "end": 15336, "pages": [15336]}, {"start": 15358, "end": 15358, "pages": [15358]}, {"start": 15382, "end": 15382, "pages": [15382]}, {"start": 15392, "end": 15392, "pages": [15392]}, {"start": 15398, "end": 15398, "pages": [15398]}, {"start": 15407, "end": 15407, "pages": [15407]}, {"start": 15422, "end": 15422, "pages": [15422]}, {"start": 15442, "end": 15442, "pages": [15442]}, {"start": 21345, "end": 21345, "pages": [21345]}];
+        const pageToPath = {"3430": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003430.jpg", "3772": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003772.jpg", "4552": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004552.jpg", "7824": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007824.jpg", "8918": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008918.jpg", "9065": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009065.jpg", "9756": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009756.jpg", "15321": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015321.jpg", "15336": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015336.jpg", "15358": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015358.jpg", "15382": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015382.jpg", "15392": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015392.jpg", "15398": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015398.jpg", "15407": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015407.jpg", "15422": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015422.jpg", "15442": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015442.jpg", "21345": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021345.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003430.jpg": "...b carat toe me meat ake  guaranteed him,“ ‘ant rabsolute rig...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003772.jpg": "...anic:  selection process guaranteed to: draw’ from.a, pool t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004552.jpg": "...b carat toe me meat ake  guaranteed him, “an absolute right...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007824.jpg": "...‘november ; l2, 2oo8  no guaranteed right to:‘oun firearis,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008918.jpg": "...n:this ease reecived the guaranteed right to a fair trial an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009065.jpg": "...fair and. impartial, one guaranteed her by the united states...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009756.jpg": "...fair and. impartial, one guaranteed her by the united states...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015321.jpg": "...ead eco gre  tatitopod, guaranteed: funds\" cou! bill, recip...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015336.jpg": "...domes : y iva ‘autopod:; guaranteed funds:cod; bill 3rd part...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015358.jpg": "...ead eco gre  tatitopod, guaranteed: funds\" cou! bill, recip...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015382.jpg": "...ead eco gre  tatitopod, guaranteed: funds\" cou! bill, recip...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015392.jpg": "...ead eco gre  tatitopod, guaranteed: funds\" cou! bill, recip...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015398.jpg": "...ead eco gre  tatitopod, guaranteed: funds\" cou! bill, recip...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015407.jpg": "...ead eco gre  tatitopod, guaranteed: funds\" cou! bill, recip...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015422.jpg": "...ead eco gre  tatitopod, guaranteed: funds\" cou! bill, recip...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015442.jpg": "...domes : y iva ‘autopod:; guaranteed funds:cod; bill 3rd part...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021345.jpg": "...and guaranteed sexual offender registra..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "guaranteed" (17 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">3430-3430</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">3772-3772</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">4552-4552</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">7824-7824</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">8918-8918</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">9065-9065</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">9756-9756</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">15321-15321</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">15336-15336</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">15358-15358</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">15382-15382</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">15392-15392</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">15398-15398</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">15407-15407</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">15422-15422</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">15442-15442</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">21345-21345</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

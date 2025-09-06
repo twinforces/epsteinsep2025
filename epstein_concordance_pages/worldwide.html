@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "worldwide"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 721, "end": 721, "pages": [721]}, {"start": 1108, "end": 1108, "pages": [1108]}, {"start": 1128, "end": 1128, "pages": [1128]}, {"start": 1984, "end": 1984, "pages": [1984]}, {"start": 2004, "end": 2004, "pages": [2004]}, {"start": 7599, "end": 7599, "pages": [7599]}, {"start": 10249, "end": 10249, "pages": [10249]}, {"start": 10692, "end": 10692, "pages": [10692]}, {"start": 20026, "end": 20026, "pages": [20026]}, {"start": 20046, "end": 20046, "pages": [20046]}];
+        const pageToPath = {"721": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000721.jpg", "1108": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001108.jpg", "1128": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001128.jpg", "1984": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001984.jpg", "2004": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002004.jpg", "7599": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007599.jpg", "10249": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010249.jpg", "10692": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010692.jpg", "20026": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020026.jpg", "20046": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020046.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000721.jpg": "...orror. fehis new wave of worldwide publicity only worsens m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001108.jpg": "...eias a fugitive:duringia worldwide pandeinic.. in fact, eve...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001128.jpg": "...reign country: during a; worldwide'‘pandemic: (presumably;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001984.jpg": "...asa, fugitive during a. worldwide  ‘pandemic. in fact, eve...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002004.jpg": "...oreign. country diring a worldwide-paridemic (prestinably,,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007599.jpg": "...product  tam ering : _a worldwide. problem. los: angeles:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010249.jpg": "...idn't expect to be knoun worldwide 48 a vietim ef sexual ab...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010692.jpg": "...he most: extensive knoun worldwide sex trafficking operatio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020026.jpg": "...eias a fugitive:duringia worldwide pandeinic.. in fact, eve...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020046.jpg": "...reign country: during a; worldwide'‘pandemic: (presumably;..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "worldwide" (10 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">721-721</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1108-1108</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1128-1128</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">1984-1984</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">2004-2004</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">7599-7599</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">10249-10249</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">10692-10692</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">20026-20026</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">20046-20046</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

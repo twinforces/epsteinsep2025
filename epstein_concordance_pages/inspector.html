@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "inspector"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1399, "end": 1399, "pages": [1399]}, {"start": 2908, "end": 2908, "pages": [2908]}, {"start": 3205, "end": 3205, "pages": [3205]}, {"start": 4327, "end": 4327, "pages": [4327]}, {"start": 10708, "end": 10708, "pages": [10708]}, {"start": 10730, "end": 10730, "pages": [10730]}, {"start": 20317, "end": 20317, "pages": [20317]}, {"start": 21979, "end": 21983, "pages": [21979, 21980, 21983]}, {"start": 21997, "end": 21997, "pages": [21997]}, {"start": 22009, "end": 22009, "pages": [22009]}, {"start": 22030, "end": 22057, "pages": [22030, 22031, 22032, 22035, 22037, 22038, 22039, 22042, 22046, 22050, 22052, 22053, 22057]}, {"start": 22064, "end": 22072, "pages": [22064, 22068, 22071, 22072]}, {"start": 22084, "end": 22091, "pages": [22084, 22088, 22089, 22090, 22091]}, {"start": 22097, "end": 22103, "pages": [22097, 22101, 22102, 22103]}, {"start": 22122, "end": 22122, "pages": [22122]}, {"start": 23041, "end": 23041, "pages": [23041]}, {"start": 23417, "end": 23417, "pages": [23417]}, {"start": 23482, "end": 23492, "pages": [23482, 23485, 23489, 23490, 23492]}];
+        const pageToPath = {"1399": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001399.jpg", "2908": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002908.jpg", "3205": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003205.jpg", "4327": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004327.jpg", "10708": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010708.jpg", "10730": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010730.jpg", "20317": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020317.jpg", "21979": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021979.jpg", "21980": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021980.jpg", "21983": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021983.jpg", "21997": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021997.jpg", "22009": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022009.jpg", "22030": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022030.jpg", "22031": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022031.jpg", "22032": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022032.jpg", "22035": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022035.jpg", "22037": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022037.jpg", "22038": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022038.jpg", "22039": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022039.jpg", "22042": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022042.jpg", "22046": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022046.jpg", "22050": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022050.jpg", "22052": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022052.jpg", "22053": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022053.jpg", "22057": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022057.jpg", "22064": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022064.jpg", "22068": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022068.jpg", "22071": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022071.jpg", "22072": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022072.jpg", "22084": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022084.jpg", "22088": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022088.jpg", "22089": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022089.jpg", "22090": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022090.jpg", "22091": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022091.jpg", "22097": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022097.jpg", "22101": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022101.jpg", "22102": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022102.jpg", "22103": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022103.jpg", "22122": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022122.jpg", "23041": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00023041.jpg", "23417": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023417.jpg", "23482": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023482.jpg", "23485": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023485.jpg", "23489": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023489.jpg", "23490": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023490.jpg", "23492": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023492.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001399.jpg": "...aracterized by: an hv ag inspector as “a.death, trap’= in-p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002908.jpg": "...aracterized by: an hv ag inspector as “a.death, trap’= in-p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003205.jpg": "...cblluity  ‘ore(ceof the: inspector,  ‘office of the  inatio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004327.jpg": "...e'of the: office:of the ‘inspector pardon general atorney’...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010708.jpg": "...cruz; and. blackburn to inspector general, horouitz. (dec....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010730.jpg": ".... the bureau. of prisons inspector general’*s office (the “...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020317.jpg": "...aracterized by: an hv ag inspector as “a.death, trap’= in-p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021979.jpg": "...that thene's an ongoimg inspector  general's feepert. i de...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021980.jpg": "...al 4ase6  based on a doj inspector general nepert, amd i do...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021983.jpg": "...ner oy  the stats of fhe inspector general's, report. i de...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021997.jpg": "...ed or possessed ‘by the: inspector: general ‘regarding, thi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022009.jpg": "...ss  with bespeet to the inspector general's report. it as...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022030.jpg": "...rom ‘the: office: of the inspector general. (see  mr +  thi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022031.jpg": "...“barr anniotitices.  doj inspector gencral. ifivestigation...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022032.jpg": "...plete disclosure, of the inspector general’s report.  moreo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022035.jpg": "...a. jhe-gomplete inspector general's report, as wel...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022037.jpg": "...s: are addressed in, the inspector general’s ‘report or in-...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022038.jpg": "...his: fact shous that the inspector gencral ‘was investigati...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022039.jpg": "...n was: initiated by the: inspector general.  additionally,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022042.jpg": "...tements contained in the inspector general’s report: or  ce...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022046.jpg": ".... by: ‘the united states inspector general.  please: see u:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022050.jpg": "...office of'the inspector general  consent to o se...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022052.jpg": "...barr announces doj inspector general investigation in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022053.jpg": "...e email server. and; the inspector general is ‘expected to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022057.jpg": "...he justies. department:  inspector general ate looking into...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022064.jpg": "...teceeseees l9  any:draft inspector general report is not. s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022068.jpg": "...f justice, office of the inspector general  @doj-oig™), whi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022071.jpg": "...rt” by the office of the inspector, general and requested....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022072.jpg": "...hak *  united, states. inspector general.” “noel’s jariua...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022084.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022088.jpg": "...hat any'‘report by: the: inspector general ‘and. related ma...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022089.jpg": "...sons.  i, drafts. ef the inspector genera als report, which...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022090.jpg": "...tion that drafts. of the inspector general?s report itself...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022091.jpg": "...any: analysis of: thos:  inspector. gencral/’s  report is w...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022097.jpg": "...(l)“[t]he:xeport of the inspector general” for the united...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022101.jpg": "...f  justice office of the inspector general’s (“oig”) invest...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022102.jpg": "...l evidence underlyingthe inspector general’s report. “[c]ou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022103.jpg": "...aterials related:to: the inspector  general’s investigation...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022122.jpg": "...nt:.of justice offiec of inspector: general, ‘review: ‘by:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00023041.jpg": "...public eee ea bureau of “inspector [+f] panoon  unired stat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023417.jpg": "...t date. the office ofthe inspector general (olg):confirmed...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023482.jpg": "...deral: bureauof prisons  inspector je ne eral! (oig) above=...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023485.jpg": "...the office of the inspector general (oig) provided a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023489.jpg": "...artment of justice (doj) inspector general michael e. horou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023490.jpg": "...a 3:minute video of the inspector general  ( ] a dounloada...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023492.jpg": "...“a message from the inspector geneeral:: investigation..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "inspector" (46 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1399-1399</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">2908-2908</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">3205-3205</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">4327-4327</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">10708-10708</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">10730-10730</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">20317-20317</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">21979-21983</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">21997-21997</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">22009-22009</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">22030-22057</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">22064-22072</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">22084-22091</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">22097-22103</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">22122-22122</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">23041-23041</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">23417-23417</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">23482-23492</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

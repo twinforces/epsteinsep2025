@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "statistical"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 2329, "end": 2329, "pages": [2329]}, {"start": 2821, "end": 2821, "pages": [2821]}, {"start": 3622, "end": 3622, "pages": [3622]}, {"start": 3634, "end": 3634, "pages": [3634]}, {"start": 3645, "end": 3648, "pages": [3645, 3646, 3647, 3648]}, {"start": 4934, "end": 4934, "pages": [4934]}, {"start": 5799, "end": 5801, "pages": [5799, 5801]}, {"start": 5950, "end": 5950, "pages": [5950]}, {"start": 6347, "end": 6347, "pages": [6347]}, {"start": 6724, "end": 6726, "pages": [6724, 6726]}, {"start": 6875, "end": 6875, "pages": [6875]}, {"start": 7229, "end": 7229, "pages": [7229]}, {"start": 7235, "end": 7235, "pages": [7235]}, {"start": 7501, "end": 7501, "pages": [7501]}, {"start": 7521, "end": 7521, "pages": [7521]}, {"start": 7697, "end": 7697, "pages": [7697]}, {"start": 7919, "end": 7919, "pages": [7919]}, {"start": 7925, "end": 7925, "pages": [7925]}, {"start": 8156, "end": 8156, "pages": [8156]}, {"start": 8964, "end": 8964, "pages": [8964]}, {"start": 12374, "end": 12374, "pages": [12374]}, {"start": 14926, "end": 14926, "pages": [14926]}, {"start": 14932, "end": 14932, "pages": [14932]}, {"start": 15031, "end": 15031, "pages": [15031]}, {"start": 17962, "end": 17962, "pages": [17962]}, {"start": 22093, "end": 22093, "pages": [22093]}];
+        const pageToPath = {"2329": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002329.jpg", "2821": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002821.jpg", "3622": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003622.jpg", "3634": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003634.jpg", "3645": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003645.jpg", "3646": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003646.jpg", "3647": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003647.jpg", "3648": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003648.jpg", "4934": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004934.jpg", "5799": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005799.jpg", "5801": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005801.jpg", "5950": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005950.jpg", "6347": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006347.jpg", "6724": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006724.jpg", "6726": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006726.jpg", "6875": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006875.jpg", "7229": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007229.jpg", "7235": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007235.jpg", "7501": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007501.jpg", "7521": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007521.jpg", "7697": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007697.jpg", "7919": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007919.jpg", "7925": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007925.jpg", "8156": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008156.jpg", "8964": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008964.jpg", "12374": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012374.jpg", "14926": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014926.jpg", "14932": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014932.jpg", "15031": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015031.jpg", "17962": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017962.jpg", "22093": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022093.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002329.jpg": "...5), which. ieasures,the, statistical significance ofa group's...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002821.jpg": "...e appropriate method of. statistical. comparison is the “abso...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003622.jpg": "...authored four books on  ‘statistical methodology; three book:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003634.jpg": "...ever, there is no valid. statistical,  evidence fo conclude t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003645.jpg": "...ental. cases ‘involving: statistical issues.  ,  tical issues...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003646.jpg": "...dt, “proper ‘methods for statistical ane of promotions,” adve...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003647.jpg": "...no.3 3 ful y l998. in, \"statistical tssues in litigating ]...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003648.jpg": "...s: national conference:  statistical consultant (partial list...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004934.jpg": "...ayers computer, ine. vs  statistical tabulating, corp., 876 f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005799.jpg": "...y need not:‘be based on: statistical  probative” (citation, a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005801.jpg": "...dkt. \"no.  335. beeause: statistical rigor is: not:a. useful....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005950.jpg": "...ed statistically: + all, statistical, analyses: were conduct...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006347.jpg": "...absenceiot sarge quantny statistical studics l is sexpiained...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006724.jpg": "...y need not:‘be based on: statistical  probative” (citation, a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006726.jpg": "...dkt. \"no.  335. beeause: statistical rigor is: not:a. useful....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006875.jpg": "...ed statistically: + all, statistical, analyses: were conduct...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007229.jpg": "...ere was a high  level of statistical stignificanee in. agreem...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007235.jpg": "...behavier, but she did a statistical  study te find out speci...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007501.jpg": "...ciation, diagnostic and, statistical manual of mental ‘disord...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007521.jpg": "...shitigtoni, dc: ameriean statistical  jicating with, people d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007697.jpg": "...s. accuracy  8. bias  9: statistical distribution  lo. statis...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007919.jpg": "...ere was a high  level of statistical stignificanee in. agreem...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007925.jpg": "...behavier, but she did a statistical  study te find out speci...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008156.jpg": "...s. accuracy  8. bias  9: statistical distribution  lo. statis...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008964.jpg": "...egal arguments about the statistical. composition of the jury...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012374.jpg": "...t*ss a diagfiestical and statistical, fiafiual definitioen ms...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014926.jpg": "...here was a high level of statistical significance in agreemen...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014932.jpg": "...behavior, but, she did a statistical study to. find out speci...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015031.jpg": "...d in the field was a .78 statistical significance or measure...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017962.jpg": "...t*ss a diagfiestical and statistical, fiafiual definitioen ms...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022093.jpg": "....3d at. l74 (defendant's statistical analysis was  2s disciss..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "statistical" (31 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">2329-2329</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">2821-2821</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">3622-3622</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3634-3634</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">3645-3648</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">4934-4934</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">5799-5801</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">5950-5950</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">6347-6347</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">6724-6726</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">6875-6875</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">7229-7229</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">7235-7235</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">7501-7501</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">7521-7521</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">7697-7697</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">7919-7919</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">7925-7925</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">8156-8156</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">8964-8964</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">12374-12374</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">14926-14926</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">14932-14932</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">15031-15031</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">17962-17962</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">22093-22093</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

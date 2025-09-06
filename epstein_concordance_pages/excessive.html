@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "excessive"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 938, "end": 938, "pages": [938]}, {"start": 1138, "end": 1138, "pages": [1138]}, {"start": 2511, "end": 2514, "pages": [2511, 2514]}, {"start": 4291, "end": 4291, "pages": [4291]}, {"start": 4725, "end": 4725, "pages": [4725]}, {"start": 5731, "end": 5731, "pages": [5731]}, {"start": 6668, "end": 6668, "pages": [6668]}, {"start": 8954, "end": 8954, "pages": [8954]}, {"start": 9596, "end": 9600, "pages": [9596, 9600]}, {"start": 10403, "end": 10403, "pages": [10403]}, {"start": 10586, "end": 10586, "pages": [10586]}, {"start": 19856, "end": 19856, "pages": [19856]}, {"start": 20056, "end": 20056, "pages": [20056]}, {"start": 21042, "end": 21042, "pages": [21042]}, {"start": 21586, "end": 21586, "pages": [21586]}, {"start": 21821, "end": 21821, "pages": [21821]}, {"start": 21874, "end": 21874, "pages": [21874]}, {"start": 21938, "end": 21938, "pages": [21938]}, {"start": 21969, "end": 21969, "pages": [21969]}, {"start": 23443, "end": 23444, "pages": [23443, 23444]}, {"start": 23476, "end": 23480, "pages": [23476, 23480]}, {"start": 23489, "end": 23489, "pages": [23489]}];
+        const pageToPath = {"938": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000938.jpg", "1138": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001138.jpg", "2511": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002511.jpg", "2514": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002514.jpg", "4291": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004291.jpg", "4725": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004725.jpg", "5731": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005731.jpg", "6668": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006668.jpg", "8954": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008954.jpg", "9596": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009596.jpg", "9600": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009600.jpg", "10403": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010403.jpg", "10586": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010586.jpg", "19856": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019856.jpg", "20056": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020056.jpg", "21042": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021042.jpg", "21586": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021586.jpg", "21821": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021821.jpg", "21874": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021874.jpg", "21938": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021938.jpg", "21969": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021969.jpg", "23443": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023443.jpg", "23444": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023444.jpg", "23476": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023476.jpg", "23480": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023480.jpg", "23489": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023489.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000938.jpg": "...hout: due process and of excessive bail require careful rev...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001138.jpg": "...solitary confinement  2 excessive 8 scanning and: ‘strip s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002511.jpg": "...ary: guarantees: against excessive:preindietment delay andt...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002514.jpg": "...34  violation based,  or excessive preindiciment del: ay. i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004291.jpg": "...l indictivient dueto the excessive pre-indictitierit delay...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004725.jpg": "...ent only compounds. [the excessive pre=  indictment. delay]...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005731.jpg": "..., that.-here had been an excessive amount of delay: in the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006668.jpg": "..., that.-here had been an excessive amount of delay: in the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008954.jpg": "...due to: the government’s excessive and prejudiet al delay i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009596.jpg": "...government’s. allegedly: excessive delay in. bringing; the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009600.jpg": "...em ne sn tay  allegedly excessive pre-indictment; delay. s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010403.jpg": "...e government's allegedly excessive and’prejudicial delay in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010586.jpg": "...ked.into theiricells for excessive periods because of covid...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019856.jpg": "...hout: due process and of excessive bail require careful rev...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020056.jpg": "...solitary confinement  2 excessive 8 scanning and: ‘strip s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021042.jpg": "...ment would nesult. in an excessive  fe  sentence is appropr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021586.jpg": "...ement would result in an excessive  6 ls appropristely cons...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021821.jpg": "...s in, new york; newyork: excessive charges, are subject to:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021874.jpg": "...s in, new york; newyork: excessive charges, are subject to:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021938.jpg": "...met by ll/26/2ol9; no | excessive ' use of alcohol; no con...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021969.jpg": "...hat he refrain. from the excessive use of aleoho.l,.  —2, s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023443.jpg": "...tages, which resulted im excessive overtime ‘and meant that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023444.jpg": "...tein sicell contained an excessive ‘amount of'linens;, some...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023476.jpg": "...rmined thathere wasz an ‘excessive iptain, reviewed ‘photog...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023480.jpg": "...found that there was an excessive amount of linens in epst...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023489.jpg": "...lone in his'cell with an‘excessive amount of bed linens i f..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "excessive" (26 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">938-938</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1138-1138</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">2511-2514</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">4291-4291</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">4725-4725</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">5731-5731</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">6668-6668</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">8954-8954</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">9596-9600</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">10403-10403</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">10586-10586</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">19856-19856</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">20056-20056</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">21042-21042</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">21586-21586</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">21821-21821</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">21874-21874</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">21938-21938</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">21969-21969</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">23443-23444</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">23476-23480</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">23489-23489</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

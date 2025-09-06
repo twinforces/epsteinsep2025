@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "discharge"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1652, "end": 1652, "pages": [1652]}, {"start": 1674, "end": 1674, "pages": [1674]}, {"start": 1693, "end": 1693, "pages": [1693]}, {"start": 2101, "end": 2101, "pages": [2101]}, {"start": 2123, "end": 2123, "pages": [2123]}, {"start": 2366, "end": 2366, "pages": [2366]}, {"start": 3337, "end": 3337, "pages": [3337]}, {"start": 3459, "end": 3459, "pages": [3459]}, {"start": 3978, "end": 3978, "pages": [3978]}, {"start": 4459, "end": 4459, "pages": [4459]}, {"start": 4581, "end": 4581, "pages": [4581]}, {"start": 5022, "end": 5022, "pages": [5022]}, {"start": 8467, "end": 8467, "pages": [8467]}, {"start": 8551, "end": 8551, "pages": [8551]}, {"start": 8631, "end": 8631, "pages": [8631]}, {"start": 8717, "end": 8717, "pages": [8717]}, {"start": 14589, "end": 14589, "pages": [14589]}, {"start": 17210, "end": 17210, "pages": [17210]}, {"start": 19306, "end": 19306, "pages": [19306]}, {"start": 19507, "end": 19507, "pages": [19507]}, {"start": 19525, "end": 19525, "pages": [19525]}, {"start": 19537, "end": 19537, "pages": [19537]}, {"start": 23419, "end": 23420, "pages": [23419, 23420]}, {"start": 23475, "end": 23475, "pages": [23475]}, {"start": 24140, "end": 24140, "pages": [24140]}, {"start": 26250, "end": 26250, "pages": [26250]}];
+        const pageToPath = {"1652": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001652.jpg", "1674": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001674.jpg", "1693": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001693.jpg", "2101": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002101.jpg", "2123": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002123.jpg", "2366": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002366.jpg", "3337": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003337.jpg", "3459": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003459.jpg", "3978": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003978.jpg", "4459": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004459.jpg", "4581": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004581.jpg", "5022": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005022.jpg", "8467": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008467.jpg", "8551": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008551.jpg", "8631": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008631.jpg", "8717": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008717.jpg", "14589": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014589.jpg", "17210": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017210.jpg", "19306": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019306.jpg", "19507": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019507.jpg", "19525": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019525.jpg", "19537": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019537.jpg", "23419": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023419.jpg", "23420": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023420.jpg", "23475": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023475.jpg", "24140": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00024140.jpg", "26250": "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00026250.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001652.jpg": "...discharge of  et  their profession...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001674.jpg": "...nment (other than in the discharge of  their professional o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001693.jpg": "...nment (other than in the discharge of  their professional o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002101.jpg": "...appeal. the decision to; discharge 22 “extradition appeals:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002123.jpg": "...ssion to appeal agairist discharge athe extradition. hearin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002366.jpg": "...ant  us. atorney did not discharge that basic. flinetion....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003337.jpg": "...?s delegates to help him discharge: his. constitutional res...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003459.jpg": "...gross:negligence in.the: discharge of.the prosecutorial fun...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003978.jpg": "...(party assertitig;p  i  discharge: its burden with, mere’...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004459.jpg": "...?s delegates to help him discharge: his. constitutional res...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004581.jpg": "...“grossmegligence in.the-discharge-of.the prosecutorial fun...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005022.jpg": "...his court is able to  3  discharge its gatekeeping function...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008467.jpg": "...ce  important’ that you, discharge your duties without disc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008551.jpg": "...itas important that you. discharge your:duties without disc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008631.jpg": "...ns,  important that you, discharge your duties without disc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008717.jpg": "...nce  important that you, discharge your duties without disc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014589.jpg": "...it ls important that you discharge  your gwees withot discr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017210.jpg": "...it ls important that you discharge  your gwees withot discr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019306.jpg": "...nment (other than in the discharge of  their professional o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019507.jpg": "...discharge of  tate, et  their prof...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019525.jpg": "...nment (other than in the discharge of  their professional o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019537.jpg": "...nment (other than in the discharge of  their professional o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023419.jpg": "...move,” the receiving‘and discharge personnel who entered th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023420.jpg": "...scorted to receiving and discharge asian expected removal,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023475.jpg": "...e taken to receiving and discharge.  ey  of the  the oig re...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00024140.jpg": "...eget cr atenas  ed  iage/discharge:no'  drainage/disc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00026250.jpg": "...eget cr atenas  ed  iage/discharge:no'  drainage/disc..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "discharge" (27 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1652-1652</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1674-1674</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1693-1693</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">2101-2101</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">2123-2123</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">2366-2366</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3337-3337</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">3459-3459</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">3978-3978</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">4459-4459</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">4581-4581</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">5022-5022</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">8467-8467</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">8551-8551</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">8631-8631</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">8717-8717</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">14589-14589</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">17210-17210</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">19306-19306</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">19507-19507</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">19525-19525</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">19537-19537</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">23419-23420</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">23475-23475</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">24140-24140</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">26250-26250</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "remainder"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 377, "end": 377, "pages": [377]}, {"start": 1640, "end": 1640, "pages": [1640]}, {"start": 2881, "end": 2881, "pages": [2881]}, {"start": 3270, "end": 3270, "pages": [3270]}, {"start": 4096, "end": 4096, "pages": [4096]}, {"start": 4392, "end": 4392, "pages": [4392]}, {"start": 4881, "end": 4881, "pages": [4881]}, {"start": 5717, "end": 5717, "pages": [5717]}, {"start": 6654, "end": 6654, "pages": [6654]}, {"start": 7092, "end": 7092, "pages": [7092]}, {"start": 7336, "end": 7336, "pages": [7336]}, {"start": 8026, "end": 8026, "pages": [8026]}, {"start": 11185, "end": 11185, "pages": [11185]}, {"start": 11244, "end": 11245, "pages": [11244, 11245]}, {"start": 11262, "end": 11262, "pages": [11262]}, {"start": 12596, "end": 12600, "pages": [12596, 12600]}, {"start": 13347, "end": 13347, "pages": [13347]}, {"start": 13557, "end": 13557, "pages": [13557]}, {"start": 14096, "end": 14096, "pages": [14096]}, {"start": 14721, "end": 14731, "pages": [14721, 14726, 14727, 14731]}, {"start": 16720, "end": 16720, "pages": [16720]}, {"start": 17338, "end": 17348, "pages": [17338, 17343, 17344, 17348]}, {"start": 18183, "end": 18187, "pages": [18183, 18187]}, {"start": 18931, "end": 18931, "pages": [18931]}, {"start": 19140, "end": 19140, "pages": [19140]}, {"start": 19495, "end": 19495, "pages": [19495]}, {"start": 21268, "end": 21268, "pages": [21268]}];
+        const pageToPath = {"377": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000377.jpg", "1640": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001640.jpg", "2881": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002881.jpg", "3270": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003270.jpg", "4096": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004096.jpg", "4392": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004392.jpg", "4881": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004881.jpg", "5717": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005717.jpg", "6654": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006654.jpg", "7092": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007092.jpg", "7336": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007336.jpg", "8026": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008026.jpg", "11185": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011185.jpg", "11244": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011244.jpg", "11245": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011245.jpg", "11262": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011262.jpg", "12596": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012596.jpg", "12600": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012600.jpg", "13347": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013347.jpg", "13557": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013557.jpg", "14096": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014096.jpg", "14721": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014721.jpg", "14726": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014726.jpg", "14727": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014727.jpg", "14731": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014731.jpg", "16720": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016720.jpg", "17338": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017338.jpg", "17343": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017343.jpg", "17344": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017344.jpg", "17348": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017348.jpg", "18183": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018183.jpg", "18187": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018187.jpg", "18931": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018931.jpg", "19140": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019140.jpg", "19495": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019495.jpg", "21268": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021268.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000377.jpg": "...r l6 or l7, then for the remainder of their relationship sh...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001640.jpg": "...in. i ‘prison. foi r the remainder of her. life. . this mor...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002881.jpg": "...relevant to the  “tic e remainder c ‘  relevant aid admiss...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003270.jpg": "...ei!  a z the remainder of september, nilafana c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004096.jpg": "...the defense. ‘(wd)). the:remainder  of the diary: consists....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004392.jpg": "...ei!  a z the remainder of: september, villafana...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004881.jpg": "...t allou us to ignore the remainder of the overwhelming evid...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005717.jpg": "...nd.  reappear within the remainder ofthe exhibit. at certai...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006654.jpg": "...nd.  reappear within the remainder ofthe exhibit. at certai...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007092.jpg": "...a chance to rule on the remainder of the sealing  requests...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007336.jpg": "...lemank you.  (recess),  (remainder of hearing sealed)...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008026.jpg": "...lemank you.  (recess),  (remainder of hearing sealed)...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011185.jpg": "...nt subjects.  »cond, the remainder of flatley’s expected. t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011244.jpg": "....a, pri  time ignore the remainder of the writing. the gove...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011245.jpg": "...very: ferms because the remainder ofthe journal is, admite...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011262.jpg": "...are nof ‘probative  the :remainder of the affidavit is simp...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012596.jpg": "...derstanding was that the remainder of that, exchange would,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012600.jpg": "...r; i would ask that. the remainder ef the answer be read, p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013347.jpg": "...ature that she toek, the remainder, i object on  —  l6arsay...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013557.jpg": "...anticipate, l'll use the remainder of tomerrew, ene, to hea...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014096.jpg": "...appy to stiptlate £6 the remainder of t if he @an be  relea...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014721.jpg": "...i think, the same  the remainder of the week and going fo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014726.jpg": "...elves available for the  remainder of the week and, if nece...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014727.jpg": "...n deliberate through the remainder of the week, but given t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014731.jpg": "...r deliberations for the  remainder of the week. if this pre...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016720.jpg": "...appy to stiptlate £6 the remainder of t if he @an be  relea...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017338.jpg": "...i think, the same  the remainder of the week and going fo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017343.jpg": "...elves available for the  remainder of the week and, if nece...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017344.jpg": "...n deliberate through the remainder of the week, but given t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017348.jpg": "...r deliberations for the  remainder of the week. if this pre...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018183.jpg": "...derstanding was that the remainder of that, exchange would,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018187.jpg": "...r; i would ask that. the remainder ef the answer be read, p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018931.jpg": "...ature that she toek, the remainder, i object on  —  l6arsay...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019140.jpg": "...anticipate, l'll use the remainder of tomerrew, ene, to hea...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019495.jpg": "...in. i ‘prison. foi r the remainder of her. life. . this mor...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021268.jpg": "...eral:charges  during:the remainder-of septeniber; \" al lafa..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "remainder" (36 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">377-377</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1640-1640</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">2881-2881</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3270-3270</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">4096-4096</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">4392-4392</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">4881-4881</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">5717-5717</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">6654-6654</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">7092-7092</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">7336-7336</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">8026-8026</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">11185-11185</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">11244-11245</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">11262-11262</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">12596-12600</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">13347-13347</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">13557-13557</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">14096-14096</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">14721-14731</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">16720-16720</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">17338-17348</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">18183-18187</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">18931-18931</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">19140-19140</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">19495-19495</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">21268-21268</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

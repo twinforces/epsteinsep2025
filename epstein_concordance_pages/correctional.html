@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "correctional"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 627, "end": 627, "pages": [627]}, {"start": 733, "end": 733, "pages": [733]}, {"start": 966, "end": 966, "pages": [966]}, {"start": 1461, "end": 1461, "pages": [1461]}, {"start": 1590, "end": 1590, "pages": [1590]}, {"start": 1871, "end": 1871, "pages": [1871]}, {"start": 3451, "end": 3451, "pages": [3451]}, {"start": 4573, "end": 4573, "pages": [4573]}, {"start": 7559, "end": 7559, "pages": [7559]}, {"start": 7567, "end": 7567, "pages": [7567]}, {"start": 7684, "end": 7684, "pages": [7684]}, {"start": 7694, "end": 7694, "pages": [7694]}, {"start": 8143, "end": 8143, "pages": [8143]}, {"start": 8153, "end": 8153, "pages": [8153]}, {"start": 10450, "end": 10450, "pages": [10450]}, {"start": 10464, "end": 10464, "pages": [10464]}, {"start": 15038, "end": 15038, "pages": [15038]}, {"start": 15134, "end": 15134, "pages": [15134]}, {"start": 19884, "end": 19884, "pages": [19884]}, {"start": 20379, "end": 20379, "pages": [20379]}, {"start": 21911, "end": 21913, "pages": [21911, 21913]}, {"start": 22029, "end": 22029, "pages": [22029]}, {"start": 22052, "end": 22059, "pages": [22052, 22053, 22056, 22057, 22059]}, {"start": 22072, "end": 22072, "pages": [22072]}, {"start": 22097, "end": 22097, "pages": [22097]}, {"start": 22105, "end": 22105, "pages": [22105]}, {"start": 23361, "end": 23368, "pages": [23361, 23362, 23366, 23368]}, {"start": 23375, "end": 23375, "pages": [23375]}, {"start": 23381, "end": 23381, "pages": [23381]}, {"start": 23388, "end": 23388, "pages": [23388]}, {"start": 23419, "end": 23419, "pages": [23419]}, {"start": 23469, "end": 23469, "pages": [23469]}, {"start": 23480, "end": 23480, "pages": [23480]}, {"start": 23489, "end": 23492, "pages": [23489, 23492]}, {"start": 24654, "end": 24654, "pages": [24654]}, {"start": 25793, "end": 25793, "pages": [25793]}, {"start": 26359, "end": 26359, "pages": [26359]}, {"start": 27143, "end": 27143, "pages": [27143]}];
+        const pageToPath = {"627": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000627.jpg", "733": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000733.jpg", "966": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000966.jpg", "1461": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001461.jpg", "1590": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001590.jpg", "1871": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001871.jpg", "3451": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003451.jpg", "4573": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004573.jpg", "7559": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007559.jpg", "7567": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007567.jpg", "7684": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007684.jpg", "7694": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007694.jpg", "8143": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008143.jpg", "8153": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008153.jpg", "10450": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010450.jpg", "10464": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010464.jpg", "15038": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015038.jpg", "15134": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015134.jpg", "19884": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019884.jpg", "20379": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020379.jpg", "21911": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021911.jpg", "21913": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021913.jpg", "22029": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022029.jpg", "22052": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022052.jpg", "22053": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022053.jpg", "22056": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022056.jpg", "22057": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022057.jpg", "22059": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022059.jpg", "22072": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022072.jpg", "22097": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022097.jpg", "22105": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022105.jpg", "23361": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023361.jpg", "23362": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023362.jpg", "23366": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023366.jpg", "23368": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023368.jpg", "23375": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023375.jpg", "23381": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023381.jpg", "23388": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023388.jpg", "23419": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023419.jpg", "23469": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023469.jpg", "23480": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023480.jpg", "23489": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023489.jpg", "23492": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023492.jpg", "24654": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00024654.jpg", "25793": "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00025793.jpg", "26359": "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00026359.jpg", "27143": "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027143.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000627.jpg": "...tody at the metropolitan correctional center. on augtist l6,2o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000733.jpg": "...ell inthe’ metropolitan, correctional center  ae it  in. new y...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000966.jpg": "...=  eaks of covid-l9 in correctional  ache!  ‘inercascd. dram...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001461.jpg": "...red at the metropolitan. correctional center (the  “mcc”), not...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001590.jpg": "...outbreaks of covid=l9 in correctional  facilities. ‘in the las...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001871.jpg": "...gi en’ paper. clothes af correctional center-to avoid su icide...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003451.jpg": "...ive,  prosecutorial, and.correctional. components: in. the tre...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004573.jpg": "...ive,  prosecutorial, and:correctional. components: in. the tre...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007559.jpg": "...e hospital, massachusets correctional institution at bridgewat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007567.jpg": "...etween mental health and correctional institutions\" “(law enfo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007684.jpg": "...32, 2ol7  violations in correctional psychiatry. arierican ac...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007694.jpg": "...boundary: violations in correctional setings. american psychi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008143.jpg": "...32, 2ol7  violations in correctional psychiatry. arierican ac...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008153.jpg": "...boundary: violations in correctional setings. american psychi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010450.jpg": "...ined in the metropolitan correctional center (“mcc”yuntil-his...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010464.jpg": "...micdical. care, or other correctional; treatment in the most e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015038.jpg": "...ell inthe: metropolitan. correctional center in new york city....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015134.jpg": "...‘correctional center (“mcc”). see genc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019884.jpg": "...=  eaks of covid-l9 in correctional  ache!  ‘inercascd. dram...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020379.jpg": "...red at the metropolitan. correctional center (the  “mcc”), not...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021911.jpg": "...separate  ‘locked. ae: 6 correctional offi.cens: assigned ‘86...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021913.jpg": "...correctional offiee rs te rounds ‘to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022029.jpg": "...l9, at the ‘metropolitan correctional ceiter  at that‘timie, m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022052.jpg": "...eled out of the manhatan correctional center around 7:3o a.m....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022053.jpg": "...s  death.”  the manhatan correctional center did not immediate...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022056.jpg": "...l9,¢ number’ of: federal correctional: officers, had continuoi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022057.jpg": "...n, to. temporarily: fill'correctional officer positions:vith o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022059.jpg": "...f prisons:  metropolitan correctional center  45o‘ park rou ne...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022072.jpg": "...the bop :regarding other correctional. offieers: and.  ‘inform...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022097.jpg": "...mas, in his:capacity asa correctional. officer'at the metropol...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022105.jpg": "...count slips. in federal. correctional facilities, or bop leade...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023361.jpg": "...tein at the metropolitan correctional center in new york, new...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023362.jpg": "...tein at the metropolitan correctional center it in new york, n...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023366.jpg": "...garding the operation of correctional facilities...........ccc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023368.jpg": "...ol9, in the metropolitan correctional center located in new’yo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023375.jpg": "...i]natention to duty in a correctional environment:can result i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023381.jpg": "...system .at: metropolitan correctional center in new york, new...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023388.jpg": "...rted to the metropolitan correctional center located ia new yo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023419.jpg": "...ig also interviewed the ‘correctional ‘systems officer; who-wa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023469.jpg": "...xo) shtion t6. duty if a correctional : ! bop standards of con...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023480.jpg": "...enstire safe and secure correctional fa  that the bop <ontint...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023489.jpg": "...tein athe metropolitan  ‘correctional:center in new york, new...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023492.jpg": "...ein .at the metropolitan correctional center in new york, new...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00024654.jpg": "...metropolitan correctional center - new york  u y a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00025793.jpg": "...n een  tidtitate (gk bop correctional citicers 7whats the’aver...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00026359.jpg": "...sip  ns entiry teer 4  correctional:  slip:  rs  os  ‘frorme...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027143.jpg": "...late ae  her. cases; the correctional supervisor will make-an..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "correctional" (47 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">627-627</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">733-733</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">966-966</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">1461-1461</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">1590-1590</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">1871-1871</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3451-3451</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">4573-4573</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">7559-7559</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">7567-7567</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">7684-7684</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">7694-7694</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">8143-8143</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">8153-8153</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">10450-10450</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">10464-10464</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">15038-15038</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">15134-15134</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">19884-19884</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">20379-20379</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">21911-21913</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">22029-22029</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">22052-22059</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">22072-22072</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">22097-22097</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">22105-22105</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">23361-23368</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">23375-23375</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">23381-23381</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">23388-23388</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">23419-23419</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">23469-23469</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">23480-23480</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">23489-23492</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">24654-24654</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">25793-25793</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">26359-26359</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">27143-27143</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

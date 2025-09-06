@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "journalist"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1034, "end": 1034, "pages": [1034]}, {"start": 1907, "end": 1907, "pages": [1907]}, {"start": 4928, "end": 4928, "pages": [4928]}, {"start": 6183, "end": 6183, "pages": [6183]}, {"start": 6256, "end": 6256, "pages": [6256]}, {"start": 7497, "end": 7497, "pages": [7497]}, {"start": 7610, "end": 7610, "pages": [7610]}, {"start": 8073, "end": 8073, "pages": [8073]}, {"start": 8824, "end": 8824, "pages": [8824]}, {"start": 9022, "end": 9022, "pages": [9022]}, {"start": 9050, "end": 9050, "pages": [9050]}, {"start": 9060, "end": 9060, "pages": [9060]}, {"start": 9129, "end": 9129, "pages": [9129]}, {"start": 9203, "end": 9203, "pages": [9203]}, {"start": 9472, "end": 9472, "pages": [9472]}, {"start": 9713, "end": 9713, "pages": [9713]}, {"start": 9741, "end": 9741, "pages": [9741]}, {"start": 9751, "end": 9751, "pages": [9751]}, {"start": 9808, "end": 9808, "pages": [9808]}, {"start": 9882, "end": 9882, "pages": [9882]}, {"start": 10151, "end": 10151, "pages": [10151]}, {"start": 10249, "end": 10251, "pages": [10249, 10250, 10251]}, {"start": 11244, "end": 11244, "pages": [11244]}, {"start": 12059, "end": 12059, "pages": [12059]}, {"start": 12827, "end": 12827, "pages": [12827]}, {"start": 17648, "end": 17648, "pages": [17648]}, {"start": 18413, "end": 18413, "pages": [18413]}, {"start": 19952, "end": 19952, "pages": [19952]}, {"start": 21132, "end": 21132, "pages": [21132]}, {"start": 21712, "end": 21712, "pages": [21712]}, {"start": 21724, "end": 21725, "pages": [21724, 21725]}];
+        const pageToPath = {"1034": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001034.jpg", "1907": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001907.jpg", "4928": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004928.jpg", "6183": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006183.jpg", "6256": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006256.jpg", "7497": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007497.jpg", "7610": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007610.jpg", "8073": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008073.jpg", "8824": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008824.jpg", "9022": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009022.jpg", "9050": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009050.jpg", "9060": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009060.jpg", "9129": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009129.jpg", "9203": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009203.jpg", "9472": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009472.jpg", "9713": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009713.jpg", "9741": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009741.jpg", "9751": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009751.jpg", "9808": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009808.jpg", "9882": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009882.jpg", "10151": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010151.jpg", "10249": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010249.jpg", "10250": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010250.jpg", "10251": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010251.jpg", "11244": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011244.jpg", "12059": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012059.jpg", "12827": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012827.jpg", "17648": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017648.jpg", "18413": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018413.jpg", "19952": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019952.jpg", "21132": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021132.jpg", "21712": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021712.jpg", "21724": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021724.jpg", "21725": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021725.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001034.jpg": "...l descnibed henself ag a journalist who  wants privacy. they...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001907.jpg": "...described henselfi ag a journalist who  wants privacy. they...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004928.jpg": "...mpany. and investigative journalist.  julie broun, whose fea...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006183.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006256.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007497.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007610.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008073.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008824.jpg": "...fili ng of. ms.  ©  re)  journalist, for the, miami. herald...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009022.jpg": "...juror no..5o provided-to journalist lue cohen.” in, the reut...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009050.jpg": "...the journalist who wrote about:him, and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009060.jpg": "...is not; a request; by a, journalist to  intervene for-public...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009129.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009203.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009472.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009713.jpg": "...juror no..5o provided-to journalist lue cohen.” in, the reut...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009741.jpg": "...the journalist who wrote about:him, and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009751.jpg": "...is not; a request; by a, journalist to  intervene for-public...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009808.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009882.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010151.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010249.jpg": "...t his interview with the journalist lucia, first  name lueia...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010250.jpg": "...cuss  b q  he had with @ journalist about this very fact.  t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010251.jpg": "...kh6wh fer this, afd the journalist. ls  that very facet?  m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011244.jpg": "...o sell ‘toa tabloid news journalist, fiftcen years. after th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012059.jpg": "...ee;, ydu toeld che news  journalist, that you were approache...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012827.jpg": "...tions, you. met fashion. journalist  ty se  fes ?  a, i'm ne...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017648.jpg": "...ee;, ydu toeld che news  journalist, that you were approache...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018413.jpg": "...tions, you. met fashion. journalist  ty se  fes ?  a, i'm ne...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019952.jpg": "...l descnibed henself ag a journalist who  wants privacy. they...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021132.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021712.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021724.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021725.jpg": ""};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "journalist" (34 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1034-1034</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1907-1907</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">4928-4928</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">6183-6183</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">6256-6256</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">7497-7497</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">7610-7610</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">8073-8073</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">8824-8824</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">9022-9022</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">9050-9050</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">9060-9060</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">9129-9129</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">9203-9203</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">9472-9472</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">9713-9713</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">9741-9741</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">9751-9751</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">9808-9808</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">9882-9882</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">10151-10151</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">10249-10251</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">11244-11244</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">12059-12059</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">12827-12827</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">17648-17648</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">18413-18413</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">19952-19952</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">21132-21132</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">21712-21712</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">21724-21725</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

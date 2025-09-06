@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "directive"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1138, "end": 1138, "pages": [1138]}, {"start": 1166, "end": 1167, "pages": [1166, 1167]}, {"start": 1440, "end": 1440, "pages": [1440]}, {"start": 2185, "end": 2186, "pages": [2185, 2186]}, {"start": 2340, "end": 2340, "pages": [2340]}, {"start": 3042, "end": 3042, "pages": [3042]}, {"start": 3133, "end": 3133, "pages": [3133]}, {"start": 3374, "end": 3374, "pages": [3374]}, {"start": 3986, "end": 3986, "pages": [3986]}, {"start": 4109, "end": 4109, "pages": [4109]}, {"start": 4258, "end": 4258, "pages": [4258]}, {"start": 4517, "end": 4517, "pages": [4517]}, {"start": 6953, "end": 6953, "pages": [6953]}, {"start": 7698, "end": 7698, "pages": [7698]}, {"start": 8157, "end": 8157, "pages": [8157]}, {"start": 10474, "end": 10476, "pages": [10474, 10476]}, {"start": 20056, "end": 20056, "pages": [20056]}, {"start": 20084, "end": 20085, "pages": [20084, 20085]}, {"start": 20358, "end": 20358, "pages": [20358]}, {"start": 21836, "end": 21836, "pages": [21836]}, {"start": 23461, "end": 23464, "pages": [23461, 23464]}];
+        const pageToPath = {"1138": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001138.jpg", "1166": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001166.jpg", "1167": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001167.jpg", "1440": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001440.jpg", "2185": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002185.jpg", "2186": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002186.jpg", "2340": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002340.jpg", "3042": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003042.jpg", "3133": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003133.jpg", "3374": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003374.jpg", "3986": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003986.jpg", "4109": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004109.jpg", "4258": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004258.jpg", "4517": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004517.jpg", "6953": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006953.jpg", "7698": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007698.jpg", "8157": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008157.jpg", "10474": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010474.jpg", "10476": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010476.jpg", "20056": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020056.jpg", "20084": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020084.jpg", "20085": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020085.jpg", "20358": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020358.jpg", "21836": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021836.jpg", "23461": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023461.jpg", "23464": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023464.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001138.jpg": "...ounsel. follouing: court directive fora report from the mdc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001166.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001167.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001440.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002185.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002186.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002340.jpg": "...or spposing the court’s, directive, adc's opposition shines...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003042.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003133.jpg": "...re, consistent with. the directive of the second circuit, t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003374.jpg": "...ite: the asheroft memo’s directive: hat federal prosecutors...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003986.jpg": "...of the court's previous directive that any proposed, redac...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004109.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004258.jpg": "...ordance with the court's directive (dkt. 277), her points o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004517.jpg": "...ponse fora congre sional directive inva pr decessor statute...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006953.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007698.jpg": "...capacity: writen advance directive: ‘confidentiality:  exce...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008157.jpg": "...capacity: writen advance directive: ‘confidentiality:  exce...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010474.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010476.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020056.jpg": "...ounsel. follouing: court directive fora report from the mdc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020084.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020085.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020358.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021836.jpg": "...tates, atorneys” manuals directive that districts.:not bind...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023461.jpg": "...psychology departinent’s directive: that epstein be:assigne...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023464.jpg": "...rk psychology department directive issued after the, july 2..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "directive" (26 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1138-1138</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1166-1167</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1440-1440</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">2185-2186</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">2340-2340</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">3042-3042</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3133-3133</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">3374-3374</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">3986-3986</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">4109-4109</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">4258-4258</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">4517-4517</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">6953-6953</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">7698-7698</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">8157-8157</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">10474-10476</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">20056-20056</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">20084-20085</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">20358-20358</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">21836-21836</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">23461-23464</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

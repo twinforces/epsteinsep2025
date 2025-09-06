@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "transparent"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 759, "end": 759, "pages": [759]}, {"start": 1032, "end": 1033, "pages": [1032, 1033]}, {"start": 1039, "end": 1039, "pages": [1039]}, {"start": 1120, "end": 1120, "pages": [1120]}, {"start": 1249, "end": 1249, "pages": [1249]}, {"start": 1385, "end": 1385, "pages": [1385]}, {"start": 1812, "end": 1814, "pages": [1812, 1814]}, {"start": 1905, "end": 1905, "pages": [1905]}, {"start": 1912, "end": 1912, "pages": [1912]}, {"start": 1996, "end": 1996, "pages": [1996]}, {"start": 2680, "end": 2680, "pages": [2680]}, {"start": 2754, "end": 2754, "pages": [2754]}, {"start": 2813, "end": 2813, "pages": [2813]}, {"start": 3150, "end": 3150, "pages": [3150]}, {"start": 3484, "end": 3484, "pages": [3484]}, {"start": 4606, "end": 4606, "pages": [4606]}, {"start": 11504, "end": 11504, "pages": [11504]}, {"start": 12236, "end": 12236, "pages": [12236]}, {"start": 13021, "end": 13021, "pages": [13021]}, {"start": 14144, "end": 14144, "pages": [14144]}, {"start": 16767, "end": 16767, "pages": [16767]}, {"start": 17825, "end": 17825, "pages": [17825]}, {"start": 18606, "end": 18606, "pages": [18606]}, {"start": 19364, "end": 19364, "pages": [19364]}, {"start": 19387, "end": 19387, "pages": [19387]}, {"start": 19950, "end": 19951, "pages": [19950, 19951]}, {"start": 19957, "end": 19957, "pages": [19957]}, {"start": 20038, "end": 20038, "pages": [20038]}, {"start": 20167, "end": 20167, "pages": [20167]}, {"start": 20303, "end": 20303, "pages": [20303]}, {"start": 23483, "end": 23483, "pages": [23483]}];
+        const pageToPath = {"759": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000759.jpg", "1032": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001032.jpg", "1033": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001033.jpg", "1039": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001039.jpg", "1120": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001120.jpg", "1249": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001249.jpg", "1385": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001385.jpg", "1812": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001812.jpg", "1814": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001814.jpg", "1905": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001905.jpg", "1912": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001912.jpg", "1996": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001996.jpg", "2680": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002680.jpg", "2754": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002754.jpg", "2813": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002813.jpg", "3150": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003150.jpg", "3484": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003484.jpg", "4606": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004606.jpg", "11504": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011504.jpg", "12236": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012236.jpg", "13021": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013021.jpg", "14144": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014144.jpg", "16767": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016767.jpg", "17825": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017825.jpg", "18606": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018606.jpg", "19364": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019364.jpg", "19387": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019387.jpg", "19950": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019950.jpg", "19951": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019951.jpg", "19957": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019957.jpg", "20038": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020038.jpg", "20167": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020167.jpg", "20303": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020303.jpg", "23483": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023483.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000759.jpg": "...el why-not be:completely transparent? shou us all. the files...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001032.jpg": "...een,  ated ts ats  fully transparent. with, the @emeft 6f whe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001033.jpg": "...l aes  def as been eully transparent  af, ila  about. her fin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001039.jpg": "...ourt can't rely on tha,  transparent at. this basie iftial st...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001120.jpg": "...‘she‘has been entirely transparent: with her finances and h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001249.jpg": "...ng: the defendant to: be transparent with. a:zmoniter under h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001385.jpg": "...im the court belou, is  transparent — it.is “trust us.” trus...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001812.jpg": "...ter dated.  fforts to be transparent. with the  us; and lass...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001814.jpg": "...ernment souglit to, ‘be ‘transparent about the files it has b...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001905.jpg": "...een,  rar,  in  i  fully transparent. with the ¢6urt 6f wheth...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001912.jpg": "...ourt can't rely on tha,  transparent at, this basie iftial st...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001996.jpg": "...‘she has been entirely transparent} with, her fmances aid h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002680.jpg": "...are nothing more than, a transparent atempt by the government...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002754.jpg": "...ng: the defendant to: be transparent with. a:zmoniter under h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002813.jpg": "...by: n’s estate, l ls a | transparent. ate empt to further thi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003150.jpg": "...re obligations  to being transparent-with the court and the d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003484.jpg": "...hthe: victims in.a, more transparent and_unificd. fashioi.  o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004606.jpg": "...the vietims ‘in. a, more transparent and-unified.  ‘fashior....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011504.jpg": "...of providing:  claimants transparent’ into, the claims proce...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012236.jpg": "...but i wanted to be very transparent  this issue. ms; menning...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013021.jpg": "...fense; and so we've been transparent about  that.  hh! q:  of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014144.jpg": "...your honor, l'll be very transparent. t ‘fhink the point is h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016767.jpg": "...your honor, l'll be very transparent. t ‘fhink the point is h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017825.jpg": "...but i wanted to be very transparent  this issue. ms; menning...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018606.jpg": "...fense; and so we've been transparent about  that.  hh! q:  of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019364.jpg": "...tion to consolidate is a transparent atempt to cireumvent: ju...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019387.jpg": "...tion to consolidate is a transparent atempt to cireumvent: ju...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019950.jpg": "...een,  ated ts ats  fully transparent. with, the @emeft 6f whe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019951.jpg": "...l aes  def as been eully transparent  af, ila  about. her fin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019957.jpg": "...ourt can't rely on tha,  transparent at. this basie iftial st...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020038.jpg": "...‘she‘has been entirely transparent: with her finances and h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020167.jpg": "...ng: the defendant to: be transparent with. a:zmoniter under h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020303.jpg": "...im the court belou, is  transparent — it.is “trust us.” trus...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023483.jpg": "...employees sto bet & and transparent the publis  tandards we..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "transparent" (34 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">759-759</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1032-1033</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1039-1039</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">1120-1120</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">1249-1249</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">1385-1385</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">1812-1814</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">1905-1905</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">1912-1912</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">1996-1996</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">2680-2680</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">2754-2754</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">2813-2813</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">3150-3150</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">3484-3484</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">4606-4606</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">11504-11504</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">12236-12236</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">13021-13021</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">14144-14144</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">16767-16767</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">17825-17825</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">18606-18606</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">19364-19364</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">19387-19387</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">19950-19951</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">19957-19957</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">20038-20038</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">20167-20167</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">20303-20303</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">23483-23483</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

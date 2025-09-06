@@ -1,0 +1,268 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "apartment"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 307, "end": 307, "pages": [307]}, {"start": 1118, "end": 1118, "pages": [1118]}, {"start": 1599, "end": 1599, "pages": [1599]}, {"start": 6021, "end": 6021, "pages": [6021]}, {"start": 6946, "end": 6946, "pages": [6946]}, {"start": 6969, "end": 6969, "pages": [6969]}, {"start": 8225, "end": 8233, "pages": [8225, 8226, 8228, 8229, 8232, 8233]}, {"start": 9040, "end": 9040, "pages": [9040]}, {"start": 9731, "end": 9731, "pages": [9731]}, {"start": 11127, "end": 11127, "pages": [11127]}, {"start": 11751, "end": 11751, "pages": [11751]}, {"start": 11795, "end": 11797, "pages": [11795, 11796, 11797]}, {"start": 11804, "end": 11804, "pages": [11804]}, {"start": 11880, "end": 11880, "pages": [11880]}, {"start": 11896, "end": 11896, "pages": [11896]}, {"start": 12126, "end": 12126, "pages": [12126]}, {"start": 12389, "end": 12389, "pages": [12389]}, {"start": 12553, "end": 12561, "pages": [12553, 12557, 12558, 12559, 12561]}, {"start": 12581, "end": 12581, "pages": [12581]}, {"start": 12757, "end": 12763, "pages": [12757, 12759, 12760, 12763]}, {"start": 13150, "end": 13150, "pages": [13150]}, {"start": 13384, "end": 13388, "pages": [13384, 13385, 13386, 13388]}, {"start": 13398, "end": 13398, "pages": [13398]}, {"start": 13420, "end": 13420, "pages": [13420]}, {"start": 13515, "end": 13516, "pages": [13515, 13516]}, {"start": 13619, "end": 13619, "pages": [13619]}, {"start": 13670, "end": 13670, "pages": [13670]}, {"start": 13906, "end": 13906, "pages": [13906]}, {"start": 13915, "end": 13915, "pages": [13915]}, {"start": 13931, "end": 13933, "pages": [13931, 13932, 13933]}, {"start": 14116, "end": 14116, "pages": [14116]}, {"start": 14412, "end": 14412, "pages": [14412]}, {"start": 14511, "end": 14511, "pages": [14511]}, {"start": 16196, "end": 16196, "pages": [16196]}, {"start": 16244, "end": 16244, "pages": [16244]}, {"start": 16295, "end": 16295, "pages": [16295]}, {"start": 16530, "end": 16530, "pages": [16530]}, {"start": 16539, "end": 16539, "pages": [16539]}, {"start": 16555, "end": 16557, "pages": [16555, 16556, 16557]}, {"start": 16739, "end": 16739, "pages": [16739]}, {"start": 17033, "end": 17033, "pages": [17033]}, {"start": 17132, "end": 17132, "pages": [17132]}, {"start": 17385, "end": 17387, "pages": [17385, 17386, 17387]}, {"start": 17394, "end": 17394, "pages": [17394]}, {"start": 17470, "end": 17470, "pages": [17470]}, {"start": 17486, "end": 17486, "pages": [17486]}, {"start": 17715, "end": 17715, "pages": [17715]}, {"start": 17977, "end": 17977, "pages": [17977]}, {"start": 18140, "end": 18148, "pages": [18140, 18144, 18145, 18146, 18148]}, {"start": 18168, "end": 18168, "pages": [18168]}, {"start": 18343, "end": 18349, "pages": [18343, 18345, 18346, 18349]}, {"start": 18735, "end": 18735, "pages": [18735]}, {"start": 18968, "end": 18972, "pages": [18968, 18969, 18970, 18972]}, {"start": 18982, "end": 18982, "pages": [18982]}, {"start": 19004, "end": 19004, "pages": [19004]}, {"start": 19099, "end": 19100, "pages": [19099, 19100]}, {"start": 20036, "end": 20036, "pages": [20036]}, {"start": 21664, "end": 21664, "pages": [21664]}];
+        const pageToPath = {"307": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000307.jpg", "1118": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001118.jpg", "1599": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001599.jpg", "6021": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006021.jpg", "6946": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006946.jpg", "6969": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006969.jpg", "8225": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008225.jpg", "8226": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008226.jpg", "8228": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008228.jpg", "8229": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008229.jpg", "8232": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008232.jpg", "8233": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008233.jpg", "9040": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009040.jpg", "9731": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009731.jpg", "11127": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011127.jpg", "11751": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011751.jpg", "11795": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011795.jpg", "11796": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011796.jpg", "11797": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011797.jpg", "11804": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011804.jpg", "11880": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011880.jpg", "11896": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011896.jpg", "12126": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012126.jpg", "12389": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012389.jpg", "12553": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012553.jpg", "12557": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012557.jpg", "12558": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012558.jpg", "12559": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012559.jpg", "12561": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012561.jpg", "12581": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012581.jpg", "12757": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012757.jpg", "12759": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012759.jpg", "12760": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012760.jpg", "12763": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012763.jpg", "13150": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013150.jpg", "13384": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013384.jpg", "13385": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013385.jpg", "13386": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013386.jpg", "13388": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013388.jpg", "13398": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013398.jpg", "13420": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013420.jpg", "13515": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013515.jpg", "13516": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013516.jpg", "13619": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013619.jpg", "13670": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013670.jpg", "13906": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013906.jpg", "13915": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013915.jpg", "13931": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013931.jpg", "13932": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013932.jpg", "13933": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013933.jpg", "14116": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014116.jpg", "14412": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014412.jpg", "14511": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014511.jpg", "16196": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016196.jpg", "16244": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016244.jpg", "16295": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016295.jpg", "16530": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016530.jpg", "16539": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016539.jpg", "16555": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016555.jpg", "16556": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016556.jpg", "16557": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016557.jpg", "16739": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016739.jpg", "17033": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017033.jpg", "17132": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017132.jpg", "17385": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017385.jpg", "17386": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017386.jpg", "17387": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017387.jpg", "17394": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017394.jpg", "17470": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017470.jpg", "17486": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017486.jpg", "17715": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017715.jpg", "17977": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017977.jpg", "18140": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018140.jpg", "18144": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018144.jpg", "18145": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018145.jpg", "18146": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018146.jpg", "18148": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018148.jpg", "18168": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018168.jpg", "18343": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018343.jpg", "18345": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018345.jpg", "18346": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018346.jpg", "18349": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018349.jpg", "18735": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018735.jpg", "18968": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018968.jpg", "18969": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018969.jpg", "18970": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018970.jpg", "18972": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018972.jpg", "18982": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018982.jpg", "19004": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019004.jpg", "19099": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019099.jpg", "19100": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019100.jpg", "20036": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020036.jpg", "21664": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021664.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000307.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001118.jpg": "...s.of  maxwell’s new york apartment coincided with her‘inten...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001599.jpg": "...l was hiding out in. an ‘apartment in pa questioning by the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006021.jpg": "...inst her will anside his apartment.  (title l8, united. sta...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006946.jpg": "...inst her will anside his apartment.  (title l8, united. sta...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006969.jpg": "...earched the: defendant's apartment long; after the crimes w...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008225.jpg": "...d-portio  as ay  newyork apartment. as it existed. in 2ol9....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008226.jpg": "...claims she was at the apartment) or even ‘in. 2oo4, when...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008228.jpg": "...t mr. epstein’s new york apartment in l994 or l995:or l996....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008229.jpg": "...reflect: mr. ° pstein’s  apartment as it:existed, in 2ol9,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008232.jpg": "....the:jury:as to what the apartment. looked.like  mee oe coe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008233.jpg": "...ready deseribed what the apartment looked like. tr.l2/3/2o2...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009040.jpg": "..., mr. epstein®s new york apartment and. said it; had a, “re...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009731.jpg": "..., mr. epstein®s new york apartment and. said it; had a, “re...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011127.jpg": "...st  death im me. jones! apartment at, ox  fame of ris deat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011751.jpg": "..., new  new mexico.  y an apartment it  of jor) db: on  3. i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011795.jpg": "...times did you visit that apartment while...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011796.jpg": "...age, did you. go to that apartment  for any other reason:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011797.jpg": "...epsteih stayed at this apartment,  we're going  ——- onge...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011804.jpg": "...l, she was in a  smallex apartment. we're going back 3o yea...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011880.jpg": "...a  building he ouned, an apartment buiddanmg on east, o2md...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011896.jpg": "...n '9l., she lived in ani apartment on -- yout said a small...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012126.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012389.jpg": "...es i stayed == we had an apartment. aero  ou please deserib...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012553.jpg": "...ame to tave woth me a my apartment, but we were not  involv...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012557.jpg": "....  q. y6u als® 6wned the apartment next door, l5l5 south fl...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012558.jpg": "...nd your wife  bought. am apartment at l9o2 l,l5 south flagl...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012559.jpg": "...and 'your wife  bought. apartment l9ol2\"  de you see that’...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012561.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012581.jpg": "...asn't there, you had the apartment on the  other side of th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012757.jpg": "...frey epstein's new york  apartment taken in. 2ol9, the gove...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012759.jpg": "...grnaphs abe of epstgia's apartment in 2ol9, a claim that i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012760.jpg": "...ane's testimony that the apartment was massiwe and,  eeenta...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012763.jpg": "...estimony that. epstein's apartment.  contained, quete, cree...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013150.jpg": "..., you had, been to their apartment; correct?  q- you and se...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013384.jpg": "...kad an apartient, lange apartment, on. s4th streeer.  and,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013385.jpg": "...she move t6  the studio apartment?’  to would say that. wa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013386.jpg": "...had to move to a smaller apartment.  nou, this ig something...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013388.jpg": "...she was  in. ‘the larger apartment and. then moved to the s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013398.jpg": "...ax sees st <i seat  @  apartment. in manhatan.  q. and wo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013420.jpg": "...s, france?  a. he bad an apartment in, paris, france.  o. a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013515.jpg": "...ht, that be lived ain an apartment, but ti. e@uld, be mista...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013516.jpg": "...q. but she moved to the apartment o  n't actually oun  ‘th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013619.jpg": "...d with my sister in. her apartment.  q. when aid you go to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013670.jpg": "...with your sister at. her apartment ih the villager right?...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013906.jpg": "...eve he dequixed, a paras apartment, and he alse  ax soa ae...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013915.jpg": "...o. was it a tounho er an apartment?  a. it was @& touhhouse...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013931.jpg": "...ddress?  a. th&t. i8 anh apartment building.  'd iet  qo. d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013932.jpg": "...nes. shelly lewis had an apartment. there  ms  fon a while,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013933.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014116.jpg": "...fter she  purchased the  apartment. ms. comey: your honor,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014412.jpg": "...la in palm beach, t6 his apartment in paris, afd to  his pr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014511.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016196.jpg": "..., new  new mexico.  y an apartment it  of jor) db: on  3. i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016244.jpg": "...d with my sister in. her apartment.  q. when aid you go to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016295.jpg": "...with your sister at. her apartment ih the villager right?...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016530.jpg": "...eve he dequixed, a paras apartment, and he alse  ax soa ae...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016539.jpg": "...o. was it a tounho er an apartment?  a. it was @& touhhouse...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016555.jpg": "...ddress?  a. th&t. i8 anh apartment building.  'd iet  qo. d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016556.jpg": "...nes. shelly lewis had an apartment. there  ms  fon a while,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016557.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016739.jpg": "...fter she  purchased the  apartment. ms. comey: your honor,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017033.jpg": "...la in palm beach, t6 his apartment in paris, afd to  his pr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017132.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017385.jpg": "...times did you visit that apartment while...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017386.jpg": "...age, did you. go to that apartment  for any other reason:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017387.jpg": "...epsteih stayed at this apartment,  we're going  ——- onge...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017394.jpg": "...l, she was in a  smallex apartment. we're going back 3o yea...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017470.jpg": "...a  building he ouned, an apartment buiddanmg on east, o2md...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017486.jpg": "...n '9l., she lived in ani apartment on -- yout said a small...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017715.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017977.jpg": "...es i stayed == we had an apartment. aero  ou please deserib...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018140.jpg": "...ame to tave woth me a my apartment, but we were not  involv...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018144.jpg": "....  q. y6u als® 6wned the apartment next door, l5l5 south fl...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018145.jpg": "...nd your wife  bought. am apartment at l9o2 l,l5 south flagl...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018146.jpg": "...and 'your wife  bought. apartment l9ol2\"  de you see that’...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018148.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018168.jpg": "...asn't there, you had the apartment on the  other side of th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018343.jpg": "...frey epstein's new york  apartment taken in. 2ol9, the gove...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018345.jpg": "...grnaphs abe of epstgia's apartment in 2ol9, a claim that i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018346.jpg": "...ane's testimony that the apartment was massiwe and,  eeenta...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018349.jpg": "...estimony that. epstein's apartment.  contained, quete, cree...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018735.jpg": "..., you had, been to their apartment; correct?  q- you and se...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018968.jpg": "...kad an apartient, lange apartment, on. s4th streeer.  and,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018969.jpg": "...she move t6  the studio apartment?’  to would say that. wa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018970.jpg": "...had to move to a smaller apartment.  nou, this ig something...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018972.jpg": "...she was  in. ‘the larger apartment and. then moved to the s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018982.jpg": "...ax sees st <i seat  @  apartment. in manhatan.  q. and wo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019004.jpg": "...s, france?  a. he bad an apartment in, paris, france.  o. a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019099.jpg": "...ht, that be lived ain an apartment, but ti. e@uld, be mista...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019100.jpg": "...q. but she moved to the apartment o  n't actually oun  ‘th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020036.jpg": "...s.of  maxwell’s new york apartment coincided with her‘inten...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021664.jpg": "...anch in new mexico,. his apartment in-paris,, and. his ‘pri..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "apartment" (93 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">307-307</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1118-1118</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1599-1599</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">6021-6021</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">6946-6946</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">6969-6969</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">8225-8233</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">9040-9040</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">9731-9731</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">11127-11127</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">11751-11751</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">11795-11797</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">11804-11804</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">11880-11880</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">11896-11896</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">12126-12126</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">12389-12389</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">12553-12561</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">12581-12581</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">12757-12763</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">13150-13150</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">13384-13388</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">13398-13398</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">13420-13420</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">13515-13516</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">13619-13619</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">13670-13670</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">13906-13906</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">13915-13915</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">13931-13933</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">14116-14116</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">14412-14412</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">14511-14511</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">16196-16196</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">16244-16244</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">16295-16295</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">16530-16530</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">16539-16539</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">16555-16557</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">16739-16739</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">17033-17033</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">17132-17132</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">17385-17387</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">17394-17394</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">17470-17470</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(45, 0); return false;">17486-17486</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(46, 0); return false;">17715-17715</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(47, 0); return false;">17977-17977</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(48, 0); return false;">18140-18148</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(49, 0); return false;">18168-18168</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(50, 0); return false;">18343-18349</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(51, 0); return false;">18735-18735</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(52, 0); return false;">18968-18972</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(53, 0); return false;">18982-18982</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(54, 0); return false;">19004-19004</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(55, 0); return false;">19099-19100</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(56, 0); return false;">20036-20036</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(57, 0); return false;">21664-21664</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

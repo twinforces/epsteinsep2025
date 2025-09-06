@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "management"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 486, "end": 486, "pages": [486]}, {"start": 610, "end": 610, "pages": [610]}, {"start": 798, "end": 798, "pages": [798]}, {"start": 3208, "end": 3208, "pages": [3208]}, {"start": 3276, "end": 3276, "pages": [3276]}, {"start": 3346, "end": 3346, "pages": [3346]}, {"start": 3397, "end": 3401, "pages": [3397, 3401]}, {"start": 3427, "end": 3427, "pages": [3427]}, {"start": 3442, "end": 3442, "pages": [3442]}, {"start": 3474, "end": 3474, "pages": [3474]}, {"start": 4330, "end": 4330, "pages": [4330]}, {"start": 4373, "end": 4373, "pages": [4373]}, {"start": 4468, "end": 4468, "pages": [4468]}, {"start": 4523, "end": 4523, "pages": [4523]}, {"start": 4549, "end": 4549, "pages": [4549]}, {"start": 4564, "end": 4564, "pages": [4564]}, {"start": 4596, "end": 4596, "pages": [4596]}, {"start": 4746, "end": 4746, "pages": [4746]}, {"start": 5655, "end": 5655, "pages": [5655]}, {"start": 6617, "end": 6617, "pages": [6617]}, {"start": 7558, "end": 7558, "pages": [7558]}, {"start": 7581, "end": 7584, "pages": [7581, 7584]}, {"start": 7612, "end": 7614, "pages": [7612, 7614]}, {"start": 7628, "end": 7628, "pages": [7628]}, {"start": 7636, "end": 7636, "pages": [7636]}, {"start": 7644, "end": 7645, "pages": [7644, 7645]}, {"start": 7675, "end": 7690, "pages": [7675, 7676, 7679, 7683, 7687, 7690]}, {"start": 7833, "end": 7833, "pages": [7833]}, {"start": 7858, "end": 7858, "pages": [7858]}, {"start": 8134, "end": 8149, "pages": [8134, 8135, 8138, 8142, 8146, 8149]}, {"start": 10438, "end": 10438, "pages": [10438]}, {"start": 10561, "end": 10561, "pages": [10561]}, {"start": 13306, "end": 13311, "pages": [13306, 13311]}, {"start": 18890, "end": 18895, "pages": [18890, 18895]}, {"start": 19319, "end": 19319, "pages": [19319]}, {"start": 21206, "end": 21206, "pages": [21206]}, {"start": 21222, "end": 21222, "pages": [21222]}, {"start": 21392, "end": 21392, "pages": [21392]}, {"start": 21425, "end": 21425, "pages": [21425]}, {"start": 22059, "end": 22061, "pages": [22059, 22060, 22061]}, {"start": 23368, "end": 23368, "pages": [23368]}, {"start": 23463, "end": 23463, "pages": [23463]}, {"start": 23474, "end": 23477, "pages": [23474, 23477]}, {"start": 23490, "end": 23490, "pages": [23490]}, {"start": 27620, "end": 27620, "pages": [27620]}];
+        const pageToPath = {"486": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000486.jpg", "610": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000610.jpg", "798": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000798.jpg", "3208": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003208.jpg", "3276": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003276.jpg", "3346": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003346.jpg", "3397": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003397.jpg", "3401": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003401.jpg", "3427": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003427.jpg", "3442": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003442.jpg", "3474": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003474.jpg", "4330": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004330.jpg", "4373": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004373.jpg", "4468": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004468.jpg", "4523": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004523.jpg", "4549": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004549.jpg", "4564": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004564.jpg", "4596": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004596.jpg", "4746": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004746.jpg", "5655": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005655.jpg", "6617": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006617.jpg", "7558": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007558.jpg", "7581": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007581.jpg", "7584": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007584.jpg", "7612": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007612.jpg", "7614": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007614.jpg", "7628": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007628.jpg", "7636": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007636.jpg", "7644": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007644.jpg", "7645": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007645.jpg", "7675": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007675.jpg", "7676": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007676.jpg", "7679": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007679.jpg", "7683": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007683.jpg", "7687": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007687.jpg", "7690": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007690.jpg", "7833": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007833.jpg", "7858": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007858.jpg", "8134": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008134.jpg", "8135": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008135.jpg", "8138": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008138.jpg", "8142": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008142.jpg", "8146": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008146.jpg", "8149": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008149.jpg", "10438": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010438.jpg", "10561": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010561.jpg", "13306": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013306.jpg", "13311": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013311.jpg", "18890": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018890.jpg", "18895": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018895.jpg", "19319": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019319.jpg", "21206": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021206.jpg", "21222": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021222.jpg", "21392": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021392.jpg", "21425": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021425.jpg", "22059": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022059.jpg", "22060": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022060.jpg", "22061": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022061.jpg", "23368": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023368.jpg", "23463": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023463.jpg", "23474": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023474.jpg", "23477": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023477.jpg", "23490": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023490.jpg", "27620": "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027620.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000486.jpg": "...ecidivism, sex offender  management assessment and. planning...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000610.jpg": "...less a scheduling/icase  management type conference, but. i'...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000798.jpg": "...ecidivism, sex offender  management assessment and. planning...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003208.jpg": "...ing materials, for  hog  management in preparation for those...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003276.jpg": "...‘ll8°u.s.c.  to, o, the ‘management team, with’ ‘a! note sta...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003346.jpg": "...members ofthe: office’s management, and informed them. that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003397.jpg": "...m specialist. ‘ss ‘case: management: system, into the vns  s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003401.jpg": "...villafania to be a. fon-management: task. acesta told ope i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003427.jpg": "...case would, have f\\ietim management;”  © woul: .amount.of de...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003442.jpg": "...consultation, with usao management, villafafia.  revised th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003474.jpg": "...al circumstance: sy usa: management, played l id ‘ale si in,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004330.jpg": "...ing materials: for  hog  management! in preparation for thos...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004373.jpg": "...en. “directly at.  his , management ” to convene such a 4. m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004468.jpg": "...embers of the: office’s. management, and informed them. that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004523.jpg": "...es: without it riging-to management level.” similarly, meneh...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004549.jpg": "...case would, have f\\ietim management;”  deeply enibarrassed”t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004564.jpg": "...ty: nsultation with usao management, *  revised ihe real the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004596.jpg": "...al circumstance: sy usa: management, played l id ‘ole l in,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004746.jpg": "...ions at-the mdc and over-management of ms. maxwell. ‘litle i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005655.jpg": "...if. waitin  ht, chustess management.  pert witness 'c jompen...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006617.jpg": "...i ie? ucas  ht, chustess management.  tori, rl is sie broups...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007558.jpg": "...ent of health policy and management, johns. hopkins school o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007581.jpg": ".../96  galligan v. pyramid management group, et al. (boston, m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007584.jpg": "...y residential properties management (atlanta, georgia)  test...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007612.jpg": "...ublic officials,\" threat management conference, anaheim, cal...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007614.jpg": "...countermeasures,\" threat management conference, central inte...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007628.jpg": "...olice depa rtment threat management unit louisiana district...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007636.jpg": "...or executives aid senior management.. this list does. not ir...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007644.jpg": "...2oo6  tag advanced case management seminar, newport beach;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007645.jpg": "...2oo6  tag advianced case management seminar, chicago, il, oc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007675.jpg": "...da division of emergency management: ative services working...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007676.jpg": "...ealth administration.and management; reid wh and silver's (e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007679.jpg": "...w, bursztajn h: practice management: managing risks:  psychi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007683.jpg": "...principles: for practice management. florida psychiatric soc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007687.jpg": "...violence: assessment and management  ‘of aggression - a mard...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007690.jpg": "...trists” role in disaster management: less6ns learried.. gour...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007833.jpg": "...haway, m.d. v. dino-peds:management group, llc retained by d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007858.jpg": "...ted. for:  “‘tnformation management, insti te: the ‘l4 annua...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008134.jpg": "...da division of emergency management: ative services working...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008135.jpg": "...ealth administration.and management; reid wh and silver's (e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008138.jpg": "...w, bursztajn h: practice management: managing risks:  psychi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008142.jpg": "...principles: for practice management. florida psychiatric soc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008146.jpg": "...violence: assessment and management  ‘of aggression - a mard...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008149.jpg": "...trists” role in disaster management: lessons learried.. gour...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010438.jpg": "...nts, and. other property management tasks at  was ‘moving on...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010561.jpg": "...nevertheless. exercised, management.  yay om  responsibility...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013306.jpg": "...a. elorida proper t-les management is the management compan...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013311.jpg": "...ior  £6 you, jolning the management. property eeipany if 2oo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018890.jpg": "...a. elorida proper t-les management is the management compan...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018895.jpg": "...ior  £6 you, jolning the management. property eeipany if 2oo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019319.jpg": "...overy or any’ other case management deadlines during the pen...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021206.jpg": "...betw “en, anenlse rs!  management | in. h preparation for...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021222.jpg": "...eawas litle higher- fee! management overs  aig  t rave, comm...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021392.jpg": "...“  in, 2oo8 + ocpariment management requested informal guida...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021425.jpg": "...tghsive amotinilol “welt management. asithezgir -  s were“de...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022059.jpg": "...abled) 2'the uniomstates management has not complied: with t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022060.jpg": "...s from. the 6/28/l8 lmr. management::manegement will prov sp...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022061.jpg": "...illbe. pe reporting that management official t to. office  m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023368.jpg": "...rity:camera systems, and management: failures:and widespread...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023463.jpg": "...icant job performan eard management faillres on  the designe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023474.jpg": "...the security:and orderly management of the institution and t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023477.jpg": "...ted in an '‘october.2o2l management advisory’ orandum issued...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023490.jpg": "...ecurity camera ‘systems, management: failures, and widesprea...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027620.jpg": "...mp.  2l ap par ncrevenue management = a.  27 rx taro hba nee..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "management" (64 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">486-486</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">610-610</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">798-798</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3208-3208</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">3276-3276</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">3346-3346</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3397-3401</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">3427-3427</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">3442-3442</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">3474-3474</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">4330-4330</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">4373-4373</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">4468-4468</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">4523-4523</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">4549-4549</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">4564-4564</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">4596-4596</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">4746-4746</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">5655-5655</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">6617-6617</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">7558-7558</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">7581-7584</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">7612-7614</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">7628-7628</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">7636-7636</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">7644-7645</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">7675-7690</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">7833-7833</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">7858-7858</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">8134-8149</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">10438-10438</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">10561-10561</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">13306-13311</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">18890-18895</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">19319-19319</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">21206-21206</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">21222-21222</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">21392-21392</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">21425-21425</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">22059-22061</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">23368-23368</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">23463-23463</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">23474-23477</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">23490-23490</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">27620-27620</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

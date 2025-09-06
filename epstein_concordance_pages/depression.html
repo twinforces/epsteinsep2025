@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "depression"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 720, "end": 720, "pages": [720]}, {"start": 5951, "end": 5955, "pages": [5951, 5955]}, {"start": 6191, "end": 6191, "pages": [6191]}, {"start": 6264, "end": 6264, "pages": [6264]}, {"start": 6876, "end": 6880, "pages": [6876, 6880]}, {"start": 7194, "end": 7195, "pages": [7194, 7195]}, {"start": 7272, "end": 7272, "pages": [7272]}, {"start": 7505, "end": 7505, "pages": [7505]}, {"start": 7676, "end": 7676, "pages": [7676]}, {"start": 7683, "end": 7686, "pages": [7683, 7684, 7686]}, {"start": 7699, "end": 7700, "pages": [7699, 7700]}, {"start": 7884, "end": 7885, "pages": [7884, 7885]}, {"start": 7962, "end": 7962, "pages": [7962]}, {"start": 8081, "end": 8081, "pages": [8081]}, {"start": 8135, "end": 8135, "pages": [8135]}, {"start": 8142, "end": 8145, "pages": [8142, 8143, 8145]}, {"start": 8158, "end": 8159, "pages": [8158, 8159]}, {"start": 10705, "end": 10705, "pages": [10705]}, {"start": 11147, "end": 11147, "pages": [11147]}, {"start": 11590, "end": 11590, "pages": [11590]}, {"start": 12313, "end": 12313, "pages": [12313]}, {"start": 14818, "end": 14818, "pages": [14818]}, {"start": 14891, "end": 14892, "pages": [14891, 14892]}, {"start": 14969, "end": 14969, "pages": [14969]}, {"start": 17901, "end": 17901, "pages": [17901]}];
+        const pageToPath = {"720": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000720.jpg", "5951": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005951.jpg", "5955": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005955.jpg", "6191": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006191.jpg", "6264": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006264.jpg", "6876": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006876.jpg", "6880": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006880.jpg", "7194": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007194.jpg", "7195": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007195.jpg", "7272": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007272.jpg", "7505": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007505.jpg", "7676": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007676.jpg", "7683": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007683.jpg", "7684": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007684.jpg", "7686": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007686.jpg", "7699": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007699.jpg", "7700": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007700.jpg", "7884": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007884.jpg", "7885": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007885.jpg", "7962": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007962.jpg", "8081": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008081.jpg", "8135": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008135.jpg", "8142": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008142.jpg", "8143": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008143.jpg", "8145": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008145.jpg", "8158": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008158.jpg", "8159": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008159.jpg", "10705": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010705.jpg", "11147": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011147.jpg", "11590": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011590.jpg", "12313": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012313.jpg", "14818": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014818.jpg", "14891": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014891.jpg", "14892": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014892.jpg", "14969": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014969.jpg", "17901": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017901.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000720.jpg": "...oney. t went inte a deep depression and mever lifted  comple...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005951.jpg": "...ica’  ' =  hinetioning,  depression, belhivi sui  tate: stre...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005955.jpg": "...c. ¢ 2oo2). ghildres ais depression inventor n cderlands lul...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006191.jpg": "...umatic: stress disorder, depression bipolar. disorder, drug-...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006264.jpg": "...umatic: stress disorder, depression bipolar. disorder, drug-...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006876.jpg": "...ica’  ' =  hinetioning,  depression, belhivi sui  tate: stre...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006880.jpg": "...c. ¢ 2oo2). ghildres ais depression inventor n cderlands lul...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007194.jpg": "...l liffe issues, anxiety, depression, coping with a health pr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007195.jpg": "...lepert to me syiptoms gf depression. ti could ask theni  hou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007272.jpg": "...fieultses, ih particular depression;  y, post-eraumatac stue...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007505.jpg": "...umatic: stress disorder, depression bipolar. disorder, drug-...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007676.jpg": "...nd treisman gj: pain and depression: an interdisciplinary, p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007683.jpg": "...lpractice while treating depression. in pregnant: women. cur...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007684.jpg": "...story: “doe, i'treat. my depression with incredible hulk.” a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007686.jpg": "...h eating disorders  and depression. poster session - americ...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007699.jpg": "...child neglect  anaclitic depression (hospitalism) regression...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007700.jpg": "...ed patients 8o: atypical depression.  8l, electroconvulsive...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007884.jpg": "...l liffe issues, anxiety, depression, coping with a health pr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007885.jpg": "...lepert to me syiptoms gf depression. ti could ask theni  hou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007962.jpg": "...fieultses, ih particular depression;  y, post-eraumatac stue...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008081.jpg": "...umatic: stress disorder, depression bipolar. disorder, drug-...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008135.jpg": "...nd treisman gj: pain and depression: an interdisciplinary, p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008142.jpg": "...lpractice while treating depression. in pregnant: women. cur...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008143.jpg": "...story: “doe, i'treat. my depression with incredible hulk.” a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008145.jpg": "...h eating disorders  and depression. poster session - americ...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008158.jpg": "...child neglect  anaclitic depression (hospitalism) regression...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008159.jpg": "...ed patients 8o: atypical depression.  8l, electroconvulsive...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010705.jpg": "...can inflice on  victims, depression, substance abuse. panic...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011147.jpg": "...(finding that depression did not impact the withe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011590.jpg": "...e syifiptoms of anxiety, depression, lou self-esteem, pisd a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012313.jpg": "...fe transitidn; anxiety;  depression, that sort of thing. oo....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014818.jpg": "...e syifiptoms of anxiety, depression, lou self-esteem, pisd a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014891.jpg": "...l lifie issues; anxiety, depression; coping with a health pr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014892.jpg": "...report to me symptoms of depression. i could ask. '  neat  h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014969.jpg": "...ficulties, in particular depression, anxiety, posstatraumati...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017901.jpg": "...fe transitidn; anxiety;  depression, that sort of thing. oo...."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "depression" (36 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">720-720</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">5951-5955</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">6191-6191</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">6264-6264</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">6876-6880</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">7194-7195</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">7272-7272</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">7505-7505</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">7676-7676</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">7683-7686</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">7699-7700</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">7884-7885</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">7962-7962</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">8081-8081</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">8135-8135</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">8142-8145</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">8158-8159</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">10705-10705</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">11147-11147</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">11590-11590</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">12313-12313</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">14818-14818</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">14891-14892</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">14969-14969</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">17901-17901</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

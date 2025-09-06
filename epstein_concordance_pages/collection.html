@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "collection"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 338, "end": 338, "pages": [338]}, {"start": 483, "end": 483, "pages": [483]}, {"start": 795, "end": 795, "pages": [795]}, {"start": 2241, "end": 2241, "pages": [2241]}, {"start": 3629, "end": 3629, "pages": [3629]}, {"start": 3853, "end": 3853, "pages": [3853]}, {"start": 3957, "end": 3957, "pages": [3957]}, {"start": 4726, "end": 4726, "pages": [4726]}, {"start": 5730, "end": 5730, "pages": [5730]}, {"start": 5953, "end": 5953, "pages": [5953]}, {"start": 6133, "end": 6133, "pages": [6133]}, {"start": 6667, "end": 6667, "pages": [6667]}, {"start": 6878, "end": 6878, "pages": [6878]}, {"start": 6969, "end": 6969, "pages": [6969]}, {"start": 7832, "end": 7832, "pages": [7832]}, {"start": 7842, "end": 7842, "pages": [7842]}, {"start": 11162, "end": 11162, "pages": [11162]}, {"start": 12634, "end": 12635, "pages": [12634, 12635]}, {"start": 15002, "end": 15002, "pages": [15002]}, {"start": 15675, "end": 15675, "pages": [15675]}, {"start": 18221, "end": 18222, "pages": [18221, 18222]}, {"start": 20481, "end": 20481, "pages": [20481]}, {"start": 21936, "end": 21936, "pages": [21936]}, {"start": 21944, "end": 21944, "pages": [21944]}];
+        const pageToPath = {"338": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000338.jpg", "483": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000483.jpg", "795": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000795.jpg", "2241": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002241.jpg", "3629": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003629.jpg", "3853": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003853.jpg", "3957": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003957.jpg", "4726": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004726.jpg", "5730": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005730.jpg", "5953": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005953.jpg", "6133": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006133.jpg", "6667": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006667.jpg", "6878": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006878.jpg", "6969": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006969.jpg", "7832": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007832.jpg", "7842": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007842.jpg", "11162": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011162.jpg", "12634": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012634.jpg", "12635": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012635.jpg", "15002": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015002.jpg", "15675": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015675.jpg", "18221": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018221.jpg", "18222": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018222.jpg", "20481": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020481.jpg", "21936": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021936.jpg", "21944": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021944.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000338.jpg": "...nane + of.a, substantial collection.of photographie: trophic...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000483.jpg": "...l  found a. “substantial collection of photographic trophies...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000795.jpg": "....”  found a “substantial collection of photographic trophies...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002241.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003629.jpg": "...es:the results. the data collection ts spread evenly across...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003853.jpg": "...te: nor informative. the collection ‘of various cliche phras...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003957.jpg": "...i  c. the government’s. collection atid review of other age...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004726.jpg": "...upon. the goverinicit’s  collection, of evidence to support....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005730.jpg": "...rphone tecords and trash collection at epstein’s. home: offi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005953.jpg": "...ical, eare und evidence: collection, have a ‘number of”  pra...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006133.jpg": "...ion? :considerthewaitne  collection. tnaddition, considerhou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006667.jpg": "...rphone tecords and trash collection at epstein’s. home: offi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006878.jpg": "...ical, eare und evidence: collection, have a ‘number of”  pra...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006969.jpg": "...directory. represents a collection of infortiation and numb...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007832.jpg": "...c images: e acquisition, collection and seizure, of determin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007842.jpg": "...olvirig various. complex collection’ issues.  j y - x xa { \\...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011162.jpg": "...uzmust cooperate: ‘inthe collection of dna.as directed by~th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012634.jpg": "...participate im evidence collection, should,  @. who else fr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012635.jpg": "...t did your teait do?  ce collection, team do after the  si a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015002.jpg": "...tially, lf we go to data collection, which is the next, para...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015675.jpg": "...lauder— private spa body collection. moisture: mass.. silky...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018221.jpg": "...participate im evidence collection, should,  @. who else fr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018222.jpg": "...t did your teait do?  ce collection, team do after the  si a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020481.jpg": "...uzmust cooperate: ‘inthe collection of dna.as directed by~th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021936.jpg": "...must: ccooperate in the collection.of a, dna sample. if it'...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021944.jpg": "...ant must-cooperate inthe collection ofa, dna sample. if  the..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "collection" (26 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">338-338</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">483-483</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">795-795</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">2241-2241</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">3629-3629</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">3853-3853</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3957-3957</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">4726-4726</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">5730-5730</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">5953-5953</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">6133-6133</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">6667-6667</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">6878-6878</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">6969-6969</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">7832-7832</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">7842-7842</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">11162-11162</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">12634-12635</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">15002-15002</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">15675-15675</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">18221-18222</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">20481-20481</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">21936-21936</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">21944-21944</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

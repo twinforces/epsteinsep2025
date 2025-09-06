@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "widespread"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 5796, "end": 5796, "pages": [5796]}, {"start": 6721, "end": 6721, "pages": [6721]}, {"start": 7247, "end": 7247, "pages": [7247]}, {"start": 7937, "end": 7937, "pages": [7937]}, {"start": 8969, "end": 8969, "pages": [8969]}, {"start": 8990, "end": 8990, "pages": [8990]}, {"start": 14944, "end": 14944, "pages": [14944]}, {"start": 15093, "end": 15093, "pages": [15093]}, {"start": 15244, "end": 15244, "pages": [15244]}, {"start": 22105, "end": 22105, "pages": [22105]}, {"start": 23368, "end": 23368, "pages": [23368]}, {"start": 23490, "end": 23492, "pages": [23490, 23492]}];
+        const pageToPath = {"5796": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005796.jpg", "6721": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006721.jpg", "7247": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007247.jpg", "7937": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007937.jpg", "8969": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008969.jpg", "8990": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008990.jpg", "14944": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014944.jpg", "15093": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015093.jpg", "15244": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015244.jpg", "22105": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022105.jpg", "23368": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023368.jpg", "23490": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023490.jpg", "23492": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023492.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005796.jpg": "...that it ‘will retain in. widespread. tise: for decades, to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006721.jpg": "...that it ‘will retain in. widespread. tise: for decades, to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007247.jpg": "...aviors that there's  is  widespread agreement, in this parta...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007937.jpg": "...aviors that there's  is  widespread agreement, in this parta...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008969.jpg": "...384 (2olo) “although the widespread  community. impact. nece...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008990.jpg": "...o  consider the risks of widespread disclosure in, deetding...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014944.jpg": "...c behaviors that there\"s widespread agreement in this partic...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015093.jpg": "...it is nothing, more than widespread. and. intense public cur...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015244.jpg": "...erelogct, they | ba  ‘ts widespread: a ‘comment on brewin ot...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022105.jpg": "...f false couritslips was. widespread aid tolerated at the bop...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023368.jpg": "...management: failures:and widespread disregard: of bop’ polic...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023490.jpg": "...anagement: failures, and widespread disregard of bop policie...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023492.jpg": "...‘part of bop. personnel; widespread disregard of bop’ polici..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "widespread" (13 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">5796-5796</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">6721-6721</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">7247-7247</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">7937-7937</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">8969-8969</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">8990-8990</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">14944-14944</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">15093-15093</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">15244-15244</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">22105-22105</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">23368-23368</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">23490-23492</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

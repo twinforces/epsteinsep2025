@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "methodology"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 3622, "end": 3627, "pages": [3622, 3627]}, {"start": 3634, "end": 3634, "pages": [3634]}, {"start": 5799, "end": 5800, "pages": [5799, 5800]}, {"start": 6046, "end": 6046, "pages": [6046]}, {"start": 6222, "end": 6222, "pages": [6222]}, {"start": 6343, "end": 6343, "pages": [6343]}, {"start": 6724, "end": 6725, "pages": [6724, 6725]}, {"start": 7309, "end": 7309, "pages": [7309]}, {"start": 7519, "end": 7519, "pages": [7519]}, {"start": 7999, "end": 7999, "pages": [7999]}, {"start": 8068, "end": 8068, "pages": [8068]}, {"start": 8095, "end": 8095, "pages": [8095]}, {"start": 8334, "end": 8334, "pages": [8334]}, {"start": 11133, "end": 11133, "pages": [11133]}, {"start": 11140, "end": 11140, "pages": [11140]}, {"start": 11645, "end": 11645, "pages": [11645]}, {"start": 13354, "end": 13354, "pages": [13354]}, {"start": 15006, "end": 15006, "pages": [15006]}, {"start": 18938, "end": 18938, "pages": [18938]}, {"start": 23037, "end": 23037, "pages": [23037]}];
+        const pageToPath = {"3622": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003622.jpg", "3627": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003627.jpg", "3634": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003634.jpg", "5799": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005799.jpg", "5800": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005800.jpg", "6046": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006046.jpg", "6222": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006222.jpg", "6343": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006343.jpg", "6724": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006724.jpg", "6725": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006725.jpg", "7309": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007309.jpg", "7519": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007519.jpg", "7999": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007999.jpg", "8068": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008068.jpg", "8095": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008095.jpg", "8334": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008334.jpg", "11133": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011133.jpg", "11140": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011140.jpg", "11645": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011645.jpg", "13354": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013354.jpg", "15006": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015006.jpg", "18938": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018938.jpg", "23037": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00023037.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003622.jpg": "...r books on  ‘statistical methodology; three book: chapters, f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003627.jpg": "...he white plains sampling methodology underrepresents the vote...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003634.jpg": "...for hispanics.  eocoding methodology:. the basic  assumption...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005799.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005800.jpg": "...ing based-on qualitative methodology. that-factor‘s inapplica...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006046.jpg": "...the -field., she has: no methodology: or studies that support...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006222.jpg": "...applying j soning and. methodology tnderlying: his testimon...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006343.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006724.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006725.jpg": "...ing based-on qualitative methodology. that-factor‘s inapplica...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007309.jpg": "...se let's go through the methodology of this particular  stud...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007519.jpg": "...hogarth (ed.),. new:  : methodology ka social and. behavi lo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007999.jpg": "...se let's go through the methodology of this particular  stud...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008068.jpg": "...d the precise  forerisie methodology that these € will-use to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008095.jpg": "...liability of his. or‘her methodology, the liberality of | s t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008334.jpg": "...nte sxpert opinion about methodology, for  mr. roarbach: tf i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011133.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011140.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011645.jpg": "...nte sxpert opinion about methodology, for  mr. roarbach: tf i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013354.jpg": "...en on gh os  practice or methodology associate  ms. moe:  are...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015006.jpg": "...so let's go through the methodology of this particular study...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018938.jpg": "...en on gh os  practice or methodology associate  ms. moe:  are...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00023037.jpg": "...ion were informed ofthe  methodology. ou... ccscnesenseeseees..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "methodology" (23 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">3622-3627</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">3634-3634</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">5799-5800</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">6046-6046</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">6222-6222</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">6343-6343</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">6724-6725</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">7309-7309</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">7519-7519</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">7999-7999</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">8068-8068</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">8095-8095</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">8334-8334</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">11133-11133</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">11140-11140</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">11645-11645</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">13354-13354</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">15006-15006</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">18938-18938</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">23037-23037</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

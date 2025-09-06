@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "impressive"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 4769, "end": 4769, "pages": [4769]}, {"start": 7459, "end": 7459, "pages": [7459]}, {"start": 11685, "end": 11685, "pages": [11685]}, {"start": 12127, "end": 12127, "pages": [12127]}, {"start": 13651, "end": 13651, "pages": [13651]}, {"start": 16130, "end": 16130, "pages": [16130]}, {"start": 16276, "end": 16276, "pages": [16276]}, {"start": 17716, "end": 17716, "pages": [17716]}];
+        const pageToPath = {"4769": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004769.jpg", "7459": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007459.jpg", "11685": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011685.jpg", "12127": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012127.jpg", "13651": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013651.jpg", "16130": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016130.jpg", "16276": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016276.jpg", "17716": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017716.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004769.jpg": "...'s  accomplished a prety impressive record, under pandemic...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007459.jpg": "...and think it sounds very impressive or ever compelling, and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011685.jpg": "...and thik it sounds  very impressive @r ‘even compel ling; an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012127.jpg": "...pa)  a. correct. q. an impressive, huge house, right? a. l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013651.jpg": "...as trying #6 be sort gf impressive if that way and talk dbo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016130.jpg": "...and thik it sounds  very impressive @r ‘even compel ling; an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016276.jpg": "...as trying #6 be sort gf impressive if that way and talk dbo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017716.jpg": "...pa)  a. correct. q. an impressive, huge house, right? a. l..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "impressive" (8 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">4769-4769</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">7459-7459</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">11685-11685</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">12127-12127</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">13651-13651</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">16130-16130</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">16276-16276</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">17716-17716</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

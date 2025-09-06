@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "meanwhile"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1223, "end": 1223, "pages": [1223]}, {"start": 2511, "end": 2511, "pages": [2511]}, {"start": 3217, "end": 3217, "pages": [3217]}, {"start": 3229, "end": 3229, "pages": [3229]}, {"start": 3248, "end": 3248, "pages": [3248]}, {"start": 3278, "end": 3278, "pages": [3278]}, {"start": 3310, "end": 3312, "pages": [3310, 3312]}, {"start": 3664, "end": 3664, "pages": [3664]}, {"start": 4042, "end": 4042, "pages": [4042]}, {"start": 4339, "end": 4339, "pages": [4339]}, {"start": 4351, "end": 4351, "pages": [4351]}, {"start": 4370, "end": 4370, "pages": [4370]}, {"start": 4400, "end": 4400, "pages": [4400]}, {"start": 4432, "end": 4434, "pages": [4432, 4434]}, {"start": 11598, "end": 11598, "pages": [11598]}, {"start": 14826, "end": 14826, "pages": [14826]}, {"start": 19429, "end": 19429, "pages": [19429]}, {"start": 20141, "end": 20141, "pages": [20141]}, {"start": 21227, "end": 21230, "pages": [21227, 21230]}, {"start": 21276, "end": 21276, "pages": [21276]}, {"start": 21624, "end": 21624, "pages": [21624]}];
+        const pageToPath = {"1223": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001223.jpg", "2511": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002511.jpg", "3217": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003217.jpg", "3229": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003229.jpg", "3248": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003248.jpg", "3278": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003278.jpg", "3310": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003310.jpg", "3312": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003312.jpg", "3664": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003664.jpg", "4042": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004042.jpg", "4339": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004339.jpg", "4351": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004351.jpg", "4370": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004370.jpg", "4400": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004400.jpg", "4432": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004432.jpg", "4434": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004434.jpg", "11598": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011598.jpg", "14826": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014826.jpg", "19429": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019429.jpg", "20141": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020141.jpg", "21227": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021227.jpg", "21230": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021230.jpg", "21276": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021276.jpg", "21624": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021624.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001223.jpg": "...t in the’ united states, meanwhile, apply with somewhat les...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002511.jpg": "...indictment: by default. meanwhile, the epstein.sfory conti...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003217.jpg": "...'the victim. witnesses.  meanwhile; the tate x sual step of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003229.jpg": "...lman emolmemogit a dcm!  meanwhile, contemporaneous emails...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003248.jpg": "...greed. to an extension:  meanwhile; epstein atorney roy: bl...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003278.jpg": "...villafaia. carlierthat.  meanwhile; villafatia sent to lour...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003310.jpg": "...‘the deadline ‘pending  meanwhile, the criminal.  ae fava...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003312.jpg": "...will.  over the mater.”  meanwhile; starr senf a: concludin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003664.jpg": "...ot;prevail at step one.  meanwhile, the governinent’s claim...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004042.jpg": "...the subpoena. request;8, meanwhile, refers to. a specific g...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004339.jpg": "...osecuting’.  witnesses.  meanwhile; the tate, ‘pr case to.a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004351.jpg": "...lman emolmemogit a dcm!  meanwhile, contemporaneous emails...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004370.jpg": "...an extension:  x 6 l997  meanwhile; epstein atorney roy: bl...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004400.jpg": "...l -nlead tfoiwe cave an  meanwhile micssage. she proposed t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004432.jpg": "...ral’s. office.  wine ad  meanwhile, the criminal.  avan hts...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004434.jpg": "...ill.  ‘ever the mater,”  meanwhile; starr senf a: concludin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011598.jpg": "...most.  lagomprehensible. meanwhile, it have had wartually n...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014826.jpg": "...most.  lagomprehensible. meanwhile, it have had wartually n...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019429.jpg": "...than denied the request. meanwhile, in this court, the giuf...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020141.jpg": "...t in the’ united states, meanwhile, apply with somewhat les...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021227.jpg": "...’ he soinmarized. ceos  meanwhile,, confemporancous: email...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021230.jpg": "...ns ‘villafaia opposes  _ meanwhile epstein’s de cfense «cou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021276.jpg": "...ell ‘him.  afternoon...  meanwhile, villafatia. sent-to lou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021624.jpg": "...lmost  incomprehensible. meanwhile, i have had warewally me..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "meanwhile" (24 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1223-1223</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">2511-2511</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">3217-3217</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3229-3229</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">3248-3248</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">3278-3278</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3310-3312</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">3664-3664</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">4042-4042</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">4339-4339</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">4351-4351</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">4370-4370</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">4400-4400</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">4432-4434</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">11598-11598</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">14826-14826</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">19429-19429</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">20141-20141</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">21227-21230</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">21276-21276</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">21624-21624</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

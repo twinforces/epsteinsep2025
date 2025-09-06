@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "investment"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 334, "end": 334, "pages": [334]}, {"start": 1032, "end": 1032, "pages": [1032]}, {"start": 1119, "end": 1119, "pages": [1119]}, {"start": 1196, "end": 1196, "pages": [1196]}, {"start": 2064, "end": 2070, "pages": [2064, 2066, 2070]}, {"start": 3699, "end": 3699, "pages": [3699]}, {"start": 5706, "end": 5706, "pages": [5706]}, {"start": 7410, "end": 7410, "pages": [7410]}, {"start": 7834, "end": 7834, "pages": [7834]}, {"start": 9528, "end": 9532, "pages": [9528, 9529, 9532]}, {"start": 10207, "end": 10211, "pages": [10207, 10208, 10211]}, {"start": 10324, "end": 10324, "pages": [10324]}, {"start": 12263, "end": 12263, "pages": [12263]}, {"start": 17852, "end": 17852, "pages": [17852]}, {"start": 19950, "end": 19950, "pages": [19950]}, {"start": 20037, "end": 20037, "pages": [20037]}, {"start": 20114, "end": 20114, "pages": [20114]}, {"start": 20944, "end": 20944, "pages": [20944]}];
+        const pageToPath = {"334": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000334.jpg", "1032": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001032.jpg", "1119": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001119.jpg", "1196": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001196.jpg", "2064": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002064.jpg", "2066": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002066.jpg", "2070": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002070.jpg", "3699": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003699.jpg", "5706": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005706.jpg", "7410": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007410.jpg", "7834": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007834.jpg", "9528": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009528.jpg", "9529": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009529.jpg", "9532": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009532.jpg", "10207": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010207.jpg", "10208": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010208.jpg", "10211": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010211.jpg", "10324": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010324.jpg", "12263": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012263.jpg", "17852": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017852.jpg", "19950": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019950.jpg", "20037": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020037.jpg", "20114": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020114.jpg", "20944": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020944.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000334.jpg": "...th.® iend. mr.  ing the “investment interests” re} afhis  l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001032.jpg": "...y as ‘bo whether that is investment income  as opposed te ef...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001119.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001196.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002064.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002066.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002070.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003699.jpg": "...ill requi a, significant investment of'time  nas oad alba ea...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005706.jpg": "...involve a “significant  investment oftime:and resources” th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007410.jpg": "...buse; and. devi: ing an, investment:  wat a aia es oses fe e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007834.jpg": "...blaine-county; idaho c&m investment group:et al. -v., neil d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009528.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009529.jpg": "...licensed stockbroker and investment adviser, and:passed ‘var...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009532.jpg": "...that he was:not giy.ing’ investment advice to:the’ backdatin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010207.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010208.jpg": "...licensed stockbroker and investment adviser, and:passed ‘var...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010211.jpg": "...that he was:not giy.ing’ investment advice to:the’ backdatin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010324.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012263.jpg": "...auditors, the banks, the investment comparies, as well  as e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017852.jpg": "...auditors, the banks, the investment comparies, as well  as e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019950.jpg": "...y as ‘bo whether that is investment income  as opposed te ef...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020037.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020114.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020944.jpg": ""};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "investment" (24 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">334-334</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1032-1032</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1119-1119</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">1196-1196</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">2064-2070</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">3699-3699</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">5706-5706</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">7410-7410</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">7834-7834</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">9528-9532</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">10207-10211</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">10324-10324</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">12263-12263</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">17852-17852</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">19950-19950</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">20037-20037</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">20114-20114</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">20944-20944</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "researcher"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 5869, "end": 5869, "pages": [5869]}, {"start": 5939, "end": 5939, "pages": [5939]}, {"start": 6181, "end": 6181, "pages": [6181]}, {"start": 6190, "end": 6190, "pages": [6190]}, {"start": 6254, "end": 6254, "pages": [6254]}, {"start": 6263, "end": 6263, "pages": [6263]}, {"start": 6347, "end": 6347, "pages": [6347]}, {"start": 6794, "end": 6794, "pages": [6794]}, {"start": 6864, "end": 6864, "pages": [6864]}, {"start": 7209, "end": 7209, "pages": [7209]}, {"start": 7221, "end": 7221, "pages": [7221]}, {"start": 7504, "end": 7504, "pages": [7504]}, {"start": 7899, "end": 7899, "pages": [7899]}, {"start": 7911, "end": 7911, "pages": [7911]}, {"start": 8071, "end": 8071, "pages": [8071]}, {"start": 8080, "end": 8080, "pages": [8080]}, {"start": 9171, "end": 9171, "pages": [9171]}, {"start": 9850, "end": 9850, "pages": [9850]}, {"start": 13970, "end": 13970, "pages": [13970]}, {"start": 13994, "end": 13994, "pages": [13994]}, {"start": 14016, "end": 14018, "pages": [14016, 14018]}, {"start": 14470, "end": 14470, "pages": [14470]}, {"start": 14918, "end": 14918, "pages": [14918]}, {"start": 16594, "end": 16594, "pages": [16594]}, {"start": 16618, "end": 16618, "pages": [16618]}, {"start": 16640, "end": 16642, "pages": [16640, 16642]}, {"start": 17091, "end": 17091, "pages": [17091]}];
+        const pageToPath = {"5869": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005869.jpg", "5939": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005939.jpg", "6181": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006181.jpg", "6190": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006190.jpg", "6254": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006254.jpg", "6263": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006263.jpg", "6347": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006347.jpg", "6794": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006794.jpg", "6864": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006864.jpg", "7209": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007209.jpg", "7221": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007221.jpg", "7504": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007504.jpg", "7899": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007899.jpg", "7911": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007911.jpg", "8071": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008071.jpg", "8080": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008080.jpg", "9171": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009171.jpg", "9850": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009850.jpg", "13970": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013970.jpg", "13994": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013994.jpg", "14016": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014016.jpg", "14018": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014018.jpg", "14470": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014470.jpg", "14918": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014918.jpg", "16594": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016594.jpg", "16618": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016618.jpg", "16640": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016640.jpg", "16642": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016642.jpg", "17091": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017091.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005869.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005939.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006181.jpg": "...an academic and clinical researcher;, ‘she has been an exper...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006190.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006254.jpg": "...an academic and clinical researcher;, ‘she has been an exper...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006263.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006347.jpg": "...ts like sexual, abuse, a researcher can onlyrarely verify re...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006794.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006864.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007209.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007221.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007504.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007899.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007911.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008071.jpg": "...an academic and clinical researcher;, ‘she has been an exper...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008080.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009171.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009850.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013970.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013994.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014016.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014018.jpg": "...in addition t6 being a  researcher, you often serve as a co...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014470.jpg": "...ore importantly, another researcher then did a follou-up stu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014918.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016594.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016618.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016640.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016642.jpg": "...in addition t6 being a  researcher, you often serve as a co...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017091.jpg": "...ore importantly, another researcher then did a follou-up stu..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "researcher" (29 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">5869-5869</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">5939-5939</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">6181-6181</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">6190-6190</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">6254-6254</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">6263-6263</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">6347-6347</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">6794-6794</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">6864-6864</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">7209-7209</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">7221-7221</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">7504-7504</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">7899-7899</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">7911-7911</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">8071-8071</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">8080-8080</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">9171-9171</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">9850-9850</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">13970-13970</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">13994-13994</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">14016-14018</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">14470-14470</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">14918-14918</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">16594-16594</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">16618-16618</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">16640-16642</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">17091-17091</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

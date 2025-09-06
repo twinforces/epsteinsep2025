@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "headquarters"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 2833, "end": 2833, "pages": [2833]}, {"start": 3203, "end": 3203, "pages": [3203]}, {"start": 7620, "end": 7620, "pages": [7620]}, {"start": 7627, "end": 7629, "pages": [7627, 7629]}, {"start": 12636, "end": 12636, "pages": [12636]}, {"start": 18223, "end": 18223, "pages": [18223]}, {"start": 21201, "end": 21201, "pages": [21201]}, {"start": 21297, "end": 21297, "pages": [21297]}];
+        const pageToPath = {"2833": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002833.jpg", "3203": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003203.jpg", "7620": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007620.jpg", "7627": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007627.jpg", "7629": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007629.jpg", "12636": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012636.jpg", "18223": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018223.jpg", "21201": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021201.jpg", "21297": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021297.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002833.jpg": "...r‘than in brooklyn, the  headquarters of'the/easterm district,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003203.jpg": "...ponents tho departments  headquarters: are in. mw ashington, d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007620.jpg": "...lace  roundtable, twiter headquarters, “san \"francisco, ‘c ca,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007627.jpg": "...emical company corporate headquarters:  harvard medical school...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007629.jpg": "...weston, ltd., corporate headquarters g. n. wilcox memorial ho...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012636.jpg": "...ranspeerted it. back. te headquarters.  ©. es that the palm  >...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018223.jpg": "...ranspeerted it. back. te headquarters.  ©. es that the palm  >...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021201.jpg": "...t 4o. eampaneats, tinent headquarters: are:‘in n washington, d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021297.jpg": "...usly d dite:  department headquarters that raises mas that cit..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "headquarters" (9 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">2833-2833</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">3203-3203</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">7620-7620</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">7627-7629</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">12636-12636</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">18223-18223</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">21201-21201</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">21297-21297</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

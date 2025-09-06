@@ -1,0 +1,178 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "interpreted"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 2513, "end": 2513, "pages": [2513]}, {"start": 2591, "end": 2591, "pages": [2591]}, {"start": 2659, "end": 2659, "pages": [2659]}, {"start": 2669, "end": 2669, "pages": [2669]}, {"start": 2977, "end": 2978, "pages": [2977, 2978]}, {"start": 3386, "end": 3388, "pages": [3386, 3388]}, {"start": 3659, "end": 3661, "pages": [3659, 3661]}, {"start": 3671, "end": 3671, "pages": [3671]}, {"start": 4507, "end": 4507, "pages": [4507]}, {"start": 4817, "end": 4817, "pages": [4817]}, {"start": 4869, "end": 4869, "pages": [4869]}, {"start": 6272, "end": 6272, "pages": [6272]}, {"start": 6957, "end": 6957, "pages": [6957]}, {"start": 10360, "end": 10360, "pages": [10360]}, {"start": 10597, "end": 10597, "pages": [10597]}, {"start": 19351, "end": 19351, "pages": [19351]}, {"start": 19374, "end": 19374, "pages": [19374]}, {"start": 19416, "end": 19416, "pages": [19416]}, {"start": 19596, "end": 19596, "pages": [19596]}, {"start": 19623, "end": 19623, "pages": [19623]}, {"start": 20980, "end": 20980, "pages": [20980]}, {"start": 21081, "end": 21081, "pages": [21081]}, {"start": 21103, "end": 21103, "pages": [21103]}, {"start": 21111, "end": 21115, "pages": [21111, 21114, 21115]}, {"start": 21121, "end": 21121, "pages": [21121]}, {"start": 21838, "end": 21841, "pages": [21838, 21841]}, {"start": 22036, "end": 22036, "pages": [22036]}, {"start": 22129, "end": 22129, "pages": [22129]}];
+        const pageToPath = {"2513": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002513.jpg", "2591": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002591.jpg", "2659": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002659.jpg", "2669": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002669.jpg", "2977": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002977.jpg", "2978": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002978.jpg", "3386": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003386.jpg", "3388": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003388.jpg", "3659": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003659.jpg", "3661": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003661.jpg", "3671": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003671.jpg", "4507": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004507.jpg", "4817": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004817.jpg", "4869": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004869.jpg", "6272": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006272.jpg", "6957": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006957.jpg", "10360": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010360.jpg", "10597": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010597.jpg", "19351": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019351.jpg", "19374": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019374.jpg", "19416": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019416.jpg", "19596": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019596.jpg", "19623": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019623.jpg", "20980": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020980.jpg", "21081": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021081.jpg", "21103": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021103.jpg", "21111": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021111.jpg", "21114": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021114.jpg", "21115": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021115.jpg", "21121": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021121.jpg", "21838": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021838.jpg", "21841": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021841.jpg", "22036": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022036.jpg", "22129": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022129.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002513.jpg": "...6].u-s. 555; 563 (l983); interpreted lovasco as holditig-that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002591.jpg": "...h. of the npa:  ng, been,interpreted in, accordance with cont...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002659.jpg": "...es are: *to be liberally interpreted. in favor of:repose.’  l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002669.jpg": "...tutes are tobe liberally-interpreted  in favorof repose” (int...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002977.jpg": "...se in which. a eourt has interpreted a, plea agreement to bar...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002978.jpg": "...a.a  plea agreements are interpreted using principles from, c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003386.jpg": "...: t to acosta, villafana interpreted. menchel’s eniail to ica...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003388.jpg": "...clear that the defense ‘interpreted the ‘provision. ¢ ic usa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003659.jpg": "...limitations. are to be: interpreted in. favor-of repose. sec...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003661.jpg": "...could not be reasonably, interpreted as.a clear reflectionof...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003671.jpg": "...283: should be similarly interpreted—particularly ‘given-the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004507.jpg": "...thee final npa. acosta, interpreted the state  ietithat the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004817.jpg": "...heroun room.  ‘constand interpreted cosby’s actions as anoth...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004869.jpg": "...g contracts that must be interpreted according to.general pri...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006272.jpg": "...ully aciminister cd and. interpreted. psychological evaluatio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006957.jpg": "...it “reasonably [ean] be interpreted.  as cheoufagitig, a. co...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010360.jpg": "...pective jurors similarly interpreted question 25: fo  not ref...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010597.jpg": "...im” under'the cvra. is  ‘interpreted so broadly that it is:no...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019351.jpg": "...er  exception should be “interpreted. . in criminal cases.”...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019374.jpg": "...er  exception should be “interpreted. . in criminal cases.”...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019416.jpg": "...l order doctrine must be interpreted “with the utmost strictn...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019596.jpg": "...l order doctrine must be:interpreted “with the-utmost strictn...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019623.jpg": "...der excepti i should be “interpreted . . with the utmost''str...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020980.jpg": "...rospe  ‘jurors similarly-interpreted question 25: to:  not re...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021081.jpg": "...apparently has ‘broadly interpreted this case as imeanitig t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021103.jpg": "...utes are to be liberally interpreted. in  favor of repose.” l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021111.jpg": "...ued ‘that § 3283 must be interpreted. under a  categorical st...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021114.jpg": "...circuit: has. similarly interpreted. § 3283. through a  cate...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021115.jpg": "...act of congress may be  interpreted to apply retroactively....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021121.jpg": "...tes are ‘to be liberally interpreted in favor of respose.” lo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021838.jpg": "...apparently: has: broadly interpreted this case  oy  ae se aca...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021841.jpg": "...es.atorneys,” would, be  interpreted to “bind[] the united st...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022036.jpg": "...omited). courts. have: interpreted. the scope of rule: l6 (...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022129.jpg": "...this agreement-shall’be interpreted to require the bop or'th..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "interpreted" (34 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">2513-2513</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">2591-2591</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">2659-2659</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">2669-2669</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">2977-2978</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">3386-3388</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3659-3661</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">3671-3671</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">4507-4507</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">4817-4817</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">4869-4869</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">6272-6272</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">6957-6957</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">10360-10360</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">10597-10597</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">19351-19351</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">19374-19374</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">19416-19416</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">19596-19596</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">19623-19623</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">20980-20980</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">21081-21081</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">21103-21103</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">21111-21115</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">21121-21121</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">21838-21841</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">22036-22036</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">22129-22129</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

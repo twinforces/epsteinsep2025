@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "specialist"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1791, "end": 1791, "pages": [1791]}, {"start": 3397, "end": 3402, "pages": [3397, 3398, 3400, 3402]}, {"start": 3423, "end": 3423, "pages": [3423]}, {"start": 3440, "end": 3440, "pages": [3440]}, {"start": 3464, "end": 3464, "pages": [3464]}, {"start": 3602, "end": 3602, "pages": [3602]}, {"start": 3998, "end": 3998, "pages": [3998]}, {"start": 4326, "end": 4326, "pages": [4326]}, {"start": 4519, "end": 4522, "pages": [4519, 4520, 4522]}, {"start": 4545, "end": 4545, "pages": [4545]}, {"start": 4562, "end": 4562, "pages": [4562]}, {"start": 4586, "end": 4586, "pages": [4586]}, {"start": 7053, "end": 7053, "pages": [7053]}, {"start": 7847, "end": 7848, "pages": [7847, 7848]}, {"start": 8043, "end": 8043, "pages": [8043]}, {"start": 8064, "end": 8069, "pages": [8064, 8065, 8067, 8069]}, {"start": 8246, "end": 8246, "pages": [8246]}, {"start": 11503, "end": 11503, "pages": [11503]}, {"start": 11596, "end": 11596, "pages": [11596]}, {"start": 11667, "end": 11667, "pages": [11667]}, {"start": 12990, "end": 12990, "pages": [12990]}, {"start": 14534, "end": 14534, "pages": [14534]}, {"start": 14824, "end": 14824, "pages": [14824]}, {"start": 15699, "end": 15699, "pages": [15699]}, {"start": 16112, "end": 16112, "pages": [16112]}, {"start": 17155, "end": 17155, "pages": [17155]}, {"start": 18576, "end": 18576, "pages": [18576]}, {"start": 21396, "end": 21396, "pages": [21396]}, {"start": 21622, "end": 21622, "pages": [21622]}];
+        const pageToPath = {"1791": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001791.jpg", "3397": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003397.jpg", "3398": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003398.jpg", "3400": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003400.jpg", "3402": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003402.jpg", "3423": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003423.jpg", "3440": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003440.jpg", "3464": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003464.jpg", "3602": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003602.jpg", "3998": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003998.jpg", "4326": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004326.jpg", "4519": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004519.jpg", "4520": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004520.jpg", "4522": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004522.jpg", "4545": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004545.jpg", "4562": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004562.jpg", "4586": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004586.jpg", "7053": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007053.jpg", "7847": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007847.jpg", "7848": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007848.jpg", "8043": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008043.jpg", "8064": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008064.jpg", "8065": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008065.jpg", "8067": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008067.jpg", "8069": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008069.jpg", "8246": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008246.jpg", "11503": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011503.jpg", "11596": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011596.jpg", "11667": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011667.jpg", "12990": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012990.jpg", "14534": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014534.jpg", "14824": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014824.jpg", "15699": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015699.jpg", "16112": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016112.jpg", "17155": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017155.jpg", "18576": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018576.jpg", "21396": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021396.jpg", "21622": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021622.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001791.jpg": "...the ¢ asked the records. specialist to: s-provide the prosec...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003397.jpg": "...system. the ebds ‘vietim specialist. ‘ss ‘case: management:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003398.jpg": "...on. inte epstein, the’ ‘specialist forthe west. palm.beach...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003400.jpg": "...time that the ebi vietim specialist was preparing ‘and. send...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003402.jpg": "...etims had contact:  ctim specialist] 2  information for ‘the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003423.jpg": "...illafana. in an : tetim specialist sent. a “standard form [...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003440.jpg": "...tively, the fbi vietini ‘specialist srairemivted. afi. ‘anre...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003464.jpg": "...at time. the e bi'vi tim specialist  the wording of: those l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003602.jpg": "...an. i am the legal video specialist. the court reporter is l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003998.jpg": "...y examined by a computer specialist to determine aetial.  fi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004326.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004519.jpg": "...system the: fbe . vietim specialist  ‘  the j  _———  sis sti...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004520.jpg": "...nte epstein, the victim. specialist forthe west. palm.beach...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004522.jpg": "...o’s leters to victims  m specialist was preparing and sendin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004545.jpg": "...o inter.  a8 the: victim specialist‘later generated.an.addit...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004562.jpg": "...ectively, the fbi vieti ‘specialist srairamnivted 2 ai ‘anre...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004586.jpg": "...that time. the bi vi tim specialist.  ‘s ‘and 3l, case > age...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007053.jpg": "...y drescher, a@ paralegal specialist in our spelge.  ehe cour...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007847.jpg": "...hemist & document dating specialist \\ssociates.forensic: lab...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007848.jpg": "...(o9/98-ol/99) technical specialist  duties: serve ‘as techn...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008043.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008064.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008065.jpg": "..., a coniputer forerisies specialist, to testify”  about:  th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008067.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008069.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008246.jpg": "..., janlag us l6 paralegal specialist sunni drescher.  the gou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011503.jpg": "...o speak: with,  a victim specialist, or if you have any ques...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011596.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011667.jpg": "...amanda. young  paralegal specialist of the fbi, and detectiv...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012990.jpg": "...tle? a. staff operations specialist.  qo. hew leng have you...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014534.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014824.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015699.jpg": "...count officers:  service specialist’ riley/hornbecker  jeffr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016112.jpg": "...amanda. young  paralegal specialist of the fbi, and detectiv...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017155.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018576.jpg": "...tle? a. staff operations specialist.  qo. hew leng have you...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021396.jpg": "...gent directed the victim specialist to: generate:z an. initi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021622.jpg": ""};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "specialist" (38 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1791-1791</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">3397-3402</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">3423-3423</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3440-3440</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">3464-3464</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">3602-3602</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3998-3998</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">4326-4326</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">4519-4522</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">4545-4545</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">4562-4562</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">4586-4586</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">7053-7053</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">7847-7848</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">8043-8043</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">8064-8069</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">8246-8246</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">11503-11503</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">11596-11596</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">11667-11667</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">12990-12990</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">14534-14534</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">14824-14824</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">15699-15699</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">16112-16112</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">17155-17155</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">18576-18576</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">21396-21396</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">21622-21622</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

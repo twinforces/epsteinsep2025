@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "coordinate"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1002, "end": 1002, "pages": [1002]}, {"start": 1628, "end": 1628, "pages": [1628]}, {"start": 3409, "end": 3409, "pages": [3409]}, {"start": 3528, "end": 3528, "pages": [3528]}, {"start": 4091, "end": 4091, "pages": [4091]}, {"start": 4531, "end": 4531, "pages": [4531]}, {"start": 5224, "end": 5224, "pages": [5224]}, {"start": 7407, "end": 7407, "pages": [7407]}, {"start": 8850, "end": 8850, "pages": [8850]}, {"start": 9624, "end": 9624, "pages": [9624]}, {"start": 10524, "end": 10524, "pages": [10524]}, {"start": 19920, "end": 19920, "pages": [19920]}, {"start": 20473, "end": 20473, "pages": [20473]}, {"start": 20574, "end": 20574, "pages": [20574]}, {"start": 21474, "end": 21474, "pages": [21474]}];
+        const pageToPath = {"1002": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001002.jpg", "1628": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001628.jpg", "3409": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003409.jpg", "3528": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003528.jpg", "4091": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004091.jpg", "4531": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004531.jpg", "5224": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005224.jpg", "7407": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007407.jpg", "8850": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008850.jpg", "9624": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009624.jpg", "10524": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010524.jpg", "19920": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019920.jpg", "20473": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020473.jpg", "20574": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020574.jpg", "21474": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021474.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001002.jpg": "...t: and will. be: able to-coordinate: with mdc legal. counsel...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001628.jpg": "...nt: and. will beable ‘to coordinate: with, mdc legal, counse...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003409.jpg": "...eepresetati & “fot the  coordinate hou t to: inform n the v...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003528.jpg": "...icking so that ak. could coordinate. so  . dan stein diso wo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004091.jpg": "...and that. mdc staff will coordinate with defense counsel so...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004531.jpg": "...ptember 26,  samy ropes  coordinate hou to: inform the victi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005224.jpg": "...e, -defense:counsel may: coordinate aceess for the defendant...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007407.jpg": "...tim-6 (gx- l:5). we will coordinate with the sovernment to p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008850.jpg": "...: ‘pu ublic: docket and. coordinate:with the government fo p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009624.jpg": "...executive’s office will coordinate scating in courtroom ll:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010524.jpg": "...exccutive’s office-will, coordinate seating, in,  ‘courtroom...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019920.jpg": "...t: and will. be: able to-coordinate: with mdc legal. counsel...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020473.jpg": "...« wietinn witness u  may coordinate access :‘for membe re  s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020574.jpg": "...unit and the  ge.  l-may coordinate aceess for smembers of t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021474.jpg": "...ritize notification and: coordinate communication  fo 2,  :..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "coordinate" (15 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1002-1002</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1628-1628</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">3409-3409</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3528-3528</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">4091-4091</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">4531-4531</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">5224-5224</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">7407-7407</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">8850-8850</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">9624-9624</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">10524-10524</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">19920-19920</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">20473-20473</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">20574-20574</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">21474-21474</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

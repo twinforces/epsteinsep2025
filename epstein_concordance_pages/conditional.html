@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "conditional"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 869, "end": 869, "pages": [869]}, {"start": 1217, "end": 1217, "pages": [1217]}, {"start": 1279, "end": 1279, "pages": [1279]}, {"start": 2240, "end": 2240, "pages": [2240]}, {"start": 2710, "end": 2710, "pages": [2710]}, {"start": 2772, "end": 2772, "pages": [2772]}, {"start": 3704, "end": 3704, "pages": [3704]}, {"start": 5839, "end": 5840, "pages": [5839, 5840]}, {"start": 6764, "end": 6765, "pages": [6764, 6765]}, {"start": 7102, "end": 7102, "pages": [7102]}, {"start": 20135, "end": 20135, "pages": [20135]}, {"start": 20197, "end": 20197, "pages": [20197]}, {"start": 20789, "end": 20789, "pages": [20789]}, {"start": 21116, "end": 21116, "pages": [21116]}];
+        const pageToPath = {"869": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000869.jpg", "1217": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001217.jpg", "1279": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001279.jpg", "2240": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002240.jpg", "2710": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002710.jpg", "2772": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002772.jpg", "3704": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003704.jpg", "5839": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005839.jpg", "5840": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005840.jpg", "6764": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006764.jpg", "6765": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006765.jpg", "7102": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007102.jpg", "20135": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020135.jpg", "20197": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020197.jpg", "20789": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020789.jpg", "21116": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021116.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000869.jpg": "...arises’ that no form of conditional. releaserwill. be adequa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001217.jpg": "...arises’ that no form of:conditional release will. be adequat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001279.jpg": "...arises’ that no form of conditional. releaserwill. be adequa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002240.jpg": "...ises” that no: form. of ‘conditional. release will be: adequa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002710.jpg": "...mited in evidence on ‘a, conditional basis,  subject to the l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002772.jpg": "...arises’ that no form of conditional. releaserwill. be adequa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003704.jpg": "...admited at  trial. on.a' conditional basis. ifthe court: dete...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005839.jpg": "...d, circuit's practice of conditional, admission, of co-conspi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005840.jpg": "...be admited at trial ona. conditional. basis,” and.'to the ext...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006764.jpg": "...d, circuit's practice of conditional, admission, of co-conspi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006765.jpg": "...be admited at trial ona. conditional. basis,” and.'to the ext...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007102.jpg": "...stablished law megarding conditional admission, of the 66-gon...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020135.jpg": "...arises’ that no form of:conditional release will. be adequat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020197.jpg": "...arises’ that no form of conditional. releaserwill. be adequa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020789.jpg": "...es that:the  ‘trial on a conditional‘basis.  ‘mistrial.  l993...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021116.jpg": "...would emit” as.a “future conditional, phrase”); salahuddin. v..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "conditional" (16 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">869-869</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1217-1217</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1279-1279</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">2240-2240</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">2710-2710</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">2772-2772</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3704-3704</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">5839-5840</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">6764-6765</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">7102-7102</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">20135-20135</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">20197-20197</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">20789-20789</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">21116-21116</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

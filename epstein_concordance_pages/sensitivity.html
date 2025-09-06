@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "sensitivity"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 709, "end": 710, "pages": [709, 710]}, {"start": 1018, "end": 1018, "pages": [1018]}, {"start": 1891, "end": 1891, "pages": [1891]}, {"start": 3474, "end": 3474, "pages": [3474]}, {"start": 3488, "end": 3488, "pages": [3488]}, {"start": 4596, "end": 4596, "pages": [4596]}, {"start": 4610, "end": 4610, "pages": [4610]}, {"start": 5905, "end": 5909, "pages": [5905, 5909]}, {"start": 6830, "end": 6834, "pages": [6830, 6834]}, {"start": 7175, "end": 7175, "pages": [7175]}, {"start": 9011, "end": 9011, "pages": [9011]}, {"start": 9702, "end": 9702, "pages": [9702]}, {"start": 11504, "end": 11504, "pages": [11504]}, {"start": 19936, "end": 19936, "pages": [19936]}, {"start": 21188, "end": 21188, "pages": [21188]}];
+        const pageToPath = {"709": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000709.jpg", "710": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000710.jpg", "1018": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001018.jpg", "1891": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001891.jpg", "3474": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003474.jpg", "3488": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003488.jpg", "4596": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004596.jpg", "4610": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004610.jpg", "5905": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005905.jpg", "5909": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005909.jpg", "6830": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006830.jpg", "6834": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006834.jpg", "7175": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007175.jpg", "9011": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009011.jpg", "9702": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009702.jpg", "11504": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011504.jpg", "19936": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019936.jpg", "21188": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021188.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000709.jpg": "...we are encouraged by the sensitivity of the atorneys for the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000710.jpg": "...use the e6urt, has shoun sensitivity te vaetims anid vaetims'...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001018.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001891.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003474.jpg": "...th, fairness, dni,  and. sensitivity. acosta’  ast  rare  exp...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003488.jpg": "...he ‘forthrightness. and ‘sensitivity’ ¢ expected, ‘by. the de...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004596.jpg": ".... fairness, dignit  and. sensitivity. acosta’  ast  428;  exp...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004610.jpg": "...he ‘forthrightness. and ‘sensitivity’ ¢ expected, ‘by. the de...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005905.jpg": "...een a need to belong and sensitivity, to social. cues. sexual...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005909.jpg": "...d to-belong and.enhanced sensitivity to bi erin 3o tno  ol so...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006830.jpg": "...een a need to belong and sensitivity, to social. cues. sexual...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006834.jpg": "...d to-belong and.enhanced sensitivity to bi erin 3o tno  ol so...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007175.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009011.jpg": "...the aecusations. and the sensitivity of sexual assault, sexua...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009702.jpg": "...the aecusations. and the sensitivity of sexual assault, sexua...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011504.jpg": "...is, with.coipassion. and sensitivity was, critical.to the suc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019936.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021188.jpg": "...the: forthrightness: and sensitivity expected. by. the  jaw:..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "sensitivity" (18 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">709-710</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1018-1018</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1891-1891</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3474-3474</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">3488-3488</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">4596-4596</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">4610-4610</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">5905-5909</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">6830-6834</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">7175-7175</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">9011-9011</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">9702-9702</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">11504-11504</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">19936-19936</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">21188-21188</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

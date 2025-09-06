@@ -1,0 +1,283 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "fundamental"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 550, "end": 550, "pages": [550]}, {"start": 646, "end": 646, "pages": [646]}, {"start": 751, "end": 751, "pages": [751]}, {"start": 1224, "end": 1224, "pages": [1224]}, {"start": 1635, "end": 1635, "pages": [1635]}, {"start": 2247, "end": 2247, "pages": [2247]}, {"start": 2590, "end": 2592, "pages": [2590, 2592]}, {"start": 2607, "end": 2607, "pages": [2607]}, {"start": 2664, "end": 2665, "pages": [2664, 2665]}, {"start": 2698, "end": 2701, "pages": [2698, 2701]}, {"start": 3013, "end": 3013, "pages": [3013]}, {"start": 3068, "end": 3068, "pages": [3068]}, {"start": 3081, "end": 3086, "pages": [3081, 3086]}, {"start": 3122, "end": 3122, "pages": [3122]}, {"start": 3719, "end": 3719, "pages": [3719]}, {"start": 3884, "end": 3885, "pages": [3884, 3885]}, {"start": 3941, "end": 3941, "pages": [3941]}, {"start": 3970, "end": 3970, "pages": [3970]}, {"start": 4088, "end": 4088, "pages": [4088]}, {"start": 4285, "end": 4285, "pages": [4285]}, {"start": 4791, "end": 4791, "pages": [4791]}, {"start": 4811, "end": 4811, "pages": [4811]}, {"start": 4865, "end": 4892, "pages": [4865, 4866, 4868, 4869, 4870, 4871, 4874, 4878, 4880, 4882, 4884, 4885, 4886, 4887, 4890, 4892]}, {"start": 4957, "end": 4958, "pages": [4957, 4958]}, {"start": 5491, "end": 5491, "pages": [5491]}, {"start": 5905, "end": 5905, "pages": [5905]}, {"start": 5976, "end": 5976, "pages": [5976]}, {"start": 6059, "end": 6059, "pages": [6059]}, {"start": 6429, "end": 6429, "pages": [6429]}, {"start": 6453, "end": 6453, "pages": [6453]}, {"start": 6830, "end": 6830, "pages": [6830]}, {"start": 6901, "end": 6901, "pages": [6901]}, {"start": 7409, "end": 7409, "pages": [7409]}, {"start": 7548, "end": 7548, "pages": [7548]}, {"start": 8229, "end": 8229, "pages": [8229]}, {"start": 8835, "end": 8835, "pages": [8835]}, {"start": 8852, "end": 8852, "pages": [8852]}, {"start": 8900, "end": 8900, "pages": [8900]}, {"start": 9009, "end": 9009, "pages": [9009]}, {"start": 9020, "end": 9020, "pages": [9020]}, {"start": 9044, "end": 9044, "pages": [9044]}, {"start": 9055, "end": 9055, "pages": [9055]}, {"start": 9109, "end": 9109, "pages": [9109]}, {"start": 9196, "end": 9196, "pages": [9196]}, {"start": 9220, "end": 9220, "pages": [9220]}, {"start": 9607, "end": 9607, "pages": [9607]}, {"start": 9700, "end": 9700, "pages": [9700]}, {"start": 9711, "end": 9711, "pages": [9711]}, {"start": 9735, "end": 9735, "pages": [9735]}, {"start": 9746, "end": 9746, "pages": [9746]}, {"start": 9875, "end": 9875, "pages": [9875]}, {"start": 9899, "end": 9899, "pages": [9899]}, {"start": 10274, "end": 10274, "pages": [10274]}, {"start": 10287, "end": 10287, "pages": [10287]}, {"start": 10756, "end": 10756, "pages": [10756]}, {"start": 11416, "end": 11416, "pages": [11416]}, {"start": 15067, "end": 15067, "pages": [15067]}, {"start": 15147, "end": 15147, "pages": [15147]}, {"start": 19432, "end": 19432, "pages": [19432]}, {"start": 19490, "end": 19490, "pages": [19490]}, {"start": 19650, "end": 19650, "pages": [19650]}, {"start": 20142, "end": 20142, "pages": [20142]}, {"start": 21768, "end": 21768, "pages": [21768]}];
+        const pageToPath = {"550": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000550.jpg", "646": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000646.jpg", "751": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000751.jpg", "1224": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001224.jpg", "1635": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001635.jpg", "2247": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002247.jpg", "2590": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002590.jpg", "2592": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002592.jpg", "2607": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002607.jpg", "2664": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002664.jpg", "2665": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002665.jpg", "2698": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002698.jpg", "2701": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002701.jpg", "3013": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003013.jpg", "3068": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003068.jpg", "3081": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003081.jpg", "3086": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003086.jpg", "3122": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003122.jpg", "3719": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003719.jpg", "3884": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003884.jpg", "3885": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003885.jpg", "3941": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003941.jpg", "3970": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003970.jpg", "4088": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004088.jpg", "4285": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004285.jpg", "4791": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004791.jpg", "4811": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004811.jpg", "4865": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004865.jpg", "4866": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004866.jpg", "4868": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004868.jpg", "4869": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004869.jpg", "4870": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004870.jpg", "4871": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004871.jpg", "4874": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004874.jpg", "4878": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004878.jpg", "4880": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004880.jpg", "4882": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004882.jpg", "4884": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004884.jpg", "4885": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004885.jpg", "4886": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004886.jpg", "4887": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004887.jpg", "4890": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004890.jpg", "4892": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004892.jpg", "4957": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004957.jpg", "4958": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004958.jpg", "5491": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005491.jpg", "5905": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005905.jpg", "5976": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005976.jpg", "6059": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006059.jpg", "6429": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006429.jpg", "6453": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006453.jpg", "6830": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006830.jpg", "6901": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006901.jpg", "7409": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007409.jpg", "7548": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007548.jpg", "8229": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008229.jpg", "8835": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008835.jpg", "8852": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008852.jpg", "8900": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008900.jpg", "9009": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009009.jpg", "9020": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009020.jpg", "9044": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009044.jpg", "9055": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009055.jpg", "9109": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009109.jpg", "9196": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009196.jpg", "9220": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009220.jpg", "9607": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009607.jpg", "9700": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009700.jpg", "9711": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009711.jpg", "9735": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009735.jpg", "9746": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009746.jpg", "9875": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009875.jpg", "9899": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009899.jpg", "10274": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010274.jpg", "10287": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010287.jpg", "10756": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010756.jpg", "11416": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011416.jpg", "15067": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015067.jpg", "15147": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015147.jpg", "19432": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019432.jpg", "19490": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019490.jpg", "19650": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019650.jpg", "20142": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020142.jpg", "21768": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021768.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000550.jpg": "...te them. out.  it's just fundamental that. mr. epstein is pre...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000646.jpg": "...a? ae with algniey. ehe fundamental substantive principle wh...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000751.jpg": "...are consistent with the fundamental, ‘purpos  phat ran) mi e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001224.jpg": "...bail alters the court’s fundamental conclusion that flight w...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001635.jpg": "...scd ‘the ial jury. this ‘fundamental guarantee is: part ofa c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002247.jpg": "...ail.alters the ‘court”s, fundamental :conclusion that flight...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002590.jpg": "...ts, involve.  waivers of fundamental. constitutional rights,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002592.jpg": "...lly identified by narne. fundamental principles .of contract...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002607.jpg": "...cnits involve waivers of fundamental. constitutional rights,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002664.jpg": "...tary. considerations” of:fundamental “fairness. * landgraf, s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002665.jpg": "...violate all. notions, of fundamental fairness.°  ® sve motion...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002698.jpg": "...m knouing: even the most fundamental. information. about the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002701.jpg": "...es. without knouing‘this fundamental information, ms.  ‘preve...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003013.jpg": "...: that.if departs. front fundamental.  tnited states vi. lou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003068.jpg": "...ricither specified what “fundamental right” the government, a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003081.jpg": "...dant: cannot demonstrate fundamental.  ambiguity simply by sh...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003086.jpg": "...ipo  ambiguity was not. “fundamental.”  ‘ohin  (concluding th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003122.jpg": "..., that grooming’  was.a, fundamental part; of both cx tims to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003719.jpg": "...unt was’ “snsedpreni for fundamental ambiguity.” resp; l2o. o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003884.jpg": "...the government. inverts fundamental, principles of contract....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003885.jpg": "...ings, are:intended—turns fundamental contract. interpretation...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003941.jpg": "...testify is personal and. fundamental, /d..(“[t]he decision wh...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003970.jpg": "...estify: is personal and. fundamental. jd.  not be made for [h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004088.jpg": "...laudable,  cainot. trump fundamental. liberties, “inthe admin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004285.jpg": "...sult is consistent with, fundamental, fairness. allou.  scale...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004791.jpg": "...ish the first and. niost:fundamental clement of.a violation....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004811.jpg": "...es of dtie ‘process and. fundamental fairness..  (dd. at: the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004865.jpg": "...estify, the principle of fundamental fairness that undergirds...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004866.jpg": "...led by the principle: of fundamental fairness, ‘a defendant:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004868.jpg": "...tates of due process and fundamental fairness. the contours a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004869.jpg": "...r. l983):  (holding that fundamental fairness requires a pros...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004870.jpg": "...or by application of the fundamental fairness  decisions un...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004871.jpg": "...from basic principles of fundamental fairness, nor :can it be...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004874.jpg": "...uee the deprivation of a fundamental  not made for the purpos...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004878.jpg": "...)). to ensure that these fundamental freedoms are “scrupulous...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004880.jpg": "...te cosby strip cosby ofa fundamental constitutional right, bu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004882.jpg": "...t and other parts of our fundamental charter, this court has...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004884.jpg": "...constitutions safeguard fundamental rights  force to the sop...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004885.jpg": "...iples of due process and fundamental fairness to which all. a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004886.jpg": "...arlier, the principle of fundamental fairness, as embodied in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004887.jpg": "...rosecute can satisfy the fundamental demands of due process....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004890.jpg": "...ucement, cosby gave up a fundamental  32 id. at l....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004892.jpg": "...lts in a gri  affront to fundamental fairness; part  an a dec...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004957.jpg": "...tates of due process and fundamental fairness.  (id. at 55)....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004958.jpg": "...tent with. principles of fundamental fairness,  (emphasis add...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005491.jpg": "...criminal. trial. is  ‘a, fundamental constitutional, right se...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005905.jpg": "...i ‘to ‘suggest*that-the; fundamental humarr need, to belong*m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005976.jpg": "...s’ a full  is. maxwell's fundamental. rights to. presenta def...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006059.jpg": "...ep deprivation. causes a fundamental:problem with.  pe ny pep...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006429.jpg": "...ess the defendant-has a. fundamental righto: remain, silent,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006453.jpg": "...criminal. trial. is  ‘a, fundamental constitutional, right se...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006830.jpg": "...i ‘to ‘suggest*that-the; fundamental humarr need, to belong*m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006901.jpg": "...s’ a full  is. maxwell's fundamental. rights to. presenta def...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007409.jpg": "...e nathan,  there are two fundamental, flaws with, the governm...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007548.jpg": "...sy fails lnvetitute for fundamental  = conem  peychelogte re...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008229.jpg": "...the massage toom.  the ‘fundamental flaw in the ¢ government...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008835.jpg": "...new frial is appropriate—fundamental. article i determination...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008852.jpg": "...ved: ‘ms. maxwell -of'a  fundamental constitutional. right =k...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008900.jpg": "...ved: ‘ms. maxwell -of'a  fundamental constitutional. right =k...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009009.jpg": "...guarantecs thal by jury. fundamental to that guarantee is the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009020.jpg": "...nd that his story-was.  ‘fundamental, to the jury’s verdict....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009044.jpg": "...fundamental. instruction ‘in every f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009055.jpg": "...xwell and the concept of fundamental fairness, houever, are t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009109.jpg": "...ntrue answers about  the fundamental issue of whether he hims...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009196.jpg": "...o this. suffers from two fundamental. errors. the first is to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009220.jpg": "...that  is the premise and fundamental guarafitee ofthe crimiti...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009607.jpg": "...: that if departs ‘frony fundamental  notions of “fair play.”...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009700.jpg": "...guarantecs thal by jury. fundamental to that guarantee is the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009711.jpg": "...nd that his story-was.  ‘fundamental, to the jury’s verdict....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009735.jpg": "...fundamental. instruction ‘in every f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009746.jpg": "...xwell and the concept of fundamental fairness, houever, are t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009875.jpg": "...o this. suffers from two fundamental. errors. the first is to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009899.jpg": "...that  is the premise and fundamental guaratitee ofthe crimiti...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010274.jpg": "...led that the jury: had.a fundamental. misunderstanding of  cl...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010287.jpg": "...of  ‘because they were: “fundamental  operation.” (opp: at 32...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010756.jpg": "...new frial is appropriate—fundamental. article i determination...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011416.jpg": "...(a ) thus recognizes: a fundamental principle i in the lawye...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015067.jpg": "...are consistent with the fundamental, ‘purpos  phat ran) mi e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015147.jpg": "....989) (“only a defect so fundamental that it causes the grand...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019432.jpg": "...second, to preserve her fundamental constitutional right to....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019490.jpg": "...scd ‘the ial jury. this ‘fundamental guarantee is: part ofa c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019650.jpg": "...s brief suffers from two fundamental flaws. it obscures the r...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020142.jpg": "...bail alters the court’s fundamental conclusion that flight w...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021768.jpg": "...therwise, a violation of fundamental  fairness arises if the..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "fundamental" (84 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">550-550</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">646-646</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">751-751</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">1224-1224</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">1635-1635</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">2247-2247</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">2590-2592</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">2607-2607</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">2664-2665</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">2698-2701</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">3013-3013</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">3068-3068</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">3081-3086</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">3122-3122</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">3719-3719</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">3884-3885</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">3941-3941</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">3970-3970</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">4088-4088</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">4285-4285</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">4791-4791</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">4811-4811</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">4865-4892</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">4957-4958</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">5491-5491</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">5905-5905</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">5976-5976</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">6059-6059</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">6429-6429</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">6453-6453</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">6830-6830</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">6901-6901</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">7409-7409</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">7548-7548</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">8229-8229</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">8835-8835</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">8852-8852</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">8900-8900</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">9009-9009</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">9020-9020</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">9044-9044</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">9055-9055</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">9109-9109</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">9196-9196</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">9220-9220</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(45, 0); return false;">9607-9607</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(46, 0); return false;">9700-9700</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(47, 0); return false;">9711-9711</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(48, 0); return false;">9735-9735</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(49, 0); return false;">9746-9746</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(50, 0); return false;">9875-9875</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(51, 0); return false;">9899-9899</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(52, 0); return false;">10274-10274</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(53, 0); return false;">10287-10287</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(54, 0); return false;">10756-10756</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(55, 0); return false;">11416-11416</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(56, 0); return false;">15067-15067</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(57, 0); return false;">15147-15147</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(58, 0); return false;">19432-19432</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(59, 0); return false;">19490-19490</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(60, 0); return false;">19650-19650</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(61, 0); return false;">20142-20142</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(62, 0); return false;">21768-21768</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

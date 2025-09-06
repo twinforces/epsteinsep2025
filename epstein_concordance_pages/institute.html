@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "institute"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 7, "end": 10, "pages": [7, 10]}, {"start": 309, "end": 309, "pages": [309]}, {"start": 316, "end": 316, "pages": [316]}, {"start": 2604, "end": 2604, "pages": [2604]}, {"start": 2617, "end": 2617, "pages": [2617]}, {"start": 3648, "end": 3648, "pages": [3648]}, {"start": 3878, "end": 3878, "pages": [3878]}, {"start": 3887, "end": 3887, "pages": [3887]}, {"start": 4284, "end": 4284, "pages": [4284]}, {"start": 5272, "end": 5272, "pages": [5272]}, {"start": 5655, "end": 5656, "pages": [5655, 5656]}, {"start": 6617, "end": 6618, "pages": [6617, 6618]}, {"start": 7487, "end": 7487, "pages": [7487]}, {"start": 7544, "end": 7566, "pages": [7544, 7547, 7548, 7550, 7552, 7553, 7557, 7559, 7561, 7562, 7566]}, {"start": 7597, "end": 7600, "pages": [7597, 7598, 7600]}, {"start": 7607, "end": 7619, "pages": [7607, 7609, 7613, 7614, 7615, 7616, 7618, 7619]}, {"start": 7627, "end": 7628, "pages": [7627, 7628]}, {"start": 7648, "end": 7648, "pages": [7648]}, {"start": 7667, "end": 7669, "pages": [7667, 7669]}, {"start": 7693, "end": 7693, "pages": [7693]}, {"start": 7826, "end": 7828, "pages": [7826, 7828]}, {"start": 7863, "end": 7868, "pages": [7863, 7867, 7868]}, {"start": 8126, "end": 8128, "pages": [8126, 8128]}, {"start": 8152, "end": 8152, "pages": [8152]}, {"start": 11485, "end": 11485, "pages": [11485]}, {"start": 14856, "end": 14859, "pages": [14856, 14859]}, {"start": 15334, "end": 15334, "pages": [15334]}, {"start": 20764, "end": 20764, "pages": [20764]}, {"start": 21077, "end": 21077, "pages": [21077]}, {"start": 21509, "end": 21509, "pages": [21509]}, {"start": 21675, "end": 21679, "pages": [21675, 21679]}, {"start": 21755, "end": 21755, "pages": [21755]}, {"start": 21800, "end": 21803, "pages": [21800, 21803]}, {"start": 21832, "end": 21834, "pages": [21832, 21834]}, {"start": 21853, "end": 21856, "pages": [21853, 21856]}, {"start": 21883, "end": 21886, "pages": [21883, 21886]}];
+        const pageToPath = {"7": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000007.jpg", "10": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000010.jpg", "309": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000309.jpg", "316": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000316.jpg", "2604": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002604.jpg", "2617": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002617.jpg", "3648": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003648.jpg", "3878": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003878.jpg", "3887": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003887.jpg", "4284": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004284.jpg", "5272": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005272.jpg", "5655": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005655.jpg", "5656": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005656.jpg", "6617": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006617.jpg", "6618": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006618.jpg", "7487": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007487.jpg", "7544": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007544.jpg", "7547": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007547.jpg", "7548": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007548.jpg", "7550": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007550.jpg", "7552": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007552.jpg", "7553": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007553.jpg", "7557": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007557.jpg", "7559": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007559.jpg", "7561": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007561.jpg", "7562": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007562.jpg", "7566": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007566.jpg", "7597": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007597.jpg", "7598": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007598.jpg", "7600": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007600.jpg", "7607": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007607.jpg", "7609": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007609.jpg", "7613": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007613.jpg", "7614": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007614.jpg", "7615": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007615.jpg", "7616": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007616.jpg", "7618": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007618.jpg", "7619": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007619.jpg", "7627": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007627.jpg", "7628": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007628.jpg", "7648": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007648.jpg", "7667": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007667.jpg", "7669": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007669.jpg", "7693": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007693.jpg", "7826": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007826.jpg", "7828": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007828.jpg", "7863": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007863.jpg", "7867": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007867.jpg", "7868": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007868.jpg", "8126": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008126.jpg", "8128": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008128.jpg", "8152": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008152.jpg", "11485": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011485.jpg", "14856": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014856.jpg", "14859": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014859.jpg", "15334": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015334.jpg", "20764": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020764.jpg", "21077": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021077.jpg", "21509": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021509.jpg", "21675": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021675.jpg", "21679": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021679.jpg", "21755": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021755.jpg", "21800": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021800.jpg", "21803": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021803.jpg", "21832": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021832.jpg", "21834": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021834.jpg", "21853": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021853.jpg", "21856": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021856.jpg", "21883": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021883.jpg", "21886": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021886.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000007.jpg": "...o agrees that ‘it -v  it institute any criminal  charges ag...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000010.jpg": "...e[d] that it w[ould] not:institute any criminal charges aga...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000309.jpg": "...oper and desirable ‘to. ‘institute a.  criminal, prosecutio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000316.jpg": "...y’ — ‘whose authority fo institute: criminal, charges again...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002604.jpg": "...united, states will:not “institute. any criminal charges ag...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002617.jpg": "...agrees that it will not institute any criminal charges ‘ag...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003648.jpg": "...—  5. ‘defense: research institute.  federal. bar associati...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003878.jpg": "...ed states . . . will not institute any  criminal. charges a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003887.jpg": "...the] fice. ...will not  institute anyeriminal. charges aga...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004284.jpg": "...united, states” will not institute any. ‘cr  “avainst any p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005272.jpg": "...s association the media. institute:  society « of. bit ronm...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005655.jpg": "...a le wy ad  yehiatric: institute:  bn reed wn rr ry rn ee...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005656.jpg": "...2olo-2ol2: ‘leadership institute for women,in psychology:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006617.jpg": "...a win edy nd  yehiatric: institute:  bn reed wn er ry rine...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006618.jpg": "...2olo-2ol2: ‘leadership institute for women.in psy ‘cholog...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007487.jpg": "...e scientist at the  salk institute for biological studies....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007544.jpg": "...es, stn valle gy. annual institute, ‘georgetoun university...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007547.jpg": "...: vancouver, 7 canada  ‘institute, wash. ‘dc gommitec for...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007548.jpg": "...seatle  opkins! medical institute-fmsf, sari  “diego 7 sou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007550.jpg": "...rence, { 2oo3 ‘national. institute on jleaching of psycholo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007552.jpg": "...a institution, ny  aspen institute , co - federal rea or th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007553.jpg": "...agency), va.  ‘radcliff institute; harvard univ,, (dean’:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007557.jpg": "...ins university (national institute  of general medical scie...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007559.jpg": "...2-l988 medical director; institute of law, psychiatry and p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007561.jpg": "...gray foundation; clarke institute of psychiatry, toronto)...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007562.jpg": "...s); the family research  institute, purdue university:  com...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007566.jpg": "...ania, funded by national institute of justice grant no. 79-...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007597.jpg": ".... report'to the national institute of justice, washington,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007598.jpg": "...jury prevention. in: the institute of medicine, national ac...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007600.jpg": "...nal research council and institute of medicine: injury in a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007607.jpg": "...current concepts, clarke institute,  university of toronto,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007609.jpg": "...joint conference  of the institute of psychiatry, the royal...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007613.jpg": "...minar, defense, research institute, dallas, texas; april l5...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007614.jpg": "...liability ‘for’ research institute, boston, massachusets, m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007615.jpg": "...inar, _ defense research institute, miami,  dietz pe: “pedo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007616.jpg": "...riminal mind,” the semel institute for neuroscience & human...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007618.jpg": "...identif defense research institute sexual torts s november...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007619.jpg": "...eminar, defense research institute; san diego, ca, november...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007627.jpg": "...augusta mental health institute, augusta, “maine califor...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007628.jpg": "...iation ‘criminal justice institute minnesota state bar asso...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007648.jpg": "...5  houard hughes medical institute, webinar: principles of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007667.jpg": "...e of forensic: examiners institute  diplomate, american boa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007669.jpg": "...: of forensic: examiners institute member, physicians socie...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007693.jpg": "...ntral florida's learning institute for elders (life) progra...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007826.jpg": "...e crimital law, judicial institute january '8, 2oo4):  orie...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007828.jpg": "...-- moderator - judicial ‘institute - may 22',.2oo3.,  lawye...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007863.jpg": "...nter, bh ic  fegas: pain institute-and me  of justice  imit...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007867.jpg": "...m, professional training institute, buraini, onvan2oo8  cha...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007868.jpg": "...ion and image analysis:  institute of technology; noveniber...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008126.jpg": "...e of forensic: examiners institute  diplomate, american boa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008128.jpg": "...: of forensic: examiners institute member, physicians socie...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008152.jpg": "...ntral florida's learning institute for elders (life) progra...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011485.jpg": "..., the administrator will institute all necessary rieasures....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014856.jpg": "...o agrees that ‘it -v  it institute any criminal  charges ag...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014859.jpg": "...ee[d] that it would] not:institute any criminal charges aga...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015334.jpg": "...egiliasteen martin nouak institute.f oradvanced' study.  tr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020764.jpg": "...agrees: that it willnot institute;any criminal  a  l at.....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021077.jpg": "...agrees that it will not institute any criminal charges aga...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021509.jpg": "...agrees that it will not institute any criminal charges aga...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021675.jpg": "...that:it will not institute any criminal charges aga...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021679.jpg": "...grees that; it will, not institute any criminal charges aga...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021755.jpg": "...agrees that.it will not institute any  criminal charges ag...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021800.jpg": "...o agrees that ‘it -v  it institute any criminal  charges ag...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021803.jpg": "...e[d] that it w[ould] not:institute any criminal charges aga...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021832.jpg": "...gree[d] that it will not institute any criminal charges aga...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021834.jpg": "...agrees that it will not institute atiy criminal, chatses a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021853.jpg": "...o agrees that ‘it -v  it institute any criminal  charges ag...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021856.jpg": "...e[d] that it w[ould] not:institute any criminal charges aga...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021883.jpg": "...o agrees that ‘it -v  it institute any criminal  charges ag...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021886.jpg": "...e[d] that it w[ould] not:institute any criminal charges aga..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "institute" (70 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">7-10</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">309-309</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">316-316</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">2604-2604</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">2617-2617</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">3648-3648</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3878-3878</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">3887-3887</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">4284-4284</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">5272-5272</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">5655-5656</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">6617-6618</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">7487-7487</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">7544-7566</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">7597-7600</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">7607-7619</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">7627-7628</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">7648-7648</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">7667-7669</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">7693-7693</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">7826-7828</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">7863-7868</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">8126-8128</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">8152-8152</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">11485-11485</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">14856-14859</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">15334-15334</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">20764-20764</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">21077-21077</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">21509-21509</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">21675-21679</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">21755-21755</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">21800-21803</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">21832-21834</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">21853-21856</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">21883-21886</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

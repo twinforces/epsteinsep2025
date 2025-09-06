@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "uncertain"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 23, "end": 23, "pages": [23]}, {"start": 660, "end": 660, "pages": [660]}, {"start": 995, "end": 995, "pages": [995]}, {"start": 1127, "end": 1127, "pages": [1127]}, {"start": 1164, "end": 1164, "pages": [1164]}, {"start": 1912, "end": 1912, "pages": [1912]}, {"start": 2003, "end": 2003, "pages": [2003]}, {"start": 2183, "end": 2183, "pages": [2183]}, {"start": 2761, "end": 2761, "pages": [2761]}, {"start": 3461, "end": 3461, "pages": [3461]}, {"start": 3666, "end": 3666, "pages": [3666]}, {"start": 4119, "end": 4119, "pages": [4119]}, {"start": 4583, "end": 4583, "pages": [4583]}, {"start": 5881, "end": 5881, "pages": [5881]}, {"start": 6806, "end": 6806, "pages": [6806]}, {"start": 7679, "end": 7679, "pages": [7679]}, {"start": 8138, "end": 8138, "pages": [8138]}, {"start": 10296, "end": 10296, "pages": [10296]}, {"start": 10360, "end": 10360, "pages": [10360]}, {"start": 10388, "end": 10388, "pages": [10388]}, {"start": 11572, "end": 11572, "pages": [11572]}, {"start": 14800, "end": 14800, "pages": [14800]}, {"start": 14872, "end": 14872, "pages": [14872]}, {"start": 19913, "end": 19913, "pages": [19913]}, {"start": 20045, "end": 20045, "pages": [20045]}, {"start": 20082, "end": 20082, "pages": [20082]}, {"start": 20980, "end": 20980, "pages": [20980]}, {"start": 21005, "end": 21005, "pages": [21005]}, {"start": 21816, "end": 21816, "pages": [21816]}, {"start": 21869, "end": 21869, "pages": [21869]}, {"start": 21899, "end": 21899, "pages": [21899]}, {"start": 23435, "end": 23435, "pages": [23435]}];
+        const pageToPath = {"23": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000023.jpg", "660": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000660.jpg", "995": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000995.jpg", "1127": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001127.jpg", "1164": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001164.jpg", "1912": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001912.jpg", "2003": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002003.jpg", "2183": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002183.jpg", "2761": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002761.jpg", "3461": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003461.jpg", "3666": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003666.jpg", "4119": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004119.jpg", "4583": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004583.jpg", "5881": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005881.jpg", "6806": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006806.jpg", "7679": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007679.jpg", "8138": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008138.jpg", "10296": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010296.jpg", "10360": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010360.jpg", "10388": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010388.jpg", "11572": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011572.jpg", "14800": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014800.jpg", "14872": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014872.jpg", "19913": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019913.jpg", "20045": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020045.jpg", "20082": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020082.jpg", "20980": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020980.jpg", "21005": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021005.jpg", "21816": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021816.jpg", "21869": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021869.jpg", "21899": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021899.jpg", "23435": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023435.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000023.jpg": "...w.” it is therefore not “uncertain, whether.  [maxwell] was...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000660.jpg": "...ical examiner to go from uncertain to suicide; and she was:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000995.jpg": "...a lengthy process.and an uncertain otitcortie..  thaty that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001127.jpg": "...would be “lengthy” and “uncertain” with bail “very likely”...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001164.jpg": "...extensively: litigated, uncertain,  ia  vels ef appeal. mo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001912.jpg": "...dant\"s finances and hex  uncertain afi6unt 6f wealth, in¢lu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002003.jpg": "...would be “lengthy” and “uncertain” ‘with bail “very likely...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002183.jpg": "...extensively: litigated, uncertain,  ia  vels ef appeal. mo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002761.jpg": "...ctuling. coarding-re are uncertain whether atiy:redac  moti...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003461.jpg": "...tein. * vallafafia was  ‘uncertain of'the date of the:conve...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003666.jpg": "...ongress ‘has sounded. an uncertain trumpet, a, cour ug t to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004119.jpg": "...‘will be forced to book uncertain travel  plans in.the: da...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004583.jpg": "...stein. * vallafafia was ‘uncertain of'the date of the:e res...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005881.jpg": "...-i¢ dual cases, such as. uncertain, or not grooning.  ive w...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006806.jpg": "...-i¢ dual cases, such as. uncertain, or not grooning.  ive w...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007679.jpg": "...” to: protect ft against uncertain ‘ ocietal harm linked to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008138.jpg": "...” to: protect ft against uncertain ‘ ocietal harm linked to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010296.jpg": "...e, many [jurors] may. be uncertain as to the meaning ‘of ‘t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010360.jpg": "...of  life, many may’ ‘be uncertain, as ‘to: the meaning of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010388.jpg": "...at,, upon. review, it is-uncertain. whether the defendant-w...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011572.jpg": "...even though it. may be uncertain as to hou those are reso...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014800.jpg": "...even though it. may be uncertain as to hou those are reso...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014872.jpg": "...”*! it is therefore not “uncertain, whether.  [maxwell] was...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019913.jpg": "...a lengthy process.and an uncertain otitcortie..  thaty that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020045.jpg": "...would be “lengthy” and “uncertain” with bail “very likely”...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020082.jpg": "...extensively: litigated, uncertain,  ia  vels ef appeal. mo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020980.jpg": "...’ by’  ‘i  , many’may be-uncertain as to: the me caning of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021005.jpg": "...hat, upon.-review, if ls uncertain. whether the defendant w...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021816.jpg": "...w.” it is therefore not “uncertain, whether.  [maxwell] was...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021869.jpg": "...w.” it is therefore not “uncertain, whether.  [maxwell] was...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021899.jpg": "...w.” it is therefore not “uncertain, whether.  [maxwell] was...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023435.jpg": "...been done; but he. was: uncertain abut the remaining. roun..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "uncertain" (32 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">23-23</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">660-660</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">995-995</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">1127-1127</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">1164-1164</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">1912-1912</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">2003-2003</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">2183-2183</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">2761-2761</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">3461-3461</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">3666-3666</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">4119-4119</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">4583-4583</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">5881-5881</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">6806-6806</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">7679-7679</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">8138-8138</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">10296-10296</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">10360-10360</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">10388-10388</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">11572-11572</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">14800-14800</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">14872-14872</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">19913-19913</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">20045-20045</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">20082-20082</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">20980-20980</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">21005-21005</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">21816-21816</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">21869-21869</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">21899-21899</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">23435-23435</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

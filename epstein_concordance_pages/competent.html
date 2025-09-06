@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "competent"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 2127, "end": 2127, "pages": [2127]}, {"start": 2133, "end": 2133, "pages": [2133]}, {"start": 2147, "end": 2147, "pages": [2147]}, {"start": 2395, "end": 2395, "pages": [2395]}, {"start": 2460, "end": 2460, "pages": [2460]}, {"start": 3332, "end": 3332, "pages": [3332]}, {"start": 3339, "end": 3339, "pages": [3339]}, {"start": 3587, "end": 3587, "pages": [3587]}, {"start": 3888, "end": 3888, "pages": [3888]}, {"start": 4118, "end": 4118, "pages": [4118]}, {"start": 4461, "end": 4461, "pages": [4461]}, {"start": 4842, "end": 4842, "pages": [4842]}, {"start": 5918, "end": 5918, "pages": [5918]}, {"start": 6232, "end": 6232, "pages": [6232]}, {"start": 6843, "end": 6843, "pages": [6843]}, {"start": 7260, "end": 7260, "pages": [7260]}, {"start": 7471, "end": 7471, "pages": [7471]}, {"start": 7615, "end": 7615, "pages": [7615]}, {"start": 7950, "end": 7950, "pages": [7950]}, {"start": 11270, "end": 11270, "pages": [11270]}, {"start": 11364, "end": 11364, "pages": [11364]}, {"start": 11428, "end": 11428, "pages": [11428]}, {"start": 11480, "end": 11480, "pages": [11480]}, {"start": 11497, "end": 11497, "pages": [11497]}, {"start": 14957, "end": 14957, "pages": [14957]}, {"start": 19352, "end": 19352, "pages": [19352]}, {"start": 19375, "end": 19375, "pages": [19375]}, {"start": 19416, "end": 19416, "pages": [19416]}, {"start": 19596, "end": 19596, "pages": [19596]}, {"start": 19623, "end": 19623, "pages": [19623]}, {"start": 20596, "end": 20596, "pages": [20596]}, {"start": 21988, "end": 21988, "pages": [21988]}];
+        const pageToPath = {"2127": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002127.jpg", "2133": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002133.jpg", "2147": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002147.jpg", "2395": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002395.jpg", "2460": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002460.jpg", "3332": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003332.jpg", "3339": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003339.jpg", "3587": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003587.jpg", "3888": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003888.jpg", "4118": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004118.jpg", "4461": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004461.jpg", "4842": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004842.jpg", "5918": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005918.jpg", "6232": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006232.jpg", "6843": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006843.jpg", "7260": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007260.jpg", "7471": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007471.jpg", "7615": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007615.jpg", "7950": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007950.jpg", "11270": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011270.jpg", "11364": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011364.jpg", "11428": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011428.jpg", "11480": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011480.jpg", "11497": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011497.jpg", "14957": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014957.jpg", "19352": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019352.jpg", "19375": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019375.jpg", "19416": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019416.jpg", "19596": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019596.jpg", "19623": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019623.jpg", "20596": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020596.jpg", "21988": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021988.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002127.jpg": "...us. government to, ‘the competent erench authoritics  all...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002133.jpg": "...d to: the  territorially competent prosecutor:'general with...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002147.jpg": "...by a. aurebee &  french competent authorities pr us author...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002395.jpg": "...by order of a:court  of competent: jurisdiction.  pridf to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002460.jpg": "...by order of a:court  of competent: jurisdiction.  pridf to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003332.jpg": "...entation. ‘to. a client  competent represeritation requires...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003339.jpg": "...s have a duty-to provide;competent, diligent representation...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003587.jpg": "...eople to see if they are competent  in the job that they do...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003888.jpg": "...volved new york-based ‘v competent defense.lawyer would hav...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004118.jpg": "..., nor that; they are not competent: trial counsel.  verrime...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004461.jpg": "...ys have a dutyto provide:competent, diligent representation...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004842.jpg": "...ted, at all  times: by a competent team ‘of atorneys, but n...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005918.jpg": "...to prov de: a curtura, y competent: framework for:csa,  d s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006232.jpg": ".... dietz is not remotely. competent to opine that epstein wo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006843.jpg": "...to prov de: a curtura, y competent: framework for:csa,  d s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007260.jpg": "...elves as  elder did more competent. to the extent that, the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007471.jpg": "...defense when it excludes competent and. reliable ev.idenee...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007615.jpg": "...oo5  dietz pe: “mentally competent to: stand trial,” ‘col....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007950.jpg": "...elves as  elder did more competent. to the extent that, the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011270.jpg": "...ether the: evidence :is “competent .and otherwise admissibl...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011364.jpg": "...ense when it excludes co competent and.  reliable evidence...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011428.jpg": "...efense when. it cxeludes competent and,  teliable gvidenee...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011480.jpg": "...ra o coe oereence ce an  competent jurisdiction and is.auth...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011497.jpg": "...’s estate by a court: of competent: jurisdiction, and is au...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014957.jpg": "...elves as  6lder and more competent. to the extent that they...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019352.jpg": "...gs to‘render a‘defendant competent: for  which the supreme...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019375.jpg": "...gs to‘render a‘defendant competent: for  which the supreme...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019416.jpg": "...s to render ‘a:defendant competent for trial. doc. 37 :at'9...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019596.jpg": "...gs to:render’a defendant competent for trial. ‘doc. 37.at'9...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019623.jpg": "...s to render’ a defendant competent; for trial, see sell vu....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020596.jpg": "...y: client ‘with the most competent. and. effective represen...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021988.jpg": "...is n@ actual, credible, competent. threat supported by evi..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "competent" (32 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">2127-2127</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">2133-2133</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">2147-2147</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">2395-2395</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">2460-2460</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">3332-3332</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3339-3339</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">3587-3587</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">3888-3888</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">4118-4118</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">4461-4461</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">4842-4842</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">5918-5918</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">6232-6232</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">6843-6843</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">7260-7260</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">7471-7471</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">7615-7615</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">7950-7950</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">11270-11270</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">11364-11364</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">11428-11428</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">11480-11480</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">11497-11497</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">14957-14957</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">19352-19352</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">19375-19375</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">19416-19416</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">19596-19596</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">19623-19623</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">20596-20596</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">21988-21988</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

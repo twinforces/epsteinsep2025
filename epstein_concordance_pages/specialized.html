@@ -1,0 +1,205 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "specialized"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 2149, "end": 2149, "pages": [2149]}, {"start": 3622, "end": 3622, "pages": [3622]}, {"start": 3998, "end": 3998, "pages": [3998]}, {"start": 5631, "end": 5633, "pages": [5631, 5632, 5633]}, {"start": 5643, "end": 5643, "pages": [5643]}, {"start": 5656, "end": 5656, "pages": [5656]}, {"start": 5751, "end": 5751, "pages": [5751]}, {"start": 5790, "end": 5791, "pages": [5790, 5791]}, {"start": 5948, "end": 5948, "pages": [5948]}, {"start": 6194, "end": 6194, "pages": [6194]}, {"start": 6267, "end": 6267, "pages": [6267]}, {"start": 6347, "end": 6347, "pages": [6347]}, {"start": 6593, "end": 6595, "pages": [6593, 6594, 6595]}, {"start": 6605, "end": 6605, "pages": [6605]}, {"start": 6618, "end": 6618, "pages": [6618]}, {"start": 6688, "end": 6688, "pages": [6688]}, {"start": 6715, "end": 6716, "pages": [6715, 6716]}, {"start": 6873, "end": 6873, "pages": [6873]}, {"start": 7154, "end": 7154, "pages": [7154]}, {"start": 7191, "end": 7191, "pages": [7191]}, {"start": 7205, "end": 7208, "pages": [7205, 7206, 7208]}, {"start": 7478, "end": 7478, "pages": [7478]}, {"start": 7508, "end": 7508, "pages": [7508]}, {"start": 7832, "end": 7832, "pages": [7832]}, {"start": 7881, "end": 7886, "pages": [7881, 7886]}, {"start": 7895, "end": 7898, "pages": [7895, 7896, 7898]}, {"start": 8066, "end": 8066, "pages": [8066]}, {"start": 8084, "end": 8084, "pages": [8084]}, {"start": 8094, "end": 8094, "pages": [8094]}, {"start": 10544, "end": 10544, "pages": [10544]}, {"start": 11183, "end": 11186, "pages": [11183, 11184, 11186]}, {"start": 11315, "end": 11317, "pages": [11315, 11317]}, {"start": 13028, "end": 13028, "pages": [13028]}, {"start": 14888, "end": 14893, "pages": [14888, 14893]}, {"start": 14902, "end": 14905, "pages": [14902, 14903, 14905]}, {"start": 18613, "end": 18613, "pages": [18613]}, {"start": 21665, "end": 21665, "pages": [21665]}];
+        const pageToPath = {"2149": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002149.jpg", "3622": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003622.jpg", "3998": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003998.jpg", "5631": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005631.jpg", "5632": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005632.jpg", "5633": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005633.jpg", "5643": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005643.jpg", "5656": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005656.jpg", "5751": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005751.jpg", "5790": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005790.jpg", "5791": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005791.jpg", "5948": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005948.jpg", "6194": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006194.jpg", "6267": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006267.jpg", "6347": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006347.jpg", "6593": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006593.jpg", "6594": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006594.jpg", "6595": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006595.jpg", "6605": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006605.jpg", "6618": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006618.jpg", "6688": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006688.jpg", "6715": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006715.jpg", "6716": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006716.jpg", "6873": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006873.jpg", "7154": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007154.jpg", "7191": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007191.jpg", "7205": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007205.jpg", "7206": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007206.jpg", "7208": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007208.jpg", "7478": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007478.jpg", "7508": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007508.jpg", "7832": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007832.jpg", "7881": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007881.jpg", "7886": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007886.jpg", "7895": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007895.jpg", "7896": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007896.jpg", "7898": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007898.jpg", "8066": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008066.jpg", "8084": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008084.jpg", "8094": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008094.jpg", "10544": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010544.jpg", "11183": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011183.jpg", "11184": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011184.jpg", "11186": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011186.jpg", "11315": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011315.jpg", "11317": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011317.jpg", "13028": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013028.jpg", "14888": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014888.jpg", "14893": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014893.jpg", "14902": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014902.jpg", "14903": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014903.jpg", "14905": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014905.jpg", "18613": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018613.jpg", "21665": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021665.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002149.jpg": "...2ooo-2oo2 internships ‘specialized‘in human rights and. cri...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003622.jpg": "...eiving my: ph.d., i have specialized. in. the application, of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003998.jpg": "...defense may require the specialized  knouledge of’expert wit...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005631.jpg": "...lescence,” has “received specialized training in,  ‘traumatic...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005632.jpg": "...technic al, or other or specialized ket wledge will help the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005633.jpg": "...’ “technical,” or ‘other specialized? maters ‘within its scop...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005643.jpg": "...fic, technical, or-other specialized knouledge.” fed..r. evid...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005656.jpg": "...ial eqivality,  selected specialized professional: train  2ol...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005751.jpg": "...hole or in-pait, on his  specialized:trai ining: and experien...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005790.jpg": "...lized, observations, the specialized translation of those:  s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005791.jpg": "...(2d ‘cir. 2o2.l) (such. specialized ‘knouledge can’ be  grou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005948.jpg": "...rape who wer admited fox specialized jew whs thts wt ni desig...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006194.jpg": "...worked for and reecived. specialized training, ‘from: the uni...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006267.jpg": "...worked for and reecived. specialized training, ‘from: the uni...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006347.jpg": "...significant training and specialized knouledge. further, on.t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006593.jpg": "...lescence,” has “received specialized training in,  ‘traumatic...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006594.jpg": "...technic al, or other or specialized ket wledge will help the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006595.jpg": "...’ “technical,” or ‘other specialized? maters ‘within its scop...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006605.jpg": "...fic, technical, or-other specialized knouledge.” fed..r. evid...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006618.jpg": "...continuing: |  selected specialized professional: train  2ol...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006688.jpg": "...hole or in-pait, on his  specialized:trai ining: and experien...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006715.jpg": "...lized, observations, the specialized translation of those:  s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006716.jpg": "...(2d ‘cir. 2o2.l) (such. specialized ‘knouledge can’ be  grou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006873.jpg": "...rape who wer admited fox specialized jew whs thts wt ni desig...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007154.jpg": "...testimony that relies om specialized training and  experience...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007191.jpg": "...work, i als6  had. geome specialized training in the area of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007205.jpg": "...cus on, a distinct area, specialized area of psychology. and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007206.jpg": "...abuse, complex: trauma, specialized practice in forensie psy...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007208.jpg": "...rt in psychology with a  specialized expertise in. traumatic...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007478.jpg": "...“[e]ven individuals with specialized.training and expertise s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007508.jpg": "...worked for and reecived. specialized training, ‘from: the uni...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007832.jpg": "...o @forensicpursuit:com:  specialized certified. computer:hack...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007881.jpg": "...work, i als6  had. seme specialized training in the area of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007886.jpg": "...my gareer, 45 l said, i specialized ifn the assessment. and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007895.jpg": "...cus on, a distinct area, specialized area of psychology. and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007896.jpg": "...abuse, complex: trauma, specialized practice in forensie psy...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007898.jpg": "...rt in psychology with a  specialized expertise in. traumatic...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008066.jpg": "...c, technical; or other:  specialized. knouledge,” houever, th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008084.jpg": "...worked for and reecived. specialized training, ‘from: the uni...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008094.jpg": "...fact in ‘issue;  , fe - specialized knouledge: will help the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010544.jpg": "...in. psychology: with. a:specialized. expertise in. traumatic...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011183.jpg": "...ir. 2oo7) (“a. witness’s specialized knouledge, or the fact t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011184.jpg": "...investigation’ required. specialized. knouledge: to “make sen...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011186.jpg": "...ws ee —  ierequires no, specialized training to knou'that in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011315.jpg": "...of these tasks without: specialized.  knouledge or training....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011317.jpg": "...is ‘case: based on. his. specialized training and.experience,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013028.jpg": "...stand without having any specialized traiming or  4  experien...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014888.jpg": ".... work, i also had ‘some specialized training in the anea of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014893.jpg": "...my career, ds i said, i specialized in the assessment. and t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014902.jpg": "...cus en a distinct, area, specialized area of psychology. and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014903.jpg": "...d abuse, complex trauma, specialized practice in forensic psy...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014905.jpg": "...ert in psychology with a specialized expertise in traumatic s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018613.jpg": "...stand without having any specialized traiming or  4  experien...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021665.jpg": "...t in. psychology with, a specialized expertise in traumatic..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "specialized" (54 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">2149-2149</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">3622-3622</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">3998-3998</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">5631-5633</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">5643-5643</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">5656-5656</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">5751-5751</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">5790-5791</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">5948-5948</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">6194-6194</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">6267-6267</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">6347-6347</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">6593-6595</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">6605-6605</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">6618-6618</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">6688-6688</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">6715-6716</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">6873-6873</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">7154-7154</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">7191-7191</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">7205-7208</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">7478-7478</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">7508-7508</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">7832-7832</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">7881-7886</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">7895-7898</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">8066-8066</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">8084-8084</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">8094-8094</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">10544-10544</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">11183-11186</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">11315-11317</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">13028-13028</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">14888-14893</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">14902-14905</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">18613-18613</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">21665-21665</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

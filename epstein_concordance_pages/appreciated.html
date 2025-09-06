@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "appreciated"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1346, "end": 1346, "pages": [1346]}, {"start": 1396, "end": 1396, "pages": [1396]}, {"start": 1838, "end": 1843, "pages": [1838, 1840, 1843]}, {"start": 1849, "end": 1849, "pages": [1849]}, {"start": 2276, "end": 2276, "pages": [2276]}, {"start": 2760, "end": 2761, "pages": [2760, 2761]}, {"start": 2886, "end": 2886, "pages": [2886]}, {"start": 2921, "end": 2921, "pages": [2921]}, {"start": 2932, "end": 2932, "pages": [2932]}, {"start": 3053, "end": 3053, "pages": [3053]}, {"start": 4734, "end": 4734, "pages": [4734]}, {"start": 4775, "end": 4775, "pages": [4775]}, {"start": 4993, "end": 4993, "pages": [4993]}, {"start": 5000, "end": 5000, "pages": [5000]}, {"start": 5263, "end": 5263, "pages": [5263]}, {"start": 7051, "end": 7051, "pages": [7051]}, {"start": 7237, "end": 7237, "pages": [7237]}, {"start": 7927, "end": 7927, "pages": [7927]}, {"start": 10412, "end": 10413, "pages": [10412, 10413]}, {"start": 10498, "end": 10498, "pages": [10498]}, {"start": 12035, "end": 12035, "pages": [12035]}, {"start": 12639, "end": 12639, "pages": [12639]}, {"start": 12776, "end": 12776, "pages": [12776]}, {"start": 14934, "end": 14934, "pages": [14934]}, {"start": 17624, "end": 17624, "pages": [17624]}, {"start": 18226, "end": 18226, "pages": [18226]}, {"start": 18362, "end": 18362, "pages": [18362]}, {"start": 20263, "end": 20263, "pages": [20263]}, {"start": 20314, "end": 20314, "pages": [20314]}];
+        const pageToPath = {"1346": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001346.jpg", "1396": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001396.jpg", "1838": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001838.jpg", "1840": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001840.jpg", "1843": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001843.jpg", "1849": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001849.jpg", "2276": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002276.jpg", "2760": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002760.jpg", "2761": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002761.jpg", "2886": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002886.jpg", "2921": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002921.jpg", "2932": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002932.jpg", "3053": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003053.jpg", "4734": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004734.jpg", "4775": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004775.jpg", "4993": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004993.jpg", "5000": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005000.jpg", "5263": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005263.jpg", "7051": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007051.jpg", "7237": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007237.jpg", "7927": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007927.jpg", "10412": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010412.jpg", "10413": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010413.jpg", "10498": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010498.jpg", "12035": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012035.jpg", "12639": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012639.jpg", "12776": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012776.jpg", "14934": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014934.jpg", "17624": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017624.jpg", "18226": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018226.jpg", "18362": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018362.jpg", "20263": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020263.jpg", "20314": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020314.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001346.jpg": "...onsideration. is greatly appreciated.  respectfully submited,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001396.jpg": "...consideration is:greatly appreciated. very truly yours, boll...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001838.jpg": "...onsideration. is greatly appreciated.  ‘very’truly: yours,  b...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001840.jpg": "...onsideration. is greatly appreciated.  ‘very’ truly: yours,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001843.jpg": "...onsideration. is greatly appreciated.  respectfully submited,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001849.jpg": "...onsideration, is greatly appreciated....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002276.jpg": "...onsideration :is greatly appreciated..  ‘submited,  ‘respectf...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002760.jpg": "...onsideration ‘is greatly appreciated.  ‘respectfully submited...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002761.jpg": "...his request ts, greatly’ appreciated.  ‘ec? counsel for all p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002886.jpg": "...consideration.is greatly appreciated.  ‘bobbi c: sternheim:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002921.jpg": "...consideration is greatly appreciated.  ‘very-truly yours,  bo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002932.jpg": "...onsideration. is greatly appreciated.  ‘very: truly yours,....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003053.jpg": "...ion chief judge memahon. appreciated the government’s general...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004734.jpg": "...consideration is greatly appreciated.  ‘respectfully: submite...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004775.jpg": "...ke things,  beter. it is appreciated. ehank you. sq much.  th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004993.jpg": "...nsideration. is greatly: appreciated.  ‘very:  truly yours,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005000.jpg": "...nsideration. is greatly: appreciated.  ‘very:  truly yours,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005263.jpg": "...nsidcration. is ‘greatly appreciated.  respectfully submited,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007051.jpg": "...stent‘problem is greatly appreciated.  /s/.  ‘ce: all. counse...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007237.jpg": "...se. but in particular, i appreciated the author's emphasis la...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007927.jpg": "...se. but in particular, i appreciated the author's emphasis la...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010412.jpg": "...onsideration. is greatly appreciated.  ytruly:yours,  bobbi:c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010413.jpg": "...onsideration. is greatly appreciated.  ytruly:yours,  bobbi:c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010498.jpg": "...nephews ‘which | deeply, appreciated: she also  comfort her,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012035.jpg": "...s this morning, which we appreciated; and we hdd a prodwetive...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012639.jpg": "...y: that. would. be tiueh appreciated; your  the gourt: okay....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012776.jpg": "...punctuality.. it\"s much appreciated.  you ay regall. that th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014934.jpg": "...e. but in, particular, l appreciated the author's emphasis la...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017624.jpg": "...s this morning, which we appreciated; and we hdd a prodwetive...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018226.jpg": "...y: that. would. be tiueh appreciated; your  the gourt: okay....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018362.jpg": "...punctuality.. it\"s much appreciated.  you ay regall. that th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020263.jpg": "...onsideration. is greatly appreciated.  respectfully submited,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020314.jpg": "...consideration is:greatly appreciated. very truly yours, boll..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "appreciated" (33 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1346-1346</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1396-1396</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1838-1843</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">1849-1849</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">2276-2276</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">2760-2761</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">2886-2886</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">2921-2921</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">2932-2932</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">3053-3053</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">4734-4734</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">4775-4775</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">4993-4993</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">5000-5000</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">5263-5263</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">7051-7051</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">7237-7237</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">7927-7927</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">10412-10413</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">10498-10498</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">12035-12035</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">12639-12639</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">12776-12776</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">14934-14934</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">17624-17624</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">18226-18226</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">18362-18362</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">20263-20263</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">20314-20314</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

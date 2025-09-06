@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "legislation"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1163, "end": 1163, "pages": [1163]}, {"start": 1198, "end": 1202, "pages": [1198, 1202]}, {"start": 2114, "end": 2114, "pages": [2114]}, {"start": 2182, "end": 2182, "pages": [2182]}, {"start": 2658, "end": 2661, "pages": [2658, 2661]}, {"start": 2992, "end": 2992, "pages": [2992]}, {"start": 3243, "end": 3243, "pages": [3243]}, {"start": 3459, "end": 3459, "pages": [3459]}, {"start": 3660, "end": 3660, "pages": [3660]}, {"start": 4365, "end": 4365, "pages": [4365]}, {"start": 4581, "end": 4581, "pages": [4581]}, {"start": 5663, "end": 5663, "pages": [5663]}, {"start": 6625, "end": 6625, "pages": [6625]}, {"start": 7669, "end": 7669, "pages": [7669]}, {"start": 8128, "end": 8128, "pages": [8128]}, {"start": 11215, "end": 11215, "pages": [11215]}, {"start": 20081, "end": 20081, "pages": [20081]}, {"start": 20116, "end": 20120, "pages": [20116, 20120]}, {"start": 21121, "end": 21123, "pages": [21121, 21122, 21123]}, {"start": 21201, "end": 21201, "pages": [21201]}, {"start": 21403, "end": 21403, "pages": [21403]}];
+        const pageToPath = {"1163": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001163.jpg", "1198": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001198.jpg", "1202": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001202.jpg", "2114": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002114.jpg", "2182": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002182.jpg", "2658": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002658.jpg", "2661": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002661.jpg", "2992": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002992.jpg", "3243": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003243.jpg", "3459": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003459.jpg", "3660": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003660.jpg", "4365": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004365.jpg", "4581": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004581.jpg", "5663": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005663.jpg", "6625": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006625.jpg", "7669": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007669.jpg", "8128": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008128.jpg", "11215": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011215.jpg", "20081": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020081.jpg", "20116": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020116.jpg", "20120": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020120.jpg", "21121": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021121.jpg", "21122": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021122.jpg", "21123": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021123.jpg", "21201": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021201.jpg", "21403": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021403.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001163.jpg": "...3, § l27(9), htps://wwwz:legislation.gov.uk/ukpga/  2oo3/4l....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001198.jpg": "...ts prevail over national legislation. (7d.).  2 th rovides.fo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001202.jpg": "...rench constitution,  nal legislation (ale  ir pubic cation, ¢...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002114.jpg": "...tation. oftheir domestic legislation.  te has! acted as.an ex...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002182.jpg": "...3, § l27(9), htps://wwwz:legislation.gov.uk/ukpga/  2oo3/4l....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002658.jpg": "...on. ugainst  retroactive legislation” that is “deeply rooted...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002661.jpg": "....” senator leahy,  amber legislation, cong. ree. l49:5o; s547...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002992.jpg": "...al controversy over that legislation —is l not: dispositive b...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003243.jpg": "...ns ofthe victims? rights legislation. strategically; yout hav...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003459.jpg": "...had re ently. introduc d legislation, spi cifically” to <tell...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003660.jpg": "...:” seriator leahy, amber legislation, cong. ree. l49:5o,,s5l4...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004365.jpg": "...the:-v ‘vic ims’ rights legislation. “neecaly  os weakness,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004581.jpg": "...and: proposed . federal. legislation—both pending as of the:d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005663.jpg": "...l mental health, parity, legislation  e state geri.  amcrican...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006625.jpg": "...l mental health, parity, legislation  e state geri.  amcrican...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007669.jpg": "...ssociation:  council on: legislation, florida medical associa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008128.jpg": "...ssociation:  council on: legislation, florida medical associa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011215.jpg": "...by the leasehold reform legislation.  took forward to receiv...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020081.jpg": "...3, § l27(9), htps://wwwz:legislation.gov.uk/ukpga/  2oo3/4l....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020116.jpg": "...ts prevail over national legislation. (7d.).  2 th rovides.fo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020120.jpg": "...rench constitution,  nal legislation (ale  ir pubic cation, ¢...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021121.jpg": "...tion against retroactive legislation,’ ‘which, “is deeply roo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021122.jpg": "...ts to retroactive ‘civil legislation are nou modest, prospect...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021123.jpg": "...oactive: application. of legislation.” 39l f.3d at.4o9. most...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021201.jpg": "...ls: ceos also works fo l legislation, government pr  and — ‘p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021403.jpg": "...s of the victims’ rights legislation.”°** ‘willafata explaine..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "legislation" (26 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1163-1163</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1198-1202</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">2114-2114</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">2182-2182</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">2658-2661</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">2992-2992</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3243-3243</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">3459-3459</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">3660-3660</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">4365-4365</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">4581-4581</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">5663-5663</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">6625-6625</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">7669-7669</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">8128-8128</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">11215-11215</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">20081-20081</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">20116-20120</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">21121-21123</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">21201-21201</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">21403-21403</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

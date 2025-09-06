@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "accommodation"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1338, "end": 1340, "pages": [1338, 1340]}, {"start": 1722, "end": 1722, "pages": [1722]}, {"start": 2341, "end": 2341, "pages": [2341]}, {"start": 4112, "end": 4112, "pages": [4112]}, {"start": 5330, "end": 5330, "pages": [5330]}, {"start": 10504, "end": 10504, "pages": [10504]}, {"start": 10763, "end": 10763, "pages": [10763]}, {"start": 10792, "end": 10792, "pages": [10792]}, {"start": 10821, "end": 10821, "pages": [10821]}, {"start": 10850, "end": 10850, "pages": [10850]}, {"start": 10908, "end": 10908, "pages": [10908]}, {"start": 11479, "end": 11479, "pages": [11479]}, {"start": 20255, "end": 20257, "pages": [20255, 20257]}, {"start": 20919, "end": 20919, "pages": [20919]}];
+        const pageToPath = {"1338": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001338.jpg", "1340": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001340.jpg", "1722": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001722.jpg", "2341": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002341.jpg", "4112": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004112.jpg", "5330": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005330.jpg", "10504": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010504.jpg", "10763": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010763.jpg", "10792": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010792.jpg", "10821": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010821.jpg", "10850": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010850.jpg", "10908": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010908.jpg", "11479": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011479.jpg", "20255": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020255.jpg", "20257": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020257.jpg", "20919": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020919.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001338.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001340.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001722.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002341.jpg": "...reasonable and. minimum. accommodation for. the difficulties en...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004112.jpg": "...vember l5, 2o2l], as.an. accommodation, to the governnicnt,, bu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005330.jpg": "...odaied’in.some:v cc the: accommodation. 5.  wvideitee atithis’...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010504.jpg": "...es, or providirig needed accommodation of cash to help out with...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010763.jpg": "...way, ease staterthe:  g  accommodation.  pe ee <> <<  ou taking...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010792.jpg": "...e’way,;please state the  accommodation....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010821.jpg": "...‘way; please, state the accommodation.  are . vou taking ally...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010850.jpg": "...ome way, ‘p : state ‘the accommodation..  are you taking any me...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010908.jpg": "...r.if such condition wwe (accommodation, j 7 ; oo oo y se as ee...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011479.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020255.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020257.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020919.jpg": "...way, please stale the |  accommodation:  preverit: fealiom givi..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "accommodation" (16 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1338-1340</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1722-1722</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">2341-2341</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">4112-4112</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">5330-5330</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">10504-10504</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">10763-10763</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">10792-10792</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">10821-10821</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">10850-10850</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">10908-10908</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">11479-11479</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">20255-20257</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">20919-20919</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

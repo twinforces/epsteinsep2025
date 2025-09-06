@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "residential"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1994, "end": 1994, "pages": [1994]}, {"start": 7584, "end": 7584, "pages": [7584]}, {"start": 11215, "end": 11215, "pages": [11215]}, {"start": 12559, "end": 12560, "pages": [12559, 12560]}, {"start": 12834, "end": 12834, "pages": [12834]}, {"start": 15321, "end": 15321, "pages": [15321]}, {"start": 15330, "end": 15330, "pages": [15330]}, {"start": 15349, "end": 15358, "pages": [15349, 15351, 15352, 15355, 15358]}, {"start": 15377, "end": 15382, "pages": [15377, 15382]}, {"start": 15392, "end": 15392, "pages": [15392]}, {"start": 15398, "end": 15398, "pages": [15398]}, {"start": 15407, "end": 15407, "pages": [15407]}, {"start": 15421, "end": 15422, "pages": [15421, 15422]}, {"start": 15432, "end": 15438, "pages": [15432, 15436, 15438]}, {"start": 18146, "end": 18147, "pages": [18146, 18147]}, {"start": 18420, "end": 18420, "pages": [18420]}];
+        const pageToPath = {"1994": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001994.jpg", "7584": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007584.jpg", "11215": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011215.jpg", "12559": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012559.jpg", "12560": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012560.jpg", "12834": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012834.jpg", "15321": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015321.jpg", "15330": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015330.jpg", "15349": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015349.jpg", "15351": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015351.jpg", "15352": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015352.jpg", "15355": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015355.jpg", "15358": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015358.jpg", "15377": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015377.jpg", "15382": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015382.jpg", "15392": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015392.jpg", "15398": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015398.jpg", "15407": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015407.jpg", "15421": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015421.jpg", "15422": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015422.jpg", "15432": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015432.jpg", "15436": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015436.jpg", "15438": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015438.jpg", "18146": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018146.jpg", "18147": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018147.jpg", "18420": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018420.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001994.jpg": "...n records the sale of  a residential. property iti new york....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007584.jpg": "...deyoo.  smith v. equity residential properties management (a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011215.jpg": "...ble ‘turner, mrics' 4 ‘residential lease manager. .  ‘grosv...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012559.jpg": "...ars back. then it says:  residential property at yarriouth dr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012560.jpg": "...purchased a multifamily residential property at sequoia driv...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012834.jpg": "...isorder.  o. and it l6 a residential 6hvireenmenit for woren...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015321.jpg": "...cee ee eee  fedex:ground residential --\"rur: return manager....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015330.jpg": "...deli y fuel:surcharge  ‘residential delivery,  ‘reference: n...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015349.jpg": "...use: 3l3ol6o2o/ol393/o2. residential delivery: total transpor...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015351.jpg": "...iscount fidel.sircharge ‘residential delivery:  delivery, are...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015352.jpg": "...9o  has  fuel'surcharge ‘residential delivery,  total transpo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015355.jpg": "...use! 3l7.24777o/oo2ll/_ ‘residential delivery, total transpor...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015358.jpg": "...cee ee eee  fedex:ground residential --\"rur: return manager....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015377.jpg": "...atge  -goldman  hare ee ‘residential delivery. fedex use: 523...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015382.jpg": "...cee ee eee  fedex:ground residential --\"rur: return manager....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015392.jpg": "...cee ee eee  fedex:ground residential --\"rur: return manager....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015398.jpg": "...cee ee eee  fedex:ground residential --\"rur: return manager....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015407.jpg": "...cee ee eee  fedex:ground residential --\"rur: return manager....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015421.jpg": "...charge: ‘fuelisurcharge residential delivery  total transpor...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015422.jpg": "...cee ee eee  fedex:ground residential --\"rur: return manager....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015432.jpg": "...iscotint  fuel surcharge residential delivery’ delivery-area...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015436.jpg": "...o9o/o2  ¢ exlip’ charge: residential delivery’  sry;atea surc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015438.jpg": "...tion: charge:  sve area ‘residential delivery: signed:by ria...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018146.jpg": "...ars back. then it says:  residential property at yarriouth dr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018147.jpg": "...purchased a multifamily residential property at sequoia driv...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018420.jpg": "...isorder.  o. and it l6 a residential 6hvireenmenit for woren..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "residential" (26 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1994-1994</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">7584-7584</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">11215-11215</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">12559-12560</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">12834-12834</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">15321-15321</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">15330-15330</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">15349-15358</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">15377-15382</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">15392-15392</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">15398-15398</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">15407-15407</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">15421-15422</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">15432-15438</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">18146-18147</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">18420-18420</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

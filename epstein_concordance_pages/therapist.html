@@ -1,0 +1,268 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "therapist"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 3079, "end": 3079, "pages": [3079]}, {"start": 3567, "end": 3569, "pages": [3567, 3568, 3569]}, {"start": 5921, "end": 5921, "pages": [5921]}, {"start": 6280, "end": 6280, "pages": [6280]}, {"start": 6846, "end": 6846, "pages": [6846]}, {"start": 7269, "end": 7269, "pages": [7269]}, {"start": 7959, "end": 7959, "pages": [7959]}, {"start": 8305, "end": 8305, "pages": [8305]}, {"start": 9653, "end": 9653, "pages": [9653]}, {"start": 11262, "end": 11263, "pages": [11262, 11263]}, {"start": 12312, "end": 12312, "pages": [12312]}, {"start": 12456, "end": 12457, "pages": [12456, 12457]}, {"start": 12500, "end": 12500, "pages": [12500]}, {"start": 12598, "end": 12606, "pages": [12598, 12599, 12600, 12601, 12604, 12606]}, {"start": 12618, "end": 12618, "pages": [12618]}, {"start": 12794, "end": 12794, "pages": [12794]}, {"start": 12834, "end": 12834, "pages": [12834]}, {"start": 12840, "end": 12840, "pages": [12840]}, {"start": 12861, "end": 12862, "pages": [12861, 12862]}, {"start": 13081, "end": 13081, "pages": [13081]}, {"start": 13122, "end": 13122, "pages": [13122]}, {"start": 13129, "end": 13129, "pages": [13129]}, {"start": 13252, "end": 13252, "pages": [13252]}, {"start": 13546, "end": 13546, "pages": [13546]}, {"start": 13613, "end": 13613, "pages": [13613]}, {"start": 13876, "end": 13876, "pages": [13876]}, {"start": 13988, "end": 13988, "pages": [13988]}, {"start": 14225, "end": 14225, "pages": [14225]}, {"start": 14371, "end": 14372, "pages": [14371, 14372]}, {"start": 14449, "end": 14449, "pages": [14449]}, {"start": 14525, "end": 14525, "pages": [14525]}, {"start": 14531, "end": 14531, "pages": [14531]}, {"start": 14966, "end": 14966, "pages": [14966]}, {"start": 15677, "end": 15677, "pages": [15677]}, {"start": 16238, "end": 16238, "pages": [16238]}, {"start": 16500, "end": 16500, "pages": [16500]}, {"start": 16612, "end": 16612, "pages": [16612]}, {"start": 16848, "end": 16848, "pages": [16848]}, {"start": 16993, "end": 16994, "pages": [16993, 16994]}, {"start": 17070, "end": 17070, "pages": [17070]}, {"start": 17146, "end": 17146, "pages": [17146]}, {"start": 17152, "end": 17152, "pages": [17152]}, {"start": 17900, "end": 17900, "pages": [17900]}, {"start": 18044, "end": 18045, "pages": [18044, 18045]}, {"start": 18088, "end": 18088, "pages": [18088]}, {"start": 18185, "end": 18193, "pages": [18185, 18186, 18187, 18188, 18191, 18193]}, {"start": 18205, "end": 18205, "pages": [18205]}, {"start": 18380, "end": 18380, "pages": [18380]}, {"start": 18420, "end": 18420, "pages": [18420]}, {"start": 18426, "end": 18426, "pages": [18426]}, {"start": 18447, "end": 18448, "pages": [18447, 18448]}, {"start": 18666, "end": 18666, "pages": [18666]}, {"start": 18707, "end": 18707, "pages": [18707]}, {"start": 18714, "end": 18714, "pages": [18714]}, {"start": 18837, "end": 18837, "pages": [18837]}, {"start": 19129, "end": 19129, "pages": [19129]}, {"start": 21131, "end": 21131, "pages": [21131]}, {"start": 21713, "end": 21713, "pages": [21713]}];
+        const pageToPath = {"3079": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003079.jpg", "3567": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003567.jpg", "3568": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003568.jpg", "3569": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003569.jpg", "5921": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005921.jpg", "6280": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006280.jpg", "6846": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006846.jpg", "7269": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007269.jpg", "7959": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007959.jpg", "8305": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008305.jpg", "9653": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009653.jpg", "11262": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011262.jpg", "11263": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011263.jpg", "12312": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012312.jpg", "12456": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012456.jpg", "12457": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012457.jpg", "12500": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012500.jpg", "12598": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012598.jpg", "12599": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012599.jpg", "12600": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012600.jpg", "12601": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012601.jpg", "12604": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012604.jpg", "12606": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012606.jpg", "12618": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012618.jpg", "12794": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012794.jpg", "12834": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012834.jpg", "12840": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012840.jpg", "12861": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012861.jpg", "12862": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012862.jpg", "13081": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013081.jpg", "13122": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013122.jpg", "13129": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013129.jpg", "13252": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013252.jpg", "13546": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013546.jpg", "13613": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013613.jpg", "13876": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013876.jpg", "13988": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013988.jpg", "14225": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014225.jpg", "14371": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014371.jpg", "14372": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014372.jpg", "14449": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014449.jpg", "14525": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014525.jpg", "14531": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014531.jpg", "14966": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014966.jpg", "15677": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015677.jpg", "16238": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016238.jpg", "16500": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016500.jpg", "16612": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016612.jpg", "16848": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016848.jpg", "16993": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016993.jpg", "16994": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016994.jpg", "17070": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017070.jpg", "17146": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017146.jpg", "17152": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017152.jpg", "17900": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017900.jpg", "18044": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018044.jpg", "18045": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018045.jpg", "18088": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018088.jpg", "18185": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018185.jpg", "18186": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018186.jpg", "18187": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018187.jpg", "18188": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018188.jpg", "18191": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018191.jpg", "18193": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018193.jpg", "18205": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018205.jpg", "18380": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018380.jpg", "18420": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018420.jpg", "18426": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018426.jpg", "18447": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018447.jpg", "18448": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018448.jpg", "18666": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018666.jpg", "18707": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018707.jpg", "18714": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018714.jpg", "18837": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018837.jpg", "19129": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019129.jpg", "21131": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021131.jpg", "21713": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021713.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003079.jpg": "...aking money as a massage therapist; that; epstcin always ha...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003567.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003568.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003569.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005921.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006280.jpg": "...who sprinkled holy- the therapist: etled  lps  have all be...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006846.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007269.jpg": "...r @xperienees with their therapist of wheh they were  hospi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007959.jpg": "...r @xperienees with their therapist of wheh they were  hospi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008305.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009653.jpg": "...e trial-that-you. “sce a therapist regularly” who ‘has give...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011262.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011263.jpg": "...hat the government. or.a therapist manufactured, false meri...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012312.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012456.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012457.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012500.jpg": "...depends who the massage therapist wais..  ax a es = . ab...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012598.jpg": "...rts was, a  oe  massage  therapist; correct? a. t have -- i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012599.jpg": "...suppesed to be a massage therapist,”  = uot) l69) 6p)  sate...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012600.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012601.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012604.jpg": "...dtang to get a fiassage  therapist bo come to the house, ne...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012606.jpg": "...gp ue ee oe se  massage therapist. t always complaint with...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012618.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012794.jpg": "...ssage;,  but the massage therapist had canceled and could i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012834.jpg": "...you licensed as a music therapist?  ie  a < eme o,  a. no,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012840.jpg": "...in which you ane a music therapist?  a. .e see people on an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012861.jpg": "...t reeeive the ighey, the therapist  '  received the money....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012862.jpg": "...g?  q. even though, as a therapist, you kmew about the reso...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013081.jpg": "...nted. ane you a massage  therapist? work if palm beach home...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013122.jpg": "...anted to become @ assage therapist. @. what, if any, conver...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013129.jpg": "...wanted to be a  massage therapist; and concert tackets to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013252.jpg": "...n pope?  a. that. was my therapist...  @. all right.  a. to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013546.jpg": "...is herself a practicing therapist, psychologist, she has m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013613.jpg": "...nd i work primarily as a therapist....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013876.jpg": "...cipated testimony on the therapist  ake ast se she as at =...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013988.jpg": "...sychoenhey apy where the therapist tells the patient that t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014225.jpg": "...elieve she was a massage therapist.  q. okay. and do you ne...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014371.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014372.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014449.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014525.jpg": "...eptional., she's a mhshg therapist. and she was starting a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014531.jpg": "...laine maxwell. she had a therapist, susan pope, she met wit...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014966.jpg": "...r expericnees with their therapist or when they were:  hosp...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015677.jpg": "...es as  are you a massage therapist ??  work in palm beach h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016238.jpg": "...nd i work primarily as a therapist....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016500.jpg": "...cipated testimony on the therapist  ake ast se she as at =...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016612.jpg": "...sychoenhey apy where the therapist tells the patient that t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016848.jpg": "...elieve she was a massage therapist.  q. okay. and do you ne...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016993.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016994.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017070.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017146.jpg": "...eptional., she's a mhshg therapist. and she was starting a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017152.jpg": "...laine maxwell. she had a therapist, susan pope, she met wit...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017900.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018044.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018045.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018088.jpg": "...depends who the massage therapist wais..  ax a es = . ab...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018185.jpg": "...rts was, a  oe  massage  therapist; correct? a. t have -- i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018186.jpg": "...suppesed to be a massage therapist,”  = uot) l69) 6p)  sate...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018187.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018188.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018191.jpg": "...dtang to get a fiassage  therapist bo come to the house, ne...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018193.jpg": "...gp ue ee oe se  massage therapist. t always complaint with...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018205.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018380.jpg": "...ssage;,  but the massage therapist had canceled and could i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018420.jpg": "...you licensed as a music therapist?  ie  a < eme o,  a. no,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018426.jpg": "...in which you ane a music therapist?  a. .e see people on an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018447.jpg": "...t reeeive the ighey, the therapist  '  received the money....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018448.jpg": "...g?  q. even though, as a therapist, you kmew about the reso...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018666.jpg": "...nted. ane you a massage  therapist? work if palm beach home...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018707.jpg": "...anted to become @ assage therapist. @. what, if any, conver...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018714.jpg": "...wanted to be a  massage therapist; and concert tackets to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018837.jpg": "...n pope?  a. that. was my therapist...  @. all right.  a. to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019129.jpg": "...is herself a practicing therapist, psychologist, she has m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021131.jpg": "...hether he spoke with. a. therapist about the case during: t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021713.jpg": "...sel- ing 6x spoke with a therapist, hou he came to give me-..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "therapist" (77 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">3079-3079</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">3567-3569</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">5921-5921</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">6280-6280</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">6846-6846</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">7269-7269</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">7959-7959</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">8305-8305</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">9653-9653</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">11262-11263</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">12312-12312</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">12456-12457</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">12500-12500</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">12598-12606</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">12618-12618</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">12794-12794</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">12834-12834</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">12840-12840</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">12861-12862</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">13081-13081</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">13122-13122</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">13129-13129</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">13252-13252</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">13546-13546</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">13613-13613</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">13876-13876</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">13988-13988</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">14225-14225</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">14371-14372</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">14449-14449</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">14525-14525</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">14531-14531</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">14966-14966</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">15677-15677</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">16238-16238</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">16500-16500</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">16612-16612</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">16848-16848</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">16993-16994</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">17070-17070</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">17146-17146</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">17152-17152</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">17900-17900</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">18044-18045</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">18088-18088</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(45, 0); return false;">18185-18193</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(46, 0); return false;">18205-18205</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(47, 0); return false;">18380-18380</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(48, 0); return false;">18420-18420</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(49, 0); return false;">18426-18426</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(50, 0); return false;">18447-18448</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(51, 0); return false;">18666-18666</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(52, 0); return false;">18707-18707</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(53, 0); return false;">18714-18714</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(54, 0); return false;">18837-18837</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(55, 0); return false;">19129-19129</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(56, 0); return false;">21131-21131</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(57, 0); return false;">21713-21713</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

@@ -1,0 +1,289 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "expertise"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1165, "end": 1165, "pages": [1165]}, {"start": 1196, "end": 1196, "pages": [1196]}, {"start": 2114, "end": 2114, "pages": [2114]}, {"start": 2184, "end": 2184, "pages": [2184]}, {"start": 3484, "end": 3484, "pages": [3484]}, {"start": 4606, "end": 4606, "pages": [4606]}, {"start": 5640, "end": 5641, "pages": [5640, 5641]}, {"start": 5750, "end": 5750, "pages": [5750]}, {"start": 5790, "end": 5803, "pages": [5790, 5795, 5798, 5803]}, {"start": 5815, "end": 5815, "pages": [5815]}, {"start": 5978, "end": 5978, "pages": [5978]}, {"start": 6001, "end": 6001, "pages": [6001]}, {"start": 6225, "end": 6225, "pages": [6225]}, {"start": 6236, "end": 6236, "pages": [6236]}, {"start": 6343, "end": 6343, "pages": [6343]}, {"start": 6602, "end": 6603, "pages": [6602, 6603]}, {"start": 6687, "end": 6687, "pages": [6687]}, {"start": 6715, "end": 6728, "pages": [6715, 6720, 6723, 6728]}, {"start": 6740, "end": 6740, "pages": [6740]}, {"start": 6903, "end": 6903, "pages": [6903]}, {"start": 6926, "end": 6926, "pages": [6926]}, {"start": 7200, "end": 7202, "pages": [7200, 7202]}, {"start": 7208, "end": 7208, "pages": [7208]}, {"start": 7224, "end": 7224, "pages": [7224]}, {"start": 7303, "end": 7303, "pages": [7303]}, {"start": 7314, "end": 7314, "pages": [7314]}, {"start": 7470, "end": 7470, "pages": [7470]}, {"start": 7478, "end": 7478, "pages": [7478]}, {"start": 7491, "end": 7491, "pages": [7491]}, {"start": 7617, "end": 7617, "pages": [7617]}, {"start": 7890, "end": 7892, "pages": [7890, 7892]}, {"start": 7898, "end": 7898, "pages": [7898]}, {"start": 7914, "end": 7914, "pages": [7914]}, {"start": 7993, "end": 7993, "pages": [7993]}, {"start": 8004, "end": 8004, "pages": [8004]}, {"start": 8090, "end": 8094, "pages": [8090, 8094]}, {"start": 8116, "end": 8116, "pages": [8116]}, {"start": 8181, "end": 8181, "pages": [8181]}, {"start": 8187, "end": 8187, "pages": [8187]}, {"start": 8333, "end": 8333, "pages": [8333]}, {"start": 8386, "end": 8386, "pages": [8386]}, {"start": 10544, "end": 10544, "pages": [10544]}, {"start": 11183, "end": 11183, "pages": [11183]}, {"start": 11192, "end": 11192, "pages": [11192]}, {"start": 11315, "end": 11315, "pages": [11315]}, {"start": 11644, "end": 11644, "pages": [11644]}, {"start": 12318, "end": 12320, "pages": [12318, 12319, 12320]}, {"start": 12358, "end": 12358, "pages": [12358]}, {"start": 12370, "end": 12370, "pages": [12370]}, {"start": 13977, "end": 13977, "pages": [13977]}, {"start": 14897, "end": 14899, "pages": [14897, 14899]}, {"start": 14905, "end": 14905, "pages": [14905]}, {"start": 14921, "end": 14921, "pages": [14921]}, {"start": 14961, "end": 14961, "pages": [14961]}, {"start": 15000, "end": 15000, "pages": [15000]}, {"start": 16601, "end": 16601, "pages": [16601]}, {"start": 17906, "end": 17908, "pages": [17906, 17907, 17908]}, {"start": 17946, "end": 17946, "pages": [17946]}, {"start": 17958, "end": 17958, "pages": [17958]}, {"start": 20083, "end": 20083, "pages": [20083]}, {"start": 20114, "end": 20114, "pages": [20114]}, {"start": 21424, "end": 21424, "pages": [21424]}, {"start": 21465, "end": 21465, "pages": [21465]}, {"start": 21665, "end": 21665, "pages": [21665]}, {"start": 21787, "end": 21787, "pages": [21787]}];
+        const pageToPath = {"1165": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001165.jpg", "1196": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001196.jpg", "2114": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002114.jpg", "2184": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002184.jpg", "3484": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003484.jpg", "4606": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004606.jpg", "5640": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005640.jpg", "5641": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005641.jpg", "5750": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005750.jpg", "5790": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005790.jpg", "5795": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005795.jpg", "5798": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005798.jpg", "5803": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005803.jpg", "5815": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005815.jpg", "5978": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005978.jpg", "6001": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006001.jpg", "6225": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006225.jpg", "6236": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006236.jpg", "6343": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006343.jpg", "6602": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006602.jpg", "6603": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006603.jpg", "6687": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006687.jpg", "6715": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006715.jpg", "6720": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006720.jpg", "6723": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006723.jpg", "6728": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006728.jpg", "6740": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006740.jpg", "6903": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006903.jpg", "6926": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006926.jpg", "7200": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007200.jpg", "7202": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007202.jpg", "7208": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007208.jpg", "7224": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007224.jpg", "7303": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007303.jpg", "7314": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007314.jpg", "7470": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007470.jpg", "7478": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007478.jpg", "7491": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007491.jpg", "7617": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007617.jpg", "7890": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007890.jpg", "7892": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007892.jpg", "7898": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007898.jpg", "7914": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007914.jpg", "7993": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007993.jpg", "8004": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008004.jpg", "8090": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008090.jpg", "8094": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008094.jpg", "8116": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008116.jpg", "8181": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008181.jpg", "8187": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008187.jpg", "8333": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008333.jpg", "8386": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008386.jpg", "10544": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010544.jpg", "11183": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011183.jpg", "11192": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011192.jpg", "11315": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011315.jpg", "11644": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011644.jpg", "12318": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012318.jpg", "12319": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012319.jpg", "12320": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012320.jpg", "12358": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012358.jpg", "12370": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012370.jpg", "13977": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013977.jpg", "14897": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014897.jpg", "14899": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014899.jpg", "14905": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014905.jpg", "14921": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014921.jpg", "14961": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014961.jpg", "15000": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015000.jpg", "16601": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016601.jpg", "17906": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017906.jpg", "17907": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017907.jpg", "17908": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017908.jpg", "17946": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017946.jpg", "17958": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017958.jpg", "20083": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020083.jpg", "20114": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020114.jpg", "21424": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021424.jpg", "21465": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021465.jpg", "21665": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021665.jpg", "21787": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021787.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001165.jpg": "...clearly’ establishes her expertise at remaining:-hidden and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001196.jpg": "...at ms. maxwell had-“an.  expertise atremaining hidden,” and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002114.jpg": "...adition = experience and expertise  mr perty is widely cons...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002184.jpg": "...clearly’ establishes her expertise at remaining:-hidden and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003484.jpg": "...are: “trained and ectons expertise ‘in. dealing with  vieti...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004606.jpg": "...are: “trained and ‘have expertise ‘in. dealing with vietim...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005640.jpg": "...c mixture of purported.  expertise and. common scnse”)).. t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005641.jpg": "...to offer ts outside ‘her expertise...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005750.jpg": "...lling; an ‘expert® whose expertise happens to be the defend...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005790.jpg": "...ary differetit kitds of. expertise”  ioerorcem,  kumho tire...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005795.jpg": "...uma psychology, she has. expertise:  in, treating victitis....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005798.jpg": "...acquired knouledge: and, expertise”), the situation here:is...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005803.jpg": "...ify squarely within, her expertise and expe  b. relevance a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005815.jpg": "...applyirig dr. rocchio’s expertise to facts. the jury will...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005978.jpg": "...ehio hase ‘experience or expertise in diagnosing, evaluatin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006001.jpg": "...; dr. roechio, bases her expertise on. her  therapeutic num...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006225.jpg": "...y legal  bly applied any expertise to tn: particular, the n...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006236.jpg": "...“pathways” offers any:  expertise that is truly. beyond th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006343.jpg": "...pport: of ‘dr. rocchio’s expertise should. be excluded as f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006602.jpg": "...c mixture of purported.  expertise and. common scnse”)).. t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006603.jpg": "...to offer ts outside ‘her expertise...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006687.jpg": "...lling; an ‘expert® whose expertise happens to be the defend...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006715.jpg": "...ary differetit kitds of. expertise”  ioerorcem,  kumho tire...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006720.jpg": "...uma psychology, she has. expertise:  in, treating victitis....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006723.jpg": "...acquired knouledge: and, expertise”), the situation here:is...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006728.jpg": "...ify squarely within, her expertise and expe  b. relevance a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006740.jpg": "...applyirig dr. rocchio’s expertise to facts. the jury will...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006903.jpg": "...ehio hase ‘experience or expertise in diagnosing, evaluatin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006926.jpg": "...; dr. roechio, bases her expertise on. her  therapeutic num...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007200.jpg": "..., wito have some sert of expertise related te the topic  of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007202.jpg": "...ation with  my’ areas ef expertise.  qo. have any of your u...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007208.jpg": "...logy with a  specialized expertise in. traumatic stress and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007224.jpg": "...of professionals whe had expertise, specifically  in offend...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007303.jpg": "...ublications and areas of expertise.  mr. pagliuca: ef  mir:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007314.jpg": "...teratre in my  areas. of expertise.  o. ok. but the thost....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007470.jpg": "...heir respe  an  arcas of expertise. atached as exhibit‘) is...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007478.jpg": "...specialized.training and expertise succumb, to hindsight bi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007491.jpg": "...’s extensive experience, expertise, and:proposed testimony:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007617.jpg": "...p: “the role of forensic expertise in capital crimes litiga...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007890.jpg": "..., wito have some sert of expertise related te the topic  of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007892.jpg": "...tation wit  my’ areas ef expertise.  qo. have any of your u...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007898.jpg": "...logy with a  specialized expertise in. traumatic stress and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007914.jpg": "...of professionals whe had expertise, specifically  in offend...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007993.jpg": "...ublications and areas of expertise.  mr. pagliuca: ef  mir:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008004.jpg": "...iteratre in my areas. of expertise.  o. ok. but the thost....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008090.jpg": "...ent-docsit challenge the expertise of atiy of ms. maxwell's...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008094.jpg": "...government concedes the expertise of dr. hall aid the reli...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008116.jpg": "..._ diverse’ resume betray expertise in [  coz pes, oh  ° nof...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008181.jpg": "...scientific or technical expertise, are inadmissible under...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008187.jpg": "...rives from.dr. loftus’s. expertise in memory: science and i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008333.jpg": "...dzdn't provide flatbey\"s expertise in  that areae either....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008386.jpg": "...and withiti-her area of expertise. suggest  best burl it m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010544.jpg": "...gy: with. a:specialized. expertise in. traumatic stress: an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011183.jpg": "...oted, exclusively in his expertise. see; :  224 (2d cir. 2o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011192.jpg": "...oted exclusively in. his expertise. ‘lo: the: extent ‘exami...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011315.jpg": "...ere; the expert “offers. expertise beyond that of the typic...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011644.jpg": "...dzdn't provide flatbey\"s expertise in  that areae either....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012318.jpg": "...pertain to my’ areas ef expertise  qo. what do@s it mean t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012319.jpg": "...topic within. my abea of expertise. q. de you belong to any...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012320.jpg": "...logy with, a speclalized expertise in, traumatle stress and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012358.jpg": "...e court: and explore her expertise ‘on those other yeasons?...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012370.jpg": ".... speeifie subgect mater expertise.  o. bight. so, for exar...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013977.jpg": "...o. and is part of your expertise relateed to the ipact of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014897.jpg": "...s; who have some sort of expertise related to the topic ef...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014899.jpg": "...tien within  my areas of expertise... q@. have any of your...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014905.jpg": "...ology with a specialized expertise in traumatic stress and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014921.jpg": "...f professionals who had, expertise, specifically in offende...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014961.jpg": "...fied about fit into your expertise?  a. so as a psychologis...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015000.jpg": "...ublications and areas of expertise.  mr. pagliuca: if we go...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016601.jpg": "...o. and is part of your expertise relateed to the ipact of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017906.jpg": "...pertain to my’ areas ef expertise  qo. what do@s it mean t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017907.jpg": "...topic within. my abea of expertise. q. de you belong to any...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017908.jpg": "...logy with, a speclalized expertise in, traumatle stress and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017946.jpg": "...e court: and explore her expertise ‘on those other yeasons?...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017958.jpg": ".... speeifie subgect mater expertise.  o. bight. so, for exar...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020083.jpg": "...clearly’ establishes her expertise at remaining:-hidden and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020114.jpg": "...at ms. maxwell had-“an.  expertise atremaining hidden,” and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021424.jpg": "...in spactalist; :  bring, expertise: and “a national ‘per sp...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021465.jpg": "...trial atorney ‘to bring ‘expertise and “a. national. ° 6 at...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021665.jpg": "...logy with, a specialized expertise in traumatic  stress and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021787.jpg": "...may arrange - atheir oun expertise - for ai. official court..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "expertise" (81 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1165-1165</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1196-1196</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">2114-2114</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">2184-2184</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">3484-3484</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">4606-4606</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">5640-5641</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">5750-5750</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">5790-5803</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">5815-5815</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">5978-5978</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">6001-6001</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">6225-6225</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">6236-6236</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">6343-6343</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">6602-6603</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">6687-6687</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">6715-6728</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">6740-6740</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">6903-6903</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">6926-6926</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">7200-7202</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">7208-7208</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">7224-7224</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">7303-7303</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">7314-7314</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">7470-7470</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">7478-7478</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">7491-7491</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">7617-7617</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">7890-7892</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">7898-7898</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">7914-7914</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">7993-7993</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">8004-8004</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">8090-8094</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">8116-8116</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">8181-8181</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">8187-8187</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">8333-8333</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">8386-8386</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">10544-10544</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">11183-11183</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">11192-11192</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">11315-11315</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(45, 0); return false;">11644-11644</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(46, 0); return false;">12318-12320</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(47, 0); return false;">12358-12358</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(48, 0); return false;">12370-12370</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(49, 0); return false;">13977-13977</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(50, 0); return false;">14897-14899</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(51, 0); return false;">14905-14905</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(52, 0); return false;">14921-14921</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(53, 0); return false;">14961-14961</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(54, 0); return false;">15000-15000</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(55, 0); return false;">16601-16601</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(56, 0); return false;">17906-17908</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(57, 0); return false;">17946-17946</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(58, 0); return false;">17958-17958</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(59, 0); return false;">20083-20083</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(60, 0); return false;">20114-20114</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(61, 0); return false;">21424-21424</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(62, 0); return false;">21465-21465</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(63, 0); return false;">21665-21665</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(64, 0); return false;">21787-21787</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

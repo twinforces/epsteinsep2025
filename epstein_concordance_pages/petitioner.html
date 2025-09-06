@@ -1,0 +1,184 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "petitioner"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 214, "end": 216, "pages": [214, 215, 216]}, {"start": 312, "end": 313, "pages": [312, 313]}, {"start": 839, "end": 839, "pages": [839]}, {"start": 2539, "end": 2539, "pages": [2539]}, {"start": 2633, "end": 2633, "pages": [2633]}, {"start": 3330, "end": 3330, "pages": [3330]}, {"start": 3365, "end": 3365, "pages": [3365]}, {"start": 3417, "end": 3417, "pages": [3417]}, {"start": 3424, "end": 3424, "pages": [3424]}, {"start": 3447, "end": 3447, "pages": [3447]}, {"start": 3470, "end": 3470, "pages": [3470]}, {"start": 4305, "end": 4305, "pages": [4305]}, {"start": 4452, "end": 4452, "pages": [4452]}, {"start": 4526, "end": 4526, "pages": [4526]}, {"start": 4546, "end": 4546, "pages": [4546]}, {"start": 4569, "end": 4569, "pages": [4569]}, {"start": 4592, "end": 4592, "pages": [4592]}, {"start": 7835, "end": 7835, "pages": [7835]}, {"start": 19238, "end": 19238, "pages": [19238]}, {"start": 19424, "end": 19424, "pages": [19424]}, {"start": 19604, "end": 19604, "pages": [19604]}, {"start": 19693, "end": 19693, "pages": [19693]}, {"start": 19745, "end": 19745, "pages": [19745]}, {"start": 20615, "end": 20615, "pages": [20615]}, {"start": 21111, "end": 21111, "pages": [21111]}, {"start": 21422, "end": 21422, "pages": [21422]}, {"start": 21437, "end": 21447, "pages": [21437, 21441, 21445, 21447]}, {"start": 21470, "end": 21470, "pages": [21470]}, {"start": 21780, "end": 21780, "pages": [21780]}, {"start": 21787, "end": 21787, "pages": [21787]}];
+        const pageToPath = {"214": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000214.jpg", "215": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000215.jpg", "216": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000216.jpg", "312": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000312.jpg", "313": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000313.jpg", "839": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000839.jpg", "2539": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002539.jpg", "2633": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002633.jpg", "3330": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003330.jpg", "3365": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003365.jpg", "3417": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003417.jpg", "3424": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003424.jpg", "3447": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003447.jpg", "3470": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003470.jpg", "4305": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004305.jpg", "4452": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004452.jpg", "4526": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004526.jpg", "4546": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004546.jpg", "4569": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004569.jpg", "4592": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004592.jpg", "7835": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007835.jpg", "19238": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019238.jpg", "19424": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019424.jpg", "19604": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019604.jpg", "19693": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019693.jpg", "19745": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019745.jpg", "20615": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020615.jpg", "21111": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021111.jpg", "21422": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021422.jpg", "21437": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021437.jpg", "21441": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021441.jpg", "21445": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021445.jpg", "21447": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021447.jpg", "21470": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021470.jpg", "21780": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021780.jpg", "21787": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021787.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000214.jpg": "...petitioner,  responde nt.  certific...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000215.jpg": "...o73)  ghislaine maxwell, petitioner,  respondent.  i, ‘rina...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000216.jpg": "...se lawyers ti support of petitioner through the overnight ne...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000312.jpg": "...; l8 u.s.c.  aiming that petitioner was “denied, her rights”...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000313.jpg": "...eonfer with petitioner  ec; cg, july ll; 2oo8 h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000839.jpg": "...s: please teview whether petitioner is listed correctly on,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002539.jpg": "...y: iransparent? with the petitioner and. had. “made: a mista...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002633.jpg": "...ewe of ofthe dst cour  petitioner ‘atid a db <ppeals denie...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003330.jpg": "...tive service system. the petitioner i in | that the self-rep...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003365.jpg": "...ited states? response to:petitioner, i orrespondence fo prov...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003417.jpg": "...o at the time re  $ la. ‘petitioner “jane doe #2” 'to inform...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003424.jpg": "...mes against [heey  cvra- petitioner jane: doe;#?2 also recei...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003447.jpg": "...e, does noe provide thie petitioner-here-with any judicial e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003470.jpg": "...t panel noted ‘that:the ‘petitioner argued “only ‘im passing...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004305.jpg": "...in tent on,  denied. the petitioner thei requested remedies...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004452.jpg": "...tive service system. the petitioner i in | that the self-rep...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004526.jpg": "...victim who ‘became cvra petitioner jane ‘dee: #2 ‘had, expr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004546.jpg": "...mes against [heey  cvra: petitioner jane: doe;#2 also: recei...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004569.jpg": "...oes not provide thie 3g  petitioner-here-with any judicially...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004592.jpg": "...t panel noted ‘that:the ‘petitioner argued “only ‘im passing...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007835.jpg": "...in re: the marriage of: petitioner: michelle landin; respon...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019238.jpg": "...s: please teview whether petitioner is listed correctly on,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019424.jpg": "...it of mandamus:  (l) the petitioner must demonstrate the rig...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019604.jpg": "...it of mandamus:  (l) the petitioner must: demonstrate the ri...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019693.jpg": "...s: please review whether petitioner ts listed correctly on,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019745.jpg": "...s: please teview whether petitioner is listed correctly on,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020615.jpg": "..._jefendant  [7] appetani/petitioner [ jappetieenesponitent...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021111.jpg": "...garien was. whether the ‘petitioner’s trial. counsel. provid...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021422.jpg": "...atwas setit to ln  cvra’ petitioner jane: doe #2: also:reeci...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021437.jpg": "...stato plea “had sone: ra petitioner jane doe #2 stated’ that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021441.jpg": "...fication leter  2oo8 the:petitioner  tion not ihe npa. 372...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021445.jpg": "...stein ‘render  the: doe. petitioner equitable:  ra; and, (5)...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021447.jpg": "...¢ ‘ i thus, ‘gp. the fa  petitioner-here of the tae age of t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021470.jpg": "...7panel noted. ‘that, the petitioner. argued. onlysin, passin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021780.jpg": "...epreserits: () appellant/petitioner () appellee-respondent |...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021787.jpg": "...epresents: (() appellant/petitioner () appellec-respondent (..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "petitioner" (36 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">214-216</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">312-313</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">839-839</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">2539-2539</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">2633-2633</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">3330-3330</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3365-3365</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">3417-3417</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">3424-3424</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">3447-3447</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">3470-3470</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">4305-4305</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">4452-4452</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">4526-4526</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">4546-4546</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">4569-4569</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">4592-4592</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">7835-7835</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">19238-19238</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">19424-19424</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">19604-19604</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">19693-19693</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">19745-19745</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">20615-20615</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">21111-21111</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">21422-21422</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">21437-21447</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">21470-21470</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">21780-21780</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">21787-21787</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

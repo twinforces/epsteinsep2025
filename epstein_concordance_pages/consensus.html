@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "consensus"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 3238, "end": 3238, "pages": [3238]}, {"start": 4360, "end": 4360, "pages": [4360]}, {"start": 5812, "end": 5812, "pages": [5812]}, {"start": 5941, "end": 5941, "pages": [5941]}, {"start": 5977, "end": 5980, "pages": [5977, 5980]}, {"start": 6737, "end": 6737, "pages": [6737]}, {"start": 6866, "end": 6866, "pages": [6866]}, {"start": 6902, "end": 6905, "pages": [6902, 6905]}, {"start": 7233, "end": 7234, "pages": [7233, 7234]}, {"start": 7313, "end": 7313, "pages": [7313]}, {"start": 7923, "end": 7924, "pages": [7923, 7924]}, {"start": 8003, "end": 8003, "pages": [8003]}, {"start": 9183, "end": 9183, "pages": [9183]}, {"start": 9862, "end": 9862, "pages": [9862]}, {"start": 12323, "end": 12323, "pages": [12323]}, {"start": 14664, "end": 14664, "pages": [14664]}, {"start": 14930, "end": 14930, "pages": [14930]}, {"start": 15010, "end": 15010, "pages": [15010]}, {"start": 17284, "end": 17284, "pages": [17284]}, {"start": 17911, "end": 17911, "pages": [17911]}, {"start": 20882, "end": 20882, "pages": [20882]}, {"start": 21236, "end": 21236, "pages": [21236]}, {"start": 21699, "end": 21699, "pages": [21699]}];
+        const pageToPath = {"3238": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003238.jpg", "4360": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004360.jpg", "5812": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005812.jpg", "5941": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005941.jpg", "5977": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005977.jpg", "5980": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005980.jpg", "6737": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006737.jpg", "6866": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006866.jpg", "6902": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006902.jpg", "6905": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006905.jpg", "7233": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007233.jpg", "7234": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007234.jpg", "7313": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007313.jpg", "7923": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007923.jpg", "7924": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007924.jpg", "8003": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008003.jpg", "9183": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009183.jpg", "9862": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009862.jpg", "12323": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012323.jpg", "14664": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014664.jpg", "14930": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014930.jpg", "15010": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015010.jpg", "17284": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017284.jpg", "17911": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017911.jpg", "20882": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020882.jpg", "21236": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021236.jpg", "21699": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021699.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003238.jpg": "...ements.to opr, a general consensus emerged that; there were...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004360.jpg": "...ents. to  opr, a general consensus  emerged that; there °...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005812.jpg": "...9, l6o:(2ol.5) (there is:consensus in the research literatu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005941.jpg": "...tions for practice:  the consensus inthe research diteratur...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005977.jpg": "...nt  gov't ‘resp.,  c n6e consensus regarding hou’ to define...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005980.jpg": "...p 2:(“there is a lack of consensus regarding exactly what....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006737.jpg": "...9, l6o:(2ol.5) (there is:consensus in the research literatu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006866.jpg": "...tions for practice:  the consensus inthe research diteratur...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006902.jpg": "...nt  gov't ‘resp.,  c n6e consensus regarding hou’ to define...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006905.jpg": "...p 2:(“there is a lack of consensus regarding exactly what....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007233.jpg": "...ing. if they're defining consensus  there as universal agre...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007234.jpg": "...established. and there's consensus that that l6 a significa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007313.jpg": "...that there's a  ‘lack of consensus regarding what grooming...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007923.jpg": "...ing. if they're defining consensus  there as universal agre...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007924.jpg": "...established. and there's consensus that that l6 a significa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008003.jpg": "...that there's a  ‘lack of consensus regarding what grooming...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009183.jpg": "...ey’  deliberated touards consensus.  and five:—-all:conspir...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009862.jpg": "...ey’  deliberated touards consensus.  and five:—-all:conspir...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012323.jpg": "...s net, there's generally consensus. areund what.  the proce...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014664.jpg": "...ain, before we haye some consensus on ms. seernhe.lm: judge...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014930.jpg": "...ing. if they're defining consensus there as universal agree...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015010.jpg": "...that there's 4  lack of consensus regarding what grooming...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017284.jpg": "...ain, before we haye some consensus on ms. seernhe.lm: judge...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017911.jpg": "...s net, there's generally consensus. areund what.  the proce...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020882.jpg": "...saying'they:had reached ‘consensus on allicounts....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021236.jpg": "...tements to: opr, a gener consensus  beet dew elop 2 etim e,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021699.jpg": "...7 (collecting eases). -  consensus that extending a. limita..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "consensus" (27 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">3238-3238</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">4360-4360</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">5812-5812</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">5941-5941</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">5977-5980</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">6737-6737</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">6866-6866</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">6902-6905</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">7233-7234</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">7313-7313</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">7923-7924</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">8003-8003</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">9183-9183</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">9862-9862</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">12323-12323</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">14664-14664</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">14930-14930</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">15010-15010</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">17284-17284</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">17911-17911</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">20882-20882</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">21236-21236</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">21699-21699</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

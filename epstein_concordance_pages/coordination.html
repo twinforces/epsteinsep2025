@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "coordination"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 2026, "end": 2026, "pages": [2026]}, {"start": 3188, "end": 3188, "pages": [3188]}, {"start": 3342, "end": 3342, "pages": [3342]}, {"start": 3372, "end": 3372, "pages": [3372]}, {"start": 3487, "end": 3487, "pages": [3487]}, {"start": 3854, "end": 3854, "pages": [3854]}, {"start": 4044, "end": 4044, "pages": [4044]}, {"start": 4310, "end": 4310, "pages": [4310]}, {"start": 4464, "end": 4464, "pages": [4464]}, {"start": 4494, "end": 4494, "pages": [4494]}, {"start": 4609, "end": 4609, "pages": [4609]}, {"start": 12745, "end": 12745, "pages": [12745]}, {"start": 18332, "end": 18332, "pages": [18332]}, {"start": 21187, "end": 21187, "pages": [21187]}, {"start": 21487, "end": 21487, "pages": [21487]}, {"start": 22082, "end": 22082, "pages": [22082]}];
+        const pageToPath = {"2026": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002026.jpg", "3188": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003188.jpg", "3342": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003342.jpg", "3372": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003372.jpg", "3487": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003487.jpg", "3854": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003854.jpg", "4044": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004044.jpg", "4310": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004310.jpg", "4464": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004464.jpg", "4494": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004494.jpg", "4609": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004609.jpg", "12745": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012745.jpg", "18332": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018332.jpg", "21187": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021187.jpg", "21487": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021487.jpg", "22082": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022082.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002026.jpg": "...:  2 sunlessire ‘direct: coordination: ‘with: them:  ae se  “c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003188.jpg": "...ensured ‘more: cffective coordination. and. communication duri...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003342.jpg": "...ires. “prompt and close: coordination” with, immigration, offi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003372.jpg": "...lack of coordination with i. ¢f  suificient o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003487.jpg": "...e ensured:more effective coordination. ‘and communi tion >a du...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003854.jpg": "...tation that there was no coordination,  between:the government...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004044.jpg": "...‘production stigeests coordination. between the government...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004310.jpg": "...e ensured:more cffective coordination. and. communication duri...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004464.jpg": "...ires. “prompt and close: coordination” with, immigration, offi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004494.jpg": "...ng feomputere 5a lack of coordination with n, th compounded ac...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004609.jpg": "...e ensured:more effective coordination. ‘and communi tion >a du...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012745.jpg": "...on cross, so  logistical coordination with ‘the government.  e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018332.jpg": "...on cross, so  logistical coordination with ‘the government.  e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021187.jpg": "...emonstrated. a. lack: of coordination. between the federal: ag...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021487.jpg": "...sured r more ‘offecti ee coordination. l6 appiouis: ‘the fitia...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022082.jpg": "...estigation jointly or in coordination with the:prosecution tea..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "coordination" (16 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">2026-2026</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">3188-3188</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">3342-3342</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3372-3372</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">3487-3487</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">3854-3854</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">4044-4044</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">4310-4310</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">4464-4464</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">4494-4494</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">4609-4609</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">12745-12745</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">18332-18332</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">21187-21187</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">21487-21487</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">22082-22082</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

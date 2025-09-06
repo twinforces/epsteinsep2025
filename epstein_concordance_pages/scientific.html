@@ -1,0 +1,274 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "scientific"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 5632, "end": 5633, "pages": [5632, 5633]}, {"start": 5643, "end": 5643, "pages": [5643]}, {"start": 5791, "end": 5791, "pages": [5791]}, {"start": 5980, "end": 5980, "pages": [5980]}, {"start": 6235, "end": 6237, "pages": [6235, 6237]}, {"start": 6251, "end": 6251, "pages": [6251]}, {"start": 6594, "end": 6595, "pages": [6594, 6595]}, {"start": 6605, "end": 6605, "pages": [6605]}, {"start": 6716, "end": 6716, "pages": [6716]}, {"start": 6905, "end": 6905, "pages": [6905]}, {"start": 7207, "end": 7207, "pages": [7207]}, {"start": 7214, "end": 7219, "pages": [7214, 7219]}, {"start": 7228, "end": 7228, "pages": [7228]}, {"start": 7258, "end": 7258, "pages": [7258]}, {"start": 7311, "end": 7311, "pages": [7311]}, {"start": 7329, "end": 7335, "pages": [7329, 7332, 7335]}, {"start": 7474, "end": 7482, "pages": [7474, 7476, 7479, 7482]}, {"start": 7488, "end": 7488, "pages": [7488]}, {"start": 7511, "end": 7511, "pages": [7511]}, {"start": 7528, "end": 7528, "pages": [7528]}, {"start": 7534, "end": 7534, "pages": [7534]}, {"start": 7547, "end": 7547, "pages": [7547]}, {"start": 7559, "end": 7559, "pages": [7559]}, {"start": 7591, "end": 7591, "pages": [7591]}, {"start": 7604, "end": 7604, "pages": [7604]}, {"start": 7630, "end": 7630, "pages": [7630]}, {"start": 7687, "end": 7687, "pages": [7687]}, {"start": 7816, "end": 7816, "pages": [7816]}, {"start": 7847, "end": 7855, "pages": [7847, 7848, 7849, 7852, 7855]}, {"start": 7868, "end": 7868, "pages": [7868]}, {"start": 7897, "end": 7897, "pages": [7897]}, {"start": 7904, "end": 7909, "pages": [7904, 7909]}, {"start": 7918, "end": 7918, "pages": [7918]}, {"start": 7948, "end": 7948, "pages": [7948]}, {"start": 8001, "end": 8001, "pages": [8001]}, {"start": 8019, "end": 8025, "pages": [8019, 8022, 8025]}, {"start": 8066, "end": 8066, "pages": [8066]}, {"start": 8146, "end": 8146, "pages": [8146]}, {"start": 8173, "end": 8173, "pages": [8173]}, {"start": 8181, "end": 8181, "pages": [8181]}, {"start": 10494, "end": 10494, "pages": [10494]}, {"start": 12331, "end": 12332, "pages": [12331, 12332]}, {"start": 12343, "end": 12343, "pages": [12343]}, {"start": 12369, "end": 12369, "pages": [12369]}, {"start": 13969, "end": 13969, "pages": [13969]}, {"start": 14030, "end": 14030, "pages": [14030]}, {"start": 14902, "end": 14904, "pages": [14902, 14904]}, {"start": 14911, "end": 14916, "pages": [14911, 14916]}, {"start": 14925, "end": 14930, "pages": [14925, 14929, 14930]}, {"start": 14944, "end": 14949, "pages": [14944, 14949]}, {"start": 14967, "end": 14970, "pages": [14967, 14970]}, {"start": 14987, "end": 14987, "pages": [14987]}, {"start": 15010, "end": 15012, "pages": [15010, 15011, 15012]}, {"start": 15018, "end": 15018, "pages": [15018]}, {"start": 15026, "end": 15032, "pages": [15026, 15029, 15030, 15032]}, {"start": 16593, "end": 16593, "pages": [16593]}, {"start": 16654, "end": 16654, "pages": [16654]}, {"start": 17919, "end": 17920, "pages": [17919, 17920]}, {"start": 17931, "end": 17931, "pages": [17931]}, {"start": 17957, "end": 17957, "pages": [17957]}];
+        const pageToPath = {"5632": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005632.jpg", "5633": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005633.jpg", "5643": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005643.jpg", "5791": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005791.jpg", "5980": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005980.jpg", "6235": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006235.jpg", "6237": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006237.jpg", "6251": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006251.jpg", "6594": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006594.jpg", "6595": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006595.jpg", "6605": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006605.jpg", "6716": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006716.jpg", "6905": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006905.jpg", "7207": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007207.jpg", "7214": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007214.jpg", "7219": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007219.jpg", "7228": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007228.jpg", "7258": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007258.jpg", "7311": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007311.jpg", "7329": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007329.jpg", "7332": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007332.jpg", "7335": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007335.jpg", "7474": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007474.jpg", "7476": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007476.jpg", "7479": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007479.jpg", "7482": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007482.jpg", "7488": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007488.jpg", "7511": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007511.jpg", "7528": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007528.jpg", "7534": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007534.jpg", "7547": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007547.jpg", "7559": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007559.jpg", "7591": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007591.jpg", "7604": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007604.jpg", "7630": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007630.jpg", "7687": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007687.jpg", "7816": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007816.jpg", "7847": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007847.jpg", "7848": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007848.jpg", "7849": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007849.jpg", "7852": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007852.jpg", "7855": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007855.jpg", "7868": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007868.jpg", "7897": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007897.jpg", "7904": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007904.jpg", "7909": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007909.jpg", "7918": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007918.jpg", "7948": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007948.jpg", "8001": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008001.jpg", "8019": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008019.jpg", "8022": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008022.jpg", "8025": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008025.jpg", "8066": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008066.jpg", "8146": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008146.jpg", "8173": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008173.jpg", "8181": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008181.jpg", "10494": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010494.jpg", "12331": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012331.jpg", "12332": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012332.jpg", "12343": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012343.jpg", "12369": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012369.jpg", "13969": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013969.jpg", "14030": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014030.jpg", "14902": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014902.jpg", "14904": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014904.jpg", "14911": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014911.jpg", "14916": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014916.jpg", "14925": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014925.jpg", "14929": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014929.jpg", "14930": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014930.jpg", "14944": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014944.jpg", "14949": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014949.jpg", "14967": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014967.jpg", "14970": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014970.jpg", "14987": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014987.jpg", "15010": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015010.jpg", "15011": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015011.jpg", "15012": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015012.jpg", "15018": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015018.jpg", "15026": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015026.jpg", "15029": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015029.jpg", "15030": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015030.jpg", "15032": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015032.jpg", "16593": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016593.jpg", "16654": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016654.jpg", "17919": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017919.jpg", "17920": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017920.jpg", "17931": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017931.jpg", "17957": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017957.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005632.jpg": "...s:  (@) thie: expert's s scientific, technic al, or other or...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005633.jpg": "...tanee” in ‘the relevant: scientific eonimunity” amorgian  ig...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005643.jpg": "...inion is net. based on  “scientific, technical, or-other spe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005791.jpg": "...e can’ be  grounded. in, scientific or other particularized...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005980.jpg": "...gist, by: contrast, has: scientific means-to verify-what her...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006235.jpg": "...ations  ‘are ‘rooted in. scientific or technical expertl sc,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006237.jpg": "...ffirmed the exelusion of scientific  expert testimony instru...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006251.jpg": ".... loftus] ‘will deseribe scientific ‘rescareh shouing that....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006594.jpg": "...s:  (@) thie: expert's s scientific, technic al, or other or...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006595.jpg": "...tanee” in ‘the relevant: scientific eonimunity” amorgian  ig...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006605.jpg": "...inion is net. based on  “scientific, technical, or-other spe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006716.jpg": "...e can’ be  grounded. in, scientific or other particularized...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006905.jpg": "...gist, by: contrast, has: scientific means-to verify-what her...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007207.jpg": "...do you keep up with the scientific litematuxe in your field...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007214.jpg": "...of grooming been in. the scientific literature?  a, grooming...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007219.jpg": "...ibe at a@ high level the scientific literature  upon. which...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007228.jpg": "...r behavior —— they did a scientific  analysis, whereby ‘they...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007258.jpg": "...noh  the scientific literature talks about,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007311.jpg": "...t. part. was  culling of scientific litesatuse to identafy p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007329.jpg": "...mitary. but typieally in scientific  the tame period ef disc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007332.jpg": "...that. l8 6bserved  , the scientific llitesatuse to eccur amo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007335.jpg": "...accep  «ct  ance in the scientific community?  a. as t've s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007474.jpg": "...h. of several. competing scientific theories has the best pr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007476.jpg": "...explaining hou they lack scientific support. fed. r. evid.7o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007479.jpg": "...ld have the benefit of a.scientific:  ‘around him. the gover...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007482.jpg": "...aining experience, the:  scientific literature.”). dr. dictz...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007488.jpg": "...ll as upon the: body of ‘scientific: research and. literatur...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007511.jpg": "...t: ‘of scienee award for scientific. freedom atid. responsib...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007528.jpg": "...igation: court cases and scientific :findings ‘on :illusory...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007534.jpg": "...a a “  ntinuing lack’ of scientific evidence for  2oo7 thoma...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007547.jpg": "...sh. ‘dc gommitec for the scientific investigation of  crimin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007559.jpg": "...airman, commitee for the scientific review of research, mcle...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007591.jpg": "....76.  dietz pe: touard a scientific forensic psychiatry. jou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007604.jpg": "...76.  dietz pes “touard a scientific forensic psychiatry,\" am...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007630.jpg": "...harvard medical school  \"scientific foundations of clinical...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007687.jpg": "...psychology, 23rd arinual scientific meeting,  lnterriational...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007816.jpg": "...view (2o7o).  contonting scientific reports under crawford v...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007847.jpg": "...ial interest broups, the scientific coitifiunity,, atid-the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007848.jpg": "...lersville, }  government scientific source (gss), vienna, va...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007849.jpg": "...llence: for outstanding: scientific advancement....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007852.jpg": "...las shift-in-hou=federal-scientific- -experts:¢an~...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007855.jpg": "...s p dmesican academy ) | scientific meeting, htps://www-ats-...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007868.jpg": "...tributing menibervin the scientific: working:group ‘for ques...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007897.jpg": "...do you keep up with the scientific litematuxe in your field...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007904.jpg": "...of grooming been in. the scientific literature?  a, grooming...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007909.jpg": "...ibe at a@ high level the scientific literature  upon. which...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007918.jpg": "...r behavior —— they did a scientific  analysis, whereby ‘they...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007948.jpg": "...noh  the scientific literature talks about,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008001.jpg": "...t. part. was  culling of scientific litesatuse to identafy p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008019.jpg": "...mitary. but typieally in scientific  the tame period ef disc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008022.jpg": "...that. l8 6bserved  , the scientific llitesatuse to eccur amo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008025.jpg": "...accep  «ct  ance in the scientific community?  a. as t've s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008066.jpg": "...stify” based. on, their “scientific, technical; or other:  s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008146.jpg": "...psychology, 23rd arinual scientific meeting,  lnterriational...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008173.jpg": "...p the'trier  2.  ou;  s. scientific, technical, or other spe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008181.jpg": "...tiations. are, rooted in scientific or technical expertise,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010494.jpg": "...r for an ‘international. scientific and educational publishi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012331.jpg": "...and then we've also done scientific reseanch that's been doh...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012332.jpg": "...lar,  thet gives us some scientific support for the idea tha...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012343.jpg": "...ining, research, and the scientific literature, as well as m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012369.jpg": "...eeitent. in the  rou py  scientific literature about the top...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013969.jpg": "...l board, members. of the scientific community ‘that will  re...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014030.jpg": "...eriments, right?  a. the scientific work, yes, primdrily.  q...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014902.jpg": "..., i regularly review the scientific and legal literature. i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014904.jpg": "...they publish literature, scientific peer review  literature,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014911.jpg": "...of grooming been, in the scientific literature?  a. grooming...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014916.jpg": "...be: at, a high level the scientific literature upon which yo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014925.jpg": "...behavior == ‘they did a scientific analysis, whereby they h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014929.jpg": "...n't at all reference the scientific literature ‘to determine...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014930.jpg": "...e's gonsensus within the scientific literature about the phe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014944.jpg": "...y found to exist, in the scientific latrerdature a8 being as...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014949.jpg": "...u heard of that. term in scientific or clinical literature?...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014967.jpg": "...t on your  review of the scientific literature?  seientifie...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014970.jpg": "...terature, as well as the scientific study of gensequences an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014987.jpg": "...rable populations in the scientific literature. q. but they\"...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015010.jpg": "...us amount ef testing and scientific study that led up to thi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015011.jpg": "..., about the state ef the scientific literature in my  q@. ok...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015012.jpg": "...-reviewed literature and scientific comhitiuisty.  the court...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015018.jpg": "...which is different than scientific iterature looking at net...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015026.jpg": "...ummary. but typically in scientific  a  rature, it would. ==...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015029.jpg": "...that is observed in the scientific literature to occur amon...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015030.jpg": "...e's a very large body of scientific literature document ing...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015032.jpg": "...dian ef testability and scientific ways to study these issu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016593.jpg": "...l board, members. of the scientific community ‘that will  re...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016654.jpg": "...eriments, right?  a. the scientific work, yes, primdrily.  q...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017919.jpg": "...and then we've also done scientific reseanch that's been doh...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017920.jpg": "...lar,  thet gives us some scientific support for the idea tha...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017931.jpg": "...ining, research, and the scientific literature, as well as m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017957.jpg": "...eeitent. in the  rou py  scientific literature about the top..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "scientific" (89 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">5632-5633</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">5643-5643</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">5791-5791</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">5980-5980</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">6235-6237</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">6251-6251</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">6594-6595</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">6605-6605</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">6716-6716</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">6905-6905</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">7207-7207</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">7214-7219</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">7228-7228</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">7258-7258</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">7311-7311</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">7329-7335</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">7474-7482</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">7488-7488</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">7511-7511</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">7528-7528</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">7534-7534</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">7547-7547</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">7559-7559</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">7591-7591</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">7604-7604</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">7630-7630</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">7687-7687</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">7816-7816</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">7847-7855</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">7868-7868</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">7897-7897</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">7904-7909</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">7918-7918</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">7948-7948</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">8001-8001</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">8019-8025</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">8066-8066</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">8146-8146</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">8173-8173</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">8181-8181</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">10494-10494</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">12331-12332</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">12343-12343</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">12369-12369</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">13969-13969</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(45, 0); return false;">14030-14030</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(46, 0); return false;">14902-14904</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(47, 0); return false;">14911-14916</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(48, 0); return false;">14925-14930</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(49, 0); return false;">14944-14949</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(50, 0); return false;">14967-14970</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(51, 0); return false;">14987-14987</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(52, 0); return false;">15010-15012</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(53, 0); return false;">15018-15018</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(54, 0); return false;">15026-15032</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(55, 0); return false;">16593-16593</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(56, 0); return false;">16654-16654</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(57, 0); return false;">17919-17920</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(58, 0); return false;">17931-17931</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(59, 0); return false;">17957-17957</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

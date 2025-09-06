@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "retention"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 7275, "end": 7275, "pages": [7275]}, {"start": 7300, "end": 7300, "pages": [7300]}, {"start": 7491, "end": 7491, "pages": [7491]}, {"start": 7525, "end": 7525, "pages": [7525]}, {"start": 7965, "end": 7965, "pages": [7965]}, {"start": 7990, "end": 7990, "pages": [7990]}, {"start": 13306, "end": 13306, "pages": [13306]}, {"start": 13982, "end": 13984, "pages": [13982, 13984]}, {"start": 14972, "end": 14972, "pages": [14972]}, {"start": 14997, "end": 14997, "pages": [14997]}, {"start": 16606, "end": 16608, "pages": [16606, 16608]}, {"start": 18890, "end": 18890, "pages": [18890]}];
+        const pageToPath = {"7275": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007275.jpg", "7300": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007300.jpg", "7491": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007491.jpg", "7525": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007525.jpg", "7965": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007965.jpg", "7990": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007990.jpg", "13306": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013306.jpg", "13982": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013982.jpg", "13984": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013984.jpg", "14972": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014972.jpg", "14997": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014997.jpg", "16606": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016606.jpg", "16608": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016608.jpg", "18890": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018890.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007275.jpg": "...dm connection with ‘your retention in  this case?  q. what...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007300.jpg": "...he mental registration,  retention and reee6lleetign. of pa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007491.jpg": "...form mation, , storage,, retention, and retrieval, of memor...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007525.jpg": "...d:) handboo!  rent ‘into retention: x ee ‘pp: l59-l  mation...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007965.jpg": "...dm connection with ‘your retention in  this case?  q. what...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007990.jpg": "...he mental registration,  retention and reee6lleetign. of pa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013306.jpg": "...et would be recrusting, retention, hasimag, bene  eedipefi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013982.jpg": "...so fhere gan be a long  retention interval peppered. with...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013984.jpg": "...e retrieval stage --  a. retention.  q. well, netertion wou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014972.jpg": "...ff comneection with your retention in  this ease?  @. what...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014997.jpg": "...the metal registratisn,, retention and recollection of past...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016606.jpg": "...so fhere gan be a long  retention interval peppered. with...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016608.jpg": "...e retrieval stage --  a. retention.  q. well, netertion wou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018890.jpg": "...et would be recrusting, retention, hasimag, bene  eedipefi..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "retention" (14 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">7275-7275</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">7300-7300</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">7491-7491</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">7525-7525</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">7965-7965</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">7990-7990</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">13306-13306</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">13982-13984</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">14972-14972</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">14997-14997</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">16606-16608</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">18890-18890</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

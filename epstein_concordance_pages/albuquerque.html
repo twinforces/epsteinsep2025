@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "albuquerque"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1294, "end": 1296, "pages": [1294, 1295, 1296]}, {"start": 7577, "end": 7581, "pages": [7577, 7578, 7581]}, {"start": 7608, "end": 7608, "pages": [7608]}, {"start": 7622, "end": 7622, "pages": [7622]}, {"start": 7631, "end": 7631, "pages": [7631]}, {"start": 11795, "end": 11795, "pages": [11795]}, {"start": 12412, "end": 12412, "pages": [12412]}, {"start": 14238, "end": 14238, "pages": [14238]}, {"start": 16861, "end": 16861, "pages": [16861]}, {"start": 17385, "end": 17385, "pages": [17385]}, {"start": 18000, "end": 18000, "pages": [18000]}, {"start": 20212, "end": 20214, "pages": [20212, 20213, 20214]}];
+        const pageToPath = {"1294": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001294.jpg", "1295": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001295.jpg", "1296": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001296.jpg", "7577": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007577.jpg", "7578": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007578.jpg", "7581": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007581.jpg", "7608": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007608.jpg", "7622": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007622.jpg", "7631": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007631.jpg", "11795": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011795.jpg", "12412": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012412.jpg", "14238": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014238.jpg", "16861": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016861.jpg", "17385": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017385.jpg", "18000": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018000.jpg", "20212": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020212.jpg", "20213": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020213.jpg", "20214": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020214.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001294.jpg": "...e federal, courthouse in albuquerque.  id. at 48.  mr. robert...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001295.jpg": "...illo v: bd. of educ. of  albuquerque pub.  has discretion 6,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001296.jpg": "...-client, meetings at the albuquerque courthouse was ultimatel...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007577.jpg": "...rder area mental health (albuquerque, new mexico) testified a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007578.jpg": "...mexico v. chester, m.d. (albuquerque, nm) testified at trial,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007581.jpg": "...nia)  garcia v.. fouler (albuquerque; new mexico). ‘testified...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007608.jpg": "...psychiatry and the law, albuquerque, new mexico, october lo,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007622.jpg": "...psychiatry and the law, albuquerque; new mexico,  october ll...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007631.jpg": "...psychiatry and the law, albuquerque, new mexico, october ll,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011795.jpg": "...ner, we would. fly  imto albuquerque due to weight restrictio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012412.jpg": "...from west pali, beath to albuquerque, new mexico. and i was p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014238.jpg": "...no)  ir  a. she laves im albuquerque.  le) = *) cp) a o, % uo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016861.jpg": "...no)  ir  a. she laves im albuquerque.  le) = *) cp) a o, % uo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017385.jpg": "...ner, we would. fly  imto albuquerque due to weight restrictio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018000.jpg": "...from west pali, beath to albuquerque, new mexico. and i was p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020212.jpg": "...e federal, courthouse in albuquerque.  id. at 48.  mr. robert...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020213.jpg": "...illo v. bd. of educ. of  albuquerque pub.  has discretion 6,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020214.jpg": "...-client, meetings at the albuquerque courthouse was ultimatel..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "albuquerque" (18 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1294-1296</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">7577-7581</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">7608-7608</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">7622-7622</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">7631-7631</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">11795-11795</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">12412-12412</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">14238-14238</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">16861-16861</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">17385-17385</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">18000-18000</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">20212-20214</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

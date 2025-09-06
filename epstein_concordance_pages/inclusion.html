@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "inclusion"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 19, "end": 19, "pages": [19]}, {"start": 1263, "end": 1263, "pages": [1263]}, {"start": 2291, "end": 2294, "pages": [2291, 2294]}, {"start": 2597, "end": 2597, "pages": [2597]}, {"start": 2681, "end": 2687, "pages": [2681, 2684, 2687]}, {"start": 2789, "end": 2789, "pages": [2789]}, {"start": 2992, "end": 2992, "pages": [2992]}, {"start": 3294, "end": 3294, "pages": [3294]}, {"start": 3849, "end": 3849, "pages": [3849]}, {"start": 4218, "end": 4218, "pages": [4218]}, {"start": 4224, "end": 4224, "pages": [4224]}, {"start": 4416, "end": 4416, "pages": [4416]}, {"start": 4464, "end": 4464, "pages": [4464]}, {"start": 4834, "end": 4834, "pages": [4834]}, {"start": 5262, "end": 5262, "pages": [5262]}, {"start": 7001, "end": 7001, "pages": [7001]}, {"start": 10694, "end": 10694, "pages": [10694]}, {"start": 10744, "end": 10744, "pages": [10744]}, {"start": 11529, "end": 11535, "pages": [11529, 11533, 11535]}, {"start": 11570, "end": 11570, "pages": [11570]}, {"start": 12687, "end": 12687, "pages": [12687]}, {"start": 14310, "end": 14310, "pages": [14310]}, {"start": 14332, "end": 14332, "pages": [14332]}, {"start": 14757, "end": 14763, "pages": [14757, 14761, 14763]}, {"start": 14798, "end": 14798, "pages": [14798]}, {"start": 14868, "end": 14868, "pages": [14868]}, {"start": 16932, "end": 16932, "pages": [16932]}, {"start": 16954, "end": 16954, "pages": [16954]}, {"start": 18274, "end": 18274, "pages": [18274]}, {"start": 20181, "end": 20181, "pages": [20181]}, {"start": 20862, "end": 20862, "pages": [20862]}, {"start": 21095, "end": 21095, "pages": [21095]}, {"start": 21340, "end": 21340, "pages": [21340]}, {"start": 21559, "end": 21559, "pages": [21559]}, {"start": 21790, "end": 21790, "pages": [21790]}, {"start": 21812, "end": 21812, "pages": [21812]}, {"start": 21865, "end": 21865, "pages": [21865]}, {"start": 21895, "end": 21895, "pages": [21895]}];
+        const pageToPath = {"19": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000019.jpg", "1263": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001263.jpg", "2291": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002291.jpg", "2294": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002294.jpg", "2597": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002597.jpg", "2681": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002681.jpg", "2684": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002684.jpg", "2687": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002687.jpg", "2789": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002789.jpg", "2992": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002992.jpg", "3294": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003294.jpg", "3849": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003849.jpg", "4218": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004218.jpg", "4224": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004224.jpg", "4416": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004416.jpg", "4464": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004464.jpg", "4834": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004834.jpg", "5262": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005262.jpg", "7001": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007001.jpg", "10694": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010694.jpg", "10744": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010744.jpg", "11529": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011529.jpg", "11533": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011533.jpg", "11535": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011535.jpg", "11570": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011570.jpg", "12687": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012687.jpg", "14310": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014310.jpg", "14332": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014332.jpg", "14757": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014757.jpg", "14761": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014761.jpg", "14763": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014763.jpg", "14798": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014798.jpg", "14868": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014868.jpg", "16932": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016932.jpg", "16954": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016954.jpg", "18274": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018274.jpg", "20181": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020181.jpg", "20862": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020862.jpg", "21095": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021095.jpg", "21340": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021340.jpg", "21559": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021559.jpg", "21790": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021790.jpg", "21812": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021812.jpg", "21865": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021865.jpg", "21895": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021895.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000019.jpg": "...l, did not challenge the inclusion of other jurors who disc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001263.jpg": "...could’ be served bys the inclusion-of a’picture-of ms: maxw...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002291.jpg": "...rule l4(a) because their inclusion will substantially preju...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002294.jpg": "...hese unresolved issues.  inclusion. of the: perjury gounts...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002597.jpg": "...ance” than. the  express inclusion clsewhere in the agreeme...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002681.jpg": "...ivity.  the government?s inclusion of-these allegations, ho...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002684.jpg": "...only explanation. forthe inclusion ofalleged.2o-year-old al...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002687.jpg": "....  cover-up, suggest the inclusion of offenses that are not...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002789.jpg": "...could’ be served bys the inclusion-of a’picture-of ms: maxw...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002992.jpg": "...ounts one and three. the inclusion. of the overt acts relat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003294.jpg": "...imit on, -damages, -and. inclusion of:certain victims,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003849.jpg": ".... monitoring the courts. inclusion. of the exaet lines:  re...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004218.jpg": "...nce ‘in, its opposi ‘its inclusion of the allegations. rega...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004224.jpg": "...not-prejudiceed. by-the inclusion of false, itelevait alle...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004416.jpg": "...imit on, ‘damages, iand, inclusion of:certain victims,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004464.jpg": "...to.defense counsel; and:inclusion.in the npa. of'a broad p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004834.jpg": "...rise.” he testified that inclusion of this sentence, warnin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005262.jpg": "...ent  ‘ctober: l4 without inclusion. of  ‘ms. maxwell reeeiv...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007001.jpg": "...6), we would ask for the inclusion \"or the former acting u....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010694.jpg": "...he probation office: for inclusion, in the  rresentence inv...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010744.jpg": "...t-does not object to the inclusion of statements.  from thr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011529.jpg": "...e's an objection. te the inclusion ef  kate aff this paragr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011533.jpg": "...efendant objects to the  inclusion, of these patagraphs im...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011535.jpg": "...8 is an ebyection to the inclusion, of  kate's vaietim infa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011570.jpg": "...efendant sb ects to  the inclusion a $lo million bequest fr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012687.jpg": "...he law dees not support  inclusion in this context without...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014310.jpg": "...tive tine period for the inclusion ef it is. mr. rohrbach:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014332.jpg": "...e appreciate the court's inclusion.  the court: well, i thi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014757.jpg": "...e's an objection. te the inclusion ef  kate aff this paragr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014761.jpg": "...efendant objects to the  inclusion, of these patagraphs im...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014763.jpg": "...8 is an ebyection to the inclusion, of  kate's vaietim infa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014798.jpg": "...efendant sb ects to  the inclusion a $lo million bequest fr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014868.jpg": "...l, did not challenge the inclusion of other jurors who disc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016932.jpg": "...tive tine period for the inclusion ef it is. mr. rohrbach:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016954.jpg": "...e appreciate the court's inclusion.  the court: well, i thi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018274.jpg": "...he law dees not support  inclusion in this context without...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020181.jpg": "...could’ be served bys the inclusion-of a’picture-of ms: maxw...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020862.jpg": "...conference, request the inclusion of  net = me  travel fro...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021095.jpg": "...rance” than. the express inclusion elsewhere in the agreeme...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021340.jpg": "...to defense counsel; and inclusion inthe npaofa broad.p ‘ov...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021559.jpg": "...fendant objects: to the  inclusion of these paragraphs in t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021790.jpg": "...ive history, namely, the inclusion of section 3l42()()(e) i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021812.jpg": "...l, did not challenge the inclusion of other jurors who disc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021865.jpg": "...l, did not challenge the inclusion of other jurors who disc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021895.jpg": "...l, did not challenge the inclusion of other jurors who disc..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "inclusion" (45 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">19-19</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1263-1263</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">2291-2294</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">2597-2597</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">2681-2687</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">2789-2789</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">2992-2992</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">3294-3294</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">3849-3849</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">4218-4218</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">4224-4224</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">4416-4416</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">4464-4464</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">4834-4834</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">5262-5262</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">7001-7001</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">10694-10694</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">10744-10744</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">11529-11535</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">11570-11570</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">12687-12687</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">14310-14310</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">14332-14332</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">14757-14763</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">14798-14798</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">14868-14868</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">16932-16932</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">16954-16954</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">18274-18274</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">20181-20181</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">20862-20862</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">21095-21095</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">21340-21340</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">21559-21559</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">21790-21790</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">21812-21812</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">21865-21865</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">21895-21895</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

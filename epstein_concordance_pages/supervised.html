@@ -1,0 +1,292 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "supervised"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 3, "end": 9, "pages": [3, 4, 9]}, {"start": 25, "end": 25, "pages": [25]}, {"start": 1001, "end": 1001, "pages": [1001]}, {"start": 1501, "end": 1501, "pages": [1501]}, {"start": 1627, "end": 1627, "pages": [1627]}, {"start": 2004, "end": 2004, "pages": [2004]}, {"start": 3249, "end": 3249, "pages": [3249]}, {"start": 3257, "end": 3257, "pages": [3257]}, {"start": 3329, "end": 3329, "pages": [3329]}, {"start": 4371, "end": 4371, "pages": [4371]}, {"start": 4379, "end": 4379, "pages": [4379]}, {"start": 4451, "end": 4451, "pages": [4451]}, {"start": 4768, "end": 4772, "pages": [4768, 4772]}, {"start": 4832, "end": 4832, "pages": [4832]}, {"start": 6054, "end": 6054, "pages": [6054]}, {"start": 7830, "end": 7830, "pages": [7830]}, {"start": 10437, "end": 10440, "pages": [10437, 10438, 10439, 10440]}, {"start": 10455, "end": 10455, "pages": [10455]}, {"start": 10561, "end": 10564, "pages": [10561, 10564]}, {"start": 11164, "end": 11164, "pages": [11164]}, {"start": 11548, "end": 11548, "pages": [11548]}, {"start": 11568, "end": 11568, "pages": [11568]}, {"start": 11606, "end": 11606, "pages": [11606]}, {"start": 11615, "end": 11617, "pages": [11615, 11616, 11617]}, {"start": 11887, "end": 11887, "pages": [11887]}, {"start": 11900, "end": 11900, "pages": [11900]}, {"start": 12310, "end": 12310, "pages": [12310]}, {"start": 12711, "end": 12711, "pages": [12711]}, {"start": 13137, "end": 13137, "pages": [13137]}, {"start": 14776, "end": 14776, "pages": [14776]}, {"start": 14796, "end": 14796, "pages": [14796]}, {"start": 14834, "end": 14834, "pages": [14834]}, {"start": 14843, "end": 14845, "pages": [14843, 14844, 14845]}, {"start": 14852, "end": 14858, "pages": [14852, 14853, 14858]}, {"start": 14874, "end": 14874, "pages": [14874]}, {"start": 15041, "end": 15041, "pages": [15041]}, {"start": 15137, "end": 15137, "pages": [15137]}, {"start": 17477, "end": 17477, "pages": [17477]}, {"start": 17490, "end": 17490, "pages": [17490]}, {"start": 17898, "end": 17898, "pages": [17898]}, {"start": 18298, "end": 18298, "pages": [18298]}, {"start": 18722, "end": 18722, "pages": [18722]}, {"start": 19919, "end": 19919, "pages": [19919]}, {"start": 20483, "end": 20483, "pages": [20483]}, {"start": 20583, "end": 20583, "pages": [20583]}, {"start": 20725, "end": 20725, "pages": [20725]}, {"start": 21030, "end": 21030, "pages": [21030]}, {"start": 21043, "end": 21043, "pages": [21043]}, {"start": 21063, "end": 21065, "pages": [21063, 21065]}, {"start": 21072, "end": 21072, "pages": [21072]}, {"start": 21146, "end": 21147, "pages": [21146, 21147]}, {"start": 21156, "end": 21160, "pages": [21156, 21158, 21160]}, {"start": 21574, "end": 21574, "pages": [21574]}, {"start": 21594, "end": 21594, "pages": [21594]}, {"start": 21632, "end": 21632, "pages": [21632]}, {"start": 21642, "end": 21644, "pages": [21642, 21643, 21644]}, {"start": 21662, "end": 21662, "pages": [21662]}, {"start": 21673, "end": 21673, "pages": [21673]}, {"start": 21750, "end": 21750, "pages": [21750]}, {"start": 21774, "end": 21775, "pages": [21774, 21775]}, {"start": 21796, "end": 21802, "pages": [21796, 21797, 21802]}, {"start": 21818, "end": 21818, "pages": [21818]}, {"start": 21849, "end": 21855, "pages": [21849, 21850, 21855]}, {"start": 21871, "end": 21871, "pages": [21871]}, {"start": 21879, "end": 21885, "pages": [21879, 21880, 21885]}, {"start": 21901, "end": 21901, "pages": [21901]}];
+        const pageToPath = {"3": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000003.jpg", "4": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000004.jpg", "9": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000009.jpg", "25": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000025.jpg", "1001": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001001.jpg", "1501": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001501.jpg", "1627": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001627.jpg", "2004": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002004.jpg", "3249": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003249.jpg", "3257": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003257.jpg", "3329": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003329.jpg", "4371": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004371.jpg", "4379": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004379.jpg", "4451": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004451.jpg", "4768": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004768.jpg", "4772": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004772.jpg", "4832": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004832.jpg", "6054": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006054.jpg", "7830": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007830.jpg", "10437": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010437.jpg", "10438": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010438.jpg", "10439": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010439.jpg", "10440": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010440.jpg", "10455": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010455.jpg", "10561": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010561.jpg", "10564": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010564.jpg", "11164": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011164.jpg", "11548": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011548.jpg", "11568": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011568.jpg", "11606": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011606.jpg", "11615": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011615.jpg", "11616": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011616.jpg", "11617": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011617.jpg", "11887": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011887.jpg", "11900": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011900.jpg", "12310": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012310.jpg", "12711": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012711.jpg", "13137": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013137.jpg", "14776": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014776.jpg", "14796": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014796.jpg", "14834": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014834.jpg", "14843": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014843.jpg", "14844": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014844.jpg", "14845": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014845.jpg", "14852": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014852.jpg", "14853": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014853.jpg", "14858": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014858.jpg", "14874": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014874.jpg", "15041": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015041.jpg", "15137": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015137.jpg", "17477": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017477.jpg", "17490": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017490.jpg", "17898": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017898.jpg", "18298": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018298.jpg", "18722": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018722.jpg", "19919": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019919.jpg", "20483": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020483.jpg", "20583": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020583.jpg", "20725": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020725.jpg", "21030": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021030.jpg", "21043": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021043.jpg", "21063": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021063.jpg", "21065": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021065.jpg", "21072": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021072.jpg", "21146": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021146.jpg", "21147": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021147.jpg", "21156": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021156.jpg", "21158": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021158.jpg", "21160": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021160.jpg", "21574": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021574.jpg", "21594": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021594.jpg", "21632": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021632.jpg", "21642": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021642.jpg", "21643": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021643.jpg", "21644": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021644.jpg", "21662": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021662.jpg", "21673": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021673.jpg", "21750": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021750.jpg", "21774": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021774.jpg", "21775": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021775.jpg", "21796": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021796.jpg", "21797": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021797.jpg", "21802": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021802.jpg", "21818": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021818.jpg", "21849": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021849.jpg", "21850": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021850.jpg", "21855": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021855.jpg", "21871": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021871.jpg", "21879": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021879.jpg", "21880": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021880.jpg", "21885": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021885.jpg", "21901": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021901.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000003.jpg": "...y conctitrent terivis of supervised release.  abel ati eet...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000004.jpg": "...d by concurrent terms of supervised. release...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000009.jpg": "...rl seam ae  ‘ive years’ supervised release, and the  of ia....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000025.jpg": "...urt found, that maxwell.“supervised” sarah » kellen in part...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001001.jpg": "...the alleged:violation of supervised release in advance of th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001501.jpg": "...n violation petition. l) supervised release violation petiti...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001627.jpg": "...e alleged, violation, of supervised release if advance of th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002004.jpg": "..., by-plane), while’being supervised and monitored 24 hours a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003249.jpg": ".... prostitution:cases she supervised,  with similar fae...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003257.jpg": "...comply with.therterms of supervised. custody: sanchez also a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003329.jpg": "...ion, as. a condition, of supervised ‘release ‘under  arid. ¢...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004371.jpg": ".... prostitution:cases she supervised,  with similar: facts...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004379.jpg": "...comply with-the:terms of supervised. custody. sanchez also ....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004451.jpg": "...ion, as. a condition, of supervised ‘release ‘under  arid. ¢...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004768.jpg": "...y a berm of  feur years' supervised release. ti am not ifipe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004772.jpg": "...for  fevocerion of your supervised release and gould result...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004832.jpg": "...over gon s. ms. ferman supervised the investigation along...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006054.jpg": "...rc ‘formally engaged and.supervised. bythe atorneys  of reco...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007830.jpg": "...nta, georgia (l.98929o)  supervised law students on, death,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010437.jpg": "...rvis  sto fi  s. maxwell supervised at  aggravating role: er...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010438.jpg": "...“jane” and a ms. maxwell supervised. in her role. as.  manag...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010439.jpg": "...dicates that ms. maxwell supervised or directed kellen or'th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010440.jpg": "...finds. that ms. maxwell.supervised another “participant,” t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010455.jpg": "...d by a five-year term of supervised release. sec psr.at 65....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010561.jpg": "...ires: that the defendant supervised a.knouing participant....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010564.jpg": "...l.l because maxwell also supervised at least.one other:‘knou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011164.jpg": "...uct: by the person being supervised. failure to. submit to a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011548.jpg": "...xter that. the defendant supervised at least ome other perso...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011568.jpg": "...2(6) (3).  ihe tbange or supervised uclease is three years f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011606.jpg": "...artrieit with respect to supervised release, ms. slernheim:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011615.jpg": "...a period of five years! supervised release..  you may be se...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011616.jpg": "...oy  ©  [fe  he  [fe  of supervised release. defense counsel...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011617.jpg": "...ou. are releedsed and on supervised  release; you will have...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011887.jpg": "...round,  ®. and ghislaine supervised all that construction  a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011900.jpg": "...agers, taking  a  q. she supervised the house managers who d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012310.jpg": "...tiately 4,ooo keours, of supervised €lifieal keurs with  und...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012711.jpg": "...trues  ad, you generally supervised the team; 42s ‘that righ...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013137.jpg": "...s. en sor.  what's that? supervised oun, recognizance.  ta....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014776.jpg": "...xter that. the defendant supervised at least ome other perso...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014796.jpg": "...2(6) (3).  ihe tbange or supervised uclease is three years f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014834.jpg": "...artrieit with respect to supervised release, ms. slernheim:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014843.jpg": "...a period of five years! supervised release..  you may be se...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014844.jpg": "...oy  ©  [fe  he  [fe  of supervised release. defense counsel...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014845.jpg": "...ou. are releedsed and on supervised  release; you will have...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014852.jpg": "...y conctitrent terivis of supervised release.  abel ati eet...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014853.jpg": "...d by concurrent terms of supervised. release...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014858.jpg": "...rl seam ae  ‘ive years’ supervised release, and the  of ia....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014874.jpg": "...urt found, that maxwell.“supervised” sarah » kellen in part...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015041.jpg": "...ent of probationers, and supervised releasees who were stibj...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015137.jpg": "...ment term of five years’ supervised...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017477.jpg": "...round,  ®. and ghislaine supervised all that construction  a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017490.jpg": "...agers, taking  a  q. she supervised the house managers who d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017898.jpg": "...tiately 4,ooo keours, of supervised €lifieal keurs with  und...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018298.jpg": "...trues  ad, you generally supervised the team; 42s ‘that righ...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018722.jpg": "...s. en sor.  what's that? supervised oun, recognizance.  ta....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019919.jpg": "...the alleged:violation of supervised release in advance of th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020483.jpg": "...uct: by the person being supervised. failure to. submit to a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020583.jpg": "...by a five-year term. of: supervised release, and ‘imposed.a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020725.jpg": "...k dere for enrollment m. supervised rel “ase: 3 years : joun...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021030.jpg": "...and  that the derendant supervised at least one other perso...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021043.jpg": "...nce that  the defendant. supervised sanah ‘kellen, who was a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021063.jpg": "...d by concurrent terms of supervised release of three years,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021065.jpg": "...finding; that defendant supervised another criminal partici...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021072.jpg": "...evidence that defendant supervised another criminal  partic...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021146.jpg": "...ent argued. that maxwell supervised sarah ‘kellen. yet the t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021147.jpg": "...he evidence that maxwell supervised. kellen. in. any: capaci...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021156.jpg": "...niment, you will. be git supervised release forz  upon rele...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021158.jpg": "...recommended that:you be: supervised by: the; districtsof res...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021160.jpg": "...yment during the term of supervised release willcommence wit...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021574.jpg": "...and  phat the defencant supervised at least one ether perso...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021594.jpg": "...2¢6) (3).  the range for supervised release is three years t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021632.jpg": "...partment with respect to supervised release.  ms. sternheim:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021642.jpg": "...tetal of five years  of supervised release.  defense counse...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021643.jpg": "...a4re reeleased afid on, supervised  release, you will. hawe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021644.jpg": "...ll of your conditions of supervised nelease. if you are  me...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021662.jpg": "...ol: loued by five years” supervised release, and imposed a $...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021673.jpg": "...folloued by. five years’ supervised release, and. imposed. a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021750.jpg": "...record that ms. maxwell supervised, another criminal partic...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021774.jpg": "...was no evidence that she supervised another criminal partici...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021775.jpg": "...ified that ‘ms. ‘maxwell supervised ‘kellen.  in. any: capac...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021796.jpg": "...y conctitrent terivis of supervised release.  abel ati eet...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021797.jpg": "...d by concurrent terms of supervised. release...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021802.jpg": "...rl seam ae  ‘ive years’ supervised release, and the  of ia....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021818.jpg": "...urt found, that maxwell.“supervised” sarah » kellen in part...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021849.jpg": "...y conctitrent terivis of supervised release.  abel ati eet...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021850.jpg": "...d by concurrent terms of supervised. release...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021855.jpg": "...rl seam ae  ‘ive years’ supervised release, and the  of ia....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021871.jpg": "...urt found, that maxwell.“supervised” sarah » kellen in part...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021879.jpg": "...y conctitrent terivis of supervised release.  abel ati eet...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021880.jpg": "...d by concurrent terms of supervised. release...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021885.jpg": "...rl seam ae  ‘ive years’ supervised release, and the  of ia....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021901.jpg": "...urt found, that maxwell.“supervised” sarah » kellen in part..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "supervised" (92 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">3-9</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">25-25</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1001-1001</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">1501-1501</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">1627-1627</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">2004-2004</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3249-3249</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">3257-3257</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">3329-3329</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">4371-4371</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">4379-4379</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">4451-4451</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">4768-4772</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">4832-4832</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">6054-6054</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">7830-7830</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">10437-10440</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">10455-10455</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">10561-10564</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">11164-11164</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">11548-11548</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">11568-11568</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">11606-11606</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">11615-11617</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">11887-11887</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">11900-11900</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">12310-12310</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">12711-12711</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">13137-13137</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">14776-14776</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">14796-14796</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">14834-14834</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">14843-14845</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">14852-14858</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">14874-14874</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">15041-15041</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">15137-15137</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">17477-17477</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">17490-17490</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">17898-17898</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">18298-18298</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">18722-18722</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">19919-19919</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">20483-20483</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">20583-20583</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(45, 0); return false;">20725-20725</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(46, 0); return false;">21030-21030</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(47, 0); return false;">21043-21043</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(48, 0); return false;">21063-21065</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(49, 0); return false;">21072-21072</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(50, 0); return false;">21146-21147</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(51, 0); return false;">21156-21160</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(52, 0); return false;">21574-21574</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(53, 0); return false;">21594-21594</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(54, 0); return false;">21632-21632</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(55, 0); return false;">21642-21644</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(56, 0); return false;">21662-21662</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(57, 0); return false;">21673-21673</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(58, 0); return false;">21750-21750</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(59, 0); return false;">21774-21775</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(60, 0); return false;">21796-21802</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(61, 0); return false;">21818-21818</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(62, 0); return false;">21849-21855</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(63, 0); return false;">21871-21871</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(64, 0); return false;">21879-21885</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(65, 0); return false;">21901-21901</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

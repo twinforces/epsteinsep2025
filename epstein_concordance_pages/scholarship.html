@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "scholarship"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 450, "end": 450, "pages": [450]}, {"start": 715, "end": 715, "pages": [715]}, {"start": 11692, "end": 11692, "pages": [11692]}, {"start": 11701, "end": 11701, "pages": [11701]}, {"start": 11726, "end": 11726, "pages": [11726]}, {"start": 11937, "end": 11937, "pages": [11937]}, {"start": 12044, "end": 12044, "pages": [12044]}, {"start": 12055, "end": 12055, "pages": [12055]}, {"start": 12062, "end": 12062, "pages": [12062]}, {"start": 12265, "end": 12273, "pages": [12265, 12270, 12272, 12273]}, {"start": 14421, "end": 14425, "pages": [14421, 14424, 14425]}, {"start": 14436, "end": 14436, "pages": [14436]}, {"start": 14457, "end": 14457, "pages": [14457]}, {"start": 16040, "end": 16040, "pages": [16040]}, {"start": 16137, "end": 16137, "pages": [16137]}, {"start": 16146, "end": 16146, "pages": [16146]}, {"start": 16171, "end": 16171, "pages": [16171]}, {"start": 17042, "end": 17046, "pages": [17042, 17045, 17046]}, {"start": 17057, "end": 17057, "pages": [17057]}, {"start": 17078, "end": 17078, "pages": [17078]}, {"start": 17527, "end": 17527, "pages": [17527]}, {"start": 17633, "end": 17633, "pages": [17633]}, {"start": 17644, "end": 17644, "pages": [17644]}, {"start": 17651, "end": 17651, "pages": [17651]}, {"start": 17854, "end": 17862, "pages": [17854, 17859, 17861, 17862]}];
+        const pageToPath = {"450": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000450.jpg", "715": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000715.jpg", "11692": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011692.jpg", "11701": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011701.jpg", "11726": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011726.jpg", "11937": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011937.jpg", "12044": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012044.jpg", "12055": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012055.jpg", "12062": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012062.jpg", "12265": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012265.jpg", "12270": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012270.jpg", "12272": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012272.jpg", "12273": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012273.jpg", "14421": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014421.jpg", "14424": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014424.jpg", "14425": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014425.jpg", "14436": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014436.jpg", "14457": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014457.jpg", "16040": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016040.jpg", "16137": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016137.jpg", "16146": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016146.jpg", "16171": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016171.jpg", "17042": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017042.jpg", "17045": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017045.jpg", "17046": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017046.jpg", "17057": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017057.jpg", "17078": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017078.jpg", "17527": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017527.jpg", "17633": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017633.jpg", "17644": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017644.jpg", "17651": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017651.jpg", "17854": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017854.jpg", "17859": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017859.jpg", "17861": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017861.jpg", "17862": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017862.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000450.jpg": "...nimentary. 4.l9. -htps://scholarship:law:umn:.edu/concomm/4l9...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000715.jpg": "...for college was to get a scholarship.  st  when i was l5, twa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011692.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011701.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011726.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011937.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012044.jpg": "...ed: are you applying for scholarship/financial aid;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012055.jpg": "...the pecapient of an nds, scholarship, grant,  award, or prize...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012062.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012265.jpg": "...he concept of building a scholarship lodge on. interlo¢ghen.'...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012270.jpg": "...ect.  ©. you wertioned 4 scholarship lodge. what l8 a scholar...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012272.jpg": "...midiar with the epstein, scholarship lodge?  a. yess q. does...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012273.jpg": "...the jeffrey e. epstgl a, scholarship lodge. q. is this a fair...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014421.jpg": "...e epstein, nad donated a scholarship lodge  here\"s the leter...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014424.jpg": "...w york  for some kind of scholarship on mentoring program. th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014425.jpg": ".... all. there wasn't some scholarship fourdation, there cexnta...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014436.jpg": "...as 4 ‘ermip for multiple scholarship students whe would be ch...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014457.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016040.jpg": "...center for the | y  rez scholarship lodge information oy dat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016137.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016146.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016171.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017042.jpg": "...e epstein, nad donated a scholarship lodge  here\"s the leter...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017045.jpg": "...w york  for some kind of scholarship on mentoring program. th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017046.jpg": ".... all. there wasn't some scholarship fourdation, there cexnta...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017057.jpg": "...as 4 ‘ermip for multiple scholarship students whe would be ch...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017078.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017527.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017633.jpg": "...ed: are you applying for scholarship/financial aid;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017644.jpg": "...the pecapient of an nds, scholarship, grant,  award, or prize...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017651.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017854.jpg": "...he concept of building a scholarship lodge on. interlo¢ghen.'...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017859.jpg": "...ect.  ©. you wertioned 4 scholarship lodge. what l8 a scholar...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017861.jpg": "...midiar with the epstein, scholarship lodge?  a. yess q. does...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017862.jpg": "...the jeffrey e. epstgl a, scholarship lodge. q. is this a fair..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "scholarship" (35 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">450-450</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">715-715</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">11692-11692</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">11701-11701</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">11726-11726</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">11937-11937</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">12044-12044</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">12055-12055</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">12062-12062</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">12265-12273</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">14421-14425</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">14436-14436</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">14457-14457</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">16040-16040</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">16137-16137</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">16146-16146</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">16171-16171</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">17042-17046</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">17057-17057</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">17078-17078</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">17527-17527</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">17633-17633</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">17644-17644</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">17651-17651</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">17854-17862</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

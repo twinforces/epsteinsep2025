@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "behaviour"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 5898, "end": 5908, "pages": [5898, 5899, 5900, 5903, 5904, 5907, 5908]}, {"start": 6823, "end": 6833, "pages": [6823, 6824, 6825, 6828, 6829, 6832, 6833]}, {"start": 7534, "end": 7534, "pages": [7534]}, {"start": 7598, "end": 7598, "pages": [7598]}, {"start": 10461, "end": 10461, "pages": [10461]}];
+        const pageToPath = {"5898": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005898.jpg", "5899": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005899.jpg", "5900": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005900.jpg", "5903": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005903.jpg", "5904": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005904.jpg", "5907": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005907.jpg", "5908": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005908.jpg", "6823": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006823.jpg", "6824": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006824.jpg", "6825": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006825.jpg", "6828": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006828.jpg", "6829": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006829.jpg", "6832": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006832.jpg", "6833": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006833.jpg", "7534": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007534.jpg", "7598": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007598.jpg", "10461": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010461.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005898.jpg": "...fected ‘by this predate ‘behaviour: sextial gtoomir ue evid...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005899.jpg": "...pose of sexual. srooming behaviour and tdentifies appears:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005900.jpg": "...the very nature of ‘the behaviour used ‘to categorize! the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005903.jpg": "...perience underlying the ‘behaviour.   idtivarion  self-groo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005904.jpg": "...y thoughts do: not mateh behaviour ‘cognitive dissonaneti m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005907.jpg": "...ss  consequences of ‘his behaviour: ‘this; conerete-|k  and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005908.jpg": "...doubt that the ambiguous behaviour of: sexual grooming:  me...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006823.jpg": "...fected ‘by this predate ‘behaviour: sextial gtoomir ue evid...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006824.jpg": "...pose of sexual. srooming behaviour and tdentifies appears:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006825.jpg": "...the very nature of ‘the behaviour used ‘to categorize! the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006828.jpg": "...perience underlying the ‘behaviour.   idtivarion  self-groo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006829.jpg": "...y thoughts do: not mateh behaviour ‘cognitive dissonaneti m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006832.jpg": "...ss  consequences of ‘his behaviour: ‘this; conerete-|k  and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006833.jpg": "...doubt that the ambiguous behaviour of: sexual grooming:  me...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007534.jpg": "...tion affects memory for  behaviour. applied cog morgan,,c....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007598.jpg": "...d  treatment:of criminal behaviour, pp. 2o7-2l9. toronto: c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010461.jpg": "...d tiot shou any perverse behaviour before shemet epstein. ‘..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "behaviour" (17 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">5898-5908</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">6823-6833</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">7534-7534</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">7598-7598</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">10461-10461</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

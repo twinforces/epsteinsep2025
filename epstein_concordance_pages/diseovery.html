@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "diseovery"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 613, "end": 613, "pages": [613]}, {"start": 1021, "end": 1021, "pages": [1021]}, {"start": 1263, "end": 1263, "pages": [1263]}, {"start": 1674, "end": 1675, "pages": [1674, 1675]}, {"start": 1681, "end": 1681, "pages": [1681]}, {"start": 1693, "end": 1694, "pages": [1693, 1694]}, {"start": 1700, "end": 1703, "pages": [1700, 1703]}, {"start": 1807, "end": 1807, "pages": [1807]}, {"start": 1852, "end": 1852, "pages": [1852]}, {"start": 1863, "end": 1863, "pages": [1863]}, {"start": 1893, "end": 1893, "pages": [1893]}, {"start": 2470, "end": 2470, "pages": [2470]}, {"start": 2483, "end": 2483, "pages": [2483]}, {"start": 2537, "end": 2537, "pages": [2537]}, {"start": 2891, "end": 2892, "pages": [2891, 2892]}, {"start": 3145, "end": 3145, "pages": [3145]}, {"start": 4113, "end": 4113, "pages": [4113]}, {"start": 5012, "end": 5012, "pages": [5012]}, {"start": 5846, "end": 5846, "pages": [5846]}, {"start": 5966, "end": 5966, "pages": [5966]}, {"start": 6232, "end": 6232, "pages": [6232]}, {"start": 6771, "end": 6771, "pages": [6771]}, {"start": 6891, "end": 6891, "pages": [6891]}, {"start": 9004, "end": 9004, "pages": [9004]}, {"start": 9695, "end": 9695, "pages": [9695]}, {"start": 10584, "end": 10584, "pages": [10584]}, {"start": 19306, "end": 19307, "pages": [19306, 19307]}, {"start": 19313, "end": 19317, "pages": [19313, 19317]}, {"start": 19504, "end": 19506, "pages": [19504, 19505, 19506]}, {"start": 19525, "end": 19526, "pages": [19525, 19526]}, {"start": 19532, "end": 19538, "pages": [19532, 19537, 19538]}, {"start": 19544, "end": 19547, "pages": [19544, 19547]}, {"start": 19627, "end": 19627, "pages": [19627]}, {"start": 19939, "end": 19939, "pages": [19939]}, {"start": 21955, "end": 21955, "pages": [21955]}, {"start": 21973, "end": 21974, "pages": [21973, 21974]}, {"start": 21982, "end": 21982, "pages": [21982]}, {"start": 22076, "end": 22076, "pages": [22076]}];
+        const pageToPath = {"613": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000613.jpg", "1021": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001021.jpg", "1263": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001263.jpg", "1674": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001674.jpg", "1675": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001675.jpg", "1681": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001681.jpg", "1693": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001693.jpg", "1694": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001694.jpg", "1700": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001700.jpg", "1703": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001703.jpg", "1807": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001807.jpg", "1852": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001852.jpg", "1863": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001863.jpg", "1893": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001893.jpg", "2470": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002470.jpg", "2483": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002483.jpg", "2537": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002537.jpg", "2891": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002891.jpg", "2892": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002892.jpg", "3145": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003145.jpg", "4113": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004113.jpg", "5012": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005012.jpg", "5846": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005846.jpg", "5966": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005966.jpg", "6232": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006232.jpg", "6771": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006771.jpg", "6891": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006891.jpg", "9004": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009004.jpg", "9695": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009695.jpg", "10584": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010584.jpg", "19306": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019306.jpg", "19307": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019307.jpg", "19313": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019313.jpg", "19317": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019317.jpg", "19504": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019504.jpg", "19505": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019505.jpg", "19506": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019506.jpg", "19525": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019525.jpg", "19526": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019526.jpg", "19532": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019532.jpg", "19537": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019537.jpg", "19538": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019538.jpg", "19544": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019544.jpg", "19547": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019547.jpg", "19627": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019627.jpg", "19939": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019939.jpg", "21955": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021955.jpg", "21973": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021973.jpg", "21974": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021974.jpg", "21982": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021982.jpg", "22076": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022076.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000613.jpg": "...ry, we would,  propose € diseovery deadline 6f o4teber 3l t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001021.jpg": "...ts about  the issties of diseovery, afd we agree with them,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001263.jpg": "...s  the ongoing re  w of. diseovery conifirnis, the lack of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001674.jpg": ".../or password protect the diseovery. 4. the government; the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001675.jpg": "...nesses referenced in the diseovery, whs  poo ead  have not...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001681.jpg": "...ly destroy sr delets all diseovery,  incltding bre not lite...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001693.jpg": ".../or password protect the diseovery. 4. the government; the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001694.jpg": "...nesses referenced in the diseovery, whs  poo ead  have not...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001700.jpg": "...ly destroy sr delets all diseovery,  incltding bre not lite...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001703.jpg": "...ness refereneed ‘in. the diseovery:  orley, no, l3=cr=48, 2...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001807.jpg": "...n. certain cases, thathe diseovery provided. i in ‘connecti...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001852.jpg": "...produced, by ‘the: gov  diseovery inatked “cor rifidential...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001863.jpg": "...ver (’s. case: against,  diseovery inatked “cor rifidential...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001893.jpg": "...mr. cohen, based on the diseovery, i6 that sehedule that\"s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002470.jpg": "...ited in gonmnectlon with diseovery motions,  decided by jud...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002483.jpg": "...; leter motion regarding diseovery: not. sealed.  5 288-l....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002537.jpg": "...ion. he petitonrs sought diseovery fiom thet usa; which mad...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002891.jpg": "...give a limited. right of diseovery, and then by rule l7 to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002892.jpg": "...ts to'use'the-rule as  a diseovery device.” (empliasis. add...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003145.jpg": "...es,  and. given,that-the diseovery makes ¢lear ‘who the thr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004113.jpg": "...arding the continuit  to diseovery and disclosure issues, t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005012.jpg": "...ay: have: reviewing -her diseovery: should the: defense wis...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005846.jpg": "...pages of newly provided. diseovery: material” (id. at 7), a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005966.jpg": "...a cursory review of:the: diseovery-produeed.related to one...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006232.jpg": "...ocuments €  changed. iti-diseovery. (def. expert.  = 5  not...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006771.jpg": "...pages of newly provided. diseovery: material” (id. at 7), a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006891.jpg": "...a cursory review of:the: diseovery-produeed.related to one...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009004.jpg": "...ld refuse juror'no; 5o's diseovery-request beeause juror‘no...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009695.jpg": "...ld refuse juror'no; 5o's diseovery-request beeause juror‘no...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010584.jpg": "...) on which to review her diseovery, pre  =  se counsel rega...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019306.jpg": ".../or password protect the diseovery. 4. the government; the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019307.jpg": "...nesses referenced in the diseovery, whs  poo ead  have not...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019313.jpg": "...ly destroy sr delets all diseovery,  incltding bre not lite...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019317.jpg": "...ot justify: a a stay of' diseovery:  follouing s six factor...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019504.jpg": "...reby ls ordered:  le the diseovery disclosed to the defenda...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019505.jpg": "...ns to whom they giselose diseovery materials. prior to dise...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019506.jpg": "...rnment wi  esses”),  the diseovery shall be used by such po...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019525.jpg": ".../or password protect the diseovery. 4. the government; the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019526.jpg": "...nesses referenced in the diseovery, whs  poo ead  have not...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019532.jpg": "...ly destroy sr delets all diseovery,  incltding bre not lite...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019537.jpg": ".../or password protect the diseovery. 4. the government; the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019538.jpg": "...nesses referenced in the diseovery, whs  poo ead  have not...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019544.jpg": "...ly destroy sr delets all diseovery,  incltding bre not lite...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019547.jpg": "...ness refereneed ‘in. the diseovery:  orley, no, l3=cr=48, 2...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019627.jpg": ".... defend. ‘ant’s use: of diseovery-materials, by contrast,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019939.jpg": "...ts about  the issties of diseovery, afd we agree with them,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021955.jpg": "...procedure l6(d):  l  l.  diseovery materials designated as...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021973.jpg": "...l procedure l6 (dq):  le diseovery materials designateed as...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021974.jpg": "...ds with respeeet ts affy diseovery material designated as...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021982.jpg": "...eceived or ceviewed the  diseovery. i've 6nly seea the indi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022076.jpg": "...d ‘pretrial requests for diseovery orders  &  pursuant to b..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "diseovery" (51 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">613-613</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1021-1021</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1263-1263</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">1674-1675</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">1681-1681</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">1693-1694</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">1700-1703</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">1807-1807</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">1852-1852</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">1863-1863</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">1893-1893</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">2470-2470</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">2483-2483</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">2537-2537</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">2891-2892</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">3145-3145</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">4113-4113</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">5012-5012</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">5846-5846</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">5966-5966</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">6232-6232</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">6771-6771</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">6891-6891</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">9004-9004</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">9695-9695</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">10584-10584</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">19306-19307</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">19313-19317</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">19504-19506</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">19525-19526</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">19532-19538</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">19544-19547</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">19627-19627</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">19939-19939</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">21955-21955</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">21973-21974</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">21982-21982</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">22076-22076</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

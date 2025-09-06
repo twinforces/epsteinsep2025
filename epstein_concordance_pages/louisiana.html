@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "louisiana"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 2826, "end": 2826, "pages": [2826]}, {"start": 3648, "end": 3648, "pages": [3648]}, {"start": 7605, "end": 7612, "pages": [7605, 7606, 7608, 7612]}, {"start": 7619, "end": 7619, "pages": [7619]}, {"start": 7628, "end": 7628, "pages": [7628]}, {"start": 7688, "end": 7688, "pages": [7688]}, {"start": 7829, "end": 7829, "pages": [7829]}, {"start": 8147, "end": 8147, "pages": [8147]}, {"start": 9193, "end": 9193, "pages": [9193]}, {"start": 9872, "end": 9872, "pages": [9872]}, {"start": 10382, "end": 10382, "pages": [10382]}, {"start": 13335, "end": 13335, "pages": [13335]}, {"start": 18919, "end": 18919, "pages": [18919]}, {"start": 20999, "end": 20999, "pages": [20999]}];
+        const pageToPath = {"2826": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002826.jpg", "3648": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003648.jpg", "7605": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007605.jpg", "7606": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007606.jpg", "7608": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007608.jpg", "7612": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007612.jpg", "7619": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007619.jpg", "7628": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007628.jpg", "7688": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007688.jpg", "7829": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007829.jpg", "8147": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008147.jpg", "9193": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009193.jpg", "9872": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009872.jpg", "10382": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010382.jpg", "13335": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013335.jpg", "18919": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018919.jpg", "20999": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020999.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002826.jpg": "...e community.” -taylor'v. louisiana, 4l9.u.s..522, 53ol975)»...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003648.jpg": "...onnecticut, mississippi. louisiana and new jersey:  and ore...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007605.jpg": "...nee ne na men evn nage  louisiana, october 23, l977.  es n...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007606.jpg": "...c sciences; new orleans, louisiana, february 2l, l98o,  die...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007608.jpg": "...gislatures, new orleans, louisiana, august 5, l986.  pornog...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007612.jpg": "...c sciences, new orleans, louisiana, february l9,. l992.  re...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007619.jpg": "...sciences, new orleafis, louisiana, february l7, 2ol7.  die...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007628.jpg": "...t threat management unit louisiana district atorneys associ...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007688.jpg": "...er4, 2ool -grand rounds, louisiana state university health...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007829.jpg": "...t ee  state of louisiana v. kyles (october 3l, l9...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008147.jpg": "...er4, 2ool -grand rounds, louisiana state university health...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009193.jpg": "...y  2 beit  lexdeodne. ©. louisiana land &  nploration. co....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009872.jpg": "...y  2 beit  lexdeodne. ©. louisiana land &  nploration. co....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010382.jpg": "....3l9  (citing johnson-y. louisiana, 4o6 u.s. 356, 362 (l.97...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013335.jpg": "...ww  no)  ir  arrested in louisiana in 2ol.5?  io = fr @ ned...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018919.jpg": "...ww  no)  ir  arrested in louisiana in 2ol.5?  io = fr @ ned...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020999.jpg": "...:9  (citing: johnson wv. louisiana, 4o6 u.s. 356 l972)); wh..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "louisiana" (17 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">2826-2826</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">3648-3648</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">7605-7612</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">7619-7619</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">7628-7628</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">7688-7688</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">7829-7829</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">8147-8147</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">9193-9193</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">9872-9872</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">10382-10382</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">13335-13335</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">18919-18919</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">20999-20999</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

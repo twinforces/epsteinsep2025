@@ -1,0 +1,256 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "california"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 557, "end": 557, "pages": [557]}, {"start": 1408, "end": 1408, "pages": [1408]}, {"start": 1419, "end": 1422, "pages": [1419, 1421, 1422]}, {"start": 3648, "end": 3648, "pages": [3648]}, {"start": 4830, "end": 4830, "pages": [4830]}, {"start": 7509, "end": 7509, "pages": [7509]}, {"start": 7543, "end": 7548, "pages": [7543, 7548]}, {"start": 7556, "end": 7559, "pages": [7556, 7558, 7559]}, {"start": 7568, "end": 7590, "pages": [7568, 7569, 7570, 7572, 7573, 7574, 7575, 7576, 7577, 7578, 7579, 7580, 7581, 7582, 7583, 7584, 7587, 7590]}, {"start": 7604, "end": 7615, "pages": [7604, 7606, 7608, 7609, 7610, 7611, 7612, 7613, 7614, 7615]}, {"start": 7621, "end": 7628, "pages": [7621, 7622, 7623, 7627, 7628]}, {"start": 7647, "end": 7647, "pages": [7647]}, {"start": 7657, "end": 7657, "pages": [7657]}, {"start": 7835, "end": 7835, "pages": [7835]}, {"start": 7862, "end": 7862, "pages": [7862]}, {"start": 8856, "end": 8856, "pages": [8856]}, {"start": 8896, "end": 8896, "pages": [8896]}, {"start": 8904, "end": 8904, "pages": [8904]}, {"start": 8982, "end": 8982, "pages": [8982]}, {"start": 10490, "end": 10490, "pages": [10490]}, {"start": 10677, "end": 10677, "pages": [10677]}, {"start": 10710, "end": 10710, "pages": [10710]}, {"start": 11302, "end": 11302, "pages": [11302]}, {"start": 11364, "end": 11364, "pages": [11364]}, {"start": 11408, "end": 11408, "pages": [11408]}, {"start": 11417, "end": 11428, "pages": [11417, 11420, 11423, 11428]}, {"start": 11589, "end": 11589, "pages": [11589]}, {"start": 11991, "end": 11991, "pages": [11991]}, {"start": 12060, "end": 12060, "pages": [12060]}, {"start": 12840, "end": 12840, "pages": [12840]}, {"start": 12861, "end": 12861, "pages": [12861]}, {"start": 13418, "end": 13418, "pages": [13418]}, {"start": 13892, "end": 13892, "pages": [13892]}, {"start": 13912, "end": 13912, "pages": [13912]}, {"start": 13925, "end": 13925, "pages": [13925]}, {"start": 13949, "end": 13949, "pages": [13949]}, {"start": 14817, "end": 14817, "pages": [14817]}, {"start": 15212, "end": 15212, "pages": [15212]}, {"start": 15241, "end": 15241, "pages": [15241]}, {"start": 16516, "end": 16516, "pages": [16516]}, {"start": 16536, "end": 16536, "pages": [16536]}, {"start": 16549, "end": 16549, "pages": [16549]}, {"start": 16573, "end": 16573, "pages": [16573]}, {"start": 17581, "end": 17581, "pages": [17581]}, {"start": 17649, "end": 17649, "pages": [17649]}, {"start": 18426, "end": 18426, "pages": [18426]}, {"start": 18447, "end": 18447, "pages": [18447]}, {"start": 19002, "end": 19002, "pages": [19002]}, {"start": 20326, "end": 20326, "pages": [20326]}, {"start": 20337, "end": 20340, "pages": [20337, 20339, 20340]}, {"start": 20774, "end": 20774, "pages": [20774]}, {"start": 21615, "end": 21615, "pages": [21615]}, {"start": 21653, "end": 21653, "pages": [21653]}, {"start": 22382, "end": 22382, "pages": [22382]}];
+        const pageToPath = {"557": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000557.jpg", "1408": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001408.jpg", "1419": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001419.jpg", "1421": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001421.jpg", "1422": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001422.jpg", "3648": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003648.jpg", "4830": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004830.jpg", "7509": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007509.jpg", "7543": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007543.jpg", "7548": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007548.jpg", "7556": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007556.jpg", "7558": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007558.jpg", "7559": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007559.jpg", "7568": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007568.jpg", "7569": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007569.jpg", "7570": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007570.jpg", "7572": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007572.jpg", "7573": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007573.jpg", "7574": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007574.jpg", "7575": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007575.jpg", "7576": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007576.jpg", "7577": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007577.jpg", "7578": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007578.jpg", "7579": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007579.jpg", "7580": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007580.jpg", "7581": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007581.jpg", "7582": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007582.jpg", "7583": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007583.jpg", "7584": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007584.jpg", "7587": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007587.jpg", "7590": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007590.jpg", "7604": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007604.jpg", "7606": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007606.jpg", "7608": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007608.jpg", "7609": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007609.jpg", "7610": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007610.jpg", "7611": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007611.jpg", "7612": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007612.jpg", "7613": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007613.jpg", "7614": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007614.jpg", "7615": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007615.jpg", "7621": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007621.jpg", "7622": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007622.jpg", "7623": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007623.jpg", "7627": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007627.jpg", "7628": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007628.jpg", "7647": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007647.jpg", "7657": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007657.jpg", "7835": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007835.jpg", "7862": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007862.jpg", "8856": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008856.jpg", "8896": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008896.jpg", "8904": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008904.jpg", "8982": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008982.jpg", "10490": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010490.jpg", "10677": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010677.jpg", "10710": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010710.jpg", "11302": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011302.jpg", "11364": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011364.jpg", "11408": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011408.jpg", "11417": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011417.jpg", "11420": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011420.jpg", "11423": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011423.jpg", "11428": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011428.jpg", "11589": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011589.jpg", "11991": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011991.jpg", "12060": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012060.jpg", "12840": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012840.jpg", "12861": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012861.jpg", "13418": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013418.jpg", "13892": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013892.jpg", "13912": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013912.jpg", "13925": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013925.jpg", "13949": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013949.jpg", "14817": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014817.jpg", "15212": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015212.jpg", "15241": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015241.jpg", "16516": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016516.jpg", "16536": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016536.jpg", "16549": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016549.jpg", "16573": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016573.jpg", "17581": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017581.jpg", "17649": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017649.jpg", "18426": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018426.jpg", "18447": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018447.jpg", "19002": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019002.jpg", "20326": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020326.jpg", "20337": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020337.jpg", "20339": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020339.jpg", "20340": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020340.jpg", "20774": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020774.jpg", "21615": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021615.jpg", "21653": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021653.jpg", "22382": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022382.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000557.jpg": "...ta eae = ‘ sm s&s sf  in california.  we just €onteend that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001408.jpg": "...markus/moss pllc encino, california 9l436-3429 4o..n.w. thir...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001419.jpg": "...arkuslaw.com lea s.'sa  ‘california bar number l2l796: by: /...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001421.jpg": "...rkus/moss. pllc  eneino, california 9l436-3429. ao.n.w. thir...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001422.jpg": "...meadougate road  encino, california 9l436-3429 tel: (858)488...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003648.jpg": "...isylvania, and states of california, oregon, massachusets, c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004830.jpg": "...suggested that the da in california: might ‘try a common: pl...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007509.jpg": "...professors university of california, irvine, 2oo2 = present....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007543.jpg": "...niv of minnesota. l979 7 california state university: chico...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007548.jpg": "...an. alths conference on  california ‘atlomeys for:criminal j...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007556.jpg": "...s, inc.; newport beach; ‘california, atid washington, dc | m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007558.jpg": "...ons (facs), los angeles, california  member, research adviso...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007559.jpg": "...l ecology, university of california,  hospital and administr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007568.jpg": "...r of los angeles county, california, im people v. robert bar...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007569.jpg": "...torney general, state of california, in people v. charles ng...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007570.jpg": "...atorney, sonoma county, california, in people v. richard al...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007572.jpg": "...rockdale cot so  county, california, in people v. steven abr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007573.jpg": "...to the mariposo county; california, district atorney’s offi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007574.jpg": "...ings)  consultant to the california atorney general's office...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007575.jpg": "...ffice, and office of the california atorney general in peo l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007576.jpg": "...y’s: office in people of california v. frane cano. and ‘stev...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007577.jpg": "...broun, m.d. (san diego, california). testified by depositio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007578.jpg": "...rial, 8/5/9l  people. of california ‘vv. robert john batdo,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007579.jpg": "...v. vasquez (los angeles, california) testified at federal ha...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007580.jpg": "...l, l/6/94  on  people of california v. tiffany n. ‘sandeffer...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007581.jpg": "...dog stand (los angeles,. california)  garcia v.. fouler (alb...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007582.jpg": "...oliday inns (long beach; california) ied at deposition, lo/2...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007583.jpg": "...mare edwards, een ana,. california)  allman 'v. union buter...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007584.jpg": "...college district (s ana, california)  testified at depositio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007587.jpg": "...iffs v. masonic homes of california, et.al. (pomona, ca)  we...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007590.jpg": "...t  chang  =  people of california 'v. bryan testified at t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007604.jpg": "...ciation, san  francisco, california, november 5, l973.  diet...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007606.jpg": "...¢ sciences, los angeles; california, february l9, l98l.  cas...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007608.jpg": "...criminology, san diego, california, november l5, l985.  =:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007609.jpg": "...ketplace, los:  angeles, california, becember l2, l986.  die...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007610.jpg": "...nalists, san  francisco, california, january 22, l988.  diet...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007611.jpg": "...the law, san francisco, california, october 2o; l988.  jal...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007612.jpg": "...ent conference, anaheim, california, may l3, l993.  dietz pe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007613.jpg": "...ors meeting, san diego, ‘california, october l4, l994.  diet...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007614.jpg": "...ssociation, san: diego, ‘california, march l8,  dietz pe: ke...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007615.jpg": "...ual review, los angeles, california, october ll, 2oo2.  diet...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007621.jpg": "...ociation, san francisco; california, may 8, l98o.  robitsche...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007622.jpg": "...y and the law, ( elton l california, october l8, l98l.  harr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007623.jpg": "...ions senihar, la quinta, california, march  adelman r, dietz...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007627.jpg": "...stitute, augusta, “maine california association of hostage n...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007628.jpg": "...ork, new. york  southern california chapter, american: acade...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007647.jpg": "...may: 29, 2ol3  southern california edison, rosemead, ca, ju...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007657.jpg": "...appearances as self:  ~ california v. elizabeth broderick.....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007835.jpg": "...r the superior court: of california, county:of los.angeles,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007862.jpg": "...pe the central dist t of california  pen  sition)  de  inter...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008856.jpg": "...*8' (quoting.pre ourfof california for  riverside cy. 478 u...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008896.jpg": "...o. 'v., siperior  gt. of california, riverside cty., 464 u.s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008904.jpg": "...*8' (quoting.pre ourfof california for  riverside cy. 478 u...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008982.jpg": "...co. superior ct. of california, riverside couity  king;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010490.jpg": "...graduate of the univ: of california. sarita cruzin counselin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010677.jpg": "...d seaurity, they ; hete! california, you could blindly check...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010710.jpg": "...inis and the dire lly o. california, 555 us. lo2o (2oo8),  q...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011302.jpg": "...t:a-defendant:located in california, detain her, fly:  pase,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011364.jpg": "...endants  (l986) (quoting california v. lrombeta, 467 u.s. 47...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011408.jpg": "...with. her. further, as‘a california.atorney, mr. glassman is...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011417.jpg": "...titution of the state of california that may result from dis...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011420.jpg": "...to confidentiality under california law  [l3] this rule is n...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011423.jpg": "...tnsel arid: perhaps’ the california state bar. we would also...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011428.jpg": "...ad ap  (l986) (quoting california. v. lrombeita,.467 u.s....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011589.jpg": "...rape; tape. like hotel  california, ‘you  inte the epstein-...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011991.jpg": "...f \"9l9?  a. les angeles, california, ®. why did you move £6...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012060.jpg": "...well, you were there af california with your lawyers and  a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012840.jpg": "...o. and you do that in. california?  o. and are you reguire...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012861.jpg": "...n; both if new york, and california;  courect  a. possibly,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013418.jpg": "...m and ‘'to% a. wan nuys, california, to santa fe, new mex ie...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013892.jpg": "...you live?  a. t live in california.  qo. hou far did you ge...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013912.jpg": "...tame's. she came out to california. just different. -- just...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013925.jpg": "...she went to go work. in california  for a sodp opera.  qo....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013949.jpg": "...and where was. that? a. california.  qo. okay. when you lef...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014817.jpg": "...rape; tape. like hotel  california, ‘you  inte the epstein-...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015212.jpg": "...4-3285,  university: of: california, irvine fax: (949) 824-3...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015241.jpg": "...essed:memory'evidence, california  ), a skeptical viewof r...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016516.jpg": "...you live?  a. t live in california.  qo. hou far did you ge...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016536.jpg": "...tame's. she came out to california. just different. -- just...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016549.jpg": "...she went to go work. in california  for a sodp opera.  qo....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016573.jpg": "...and where was. that? a. california.  qo. okay. when you lef...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017581.jpg": "...f \"9l9?  a. les angeles, california, ®. why did you move £6...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017649.jpg": "...well, you were there af california with your lawyers and  a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018426.jpg": "...o. and you do that in. california?  o. and are you reguire...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018447.jpg": "...n; both if new york, and california;  courect  a. possibly,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019002.jpg": "...m and ‘'to% a. wan nuys, california, to santa fe, new mex ie...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020326.jpg": "...markus/moss pllc encino, california 9l436-3429 4o..n.w. thir...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020337.jpg": "...arkuslaw.com lea s.'sa  ‘california bar number l2l796: by: /...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020339.jpg": "...rkus/moss. pllc  eneino, california 9l436-3429. ao.n.w. thir...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020340.jpg": "...meadougate road  encino, california 9l436-3429 tel: (858)488...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020774.jpg": "...of limitations:  ognerv: california, 539 |  met  does not. ....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021615.jpg": "...rape, kape. dike hotel.  california, you ‘can check into the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021653.jpg": "...ited states,  stogner v. california,  539 u.s. 6o7 oo3). 2.....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022382.jpg": "...oo ‘tgantinor? (massage= california 2 i | - wey pty ees ete..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "california" (94 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">557-557</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1408-1408</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1419-1422</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3648-3648</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">4830-4830</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">7509-7509</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">7543-7548</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">7556-7559</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">7568-7590</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">7604-7615</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">7621-7628</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">7647-7647</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">7657-7657</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">7835-7835</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">7862-7862</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">8856-8856</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">8896-8896</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">8904-8904</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">8982-8982</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">10490-10490</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">10677-10677</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">10710-10710</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">11302-11302</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">11364-11364</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">11408-11408</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">11417-11428</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">11589-11589</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">11991-11991</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">12060-12060</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">12840-12840</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">12861-12861</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">13418-13418</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">13892-13892</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">13912-13912</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">13925-13925</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">13949-13949</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">14817-14817</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">15212-15212</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">15241-15241</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">16516-16516</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">16536-16536</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">16549-16549</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">16573-16573</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">17581-17581</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">17649-17649</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(45, 0); return false;">18426-18426</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(46, 0); return false;">18447-18447</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(47, 0); return false;">19002-19002</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(48, 0); return false;">20326-20326</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(49, 0); return false;">20337-20340</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(50, 0); return false;">20774-20774</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(51, 0); return false;">21615-21615</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(52, 0); return false;">21653-21653</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(53, 0); return false;">22382-22382</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

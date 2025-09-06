@@ -1,0 +1,268 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "detection"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 870, "end": 870, "pages": [870]}, {"start": 954, "end": 954, "pages": [954]}, {"start": 975, "end": 975, "pages": [975]}, {"start": 988, "end": 998, "pages": [988, 992, 993, 998]}, {"start": 1036, "end": 1036, "pages": [1036]}, {"start": 1103, "end": 1103, "pages": [1103]}, {"start": 1126, "end": 1126, "pages": [1126]}, {"start": 1150, "end": 1150, "pages": [1150]}, {"start": 1158, "end": 1158, "pages": [1158]}, {"start": 1165, "end": 1165, "pages": [1165]}, {"start": 1222, "end": 1222, "pages": [1222]}, {"start": 1228, "end": 1228, "pages": [1228]}, {"start": 1280, "end": 1280, "pages": [1280]}, {"start": 1324, "end": 1336, "pages": [1324, 1329, 1330, 1335, 1336]}, {"start": 1448, "end": 1448, "pages": [1448]}, {"start": 1495, "end": 1495, "pages": [1495]}, {"start": 1598, "end": 1598, "pages": [1598]}, {"start": 1614, "end": 1624, "pages": [1614, 1618, 1619, 1624]}, {"start": 1909, "end": 1909, "pages": [1909]}, {"start": 1964, "end": 1964, "pages": [1964]}, {"start": 1979, "end": 1979, "pages": [1979]}, {"start": 2002, "end": 2002, "pages": [2002]}, {"start": 2169, "end": 2169, "pages": [2169]}, {"start": 2177, "end": 2177, "pages": [2177]}, {"start": 2184, "end": 2184, "pages": [2184]}, {"start": 2245, "end": 2245, "pages": [2245]}, {"start": 2251, "end": 2251, "pages": [2251]}, {"start": 2773, "end": 2773, "pages": [2773]}, {"start": 2919, "end": 2919, "pages": [2919]}, {"start": 3394, "end": 3394, "pages": [3394]}, {"start": 3451, "end": 3451, "pages": [3451]}, {"start": 4516, "end": 4516, "pages": [4516]}, {"start": 5691, "end": 5692, "pages": [5691, 5692]}, {"start": 5931, "end": 5931, "pages": [5931]}, {"start": 6202, "end": 6209, "pages": [6202, 6205, 6208, 6209]}, {"start": 6856, "end": 6856, "pages": [6856]}, {"start": 7600, "end": 7600, "pages": [7600]}, {"start": 7648, "end": 7648, "pages": [7648]}, {"start": 7678, "end": 7681, "pages": [7678, 7681]}, {"start": 7818, "end": 7818, "pages": [7818]}, {"start": 7832, "end": 7832, "pages": [7832]}, {"start": 8137, "end": 8140, "pages": [8137, 8140]}, {"start": 19872, "end": 19872, "pages": [19872]}, {"start": 19893, "end": 19893, "pages": [19893]}, {"start": 19906, "end": 19916, "pages": [19906, 19910, 19911, 19916]}, {"start": 19954, "end": 19954, "pages": [19954]}, {"start": 20021, "end": 20021, "pages": [20021]}, {"start": 20044, "end": 20044, "pages": [20044]}, {"start": 20068, "end": 20068, "pages": [20068]}, {"start": 20076, "end": 20076, "pages": [20076]}, {"start": 20083, "end": 20083, "pages": [20083]}, {"start": 20140, "end": 20140, "pages": [20140]}, {"start": 20146, "end": 20146, "pages": [20146]}, {"start": 20198, "end": 20198, "pages": [20198]}, {"start": 20241, "end": 20253, "pages": [20241, 20246, 20247, 20252, 20253]}, {"start": 20366, "end": 20366, "pages": [20366]}, {"start": 21450, "end": 21450, "pages": [21450]}, {"start": 23231, "end": 23231, "pages": [23231]}];
+        const pageToPath = {"870": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000870.jpg", "954": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000954.jpg", "975": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000975.jpg", "988": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000988.jpg", "992": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000992.jpg", "993": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000993.jpg", "998": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000998.jpg", "1036": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001036.jpg", "1103": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001103.jpg", "1126": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001126.jpg", "1150": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001150.jpg", "1158": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001158.jpg", "1165": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001165.jpg", "1222": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001222.jpg", "1228": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001228.jpg", "1280": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001280.jpg", "1324": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001324.jpg", "1329": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001329.jpg", "1330": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001330.jpg", "1335": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001335.jpg", "1336": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001336.jpg", "1448": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001448.jpg", "1495": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001495.jpg", "1598": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001598.jpg", "1614": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001614.jpg", "1618": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001618.jpg", "1619": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001619.jpg", "1624": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001624.jpg", "1909": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001909.jpg", "1964": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001964.jpg", "1979": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001979.jpg", "2002": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002002.jpg", "2169": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002169.jpg", "2177": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002177.jpg", "2184": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002184.jpg", "2245": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002245.jpg", "2251": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002251.jpg", "2773": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002773.jpg", "2919": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002919.jpg", "3394": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003394.jpg", "3451": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003451.jpg", "4516": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004516.jpg", "5691": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005691.jpg", "5692": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005692.jpg", "5931": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005931.jpg", "6202": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006202.jpg", "6205": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006205.jpg", "6208": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006208.jpg", "6209": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006209.jpg", "6856": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006856.jpg", "7600": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007600.jpg", "7648": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007648.jpg", "7678": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007678.jpg", "7681": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007681.jpg", "7818": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007818.jpg", "7832": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007832.jpg", "8137": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008137.jpg", "8140": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008140.jpg", "19872": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019872.jpg", "19893": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019893.jpg", "19906": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019906.jpg", "19910": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019910.jpg", "19911": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019911.jpg", "19916": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019916.jpg", "19954": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019954.jpg", "20021": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020021.jpg", "20044": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020044.jpg", "20068": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020068.jpg", "20076": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020076.jpg", "20083": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020083.jpg", "20140": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020140.jpg", "20146": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020146.jpg", "20198": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020198.jpg", "20241": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020241.jpg", "20246": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020246.jpg", "20247": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020247.jpg", "20252": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020252.jpg", "20253": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020253.jpg", "20366": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020366.jpg", "21450": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021450.jpg", "23231": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00023231.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000870.jpg": "...dant’s lac  moss ben ie  detection, jdat /o-ll.  regarding...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000954.jpg": "...tional efforts to avoid. detection; including: moving locat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000975.jpg": "...detection, including moving reside...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000988.jpg": "...ted her ability to evade detection, and the victims ofthe.d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000992.jpg": "...sguided effort:to evade: detection; not by: the-press' orpu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000993.jpg": "...t: also: sought'to evade detection by law enforcement.  in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000998.jpg": "...her willingness to evade detection, and her lies under oath...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001036.jpg": "...e was a motive te evdede detection by law enfercement. but...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001103.jpg": "...axwell atempted to evade:detection’ by law-enforcement prio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001126.jpg": "...one:in.tin foil to:avoid detection.and.not the other:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001150.jpg": "...dinary capacity to:evade detection, even in-the:face of wha...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001158.jpg": "...avoiding detection contintc to'weigh. in fa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001165.jpg": "...and her ability to avoid detection. the court noted as much...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001222.jpg": "...her experience avoiding-detection (whether from the goverm...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001228.jpg": "...inary capacity to‘evade: detection, “le |ven-in the face of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001280.jpg": "...dant’s lac  moss ben ie  detection, jdat /o-ll.  regarding...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001324.jpg": "...inary capacity’ to evade detection, even.in. the face of wh...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001329.jpg": "...inary capacity: to.evade detection.” (/d. at l8-l9).  &  22...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001330.jpg": "...and, experience evading: detection,” and maxwell's. “lack o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001335.jpg": "...inary capacity: to evade detection.” (ex. d: at, 79- 9l; ex...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001336.jpg": "...ifiaty capacity to evade detection?’ (ex. d at 87). maxwell...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001448.jpg": "...and, experience evading detection,” and maxwell’s  “lack o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001495.jpg": "...tional. efforts to avoid detection, including moving locati...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001598.jpg": "...everal steps. to avoid.  detection, icludig movie residence...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001614.jpg": "...ted her ability to evade detection, and the victims of the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001618.jpg": "...tin, foil,’o  n n topo  detection, not by: the press. or p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001619.jpg": "...nt also sought:to: evade detection. by law eriforcemenit:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001624.jpg": "...her willingness to evade detection, and:her lies under  oat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001909.jpg": "...e was a motive te evdede detection by law enfercement. but...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001964.jpg": "...inary capacity to evade  detection, even jin, the face of w...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001979.jpg": "...l. atempted to  a  evade detection, by law ‘enforcement pto...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002002.jpg": "...hone: in order to evade: detection by law enforcement.  rst...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002169.jpg": "...dinary capacity to:evade detection, even in-the:face of wha...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002177.jpg": "...avoiding detection contintc to'weigh. in fa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002184.jpg": "...and her ability to avoid detection. the court noted as much...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002245.jpg": "...her.experience avoiding detection. (whether from the; gove...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002251.jpg": "...t noted, athe  to evade: detection,  ebsa arhtak  ‘original...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002773.jpg": "...dant’s lac  moss ben ie  detection, jdat /o-ll.  regarding...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002919.jpg": "...ealth, skill. at evading detection, and ‘prior lack of cand...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003394.jpg": "...s, which. atach upon the detection. of : a crime, ihe | { v...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003451.jpg": "...rliest opportunity after detection fia critic at’whieh. it:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004516.jpg": "...which: allach upon the, detection. of a. crime; swhile ‘th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005691.jpg": "...the purpose of evading: detection by: law enforcement, but...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005692.jpg": "...w ww ding” follouin lit  detection by law enforcement. see...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005931.jpg": "...others: eyewiciesses co detection shrough ‘community membe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006202.jpg": "...dinary capacity to evade detection, even. iti the face of w...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006205.jpg": "...e evading.  sendin i9 9  detection,” andthe defendant's “la...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006208.jpg": "...t).  ‘ccapacity-to evade detection.”...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006209.jpg": "...dinary capacity“to evade detection. the defendant's. primar...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006856.jpg": "...others: eyewiciesses co detection shrough ‘community membe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007600.jpg": "...ologi¢al barriers to the detection of child sexual abuse. f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007648.jpg": "...e workplace: prevention, detection, dtid response, december...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007678.jpg": "...22. hall rcw, hall rcw: detection of malingered ptsd: an o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007681.jpg": "...wooten k: frequency and  detection ‘of malingering in ho »...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007818.jpg": "...(october l8, l999)  lie. detection: the supreitie gourt’s....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007832.jpg": "...lysis e android ‘malware detection link:file analysis: * de...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008137.jpg": "...22. hall rcw, hall rcw: detection of malingered ptsd: an o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008140.jpg": "...wooten k: frequency and  detection ‘of malingering in ho »...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019872.jpg": "...tional efforts to avoid. detection; including: moving locat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019893.jpg": "...detection, including moving reside...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019906.jpg": "...ted her ability to evade detection, and the victims ofthe.d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019910.jpg": "...sguided effort:to evade: detection; not by: the-press' orpu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019911.jpg": "...t: also: sought'to evade detection by law enforcement.  in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019916.jpg": "...her willingness to evade detection, and her lies under oath...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019954.jpg": "...e was a motive te evdede detection by law enfercement. but...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020021.jpg": "...axwell atempted to evade:detection’ by law-enforcement prio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020044.jpg": "...one:in.tin foil to:avoid detection.and.not the other:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020068.jpg": "...dinary capacity to:evade detection, even in-the:face of wha...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020076.jpg": "...avoiding detection contintc to'weigh. in fa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020083.jpg": "...and her ability to avoid detection. the court noted as much...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020140.jpg": "...her experience avoiding-detection (whether from the goverm...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020146.jpg": "...nary: capacity to:evade: detection,, “le |ven-in the face o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020198.jpg": "...dant’s lac  moss ben ie  detection, jdat /o-ll.  regarding...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020241.jpg": "...inary capacity’ to evade detection, even.in. the face of wh...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020246.jpg": "...inary capacity: to.evade detection.” (/d. at l8-l9).  &  22...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020247.jpg": "...and, experience evading: detection,” and maxwell's. “lack o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020252.jpg": "...inary capacity: to evade detection.” (ex. d: at, 79- 9l; ex...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020253.jpg": "...ifiaty capacity to evade detection?’ (ex. d at 87). maxwell...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020366.jpg": "...and, experience evading detection,” and maxwell’s  “lack o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021450.jpg": "...opportunity. after the, detection ofa a. crime: at ‘which...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00023231.jpg": "...agen ies “engaged in the detection, l i  2.  vat ion l stag..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "detection" (81 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">870-870</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">954-954</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">975-975</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">988-998</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">1036-1036</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">1103-1103</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">1126-1126</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">1150-1150</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">1158-1158</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">1165-1165</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">1222-1222</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">1228-1228</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">1280-1280</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">1324-1336</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">1448-1448</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">1495-1495</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">1598-1598</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">1614-1624</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">1909-1909</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">1964-1964</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">1979-1979</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">2002-2002</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">2169-2169</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">2177-2177</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">2184-2184</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">2245-2245</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">2251-2251</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">2773-2773</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">2919-2919</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">3394-3394</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">3451-3451</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">4516-4516</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">5691-5692</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">5931-5931</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">6202-6209</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">6856-6856</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">7600-7600</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">7648-7648</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">7678-7681</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">7818-7818</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">7832-7832</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">8137-8140</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">19872-19872</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">19893-19893</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">19906-19916</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(45, 0); return false;">19954-19954</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(46, 0); return false;">20021-20021</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(47, 0); return false;">20044-20044</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(48, 0); return false;">20068-20068</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(49, 0); return false;">20076-20076</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(50, 0); return false;">20083-20083</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(51, 0); return false;">20140-20140</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(52, 0); return false;">20146-20146</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(53, 0); return false;">20198-20198</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(54, 0); return false;">20241-20253</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(55, 0); return false;">20366-20366</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(56, 0); return false;">21450-21450</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(57, 0); return false;">23231-23231</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

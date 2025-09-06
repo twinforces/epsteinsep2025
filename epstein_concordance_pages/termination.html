@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "termination"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 2067, "end": 2067, "pages": [2067]}, {"start": 3320, "end": 3324, "pages": [3320, 3324]}, {"start": 3866, "end": 3866, "pages": [3866]}, {"start": 4442, "end": 4446, "pages": [4442, 4446]}, {"start": 7634, "end": 7635, "pages": [7634, 7635]}, {"start": 7642, "end": 7648, "pages": [7642, 7646, 7648]}, {"start": 8505, "end": 8505, "pages": [8505]}, {"start": 8589, "end": 8589, "pages": [8589]}, {"start": 8669, "end": 8669, "pages": [8669]}, {"start": 8755, "end": 8755, "pages": [8755]}, {"start": 14621, "end": 14621, "pages": [14621]}, {"start": 16094, "end": 16094, "pages": [16094]}, {"start": 17242, "end": 17242, "pages": [17242]}, {"start": 21710, "end": 21710, "pages": [21710]}, {"start": 22057, "end": 22057, "pages": [22057]}, {"start": 22129, "end": 22129, "pages": [22129]}];
+        const pageToPath = {"2067": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002067.jpg", "3320": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003320.jpg", "3324": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003324.jpg", "3866": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003866.jpg", "4442": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004442.jpg", "4446": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004446.jpg", "7634": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007634.jpg", "7635": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007635.jpg", "7642": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007642.jpg", "7646": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007646.jpg", "7648": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007648.jpg", "8505": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008505.jpg", "8589": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008589.jpg", "8669": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008669.jpg", "8755": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008755.jpg", "14621": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014621.jpg", "16094": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016094.jpg", "17242": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017242.jpg", "21710": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021710.jpg", "22057": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022057.jpg", "22129": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022129.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002067.jpg": "...nts off sd tere  to: the termination. of the accounts in. 2o2...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003320.jpg": "...the usao opposed. early termination. of epstein’ s ‘communit...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003324.jpg": "...or a dismissal or other termination, onthe: merits after j s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003866.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004442.jpg": "...the usao opposed. early termination. of epstein’ s ‘communit...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004446.jpg": "...or a dismissal or other termination, on. the: merits! after...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007634.jpg": "...on (training video) safe termination (training video)  proble...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007635.jpg": "...-learning course);  safe termination (e-learning course) prob...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007642.jpg": "...ation, interviewing, and termination,” new york, ny, october...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007646.jpg": "...l express, webinar: safe termination, july ll, 2ol2 air liqui...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007648.jpg": "...: express, webinar: safe termination of end stage employees,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008505.jpg": "...some affirmative act of termination by the members, so too,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008589.jpg": "...sone affirmative act: of termination by the members. so too,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008669.jpg": "...some affirmative act of termination by the members, so too,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008755.jpg": "...some affirmative act of termination by the members, so too,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014621.jpg": "...some affirmative act of termination by the member's. so too,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016094.jpg": "...s —_—___. ‘gays/hours  o termination (check )  be job o)reloc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017242.jpg": "...some affirmative act of termination by the member's. so too,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021710.jpg": "...affirm that, careful de= termination.  a. relevant facts  l....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022057.jpg": "...a ta  prosecution or by termination..but ths 36o4 staff are...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022129.jpg": "...tie ding 2 supponsion of termination. of employment, based x..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "termination" (21 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">2067-2067</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">3320-3324</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">3866-3866</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">4442-4446</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">7634-7635</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">7642-7648</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">8505-8505</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">8589-8589</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">8669-8669</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">8755-8755</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">14621-14621</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">16094-16094</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">17242-17242</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">21710-21710</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">22057-22057</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">22129-22129</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

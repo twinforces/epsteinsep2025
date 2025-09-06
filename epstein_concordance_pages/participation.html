@@ -1,0 +1,310 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "participation"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 265, "end": 265, "pages": [265]}, {"start": 698, "end": 698, "pages": [698]}, {"start": 913, "end": 913, "pages": [913]}, {"start": 989, "end": 989, "pages": [989]}, {"start": 1011, "end": 1011, "pages": [1011]}, {"start": 1601, "end": 1601, "pages": [1601]}, {"start": 1615, "end": 1615, "pages": [1615]}, {"start": 1953, "end": 1953, "pages": [1953]}, {"start": 2860, "end": 2860, "pages": [2860]}, {"start": 3008, "end": 3008, "pages": [3008]}, {"start": 3079, "end": 3079, "pages": [3079]}, {"start": 3102, "end": 3102, "pages": [3102]}, {"start": 3139, "end": 3139, "pages": [3139]}, {"start": 3384, "end": 3384, "pages": [3384]}, {"start": 3403, "end": 3403, "pages": [3403]}, {"start": 3911, "end": 3911, "pages": [3911]}, {"start": 4506, "end": 4506, "pages": [4506]}, {"start": 4728, "end": 4728, "pages": [4728]}, {"start": 5514, "end": 5515, "pages": [5514, 5515]}, {"start": 5808, "end": 5808, "pages": [5808]}, {"start": 5832, "end": 5832, "pages": [5832]}, {"start": 5928, "end": 5928, "pages": [5928]}, {"start": 6120, "end": 6121, "pages": [6120, 6121]}, {"start": 6226, "end": 6226, "pages": [6226]}, {"start": 6476, "end": 6477, "pages": [6476, 6477]}, {"start": 6733, "end": 6733, "pages": [6733]}, {"start": 6757, "end": 6757, "pages": [6757]}, {"start": 6853, "end": 6853, "pages": [6853]}, {"start": 6958, "end": 6958, "pages": [6958]}, {"start": 6969, "end": 6969, "pages": [6969]}, {"start": 7439, "end": 7439, "pages": [7439]}, {"start": 7622, "end": 7622, "pages": [7622]}, {"start": 8504, "end": 8505, "pages": [8504, 8505]}, {"start": 8588, "end": 8588, "pages": [8588]}, {"start": 8668, "end": 8669, "pages": [8668, 8669]}, {"start": 8754, "end": 8755, "pages": [8754, 8755]}, {"start": 8919, "end": 8919, "pages": [8919]}, {"start": 9060, "end": 9060, "pages": [9060]}, {"start": 9526, "end": 9531, "pages": [9526, 9529, 9531]}, {"start": 9595, "end": 9595, "pages": [9595]}, {"start": 9611, "end": 9611, "pages": [9611]}, {"start": 9751, "end": 9751, "pages": [9751]}, {"start": 10205, "end": 10210, "pages": [10205, 10208, 10210]}, {"start": 10367, "end": 10375, "pages": [10367, 10368, 10370, 10375]}, {"start": 10411, "end": 10411, "pages": [10411]}, {"start": 10560, "end": 10560, "pages": [10560]}, {"start": 10704, "end": 10704, "pages": [10704]}, {"start": 11432, "end": 11432, "pages": [11432]}, {"start": 11451, "end": 11455, "pages": [11451, 11455]}, {"start": 11474, "end": 11479, "pages": [11474, 11479]}, {"start": 11490, "end": 11492, "pages": [11490, 11492]}, {"start": 11503, "end": 11503, "pages": [11503]}, {"start": 12178, "end": 12178, "pages": [12178]}, {"start": 12702, "end": 12702, "pages": [12702]}, {"start": 13200, "end": 13200, "pages": [13200]}, {"start": 14551, "end": 14551, "pages": [14551]}, {"start": 14619, "end": 14619, "pages": [14619]}, {"start": 15105, "end": 15105, "pages": [15105]}, {"start": 15208, "end": 15208, "pages": [15208]}, {"start": 17172, "end": 17172, "pages": [17172]}, {"start": 17240, "end": 17240, "pages": [17240]}, {"start": 17767, "end": 17767, "pages": [17767]}, {"start": 18289, "end": 18289, "pages": [18289]}, {"start": 18785, "end": 18785, "pages": [18785]}, {"start": 19831, "end": 19831, "pages": [19831]}, {"start": 19907, "end": 19907, "pages": [19907]}, {"start": 19929, "end": 19929, "pages": [19929]}, {"start": 20984, "end": 20993, "pages": [20984, 20985, 20987, 20992, 20993]}, {"start": 21028, "end": 21028, "pages": [21028]}, {"start": 21071, "end": 21071, "pages": [21071]}, {"start": 21131, "end": 21131, "pages": [21131]}, {"start": 21608, "end": 21608, "pages": [21608]}];
+        const pageToPath = {"265": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000265.jpg", "698": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000698.jpg", "913": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000913.jpg", "989": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000989.jpg", "1011": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001011.jpg", "1601": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001601.jpg", "1615": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001615.jpg", "1953": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001953.jpg", "2860": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002860.jpg", "3008": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003008.jpg", "3079": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003079.jpg", "3102": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003102.jpg", "3139": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003139.jpg", "3384": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003384.jpg", "3403": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003403.jpg", "3911": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003911.jpg", "4506": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004506.jpg", "4728": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004728.jpg", "5514": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005514.jpg", "5515": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005515.jpg", "5808": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005808.jpg", "5832": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005832.jpg", "5928": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005928.jpg", "6120": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006120.jpg", "6121": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006121.jpg", "6226": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006226.jpg", "6476": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006476.jpg", "6477": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006477.jpg", "6733": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006733.jpg", "6757": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006757.jpg", "6853": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006853.jpg", "6958": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006958.jpg", "6969": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006969.jpg", "7439": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007439.jpg", "7622": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007622.jpg", "8504": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008504.jpg", "8505": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008505.jpg", "8588": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008588.jpg", "8668": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008668.jpg", "8669": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008669.jpg", "8754": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008754.jpg", "8755": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008755.jpg", "8919": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008919.jpg", "9060": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009060.jpg", "9526": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009526.jpg", "9529": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009529.jpg", "9531": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009531.jpg", "9595": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009595.jpg", "9611": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009611.jpg", "9751": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009751.jpg", "10205": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010205.jpg", "10208": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010208.jpg", "10210": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010210.jpg", "10367": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010367.jpg", "10368": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010368.jpg", "10370": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010370.jpg", "10375": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010375.jpg", "10411": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010411.jpg", "10560": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010560.jpg", "10704": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010704.jpg", "11432": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011432.jpg", "11451": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011451.jpg", "11455": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011455.jpg", "11474": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011474.jpg", "11479": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011479.jpg", "11490": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011490.jpg", "11492": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011492.jpg", "11503": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011503.jpg", "12178": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012178.jpg", "12702": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012702.jpg", "13200": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013200.jpg", "14551": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014551.jpg", "14619": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014619.jpg", "15105": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015105.jpg", "15208": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015208.jpg", "17172": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017172.jpg", "17240": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017240.jpg", "17767": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017767.jpg", "18289": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018289.jpg", "18785": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018785.jpg", "19831": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019831.jpg", "19907": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019907.jpg", "19929": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019929.jpg", "20984": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020984.jpg", "20985": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020985.jpg", "20987": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020987.jpg", "20992": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020992.jpg", "20993": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020993.jpg", "21028": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021028.jpg", "21071": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021071.jpg", "21131": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021131.jpg", "21608": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021608.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000265.jpg": "...anything of value; from participation in a ventune which has e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000698.jpg": "...just abused me with hex participation. she seemed. exhi.larate...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000913.jpg": "...l deterioration, which | participation. in trial preparation....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000989.jpg": "...f the defendant’s active participation in a disturbing scheme t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001011.jpg": "...ucted remotely with full participation of  the paerties if view...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001601.jpg": "...sexual proell  alleged.-participation in. offenses inyoly.ing...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001615.jpg": "...the:.defendant’s active: participation. in a disturbing: scheme...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001953.jpg": "...er, again,  the victims! participation, in  ale sok  this proce...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002860.jpg": "...participation in a venture which has e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003008.jpg": "...without the defendant's ‘participation :is not. exculpatory as....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003079.jpg": "...“withthe assistance and participation of maxwell” at “numerous...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003102.jpg": "...ge girls, and maxwell’s. participation therein, will.  also, pr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003139.jpg": "...oncert. the deferidant’s participation. in conspiracies: to tra...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003384.jpg": "...hat it deemed..epstcin’s participation in-work release to bea....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003403.jpg": "...hat e . qut. about hi ir participation in the  am’ thn renee et...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003911.jpg": "...ssairesultiof  7  ‘their participation in:the:eventsinderlying’...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004506.jpg": "...hat it deemed..epstcin’s participation in-work release to bea....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004728.jpg": "...s2:indietment, ‘counts  participation in. a conspiracy to coni...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005514.jpg": "...maxwell's kriewledge 6r participation — may:be relevant to exi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005515.jpg": "...ithout the  knouledge or participation of ms.. maxwell. may: be...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005808.jpg": "...‘participation in-risky sexual behavior...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005832.jpg": "...that. romero-padilla’s: participation in the charged. conspira...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005928.jpg": "...eys and consent-base “d -participation in file & kumalo,, 2oo 2...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006120.jpg": "...ion-and  e duratioman @  participation has‘  simaxawe  har  dit...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006121.jpg": "...eee  quiescencesivithout participation: i  pair: a ear 2  {knou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006226.jpg": "...lack of confidence, and. participation:in. other risky behavior...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006476.jpg": "...maxwell's kriewledge 6r participation — may:be relevant to exi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006477.jpg": "...ithout the  knouledge or participation of ms.. maxwell. may: be...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006733.jpg": "...‘participation in-risky sexual behavior...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006757.jpg": "...that. romero-padilla’s: participation in the charged. conspira...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006853.jpg": "...eys and consent-base “d -participation in file & kumalo,, 2oo 2...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006958.jpg": "...n  y is presumed to  his participation in a.conspirac  3 539  c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006969.jpg": "...to her‘knvouledge-of and participation.  paras se go  in. the e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007439.jpg": "...fficking:  conspirator’s participation. in the conspiracy.” jd....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007622.jpg": "..., dietz pe: \"psychiatric participation in  the capital sentenci...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008504.jpg": "...knou that.ms. maxwell’s. participation in.the corispiracy iust...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008505.jpg": "...out-agreement  ree,  and participation. is not sufficierit. wha...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008588.jpg": "...-extent of ms, maxwell’s participation, has:no bearing: on,the:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008668.jpg": "...knou that.ms. maxwell’s. participation in.the corispiracy iust...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008669.jpg": "...acquiescence, ‘without  ‘participation, im the unlawful plan is...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008754.jpg": "...knou that.ms. maxwell’s. participation in.the corispiracy iust...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008755.jpg": "...acquiescence, ‘without  ‘participation, im the unlawful plan is...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008919.jpg": "...ve discretion to ‘permit participation of amici where such :par...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009060.jpg": "...who enjoy: vs rights of participation, have no right t ene in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009526.jpg": "...tax, shelte  3, parge’s participation in the fraudulent backda...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009529.jpg": "...additio  cl. ‘parse? s. participation ‘inthe eraudulent. kaspe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009531.jpg": "...ntended.  ix  3. parse’s:participation.in the fraudulent. backd...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009595.jpg": "...relationships with vie  participation in,a.“pyramid:scheme of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009611.jpg": "...idence ofthe defendant’s participation. in. janc’s  iet‘om coun...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009751.jpg": "...who enjoy: vs rights of participation, have no right t ene in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010205.jpg": "...tax, shelte  3, parge’s participation in the fraudulent backda...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010208.jpg": "...additio  cl. ‘parse? s. participation ‘inthe eraudulent. kaspe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010210.jpg": "...ntended.  ix  3. parse’s:participation.in the fraudulent. backd...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010367.jpg": "...ll was. indicted for her participation in.a scheme  to entice,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010368.jpg": "...charges, the defendant?s participation in ‘the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010370.jpg": "...sed:on the deferidanit’s participation in a sifigle eriminal co...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010375.jpg": "...:conspiracies, so their-participation. in both. conspiracies h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010411.jpg": "...charged the defendant's participation, in the same 'deeade-lon...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010560.jpg": "...decade. it irivelved the-participation.of numerous members  ‘of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010704.jpg": "...46-47 (2oo6)).  ai sale  participation explained: “the cumulati...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011432.jpg": "...s. maxwell or  even. any participation by ms. maxwell iti.any c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011451.jpg": "...that promise alloued.for participation. by: vit  becn:teluetant...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011455.jpg": "...p confidential wictinis’ participation in the prograni and any....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011474.jpg": "...ms. biros added. that “participation in, the: program. will b...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011479.jpg": "...she obtains through: her participation in, the program, includi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011490.jpg": "...isthe program voluntar  ‘participation in, the program is entir...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011492.jpg": "...ation concurrently  with participation ‘ivi ‘the ‘program. you,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011503.jpg": "...ices@fbi.gov.  yo  does: participation in the program impact my...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012178.jpg": "...is, 'to belseve that her participation as a witness here would...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012702.jpg": "...kinson, other than ‘your participation inf the search  of 3598...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013200.jpg": "...ih  cy  exchange for her participation. as. an ohsenver of jeff...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014551.jpg": "...that. knouledge without participation. in the  unlawful, plan,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014619.jpg": "...duration, and extent of  participation has no bearing 6n the is...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015105.jpg": "...ing, im the: abuse. her ‘participation, and ‘the complicity ‘an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015208.jpg": "...’ | information fluoride participation’ miscellaneous ‘hitps://...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017172.jpg": "...that. knouledge without participation. in the  unlawful, plan,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017240.jpg": "...duration, and extent of  participation has no bearing 6n the is...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017767.jpg": "...is, 'to belseve that her participation as a witness here would...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018289.jpg": "...kinson, other than ‘your participation inf the search  of 3598...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018785.jpg": "...ih  cy  exchange for her participation. as. an ohsenver of jeff...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019831.jpg": "...l deterioration, which | participation. in trial preparation....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019907.jpg": "...f the defendant’s active participation in a disturbing scheme t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019929.jpg": "...ucted remotely with full participation of  the paerties if view...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020984.jpg": "...l was ‘indicted, for-her participation ima,scheme; ‘to.entice,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020985.jpg": "...ent with the  efendant’s participation ‘iy the same decade- lon...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020987.jpg": "...mised-on:the defendant’s;participation-in a single criminal con...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020992.jpg": "...conspiracies, so their, participation: in. both: eonspirac cie...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020993.jpg": "...decade. see united.  *s participation beginning in 2ool,  seco...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021028.jpg": "...charged the defendant’s participation in the same  decade-long...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021071.jpg": "...matic experience on ‘his participation as a juror in this case,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021131.jpg": "...voir  c memories and his participation.  >; and his public stat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021608.jpg": "...ce. she  could aomit her participation. in this sicheme, acknou..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "participation" (92 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">265-265</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">698-698</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">913-913</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">989-989</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">1011-1011</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">1601-1601</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">1615-1615</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">1953-1953</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">2860-2860</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">3008-3008</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">3079-3079</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">3102-3102</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">3139-3139</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">3384-3384</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">3403-3403</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">3911-3911</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">4506-4506</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">4728-4728</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">5514-5515</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">5808-5808</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">5832-5832</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">5928-5928</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">6120-6121</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">6226-6226</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">6476-6477</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">6733-6733</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">6757-6757</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">6853-6853</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">6958-6958</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">6969-6969</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">7439-7439</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">7622-7622</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">8504-8505</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">8588-8588</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">8668-8669</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">8754-8755</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">8919-8919</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">9060-9060</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">9526-9531</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">9595-9595</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">9611-9611</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">9751-9751</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">10205-10210</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">10367-10375</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">10411-10411</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(45, 0); return false;">10560-10560</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(46, 0); return false;">10704-10704</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(47, 0); return false;">11432-11432</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(48, 0); return false;">11451-11455</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(49, 0); return false;">11474-11479</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(50, 0); return false;">11490-11492</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(51, 0); return false;">11503-11503</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(52, 0); return false;">12178-12178</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(53, 0); return false;">12702-12702</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(54, 0); return false;">13200-13200</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(55, 0); return false;">14551-14551</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(56, 0); return false;">14619-14619</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(57, 0); return false;">15105-15105</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(58, 0); return false;">15208-15208</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(59, 0); return false;">17172-17172</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(60, 0); return false;">17240-17240</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(61, 0); return false;">17767-17767</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(62, 0); return false;">18289-18289</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(63, 0); return false;">18785-18785</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(64, 0); return false;">19831-19831</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(65, 0); return false;">19907-19907</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(66, 0); return false;">19929-19929</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(67, 0); return false;">20984-20993</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(68, 0); return false;">21028-21028</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(69, 0); return false;">21071-21071</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(70, 0); return false;">21131-21131</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(71, 0); return false;">21608-21608</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

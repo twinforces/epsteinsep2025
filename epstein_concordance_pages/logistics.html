@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "logistics"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1561, "end": 1561, "pages": [1561]}, {"start": 4082, "end": 4082, "pages": [4082]}, {"start": 5178, "end": 5178, "pages": [5178]}, {"start": 5268, "end": 5268, "pages": [5268]}, {"start": 5387, "end": 5387, "pages": [5387]}, {"start": 6312, "end": 6312, "pages": [6312]}, {"start": 6336, "end": 6336, "pages": [6336]}, {"start": 6356, "end": 6356, "pages": [6356]}, {"start": 6974, "end": 6975, "pages": [6974, 6975]}, {"start": 7013, "end": 7013, "pages": [7013]}, {"start": 7064, "end": 7064, "pages": [7064]}, {"start": 7158, "end": 7158, "pages": [7158]}, {"start": 7182, "end": 7182, "pages": [7182]}, {"start": 7872, "end": 7872, "pages": [7872]}, {"start": 8249, "end": 8249, "pages": [8249]}, {"start": 8313, "end": 8313, "pages": [8313]}, {"start": 11624, "end": 11624, "pages": [11624]}, {"start": 12745, "end": 12745, "pages": [12745]}, {"start": 13669, "end": 13669, "pages": [13669]}, {"start": 13720, "end": 13720, "pages": [13720]}, {"start": 13881, "end": 13881, "pages": [13881]}, {"start": 13909, "end": 13909, "pages": [13909]}, {"start": 14300, "end": 14300, "pages": [14300]}, {"start": 14879, "end": 14882, "pages": [14879, 14881, 14882]}, {"start": 16294, "end": 16294, "pages": [16294]}, {"start": 16345, "end": 16345, "pages": [16345]}, {"start": 16505, "end": 16505, "pages": [16505]}, {"start": 16533, "end": 16533, "pages": [16533]}, {"start": 16923, "end": 16923, "pages": [16923]}, {"start": 18332, "end": 18332, "pages": [18332]}, {"start": 20432, "end": 20432, "pages": [20432]}, {"start": 20533, "end": 20533, "pages": [20533]}, {"start": 20545, "end": 20545, "pages": [20545]}, {"start": 20676, "end": 20676, "pages": [20676]}];
+        const pageToPath = {"1561": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001561.jpg", "4082": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004082.jpg", "5178": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005178.jpg", "5268": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005268.jpg", "5387": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005387.jpg", "6312": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006312.jpg", "6336": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006336.jpg", "6356": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006356.jpg", "6974": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006974.jpg", "6975": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006975.jpg", "7013": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007013.jpg", "7064": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007064.jpg", "7158": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007158.jpg", "7182": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007182.jpg", "7872": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007872.jpg", "8249": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008249.jpg", "8313": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008313.jpg", "11624": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011624.jpg", "12745": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012745.jpg", "13669": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013669.jpg", "13720": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013720.jpg", "13881": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013881.jpg", "13909": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013909.jpg", "14300": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014300.jpg", "14879": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014879.jpg", "14881": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014881.jpg", "14882": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014882.jpg", "16294": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016294.jpg", "16345": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016345.jpg", "16505": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016505.jpg", "16533": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016533.jpg", "16923": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016923.jpg", "18332": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018332.jpg", "20432": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020432.jpg", "20533": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020533.jpg", "20545": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020545.jpg", "20676": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020676.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001561.jpg": "...information. as-to, the logistics, for their dial-in, acce...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004082.jpg": "...ense counsel, must:  the logistics, of conducting investiga...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005178.jpg": "...n the:process:ofplanning logistics for trial in this mater....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005268.jpg": "...y selection. maters: and logistics:with therparties, the: g...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005387.jpg": "...s: still considering the logistics of when peremptory strik...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006312.jpg": "...: accurately explain the logistics: of voir. dire.. each. o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006336.jpg": "...parties. with respect to logistics, the government would pr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006356.jpg": "...parties. with respect to logistics, the government would pr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006974.jpg": "...ury selection maters and logistics. i'll alse address the r...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006975.jpg": "...sistanee if handling any logistics that. fiay come up; alth...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007013.jpg": "...have walked through the logistics of that so that we're ab...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007064.jpg": "...on ece.  ehere are some logistics of voir dire related to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007158.jpg": "...nd  after panel. and the logistics of all of this ds  on; b...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007182.jpg": "...rhe court: ok fixzst, on logistics, as  coumsel, we had a v...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007872.jpg": "...rhe court: ok fixzst, on logistics, as  coumsel, we had a v...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008249.jpg": "...moving to the specific logistics o£ veis dire. we'll  t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008313.jpg": "...ff the list, and ge oven logistics  lons of hear your issue...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011624.jpg": "...ff the list, and ge oven logistics  lons of hear your issue...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012745.jpg": "...d to discuss a number of logistics we will need. to  diseus...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013669.jpg": "...well had ino role in the logistics of your travel, to new y...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013720.jpg": "...or things like that, the logistics? a. hou the ticket was d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013881.jpg": "...oa't you work out.  ind, logistics cl  the -- df a fusthes...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013909.jpg": "...supervise all, o£ these logistics?  a. t would be ghisslai...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014300.jpg": "...ould reach out to about. logistics?...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014879.jpg": "...the court: ok. fisst, 6n logistics, a8 you knou, counsel, w...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014881.jpg": "...eed to work. through the logistics and space and timing on...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014882.jpg": "...d i do plan te put out a logistics order after today that c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016294.jpg": "...well had ino role in the logistics of your travel, to new y...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016345.jpg": "...or things like that, the logistics? a. hou the ticket was d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016505.jpg": "...oa't you work out.  ind, logistics cl  the -- df a fusthes...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016533.jpg": "...supervise all, o£ these logistics?  a. t would be ghisslai...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016923.jpg": "...ould reach out to about. logistics?...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018332.jpg": "...d to discuss a number of logistics we will need. to  diseus...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020432.jpg": "...f planning  ae ae es ad  logistics for  eth oftrial: ‘t. ca...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020533.jpg": "...2ll,  se te  or  eas ae  logistics  as ‘to'g ‘ for  “4  ¢ c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020545.jpg": "...a lo, 2o2ll; : pseudonym logistics document filed. by usa....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020676.jpg": "...sele sction. maters and logistics ‘with the parties, the i..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "logistics" (37 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1561-1561</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">4082-4082</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">5178-5178</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">5268-5268</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">5387-5387</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">6312-6312</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">6336-6336</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">6356-6356</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">6974-6975</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">7013-7013</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">7064-7064</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">7158-7158</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">7182-7182</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">7872-7872</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">8249-8249</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">8313-8313</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">11624-11624</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">12745-12745</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">13669-13669</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">13720-13720</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">13881-13881</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">13909-13909</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">14300-14300</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">14879-14882</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">16294-16294</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">16345-16345</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">16505-16505</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">16533-16533</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">16923-16923</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">18332-18332</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">20432-20432</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">20533-20533</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">20545-20545</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">20676-20676</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "consistency"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 6347, "end": 6347, "pages": [6347]}, {"start": 7135, "end": 7135, "pages": [7135]}, {"start": 7219, "end": 7220, "pages": [7219, 7220]}, {"start": 7234, "end": 7234, "pages": [7234]}, {"start": 7399, "end": 7399, "pages": [7399]}, {"start": 7909, "end": 7910, "pages": [7909, 7910]}, {"start": 7924, "end": 7924, "pages": [7924]}, {"start": 8182, "end": 8182, "pages": [8182]}, {"start": 10463, "end": 10463, "pages": [10463]}, {"start": 12332, "end": 12332, "pages": [12332]}, {"start": 12539, "end": 12539, "pages": [12539]}, {"start": 13020, "end": 13020, "pages": [13020]}, {"start": 14915, "end": 14917, "pages": [14915, 14916, 14917]}, {"start": 17920, "end": 17920, "pages": [17920]}, {"start": 18126, "end": 18126, "pages": [18126]}, {"start": 18605, "end": 18605, "pages": [18605]}];
+        const pageToPath = {"6347": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006347.jpg", "7135": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007135.jpg", "7219": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007219.jpg", "7220": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007220.jpg", "7234": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007234.jpg", "7399": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007399.jpg", "7909": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007909.jpg", "7910": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007910.jpg", "7924": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007924.jpg", "8182": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008182.jpg", "10463": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010463.jpg", "12332": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012332.jpg", "12539": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012539.jpg", "13020": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013020.jpg", "14915": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014915.jpg", "14916": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014916.jpg", "14917": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014917.jpg", "17920": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017920.jpg", "18126": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018126.jpg", "18605": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018605.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006347.jpg": "...she reports “remarkable consistency” between, the reports of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007135.jpg": "...sistent. and i think the consistency qf that is part ef why t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007219.jpg": "...?  a. thene's remarkable consistency dn what. i see in my wor...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007220.jpg": "...a. there's reiharkable consistency. arid eveh though. defin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007234.jpg": "...reboration, to  look for consistency among different data poi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007399.jpg": "...arguments about bias and consistency without; issuing a subpo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007909.jpg": "...?  a. thene's remarkable consistency dn what. i see in my wor...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007910.jpg": "...a. there's reiharkable consistency. arid eveh though. defin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007924.jpg": "...reboration, to  look for consistency among different data poi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008182.jpg": "...ictz*s opinions that the consistency of core details. is pred...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010463.jpg": "...nd,to secure ‘nationwide consistency, the guidelines. should....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012332.jpg": "...to be clear, what is the consistency across those  various gr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012539.jpg": "...ce; that's why soiht, ls consistency. t  think for the timefr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013020.jpg": "...nt statements would shou consistency. that's, i thank, the on...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014915.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014916.jpg": "...a. there's’ remarkable ‘consistency in what i see tn my work...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014917.jpg": "...a. there's! remarkable ‘consistency. and even, though defini...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017920.jpg": "...to be clear, what is the consistency across those  various gr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018126.jpg": "...ce; that's why soiht, ls consistency. t  think for the timefr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018605.jpg": "...nt statements would shou consistency. that's, i thank, the on..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "consistency" (20 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">6347-6347</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">7135-7135</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">7219-7220</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">7234-7234</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">7399-7399</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">7909-7910</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">7924-7924</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">8182-8182</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">10463-10463</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">12332-12332</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">12539-12539</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">13020-13020</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">14915-14917</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">17920-17920</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">18126-18126</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">18605-18605</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

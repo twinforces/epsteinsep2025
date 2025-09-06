@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "everywhere"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 10546, "end": 10546, "pages": [10546]}, {"start": 11595, "end": 11595, "pages": [11595]}, {"start": 11951, "end": 11954, "pages": [11951, 11954]}, {"start": 11993, "end": 11993, "pages": [11993]}, {"start": 14424, "end": 14424, "pages": [14424]}, {"start": 14509, "end": 14509, "pages": [14509]}, {"start": 14543, "end": 14543, "pages": [14543]}, {"start": 14823, "end": 14823, "pages": [14823]}, {"start": 15111, "end": 15111, "pages": [15111]}, {"start": 17045, "end": 17045, "pages": [17045]}, {"start": 17130, "end": 17130, "pages": [17130]}, {"start": 17164, "end": 17164, "pages": [17164]}, {"start": 17541, "end": 17544, "pages": [17541, 17544]}, {"start": 17583, "end": 17583, "pages": [17583]}, {"start": 21134, "end": 21134, "pages": [21134]}, {"start": 21621, "end": 21621, "pages": [21621]}];
+        const pageToPath = {"10546": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010546.jpg", "11595": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011595.jpg", "11951": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011951.jpg", "11954": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011954.jpg", "11993": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011993.jpg", "14424": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014424.jpg", "14509": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014509.jpg", "14543": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014543.jpg", "14823": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014823.jpg", "15111": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015111.jpg", "17045": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017045.jpg", "17130": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017130.jpg", "17164": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017164.jpg", "17541": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017541.jpg", "17544": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017544.jpg", "17583": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017583.jpg", "21134": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021134.jpg", "21621": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021621.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010546.jpg": "...ening, “there were hands everywhere,” epstein began to: mast...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011595.jpg": "...tes te try to get away.  everywhere i went, they found ie-~...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011951.jpg": "...of just these were hands everywhere. and jehiney  preceedeed...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011954.jpg": "...you ‘pouch his body?  a, everywhere.  ®. wheh you were alone...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011993.jpg": "...t of would, see his face everywhere and, it  i  would jake f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014424.jpg": "...s, that there were  ands everywhere. she also told you that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014509.jpg": "...mame. there ls michelles everywhere, but. jane told you. fre...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014543.jpg": "...se  address beoks laying everywhere, where are those employe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014823.jpg": "...tes te try to get away.  everywhere i went, they found ie-~...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015111.jpg": "...d suggest: to. victims:  everywhere that:pouerful predators...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017045.jpg": "...s, that there were  ands everywhere. she also told you that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017130.jpg": "...mame. there ls michelles everywhere, but. jane told you. fre...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017164.jpg": "...se  address beoks laying everywhere, where are those employe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017541.jpg": "...of just these were hands everywhere. and jehiney  preceedeed...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017544.jpg": "...you ‘pouch his body?  a, everywhere.  ®. wheh you were alone...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017583.jpg": "...t of would, see his face everywhere and, it  i  would jake f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021134.jpg": "...lausible since he saw it-everywhere else. juxtaposed.  hamel...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021621.jpg": "...et away:  apartinenats,  everywhere i’ went, they founda me...."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "everywhere" (18 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">10546-10546</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">11595-11595</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">11951-11954</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">11993-11993</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">14424-14424</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">14509-14509</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">14543-14543</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">14823-14823</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">15111-15111</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">17045-17045</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">17130-17130</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">17164-17164</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">17541-17544</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">17583-17583</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">21134-21134</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">21621-21621</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

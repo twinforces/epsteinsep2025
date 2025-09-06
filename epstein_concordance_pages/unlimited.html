@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "unlimited"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1304, "end": 1304, "pages": [1304]}, {"start": 2340, "end": 2340, "pages": [2340]}, {"start": 3039, "end": 3039, "pages": [3039]}, {"start": 3282, "end": 3282, "pages": [3282]}, {"start": 3547, "end": 3547, "pages": [3547]}, {"start": 3553, "end": 3553, "pages": [3553]}, {"start": 3976, "end": 3976, "pages": [3976]}, {"start": 5579, "end": 5579, "pages": [5579]}, {"start": 6541, "end": 6541, "pages": [6541]}, {"start": 9190, "end": 9190, "pages": [9190]}, {"start": 9869, "end": 9869, "pages": [9869]}, {"start": 10701, "end": 10701, "pages": [10701]}, {"start": 10741, "end": 10745, "pages": [10741, 10745]}, {"start": 11533, "end": 11533, "pages": [11533]}, {"start": 14761, "end": 14761, "pages": [14761]}, {"start": 20222, "end": 20222, "pages": [20222]}, {"start": 20887, "end": 20889, "pages": [20887, 20889]}, {"start": 21559, "end": 21559, "pages": [21559]}, {"start": 22083, "end": 22083, "pages": [22083]}, {"start": 31391, "end": 31391, "pages": [31391]}];
+        const pageToPath = {"1304": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001304.jpg", "2340": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002340.jpg", "3039": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003039.jpg", "3282": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003282.jpg", "3547": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003547.jpg", "3553": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003553.jpg", "3976": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003976.jpg", "5579": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005579.jpg", "6541": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006541.jpg", "9190": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009190.jpg", "9869": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009869.jpg", "10701": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010701.jpg", "10741": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010741.jpg", "10745": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010745.jpg", "11533": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011533.jpg", "14761": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014761.jpg", "20222": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020222.jpg", "20887": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020887.jpg", "20889": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020889.jpg", "21559": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021559.jpg", "22083": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022083.jpg", "31391": "Prod 01_20250822/VOL00001/IMAGES/IMAGES012/DOJ-OGR-00031391.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001304.jpg": "...o prepare for trial, for unlimited. mectings and unlimited....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002340.jpg": "...'m  ‘other inmates have ‘unlimited meh to. commur ricate ‘w...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003039.jpg": "...the grand, jury’ are not;unlimited and are subject:to the:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003282.jpg": "...ght that the revs nguag  unlimited:nuniber, of:claimed vict...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003547.jpg": "...the: grand jury are not unlimited and. are: subj; et t ) t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003553.jpg": "...cept for those  are not; unlimited. anc ubjeet to the s ‘is...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003976.jpg": "...ut, the subpoenas, were ‘unlimited in. timc or scope: and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005579.jpg": "...m ary -  not, of course, unlimited: the defendant ‘must com...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006541.jpg": "...m ary -  not, of course, unlimited: the defendant ‘must com...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009190.jpg": "....  register nou for free unlimited access'to reuters.com  ‘...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009869.jpg": "....  register nou for free unlimited access'to reuters.com  ‘...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010701.jpg": "...hag rhis gourt has broad unlimited discretion.  ‘in. senten...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010741.jpg": "...broad.in:scope,, largely unlimited. either as tothe kind of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010745.jpg": "...be or that: the conduct  unlimited ¢ither as to'the kind of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011533.jpg": "...aon is  ict  he  lawgely unlimited as te  kand of informati...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014761.jpg": "...aon is  ict  he  lawgely unlimited as te  kand of informati...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020222.jpg": "...o prepare for trial, for unlimited. mectings and unlimited....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020887.jpg": "....  register nou for free unlimited access:to reuters.com  “...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020889.jpg": "...s  register nou for free unlimited acc  reporting by luc:co...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021559.jpg": "...discretion. is:  largely unlimited as to the kind of inform...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022083.jpg": "...imposition of such “an,  unlimited. duty:on a prosecutor to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES012/DOJ-OGR-00031391.jpg": "...irtime minutes amin £59: unlimited, hwknd min| 97°\" “b °2ao..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "unlimited" (22 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1304-1304</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">2340-2340</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">3039-3039</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3282-3282</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">3547-3547</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">3553-3553</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3976-3976</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">5579-5579</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">6541-6541</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">9190-9190</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">9869-9869</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">10701-10701</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">10741-10745</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">11533-11533</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">14761-14761</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">20222-20222</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">20887-20889</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">21559-21559</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">22083-22083</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">31391-31391</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

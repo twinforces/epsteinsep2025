@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "accountability"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 767, "end": 768, "pages": [767, 768]}, {"start": 998, "end": 998, "pages": [998]}, {"start": 1624, "end": 1624, "pages": [1624]}, {"start": 3338, "end": 3338, "pages": [3338]}, {"start": 3393, "end": 3393, "pages": [3393]}, {"start": 4460, "end": 4460, "pages": [4460]}, {"start": 8854, "end": 8854, "pages": [8854]}, {"start": 10480, "end": 10480, "pages": [10480]}, {"start": 10580, "end": 10580, "pages": [10580]}, {"start": 13662, "end": 13662, "pages": [13662]}, {"start": 15104, "end": 15105, "pages": [15104, 15105]}, {"start": 15111, "end": 15111, "pages": [15111]}, {"start": 16287, "end": 16287, "pages": [16287]}, {"start": 19916, "end": 19916, "pages": [19916]}, {"start": 23469, "end": 23469, "pages": [23469]}];
+        const pageToPath = {"767": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000767.jpg", "768": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000768.jpg", "998": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000998.jpg", "1624": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001624.jpg", "3338": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003338.jpg", "3393": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003393.jpg", "4460": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004460.jpg", "8854": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008854.jpg", "10480": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010480.jpg", "10580": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010580.jpg", "13662": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013662.jpg", "15104": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015104.jpg", "15105": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015105.jpg", "15111": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015111.jpg", "16287": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016287.jpg", "19916": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019916.jpg", "23469": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023469.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000767.jpg": "...ailures of institutional accountability, there is an especially...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000768.jpg": "...ontinuing, lack of. full accountability for epstein, maxwell, an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000998.jpg": "...motivation to escape accountability for her appalling crimes...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001624.jpg": "...accountability for wer appalling erimes...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003338.jpg": "...dant: should. not evade: accountability  tatoo lam + b carat toe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003393.jpg": "...the ease.,  ov ernment “accountability © inereast i  7...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004460.jpg": "...ant: should. ‘not evade: accountability  een nn san lam + b cara...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008854.jpg": "...ert—to have a measire of accountability and forthe:  ic to: have...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010480.jpg": "...v oriticasures: ‘without accountability.  ni iposed, “fort eitve...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010580.jpg": "...e will be ‘no meaningful accountability: as the probat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013662.jpg": "...could help. there be any accountability’  6r these people being...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015104.jpg": "...ures, of institutiorial, accountability,, thete is an. especiall...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015105.jpg": ".... this transparency and  accountability is a form of justice. ep...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015111.jpg": "...well.convi  of guimunial accountability;  its erosion would. be...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016287.jpg": "...could help. there be any accountability’  6r these people being...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019916.jpg": "...motivation to escape accountability for her appalling crimes...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023469.jpg": "...y. “ec]ontinuous: inmate accountability, \"which is accomplished...."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "accountability" (17 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">767-768</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">998-998</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1624-1624</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3338-3338</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">3393-3393</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">4460-4460</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">8854-8854</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">10480-10480</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">10580-10580</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">13662-13662</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">15104-15105</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">15111-15111</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">16287-16287</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">19916-19916</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">23469-23469</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

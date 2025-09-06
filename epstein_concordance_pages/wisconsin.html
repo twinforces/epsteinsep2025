@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "wisconsin"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 7543, "end": 7547, "pages": [7543, 7547]}, {"start": 7569, "end": 7569, "pages": [7569]}, {"start": 7578, "end": 7582, "pages": [7578, 7579, 7581, 7582]}, {"start": 7629, "end": 7629, "pages": [7629]}];
+        const pageToPath = {"7543": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007543.jpg", "7547": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007547.jpg", "7569": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007569.jpg", "7578": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007578.jpg", "7579": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007579.jpg", "7581": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007581.jpg", "7582": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007582.jpg", "7629": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007629.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007543.jpg": "...ethbridge  university of wisconsin, madisoi. lawrence unive...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007547.jpg": "...erica  jficest, madison, wisconsin. . 8 glark univ., conf o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007569.jpg": "...orney, milwaukee county; wisconsin, in state v. jeffrey l:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007578.jpg": "...‘v. brzeski (milwaukee, wisconsin) tactifiad at danncitinn...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007579.jpg": "...ring, l/29/92  state. of wisconsin \\ ve jeffrey ;  l dahme...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007581.jpg": "...aring, ll/7/96  state of wisconsin v. joseph clark (baraboo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007582.jpg": "...gerald turner (madison, wisconsin): tactifian at trial 4l7...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007629.jpg": "...ol of law  university of wisconsin  virginia association of..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "wisconsin" (8 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">7543-7547</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">7569-7569</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">7578-7582</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">7629-7629</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

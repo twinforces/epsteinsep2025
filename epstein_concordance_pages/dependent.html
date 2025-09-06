@@ -1,0 +1,235 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "dependent"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 663, "end": 663, "pages": [663]}, {"start": 1112, "end": 1112, "pages": [1112]}, {"start": 1149, "end": 1149, "pages": [1149]}, {"start": 1158, "end": 1158, "pages": [1158]}, {"start": 1220, "end": 1223, "pages": [1220, 1223]}, {"start": 1323, "end": 1323, "pages": [1323]}, {"start": 1446, "end": 1446, "pages": [1446]}, {"start": 1961, "end": 1961, "pages": [1961]}, {"start": 1988, "end": 1988, "pages": [1988]}, {"start": 2168, "end": 2168, "pages": [2168]}, {"start": 2177, "end": 2177, "pages": [2177]}, {"start": 2243, "end": 2246, "pages": [2243, 2246]}, {"start": 2306, "end": 2306, "pages": [2306]}, {"start": 5038, "end": 5038, "pages": [5038]}, {"start": 5510, "end": 5510, "pages": [5510]}, {"start": 5907, "end": 5907, "pages": [5907]}, {"start": 6472, "end": 6472, "pages": [6472]}, {"start": 6832, "end": 6832, "pages": [6832]}, {"start": 6988, "end": 6988, "pages": [6988]}, {"start": 7211, "end": 7212, "pages": [7211, 7212]}, {"start": 7218, "end": 7218, "pages": [7218]}, {"start": 7845, "end": 7845, "pages": [7845]}, {"start": 7901, "end": 7902, "pages": [7901, 7902]}, {"start": 7908, "end": 7908, "pages": [7908]}, {"start": 8953, "end": 8953, "pages": [8953]}, {"start": 10287, "end": 10287, "pages": [10287]}, {"start": 11207, "end": 11207, "pages": [11207]}, {"start": 11541, "end": 11541, "pages": [11541]}, {"start": 12539, "end": 12539, "pages": [12539]}, {"start": 13290, "end": 13294, "pages": [13290, 13294]}, {"start": 13303, "end": 13303, "pages": [13303]}, {"start": 14088, "end": 14088, "pages": [14088]}, {"start": 14538, "end": 14538, "pages": [14538]}, {"start": 14769, "end": 14769, "pages": [14769]}, {"start": 14908, "end": 14909, "pages": [14908, 14909]}, {"start": 14915, "end": 14915, "pages": [14915]}, {"start": 16712, "end": 16712, "pages": [16712]}, {"start": 17159, "end": 17159, "pages": [17159]}, {"start": 18126, "end": 18126, "pages": [18126]}, {"start": 18874, "end": 18878, "pages": [18874, 18878]}, {"start": 18887, "end": 18887, "pages": [18887]}, {"start": 20030, "end": 20030, "pages": [20030]}, {"start": 20067, "end": 20067, "pages": [20067]}, {"start": 20076, "end": 20076, "pages": [20076]}, {"start": 20138, "end": 20141, "pages": [20138, 20141]}, {"start": 20240, "end": 20240, "pages": [20240]}, {"start": 20364, "end": 20364, "pages": [20364]}];
+        const pageToPath = {"663": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000663.jpg", "1112": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001112.jpg", "1149": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001149.jpg", "1158": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001158.jpg", "1220": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001220.jpg", "1223": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001223.jpg", "1323": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001323.jpg", "1446": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001446.jpg", "1961": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001961.jpg", "1988": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001988.jpg", "2168": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002168.jpg", "2177": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002177.jpg", "2243": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002243.jpg", "2246": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002246.jpg", "2306": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002306.jpg", "5038": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005038.jpg", "5510": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005510.jpg", "5907": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005907.jpg", "6472": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006472.jpg", "6832": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006832.jpg", "6988": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006988.jpg", "7211": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007211.jpg", "7212": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007212.jpg", "7218": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007218.jpg", "7845": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007845.jpg", "7901": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007901.jpg", "7902": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007902.jpg", "7908": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007908.jpg", "8953": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008953.jpg", "10287": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010287.jpg", "11207": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011207.jpg", "11541": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011541.jpg", "12539": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012539.jpg", "13290": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013290.jpg", "13294": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013294.jpg", "13303": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013303.jpg", "14088": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014088.jpg", "14538": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014538.jpg", "14769": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014769.jpg", "14908": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014908.jpg", "14909": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014909.jpg", "14915": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014915.jpg", "16712": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016712.jpg", "17159": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017159.jpg", "18126": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018126.jpg", "18874": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018874.jpg", "18878": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018878.jpg", "18887": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018887.jpg", "20030": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020030.jpg", "20067": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020067.jpg", "20076": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020076.jpg", "20138": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020138.jpg", "20141": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020141.jpg", "20240": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020240.jpg", "20364": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020364.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000663.jpg": "...authority to eenduet an  dependent investigation. to the ex...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001112.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001149.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001158.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001220.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001223.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001323.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001446.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001961.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001988.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002168.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002177.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002243.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002246.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002306.jpg": "...ourt three is. logically dependent:on the success. of the c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005038.jpg": "...at. issue); and on this dependent basis, the requests fail...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005510.jpg": "...o sexual activity ls age-dependent, the proof  ust satisfy...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005907.jpg": "...s adapt their strategies dependent or the chile, who  e  am...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006472.jpg": "...o sexual activity ls age-dependent, the proof  fust satisfy...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006832.jpg": "...s adapt their strategies dependent or the chile, who  e  am...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006988.jpg": "...s my plan -- again, time dependent -- to try te qualbify at...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007211.jpg": "...child trusts and becomes dependent, upon the  perpetrator:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007212.jpg": ".... make them perhaps more dependent upon you. ‘so if  you. a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007218.jpg": "...sterature. and it is mot dependent on who is hiring me, for...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007845.jpg": "...: dependent ‘consultant, performed a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007901.jpg": "...child trusts and becomes dependent, upon the  perpetrator:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007902.jpg": ".... make them perhaps more dependent upon you. ‘so if  you. a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007908.jpg": "...sterature. and it is mot dependent on who is hiring me, for...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008953.jpg": "...ount three was logically dependent on. the success  of the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010287.jpg": "...different conspiracies  dependent schemes, ‘with different...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011207.jpg": "...overy to the defense ts: dependent upon giving also a, broa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011541.jpg": "...by a gonspirdey that is dependent.  hewe on canolyn being...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012539.jpg": "...if the court's ruling is dependent upon the prospective  te...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013290.jpg": "...hrbach: that she was the dependent of a  max-a-bago: employ...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013294.jpg": "...its to the daughter as a dependent of  mr. roberts. so in t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013303.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014088.jpg": "...okay. and so 'fhat's not dependent on whether the airlines...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014538.jpg": "...ilence theory, which is  dependent. entirely on tjuadea ale...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014769.jpg": "...by a gonspirdey that is dependent.  hewe on canolyn being...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014908.jpg": "...ild trusts! and becomes! dependent ‘upon the perpetrator....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014909.jpg": "...t make them perhaps more dependent upon. you. so if  you ar...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014915.jpg": "...iterature. and it is not dependent on who is hiring me, for...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016712.jpg": "...okay. and so 'fhat's not dependent on whether the airlines...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017159.jpg": "...ilence theory, which is  dependent. entirely on tjuadea ale...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018126.jpg": "...if the court's ruling is dependent upon the prospective  te...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018874.jpg": "...hrbach: that she was the dependent of a  max-a-bago: employ...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018878.jpg": "...its to the daughter as a dependent of  mr. roberts. so in t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018887.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020030.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020067.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020076.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020138.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020141.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020240.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020364.jpg": ""};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "dependent" (55 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">663-663</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1112-1112</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1149-1149</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">1158-1158</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">1220-1223</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">1323-1323</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">1446-1446</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">1961-1961</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">1988-1988</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">2168-2168</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">2177-2177</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">2243-2246</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">2306-2306</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">5038-5038</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">5510-5510</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">5907-5907</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">6472-6472</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">6832-6832</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">6988-6988</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">7211-7212</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">7218-7218</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">7845-7845</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">7901-7902</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">7908-7908</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">8953-8953</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">10287-10287</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">11207-11207</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">11541-11541</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">12539-12539</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">13290-13294</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">13303-13303</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">14088-14088</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">14538-14538</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">14769-14769</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">14908-14909</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">14915-14915</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">16712-16712</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">17159-17159</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">18126-18126</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">18874-18878</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">18887-18887</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">20030-20030</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">20067-20067</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">20076-20076</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">20138-20141</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(45, 0); return false;">20240-20240</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(46, 0); return false;">20364-20364</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

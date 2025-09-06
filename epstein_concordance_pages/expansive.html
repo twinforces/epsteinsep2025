@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "expansive"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1017, "end": 1017, "pages": [1017]}, {"start": 1098, "end": 1103, "pages": [1098, 1103]}, {"start": 1214, "end": 1214, "pages": [1214]}, {"start": 1234, "end": 1234, "pages": [1234]}, {"start": 1890, "end": 1890, "pages": [1890]}, {"start": 1979, "end": 1979, "pages": [1979]}, {"start": 2544, "end": 2544, "pages": [2544]}, {"start": 2733, "end": 2733, "pages": [2733]}, {"start": 2965, "end": 2968, "pages": [2965, 2968]}, {"start": 3088, "end": 3088, "pages": [3088]}, {"start": 3671, "end": 3671, "pages": [3671]}, {"start": 3948, "end": 3948, "pages": [3948]}, {"start": 3955, "end": 3959, "pages": [3955, 3959]}, {"start": 4004, "end": 4004, "pages": [4004]}, {"start": 4902, "end": 4902, "pages": [4902]}, {"start": 5219, "end": 5219, "pages": [5219]}, {"start": 8391, "end": 8391, "pages": [8391]}, {"start": 10693, "end": 10693, "pages": [10693]}, {"start": 10700, "end": 10700, "pages": [10700]}, {"start": 19935, "end": 19935, "pages": [19935]}, {"start": 20016, "end": 20021, "pages": [20016, 20021]}, {"start": 20132, "end": 20132, "pages": [20132]}, {"start": 20152, "end": 20152, "pages": [20152]}, {"start": 21110, "end": 21110, "pages": [21110]}, {"start": 21186, "end": 21186, "pages": [21186]}, {"start": 21487, "end": 21487, "pages": [21487]}, {"start": 21705, "end": 21705, "pages": [21705]}, {"start": 22031, "end": 22031, "pages": [22031]}, {"start": 22075, "end": 22075, "pages": [22075]}];
+        const pageToPath = {"1017": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001017.jpg", "1098": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001098.jpg", "1103": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001103.jpg", "1214": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001214.jpg", "1234": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001234.jpg", "1890": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001890.jpg", "1979": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001979.jpg", "2544": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002544.jpg", "2733": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002733.jpg", "2965": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002965.jpg", "2968": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002968.jpg", "3088": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003088.jpg", "3671": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003671.jpg", "3948": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003948.jpg", "3955": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003955.jpg", "3959": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003959.jpg", "4004": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004004.jpg", "4902": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004902.jpg", "5219": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005219.jpg", "8391": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008391.jpg", "10693": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010693.jpg", "10700": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010700.jpg", "19935": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019935.jpg", "20016": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020016.jpg", "20021": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020021.jpg", "20132": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020132.jpg", "20152": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020152.jpg", "21110": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021110.jpg", "21186": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021186.jpg", "21487": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021487.jpg", "21705": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021705.jpg", "22031": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022031.jpg", "22075": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022075.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001017.jpg": "...e6d and we are taking an expansive ahd theughtful, approach...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001098.jpg": "...proposed.bail package is expansive and far exceeds what is...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001103.jpg": "...maxwell. is proposing an expansive set:of bail. conditions...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001214.jpg": "...efendant:proposes a more expansive set:of bail conditions t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001234.jpg": "...as already proposed ‘an. expansive and, to  ‘our knouledge,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001890.jpg": "...eed and we are taking an expansive ahd theughtful, approach...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001979.jpg": "...maxwell is proposing: an expansive set-of bail  (whieh was:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002544.jpg": "...na  principles ‘was: too expansive, this view: ‘of the ‘fed...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002733.jpg": "...as already proposed ‘an. expansive and, to  ‘our knouledge,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002965.jpg": "...establish:that a.  more-expansive interpretation:was conte...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002968.jpg": "...establish. that a more ‘expansive: interpretation. was..co...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003088.jpg": "...)); and “interact” is an.expansive word.aimed at. capturing...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003671.jpg": "...but:even-under‘such.an. expansive  definition, neither §'2...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003948.jpg": "...this. production with an.expansive:.cye: touard its pretria...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003955.jpg": "...e  endeavored to fake an expansive approach with te  penden...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003959.jpg": "...government has’taken. an expansive approach.to discovery an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004004.jpg": "...7.” thus;  duerto their expansive definitions, the defenda...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004902.jpg": "...‘unfor  that even were  expansive  ve, order or sort. of r...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005219.jpg": "...research itdicates that expansive woir dite yields greater...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008391.jpg": "...efinition of'victim. is “expansive,” the defense has not: i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010693.jpg": "...inal involvement.in this expansive conspiracy.  ‘the vietit...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010700.jpg": "...fance in. confirming the expansive pouer. of federal courts...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019935.jpg": "...e6d and we are taking an expansive ahd theughtful, approach...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020016.jpg": "...proposed.bail package is expansive and far exceeds what is...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020021.jpg": "...maxwell. is proposing an expansive set:of bail. conditions...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020132.jpg": "...efendant:proposes a more expansive set:of bail conditions t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020152.jpg": "...as already proposed ‘an. expansive and, to  ‘our knouledge,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021110.jpg": "...history: supporting its. expansive interpretation ‘of $3283...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021186.jpg": "...a’ s  pine oles was too, expansive, bs his: vidi of ths  ac...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021487.jpg": "...principles avas too expansive, ‘his view of the federa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021705.jpg": "...adly defined. given this expansive langtiage,  ‘sexual abus...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022031.jpg": "...investigation was  more expansive, that previously thought...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022075.jpg": "...nment: has ‘produced an: expansive amount’ of dis scovery,..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "expansive" (33 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1017-1017</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1098-1103</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1214-1214</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">1234-1234</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">1890-1890</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">1979-1979</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">2544-2544</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">2733-2733</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">2965-2968</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">3088-3088</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">3671-3671</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">3948-3948</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">3955-3959</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">4004-4004</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">4902-4902</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">5219-5219</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">8391-8391</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">10693-10693</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">10700-10700</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">19935-19935</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">20016-20021</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">20132-20132</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">20152-20152</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">21110-21110</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">21186-21186</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">21487-21487</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">21705-21705</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">22031-22031</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">22075-22075</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

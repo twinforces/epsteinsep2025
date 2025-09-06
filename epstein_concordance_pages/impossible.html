@@ -1,0 +1,313 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "impossible"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 335, "end": 335, "pages": [335]}, {"start": 434, "end": 434, "pages": [434]}, {"start": 448, "end": 448, "pages": [448]}, {"start": 918, "end": 918, "pages": [918]}, {"start": 926, "end": 926, "pages": [926]}, {"start": 995, "end": 995, "pages": [995]}, {"start": 1164, "end": 1164, "pages": [1164]}, {"start": 1204, "end": 1204, "pages": [1204]}, {"start": 1222, "end": 1222, "pages": [1222]}, {"start": 1271, "end": 1271, "pages": [1271]}, {"start": 1302, "end": 1302, "pages": [1302]}, {"start": 1374, "end": 1374, "pages": [1374]}, {"start": 1394, "end": 1394, "pages": [1394]}, {"start": 1410, "end": 1410, "pages": [1410]}, {"start": 1621, "end": 1621, "pages": [1621]}, {"start": 1874, "end": 1874, "pages": [1874]}, {"start": 2183, "end": 2183, "pages": [2183]}, {"start": 2245, "end": 2245, "pages": [2245]}, {"start": 2295, "end": 2295, "pages": [2295]}, {"start": 2317, "end": 2317, "pages": [2317]}, {"start": 2797, "end": 2797, "pages": [2797]}, {"start": 2930, "end": 2930, "pages": [2930]}, {"start": 3024, "end": 3024, "pages": [3024]}, {"start": 3138, "end": 3138, "pages": [3138]}, {"start": 3161, "end": 3165, "pages": [3161, 3165]}, {"start": 3284, "end": 3284, "pages": [3284]}, {"start": 3642, "end": 3642, "pages": [3642]}, {"start": 3997, "end": 3997, "pages": [3997]}, {"start": 4007, "end": 4008, "pages": [4007, 4008]}, {"start": 4406, "end": 4406, "pages": [4406]}, {"start": 4460, "end": 4460, "pages": [4460]}, {"start": 4854, "end": 4854, "pages": [4854]}, {"start": 4875, "end": 4875, "pages": [4875]}, {"start": 4958, "end": 4959, "pages": [4958, 4959]}, {"start": 5485, "end": 5485, "pages": [5485]}, {"start": 5600, "end": 5601, "pages": [5600, 5601]}, {"start": 6049, "end": 6049, "pages": [6049]}, {"start": 6207, "end": 6207, "pages": [6207]}, {"start": 6287, "end": 6287, "pages": [6287]}, {"start": 6447, "end": 6447, "pages": [6447]}, {"start": 6562, "end": 6563, "pages": [6562, 6563]}, {"start": 7355, "end": 7355, "pages": [7355]}, {"start": 7396, "end": 7396, "pages": [7396]}, {"start": 8322, "end": 8322, "pages": [8322]}, {"start": 8512, "end": 8512, "pages": [8512]}, {"start": 8596, "end": 8596, "pages": [8596]}, {"start": 8676, "end": 8676, "pages": [8676]}, {"start": 8762, "end": 8762, "pages": [8762]}, {"start": 9198, "end": 9200, "pages": [9198, 9200]}, {"start": 9877, "end": 9879, "pages": [9877, 9879]}, {"start": 10409, "end": 10409, "pages": [10409]}, {"start": 10665, "end": 10665, "pages": [10665]}, {"start": 11408, "end": 11408, "pages": [11408]}, {"start": 11420, "end": 11420, "pages": [11420]}, {"start": 11633, "end": 11633, "pages": [11633]}, {"start": 14032, "end": 14032, "pages": [14032]}, {"start": 16656, "end": 16656, "pages": [16656]}, {"start": 19415, "end": 19415, "pages": [19415]}, {"start": 19836, "end": 19836, "pages": [19836]}, {"start": 19844, "end": 19844, "pages": [19844]}, {"start": 19913, "end": 19913, "pages": [19913]}, {"start": 20082, "end": 20082, "pages": [20082]}, {"start": 20122, "end": 20122, "pages": [20122]}, {"start": 20140, "end": 20140, "pages": [20140]}, {"start": 20189, "end": 20189, "pages": [20189]}, {"start": 20220, "end": 20220, "pages": [20220]}, {"start": 20292, "end": 20292, "pages": [20292]}, {"start": 20304, "end": 20304, "pages": [20304]}, {"start": 20312, "end": 20312, "pages": [20312]}, {"start": 20328, "end": 20328, "pages": [20328]}, {"start": 20954, "end": 20954, "pages": [20954]}, {"start": 21026, "end": 21026, "pages": [21026]}, {"start": 21714, "end": 21714, "pages": [21714]}];
+        const pageToPath = {"335": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000335.jpg", "434": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000434.jpg", "448": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000448.jpg", "918": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000918.jpg", "926": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000926.jpg", "995": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000995.jpg", "1164": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001164.jpg", "1204": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001204.jpg", "1222": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001222.jpg", "1271": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001271.jpg", "1302": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001302.jpg", "1374": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001374.jpg", "1394": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001394.jpg", "1410": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001410.jpg", "1621": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001621.jpg", "1874": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001874.jpg", "2183": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002183.jpg", "2245": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002245.jpg", "2295": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002295.jpg", "2317": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002317.jpg", "2797": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002797.jpg", "2930": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002930.jpg", "3024": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003024.jpg", "3138": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003138.jpg", "3161": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003161.jpg", "3165": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003165.jpg", "3284": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003284.jpg", "3642": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003642.jpg", "3997": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003997.jpg", "4007": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004007.jpg", "4008": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004008.jpg", "4406": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004406.jpg", "4460": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004460.jpg", "4854": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004854.jpg", "4875": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004875.jpg", "4958": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004958.jpg", "4959": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004959.jpg", "5485": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005485.jpg", "5600": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005600.jpg", "5601": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005601.jpg", "6049": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006049.jpg", "6207": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006207.jpg", "6287": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006287.jpg", "6447": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006447.jpg", "6562": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006562.jpg", "6563": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006563.jpg", "7355": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007355.jpg", "7396": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007396.jpg", "8322": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008322.jpg", "8512": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008512.jpg", "8596": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008596.jpg", "8676": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008676.jpg", "8762": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008762.jpg", "9198": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009198.jpg", "9200": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009200.jpg", "9877": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009877.jpg", "9879": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009879.jpg", "10409": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010409.jpg", "10665": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010665.jpg", "11408": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011408.jpg", "11420": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011420.jpg", "11633": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011633.jpg", "14032": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014032.jpg", "16656": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016656.jpg", "19415": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019415.jpg", "19836": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019836.jpg", "19844": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019844.jpg", "19913": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019913.jpg", "20082": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020082.jpg", "20122": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020122.jpg", "20140": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020140.jpg", "20189": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020189.jpg", "20220": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020220.jpg", "20292": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020292.jpg", "20304": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020304.jpg", "20312": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020312.jpg", "20328": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020328.jpg", "20954": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020954.jpg", "21026": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021026.jpg", "21714": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021714.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000335.jpg": "...on treaty.  beyond being impossible to guarantee, extraditio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000434.jpg": "...ly complex. it: would be impossible for mr. epstein = given,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000448.jpg": "...rly complex. it would be impossible for epstein = given, amo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000918.jpg": "...ocent human being. it is impossible for ms. maxwell to parti...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000926.jpg": "...food makes. it virtually impossible, and violates ms. maxwel...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000995.jpg": "..., resources, it'would be impossible for the court to even be...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001164.jpg": "...ention:”): beyond being, impossible to guarantec, extraditio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001204.jpg": "...judicial decision,.it is impossible to-determine what the:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001222.jpg": "...and, at‘worst, impossible.”). having carefully rev...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001271.jpg": "...ion in  litially: seemed impossible, not: because ‘he used...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001302.jpg": "...a sercen,making:itnearly impossible to effectively review do...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001374.jpg": "...her confinement make it:impossible for her to effectively p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001394.jpg": "...is case unlikely, if:not impossible, before mid-january. wea...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001410.jpg": "...rific conditions make it impossible to ‘prepare for tnal. ac...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001621.jpg": "...resources, ‘it. would be impossible ‘for the court to even....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001874.jpg": "...kingly: slou and, often, impossible.  additionally, ms.. max...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002183.jpg": "...ention:”): beyond being, impossible to guarantec, extraditio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002245.jpg": "...and, at.worst, impossible.”).  aving carefully: re...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002295.jpg": "...be difficult, i  f not j impossible, ‘for ms. maxwell to lod...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002317.jpg": "...a:movic); itas impossible to knou what aet or acts...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002797.jpg": "...dition in tially: seemed impossible,.l not: because ‘he used...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002930.jpg": "...s case ‘unlikely; if-not impossible,  “9 ween es na a  befor...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003024.jpg": "...ting, that maxwell had.  impossible that the ‘atorneys. sugg...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003138.jpg": "...neral as to. render it:  impossible to prepare a deferise. b...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003161.jpg": "...thermore, it ‘would. be: impossible: in practice t to > admi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003165.jpg": "...dant’s approach, it d be impossible: for ‘prosecutors to det...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003284.jpg": "...it'would’be “ ‘virtually impossible to: comply” with, four s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003642.jpg": "...mmunity: benchmarks (an. impossible task) we would also:need...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003997.jpg": "...mber of images tivake it impossible for any effective tewiew...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004007.jpg": "...through s$ tiakes. it.  impossible to meaningfully debate t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004008.jpg": "...rbroad requests make: it impossible for  bsf to determine ho...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004406.jpg": ".... ‘would: be* ‘virtually impossible to: comply  is resolutio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004460.jpg": "...stimonial.immunity) were“impossible: or impracticable. “coop...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004854.jpg": "...tims to be identical in  impossible for two incidents of sex...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004875.jpg": "...bt ‘was unlikely; if not impossible. for those reasons, d.a....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004958.jpg": "...the press and making it;impossible for ms. maxwell. to rece...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004959.jpg": "...ements that will make it-impossible for ms, maxwell to recei...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005485.jpg": "...also be: confusing, and impossible  to neutrally:explain to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005600.jpg": "...the s2 indictment: it is impossible for ms. maxwell, to iden...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005601.jpg": "...or statements. makes it  impossible: to prepare:a. defense....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006049.jpg": "...search to:  it virtually impossible ‘for the parties to <  ‘...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006207.jpg": "...tions. [at mdc] make it: impossible: to prepare: for trial.”...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006287.jpg": "...al, unsubstant ited ‘or impossible  * some person sltrsiona...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006447.jpg": "...also be: confusing, and impossible  to neutrally:explain to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006562.jpg": "...the s2 indictment: it is impossible for ms. maxwell, to iden...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006563.jpg": "...or statements. makes it  impossible: to prepare:a. defense....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007355.jpg": "...is therefore physically impossible for information of the c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007396.jpg": "...te cross-examination is: impossible without-understanding: t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008322.jpg": "...uca: t's an unwieldy and impossible project  here, ‘your hen...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008512.jpg": "...‘place. it:is logically: impossible :for.a.defendant:to inte...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008596.jpg": "...he first:  lis logically impossible fora, defendant to ‘inte...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008676.jpg": "...‘place. it:is logically: impossible :for.a.defendant:to inte...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008762.jpg": "...‘place. it:is logically: impossible :for.a.defendant:to inte...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009198.jpg": "...t wotild make it.all but impossible ‘for  ms. maxwell to:mee...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009200.jpg": "...eryone wants ta’ ‘belie  impossible: for any human. todo. re...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009877.jpg": "...t wotild make it.all but impossible ‘for  ms. maxwell to:mee...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009879.jpg": "...eryone wants ta’ ‘belie  impossible: for any human. todo. re...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010409.jpg": "...” :it-would have  been, “impossible for him to testify that,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010665.jpg": "...mber of people harmed is impossible to measure:  maxwell-had...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011408.jpg": "...‘was served:- making ‘if impossible for him to comply. addit...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011420.jpg": "...esentation of the client impossible. therefore, when: the re...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011633.jpg": "...uca: t's an unwieldy and impossible project  here, ‘your hen...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014032.jpg": "...®. and, that, would be impossible begatise bugs, binny is...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016656.jpg": "...®. and, that, would be impossible begatise bugs, binny is...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019415.jpg": "...iew of the order will be impossible follouing final judgment...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019836.jpg": "...ocent human being. it is impossible for ms. maxwell to parti...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019844.jpg": "...food makes. it virtually impossible, and violates ms. maxwel...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019913.jpg": "...l resources, it'would be impossible for the court to even be...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020082.jpg": "...ention:”): beyond being, impossible to guarantec, extraditio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020122.jpg": "...judicial decision,-it is impossible to:determine what the:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020140.jpg": "...and, at‘worst, impossible.”). having carefully rev...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020189.jpg": "...ion in  litially: seemed impossible, not: because ‘he used...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020220.jpg": "...a sercen,making:itnearly impossible to effectively review do...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020292.jpg": "...her confinement make it:impossible for her to effectively p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020304.jpg": "...or trial, impossible. there must be an, adver...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020312.jpg": "...is case unlikely, if:not impossible, before mid-january. wea...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020328.jpg": "...rific conditions make it impossible to ‘prepare for tnal. ac...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020954.jpg": "...‘was; impossible:he would. be selected as...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021026.jpg": "...t“*every moment,  ‘been.“impossible forhim l  that defendant...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021714.jpg": "...he thought it. virtually impossible that: he would be se- le..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "impossible" (80 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">335-335</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">434-434</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">448-448</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">918-918</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">926-926</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">995-995</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">1164-1164</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">1204-1204</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">1222-1222</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">1271-1271</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">1302-1302</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">1374-1374</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">1394-1394</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">1410-1410</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">1621-1621</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">1874-1874</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">2183-2183</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">2245-2245</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">2295-2295</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">2317-2317</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">2797-2797</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">2930-2930</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">3024-3024</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">3138-3138</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">3161-3165</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">3284-3284</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">3642-3642</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">3997-3997</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">4007-4008</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">4406-4406</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">4460-4460</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">4854-4854</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">4875-4875</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">4958-4959</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">5485-5485</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">5600-5601</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">6049-6049</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">6207-6207</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">6287-6287</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">6447-6447</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">6562-6563</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">7355-7355</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">7396-7396</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">8322-8322</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">8512-8512</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(45, 0); return false;">8596-8596</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(46, 0); return false;">8676-8676</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(47, 0); return false;">8762-8762</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(48, 0); return false;">9198-9200</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(49, 0); return false;">9877-9879</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(50, 0); return false;">10409-10409</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(51, 0); return false;">10665-10665</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(52, 0); return false;">11408-11408</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(53, 0); return false;">11420-11420</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(54, 0); return false;">11633-11633</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(55, 0); return false;">14032-14032</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(56, 0); return false;">16656-16656</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(57, 0); return false;">19415-19415</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(58, 0); return false;">19836-19836</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(59, 0); return false;">19844-19844</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(60, 0); return false;">19913-19913</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(61, 0); return false;">20082-20082</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(62, 0); return false;">20122-20122</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(63, 0); return false;">20140-20140</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(64, 0); return false;">20189-20189</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(65, 0); return false;">20220-20220</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(66, 0); return false;">20292-20292</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(67, 0); return false;">20304-20304</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(68, 0); return false;">20312-20312</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(69, 0); return false;">20328-20328</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(70, 0); return false;">20954-20954</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(71, 0); return false;">21026-21026</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(72, 0); return false;">21714-21714</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

@@ -1,0 +1,205 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "intentional"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 954, "end": 954, "pages": [954]}, {"start": 1495, "end": 1495, "pages": [1495]}, {"start": 1687, "end": 1687, "pages": [1687]}, {"start": 2604, "end": 2604, "pages": [2604]}, {"start": 2655, "end": 2655, "pages": [2655]}, {"start": 2661, "end": 2661, "pages": [2661]}, {"start": 2827, "end": 2827, "pages": [2827]}, {"start": 2839, "end": 2839, "pages": [2839]}, {"start": 2998, "end": 2998, "pages": [2998]}, {"start": 3014, "end": 3014, "pages": [3014]}, {"start": 3075, "end": 3075, "pages": [3075]}, {"start": 3661, "end": 3661, "pages": [3661]}, {"start": 4161, "end": 4161, "pages": [4161]}, {"start": 4726, "end": 4726, "pages": [4726]}, {"start": 4796, "end": 4796, "pages": [4796]}, {"start": 5692, "end": 5692, "pages": [5692]}, {"start": 7576, "end": 7576, "pages": [7576]}, {"start": 8804, "end": 8804, "pages": [8804]}, {"start": 9032, "end": 9032, "pages": [9032]}, {"start": 9049, "end": 9051, "pages": [9049, 9051]}, {"start": 9597, "end": 9597, "pages": [9597]}, {"start": 9608, "end": 9609, "pages": [9608, 9609]}, {"start": 9723, "end": 9723, "pages": [9723]}, {"start": 9740, "end": 9742, "pages": [9740, 9742]}, {"start": 10309, "end": 10309, "pages": [10309]}, {"start": 10346, "end": 10346, "pages": [10346]}, {"start": 10353, "end": 10353, "pages": [10353]}, {"start": 10404, "end": 10404, "pages": [10404]}, {"start": 19872, "end": 19872, "pages": [19872]}, {"start": 20973, "end": 20973, "pages": [20973]}, {"start": 20980, "end": 20980, "pages": [20980]}, {"start": 21071, "end": 21071, "pages": [21071]}, {"start": 21119, "end": 21119, "pages": [21119]}, {"start": 21127, "end": 21127, "pages": [21127]}, {"start": 21704, "end": 21704, "pages": [21704]}, {"start": 21758, "end": 21758, "pages": [21758]}, {"start": 22080, "end": 22080, "pages": [22080]}];
+        const pageToPath = {"954": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000954.jpg", "1495": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001495.jpg", "1687": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001687.jpg", "2604": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002604.jpg", "2655": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002655.jpg", "2661": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002661.jpg", "2827": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002827.jpg", "2839": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002839.jpg", "2998": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002998.jpg", "3014": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003014.jpg", "3075": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003075.jpg", "3661": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003661.jpg", "4161": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004161.jpg", "4726": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004726.jpg", "4796": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004796.jpg", "5692": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005692.jpg", "7576": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007576.jpg", "8804": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008804.jpg", "9032": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009032.jpg", "9049": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009049.jpg", "9051": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009051.jpg", "9597": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009597.jpg", "9608": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009608.jpg", "9609": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009609.jpg", "9723": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009723.jpg", "9740": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009740.jpg", "9742": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009742.jpg", "10309": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010309.jpg", "10346": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010346.jpg", "10353": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010353.jpg", "10404": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010404.jpg", "19872": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019872.jpg", "20973": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020973.jpg", "20980": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020980.jpg", "21071": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021071.jpg", "21119": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021119.jpg", "21127": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021127.jpg", "21704": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021704.jpg", "21758": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021758.jpg", "22080": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022080.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000954.jpg": "...appears. that: she made intentional efforts to avoid. detect...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001495.jpg": "...appears  that she: :made intentional. efforts to avoid detect...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001687.jpg": "...quished by souing and. intentional  himsele aisclosetl. is...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002604.jpg": "...e  erpretal ‘ion princl  intentional. see, ae, lasalle bank,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002655.jpg": "...or that the omission:was intentional. moreover, any:  retroac...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002661.jpg": "...iginal co-sponsors and.  intentional: “i ani pleased. that th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002827.jpg": "...tion claim  must allege ‘intentional discrimination by the ju...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002839.jpg": "...lack of evidence shouing intentional discrimination). therefo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002998.jpg": "...hings, “sexual. in  “the intentional. touching, ¢  ither dire...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003014.jpg": "..., e.g:,.\" » l7l p3d.at7 ‘intentional  tical advantage :  devi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003075.jpg": "...io § or ‘omissions: were intentional or de  erate, or were  k...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003661.jpg": "...roactivityprovision.was: intentional, his:statement as.to uwe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004161.jpg": "...lusion that agent: broun intentional.  “or recklessly misrepr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004726.jpg": "...delay,,:much. less an.  ‘intentional and deliberate delay:cau...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004796.jpg": "...‘in, that; hearing was  intentional.  the supreme court has....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005692.jpg": "...at.8 ([ms. maxwell] made intentional. efforts to: avoid detec...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007576.jpg": "...false imprisonment and. intentional  governmel  consultant t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008804.jpg": "...rely inadvertent:and not:intentional, united’  ee aoe lu, rt...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009032.jpg": "...wer was, inadvertent. or intentional, are simply factors to b...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009049.jpg": "...the  questionnaire were intentional. juror no: 5o went on.a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009051.jpg": "...or’no: 5o’s answers were intentional lies, or inadvertent  mi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009597.jpg": "...y make any shouitg of an intentional.  and. deliberate: delay...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009608.jpg": "...e.3d at 752 (requiring “intentional device” to gain, “tactic...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009609.jpg": "...due delay, much. less an intentional and deliberate delay cau...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009723.jpg": "...wer was, inadvertent. or intentional, are simply factors to b...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009740.jpg": "...the  questionnaire were intentional. juror no: 5o went on.a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009742.jpg": "...or’no: 5o’s answers were intentional lies, or inadvertent  mi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010309.jpg": "...t amaterial.question was intentional’ a a.niovantniay: introd...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010346.jpg": "...t; twas not:motivated by intentional deception. in, light of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010353.jpg": "...advertent mistake,” ‘not intentional deception.  explanatio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010404.jpg": "...to present evidence: of intentional. delay for'tactical adva...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019872.jpg": "...appears. that: she made intentional efforts to avoid. detect...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020973.jpg": "...t his nondisclosur ” not intentional.deeeption.  hearing er....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020980.jpg": "...rreet, does’  not evince intentional. deception or partiality...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021071.jpg": "...’s false statements were intentional, which. they clearly wer...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021119.jpg": "...the  m9,  provision was: intentional—that it did not merely’...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021127.jpg": "...his misstatements. were intentional. of some: 5o  i or  eale...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021704.jpg": "...xual contact” means “the intentional touching,  either direct...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021758.jpg": "...7, fn.239, &:fn.24o. the intentional excision. of this limiti...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022080.jpg": "...rge of pu rposeful ¢ and intentional action  states'v. rosenf..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "intentional" (40 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">954-954</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1495-1495</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1687-1687</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">2604-2604</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">2655-2655</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">2661-2661</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">2827-2827</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">2839-2839</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">2998-2998</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">3014-3014</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">3075-3075</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">3661-3661</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">4161-4161</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">4726-4726</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">4796-4796</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">5692-5692</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">7576-7576</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">8804-8804</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">9032-9032</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">9049-9051</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">9597-9597</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">9608-9609</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">9723-9723</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">9740-9742</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">10309-10309</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">10346-10346</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">10353-10353</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">10404-10404</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">19872-19872</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">20973-20973</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">20980-20980</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">21071-21071</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">21119-21119</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">21127-21127</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">21704-21704</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">21758-21758</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">22080-22080</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

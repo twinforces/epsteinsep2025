@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "acceptance"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 17, "end": 17, "pages": [17]}, {"start": 380, "end": 380, "pages": [380]}, {"start": 2988, "end": 2988, "pages": [2988]}, {"start": 3315, "end": 3315, "pages": [3315]}, {"start": 3325, "end": 3325, "pages": [3325]}, {"start": 3450, "end": 3450, "pages": [3450]}, {"start": 4437, "end": 4437, "pages": [4437]}, {"start": 4572, "end": 4572, "pages": [4572]}, {"start": 5495, "end": 5502, "pages": [5495, 5497, 5500, 5502]}, {"start": 5638, "end": 5638, "pages": [5638]}, {"start": 5904, "end": 5904, "pages": [5904]}, {"start": 6274, "end": 6274, "pages": [6274]}, {"start": 6457, "end": 6464, "pages": [6457, 6459, 6462, 6464]}, {"start": 6600, "end": 6600, "pages": [6600]}, {"start": 6829, "end": 6829, "pages": [6829]}, {"start": 7318, "end": 7318, "pages": [7318]}, {"start": 7335, "end": 7335, "pages": [7335]}, {"start": 8008, "end": 8008, "pages": [8008]}, {"start": 8025, "end": 8025, "pages": [8025]}, {"start": 11480, "end": 11481, "pages": [11480, 11481]}, {"start": 11501, "end": 11501, "pages": [11501]}, {"start": 11614, "end": 11615, "pages": [11614, 11615]}, {"start": 14842, "end": 14843, "pages": [14842, 14843]}, {"start": 14866, "end": 14866, "pages": [14866]}, {"start": 15015, "end": 15015, "pages": [15015]}, {"start": 15032, "end": 15032, "pages": [15032]}, {"start": 20775, "end": 20775, "pages": [20775]}, {"start": 21115, "end": 21115, "pages": [21115]}, {"start": 21453, "end": 21453, "pages": [21453]}, {"start": 21640, "end": 21640, "pages": [21640]}, {"start": 21653, "end": 21653, "pages": [21653]}, {"start": 21694, "end": 21694, "pages": [21694]}, {"start": 21810, "end": 21810, "pages": [21810]}, {"start": 21863, "end": 21863, "pages": [21863]}, {"start": 21893, "end": 21893, "pages": [21893]}, {"start": 21935, "end": 21935, "pages": [21935]}];
+        const pageToPath = {"17": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000017.jpg", "380": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000380.jpg", "2988": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002988.jpg", "3315": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003315.jpg", "3325": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003325.jpg", "3450": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003450.jpg", "4437": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004437.jpg", "4572": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004572.jpg", "5495": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005495.jpg", "5497": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005497.jpg", "5500": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005500.jpg", "5502": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005502.jpg", "5638": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005638.jpg", "5904": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005904.jpg", "6274": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006274.jpg", "6457": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006457.jpg", "6459": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006459.jpg", "6462": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006462.jpg", "6464": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006464.jpg", "6600": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006600.jpg", "6829": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006829.jpg", "7318": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007318.jpg", "7335": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007335.jpg", "8008": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008008.jpg", "8025": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008025.jpg", "11480": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011480.jpg", "11481": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011481.jpg", "11501": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011501.jpg", "11614": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011614.jpg", "11615": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011615.jpg", "14842": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014842.jpg", "14843": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014843.jpg", "14866": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014866.jpg", "15015": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015015.jpg", "15032": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015032.jpg", "20775": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020775.jpg", "21115": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021115.jpg", "21453": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021453.jpg", "21640": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021640.jpg", "21653": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021653.jpg", "21694": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021694.jpg", "21810": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021810.jpg", "21863": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021863.jpg", "21893": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021893.jpg", "21935": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021935.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000017.jpg": "...pt  3 dn ve enter. morte acceptance « , lites, 39l, f.3d,4ol...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000380.jpg": "...ey: gave him zero...  - “acceptance of responsibility, they...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002988.jpg": "...oting jn re enier, mori: acceptance’  os  co. see. lig: (hit...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003315.jpg": "...&  program as: a. co  a  acceptance into “he ‘work. lease 5...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003325.jpg": "...bject: to. the-court® #s acceptance ©) theagreement;  l9 see...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003450.jpg": "...s ont ile te: atend  the acceptance sofa a. ple a, aofe ouil...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004437.jpg": "...a] ay. 8  a  > the ‘wo  acceptance into “he ‘work. lease  n...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004572.jpg": "...s ont ile te: atend  the acceptance sofa a. ple a, aofe ouil...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005495.jpg": "...t 445, 448 (the poliee’s acceptance of mai withess’ statemer...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005497.jpg": "...s at 445, 448 (poliee’s, acceptance of mai  “barr: -delivers...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005500.jpg": "...f facilita  government’s acceptance of her ‘later . maxwell...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005502.jpg": "...ity andthe government’s. acceptance of her. differing testim...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005638.jpg": "...heory“has not gained any acceptance: (let: alone general. ac...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005904.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006274.jpg": "...l vit rape. indeed thie: acceptance of rape. and. g gen nere...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006457.jpg": "...t 445, 448 (the poliee’s acceptance of mai withess’ statemer...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006459.jpg": "...s at 445, 448 (poliee’s, acceptance of mai  “barr: -delivers...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006462.jpg": "...f facilita  government’s acceptance of her ‘later . maxwell...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006464.jpg": "...ity andthe government’s. acceptance of her. differing testim...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006600.jpg": "...heory“has not gained any acceptance: (let: alone general. ac...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006829.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007318.jpg": ".... may we go to page lil; acceptance of the term, sexual groo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007335.jpg": "...e lssues, a4  a  well as acceptance within the commun -- gen...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008008.jpg": ".... may we go to page lil; acceptance of the term, sexual groo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008025.jpg": "...se lssu6s, 4  a  well as acceptance within the commun -- gen...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011480.jpg": "...or prior to. the signed acceptance of' the compensation det...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011481.jpg": "...riofto or at the time of acceptance: ofia compensation deter...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011501.jpg": "...veeeived the claimant’s acceptance of the administrator's c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011614.jpg": "...d mot express remorse or acceptance of responsibility, ms. s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011615.jpg": "...eee er i ee oren et  and acceptance ge khesporsibility, t6...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014842.jpg": "...d mot express remorse or acceptance of responsibility, ms. s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014843.jpg": "...eee er i ee oren et  and acceptance ge khesporsibility, t6...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014866.jpg": "...pt  3 dn ve enter. morte acceptance « , lites, 39l, f.3d,4ol...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015015.jpg": "...usion. \"despite the wide acceptance of the rerm, sexual. gro...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015032.jpg": "...these issues, as well as acceptance within the commun == gen...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020775.jpg": "...roactive e inter. mortg: acceptance co., blc, sec.  kitig.,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021115.jpg": "...e also enterprise mortg. acceptance co., llc, securities. li...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021453.jpg": "...& notice of the  (d) the acceptance of a plea of: guiltysor...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021640.jpg": "...d not express remorse or acceptance of  and ms. maxwell toda...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021653.jpg": "...4o)  in.re eniter. mort. acceptance co. sec. litig.., 39l f....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021694.jpg": "...tory. jn re enter. mort. acceptance co. sec.  litig. (“enter...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021810.jpg": "...pt  3 dn ve enter. morte acceptance « , lites, 39l, f.3d,4ol...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021863.jpg": "...pt  3 dn ve enter. morte acceptance « , lites, 39l, f.3d,4ol...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021893.jpg": "...pt  3 dn ve enter. morte acceptance « , lites, 39l, f.3d,4ol...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021935.jpg": "...ce bond i is in effect.  acceptance: i, the defendant — and..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "acceptance" (45 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">17-17</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">380-380</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">2988-2988</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3315-3315</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">3325-3325</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">3450-3450</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">4437-4437</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">4572-4572</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">5495-5502</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">5638-5638</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">5904-5904</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">6274-6274</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">6457-6464</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">6600-6600</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">6829-6829</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">7318-7318</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">7335-7335</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">8008-8008</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">8025-8025</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">11480-11481</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">11501-11501</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">11614-11615</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">14842-14843</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">14866-14866</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">15015-15015</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">15032-15032</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">20775-20775</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">21115-21115</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">21453-21453</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">21640-21640</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">21653-21653</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">21694-21694</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">21810-21810</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">21863-21863</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">21893-21893</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">21935-21935</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

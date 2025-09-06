@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "separated"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 977, "end": 977, "pages": [977]}, {"start": 1302, "end": 1302, "pages": [1302]}, {"start": 1600, "end": 1600, "pages": [1600]}, {"start": 2286, "end": 2289, "pages": [2286, 2289]}, {"start": 2427, "end": 2427, "pages": [2427]}, {"start": 10550, "end": 10550, "pages": [10550]}, {"start": 11755, "end": 11755, "pages": [11755]}, {"start": 12403, "end": 12405, "pages": [12403, 12405]}, {"start": 14697, "end": 14697, "pages": [14697]}, {"start": 16200, "end": 16200, "pages": [16200]}, {"start": 17315, "end": 17315, "pages": [17315]}, {"start": 17991, "end": 17993, "pages": [17991, 17993]}, {"start": 19895, "end": 19895, "pages": [19895]}, {"start": 20220, "end": 20220, "pages": [20220]}, {"start": 20835, "end": 20835, "pages": [20835]}, {"start": 21671, "end": 21671, "pages": [21671]}, {"start": 21910, "end": 21910, "pages": [21910]}, {"start": 23362, "end": 23362, "pages": [23362]}, {"start": 23368, "end": 23372, "pages": [23368, 23372]}];
+        const pageToPath = {"977": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000977.jpg", "1302": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001302.jpg", "1600": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001600.jpg", "2286": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002286.jpg", "2289": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002289.jpg", "2427": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002427.jpg", "10550": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010550.jpg", "11755": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011755.jpg", "12403": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012403.jpg", "12405": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012405.jpg", "14697": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014697.jpg", "16200": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016200.jpg", "17315": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017315.jpg", "17991": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017991.jpg", "17993": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017993.jpg", "19895": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019895.jpg", "20220": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020220.jpg", "20835": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020835.jpg", "21671": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021671.jpg", "21910": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021910.jpg", "23362": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023362.jpg", "23368": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023368.jpg", "23372": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023372.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000977.jpg": "...e person would, do — she separated herself from  everyone s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001302.jpg": "...itis with the defendants:separated.ftom,theircounsel by a s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001600.jpg": "...le person would:do = she separated herself from  everyone:s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002286.jpg": "...larly, offenses:that are separated by; time and location, a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002289.jpg": "...‘each othe  offenses are separated by such. a significant t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002427.jpg": "...doun. into three fopies separated’ by’  dozens of pages of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010550.jpg": "...e, that her parents were separated, and that her mother  st...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011755.jpg": "...staff that was actually separated.  so, to answer youn que...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012403.jpg": "...2 ed  o. is that hallway separated #rdeit the stairease by...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012405.jpg": "...t they were hot -—- not  separated oy -- they were separate...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014697.jpg": "...s' note, they've clearly separated out  if, their minds the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016200.jpg": "...staff that was actually separated.  so, to answer youn que...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017315.jpg": "...s' note, they've clearly separated out  if, their minds the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017991.jpg": "...2 ed  o. is that hallway separated #rdeit the stairease by...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017993.jpg": "...t they were hot -—- not  separated oy -- they were separate...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019895.jpg": "...e person would, do — she separated herself from  everyone s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020220.jpg": "...itis with the defendants:separated.ftom,theircounsel by a s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020835.jpg": "...s\" note, they've clearly separated out.  chel & be new mes...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021671.jpg": "...e, that her parents were separated, and. that. her mother s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021910.jpg": "...c » where  are secur ely separated. from, the general inmat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023362.jpg": "...shu ap mate es securely separated  eliminate safety hazard...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023368.jpg": "...re inmates are: securely separated from the ‘general inmate...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023372.jpg": "...:inmates. are: securely’ separated from the ‘general inmate..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "separated" (23 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">977-977</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1302-1302</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1600-1600</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">2286-2289</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">2427-2427</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">10550-10550</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">11755-11755</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">12403-12405</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">14697-14697</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">16200-16200</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">17315-17315</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">17991-17993</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">19895-19895</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">20220-20220</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">20835-20835</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">21671-21671</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">21910-21910</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">23362-23362</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">23368-23372</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

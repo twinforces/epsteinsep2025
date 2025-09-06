@@ -1,0 +1,274 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "equipment"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1401, "end": 1401, "pages": [1401]}, {"start": 2561, "end": 2561, "pages": [2561]}, {"start": 2617, "end": 2617, "pages": [2617]}, {"start": 2910, "end": 2910, "pages": [2910]}, {"start": 3219, "end": 3219, "pages": [3219]}, {"start": 3238, "end": 3238, "pages": [3238]}, {"start": 3247, "end": 3251, "pages": [3247, 3248, 3249, 3251]}, {"start": 3262, "end": 3262, "pages": [3262]}, {"start": 3277, "end": 3277, "pages": [3277]}, {"start": 3288, "end": 3288, "pages": [3288]}, {"start": 3378, "end": 3380, "pages": [3378, 3379, 3380]}, {"start": 3509, "end": 3509, "pages": [3509]}, {"start": 4341, "end": 4341, "pages": [4341]}, {"start": 4360, "end": 4360, "pages": [4360]}, {"start": 4369, "end": 4373, "pages": [4369, 4370, 4373]}, {"start": 4384, "end": 4384, "pages": [4384]}, {"start": 4399, "end": 4399, "pages": [4399]}, {"start": 4410, "end": 4410, "pages": [4410]}, {"start": 4500, "end": 4502, "pages": [4500, 4501, 4502]}, {"start": 4631, "end": 4631, "pages": [4631]}, {"start": 6961, "end": 6961, "pages": [6961]}, {"start": 7848, "end": 7848, "pages": [7848]}, {"start": 9032, "end": 9032, "pages": [9032]}, {"start": 9122, "end": 9122, "pages": [9122]}, {"start": 9639, "end": 9639, "pages": [9639]}, {"start": 9723, "end": 9723, "pages": [9723]}, {"start": 9801, "end": 9801, "pages": [9801]}, {"start": 10309, "end": 10309, "pages": [10309]}, {"start": 11791, "end": 11791, "pages": [11791]}, {"start": 11803, "end": 11803, "pages": [11803]}, {"start": 11894, "end": 11898, "pages": [11894, 11895, 11898]}, {"start": 12326, "end": 12326, "pages": [12326]}, {"start": 12399, "end": 12399, "pages": [12399]}, {"start": 12407, "end": 12407, "pages": [12407]}, {"start": 13888, "end": 13888, "pages": [13888]}, {"start": 16512, "end": 16512, "pages": [16512]}, {"start": 17381, "end": 17381, "pages": [17381]}, {"start": 17393, "end": 17393, "pages": [17393]}, {"start": 17484, "end": 17488, "pages": [17484, 17485, 17488]}, {"start": 17914, "end": 17914, "pages": [17914]}, {"start": 17987, "end": 17987, "pages": [17987]}, {"start": 17995, "end": 17995, "pages": [17995]}, {"start": 19356, "end": 19356, "pages": [19356]}, {"start": 19379, "end": 19379, "pages": [19379]}, {"start": 20319, "end": 20319, "pages": [20319]}, {"start": 20955, "end": 20955, "pages": [20955]}, {"start": 21071, "end": 21071, "pages": [21071]}, {"start": 21190, "end": 21190, "pages": [21190]}, {"start": 21217, "end": 21218, "pages": [21217, 21218]}, {"start": 21246, "end": 21247, "pages": [21246, 21247]}, {"start": 21260, "end": 21260, "pages": [21260]}, {"start": 21377, "end": 21378, "pages": [21377, 21378]}, {"start": 21509, "end": 21509, "pages": [21509]}, {"start": 21761, "end": 21761, "pages": [21761]}, {"start": 22050, "end": 22050, "pages": [22050]}, {"start": 22059, "end": 22059, "pages": [22059]}, {"start": 23375, "end": 23375, "pages": [23375]}, {"start": 23449, "end": 23449, "pages": [23449]}, {"start": 23476, "end": 23477, "pages": [23476, 23477]}, {"start": 30650, "end": 30650, "pages": [30650]}];
+        const pageToPath = {"1401": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001401.jpg", "2561": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002561.jpg", "2617": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002617.jpg", "2910": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002910.jpg", "3219": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003219.jpg", "3238": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003238.jpg", "3247": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003247.jpg", "3248": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003248.jpg", "3249": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003249.jpg", "3251": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003251.jpg", "3262": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003262.jpg", "3277": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003277.jpg", "3288": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003288.jpg", "3378": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003378.jpg", "3379": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003379.jpg", "3380": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003380.jpg", "3509": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003509.jpg", "4341": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004341.jpg", "4360": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004360.jpg", "4369": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004369.jpg", "4370": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004370.jpg", "4373": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004373.jpg", "4384": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004384.jpg", "4399": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004399.jpg", "4410": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004410.jpg", "4500": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004500.jpg", "4501": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004501.jpg", "4502": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004502.jpg", "4631": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004631.jpg", "6961": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006961.jpg", "7848": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007848.jpg", "9032": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009032.jpg", "9122": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009122.jpg", "9639": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009639.jpg", "9723": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009723.jpg", "9801": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009801.jpg", "10309": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010309.jpg", "11791": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011791.jpg", "11803": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011803.jpg", "11894": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011894.jpg", "11895": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011895.jpg", "11898": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011898.jpg", "12326": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012326.jpg", "12399": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012399.jpg", "12407": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012407.jpg", "13888": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013888.jpg", "16512": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016512.jpg", "17381": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017381.jpg", "17393": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017393.jpg", "17484": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017484.jpg", "17485": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017485.jpg", "17488": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017488.jpg", "17914": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017914.jpg", "17987": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017987.jpg", "17995": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017995.jpg", "19356": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019356.jpg", "19379": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019379.jpg", "20319": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020319.jpg", "20955": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020955.jpg", "21071": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021071.jpg", "21190": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021190.jpg", "21217": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021217.jpg", "21218": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021218.jpg", "21246": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021246.jpg", "21247": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021247.jpg", "21260": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021260.jpg", "21377": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021377.jpg", "21378": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021378.jpg", "21509": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021509.jpg", "21761": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021761.jpg", "22050": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022050.jpg", "22059": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022059.jpg", "23375": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023375.jpg", "23449": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023449.jpg", "23476": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023476.jpg", "23477": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023477.jpg", "30650": "Prod 01_20250822/VOL00001/IMAGES/IMAGES011/DOJ-OGR-00030650.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001401.jpg": "...rs per day. lhe computer equipment: prouided remains:  ‘ina...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002561.jpg": "...g] th information to its equipment in.the ordinary course o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002617.jpg": "...cluding certain.computer equipment, inviolate until all of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002910.jpg": "...rs per day. lhe computer equipment: prouided remains:  ‘ina...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003219.jpg": "...thei missing: computer  equipment and. surveillance camera...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003238.jpg": "...emand for ‘the.computer: equipment that}had been taken:from...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003247.jpg": "...to. obtain the computer equipment missig from. epstein’s:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003248.jpg": "...to: obtain the; computer equipment.  an  s follouing the pl...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003249.jpg": "...obtainin x the computer equipment,  ‘reporting: that she l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003251.jpg": "...n-epsicin’ ‘ss. computer equipment.  regardless of exactly...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003262.jpg": "...tain. epstein’s computer equipment until after.acosta’s mec...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003277.jpg": "...oing to get the computer equipment.”  at 3:44 p.m. that aft...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003288.jpg": "...itig; ecftain. coniputer equipment, a would ‘be kept inwisl...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003378.jpg": "...session, of the computer equipment that was. removed from e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003379.jpg": "...stein’s missing computer equipment.  %  villafafia ke  pm...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003380.jpg": "...xper  dont to obtain the equipment....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003509.jpg": "...cluding certain computer equipment, anviolate untilall of t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004341.jpg": "...thei missing: computer ‘equipment and, surveillance camera...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004360.jpg": "...demand forthe, computer: equipment that/had.been.taken:from...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004369.jpg": "...‘to obtain the compiter equipment missing from. epstein’s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004370.jpg": "...arned that. the computer equipment was in the :  comments ....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004373.jpg": "...n-epsicin’ ‘ss. computer equipment.  regardless of exactly...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004384.jpg": "...tain. epstein’s computer equipment until after.acosta’s mec...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004399.jpg": "...ing to: get the computer equipment.”  split” d dtafi she ba...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004410.jpg": "...itig; eertain. coiptite: equipment,” would ‘be kept inwisla...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004500.jpg": "...session. of the computer equipment that was removed from ep...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004501.jpg": "...stein’s missing computer equipment.  villafafia ke  pm  sus...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004502.jpg": "...r obtaining the computer equipment: the } swill be susp ded...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004631.jpg": "...cluding certain computer‘equipment, inviolate until all of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006961.jpg": "...tion ol tin sor alo tl,  equipment at epstein’s institictio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007848.jpg": "...laboratory: supplies and.equipment:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009032.jpg": "...medonoug:  bae ts  pouer equipment, dnc. v  action in which...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009122.jpg": "...rials.” meedonough pouer equipment, inc. 'v. ‘greenwood, 46...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009639.jpg": "...cititig, medgneugh pouer equipment,  rreenwood, 464 u.s, 54...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009723.jpg": "...medonoug:  bae ts  pouer equipment, dnc. v  action in which...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009801.jpg": "...rials.” meedonough pouer equipment, inc. 'v. ‘greenwood, 46...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010309.jpg": "...s: 548,556 (l984)).!  l” equipment, in  he would have been...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011791.jpg": "...kame theater  and, audio equipment. he was an audiophile, s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011803.jpg": "...tiad  and, such, support equipment for the island. and tren...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011894.jpg": "...the latest audio/video  equipment. or home ‘theater equipm...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011895.jpg": "...uggage and install vides equipment?  a. yes.  l56 weht t6 g...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011898.jpg": "...iastalled this type of equipment in virtually all ge epst...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012326.jpg": "...you. knou, give camp:lng equipment ‘or siomeone else might...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012399.jpg": "...ere  £ all the  p stereo equipment, and hundreds. and hundy...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012407.jpg": "...oe  lading deor  stereo equipment right here.  outside of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013888.jpg": "...e gircumstanees. aid the equipment ls  ea sesd ied sy it he...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016512.jpg": "...e gircumstanees. aid the equipment ls  ea sesd ied sy it he...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017381.jpg": "...kame theater  and, audio equipment. he was an audiophile, s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017393.jpg": "...tiad  and, such, support equipment for the island. and tren...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017484.jpg": "...the latest audio/video  equipment. or home ‘theater equipm...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017485.jpg": "...uggage and install vides equipment?  a. yes.  l56 weht t6 g...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017488.jpg": "...iastalled this type of equipment in virtually all ge epst...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017914.jpg": "...you. knou, give camp:lng equipment ‘or siomeone else might...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017987.jpg": "...ere  £ all the  p stereo equipment, and hundreds. and hundy...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017995.jpg": "...oe  lading deor  stereo equipment right here.  outside of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019356.jpg": "...437 u.s. at 473; digital equipment corp. v. desktop direct,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019379.jpg": "...437 u.s. at 473; digital equipment corp. v. desktop direct,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020319.jpg": "...rs per day. lhe computer equipment: prouided remains:  ‘ina...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020955.jpg": "...ened by. medonough rouer equipment, inc. v.  greenwood,464...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021071.jpg": "...st under mcdonough pouer equipment, ine. v. greenwood, 464...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021190.jpg": "...to » obtain the erie ie equipment missing fr om  ni: oppo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021217.jpg": "...s  investigation  rated  equipment anid. § : ss “tipped off...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021218.jpg": "...er exited a a,  eomputer equipment from h - ected. thie sta...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021246.jpg": "...ing the:missing computer equipment. villafana’told that she...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021247.jpg": "...24  equipment: after: further communic...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021260.jpg": "...s. effort  ‘ss! computer equipment until after ‘acost ss ‘m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021377.jpg": "...ng compliter edi  iter equipment | as sa naka at  ake....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021378.jpg": "...g ¢ cer tain. n-compuler equipment, inviolate” until. the....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021509.jpg": "...cluding certain computer equipment, inviolate until all of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021761.jpg": "...system. mcdonough pouer equipment v. greenwood, 464 u.s. 5...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022050.jpg": "...ch, compuiter/electroni¢ equipment  av ane ve been asked'to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022059.jpg": "...rriails and no response. equipment’ was ordered to. confipe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023375.jpg": "...use of government office equipment, such as computers, “wil...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023449.jpg": "...de assorted networkin ng equipment anid wiring: teede d to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023476.jpg": "...d for replacement:camera equipment—the  a ests o —  closed...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023477.jpg": "...the latest software and equipment, and t had i additional...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES011/DOJ-OGR-00030650.jpg": "o-defendant name’  ‘equipment  synthoticis  lay"};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "equipment" (77 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1401-1401</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">2561-2561</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">2617-2617</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">2910-2910</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">3219-3219</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">3238-3238</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3247-3251</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">3262-3262</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">3277-3277</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">3288-3288</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">3378-3380</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">3509-3509</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">4341-4341</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">4360-4360</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">4369-4373</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">4384-4384</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">4399-4399</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">4410-4410</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">4500-4502</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">4631-4631</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">6961-6961</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">7848-7848</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">9032-9032</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">9122-9122</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">9639-9639</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">9723-9723</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">9801-9801</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">10309-10309</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">11791-11791</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">11803-11803</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">11894-11898</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">12326-12326</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">12399-12399</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">12407-12407</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">13888-13888</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">16512-16512</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">17381-17381</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">17393-17393</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">17484-17488</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">17914-17914</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">17987-17987</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">17995-17995</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">19356-19356</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">19379-19379</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">20319-20319</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(45, 0); return false;">20955-20955</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(46, 0); return false;">21071-21071</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(47, 0); return false;">21190-21190</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(48, 0); return false;">21217-21218</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(49, 0); return false;">21246-21247</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(50, 0); return false;">21260-21260</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(51, 0); return false;">21377-21378</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(52, 0); return false;">21509-21509</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(53, 0); return false;">21761-21761</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(54, 0); return false;">22050-22050</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(55, 0); return false;">22059-22059</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(56, 0); return false;">23375-23375</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(57, 0); return false;">23449-23449</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(58, 0); return false;">23476-23477</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(59, 0); return false;">30650-30650</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

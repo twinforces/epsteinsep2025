@@ -1,0 +1,238 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "evaluated"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1458, "end": 1458, "pages": [1458]}, {"start": 1806, "end": 1806, "pages": [1806]}, {"start": 3480, "end": 3480, "pages": [3480]}, {"start": 4097, "end": 4097, "pages": [4097]}, {"start": 4309, "end": 4309, "pages": [4309]}, {"start": 4602, "end": 4602, "pages": [4602]}, {"start": 4724, "end": 4724, "pages": [4724]}, {"start": 4856, "end": 4856, "pages": [4856]}, {"start": 5587, "end": 5587, "pages": [5587]}, {"start": 5789, "end": 5789, "pages": [5789]}, {"start": 5815, "end": 5815, "pages": [5815]}, {"start": 5987, "end": 5988, "pages": [5987, 5988]}, {"start": 6230, "end": 6230, "pages": [6230]}, {"start": 6250, "end": 6250, "pages": [6250]}, {"start": 6549, "end": 6549, "pages": [6549]}, {"start": 6714, "end": 6714, "pages": [6714]}, {"start": 6740, "end": 6740, "pages": [6740]}, {"start": 6912, "end": 6913, "pages": [6912, 6913]}, {"start": 7196, "end": 7197, "pages": [7196, 7197]}, {"start": 7215, "end": 7216, "pages": [7215, 7216]}, {"start": 7242, "end": 7242, "pages": [7242]}, {"start": 7265, "end": 7265, "pages": [7265]}, {"start": 7361, "end": 7362, "pages": [7361, 7362]}, {"start": 7396, "end": 7396, "pages": [7396]}, {"start": 7886, "end": 7887, "pages": [7886, 7887]}, {"start": 7905, "end": 7906, "pages": [7905, 7906]}, {"start": 7932, "end": 7932, "pages": [7932]}, {"start": 7955, "end": 7955, "pages": [7955]}, {"start": 8059, "end": 8059, "pages": [8059]}, {"start": 8912, "end": 8912, "pages": [8912]}, {"start": 10473, "end": 10473, "pages": [10473]}, {"start": 10582, "end": 10582, "pages": [10582]}, {"start": 10726, "end": 10726, "pages": [10726]}, {"start": 11243, "end": 11243, "pages": [11243]}, {"start": 11473, "end": 11482, "pages": [11473, 11478, 11481, 11482]}, {"start": 11491, "end": 11494, "pages": [11491, 11493, 11494]}, {"start": 12316, "end": 12316, "pages": [12316]}, {"start": 14893, "end": 14894, "pages": [14893, 14894]}, {"start": 14912, "end": 14913, "pages": [14912, 14913]}, {"start": 14939, "end": 14939, "pages": [14939]}, {"start": 14962, "end": 14962, "pages": [14962]}, {"start": 17904, "end": 17904, "pages": [17904]}, {"start": 19433, "end": 19433, "pages": [19433]}, {"start": 19636, "end": 19636, "pages": [19636]}, {"start": 19658, "end": 19658, "pages": [19658]}, {"start": 20376, "end": 20376, "pages": [20376]}, {"start": 21185, "end": 21185, "pages": [21185]}, {"start": 21486, "end": 21486, "pages": [21486]}];
+        const pageToPath = {"1458": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001458.jpg", "1806": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001806.jpg", "3480": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003480.jpg", "4097": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004097.jpg", "4309": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004309.jpg", "4602": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004602.jpg", "4724": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004724.jpg", "4856": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004856.jpg", "5587": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005587.jpg", "5789": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005789.jpg", "5815": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005815.jpg", "5987": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005987.jpg", "5988": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005988.jpg", "6230": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006230.jpg", "6250": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006250.jpg", "6549": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006549.jpg", "6714": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006714.jpg", "6740": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006740.jpg", "6912": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006912.jpg", "6913": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006913.jpg", "7196": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007196.jpg", "7197": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007197.jpg", "7215": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007215.jpg", "7216": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007216.jpg", "7242": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007242.jpg", "7265": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007265.jpg", "7361": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007361.jpg", "7362": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007362.jpg", "7396": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007396.jpg", "7886": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007886.jpg", "7887": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007887.jpg", "7905": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007905.jpg", "7906": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007906.jpg", "7932": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007932.jpg", "7955": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007955.jpg", "8059": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008059.jpg", "8912": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008912.jpg", "10473": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010473.jpg", "10582": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010582.jpg", "10726": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010726.jpg", "11243": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011243.jpg", "11473": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011473.jpg", "11478": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011478.jpg", "11481": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011481.jpg", "11482": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011482.jpg", "11491": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011491.jpg", "11493": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011493.jpg", "11494": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011494.jpg", "12316": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012316.jpg", "14893": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014893.jpg", "14894": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014894.jpg", "14912": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014912.jpg", "14913": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014913.jpg", "14939": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014939.jpg", "14962": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014962.jpg", "17904": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017904.jpg", "19433": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019433.jpg", "19636": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019636.jpg", "19658": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019658.jpg", "20376": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020376.jpg", "21185": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021185.jpg", "21486": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021486.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001458.jpg": "...tes e from, the mdc and. evaluated. the exple judge nathan....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001806.jpg": "...undercut the government  evaluated in the context.of the al...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003480.jpg": "...terms  4-4, l were  opr, evaluated ‘villafafia’s conduct in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004097.jpg": "...ry: that had never been. evaluated for brad.  material—or a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004309.jpg": "...ation.after'the: n  opr. evaluated. the: conduct; of cach,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004602.jpg": "...the:  4-4, l were  opr, evaluated ‘villafafia’s conduct in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004724.jpg": "...ri  rejected. this court evaluated, the defendant’s specula...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004856.jpg": "...mplaint; which would  be evaluated under an abuse-of-discre...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005587.jpg": "...nce or lack: of evidence evaluated. by: prosecutors :in. an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005789.jpg": "...ned, dr. rocchiovhas not evaluated.  any of the vietims int...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005815.jpg": "...the defense  itnesscs.  evaluated. any victims in this cas...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005987.jpg": "..._] co jevidenee: must be evaluated under rule 4o4(b).  seco...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005988.jpg": "..._—c—ci @widdece soul. be evaluated tinder rule 4o4(p). four...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006230.jpg": "...of the individual,  are evaluated” (ex. a at s}—are irrele...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006250.jpg": "...ions. dr. loftus has not evaluated any ofthe vietims in thi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006549.jpg": "...nce or lack: of evidence evaluated. by: prosecutors :in. an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006714.jpg": "...ned, dr. rocchiovhas not evaluated.  any of the vietims int...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006740.jpg": "...the defense  itnesscs.  evaluated. any victims in this cas...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006912.jpg": "..._] co jevidenee: must be evaluated under rule 4o4(b).  seco...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006913.jpg": "..._—c—ci @widdece soul. be evaluated tinder rule 4o4(p). four...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007196.jpg": "...d. sexual abuse have you evaluated and tredted in your care...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007197.jpg": "...ents  yeu've treated and evaluated who experienced childhoe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007215.jpg": "...ce, have you treated and evaluated  sexual abuse?  a, i kav...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007216.jpg": "...ensic practice, have you evaluated survivors of  childhood...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007242.jpg": "...tice, fave you treat and evaluated patients who belong to6...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007265.jpg": "...ce, have you treated and evaluated  patients who did not di...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007361.jpg": "...bmission: the claims are evaluated.per the protocol, which...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007362.jpg": "...n. these claims are then-evaluated based on.the: criteria.e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007396.jpg": "...states that: claims are evaluated.  depending on, whether...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007886.jpg": "...d. sexual abuse have you evaluated and tredted in your care...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007887.jpg": "...ents  yeu've treated and evaluated who experienced childhoe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007905.jpg": "...ce, have you treated and evaluated  sexual abuse?  a, i kav...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007906.jpg": "...ensic practice, have you evaluated survivors of  childhood...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007932.jpg": "...tice, fave you treat and evaluated patients who belong to6...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007955.jpg": "...ce, have you treated and evaluated  patients who did not di...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008059.jpg": "...tional account of hou he evaluated-minor  vietim=4, the def...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008912.jpg": "...arit?s motion  should be evaluated, as well. as ‘legal argu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010473.jpg": "...orensic psychiatrist who evaluated ms. maxwell throughout...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010582.jpg": "...court. to  was! abli  en evaluated.asunfounded,  eapp arent...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010726.jpg": "...morning, a  psychologist.evaluated ms. maxwell. and. determ...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011243.jpg": "...journal, here, has “beer evaluated, for brady material” (dk...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011473.jpg": "...uall claims, claims were evaluated.on.a. high!  factors. an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011478.jpg": "...individual claim will be evaluated separately: by the:  adm...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011481.jpg": "...on has been submited and evaluated by the administrator.  i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011482.jpg": "...rmiation  claims will be evaluated in the order in which th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011491.jpg": "...individual claim will be evaluated. separately by: the admi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011493.jpg": "...d that, information its  evaluated. by the administrator....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011494.jpg": "...and that information is evaluated by the  administrator....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012316.jpg": "...er, ha  ve you, treated  evaluated individuals. whe have ex...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014893.jpg": "...; have you. treated and  evaluated individuals whe have exp...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014894.jpg": "...ent's you've treated and evaluated who experienced childhoo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014912.jpg": "...ce, have you treated and evaluated patients who, have repor...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014913.jpg": "...ensic practice; nave you evaluated survivors’ of childhood....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014939.jpg": "...ices, have you treat and evaluated paklents who belong to h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014962.jpg": "...ce, nave you treated and evaluated  patients who did not di...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017904.jpg": "...er, ha  ve you, treated  evaluated individuals. whe have ex...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019433.jpg": "...judge preska could have evaluated, whether keeping the dep...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019636.jpg": "...correct legal standard, evaluated maxwell’s argument. that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019658.jpg": "...more apparent once it is evaluated in its full context: tha...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020376.jpg": "...tes e from, the mdc and. evaluated. the exple judge nathan....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021185.jpg": "...s and: conclusions:  opr evaluated. the conduct: of cach. s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021486.jpg": "...orr: evaluated the eonduet: of ‘each su..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "evaluated" (62 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1458-1458</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1806-1806</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">3480-3480</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">4097-4097</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">4309-4309</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">4602-4602</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">4724-4724</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">4856-4856</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">5587-5587</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">5789-5789</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">5815-5815</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">5987-5988</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">6230-6230</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">6250-6250</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">6549-6549</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">6714-6714</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">6740-6740</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">6912-6913</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">7196-7197</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">7215-7216</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">7242-7242</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">7265-7265</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">7361-7362</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">7396-7396</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">7886-7887</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">7905-7906</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">7932-7932</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">7955-7955</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">8059-8059</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">8912-8912</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">10473-10473</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">10582-10582</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">10726-10726</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">11243-11243</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">11473-11482</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">11491-11494</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">12316-12316</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">14893-14894</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">14912-14913</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">14939-14939</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">14962-14962</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">17904-17904</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">19433-19433</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">19636-19636</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">19658-19658</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(45, 0); return false;">20376-20376</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(46, 0); return false;">21185-21185</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(47, 0); return false;">21486-21486</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

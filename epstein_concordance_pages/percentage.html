@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "percentage"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 544, "end": 544, "pages": [544]}, {"start": 874, "end": 874, "pages": [874]}, {"start": 1284, "end": 1284, "pages": [1284]}, {"start": 2329, "end": 2329, "pages": [2329]}, {"start": 2777, "end": 2777, "pages": [2777]}, {"start": 3623, "end": 3640, "pages": [3623, 3624, 3625, 3630, 3633, 3635, 3637, 3639, 3640]}, {"start": 4830, "end": 4830, "pages": [4830]}, {"start": 6999, "end": 6999, "pages": [6999]}, {"start": 7271, "end": 7271, "pages": [7271]}, {"start": 7832, "end": 7832, "pages": [7832]}, {"start": 7961, "end": 7961, "pages": [7961]}, {"start": 9148, "end": 9148, "pages": [9148]}, {"start": 9827, "end": 9827, "pages": [9827]}, {"start": 11165, "end": 11165, "pages": [11165]}, {"start": 12411, "end": 12411, "pages": [12411]}, {"start": 12486, "end": 12486, "pages": [12486]}, {"start": 14032, "end": 14037, "pages": [14032, 14037]}, {"start": 14965, "end": 14968, "pages": [14965, 14967, 14968]}, {"start": 16656, "end": 16661, "pages": [16656, 16661]}, {"start": 17999, "end": 17999, "pages": [17999]}, {"start": 18074, "end": 18074, "pages": [18074]}, {"start": 20202, "end": 20202, "pages": [20202]}, {"start": 20484, "end": 20484, "pages": [20484]}, {"start": 21159, "end": 21159, "pages": [21159]}];
+        const pageToPath = {"544": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000544.jpg", "874": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000874.jpg", "1284": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001284.jpg", "2329": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002329.jpg", "2777": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002777.jpg", "3623": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003623.jpg", "3624": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003624.jpg", "3625": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003625.jpg", "3630": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003630.jpg", "3633": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003633.jpg", "3635": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003635.jpg", "3637": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003637.jpg", "3639": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003639.jpg", "3640": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003640.jpg", "4830": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004830.jpg", "6999": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006999.jpg", "7271": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007271.jpg", "7832": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007832.jpg", "7961": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007961.jpg", "9148": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009148.jpg", "9827": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009827.jpg", "11165": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011165.jpg", "12411": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012411.jpg", "12486": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012486.jpg", "14032": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014032.jpg", "14037": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014037.jpg", "14965": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014965.jpg", "14967": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014967.jpg", "14968": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014968.jpg", "16656": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016656.jpg", "16661": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016661.jpg", "17999": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017999.jpg", "18074": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018074.jpg", "20202": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020202.jpg", "20484": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020484.jpg", "21159": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021159.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000544.jpg": "....  and the fesponse, fhe percentage of feeidiwism  actually...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000874.jpg": "...unts. may: be a. small, percentage of the defendant's total...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001284.jpg": "...unts. may: be a. small, percentage of the defendant's total...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002329.jpg": "...entaye of the population’percentage of that group, arid 4 st...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002777.jpg": "...unts. may: be a. small, percentage of the defendant's total...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003623.jpg": "...of the  frican american percentage of the white: plains qua...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003624.jpg": "...ould have been only o.57 percentage, points, and the absolti...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003625.jpg": "...el, it  evident that the percentage: of  african americans a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003630.jpg": "...the: community is  3.69’ percentage points higher'than, thei...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003633.jpg": "...ns will  be withiti .ool percentage points of 85%. the more:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003635.jpg": "...‘percentage poits. less hispanic tha...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003637.jpg": "...panic pereentage by o,39 percentage points: on  sample ‘fram...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003639.jpg": "...ghtly decreased by’ o.l4 percentage points. (from. 8.76%  8....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003640.jpg": "...ied jury  wheel, is 2:58 percentage points |  . ls 2.59’ per...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004830.jpg": "...a lot of money, a large percentage of which went to her  rt...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006999.jpg": "...more ful saie  a langer percentage o£ the questo  questionn...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007271.jpg": "...e ae web cas  rate, what percentage, what is the prevalence...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007832.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007961.jpg": "...e ae web cas  rate, what percentage, what is the prevalence...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009148.jpg": "...ho make up:a significant percentage of the-prospec'  ry*pool...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009827.jpg": "...ho make up:a significant percentage of the-prospec'  ry*pool...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011165.jpg": "...on ordered. priority: or percentage totals ; o.oo o.oo oo re...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012411.jpg": "...ds gf times, about what. percentage of  the time were those...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012486.jpg": "...mernt?  o  ®. abot what. percentage of those people were fem...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014032.jpg": "...pful for yeu  to see the percentage. it's government exhibit...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014037.jpg": "...oing to move on from the percentage.  the gourt: oh, ekay. l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014965.jpg": "...'ll; you knou, a cerbain percentage of them will say yes. an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014967.jpg": "..., get, some idea of what percentage of people in various stu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014968.jpg": "...wn a ca: es  rate, what. percentage, what is the prewalence...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016656.jpg": "...pful for yeu  to see the percentage. it's government exhibit...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016661.jpg": "...oing to move on from the percentage.  the gourt: oh, ekay. l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017999.jpg": "...ds gf times, about what. percentage of  the time were those...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018074.jpg": "...mernt?  o  ®. abot what. percentage of those people were fem...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020202.jpg": "...unts. may: be a. small, percentage of the defendant's total...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020484.jpg": "...on ordered. priority: or percentage totals ; o.oo o.oo oo re...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021159.jpg": "...ion:ordered priority, or percentage  — ee ee  totals  oo  co..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "percentage" (36 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">544-544</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">874-874</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1284-1284</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">2329-2329</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">2777-2777</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">3623-3640</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">4830-4830</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">6999-6999</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">7271-7271</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">7832-7832</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">7961-7961</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">9148-9148</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">9827-9827</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">11165-11165</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">12411-12411</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">12486-12486</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">14032-14037</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">14965-14968</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">16656-16661</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">17999-17999</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">18074-18074</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">20202-20202</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">20484-20484</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">21159-21159</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

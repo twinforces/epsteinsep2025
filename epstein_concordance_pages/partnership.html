@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "partnership"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 947, "end": 947, "pages": [947]}, {"start": 1488, "end": 1488, "pages": [1488]}, {"start": 7619, "end": 7619, "pages": [7619]}, {"start": 7644, "end": 7644, "pages": [7644]}, {"start": 7833, "end": 7833, "pages": [7833]}, {"start": 7845, "end": 7845, "pages": [7845]}, {"start": 8497, "end": 8497, "pages": [8497]}, {"start": 8581, "end": 8581, "pages": [8581]}, {"start": 8661, "end": 8661, "pages": [8661]}, {"start": 8747, "end": 8747, "pages": [8747]}, {"start": 10381, "end": 10381, "pages": [10381]}, {"start": 14612, "end": 14612, "pages": [14612]}, {"start": 17233, "end": 17233, "pages": [17233]}, {"start": 19865, "end": 19865, "pages": [19865]}, {"start": 20998, "end": 20998, "pages": [20998]}, {"start": 27592, "end": 27592, "pages": [27592]}];
+        const pageToPath = {"947": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000947.jpg", "1488": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001488.jpg", "7619": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007619.jpg", "7644": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007644.jpg", "7833": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007833.jpg", "7845": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007845.jpg", "8497": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008497.jpg", "8581": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008581.jpg", "8661": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008661.jpg", "8747": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008747.jpg", "10381": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010381.jpg", "14612": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014612.jpg", "17233": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017233.jpg", "19865": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019865.jpg", "20998": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020998.jpg", "27592": "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027592.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000947.jpg": "...at ghislaine’ maxwell,.i partnership with jeffrey epstein; a-...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001488.jpg": "...ghislaine  maxiwell, in:partnership with jeffrey epstein, a....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007619.jpg": "...ce, twin cities security partnership, minneapolis; mn, ‘septe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007644.jpg": "...6: twin cities. security partnership, may l8, 2oo6 ameriprise...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007833.jpg": "...v. amli/bpmt toun square partnership retained by defendant  c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007845.jpg": "...ask. force (nyaftf) i in partnership: with various law: enfor...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008497.jpg": "...y. is a-kind of criminal partnership—an agreement: of two or...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008581.jpg": "...is a kitid of-eritinal, partnership—an. agreement of two. or...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008661.jpg": "...y. is a-kind of criminal partnership—an agreement: of two or...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008747.jpg": "...y. is a-kind of criminal partnership—an agreement: of two or...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010381.jpg": "...at 2848; atid the tight-partnership between the defendant an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014612.jpg": "...y is. a kind ef criminal partnership, an agreement of ewwo or...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017233.jpg": "...y is. a kind ef criminal partnership, an agreement of ewwo or...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019865.jpg": "...at ghislaine’ maxwell,.i partnership with jeffrey epstein; a-...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020998.jpg": "...at2848:. and theetight partnership: between the defendant a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES010/DOJ-OGR-00027592.jpg": "...48l. we apprecaite' your partnership --<thx  3o rx ta(s) @) c..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "partnership" (16 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">947-947</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1488-1488</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">7619-7619</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">7644-7644</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">7833-7833</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">7845-7845</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">8497-8497</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">8581-8581</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">8661-8661</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">8747-8747</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">10381-10381</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">14612-14612</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">17233-17233</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">19865-19865</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">20998-20998</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">27592-27592</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

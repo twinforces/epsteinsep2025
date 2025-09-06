@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "addiction"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 4959, "end": 4959, "pages": [4959]}, {"start": 5913, "end": 5913, "pages": [5913]}, {"start": 6838, "end": 6838, "pages": [6838]}, {"start": 7676, "end": 7676, "pages": [7676]}, {"start": 7701, "end": 7701, "pages": [7701]}, {"start": 8101, "end": 8101, "pages": [8101]}, {"start": 8117, "end": 8117, "pages": [8117]}, {"start": 8135, "end": 8135, "pages": [8135]}, {"start": 8160, "end": 8160, "pages": [8160]}, {"start": 10550, "end": 10550, "pages": [10550]}, {"start": 10566, "end": 10566, "pages": [10566]}, {"start": 10577, "end": 10577, "pages": [10577]}, {"start": 11565, "end": 11565, "pages": [11565]}, {"start": 14793, "end": 14793, "pages": [14793]}, {"start": 21591, "end": 21591, "pages": [21591]}, {"start": 21671, "end": 21671, "pages": [21671]}];
+        const pageToPath = {"4959": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004959.jpg", "5913": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005913.jpg", "6838": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006838.jpg", "7676": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007676.jpg", "7701": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007701.jpg", "8101": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008101.jpg", "8117": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008117.jpg", "8135": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008135.jpg", "8160": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008160.jpg", "10550": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010550.jpg", "10566": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010566.jpg", "10577": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010577.jpg", "11565": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011565.jpg", "14793": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014793.jpg", "21591": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021591.jpg", "21671": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021671.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004959.jpg": "...who has: this crazy sex: addiction. that: l can?t fulfill....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005913.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006838.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007676.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007701.jpg": "...f substance abuse heroin addiction  alcobiolis i  delirium...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008101.jpg": "...nited states,  (morphine addiction. at;time of trial, has....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008117.jpg": "...llou inquiry ‘into a.  , addiction, absent; any  influence...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008135.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008160.jpg": "...f substance abuse heroin addiction  alcobiolis i  delirium...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010550.jpg": "...r mother  struggled with addiction. (d-). “the defendant in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010566.jpg": "...eeded to: fuel, her drug addiction (tr. l528-3l, (l54-l), a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010577.jpg": "...n. fell deeper into drug addiction, and she has. experience...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011565.jpg": "...the momey ‘eon hen drug addiction.  = se  later, carolyn r...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014793.jpg": "...the momey ‘eon hen drug addiction.  = se  later, carolyn r...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021591.jpg": "...ea the morey for her rug addiction.  later, carolyn returne...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021671.jpg": "...mother strug- gled with addiction. (tr.l533-36). maxwell i..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "addiction" (16 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">4959-4959</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">5913-5913</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">6838-6838</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">7676-7676</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">7701-7701</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">8101-8101</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">8117-8117</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">8135-8135</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">8160-8160</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">10550-10550</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">10566-10566</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">10577-10577</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">11565-11565</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">14793-14793</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">21591-21591</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">21671-21671</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

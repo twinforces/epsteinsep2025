@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "omissions"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 2368, "end": 2368, "pages": [2368]}, {"start": 3074, "end": 3075, "pages": [3074, 3075]}, {"start": 3332, "end": 3332, "pages": [3332]}, {"start": 3455, "end": 3455, "pages": [3455]}, {"start": 3479, "end": 3480, "pages": [3479, 3480]}, {"start": 4454, "end": 4454, "pages": [4454]}, {"start": 4577, "end": 4577, "pages": [4577]}, {"start": 4601, "end": 4602, "pages": [4601, 4602]}, {"start": 4798, "end": 4798, "pages": [4798]}, {"start": 8510, "end": 8510, "pages": [8510]}, {"start": 8594, "end": 8594, "pages": [8594]}, {"start": 8674, "end": 8674, "pages": [8674]}, {"start": 8760, "end": 8760, "pages": [8760]}, {"start": 9055, "end": 9055, "pages": [9055]}, {"start": 9160, "end": 9160, "pages": [9160]}, {"start": 9746, "end": 9746, "pages": [9746]}, {"start": 9839, "end": 9839, "pages": [9839]}, {"start": 13220, "end": 13220, "pages": [13220]}, {"start": 18805, "end": 18805, "pages": [18805]}, {"start": 21455, "end": 21455, "pages": [21455]}, {"start": 21480, "end": 21480, "pages": [21480]}, {"start": 21770, "end": 21770, "pages": [21770]}];
+        const pageToPath = {"2368": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002368.jpg", "3074": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003074.jpg", "3075": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003075.jpg", "3332": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003332.jpg", "3455": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003455.jpg", "3479": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003479.jpg", "3480": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003480.jpg", "4454": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004454.jpg", "4577": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004577.jpg", "4601": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004601.jpg", "4602": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004602.jpg", "4798": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004798.jpg", "8510": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008510.jpg", "8594": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008594.jpg", "8674": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008674.jpg", "8760": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008760.jpg", "9055": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009055.jpg", "9160": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009160.jpg", "9746": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009746.jpg", "9839": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009839.jpg", "13220": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013220.jpg", "18805": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018805.jpg", "21455": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021455.jpg", "21480": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021480.jpg", "21770": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021770.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002368.jpg": "...leged m isstatements ‘or omissions. in the warrant: or-wire...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003074.jpg": "...e were “inaccuracies or  omissions” in the affidavit, (i) “...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003075.jpg": "...e misrepresentatio § or ‘omissions: were intentional or de...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003332.jpg": "...misleading statements or omissions that: are the cquivalent...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003455.jpg": "...is rule explains. that“  omissions: iat < are ‘the equivale...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003479.jpg": "...misleading statements or omissions s that  : that the atomy...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003480.jpg": "...he: rule ‘tee -couniz t; omissions made during’ ¢ ss ith t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004454.jpg": "...isleading statements or ‘omissions that: are the cquivalent...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004577.jpg": "...t rse ¢  explains. that“ omissions that’ 2 are, the, equiva...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004601.jpg": "...misleading statements or omissions s that  eriot [ing] aein...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004602.jpg": "...e but sues statements or omissions that are the  the lawyer...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004798.jpg": "...alleged.  falschoods or‘omissions were necessary to the is...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008510.jpg": "...rations, statements, and omissions of any member ofthe cons...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008594.jpg": "...tions, statenicnts, atid-omissions of any tiemberof the con...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008674.jpg": "...rations, statements, and omissions of any member ofthe cons...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008760.jpg": "...rations, statements, and omissions of any member ofthe cons...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009055.jpg": "...f cotirse, the material. omissions by juror 5o were not mad...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009160.jpg": "...g.a host of  ‘deliberate omissions by: a juror. 3l7 f. supp...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009746.jpg": "...f cotirse, the material. omissions by juror 5o were not mad...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009839.jpg": "...g.a host of  ‘deliberate omissions by: a juror. 3l7 f. supp...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013220.jpg": "...n't, think the theory of omissions works with respeet te th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018805.jpg": "...n't, think the theory of omissions works with respeet te th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021455.jpg": "...{ fact can depend onthe  omissions hat are statenient:shoul...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021480.jpg": "...r ‘edwards: or'that her. omissions were “the cquivalent o o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021770.jpg": "...y crime  itself. but his omissions during: voir dire presen..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "omissions" (25 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">2368-2368</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">3074-3075</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">3332-3332</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3455-3455</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">3479-3480</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">4454-4454</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">4577-4577</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">4601-4602</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">4798-4798</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">8510-8510</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">8594-8594</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">8674-8674</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">8760-8760</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">9055-9055</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">9160-9160</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">9746-9746</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">9839-9839</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">13220-13220</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">18805-18805</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">21455-21455</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">21480-21480</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">21770-21770</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

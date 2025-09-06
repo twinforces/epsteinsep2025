@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "charitable"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 2067, "end": 2067, "pages": [2067]}, {"start": 3345, "end": 3345, "pages": [3345]}, {"start": 5441, "end": 5442, "pages": [5441, 5442]}, {"start": 6408, "end": 6409, "pages": [6408, 6409]}, {"start": 6481, "end": 6481, "pages": [6481]}, {"start": 10460, "end": 10460, "pages": [10460]}, {"start": 14425, "end": 14425, "pages": [14425]}, {"start": 17046, "end": 17046, "pages": [17046]}];
+        const pageToPath = {"2067": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002067.jpg", "3345": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003345.jpg", "5441": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005441.jpg", "5442": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005442.jpg", "6408": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006408.jpg", "6409": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006409.jpg", "6481": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006481.jpg", "10460": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010460.jpg", "14425": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014425.jpg", "17046": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017046.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002067.jpg": "...‘were disbi ised for ihe charitable purposes inc. no persona...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003345.jpg": "...rparted good, deeds ind ‘charitable  ale nt ha in: the: left...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005441.jpg": "...sympathy, such, as her ‘charitable works or evidence of her...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005442.jpg": "...nsider the: defendant’s: charitable ‘activities, family hist...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006408.jpg": "...sympathy, such, as her ‘charitable works or evidence of her...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006409.jpg": "...nsider the: defendant’s: charitable ‘activities, family hist...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006481.jpg": "...nderstand  ee: (beyond. \"charitable works\" or “evidence of ‘...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010460.jpg": "...variety ‘non-profit. and charitable:  organizations. in. 2ol...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014425.jpg": "...epstein,  weren't simply charitable, wealthy people whe were...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017046.jpg": "...epstein,  weren't simply charitable, wealthy people whe were..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "charitable" (10 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">2067-2067</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">3345-3345</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">5441-5442</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">6408-6409</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">6481-6481</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">10460-10460</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">14425-14425</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">17046-17046</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

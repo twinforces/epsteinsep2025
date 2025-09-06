@@ -1,0 +1,223 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "appointed"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 407, "end": 407, "pages": [407]}, {"start": 435, "end": 435, "pages": [435]}, {"start": 449, "end": 449, "pages": [449]}, {"start": 475, "end": 475, "pages": [475]}, {"start": 787, "end": 787, "pages": [787]}, {"start": 1094, "end": 1094, "pages": [1094]}, {"start": 1130, "end": 1130, "pages": [1130]}, {"start": 1260, "end": 1260, "pages": [1260]}, {"start": 1293, "end": 1293, "pages": [1293]}, {"start": 1302, "end": 1302, "pages": [1302]}, {"start": 1967, "end": 1967, "pages": [1967]}, {"start": 2006, "end": 2006, "pages": [2006]}, {"start": 2114, "end": 2114, "pages": [2114]}, {"start": 2786, "end": 2786, "pages": [2786]}, {"start": 3206, "end": 3207, "pages": [3206, 3207]}, {"start": 3289, "end": 3289, "pages": [3289]}, {"start": 3409, "end": 3409, "pages": [3409]}, {"start": 4328, "end": 4329, "pages": [4328, 4329]}, {"start": 4411, "end": 4411, "pages": [4411]}, {"start": 4531, "end": 4531, "pages": [4531]}, {"start": 6050, "end": 6050, "pages": [6050]}, {"start": 6192, "end": 6192, "pages": [6192]}, {"start": 6265, "end": 6265, "pages": [6265]}, {"start": 7506, "end": 7506, "pages": [7506]}, {"start": 7673, "end": 7674, "pages": [7673, 7674]}, {"start": 7826, "end": 7826, "pages": [7826]}, {"start": 8082, "end": 8082, "pages": [8082]}, {"start": 8132, "end": 8133, "pages": [8132, 8133]}, {"start": 8805, "end": 8810, "pages": [8805, 8807, 8810]}, {"start": 9465, "end": 9465, "pages": [9465]}, {"start": 10144, "end": 10144, "pages": [10144]}, {"start": 11480, "end": 11480, "pages": [11480]}, {"start": 11497, "end": 11497, "pages": [11497]}, {"start": 14251, "end": 14251, "pages": [14251]}, {"start": 16874, "end": 16874, "pages": [16874]}, {"start": 20012, "end": 20012, "pages": [20012]}, {"start": 20048, "end": 20048, "pages": [20048]}, {"start": 20178, "end": 20178, "pages": [20178]}, {"start": 20211, "end": 20211, "pages": [20211]}, {"start": 20220, "end": 20220, "pages": [20220]}, {"start": 21204, "end": 21204, "pages": [21204]}, {"start": 21407, "end": 21407, "pages": [21407]}, {"start": 21960, "end": 21960, "pages": [21960]}];
+        const pageToPath = {"407": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000407.jpg", "435": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000435.jpg", "449": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000449.jpg", "475": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000475.jpg", "787": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000787.jpg", "1094": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001094.jpg", "1130": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001130.jpg", "1260": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001260.jpg", "1293": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001293.jpg", "1302": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001302.jpg", "1967": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001967.jpg", "2006": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002006.jpg", "2114": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002114.jpg", "2786": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002786.jpg", "3206": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003206.jpg", "3207": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003207.jpg", "3289": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003289.jpg", "3409": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003409.jpg", "4328": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004328.jpg", "4329": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004329.jpg", "4411": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004411.jpg", "4531": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004531.jpg", "6050": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006050.jpg", "6192": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006192.jpg", "6265": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006265.jpg", "7506": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007506.jpg", "7673": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007673.jpg", "7674": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007674.jpg", "7826": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007826.jpg", "8082": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008082.jpg", "8132": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008132.jpg", "8133": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008133.jpg", "8805": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008805.jpg", "8807": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008807.jpg", "8810": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008810.jpg", "9465": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009465.jpg", "10144": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010144.jpg", "11480": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011480.jpg", "11497": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011497.jpg", "14251": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014251.jpg", "16874": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016874.jpg", "20012": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020012.jpg", "20048": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020048.jpg", "20178": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020178.jpg", "20211": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020211.jpg", "20220": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020220.jpg", "21204": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021204.jpg", "21407": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021407.jpg", "21960": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021960.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000407.jpg": "...ether counsel should. be appointed for you, and to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000435.jpg": "...o supervision by a.court-appointed trustee = that collatera...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000449.jpg": "...supervision. by 4 court-appointed trustee — that collatera...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000475.jpg": "...e or ‘trustees: will be: appointed.to  other schedtile'the;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000787.jpg": "...e or ‘trustees: will be: appointed.to  other schedtile'the;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001094.jpg": "...e filings from the court=appointed  mediator in that case d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001130.jpg": "...as part of'a select team appointed by the u.k. government t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001260.jpg": "...to others who have’been appointed by. courts to oversee ‘f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001293.jpg": "...l. in two ionithis were  appointed. in september 2o2o and....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001302.jpg": "...rrent atorneys have been appointed, within. the past six :m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001967.jpg": "...e filings from the court=appointed  euibe the availability...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002006.jpg": "...as part of'a.select team.appointed by the u.k. government...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002114.jpg": "...ook silk? (ice. ‘was: is appointed queen’s counsel). he is...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002786.jpg": "...to others who have’been  appointed by. courts to oversee fi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003206.jpg": "...aleexarider acosta. was appointed interim. u. s. auomey fo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003207.jpg": "...nd i in. 2oo4 sloman was appointed.  lmlea a,  stein,  lly...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003289.jpg": "...t a special. master’ be: appointed. to sclect ‘the atorney:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003409.jpg": "...rney representative was. appointed. for the victims, she: p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004328.jpg": "..., alexarider acosta. was appointed interim. u. s. automey’...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004329.jpg": ".... in, ea 2oo4 sloman wae appointed.  as o fane ss  stein,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004411.jpg": "...t a special. master’ be: appointed. to sclect ‘the atorney:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004531.jpg": "...rney representative was. appointed. for the victims, she: p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006050.jpg": "...efendants. judge pauley .appointed:-bobbi  ‘c. sternheim, e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006192.jpg": "...r forensies and-has been appointed a \"special, master\" by t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006265.jpg": "...r forensies and-has been appointed a \"special, master\" by t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007506.jpg": "...r forensies and-has been appointed a \"special, master\" by t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007673.jpg": "...ndo — orlando magazine’  appointed, fellou, american psychi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007674.jpg": "...‘commission  appointed, f fellou, the american...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007826.jpg": "...or newly-elected and.ne  appointed j  y “  dges and justice...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008082.jpg": "...r forensies and-has been appointed a \"special, master\" by t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008132.jpg": "...ndo — orlando magazine’  appointed, fellou, american psychi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008133.jpg": "...‘commission  appointed, | fellou, the america i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008805.jpg": "...rd qualifies ‘for cotirt-appointed. ‘counsel. moreover, any...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008807.jpg": "...no..568, to offer court-appointed counsel to: the juror in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008810.jpg": "...‘wish.  to lave counsel. appointed. accordingly, the court...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009465.jpg": "...commission, 2oo9-_____ (appointed by. the public service a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010144.jpg": "...commission, 2oo9-_____ (appointed by. the public service a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011480.jpg": "...rson who has: been ‘duly appointed as the claimant's: legal...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011497.jpg": "...son who has: been, duly: appointed as the claimant’s legal...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014251.jpg": "...m! there was no gounsel appointed for  io]  s there were w...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016874.jpg": "...m! theyfe was no gounsel appointed for  io]  s there were w...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020012.jpg": "...e filings from the court=appointed  mediator in that case d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020048.jpg": "...as part of'a select team appointed by the u.k. government t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020178.jpg": "...to others who have’been appointed by. courts to oversee ‘f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020211.jpg": "...l. in two ionithis were  appointed. in september 2o2o and....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020220.jpg": "...rent atorrieys have been appointed. within.  the past six :...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021204.jpg": "...rua  west. palin bea  s$ appointed i anteti i vu: - atorne...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021407.jpg": "...o sup  epresentative was appointed for the vietims, she: pl...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021960.jpg": "...whether counsel shall be appointed for you, and  be  oe  de..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "appointed" (49 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">407-407</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">435-435</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">449-449</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">475-475</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">787-787</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">1094-1094</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">1130-1130</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">1260-1260</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">1293-1293</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">1302-1302</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">1967-1967</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">2006-2006</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">2114-2114</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">2786-2786</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">3206-3207</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">3289-3289</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">3409-3409</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">4328-4329</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">4411-4411</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">4531-4531</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">6050-6050</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">6192-6192</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">6265-6265</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">7506-7506</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">7673-7674</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">7826-7826</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">8082-8082</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">8132-8133</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">8805-8810</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">9465-9465</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">10144-10144</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">11480-11480</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">11497-11497</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">14251-14251</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">16874-16874</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">20012-20012</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">20048-20048</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">20178-20178</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">20211-20211</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">20220-20220</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">21204-21204</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">21407-21407</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">21960-21960</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

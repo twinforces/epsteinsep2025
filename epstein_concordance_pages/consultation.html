@@ -1,0 +1,241 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "consultation"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 309, "end": 309, "pages": [309]}, {"start": 536, "end": 536, "pages": [536]}, {"start": 1037, "end": 1037, "pages": [1037]}, {"start": 1534, "end": 1534, "pages": [1534]}, {"start": 1910, "end": 1910, "pages": [1910]}, {"start": 2540, "end": 2543, "pages": [2540, 2543]}, {"start": 2614, "end": 2614, "pages": [2614]}, {"start": 3184, "end": 3188, "pages": [3184, 3188]}, {"start": 3200, "end": 3200, "pages": [3200]}, {"start": 3264, "end": 3264, "pages": [3264]}, {"start": 3406, "end": 3406, "pages": [3406]}, {"start": 3442, "end": 3443, "pages": [3442, 3443]}, {"start": 3454, "end": 3454, "pages": [3454]}, {"start": 3460, "end": 3462, "pages": [3460, 3461, 3462]}, {"start": 3483, "end": 3491, "pages": [3483, 3487, 3491]}, {"start": 3506, "end": 3508, "pages": [3506, 3508]}, {"start": 3889, "end": 3889, "pages": [3889]}, {"start": 4306, "end": 4310, "pages": [4306, 4310]}, {"start": 4322, "end": 4322, "pages": [4322]}, {"start": 4371, "end": 4371, "pages": [4371]}, {"start": 4386, "end": 4386, "pages": [4386]}, {"start": 4528, "end": 4529, "pages": [4528, 4529]}, {"start": 4565, "end": 4565, "pages": [4565]}, {"start": 4576, "end": 4576, "pages": [4576]}, {"start": 4582, "end": 4584, "pages": [4582, 4583, 4584]}, {"start": 4605, "end": 4613, "pages": [4605, 4609, 4613]}, {"start": 4628, "end": 4630, "pages": [4628, 4630]}, {"start": 6152, "end": 6152, "pages": [6152]}, {"start": 7194, "end": 7194, "pages": [7194]}, {"start": 7206, "end": 7206, "pages": [7206]}, {"start": 7591, "end": 7591, "pages": [7591]}, {"start": 7687, "end": 7687, "pages": [7687]}, {"start": 7828, "end": 7828, "pages": [7828]}, {"start": 7884, "end": 7884, "pages": [7884]}, {"start": 7896, "end": 7896, "pages": [7896]}, {"start": 8146, "end": 8146, "pages": [8146]}, {"start": 8615, "end": 8615, "pages": [8615]}, {"start": 12320, "end": 12320, "pages": [12320]}, {"start": 14891, "end": 14891, "pages": [14891]}, {"start": 14903, "end": 14903, "pages": [14903]}, {"start": 17908, "end": 17908, "pages": [17908]}, {"start": 19955, "end": 19955, "pages": [19955]}, {"start": 21185, "end": 21186, "pages": [21185, 21186]}, {"start": 21262, "end": 21262, "pages": [21262]}, {"start": 21443, "end": 21443, "pages": [21443]}, {"start": 21462, "end": 21462, "pages": [21462]}, {"start": 21487, "end": 21491, "pages": [21487, 21491]}, {"start": 21508, "end": 21508, "pages": [21508]}, {"start": 23279, "end": 23279, "pages": [23279]}];
+        const pageToPath = {"309": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000309.jpg", "536": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000536.jpg", "1037": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001037.jpg", "1534": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001534.jpg", "1910": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001910.jpg", "2540": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002540.jpg", "2543": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002543.jpg", "2614": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002614.jpg", "3184": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003184.jpg", "3188": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003188.jpg", "3200": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003200.jpg", "3264": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003264.jpg", "3406": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003406.jpg", "3442": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003442.jpg", "3443": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003443.jpg", "3454": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003454.jpg", "3460": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003460.jpg", "3461": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003461.jpg", "3462": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003462.jpg", "3483": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003483.jpg", "3487": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003487.jpg", "3491": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003491.jpg", "3506": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003506.jpg", "3508": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003508.jpg", "3889": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003889.jpg", "4306": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004306.jpg", "4310": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004310.jpg", "4322": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004322.jpg", "4371": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004371.jpg", "4386": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004386.jpg", "4528": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004528.jpg", "4529": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004529.jpg", "4565": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004565.jpg", "4576": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004576.jpg", "4582": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004582.jpg", "4583": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004583.jpg", "4584": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004584.jpg", "4605": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004605.jpg", "4609": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004609.jpg", "4613": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004613.jpg", "4628": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004628.jpg", "4630": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004630.jpg", "6152": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006152.jpg", "7194": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007194.jpg", "7206": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007206.jpg", "7591": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007591.jpg", "7687": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007687.jpg", "7828": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007828.jpg", "7884": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007884.jpg", "7896": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007896.jpg", "8146": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008146.jpg", "8615": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008615.jpg", "12320": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012320.jpg", "14891": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014891.jpg", "14903": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014903.jpg", "17908": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017908.jpg", "19955": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019955.jpg", "21185": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021185.jpg", "21186": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021186.jpg", "21262": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021262.jpg", "21443": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021443.jpg", "21462": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021462.jpg", "21487": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021487.jpg", "21491": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021491.jpg", "21508": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021508.jpg", "23279": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00023279.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000309.jpg": "...cvra; and even if after consultation with, petitioners the un...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000536.jpg": "...ith  =a cpy = ae cp)  =  consultation of the department. of ju...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001037.jpg": "...s aeeuratee iff  tional  consultation with the agents, so l do...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001534.jpg": "...se, the court that after:consultation with: my:atorney i, will...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001910.jpg": "...iefing was aeeurdte iff  consultation with the agents, so i do...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002540.jpg": "...slba:  notification, and consultation. opr. receiv subjects, a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002543.jpg": "...government's g lae ok of consultation with the vietinis ‘be fo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002614.jpg": "...agencies, and after due consultation with the’ state: atomey'...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003184.jpg": "...slba:  notification. and consultation: opr r subjects, and sub...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003188.jpg": "...the:  5 that the lack of consultation was for the purpose  ge...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003200.jpg": "...i ng’ that:the: lack: of consultation  status of the federal-i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003264.jpg": "...with respect t fo im 4 l consultation and the  loo \"phsvinitia...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003406.jpg": "...dato  ban’s opinion that consultation  3. september: 6, 2oo5...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003442.jpg": "...iality:  sponse, and in. consultation, with usao management, v...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003443.jpg": "...guage concerning victim:-consultation,  :, “int eifctimstances...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003454.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003460.jpg": "...shing ‘that the lack of :consultation was.  during her opr int...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003461.jpg": "...aised the topi of victim consultation srith slontan: “the agen...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003462.jpg": "...pr includes the lack: of*consultation in. its criticism. of a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003483.jpg": "...the ‘benefits of victim, consultation were discussed. or consi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003487.jpg": "...t find evidence ls re of.consultation ni the lack of consultat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003491.jpg": "...et 'm: noti fication and consultation in addition, opr conduct...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003506.jpg": "...r) encies, and after due consultation with the state  atorney'...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003508.jpg": "...t, the united states, in-consultation. with and subject to the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003889.jpg": "...ies reflecting the us: 5 consultation with:the united. states:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004306.jpg": "...slba:  notification. and consultation: opr, reeei subjects, an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004310.jpg": "...t. -  e that the lack of consultation, was 6 for the, purpose...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004322.jpg": "...i ng’ that:the: lack: of consultation  status of the federal i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004371.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004386.jpg": "...he'tinie was that victim-consultation.was riot required tin ma...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004528.jpg": "...dato  ban’s opinion that consultation  nforms acosta,  onl ant...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004529.jpg": "...)”  re-chay ange ‘victim consultation, ‘but in his ‘view: the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004565.jpg": "...hould include reasonable consultation’ prior to. the  pa  rume...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004576.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004582.jpg": "...ishing ‘that the lack of consultation was.  during her opr int...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004583.jpg": "...aised the topi of victim consultation srith slonian: “the agen...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004584.jpg": "...pr includes the lack: of*consultation in. its criticism. of a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004605.jpg": "...the ‘benefits of victim. consultation were discussed. or  eonc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004609.jpg": "...t find evidence ls re of.consultation ni the lack of consultat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004613.jpg": "...et 'm: noti fication and consultation in addition, opr conduct...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004628.jpg": "...issenies, and after due consultation with the state:  smes. 3...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004630.jpg": "...t, the united states,.in‘consultation, ‘with .and ‘subject to...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006152.jpg": "...ll avitness wilhoutssuch.consultation.  avain, cheweightyou gi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007194.jpg": "...de?  a. 5 provide expert consultation, psychological, forensic...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007206.jpg": "...thical, issues to -- and consultation  to individuals whe requ...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007591.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007687.jpg": "...ffects on  survivors - a,consultation-liaison perspective ~ pa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007828.jpg": "...inion, ‘lestimony,. and ‘consultation  bozella-v. gounty: of d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007884.jpg": "...de?  a. 5 provide expert consultation, psychological, forensic...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007896.jpg": "...thical, issues to -- and consultation  to individuals whe requ...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008146.jpg": "...ffects on  survivors - a,consultation-liaison perspective ~ pa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008615.jpg": "...tioned about them. such, consultation helps conserve ‘your tim...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012320.jpg": "...s. through regular peer  consultation, talking with other coll...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014891.jpg": "...do?  a. i provide expert consultation; psychological; forensic...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014903.jpg": "...ethical issues to -- and consultation to individuals who xeque...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017908.jpg": "...s. through regular peer  consultation, talking with other coll...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019955.jpg": "...s aeeuratee iff  tional  consultation with the agents, so l do...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021185.jpg": "...unamibieuous: s ictim, “consultation © or | noi fication.  go...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021186.jpg": "...ence ‘that.the: lack: of consultation was forthe purpose  s. ‘...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021262.jpg": "...nme {  depa iment’  tim: consultation and ‘the  ademplate-upon...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021443.jpg": "...thei dismissed vi i  tim consultation  ease has  also: o speci...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021462.jpg": "...that l  was |  vietim n consultation. prior to when the npa....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021487.jpg": "...nonetheless, the lack of consultation was part: ‘ofta series f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021491.jpg": "...tiny notification. and consultation. in.addition, opr. condu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021508.jpg": "..., ‘th united states, in’ consultation. with arid, subject to t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00023279.jpg": "...hould include reasonable consultation an to. the  also specie..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "consultation" (66 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">309-309</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">536-536</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1037-1037</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">1534-1534</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">1910-1910</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">2540-2543</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">2614-2614</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">3184-3188</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">3200-3200</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">3264-3264</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">3406-3406</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">3442-3443</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">3454-3454</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">3460-3462</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">3483-3491</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">3506-3508</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">3889-3889</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">4306-4310</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">4322-4322</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">4371-4371</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">4386-4386</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">4528-4529</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">4565-4565</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">4576-4576</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">4582-4584</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">4605-4613</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">4628-4630</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">6152-6152</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">7194-7194</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">7206-7206</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">7591-7591</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">7687-7687</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">7828-7828</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">7884-7884</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">7896-7896</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">8146-8146</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">8615-8615</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">12320-12320</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">14891-14891</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">14903-14903</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">17908-17908</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">19955-19955</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">21185-21186</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">21262-21262</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">21443-21443</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(45, 0); return false;">21462-21462</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(46, 0); return false;">21487-21491</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(47, 0); return false;">21508-21508</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(48, 0); return false;">23279-23279</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

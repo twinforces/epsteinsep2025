@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "presidential"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 2327, "end": 2327, "pages": [2327]}, {"start": 2564, "end": 2564, "pages": [2564]}, {"start": 7204, "end": 7204, "pages": [7204]}, {"start": 7549, "end": 7549, "pages": [7549]}, {"start": 7614, "end": 7614, "pages": [7614]}, {"start": 7689, "end": 7689, "pages": [7689]}, {"start": 7821, "end": 7821, "pages": [7821]}, {"start": 7894, "end": 7894, "pages": [7894]}, {"start": 8148, "end": 8148, "pages": [8148]}, {"start": 9473, "end": 9473, "pages": [9473]}, {"start": 10152, "end": 10152, "pages": [10152]}, {"start": 14901, "end": 14901, "pages": [14901]}];
+        const pageToPath = {"2327": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002327.jpg", "2564": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002564.jpg", "7204": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007204.jpg", "7549": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007549.jpg", "7614": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007614.jpg", "7689": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007689.jpg", "7821": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007821.jpg", "7894": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007894.jpg", "8148": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008148.jpg", "9473": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009473.jpg", "10152": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010152.jpg", "14901": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014901.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002327.jpg": "...four'years, follouing; a presidential, election, andthe defend...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002564.jpg": "...cy related fo the l.97o: presidential election. in chile.. /d....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007204.jpg": "...art 6f what's called the presidential trid6, whith  consists o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007549.jpg": "...logical a tovidence, ri (presidential speaker) ; 6t annual for...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007614.jpg": "..., may: 35 l995  dietz ps presidential address: \"the quest for...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007689.jpg": "...ship: the new realities. presidential address., southern  hall...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007821.jpg": "...wary £  bush will’ lose-“presidential pouer’ c  religious mcca...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007894.jpg": "...art 6f what's called the presidential trid6, whith  consists o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008148.jpg": "...ship: the new realities. presidential address., southern  hall...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009473.jpg": "...o at: a25- (florida’ a’s presidential election:recount).  wi....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010152.jpg": "...o at: a25- (florida’ a’s presidential election:recount).  wi....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014901.jpg": "...art of what's called the presidential trie, which  consists of..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "presidential" (12 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">2327-2327</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">2564-2564</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">7204-7204</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">7549-7549</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">7614-7614</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">7689-7689</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">7821-7821</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">7894-7894</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">8148-8148</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">9473-9473</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">10152-10152</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">14901-14901</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

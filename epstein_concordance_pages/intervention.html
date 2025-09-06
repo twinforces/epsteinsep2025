@@ -1,0 +1,178 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "intervention"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 635, "end": 635, "pages": [635]}, {"start": 1418, "end": 1418, "pages": [1418]}, {"start": 1744, "end": 1744, "pages": [1744]}, {"start": 1871, "end": 1871, "pages": [1871]}, {"start": 2565, "end": 2565, "pages": [2565]}, {"start": 2704, "end": 2704, "pages": [2704]}, {"start": 3729, "end": 3729, "pages": [3729]}, {"start": 4932, "end": 4932, "pages": [4932]}, {"start": 5953, "end": 5953, "pages": [5953]}, {"start": 6878, "end": 6878, "pages": [6878]}, {"start": 7242, "end": 7242, "pages": [7242]}, {"start": 7677, "end": 7679, "pages": [7677, 7679]}, {"start": 7932, "end": 7932, "pages": [7932]}, {"start": 8136, "end": 8138, "pages": [8136, 8138]}, {"start": 8825, "end": 8825, "pages": [8825]}, {"start": 8909, "end": 8913, "pages": [8909, 8913]}, {"start": 8979, "end": 8987, "pages": [8979, 8981, 8984, 8987]}, {"start": 9000, "end": 9000, "pages": [9000]}, {"start": 9041, "end": 9041, "pages": [9041]}, {"start": 9059, "end": 9064, "pages": [9059, 9064]}, {"start": 9732, "end": 9732, "pages": [9732]}, {"start": 9750, "end": 9755, "pages": [9750, 9755]}, {"start": 14108, "end": 14108, "pages": [14108]}, {"start": 15061, "end": 15061, "pages": [15061]}, {"start": 16731, "end": 16731, "pages": [16731]}, {"start": 19448, "end": 19448, "pages": [19448]}, {"start": 20336, "end": 20336, "pages": [20336]}, {"start": 25007, "end": 25007, "pages": [25007]}];
+        const pageToPath = {"635": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000635.jpg", "1418": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001418.jpg", "1744": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001744.jpg", "1871": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001871.jpg", "2565": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002565.jpg", "2704": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002704.jpg", "3729": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003729.jpg", "4932": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004932.jpg", "5953": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005953.jpg", "6878": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006878.jpg", "7242": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007242.jpg", "7677": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007677.jpg", "7679": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007679.jpg", "7932": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007932.jpg", "8136": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008136.jpg", "8138": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008138.jpg", "8825": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008825.jpg", "8909": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008909.jpg", "8913": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008913.jpg", "8979": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008979.jpg", "8981": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008981.jpg", "8984": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008984.jpg", "8987": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008987.jpg", "9000": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009000.jpg", "9041": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009041.jpg", "9059": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009059.jpg", "9064": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009064.jpg", "9732": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009732.jpg", "9750": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009750.jpg", "9755": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009755.jpg", "14108": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014108.jpg", "15061": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015061.jpg", "16731": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016731.jpg", "19448": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019448.jpg", "20336": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020336.jpg", "25007": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00025007.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000635.jpg": "...epstein was found dead.  intervention in eriminal maters “have...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001418.jpg": "...se, there needs to be an intervention. if the court is not pre...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001744.jpg": "...fense counscl. may: seek intervention. by the court. the defen...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001871.jpg": "...se maters without: court intervention. we  ly  oat kes ne .  c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002565.jpg": "...e:  subpoena or opposing intervention and. modification.of the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002704.jpg": "...bpoena, requiring court, intervention; and it would be impossi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003729.jpg": "...nited intervention filedib  tak fe peed i a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004932.jpg": "...stated ‘that:permissive intervention is the proper method for...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005953.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006878.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007242.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007677.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007679.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007932.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008136.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008138.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008825.jpg": "...unsealing. /d:, finally, intervention “for the limited,purpose...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008909.jpg": "...nd:the defendant .oppose:intervention.. the  defendant’s motio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008913.jpg": "...to: sipport  a juror’ ‘s intervention when he-will possibly b...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008979.jpg": "...ted jatiuary lo,2o22.  n intervention respeetfull  wherefore:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008981.jpg": "...uestionnaires......8  3. intervention. in criminal. trials may...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008984.jpg": "...o a possib  the merits.  intervention are satisfied, ere. addi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008987.jpg": "...ination. dd., at 9l.  3, intervention in criminal trials. may...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009000.jpg": ".... juror.5o°s motion. for:intervention and. discovery: have bee...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009041.jpg": "...t- -cvent suggestion. of intervention, people gct very confide...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009059.jpg": "...t. precedent  ‘supports. intervention by interested third part...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009064.jpg": "...not  o; 5o’s motion, fer intervention.  ial documents” and-unt...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009732.jpg": "...t- -cvent suggestion. of intervention, people gct very confide...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009750.jpg": "...t. precedent  ‘supports. intervention by interested third part...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009755.jpg": "...not  o; 5o’s motion, fer intervention.  ial documents” and-unt...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014108.jpg": "...‘except. to ask to have intervention of  the marshals to brin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015061.jpg": "...kes. no position on, the intervention of. msw media. ;  aine m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016731.jpg": "...‘except. to ask to have intervention of  the marshals to brin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019448.jpg": "...vernment?s leter in an. “intervention”  ‘framework, which;woul...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020336.jpg": "...se, there needs to be an intervention. if the court is not pre...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00025007.jpg": ""};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "intervention" (36 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">635-635</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1418-1418</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1744-1744</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">1871-1871</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">2565-2565</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">2704-2704</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3729-3729</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">4932-4932</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">5953-5953</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">6878-6878</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">7242-7242</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">7677-7679</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">7932-7932</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">8136-8138</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">8825-8825</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">8909-8913</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">8979-8987</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">9000-9000</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">9041-9041</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">9059-9064</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">9732-9732</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">9750-9755</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">14108-14108</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">15061-15061</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">16731-16731</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">19448-19448</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">20336-20336</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">25007-25007</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

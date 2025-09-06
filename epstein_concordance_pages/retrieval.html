@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "retrieval"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 7263, "end": 7263, "pages": [7263]}, {"start": 7491, "end": 7491, "pages": [7491]}, {"start": 7515, "end": 7517, "pages": [7515, 7516, 7517]}, {"start": 7953, "end": 7953, "pages": [7953]}, {"start": 8330, "end": 8331, "pages": [8330, 8331]}, {"start": 11185, "end": 11185, "pages": [11185]}, {"start": 11641, "end": 11642, "pages": [11641, 11642]}, {"start": 13981, "end": 13987, "pages": [13981, 13982, 13984, 13987]}, {"start": 14546, "end": 14546, "pages": [14546]}, {"start": 14960, "end": 14960, "pages": [14960]}, {"start": 16605, "end": 16611, "pages": [16605, 16606, 16608, 16611]}, {"start": 17167, "end": 17167, "pages": [17167]}];
+        const pageToPath = {"7263": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007263.jpg", "7491": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007491.jpg", "7515": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007515.jpg", "7516": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007516.jpg", "7517": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007517.jpg", "7953": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007953.jpg", "8330": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008330.jpg", "8331": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008331.jpg", "11185": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011185.jpg", "11641": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011641.jpg", "11642": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011642.jpg", "13981": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013981.jpg", "13982": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013982.jpg", "13984": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013984.jpg", "13987": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013987.jpg", "14546": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014546.jpg", "14960": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014960.jpg", "16605": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016605.jpg", "16606": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016606.jpg", "16608": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016608.jpg", "16611": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016611.jpg", "17167": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017167.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007263.jpg": "...then later available for retrieval at. the time of recall....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007491.jpg": "...storage,, retention, and retrieval, of memories. alo ong wi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007515.jpg": "...ete  computer”  (l 97l). retrieval of words. from long-term...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007516.jpg": "...n. memory: structure and retrieval over the course of _inst...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007517.jpg": "...2.  loftus, ee, (l975). retrieval: fioms semantic memory:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007953.jpg": "...then later available for retrieval at. the time of recall....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008330.jpg": "...ecument.  2  storage and retrieval of digital decuments and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008331.jpg": "...posees to talk about the retrieval of metadata from some of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011185.jpg": "...es to talk; about: the:  retrieval. of metadata from sonic...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011641.jpg": "...ecument.  2  storage and retrieval of digital decuments and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011642.jpg": "...posees to talk about the retrieval of metadata from some of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013981.jpg": "...stify. these ane acts of retrieval where somebody is trying...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013982.jpg": "...here gan be many acts of retrieval. so fhere gan be a long...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013984.jpg": "...qo. nou, going to 'the retrieval stage --  a. retention....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013987.jpg": "...e er ere  at the tame of retrieval when ‘you're answering q...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014546.jpg": "...e information, and  the  retrieval. and, post-event informa...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014960.jpg": "...then later available for retrieval at the time of yeeall.....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016605.jpg": "...stify. these ane acts of retrieval where somebody is trying...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016606.jpg": "...here gan be many acts of retrieval. so fhere gan be a long...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016608.jpg": "...qo. nou, going to 'the retrieval stage --  a. retention....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016611.jpg": "...e er ere  at the tame of retrieval when ‘you're answering q...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017167.jpg": "...e information, and  the  retrieval. and, post-event informa..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "retrieval" (22 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">7263-7263</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">7491-7491</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">7515-7517</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">7953-7953</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">8330-8331</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">11185-11185</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">11641-11642</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">13981-13987</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">14546-14546</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">14960-14960</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">16605-16611</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">17167-17167</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

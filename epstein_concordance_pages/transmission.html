@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "transmission"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1523, "end": 1523, "pages": [1523]}, {"start": 2132, "end": 2132, "pages": [2132]}, {"start": 2382, "end": 2382, "pages": [2382]}, {"start": 2447, "end": 2447, "pages": [2447]}, {"start": 7171, "end": 7171, "pages": [7171]}, {"start": 11522, "end": 11522, "pages": [11522]}, {"start": 14750, "end": 14750, "pages": [14750]}, {"start": 15321, "end": 15321, "pages": [15321]}, {"start": 15358, "end": 15358, "pages": [15358]}, {"start": 15382, "end": 15382, "pages": [15382]}, {"start": 15392, "end": 15392, "pages": [15392]}, {"start": 15398, "end": 15398, "pages": [15398]}, {"start": 15407, "end": 15407, "pages": [15407]}, {"start": 15422, "end": 15422, "pages": [15422]}, {"start": 19196, "end": 19196, "pages": [19196]}, {"start": 19226, "end": 19226, "pages": [19226]}, {"start": 20431, "end": 20431, "pages": [20431]}, {"start": 20649, "end": 20649, "pages": [20649]}, {"start": 20668, "end": 20668, "pages": [20668]}, {"start": 21548, "end": 21548, "pages": [21548]}, {"start": 23849, "end": 23849, "pages": [23849]}];
+        const pageToPath = {"1523": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001523.jpg", "2132": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002132.jpg", "2382": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002382.jpg", "2447": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002447.jpg", "7171": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007171.jpg", "11522": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011522.jpg", "14750": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014750.jpg", "15321": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015321.jpg", "15358": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015358.jpg", "15382": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015382.jpg", "15392": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015392.jpg", "15398": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015398.jpg", "15407": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015407.jpg", "15422": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015422.jpg", "19196": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019196.jpg", "19226": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019226.jpg", "20431": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020431.jpg", "20649": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020649.jpg", "20668": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020668.jpg", "21548": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021548.jpg", "23849": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023849.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001523.jpg": "...ts), and community-based transmission has been. confirmed. nat...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002132.jpg": "...ting state follouing'the transmission ofthe  extradition. requ...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002382.jpg": "...ls identified, belou via/transmission of notices  of eleetroni...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002447.jpg": "...ls identified, belou via/transmission of notices  of eleetroni...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007171.jpg": "...ex facilitate the speedy transmission, of the mater, ms, maxwe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011522.jpg": "...en t received by a later transmission date of june 26, 2o22 a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014750.jpg": "...en t received by a later transmission date of june 26, 2o22 a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015321.jpg": "...--\"rur: return manager. transmission: fee fedex: ‘signature!...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015358.jpg": "...--\"rur: return manager. transmission: fee fedex: ‘signature!...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015382.jpg": "...--\"rur: return manager. transmission: fee fedex: ‘signature!...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015392.jpg": "...--\"rur: return manager. transmission: fee fedex: ‘signature!...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015398.jpg": "...--\"rur: return manager. transmission: fee fedex: ‘signature!...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015407.jpg": "...--\"rur: return manager. transmission: fee fedex: ‘signature!...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015422.jpg": "...--\"rur: return manager. transmission: fee fedex: ‘signature!...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019196.jpg": "...ts), and community-based transmission has’ been confirmed.*  m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019226.jpg": "...ts), and community-based transmission has’ been confirmed.*  m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020431.jpg": "...372. l) (jw) (entered:  ‘transmission  —————— saws mee  l ter...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020649.jpg": "...a ae  * ore  o372472o2l ‘transmission of notice of:appeal. and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020668.jpg": "...6/l5/2o2  o6/l.6/2o2.]  ‘transmission of usga, mandate to the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021548.jpg": "...n. i recetved by a later transmission cate  of june 26, 2o22 a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023849.jpg": "...er ee ea ee he  is:soon  transmission:..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "transmission" (21 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1523-1523</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">2132-2132</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">2382-2382</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">2447-2447</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">7171-7171</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">11522-11522</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">14750-14750</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">15321-15321</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">15358-15358</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">15382-15382</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">15392-15392</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">15398-15398</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">15407-15407</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">15422-15422</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">19196-19196</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">19226-19226</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">20431-20431</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">20649-20649</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">20668-20668</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">21548-21548</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">23849-23849</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

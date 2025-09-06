@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "comparison"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1325, "end": 1325, "pages": [1325]}, {"start": 1999, "end": 1999, "pages": [1999]}, {"start": 2324, "end": 2330, "pages": [2324, 2329, 2330]}, {"start": 2821, "end": 2821, "pages": [2821]}, {"start": 2831, "end": 2831, "pages": [2831]}, {"start": 3159, "end": 3159, "pages": [3159]}, {"start": 3765, "end": 3770, "pages": [3765, 3768, 3770]}, {"start": 3991, "end": 3991, "pages": [3991]}, {"start": 5637, "end": 5637, "pages": [5637]}, {"start": 5791, "end": 5791, "pages": [5791]}, {"start": 6599, "end": 6599, "pages": [6599]}, {"start": 6716, "end": 6716, "pages": [6716]}, {"start": 7209, "end": 7209, "pages": [7209]}, {"start": 7899, "end": 7899, "pages": [7899]}, {"start": 9198, "end": 9198, "pages": [9198]}, {"start": 9877, "end": 9877, "pages": [9877]}, {"start": 10575, "end": 10575, "pages": [10575]}, {"start": 11246, "end": 11246, "pages": [11246]}, {"start": 11308, "end": 11308, "pages": [11308]}, {"start": 12467, "end": 12467, "pages": [12467]}, {"start": 14906, "end": 14906, "pages": [14906]}, {"start": 18055, "end": 18055, "pages": [18055]}, {"start": 20242, "end": 20242, "pages": [20242]}, {"start": 21735, "end": 21735, "pages": [21735]}];
+        const pageToPath = {"1325": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001325.jpg", "1999": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001999.jpg", "2324": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002324.jpg", "2329": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002329.jpg", "2330": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002330.jpg", "2821": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002821.jpg", "2831": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002831.jpg", "3159": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003159.jpg", "3765": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003765.jpg", "3768": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003768.jpg", "3770": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003770.jpg", "3991": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003991.jpg", "5637": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005637.jpg", "5791": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005791.jpg", "6599": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006599.jpg", "6716": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006716.jpg", "7209": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007209.jpg", "7899": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007899.jpg", "9198": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009198.jpg", "9877": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009877.jpg", "10575": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010575.jpg", "11246": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011246.jpg", "11308": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011308.jpg", "12467": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012467.jpg", "14906": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014906.jpg", "18055": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018055.jpg", "20242": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020242.jpg", "21735": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021735.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001325.jpg": "...also rejected maxwell’s:comparison. to certain other high-p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001999.jpg": "...ll‘u,s: media. coverage, comparison, |  “bill cosby:  d 7 er...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002324.jpg": "...ly. underrepresented. by comparison. the government thus  vi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002329.jpg": "...ivision. the appropriate comparison. here is ‘therefore’betw...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002330.jpg": "...s used ‘as the point: of comparison, the percent of'both bla...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002821.jpg": "...method of. statistical. comparison is the “absolute: dispar...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002831.jpg": "...nic  american jurors. in comparison to their demographics in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003159.jpg": "...ant’s  apples-to-oranges comparison of the whi  ‘manhatan. *...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003765.jpg": "...relevant “community” fer comparison purposes is the manhatan...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003768.jpg": "...s court, the appropriate comparison ‘population for  ‘purpos...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003770.jpg": "...‘bermeasured against the-comparison.community‘is the: white...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003991.jpg": "...n november &, 2o2l... b. comparison of the si and's2 indictm...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005637.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005791.jpg": "...e afi apples and oranges comparison... .. any other contenti...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006599.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006716.jpg": "...e afi apples and oranges comparison... .. any other contenti...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007209.jpg": "...tion. ihere's been some  comparison in the literature, a sig...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007899.jpg": "...tion. ihere's been some  comparison in the literature, a sig...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009198.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009877.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010575.jpg": "...course, there can. be:no comparison between ‘the :defendant—...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011246.jpg": "...ntends  roduce at trial, comparison, of onc  she pala on tit...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011308.jpg": "...new.mexico state law: in comparison to. the facts clicited....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012467.jpg": "...need an s6f=thee=reeord comparison beecause we've dealt. wi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014906.jpg": "...significant. atiount of comparison to strategies that are b...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018055.jpg": "...need an s6f=thee=reeord comparison beecause we've dealt. wi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020242.jpg": "...also rejected maxwell’s:comparison. to certain other high-p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021735.jpg": "...rue regarding maxwell's. comparison of counts two and four:..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "comparison" (28 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1325-1325</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1999-1999</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">2324-2330</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">2821-2821</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">2831-2831</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">3159-3159</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3765-3770</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">3991-3991</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">5637-5637</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">5791-5791</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">6599-6599</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">6716-6716</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">7209-7209</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">7899-7899</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">9198-9198</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">9877-9877</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">10575-10575</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">11246-11246</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">11308-11308</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">12467-12467</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">14906-14906</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">18055-18055</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">20242-20242</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">21735-21735</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

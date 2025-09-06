@@ -1,0 +1,232 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "intervene"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 741, "end": 743, "pages": [741, 743]}, {"start": 1767, "end": 1767, "pages": [1767]}, {"start": 1811, "end": 1811, "pages": [1811]}, {"start": 2135, "end": 2135, "pages": [2135]}, {"start": 2364, "end": 2364, "pages": [2364]}, {"start": 2527, "end": 2527, "pages": [2527]}, {"start": 2537, "end": 2537, "pages": [2537]}, {"start": 2564, "end": 2564, "pages": [2564]}, {"start": 2878, "end": 2878, "pages": [2878]}, {"start": 3018, "end": 3018, "pages": [3018]}, {"start": 3041, "end": 3041, "pages": [3041]}, {"start": 3292, "end": 3292, "pages": [3292]}, {"start": 3363, "end": 3363, "pages": [3363]}, {"start": 3509, "end": 3509, "pages": [3509]}, {"start": 4473, "end": 4473, "pages": [4473]}, {"start": 4485, "end": 4485, "pages": [4485]}, {"start": 5179, "end": 5179, "pages": [5179]}, {"start": 5883, "end": 5883, "pages": [5883]}, {"start": 6705, "end": 6705, "pages": [6705]}, {"start": 6808, "end": 6808, "pages": [6808]}, {"start": 8814, "end": 8816, "pages": [8814, 8816]}, {"start": 8824, "end": 8831, "pages": [8824, 8825, 8829, 8831]}, {"start": 8841, "end": 8845, "pages": [8841, 8843, 8845]}, {"start": 8909, "end": 8913, "pages": [8909, 8910, 8913]}, {"start": 8978, "end": 8990, "pages": [8978, 8979, 8981, 8983, 8985, 8986, 8987, 8990]}, {"start": 8997, "end": 8998, "pages": [8997, 8998]}, {"start": 9004, "end": 9004, "pages": [9004]}, {"start": 9059, "end": 9062, "pages": [9059, 9060, 9062]}, {"start": 9163, "end": 9167, "pages": [9163, 9165, 9166, 9167]}, {"start": 9537, "end": 9538, "pages": [9537, 9538]}, {"start": 9695, "end": 9695, "pages": [9695]}, {"start": 9750, "end": 9753, "pages": [9750, 9751, 9753]}, {"start": 9842, "end": 9846, "pages": [9842, 9844, 9845, 9846]}, {"start": 15058, "end": 15058, "pages": [15058]}, {"start": 19395, "end": 19395, "pages": [19395]}, {"start": 19433, "end": 19434, "pages": [19433, 19434]}, {"start": 19447, "end": 19448, "pages": [19447, 19448]}, {"start": 19578, "end": 19578, "pages": [19578]}, {"start": 19641, "end": 19641, "pages": [19641]}, {"start": 19655, "end": 19655, "pages": [19655]}, {"start": 19662, "end": 19666, "pages": [19662, 19666]}, {"start": 20533, "end": 20533, "pages": [20533]}, {"start": 20567, "end": 20567, "pages": [20567]}, {"start": 20715, "end": 20715, "pages": [20715]}, {"start": 21290, "end": 21290, "pages": [21290]}, {"start": 21349, "end": 21349, "pages": [21349]}];
+        const pageToPath = {"741": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000741.jpg", "743": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000743.jpg", "1767": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001767.jpg", "1811": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001811.jpg", "2135": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002135.jpg", "2364": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002364.jpg", "2527": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002527.jpg", "2537": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002537.jpg", "2564": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002564.jpg", "2878": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002878.jpg", "3018": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003018.jpg", "3041": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003041.jpg", "3292": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003292.jpg", "3363": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003363.jpg", "3509": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003509.jpg", "4473": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004473.jpg", "4485": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004485.jpg", "5179": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005179.jpg", "5883": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005883.jpg", "6705": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006705.jpg", "6808": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006808.jpg", "8814": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008814.jpg", "8816": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008816.jpg", "8824": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008824.jpg", "8825": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008825.jpg", "8829": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008829.jpg", "8831": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008831.jpg", "8841": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008841.jpg", "8843": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008843.jpg", "8845": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008845.jpg", "8909": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008909.jpg", "8910": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008910.jpg", "8913": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008913.jpg", "8978": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008978.jpg", "8979": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008979.jpg", "8981": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008981.jpg", "8983": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008983.jpg", "8985": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008985.jpg", "8986": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008986.jpg", "8987": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008987.jpg", "8990": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008990.jpg", "8997": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008997.jpg", "8998": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008998.jpg", "9004": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009004.jpg", "9059": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009059.jpg", "9060": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009060.jpg", "9062": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009062.jpg", "9163": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009163.jpg", "9165": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009165.jpg", "9166": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009166.jpg", "9167": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009167.jpg", "9537": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009537.jpg", "9538": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009538.jpg", "9695": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009695.jpg", "9750": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009750.jpg", "9751": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009751.jpg", "9753": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009753.jpg", "9842": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009842.jpg", "9844": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009844.jpg", "9845": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009845.jpg", "9846": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009846.jpg", "15058": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015058.jpg", "19395": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019395.jpg", "19433": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019433.jpg", "19434": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019434.jpg", "19447": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019447.jpg", "19448": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019448.jpg", "19578": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019578.jpg", "19641": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019641.jpg", "19655": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019655.jpg", "19662": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019662.jpg", "19666": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019666.jpg", "20533": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020533.jpg", "20567": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020567.jpg", "20715": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020715.jpg", "21290": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021290.jpg", "21349": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021349.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000741.jpg": "...rt denies the motion to: intervene but will take into consi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000743.jpg": "...w media has stariding fo intervene in this case forthe foll...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001767.jpg": "...e government: is re to: ‘intervene in. civil ‘cases and. se...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001811.jpg": "...call the:proseeutors to intervene. the prosecutors agreed...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002135.jpg": "...of extradition.can only intervene after'the end of the  ju...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002364.jpg": "...tial giuffre.  smoved,to intervene in the civil case and, t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002527.jpg": "...government moved to intervene, representing to magistr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002537.jpg": "...stantial  ‘permited. to. intervene in the li ne verilieless...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002564.jpg": "...292. without seeking to intervene; and without serving a,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002878.jpg": "...he court and/or move to: intervene:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003018.jpg": "...., it  would:not move to intervene.” (jd. at l9), seting th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003041.jpg": "...y general’s. motion, ‘to intervene:to modify sealing orders...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003292.jpg": "...at [the usao] would. not intervene with, the state atomey’s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003363.jpg": "...had. t agreed ) not. to intervene with the state  ati did,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003509.jpg": "...aw his pending motion to intervene: and to quash. certain,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004473.jpg": "...ra epssinor than a auiy  intervene dt toe  line proses ulio...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004485.jpg": "...had. t agreed ) not. to intervene with the state  he: did,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005179.jpg": "...d states  the motion to ‘intervene is: sacetams  cerns penc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005883.jpg": "...mine  dat in approp late intervene to: stop  ming: aets sho...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006705.jpg": "...city press atid amin to-intervene in criminal proceedings...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006808.jpg": "...mine  dat in approp late intervene to: stop  ming: aets sho...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008814.jpg": "...s submited a. motion. to intervene and:to be:provided a, co...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008816.jpg": "...on juror 5o’s request fo intervene ‘and, to be’provided.a,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008824.jpg": "...hat: they be:permited to intervene: in the above-captioned....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008825.jpg": "...ited to  ay a siena mnt  intervene for the linited purpose...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008829.jpg": "...:forth. in those:  abc's intervene, which according;to this...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008831.jpg": "...uror no. 5o’s tiotion to intervene....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008841.jpg": ".... juror:5o?s motion. to. intervene, and to‘unseal the juror...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008843.jpg": "...:forth. in those:  abc's intervene, which according;to this...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008845.jpg": "...uror no. 5o’s tiotion to intervene....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008909.jpg": "...of juror 5o°s  motion to intervene. both the'government and...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008910.jpg": "...uror 5o°s motion, to intervene, houever, will be:  meth...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008913.jpg": "...i. = stiror 5o motion to intervene  ‘the: court is also: in...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008978.jpg": "...o grant him the right-to intervene’ in the above-capti  the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008979.jpg": "...in support of motion to intervene,  by todd a. spodek, esq...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008981.jpg": "...a. juror 5o’s request to intervene veseeee ecceevunsececsec...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008983.jpg": "...anting him the-right to ‘intervene in.this action, ‘under ‘...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008985.jpg": "...y allouing juror 5o. to: intervene in this: action, this: c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008986.jpg": "...allouing juror ‘5o to:intervene will  the interests, of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008987.jpg": "...alloued.  the press: to:intervene in.criminal. cases to. a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008990.jpg": "...t grant his riotion to  ‘intervene....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008997.jpg": "...l, basis for juror.5o to intervene ‘in this...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008998.jpg": "...d git. 2oo8) (motion. to intervene to assert the public's f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009004.jpg": "...-no.,5o ‘has no right to intervene: .  a; juror’no. 5o lack...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009059.jpg": "....  . 5o lias no right to intervene,  wl. juror:  a. juror n...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009060.jpg": "...for juror ‘no. 5o to ‘intervene in this mater. this:is n...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009062.jpg": "..., support of  motion. to intervene. and for release of seal...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009163.jpg": "...or 5o. filed a motion to intervene and _.a supporting:  mme...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009165.jpg": "...need not be permited to: intervene or be  .» at: least;not...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009166.jpg": "...ike:juror 5o°s motion to intervene and.  the supporting mem...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009167.jpg": "...uror 5o°s oun. motion.to intervene will.interfere with.juro...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009537.jpg": "...has filed a ‘motion fo ‘intervene, and to obtain 4 copy of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009538.jpg": "...juror’ 5o’s motion. to  intervene, whieh the parties have...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009695.jpg": "...-no.,5o ‘has no right to intervene: .  a; juror’no. 5o lack...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009750.jpg": "....  . 5o lias no right to intervene,  wl. juror:  a. juror n...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009751.jpg": "...for juror ‘no. 5o to ‘intervene in this mater. this:is n...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009753.jpg": "..., support of  motion. to intervene. and for release of seal...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009842.jpg": "...or 5o. filed a motion to intervene and _.a supporting:  mme...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009844.jpg": "...need not be permited to: intervene or be  .» at: least;not...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009845.jpg": "...ike:juror 5o°s motion to intervene and.  the supporting mem...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009846.jpg": "...uror 5o°s oun. motion.to intervene will.interfere with.juro...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015058.jpg": "...gelmayer, district judg  intervene, which addresses the sco...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019395.jpg": "...it would have‘ moved to intervene:in the civil...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019433.jpg": "...overnment itselfmoved to intervene and to stay all proceedi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019434.jpg": "...ent should have moved to intervene.  a  ‘he dey eposi tio n...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019447.jpg": "...ent, requesting icave to intervene inthis  the court from a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019448.jpg": "...ent has ‘sought leave to intervene ‘in the action: (see9/4/...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019578.jpg": "...e government: is re to: ‘intervene in. civil ‘cases and. se...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019641.jpg": "...riment hav- ing moved to'intervene.and stay the proceedings...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019655.jpg": "...ernment has hot moved to intervene in gruffre  ». maxwell,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019662.jpg": "...artindell: by seeking to intervene in the:civil case or by...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019666.jpg": "...fense of its.decision to intervene in, doe'v. indyke, no. 2...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020533.jpg": "...2l,  be a el ree reed]  ‘intervene:  (signed by judge aliso...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020567.jpg": "...sition and,  ‘motion to \"intervene, both the governmen sand...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020715.jpg": "...oes  ‘a pomerantz, and.7 intervene document filed’ by usa,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021290.jpg": "...osta:  jsao] would :not. intervene with ‘the: state ( this:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021349.jpg": "...ie ¢  the case, as: eps  intervene  {a sentence: oo: “pr ba..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "intervene" (77 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">741-743</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1767-1767</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1811-1811</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">2135-2135</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">2364-2364</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">2527-2527</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">2537-2537</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">2564-2564</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">2878-2878</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">3018-3018</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">3041-3041</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">3292-3292</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">3363-3363</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">3509-3509</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">4473-4473</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">4485-4485</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">5179-5179</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">5883-5883</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">6705-6705</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">6808-6808</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">8814-8816</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">8824-8831</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">8841-8845</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">8909-8913</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">8978-8990</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">8997-8998</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">9004-9004</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">9059-9062</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">9163-9167</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">9537-9538</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">9695-9695</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">9750-9753</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">9842-9846</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">15058-15058</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">19395-19395</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">19433-19434</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">19447-19448</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">19578-19578</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">19641-19641</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">19655-19655</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">19662-19666</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">20533-20533</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">20567-20567</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">20715-20715</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">21290-21290</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(45, 0); return false;">21349-21349</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

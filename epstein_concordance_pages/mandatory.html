@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "mandatory"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 25, "end": 25, "pages": [25]}, {"start": 1867, "end": 1867, "pages": [1867]}, {"start": 3397, "end": 3397, "pages": [3397]}, {"start": 3588, "end": 3588, "pages": [3588]}, {"start": 4519, "end": 4519, "pages": [4519]}, {"start": 4749, "end": 4749, "pages": [4749]}, {"start": 4767, "end": 4768, "pages": [4767, 4768]}, {"start": 7688, "end": 7688, "pages": [7688]}, {"start": 8147, "end": 8147, "pages": [8147]}, {"start": 9118, "end": 9118, "pages": [9118]}, {"start": 9146, "end": 9150, "pages": [9146, 9148, 9150]}, {"start": 9212, "end": 9212, "pages": [9212]}, {"start": 9825, "end": 9829, "pages": [9825, 9827, 9829]}, {"start": 9891, "end": 9891, "pages": [9891]}, {"start": 10304, "end": 10304, "pages": [10304]}, {"start": 10349, "end": 10354, "pages": [10349, 10354]}, {"start": 11606, "end": 11606, "pages": [11606]}, {"start": 11616, "end": 11616, "pages": [11616]}, {"start": 14834, "end": 14834, "pages": [14834]}, {"start": 14844, "end": 14844, "pages": [14844]}, {"start": 14874, "end": 14874, "pages": [14874]}, {"start": 15041, "end": 15041, "pages": [15041]}, {"start": 20969, "end": 20975, "pages": [20969, 20974, 20975]}, {"start": 21642, "end": 21642, "pages": [21642]}, {"start": 21662, "end": 21662, "pages": [21662]}, {"start": 21673, "end": 21673, "pages": [21673]}, {"start": 21717, "end": 21717, "pages": [21717]}, {"start": 21723, "end": 21724, "pages": [21723, 21724]}, {"start": 21768, "end": 21772, "pages": [21768, 21772]}, {"start": 21818, "end": 21818, "pages": [21818]}, {"start": 21856, "end": 21856, "pages": [21856]}, {"start": 21871, "end": 21871, "pages": [21871]}, {"start": 21901, "end": 21901, "pages": [21901]}, {"start": 22006, "end": 22006, "pages": [22006]}, {"start": 22017, "end": 22017, "pages": [22017]}, {"start": 23367, "end": 23367, "pages": [23367]}, {"start": 23469, "end": 23474, "pages": [23469, 23474]}, {"start": 24348, "end": 24348, "pages": [24348]}];
+        const pageToPath = {"25": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000025.jpg", "1867": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001867.jpg", "3397": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003397.jpg", "3588": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003588.jpg", "4519": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004519.jpg", "4749": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004749.jpg", "4767": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004767.jpg", "4768": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004768.jpg", "7688": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007688.jpg", "8147": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008147.jpg", "9118": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009118.jpg", "9146": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009146.jpg", "9148": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009148.jpg", "9150": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009150.jpg", "9212": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009212.jpg", "9825": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009825.jpg", "9827": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009827.jpg", "9829": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009829.jpg", "9891": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009891.jpg", "10304": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010304.jpg", "10349": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010349.jpg", "10354": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010354.jpg", "11606": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011606.jpg", "11616": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011616.jpg", "14834": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014834.jpg", "14844": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014844.jpg", "14874": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014874.jpg", "15041": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015041.jpg", "20969": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020969.jpg", "20974": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020974.jpg", "20975": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020975.jpg", "21642": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021642.jpg", "21662": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021662.jpg", "21673": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021673.jpg", "21717": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021717.jpg", "21723": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021723.jpg", "21724": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021724.jpg", "21768": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021768.jpg", "21772": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021772.jpg", "21818": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021818.jpg", "21856": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021856.jpg", "21871": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021871.jpg", "21901": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021901.jpg", "22006": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022006.jpg", "22017": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022017.jpg", "23367": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023367.jpg", "23469": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023469.jpg", "23474": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023474.jpg", "24348": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00024348.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000025.jpg": "...sentencing guidelines.as mandatory, fails to consider the [...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001867.jpg": "...: 8o:  not xt subject to mandatory testing, with s some: >...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003397.jpg": "...the usao’s vietim  mandatory office-w ‘de training on...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003588.jpg": "...which would obviously be mandatory and. mr. epstein would m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004519.jpg": "...nual  the usao’s vietim  mandatory office-w ‘de training. o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004749.jpg": "...rime carries a statutory mandatory mirmimum sentence of  fi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004767.jpg": "...and so i conclude that a mandatory  = ae ese s dat ox  am r...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004768.jpg": "...nd. i. conelude that the mandatory filtatium seatence meets...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007688.jpg": "...e: the physician’s role. mandatory madn less, halifax medic...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008147.jpg": "...e: the physician’s role. mandatory madn less, halifax medic...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009118.jpg": "...:not so great:as to make mandatory a presumption.of bias.”...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009146.jpg": "...circumstances where''a. ‘mandatory:  presumption of bias: m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009148.jpg": "...t.:does not hold, that a mandatory. prestiniption of bias a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009150.jpg": "...7.. this doctrine of “i  mandatory: a, presumption, o  “clo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009212.jpg": ".... abuse was subject toa “mandatory” challenge for cause bas...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009825.jpg": "...circumstances where''a. ‘mandatory:  presumption of bias: m...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009827.jpg": "...t.:does not hold, that a mandatory. prestiniption of bias a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009829.jpg": "...7.. this doctrine of “i  mandatory: a, presumption, o  “clo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009891.jpg": ".... abuse was subject toa “mandatory” challenge for cause bas...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010304.jpg": "...‘to make''a. finding of mandatory,  implied bias, arid the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010349.jpg": "...uoting ferrey, l28 f3da  mandatory: a, presumption of  ‘the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010354.jpg": "...abuse was subject fo.a, ‘mandatory’ challenge forcause:  ba...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011606.jpg": "...udgient...  count six ds mandatory resti.tutdon, but, the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011616.jpg": "...special  conditions, and mandatory conditions of supervised...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014834.jpg": "...udgient...  count six ds mandatory resti.tutdon, but, the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014844.jpg": "...special  conditions, and mandatory conditions of supervised...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00014874.jpg": "...sentencing guidelines.as mandatory, fails to consider the [...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015041.jpg": "...ances;  reassignment. is mandatory: ‘therefore, and fo expe...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020969.jpg": "...to make.  =  granting:  mandatory a presumption.of. bias.”...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020974.jpg": "...abuse was subject to. a “mandatory” challenge for cause,  e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020975.jpg": "...urt  99  ‘that call, for‘mandatory-  explained, “[s]uch cas...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021642.jpg": "...entence  conditions, and mandatory conditions. of supervise...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021662.jpg": "...75o,ooo. fine and a $3oo mandatory specral assess: ‘ment,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021673.jpg": "...‘$75o,ooo fine anda $3oo mandatory: special assessment.  th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021717.jpg": "...ot so great as to:  make mandatory:a presumption. of bias.”...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021723.jpg": "...e circumstances where .a mandatory’ presumption of bias app...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021724.jpg": "...uation that e¢all[s] for mandatory remoyal.” (a.349 (quotin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021768.jpg": "...t so great: as ‘to. make:mandatory a presumption of bias.\"...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021772.jpg": "...e a presumption of bias  mandatory. jorres at 43, 47. in yo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021818.jpg": "...sentencing guidelines.as mandatory, fails to consider the [...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021856.jpg": "...75o,ooo fine and, a.$3oo mandatory special,  l. the npa bet...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021871.jpg": "...sentencing guidelines.as mandatory, fails to consider the [...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021901.jpg": "...sentencing guidelines.as mandatory, fails to consider the [...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022006.jpg": "...wo years. he l5 facing a mandatory.  life sentence, so l do...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022017.jpg": "...- cramigval case with no mandatory jail —- gounsel;, sit. d...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023367.jpg": "...staff failed to conduct: mandatory rounds and. inmate count...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023469.jpg": "...conduct: mandatory rounds:and inmate:counts...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023474.jpg": "...aff's failure to conduct mandatory: rounds: and la jol i  t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00024348.jpg": "...noo)  sws unie wes  pped:mandatory=chec!  ss  ee tee pers a..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "mandatory" (49 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">25-25</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1867-1867</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">3397-3397</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3588-3588</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">4519-4519</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">4749-4749</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">4767-4768</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">7688-7688</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">8147-8147</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">9118-9118</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">9146-9150</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">9212-9212</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">9825-9829</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">9891-9891</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">10304-10304</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">10349-10354</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">11606-11606</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">11616-11616</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">14834-14834</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">14844-14844</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">14874-14874</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">15041-15041</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">20969-20975</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">21642-21642</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">21662-21662</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">21673-21673</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">21717-21717</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">21723-21724</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">21768-21772</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">21818-21818</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">21856-21856</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">21871-21871</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">21901-21901</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">22006-22006</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">22017-22017</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">23367-23367</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">23469-23474</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">24348-24348</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

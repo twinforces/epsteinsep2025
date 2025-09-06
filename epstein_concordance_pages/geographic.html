@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "geographic"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 2306, "end": 2306, "pages": [2306]}, {"start": 2329, "end": 2329, "pages": [2329]}, {"start": 2595, "end": 2595, "pages": [2595]}, {"start": 2833, "end": 2833, "pages": [2833]}, {"start": 3160, "end": 3165, "pages": [3160, 3161, 3162, 3163, 3165]}, {"start": 3679, "end": 3679, "pages": [3679]}, {"start": 3887, "end": 3887, "pages": [3887]}, {"start": 4288, "end": 4288, "pages": [4288]}, {"start": 7704, "end": 7704, "pages": [7704]}, {"start": 8163, "end": 8163, "pages": [8163]}, {"start": 8949, "end": 8949, "pages": [8949]}, {"start": 9589, "end": 9595, "pages": [9589, 9591, 9594, 9595]}, {"start": 10268, "end": 10268, "pages": [10268]}, {"start": 10284, "end": 10286, "pages": [10284, 10285, 10286]}, {"start": 10379, "end": 10379, "pages": [10379]}, {"start": 10460, "end": 10460, "pages": [10460]}, {"start": 10495, "end": 10495, "pages": [10495]}, {"start": 20996, "end": 20996, "pages": [20996]}, {"start": 21832, "end": 21832, "pages": [21832]}];
+        const pageToPath = {"2306": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002306.jpg", "2329": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002329.jpg", "2595": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002595.jpg", "2833": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002833.jpg", "3160": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003160.jpg", "3161": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003161.jpg", "3162": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003162.jpg", "3163": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003163.jpg", "3165": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003165.jpg", "3679": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003679.jpg", "3887": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003887.jpg", "4288": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004288.jpg", "7704": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007704.jpg", "8163": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008163.jpg", "8949": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008949.jpg", "9589": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009589.jpg", "9591": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009591.jpg", "9594": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009594.jpg", "9595": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009595.jpg", "10268": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010268.jpg", "10284": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010284.jpg", "10285": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010285.jpg", "10286": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010286.jpg", "10379": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010379.jpg", "10460": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010460.jpg", "10495": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010495.jpg", "20996": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020996.jpg", "21832": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021832.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002306.jpg": "...id. 4/3 atid.l7.  v. the geographic scope. of the alleged co...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002329.jpg": "...e.d:n.y. l995). the only geographic nextis inthis case to th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002595.jpg": "...stein,” with no express: geographic  n-contrast, the clauses...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002833.jpg": "...fendant,to be tried-in a geographic location anymore specifi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003160.jpg": "...endant to be: tried in a geographic location any more  * thi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003161.jpg": "...latitude in defining the geographic area from which juries \\...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003162.jpg": "...e district.or from a pa  geographic ated withifi a district;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003163.jpg": "...be. analyzed against the geographic location in-which the of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003165.jpg": "...rawn from any partictlat geographic area.  §. 257, 26o-63 (l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003679.jpg": "...rastically expand the  ; geographic. scope in. the single se...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003887.jpg": "...biguities” relate to the geographic applicability of a plea...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004288.jpg": "...on overt acts; (6) the g geographic. scope of the. alleged....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007704.jpg": "...chael greshko; national ‘geographic. the real science inspir...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008163.jpg": "...chael greshko; national ‘geographic. the real science inspir...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008949.jpg": "...tenee of commo: ig ) the geographic: seope.of the alleged co...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009589.jpg": "...on, common. overt: acts, geographic scope, common. objective...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009591.jpg": "...iracies  had a different geographic lous. as a:result of the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009594.jpg": "...rat best is: neutral. 5. geographic scope although the evide...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009595.jpg": "...conspiracy overlapped in geographic scope; the loctis ofeach...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010268.jpg": "...participants, time, and geographic seope:  ti. the court sh...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010284.jpg": "...participants, time, and geographic scope the government:mak...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010285.jpg": "...nuously argues: that;the geographic scope ofthe two:  eatise...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010286.jpg": "...-3l5). accordingly, the: geographic scope of count.five (flo...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010379.jpg": "...ee t  nevertheless, soie geographic overlap between the-tw6...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010460.jpg": "...nited. nations. national geographic: and oxford.  university...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010495.jpg": "...ions,, such as: national geographic and ‘oxford. ‘university...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020996.jpg": "...e, ‘albeit’ incomp icte, geographic ‘overlap:  fe  overlap o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021832.jpg": "...for civil claims without geographic  * numerical, references..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "geographic" (28 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">2306-2306</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">2329-2329</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">2595-2595</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">2833-2833</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">3160-3165</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">3679-3679</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3887-3887</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">4288-4288</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">7704-7704</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">8163-8163</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">8949-8949</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">9589-9595</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">10268-10268</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">10284-10286</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">10379-10379</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">10460-10460</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">10495-10495</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">20996-20996</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">21832-21832</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "criticism"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 393, "end": 393, "pages": [393]}, {"start": 2582, "end": 2582, "pages": [2582]}, {"start": 3341, "end": 3344, "pages": [3341, 3344]}, {"start": 3362, "end": 3362, "pages": [3362]}, {"start": 3462, "end": 3471, "pages": [3462, 3467, 3471]}, {"start": 3488, "end": 3488, "pages": [3488]}, {"start": 4329, "end": 4329, "pages": [4329]}, {"start": 4584, "end": 4593, "pages": [4584, 4589, 4593]}, {"start": 4610, "end": 4610, "pages": [4610]}, {"start": 6057, "end": 6057, "pages": [6057]}, {"start": 8175, "end": 8177, "pages": [8175, 8177]}, {"start": 10607, "end": 10607, "pages": [10607]}, {"start": 10668, "end": 10668, "pages": [10668]}, {"start": 21187, "end": 21187, "pages": [21187]}, {"start": 21488, "end": 21488, "pages": [21488]}];
+        const pageToPath = {"393": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000393.jpg", "2582": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002582.jpg", "3341": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003341.jpg", "3344": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003344.jpg", "3362": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003362.jpg", "3462": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003462.jpg", "3467": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003467.jpg", "3471": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003471.jpg", "3488": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003488.jpg", "4329": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004329.jpg", "4584": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004584.jpg", "4589": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004589.jpg", "4593": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004593.jpg", "4610": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004610.jpg", "6057": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006057.jpg", "8175": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008175.jpg", "8177": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008177.jpg", "10607": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010607.jpg", "10668": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010668.jpg", "21187": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021187.jpg", "21488": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021488.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000393.jpg": "...who are mou under severe criticism  lo: year's later, steer...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002582.jpg": "...n the blistering public. criticism of the npa ‘arid. of aco...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003341.jpg": "..., ‘opr includes::in. its criticism, of . decision. to: appr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003344.jpg": "...withstanding the katsh. criticism  ‘witnesses: ofthe epste...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003362.jpg": "...atention and ‘ public © criticism. the. viami her rakd’s'...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003462.jpg": "...of*consultation in. its criticism. of a series of governme...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003467.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003471.jpg": "...costa argued that opr's: criticism, obligation’ ‘to: the, s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003488.jpg": ".... in ‘exfensive ‘public. criticism. ‘in:ssum, opr, co  that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004329.jpg": "...l9,2ol9, follouing;pub| criticism of the usao’s handling:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004584.jpg": "...of*consultation in. its criticism. of a series of governme...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004589.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004593.jpg": "...sta ar gued, that opr’s; criticism ‘of hiny for’ obligation...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004610.jpg": ".... in ‘exfensive ‘public. criticism. ‘in:ssum, opr, co  that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006057.jpg": "...ause: of the:  ‘intense: criticism sustained, by the depart...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008175.jpg": "...ourt concludes that this criticism of  dr.. rocehio*s groom...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008177.jpg": "...nion insofar as. it is 4 criticism of dr. rocchio’s groomin...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010607.jpg": "...me opened me up to mich criticism’ and forced me'to  reliv...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010668.jpg": "...me opened me up to mich criticism’ and forced me'to  reliv...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021187.jpg": "...in. extensive = paibie-c criticism. in sum,  opr.concludes...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021488.jpg": "...in. extensive: e publies criticism. uns sum, »opr concludes..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "criticism" (21 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">393-393</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">2582-2582</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">3341-3344</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3362-3362</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">3462-3471</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">3488-3488</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">4329-4329</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">4584-4593</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">4610-4610</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">6057-6057</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">8175-8177</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">10607-10607</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">10668-10668</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">21187-21187</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">21488-21488</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

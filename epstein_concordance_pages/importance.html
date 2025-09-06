@@ -1,0 +1,274 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "importance"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 563, "end": 563, "pages": [563]}, {"start": 930, "end": 930, "pages": [930]}, {"start": 2101, "end": 2101, "pages": [2101]}, {"start": 3063, "end": 3063, "pages": [3063]}, {"start": 3083, "end": 3083, "pages": [3083]}, {"start": 3325, "end": 3325, "pages": [3325]}, {"start": 3379, "end": 3379, "pages": [3379]}, {"start": 3861, "end": 3863, "pages": [3861, 3863]}, {"start": 4447, "end": 4447, "pages": [4447]}, {"start": 4501, "end": 4501, "pages": [4501]}, {"start": 4933, "end": 4933, "pages": [4933]}, {"start": 5916, "end": 5916, "pages": [5916]}, {"start": 5936, "end": 5936, "pages": [5936]}, {"start": 6133, "end": 6133, "pages": [6133]}, {"start": 6841, "end": 6841, "pages": [6841]}, {"start": 6861, "end": 6861, "pages": [6861]}, {"start": 7477, "end": 7477, "pages": [7477]}, {"start": 7625, "end": 7625, "pages": [7625]}, {"start": 7855, "end": 7855, "pages": [7855]}, {"start": 8106, "end": 8106, "pages": [8106]}, {"start": 8304, "end": 8304, "pages": [8304]}, {"start": 8470, "end": 8470, "pages": [8470]}, {"start": 8634, "end": 8634, "pages": [8634]}, {"start": 8720, "end": 8720, "pages": [8720]}, {"start": 8794, "end": 8794, "pages": [8794]}, {"start": 8801, "end": 8801, "pages": [8801]}, {"start": 8853, "end": 8853, "pages": [8853]}, {"start": 8901, "end": 8901, "pages": [8901]}, {"start": 8918, "end": 8919, "pages": [8918, 8919]}, {"start": 8966, "end": 8966, "pages": [8966]}, {"start": 9051, "end": 9051, "pages": [9051]}, {"start": 9546, "end": 9546, "pages": [9546]}, {"start": 9584, "end": 9584, "pages": [9584]}, {"start": 10398, "end": 10398, "pages": [10398]}, {"start": 10580, "end": 10580, "pages": [10580]}, {"start": 10705, "end": 10705, "pages": [10705]}, {"start": 10742, "end": 10742, "pages": [10742]}, {"start": 11175, "end": 11175, "pages": [11175]}, {"start": 11242, "end": 11242, "pages": [11242]}, {"start": 11365, "end": 11365, "pages": [11365]}, {"start": 11455, "end": 11455, "pages": [11455]}, {"start": 11469, "end": 11469, "pages": [11469]}, {"start": 11476, "end": 11476, "pages": [11476]}, {"start": 12377, "end": 12377, "pages": [12377]}, {"start": 14553, "end": 14555, "pages": [14553, 14555]}, {"start": 14592, "end": 14592, "pages": [14592]}, {"start": 14635, "end": 14635, "pages": [14635]}, {"start": 15093, "end": 15093, "pages": [15093]}, {"start": 15105, "end": 15105, "pages": [15105]}, {"start": 15156, "end": 15156, "pages": [15156]}, {"start": 17174, "end": 17176, "pages": [17174, 17176]}, {"start": 17213, "end": 17213, "pages": [17213]}, {"start": 17256, "end": 17256, "pages": [17256]}, {"start": 17965, "end": 17965, "pages": [17965]}, {"start": 19456, "end": 19456, "pages": [19456]}, {"start": 19848, "end": 19848, "pages": [19848]}, {"start": 20853, "end": 20853, "pages": [20853]}, {"start": 21773, "end": 21773, "pages": [21773]}, {"start": 22033, "end": 22033, "pages": [22033]}, {"start": 23485, "end": 23485, "pages": [23485]}];
+        const pageToPath = {"563": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000563.jpg", "930": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000930.jpg", "2101": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002101.jpg", "3063": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003063.jpg", "3083": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003083.jpg", "3325": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003325.jpg", "3379": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003379.jpg", "3861": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003861.jpg", "3863": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003863.jpg", "4447": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004447.jpg", "4501": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004501.jpg", "4933": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004933.jpg", "5916": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005916.jpg", "5936": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005936.jpg", "6133": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006133.jpg", "6841": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006841.jpg", "6861": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006861.jpg", "7477": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007477.jpg", "7625": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007625.jpg", "7855": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007855.jpg", "8106": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008106.jpg", "8304": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008304.jpg", "8470": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008470.jpg", "8634": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008634.jpg", "8720": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008720.jpg", "8794": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008794.jpg", "8801": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008801.jpg", "8853": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008853.jpg", "8901": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008901.jpg", "8918": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008918.jpg", "8919": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008919.jpg", "8966": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008966.jpg", "9051": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009051.jpg", "9546": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009546.jpg", "9584": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009584.jpg", "10398": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010398.jpg", "10580": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010580.jpg", "10705": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010705.jpg", "10742": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010742.jpg", "11175": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011175.jpg", "11242": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011242.jpg", "11365": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011365.jpg", "11455": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011455.jpg", "11469": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011469.jpg", "11476": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011476.jpg", "12377": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012377.jpg", "14553": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014553.jpg", "14555": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014555.jpg", "14592": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014592.jpg", "14635": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014635.jpg", "15093": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015093.jpg", "15105": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015105.jpg", "15156": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015156.jpg", "17174": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017174.jpg", "17176": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017176.jpg", "17213": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017213.jpg", "17256": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017256.jpg", "17965": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017965.jpg", "19456": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019456.jpg", "19848": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019848.jpg", "20853": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020853.jpg", "21773": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021773.jpg", "22033": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022033.jpg", "23485": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023485.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000563.jpg": "...mudl aeeument, of importance to explain a juaicial  h...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000930.jpg": "...3d at 67 (explaining the importance: of legal visits. and or...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002101.jpg": "...of law of sehefal public importance, and either  ‘the, high...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003063.jpg": "...eb.  27, 998) (noting: : importance of poliey concerns of mc...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003083.jpg": "...of stifficient probative importance to the inqtiry so that,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003325.jpg": "...- bar  rosecutor’ $  pl  importance of seleet ne a. charge t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003379.jpg": "...se was trying, desperate importance: of:the evidence.”  that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003861.jpg": "...netheless recognizes the importance of anticipating hou thes...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003863.jpg": "...netheless recognizes the importance of anticipating hou thes...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004447.jpg": "...ain  rosceutor’ 's ‘plea importance of seleet ne a. charge t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004501.jpg": "...further cvidetice of the importance of:the evidence.” - -  e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004933.jpg": "...ege might be of critical importance.” in re agenf orange pro...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005916.jpg": "...pfu iresponses: and the importance of expand nginetworksfor...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00005936.jpg": "...et “professionals. ‘the: importance: ihe oeronecies the: ‘dy...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006133.jpg": "...talsehood’that is alway  importance that you.shouldavergh ca...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006841.jpg": "...pfu iresponses: and the importance of expand nginetworksfor...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006861.jpg": "...et “professionals. ‘the: importance: ihe oeronecies the: ‘dy...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007477.jpg": "...allegations. the likely importance of her  i  government*s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007625.jpg": "...kin ja, spiers. em: “the importance: of video recording fore...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007855.jpg": "...e: a ‘discussion on. the importance: oft. research and ] ase...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008106.jpg": "...prosecution’s case, the importance of full  cours rat eae s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008304.jpg": "...idence, to minimize its  importance, or to argue alternative...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008470.jpg": "...n, acting in maters, of  importance in. his: or.her. oun .af...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008634.jpg": "...n, acting in maters, of  importance in. his: or.her. oun .af...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008720.jpg": "...n, acting in maters, of  importance in. his: or.her. oun .af...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008794.jpg": "...e 3  aseribe[s] “crucial importance’ to; a ‘conipletely accu...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008801.jpg": "...ng an:issue of pressing’ importance  . ih this. case (the “j...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008853.jpg": "...ke; ‘it:is of' paramount importance: forthe: court:to. ensur...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00008901.jpg": "...ke; ‘it:is of' paramount importance: forthe: court:to. ensur...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008918.jpg": ".... address the inereased, importance: of writen or oral voir...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008919.jpg": "...resent issues of, broad. importance ‘to ‘criminal defendants...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00008966.jpg": "...ddress issues ‘of broad. importance’ to  ‘criminal. defendan...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009051.jpg": "...s court. cinphasized the importance of foir dire, atid  it e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009546.jpg": "...y hearing because of the importance of finality. of judgment...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009584.jpg": "...es—which are of primary: importance under the defendant” ‘s....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010398.jpg": "...accuracy:is of “crucial importance,” united's _kopstein, 75...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010580.jpg": "...dequate deterrence,  the importance of promoting respect for...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010705.jpg": "...nues ro demonstrate: the importance of hearing from crime yi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010742.jpg": "...ir l995).  of particular importance ‘in. confirming ‘the bro...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011175.jpg": "...idence, to :minimize its importance, or to argc alternative...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011242.jpg": "...8, 9), and obfuscate the importance of legitiniate defense...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011365.jpg": "...” j: 4l5 us. at.3l6. the importance of cross-examination can...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011455.jpg": "...peatedly emphasized, the importance of confidentiality to th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011469.jpg": "...dition of the evcp; :its importance cannot  be overstated. t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011476.jpg": "...privacy is of paramount importance to the: program. the pro...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00012377.jpg": "...t would. net  qo. se the importance there l5 whether or mot...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014553.jpg": "...ate to act in a mater of importance to  yourself. would you...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014555.jpg": "...ly, if it was d mater of importance to  yourself; because i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014592.jpg": "...hea  acting dn maters o£ importance in, his or her oun,  ~...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014635.jpg": "...at is always. a mater of importance that you sshotild weagh...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015093.jpg": "...at the great historical. importance of the hiss case ovitwei...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015105.jpg": "...d substantial historieal importance andthe living witnesses...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015156.jpg": "...t ‘of present-day public importance: because it consists of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017174.jpg": "...ate to act in a mater of importance to  yourself. would you...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017176.jpg": "...ly, if it was d mater of importance to  yourself; because i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017213.jpg": "...hea  acting dn maters o£ importance in, his or her oun,  ~...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017256.jpg": "...at is always. a mater of importance that you sshotild weagh...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00017965.jpg": "...t would. net  qo. se the importance there l5 whether or mot...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019456.jpg": "...’s testimony :is of key: importance, a partial. stay :can.le...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019848.jpg": "...3d at 67 (explaining the importance: of legal visits. and or...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020853.jpg": "...the‘law:  be[s] “crucial importance’ to:a. seompletely accur...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021773.jpg": "...gh court highlighted the importance of the voir dire  as a....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022033.jpg": "...mation is of significant importance to mr. ‘thomas’  defense...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023485.jpg": "...the bop recognizes the importance of careful monitoring of..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "importance" (64 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">563-563</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">930-930</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">2101-2101</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3063-3063</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">3083-3083</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">3325-3325</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3379-3379</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">3861-3863</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">4447-4447</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">4501-4501</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">4933-4933</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">5916-5916</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">5936-5936</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">6133-6133</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">6841-6841</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">6861-6861</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">7477-7477</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">7625-7625</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">7855-7855</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">8106-8106</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">8304-8304</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">8470-8470</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">8634-8634</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">8720-8720</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">8794-8794</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">8801-8801</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">8853-8853</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">8901-8901</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">8918-8919</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">8966-8966</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">9051-9051</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">9546-9546</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">9584-9584</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">10398-10398</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">10580-10580</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">10705-10705</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">10742-10742</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">11175-11175</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(38, 0); return false;">11242-11242</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(39, 0); return false;">11365-11365</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(40, 0); return false;">11455-11455</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(41, 0); return false;">11469-11469</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(42, 0); return false;">11476-11476</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(43, 0); return false;">12377-12377</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(44, 0); return false;">14553-14555</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(45, 0); return false;">14592-14592</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(46, 0); return false;">14635-14635</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(47, 0); return false;">15093-15093</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(48, 0); return false;">15105-15105</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(49, 0); return false;">15156-15156</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(50, 0); return false;">17174-17176</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(51, 0); return false;">17213-17213</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(52, 0); return false;">17256-17256</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(53, 0); return false;">17965-17965</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(54, 0); return false;">19456-19456</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(55, 0); return false;">19848-19848</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(56, 0); return false;">20853-20853</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(57, 0); return false;">21773-21773</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(58, 0); return false;">22033-22033</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(59, 0); return false;">23485-23485</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

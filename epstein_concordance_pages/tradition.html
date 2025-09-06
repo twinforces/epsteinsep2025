@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "tradition"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 1162, "end": 1162, "pages": [1162]}, {"start": 1207, "end": 1207, "pages": [1207]}, {"start": 1982, "end": 1982, "pages": [1982]}, {"start": 2103, "end": 2104, "pages": [2103, 2104]}, {"start": 2147, "end": 2147, "pages": [2147]}, {"start": 2181, "end": 2181, "pages": [2181]}, {"start": 2224, "end": 2224, "pages": [2224]}, {"start": 2365, "end": 2365, "pages": [2365]}, {"start": 4886, "end": 4886, "pages": [4886]}, {"start": 9197, "end": 9197, "pages": [9197]}, {"start": 9876, "end": 9876, "pages": [9876]}, {"start": 15039, "end": 15039, "pages": [15039]}, {"start": 15088, "end": 15088, "pages": [15088]}, {"start": 20080, "end": 20080, "pages": [20080]}, {"start": 20125, "end": 20125, "pages": [20125]}];
+        const pageToPath = {"1162": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001162.jpg", "1207": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001207.jpg", "1982": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001982.jpg", "2103": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002103.jpg", "2104": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002104.jpg", "2147": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002147.jpg", "2181": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002181.jpg", "2224": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002224.jpg", "2365": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002365.jpg", "4886": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004886.jpg", "9197": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009197.jpg", "9876": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009876.jpg", "15039": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015039.jpg", "15088": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015088.jpg", "20080": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020080.jpg", "20125": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020125.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001162.jpg": "..., law, and would not be  tradition proeess, or otherwise en...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001207.jpg": "...ply to ‘the. balancing  <tradition ¥  assessing. whetlier €...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001982.jpg": "...time of her arrest. (ex  tradition waly coneems. about extr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002103.jpg": "...ail, was refused”.  ““ex tradition. act 2oo3; s., f28(4)....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002104.jpg": "...ational terrorism,  *“ex tradition. act 2oo3; 's., 94.  95,...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002147.jpg": "...under the apa cable.ex ‘tradition n treaty't ‘betwee  cont...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002181.jpg": "..., law, and would not be  tradition proeess, or otherwise en...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002224.jpg": "...hat, the:  orig the extr tradition treaty  %  a meeey  © ma...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002365.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004886.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009197.jpg": "...th, and  ‘contravene the tradition and:preeedent of this:ju...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009876.jpg": "...th, and  ‘contravene the tradition and:preeedent of this:ju...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015039.jpg": "...9 (2d cir, l973). “[t]he tradition. of seercey,” houever “i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015088.jpg": "...ongoing gase  there is.a tradition.in the united states tha...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020080.jpg": "..., law, and would not be  tradition proeess, or otherwise en...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020125.jpg": "...ply to ‘the. balancing  <tradition ¥  assessing. whetlier €..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "tradition" (16 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">1162-1162</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">1207-1207</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1982-1982</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">2103-2104</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">2147-2147</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">2181-2181</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">2224-2224</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">2365-2365</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">4886-4886</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">9197-9197</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">9876-9876</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">15039-15039</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">15088-15088</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">20080-20080</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">20125-20125</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

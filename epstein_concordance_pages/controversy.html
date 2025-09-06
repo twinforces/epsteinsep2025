@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "controversy"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 308, "end": 311, "pages": [308, 311]}, {"start": 2632, "end": 2632, "pages": [2632]}, {"start": 2992, "end": 2992, "pages": [2992]}, {"start": 3182, "end": 3182, "pages": [3182]}, {"start": 3384, "end": 3384, "pages": [3384]}, {"start": 4304, "end": 4304, "pages": [4304]}, {"start": 4411, "end": 4411, "pages": [4411]}, {"start": 4506, "end": 4506, "pages": [4506]}, {"start": 4888, "end": 4888, "pages": [4888]}, {"start": 5771, "end": 5771, "pages": [5771]}, {"start": 9117, "end": 9117, "pages": [9117]}, {"start": 10349, "end": 10349, "pages": [10349]}, {"start": 10456, "end": 10456, "pages": [10456]}, {"start": 15104, "end": 15104, "pages": [15104]}, {"start": 19361, "end": 19361, "pages": [19361]}, {"start": 19384, "end": 19384, "pages": [19384]}, {"start": 19428, "end": 19428, "pages": [19428]}, {"start": 21180, "end": 21180, "pages": [21180]}, {"start": 21986, "end": 21986, "pages": [21986]}];
+        const pageToPath = {"308": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000308.jpg", "311": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000311.jpg", "2632": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002632.jpg", "2992": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002992.jpg", "3182": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003182.jpg", "3384": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003384.jpg", "4304": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004304.jpg", "4411": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004411.jpg", "4506": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004506.jpg", "4888": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004888.jpg", "5771": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005771.jpg", "9117": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009117.jpg", "10349": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010349.jpg", "10456": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010456.jpg", "15104": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015104.jpg", "19361": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019361.jpg", "19384": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019384.jpg", "19428": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019428.jpg", "21180": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021180.jpg", "21986": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021986.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000308.jpg": "...rescnts.a, live: case or controversy, and ‘the federal court...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000311.jpg": "...quirement of'.a, case or:controversy’ and, if so, whether the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002632.jpg": "...and.o: on.july  houever  controversy;  lef tey. bpstein’...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00002992.jpg": "...ly: souree of ‘political controversy over that legislation —i...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003182.jpg": "...nce ‘did :not end. the: ‘controversy, houever, and.on july: l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003384.jpg": "...r of much of the: public controversy: concerning the usa  res...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004304.jpg": "...ce ‘did :not end. ‘the: ‘controversy, houever, and.on july: l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004411.jpg": "...addendum  g  the first: controversy::centered on. the ‘appoi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004506.jpg": "...of :much of ‘the public controversy: concerning the usa  han...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004888.jpg": "...rely unique. while ‘this controversy shares some features of...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005771.jpg": "...an ordinary: party:to: a controversy,, but ofa. sovereignty ‘...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009117.jpg": "...position of the juror in controversy would. be  prejudiced.”...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010349.jpg": "...iti ion  ‘lorre  uror in controversy would. be prejudiced.” ‘...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010456.jpg": "...xt:  family: tragedy and controversy\"  ‘michael’s acerdent: a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00015104.jpg": "...rocities. :  the tecent. controversy surrounding the governme...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019361.jpg": "...because “[t]he entire:  controversy between the cftc and. th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019384.jpg": "...because “[t]he entire:  controversy between the cftc and. th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019428.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021180.jpg": "...sons and held at’ the |  controversy; houever, ‘andon, july l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021986.jpg": "...believe that there's a  controversy of whether she's 4 flagh..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "controversy" (20 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">308-311</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">2632-2632</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">2992-2992</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3182-3182</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">3384-3384</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">4304-4304</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">4411-4411</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">4506-4506</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">4888-4888</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">5771-5771</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">9117-9117</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">10349-10349</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">10456-10456</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">15104-15104</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">19361-19361</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">19384-19384</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">19428-19428</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">21180-21180</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">21986-21986</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

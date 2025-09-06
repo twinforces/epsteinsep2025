@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "technician"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 7849, "end": 7849, "pages": [7849]}, {"start": 10462, "end": 10462, "pages": [10462]}, {"start": 11918, "end": 11918, "pages": [11918]}, {"start": 17508, "end": 17508, "pages": [17508]}, {"start": 23381, "end": 23381, "pages": [23381]}, {"start": 23448, "end": 23451, "pages": [23448, 23450, 23451]}, {"start": 23459, "end": 23459, "pages": [23459]}];
+        const pageToPath = {"7849": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007849.jpg", "10462": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010462.jpg", "11918": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011918.jpg", "17508": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017508.jpg", "23381": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023381.jpg", "23448": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023448.jpg", "23450": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023450.jpg", "23451": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023451.jpg", "23459": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023459.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007849.jpg": "...sy, assistant/for ensic “technician ' duties: identi vand do...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010462.jpg": "...ari emergency’ medical. technician (emt) stibiners ible pil...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011918.jpg": "...uaimed emergency medical technician, didn't.  @ gi o: wi  re...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017508.jpg": "...uaimed emergency medical technician, didn't.  @ gi o: wi  re...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023381.jpg": "", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023448.jpg": "...camera ‘system,  onics = technician, the system, had not bee...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023450.jpg": "...to end. ‘the electronics technician told the olg that he fou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023451.jpg": "...ding to:the electronics: technician, after he: reported ‘to:...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023459.jpg": "...oning dvr 2 system, but  technician further said that the wa..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "technician" (9 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">7849-7849</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">10462-10462</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">11918-11918</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">17508-17508</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">23381-23381</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">23448-23451</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">23459-23459</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "infermation"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 519, "end": 519, "pages": [519]}, {"start": 867, "end": 867, "pages": [867]}, {"start": 1022, "end": 1022, "pages": [1022]}, {"start": 1277, "end": 1277, "pages": [1277]}, {"start": 1675, "end": 1679, "pages": [1675, 1679]}, {"start": 1694, "end": 1698, "pages": [1694, 1698]}, {"start": 2483, "end": 2487, "pages": [2483, 2487]}, {"start": 2770, "end": 2770, "pages": [2770]}, {"start": 7061, "end": 7061, "pages": [7061]}, {"start": 7157, "end": 7157, "pages": [7157]}, {"start": 10221, "end": 10221, "pages": [10221]}, {"start": 11338, "end": 11338, "pages": [11338]}, {"start": 11851, "end": 11851, "pages": [11851]}, {"start": 13007, "end": 13007, "pages": [13007]}, {"start": 13357, "end": 13357, "pages": [13357]}, {"start": 13464, "end": 13464, "pages": [13464]}, {"start": 14059, "end": 14059, "pages": [14059]}, {"start": 14144, "end": 14144, "pages": [14144]}, {"start": 14371, "end": 14371, "pages": [14371]}, {"start": 14547, "end": 14547, "pages": [14547]}, {"start": 14735, "end": 14735, "pages": [14735]}, {"start": 16683, "end": 16683, "pages": [16683]}, {"start": 16767, "end": 16767, "pages": [16767]}, {"start": 16993, "end": 16993, "pages": [16993]}, {"start": 17168, "end": 17168, "pages": [17168]}, {"start": 17351, "end": 17351, "pages": [17351]}, {"start": 17441, "end": 17441, "pages": [17441]}, {"start": 18593, "end": 18593, "pages": [18593]}, {"start": 18941, "end": 18941, "pages": [18941]}, {"start": 19048, "end": 19048, "pages": [19048]}, {"start": 19307, "end": 19311, "pages": [19307, 19311]}, {"start": 19509, "end": 19509, "pages": [19509]}, {"start": 19526, "end": 19530, "pages": [19526, 19530]}, {"start": 19538, "end": 19542, "pages": [19538, 19542]}, {"start": 19940, "end": 19940, "pages": [19940]}, {"start": 20195, "end": 20195, "pages": [20195]}, {"start": 21984, "end": 21984, "pages": [21984]}, {"start": 22009, "end": 22009, "pages": [22009]}];
+        const pageToPath = {"519": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000519.jpg", "867": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000867.jpg", "1022": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001022.jpg", "1277": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001277.jpg", "1675": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001675.jpg", "1679": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001679.jpg", "1694": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001694.jpg", "1698": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001698.jpg", "2483": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002483.jpg", "2487": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002487.jpg", "2770": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002770.jpg", "7061": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007061.jpg", "7157": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007157.jpg", "10221": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010221.jpg", "11338": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011338.jpg", "11851": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011851.jpg", "13007": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013007.jpg", "13357": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013357.jpg", "13464": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013464.jpg", "14059": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014059.jpg", "14144": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014144.jpg", "14371": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014371.jpg", "14547": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014547.jpg", "14735": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014735.jpg", "16683": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016683.jpg", "16767": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016767.jpg", "16993": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016993.jpg", "17168": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017168.jpg", "17351": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017351.jpg", "17441": "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017441.jpg", "18593": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018593.jpg", "18941": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018941.jpg", "19048": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019048.jpg", "19307": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019307.jpg", "19311": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019311.jpg", "19509": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019509.jpg", "19526": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019526.jpg", "19530": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019530.jpg", "19538": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019538.jpg", "19542": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019542.jpg", "19940": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019940.jpg", "20195": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020195.jpg", "21984": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021984.jpg", "22009": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022009.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000519.jpg": "...particularly what that infermation is amd whether it would...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00000867.jpg": "...eterifies, that any new  infermation would:not have a materia...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001022.jpg": "...e,. di.ny  as seheduling infermation relating te the  of thei...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001277.jpg": "...eterifies, that any new  infermation would:not have a materia...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001675.jpg": "...inating such identifying infermation. this order does  not. p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001679.jpg": "...als  highly comfidential infermation ‘will  l  be controlling...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001694.jpg": "...inating such identifying infermation. this order does  not. p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00001698.jpg": "...als  highly comfidential infermation ‘will  l  be controlling...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002483.jpg": "..... lo redact identifying infermation and e-mail addresses.  l...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002487.jpg": "...he wames and identafying infermation and sunmitaries of  test...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002770.jpg": "...eterifies, that any new  infermation would:not have a materia...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007061.jpg": "...ie airing of identifying infermation about witnesses.  eere a...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007157.jpg": "...s wits, nee. identifying infermation. and wake g6pies for the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010221.jpg": "...nd, do met respond with  infermation about the jury's deliber...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011338.jpg": "...‘for ing: and exchanging infermation:with the united kingdom...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00011851.jpg": "...ou might be ‘told  thaet infermation it advance?  na  ve  o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013007.jpg": "...ven't reviewed the final infermation. reeentiy; so i den't  w...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013357.jpg": "...weefre writang doun that infermation. inte the beek?  sensi s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013464.jpg": "...gbook. has these -- that infermation in  o. but that\"s your p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014059.jpg": "...igratien laine dees that infermation hit the system, hit the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014144.jpg": "...didm't get geo logation infermation because ve didn't exist....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014371.jpg": "...her  volunteering that. infermation, i think.  but anyway, t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014547.jpg": "...have  told ther the same infermation; it's just. infermatioen...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00014735.jpg": "...is  it's private jureer infermation, and we ¢a. do that nou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016683.jpg": "...igratien laine dees that infermation hit the system, hit the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016767.jpg": "...didm't get geo logation infermation because ve didn't exist....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00016993.jpg": "...her  volunteering that. infermation, i think.  but anyway, t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017168.jpg": "...have  told ther the same infermation; it's just. infermatioen...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017351.jpg": "...is  it's private jureer infermation, and we ¢a. do that nou...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES006/DOJ-OGR-00017441.jpg": "...ou might be ‘told  thaet infermation it advance?  na  ve  o...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018593.jpg": "...ven't reviewed the final infermation. reeentiy; so i den't  w...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00018941.jpg": "...weefre writang doun that infermation. inte the beek?  sensi s...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019048.jpg": "...gbook. has these -- that infermation in  o. but that\"s your p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019307.jpg": "...inating such identifying infermation. this order does  not. p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019311.jpg": "...als  highly comfidential infermation ‘will  l  be controlling...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019509.jpg": "...aterials as confidential infermation will be centroelling abs...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019526.jpg": "...inating such identifying infermation. this order does  not. p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019530.jpg": "...als  highly comfidential infermation ‘will  l  be controlling...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019538.jpg": "...inating such identifying infermation. this order does  not. p...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019542.jpg": "...als  highly comfidential infermation ‘will  l  be controlling...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019940.jpg": "...e,. di.ny  as seheduling infermation relating te the  of thei...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00020195.jpg": "...eterifies, that any new  infermation would:not have a materia...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021984.jpg": "...there's beea tiultiple infermation. ifn the fiedia nou’  wi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022009.jpg": "...we are entitled te that. infermation. tr l6 an  it 28 4h inve..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "infermation" (44 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">519-519</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">867-867</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">1022-1022</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">1277-1277</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">1675-1679</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">1694-1698</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">2483-2487</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">2770-2770</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">7061-7061</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">7157-7157</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">10221-10221</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">11338-11338</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">11851-11851</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">13007-13007</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">13357-13357</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">13464-13464</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">14059-14059</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">14144-14144</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">14371-14371</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">14547-14547</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">14735-14735</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">16683-16683</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">16767-16767</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">16993-16993</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">17168-17168</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(25, 0); return false;">17351-17351</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(26, 0); return false;">17441-17441</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(27, 0); return false;">18593-18593</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(28, 0); return false;">18941-18941</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(29, 0); return false;">19048-19048</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(30, 0); return false;">19307-19311</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(31, 0); return false;">19509-19509</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(32, 0); return false;">19526-19530</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(33, 0); return false;">19538-19542</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(34, 0); return false;">19940-19940</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(35, 0); return false;">20195-20195</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(36, 0); return false;">21984-21984</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(37, 0); return false;">22009-22009</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>

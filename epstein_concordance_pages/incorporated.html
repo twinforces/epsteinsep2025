@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concordance for "incorporated"</title>
+    <style>
+        .pager { margin: 10px 0; }
+        .run { display: inline-block; margin-right: 10px; }
+        .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
+        .nav-arrow:disabled { color: grey; cursor: not-allowed; }
+        .context-hint { font-style: italic; color: #555; }
+        img { width: 8.5in; height: auto; }
+    </style>
+    <script>
+        let currentRun = 0;
+        let currentPageIndex = 0;
+        const runs = [{"start": 2712, "end": 2712, "pages": [2712]}, {"start": 2823, "end": 2827, "pages": [2823, 2827]}, {"start": 3002, "end": 3002, "pages": [3002]}, {"start": 3060, "end": 3060, "pages": [3060]}, {"start": 3282, "end": 3282, "pages": [3282]}, {"start": 3372, "end": 3372, "pages": [3372]}, {"start": 3469, "end": 3469, "pages": [3469]}, {"start": 4328, "end": 4328, "pages": [4328]}, {"start": 4404, "end": 4404, "pages": [4404]}, {"start": 4494, "end": 4494, "pages": [4494]}, {"start": 4591, "end": 4591, "pages": [4591]}, {"start": 7405, "end": 7405, "pages": [7405]}, {"start": 7491, "end": 7491, "pages": [7491]}, {"start": 7859, "end": 7859, "pages": [7859]}, {"start": 9448, "end": 9448, "pages": [9448]}, {"start": 10127, "end": 10127, "pages": [10127]}, {"start": 10283, "end": 10283, "pages": [10283]}, {"start": 10725, "end": 10725, "pages": [10725]}, {"start": 11476, "end": 11476, "pages": [11476]}, {"start": 13469, "end": 13469, "pages": [13469]}, {"start": 19053, "end": 19053, "pages": [19053]}, {"start": 21273, "end": 21273, "pages": [21273]}, {"start": 21728, "end": 21728, "pages": [21728]}, {"start": 22095, "end": 22095, "pages": [22095]}, {"start": 23485, "end": 23485, "pages": [23485]}];
+        const pageToPath = {"2712": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002712.jpg", "2823": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002823.jpg", "2827": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002827.jpg", "3002": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003002.jpg", "3060": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003060.jpg", "3282": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003282.jpg", "3372": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003372.jpg", "3469": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003469.jpg", "4328": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004328.jpg", "4404": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004404.jpg", "4494": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004494.jpg", "4591": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004591.jpg", "7405": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007405.jpg", "7491": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007491.jpg", "7859": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007859.jpg", "9448": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009448.jpg", "10127": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010127.jpg", "10283": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010283.jpg", "10725": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010725.jpg", "11476": "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011476.jpg", "13469": "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013469.jpg", "19053": "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019053.jpg", "21273": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021273.jpg", "21728": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021728.jpg", "22095": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022095.jpg", "23485": "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023485.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002712.jpg": "...tents thereo?” haye’been incorporated i in official reports;...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002823.jpg": "...eding  indictment; which incorporated the:same offenses as the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002827.jpg": "...3 the supreme court has incorporated the fourteenth amendment...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003002.jpg": "...at dea hs ats od  ) and. incorporated into section 3283.  i. t...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003060.jpg": "...ons. omited; alterations incorporated)). nor is it:sufficient...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003282.jpg": "...ess in abeyance, and she incorporated the non -prosecution. pr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003372.jpg": "...state plea. under terms incorporated into the npa. was based....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003469.jpg": "...atorney sloman. alread ‘incorporated  in the: leter several e...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004328.jpg": "...avck.  red  headed.  the incorporated touri of palni beach occ...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004404.jpg": "...ess in abeyance, and she incorporated the non -prosecution. pr...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004494.jpg": "...state plea. under terms incorporated ‘into the npa was based....", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004591.jpg": "...atorney: sloman. alread incorporated efter several edits that...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007405.jpg": "...ivil procedure 44(a)(l), incorporated into federal rule: of  c...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007491.jpg": "...istent details to become incorporated into a-previously acquir...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00007859.jpg": "...s:  nada 'vs.l.d.g. 2ooo incorporated  october l7, 2oo3:  dece...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00009448.jpg": ".... the new york-rules are incorporated in the'local nules:ofthi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010127.jpg": ".... the new york-rules are incorporated in the'local nules:ofthi...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010283.jpg": "...conspiracy.  and, fully incorporated her allegations into the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00010725.jpg": "...ions on, this ‘issue and incorporated herein (dkt. 667, 672):...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES004/DOJ-OGR-00011476.jpg": "..., and that feedback: was incorporated into a draft protocol th...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES005/DOJ-OGR-00013469.jpg": "...l27 was oued,  by jege,; incorporated, right?  comrect.  o. an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES007/DOJ-OGR-00019053.jpg": "...l27 was oued,  by jege,; incorporated, right?  comrect.  o. an...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021273.jpg": "...the new. deten version. incorporated terms: that we “om letel...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00021728.jpg": "...uctions on count: three :incorporated this discus- sion of the...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00022095.jpg": "...rks ‘omited;, alteration incorporated). thomas: has not put.:f...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES009/DOJ-OGR-00023485.jpg": "...id the bop’s response is incorporated as appendix.a. the bop i..."};
+        
+        function loadPage(runIndex, pageIndex) {
+            if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const pageNum = runs[runIndex].pages[pageIndex];
+            const pagePath = pageToPath[pageNum];
+            if (pagePath) {
+                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+            }
+            currentRun = runIndex;
+            currentPageIndex = pageIndex;
+            updateNavigation();
+            updateContextHint();
+        }
+        function prevPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex > 0) {
+                loadPage(currentRun, currentPageIndex - 1);
+            } else if (currentRun > 0) {
+                currentRun--;
+                currentPageIndex = (runs[currentRun].pages || []).length - 1;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function nextPage() {
+            if (!runs || runs.length === 0) return;
+            if (currentPageIndex < (runs[currentRun].pages || []).length - 1) {
+                loadPage(currentRun, currentPageIndex + 1);
+            } else if (currentRun < runs.length - 1) {
+                currentRun++;
+                currentPageIndex = 0;
+                loadPage(currentRun, currentPageIndex);
+            }
+        }
+        function updateNavigation() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('prevArrow').disabled = true;
+                document.getElementById('nextArrow').disabled = true;
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            document.getElementById('prevArrow').disabled = currentRun === 0 && currentPageIndex === 0;
+            document.getElementById('nextArrow').disabled = currentRun === runs.length - 1 && currentPageIndex === (runs[currentRun].pages || []).length - 1;
+        }
+        function updateContextHint() {
+            if (!runs || runs.length === 0) {
+                document.getElementById('contextHint').innerText = 'No pages available';
+                return;
+            }
+            const run = runs[currentRun] || {};
+            const pages = run.pages || [];
+            const currentPage = pages[currentPageIndex] || 1;
+            const before = currentPageIndex;
+            const after = pages.length - 1 - currentPageIndex;
+            document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
+        }
+        
+    </script>
+</head>
+<body onload="loadPage(0, 0);">
+    <h1>Pages containing "incorporated" (26 total)</h1>
+    <div class="pager">
+            <div class="run">
+                <a href="#" onclick="loadPage(0, 0); return false;">2712-2712</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(1, 0); return false;">2823-2827</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(2, 0); return false;">3002-3002</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(3, 0); return false;">3060-3060</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(4, 0); return false;">3282-3282</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(5, 0); return false;">3372-3372</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(6, 0); return false;">3469-3469</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(7, 0); return false;">4328-4328</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(8, 0); return false;">4404-4404</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(9, 0); return false;">4494-4494</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(10, 0); return false;">4591-4591</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(11, 0); return false;">7405-7405</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(12, 0); return false;">7491-7491</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(13, 0); return false;">7859-7859</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(14, 0); return false;">9448-9448</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(15, 0); return false;">10127-10127</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(16, 0); return false;">10283-10283</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(17, 0); return false;">10725-10725</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(18, 0); return false;">11476-11476</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(19, 0); return false;">13469-13469</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(20, 0); return false;">19053-19053</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(21, 0); return false;">21273-21273</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(22, 0); return false;">21728-21728</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(23, 0); return false;">22095-22095</a>
+            </div>
+            <div class="run">
+                <a href="#" onclick="loadPage(24, 0); return false;">23485-23485</a>
+            </div>
+    </div>
+    <div>
+        <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
+    </div>
+    <p id="contextHint" class="context-hint"></p>
+    <img id="imageFrame" src="" alt="Page image">
+    <p id="pageText"></p>
+</body>
+</html>
