@@ -9,14 +9,19 @@
         .nav-arrow { cursor: pointer; font-size: 1.2em; margin: 0 5px; }
         .nav-arrow:disabled { color: grey; cursor: not-allowed; }
         .context-hint { font-style: italic; color: #555; }
+        .container { display: flex; }
+        .image { flex: 1; }
+        .text { flex: 1; font-family: monospace; white-space: pre-wrap; overflow: auto; height: 800px; padding-left: 10px; }
         img { width: 8.5in; height: auto; }
+        .highlight { background-color: yellow; }
     </style>
     <script>
         let currentRun = 0;
         let currentPageIndex = 0;
-        const runs = [{"start": 2485, "end": 2491, "pages": [2485, 2486, 2491]}, {"start": 2612, "end": 2612, "pages": [2612]}, {"start": 3304, "end": 3304, "pages": [3304]}, {"start": 4426, "end": 4426, "pages": [4426]}, {"start": 5530, "end": 5530, "pages": [5530]}, {"start": 6492, "end": 6492, "pages": [6492]}];
-        const pageToPath = {"2485": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002485.jpg", "2486": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002486.jpg", "2491": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002491.jpg", "2612": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002612.jpg", "3304": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003304.jpg", "4426": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004426.jpg", "5530": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005530.jpg", "6492": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006492.jpg"};
-        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002485.jpg": "...docket  entry, but tb ls composite exhibit 2. it's excerpts...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002486.jpg": "...cumient no; 86, whieh is composite exhibit 8.  messages inv...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002491.jpg": "...cuit. on page 24 of the composite  393=2,. these are fligh...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002612.jpg": "...composite exhibit a  non-prosecuti...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00003304.jpg": "...spai.. she regained her composite enough to continuca shor...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004426.jpg": "...spai.. she regained her composite enough to continuca shor...", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005530.jpg": "composite exhibit a.", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006492.jpg": "composite exhibit a."};
+        const runs = [{"start": 2485, "end": 2491, "pages": [2485, 2486, 2491]}, {"start": 2612, "end": 2612, "pages": [2612]}, {"start": 4648, "end": 4648, "pages": [4648]}, {"start": 5530, "end": 5530, "pages": [5530]}, {"start": 6492, "end": 6492, "pages": [6492]}, {"start": 20795, "end": 20795, "pages": [20795]}];
+        const pageToPath = {"2485": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002485.jpg", "2486": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002486.jpg", "2491": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002491.jpg", "2612": "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002612.jpg", "4648": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004648.jpg", "5530": "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005530.jpg", "6492": "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006492.jpg", "20795": "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020795.jpg"};
+        const textData = {"Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002485.jpg": "IdasesT2O-cr-oo33o-AJN Document l36-9 Filed o2/o4/2l Page l9 of 33 l8\n\nl 375. Response in opposition to the motion to strike.\n2 Not sealed.\n\n3 Document No. 77. I think it's docket entry 3l5.\n\n4 Motion to compel. Unseal and redact the names and identifying\n5 information of nonparties and their testimony. Page l2. The\n\n6 last bullet point shall remain redacted. It relates to private\n7 conduct. Argument may be unsealed. The public Vanity Fair\n\n8 article may be unsealed.\n\n9 3l6. Ms. Schultz's declaration. Unseal and redact\n\nlo the names and identifying information of the nonparties.\n\nll 3l6-l. Excerpts from a Does deposition. We are not\nl2 up to that Doe yet. Remain sealed.\n\nl3 Document No. 8o. Forgive me. I don't have the docket\nl4 entry, but it is <span class=\"highlight\">composite</span> Exhibit 2. It's excerpts from a\n\nl5 Doe's deposition. Not up to that Doe yet. Keep sealed.\n\nl6 3l6-3. Excerpts from Detective Recarey's deposition.\nl7 Unseal except for names and identifying information of\n\nl8 nonparties.\n\nl9 3l6-4. Excerpts of a Doe deposition. Not up to that\n2o Doe. Keep sealed.\n2l Document No. 83, which is <span class=\"highlight\">composite</span> Exhibit 5. These\n22 are excerpts from Doe l's deposition. Apparently, the Second\n28 Circuit already released them without redactions.\n24 3l6-6. June 2o, 2ol6 order from Judge Sweet. This\n25 was filed at docket entry 264-l and the same redactions shall\n\nSOUTHERN DISTRICT REPORTERS, P.C.ee\n(2l2) 8o5-o3oo\nDOJ-OGR-oooo2485\n", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002486.jpg": "Idas@sT2O-cr-oo33o-AJN Document l36-9 Filed o2/o4/2l Page 2o of 33 l2\n\nl remain.\n\n2 3l6-7. Excerpts from Ms. Maxwell's deposition. As\n\n5 with the entire transcript.\n\n4 Document No. 86, which is <span class=\"highlight\">composite</span> Exhibit 8.\n\n5 Messages involving the defendant. Portions of this document\n\n6 were redacted and released by the Second Circuit. So whatever\n7 happened with respect to the Second Circuit's release, we will\n8 abide by its ruling.\n\n9 339. Response in opposition to the motion to compel.\nlo Unseal and redact the names, identifying information, and\n\nll testimony of the nonparties. With respect to Ms. Maxwell's\n\nl2 depositions, as ordered for the whole transcript. The\n\nl3 objections to questions 9, lo, and ll will remain sealed\n\nl4 because it relates to Ms. Maxwell's intimate conduct.\n\nl5 The material on pages l7 to l9, the shaded material\nl6 there shall remain sealed. Same reason.\n\nl7 Pages 2o to 23. Testimony from or about the Does.\n\nl8 The shaded material shall remain sealed except for Detective\nl9 Recarey.\n2o 34o. Declaration of Mr. Pagliuca. Unseal and redact\n2l only the names and identifying information of the nonparties.\n22 I will note Detective Recarey is in there and Ms. Maxwell's\n28 depositions are in there, but those rulings are already out.\n24 34o-l. Ms. Giuffre's deposition. This was already\n25 unsealed by us on docket entry lo9o-32.\n\nSOUTHERN DISTRICT REPORTERS, P.C.ee\n(2l2) 8o5-o3oo\nDOJ-OGR-oooo2486\n", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002491.jpg": "Idas@sT2O-cr-oo33o-AJN Document l36-9 Filed o2/o4/2l Page 25 of 33 za\n\nl protective order. Unseal.\n\n2 38l. Ms. Menninger's declaration. The parties agree\n3 to unseal.\n\n4 We are nou coming upon a group of Palm Beach County\n\n5 Sheriff's Office records and later Fremont County police\n\n6 reports.\n\n7 And the answer to all of this is going to be unseal.\n8 This applies to 38l-l, 38l-2, 38l-3, 38l-4, 38l-5,\n\n9 38l-6, 38l-7, all of which were Palm Beach County police\n\nlo records and 38l-8, which is a Fremont County police record.\n\nll Unseal all of that. As I said at the outset, as produced. So\nl2 to the extent that the producing agency redacted material, it\nl3 should remain redacted.\n\nl4 392. Reply memo of the law. Unseal but redact names\nl5 and identifying information of nonparties.\n\nl6 393. Declaration of Ms. McCawley. Unseal but redact\nl7 names and identifying information of nonparties.\n\nl8 393-l. These were unsealed by the Second Circuit and\nl9 shall remain unsealed, subject to the redactions ordered by the\n2o circuit on page 24 of the <span class=\"highlight\">composite</span> exhibit.\n2l 393-2. These are flight logs. They were released by\n22 the Second Circuit without redactions.\n23 393-3. Excerpts from Ms. Maxwell's July 2ol6\n24 deposition. As with the entire transcript.\n25 393-4. Excerpts from Ms. Maxwell's April 22, 2ol6\n\nSOUTHERN DISTRICT REPORTERS, P.C.ee\n(2l2) 8o5-o3oo\nDOJ-OGR-oooo249l\n", "Prod 01_20250822/VOL00001/IMAGES/IMAGES001/DOJ-OGR-00002612.jpg": "Case l:lo €ese beOAsOo386cwhenbeginanbiae dn Fills C4ekEe DoAageo4 Of Hage l of l5\n<span class=\"highlight\">COMPOSITE</span> EXHIBIT A\nNON-PROSECUTION AGREEMENT AND\nADDENDUM\nDOJ-OGR-oooo26l2\n", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00004648.jpg": "Case l:lGa8¢-dl2o6lAGRS3HBAmerPacemeniea-dn FERS DaGe2ds/lPage? ObdGe l of l5\n<span class=\"highlight\">COMPOSITE</span> EXHIBIT A\nNON-PROSECUTION AGREEMENT AND\nADDENDUM\nDOJ-OGR-oooo4648\n", "Prod 01_20250822/VOL00001/IMAGES/IMAGES002/DOJ-OGR-00005530.jpg": "Case l:lGA8P Al26 GAGS SHBARnerPacemeniaee 6n FER BBRV2d5/lNaGte GAG l of l5\n<span class=\"highlight\">COMPOSITE</span> EXHIBIT A\nNON-PROSECUTION AGREEMENT AND\nADDENDUM\nDOJ-OGR-oooo553o\n", "Prod 01_20250822/VOL00001/IMAGES/IMAGES003/DOJ-OGR-00006492.jpg": "Case l:lGa8P Al26 6lACRSSHBARnerPacemenicetee-6n FERS B6Ge/eds5/l Nate GbdGe l of l5\n<span class=\"highlight\">COMPOSITE</span> EXHIBIT A\nNON-PROSECUTION AGREEMENT AND\nADDENDUM\nDOJ-OGR-oooo6492\n", "Prod 01_20250822/VOL00001/IMAGES/IMAGES008/DOJ-OGR-00020795.jpg": "Case 22-l426, Document 57_o2/28/2o23, 34759oo, Pagel7/7 of 2o8\nA-l73\nCase l:lo-cv-2l586-ASG Document l-3 Entered on FLSD Docket o5/l7/2olo Page l of l5\n<span class=\"highlight\">COMPOSITE</span> EXHIBIT A\nNON-PROSECUTION AGREEMENT AND\nADDENDUM\nDOJ-OGR-ooo2o795\n"};
+        const word = 'composite';
         
         function loadPage(runIndex, pageIndex) {
             if (!runs || runs.length === 0 || !runs[runIndex] || !runs[runIndex].pages || runs[runIndex].pages.length === 0) {
@@ -27,7 +32,8 @@
             const pagePath = pageToPath[pageNum];
             if (pagePath) {
                 document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
-                document.getElementById('pageText').innerText = textData[pagePath] || 'No text available';
+                const fullText = textData[pagePath] || 'No text available';
+                document.getElementById('pageText').innerHTML = fullText;
             }
             currentRun = runIndex;
             currentPageIndex = pageIndex;
@@ -89,16 +95,16 @@
                 <a href="#" onclick="loadPage(1, 0); return false;">2612-2612</a>
             </div>
             <div class="run">
-                <a href="#" onclick="loadPage(2, 0); return false;">3304-3304</a>
+                <a href="#" onclick="loadPage(2, 0); return false;">4648-4648</a>
             </div>
             <div class="run">
-                <a href="#" onclick="loadPage(3, 0); return false;">4426-4426</a>
+                <a href="#" onclick="loadPage(3, 0); return false;">5530-5530</a>
             </div>
             <div class="run">
-                <a href="#" onclick="loadPage(4, 0); return false;">5530-5530</a>
+                <a href="#" onclick="loadPage(4, 0); return false;">6492-6492</a>
             </div>
             <div class="run">
-                <a href="#" onclick="loadPage(5, 0); return false;">6492-6492</a>
+                <a href="#" onclick="loadPage(5, 0); return false;">20795-20795</a>
             </div>
     </div>
     <div>
@@ -106,7 +112,11 @@
         <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
     </div>
     <p id="contextHint" class="context-hint"></p>
-    <img id="imageFrame" src="" alt="Page image">
-    <p id="pageText"></p>
+    <div class="container">
+        <div class="image">
+            <img id="imageFrame" src="" alt="Page image">
+        </div>
+        <div class="text" id="pageText"></div>
+    </div>
 </body>
 </html>
