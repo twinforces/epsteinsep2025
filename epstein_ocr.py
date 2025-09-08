@@ -107,7 +107,7 @@ def choose_psm(img_path):
 # Function to process a single image
 def process_image(file_info, config_or_psm, save_flag, adaptive=False):
     root, file = file_info
-    if file.lower().endswith((".jpg", ".jpeg", ".png")):
+    if file.lower().endswith((".jpg", ".jpeg", ".png", ".tif", ".tiff")):
         img_path = os.path.join(root, file)
         try:
             if adaptive:
@@ -155,7 +155,7 @@ def process_image(file_info, config_or_psm, save_flag, adaptive=False):
 image_files = []
 for root, _, files in os.walk(extract_dir):
     for file in files:
-        if file.lower().endswith((".jpg", ".jpeg", ".png")):
+        if file.lower().endswith((".jpg", ".jpeg", ".png", ".tif", ".tiff")):
             image_files.append((root, file))
 
 full_image_files = image_files[:]

@@ -341,7 +341,7 @@ def group_sequential_pages(paths):
     for path in set(paths):
         # Extract the page number from the filename (e.g., 'DOJ-OGR-00000519.jpg' -> 519)
         filename = os.path.basename(path)
-        match = re.search(r'DOJ-OGR-(\d+)\.jpg$', filename)
+        match = re.search(r'DOJ-OGR-(\d+)\.(jpg|jpeg|tif|tiff)$', filename)
         if not match:
             print(f"Warning: Invalid page number in path {path}, skipping")
             continue
@@ -585,7 +585,7 @@ def build_concordance():
     print(f"Concordance built and saved to {index_file}.")
     print(f"Sample non-dictionary words flagged as proper nouns: {list(proper_nouns.keys())[:10]}")
     
-    thumbnail_files = [f for f in os.listdir(objects_dir) if f.endswith('.jpg')]
+    thumbnail_files = [f for f in os.listdir(objects_dir) if f.endswith(('.jpg', '.jpeg', '.tif', '.tiff'))]
     print(f"Available thumbnails in {objects_dir}: {thumbnail_files[:10]}")
     
     return final_concordance, title_words, non_dict_words, final_word_sources, final_merged_mapping
@@ -626,7 +626,7 @@ def generate_concordance_pages(concordance):
         page_to_path = {}
         text_data = {}
         for path in paths:
-            match = re.search(r'DOJ-OGR-(\d+)\.jpg$', path)
+            match = re.search(r'DOJ-OGR-(\d+)\.(jpg|jpeg|tif|tiff)$', path)
             if match:
                 page_num = int(match.group(1))
                 page_to_path[page_num] = path
@@ -721,12 +721,28 @@ def generate_index(concordance):
 
 # Function to generate concordance.md
 def generate_concordance_md(concordance, title_words, non_dict_words, word_sources, merged_mapping):
-    md_path = "concordance.md"
+    md_path = "concordance3.md"
     total_words = sum(len(paths) for paths in concordance.values())
     unique_words = len(concordance)
     proper_nouns = sum(1 for word in concordance if word.islower() and word in title_words)
     avg_pages = total_words / unique_words if unique_words > 0 else 0
-    
+
+    # Categorize words
+    always_include = {}
+    possible_names = {}
+    everything_else = {}
+
+    for word in concordance:
+        count = len(concordance[word])
+        source = word_sources.get(word, "unknown")
+
+        if word in ALWAYS_INCLUDE_WORDS:
+            always_include[word] = (count, source)
+        elif any(tag in source for tag in ['title_case', 'all_caps', 'title_words']):
+            possible_names[word] = (count, source)
+        else:
+            everything_else[word] = (count, source)
+
     try:
         with open(md_path, "w", encoding="utf-8") as md:
             md.write("# Concordance Review\n\n")
@@ -736,17 +752,28 @@ def generate_concordance_md(concordance, title_words, non_dict_words, word_sourc
             md.write(f"- Estimated proper nouns: {proper_nouns}\n")
             md.write(f"- Average pages per word: {avg_pages:.2f}\n")
             md.write(f"- Top 10 non-dictionary words flagged as proper nouns: {list(non_dict_words)[:10]}\n\n")
-            md.write("| Word | Count | Source | Merged Words | Sample Pages |\n|------|-------|--------|--------------|--------------|\n")
-            # Priority sort ALWAYS_INCLUDE_WORDS
-            sorted_words = sorted(concordance.keys(), key=lambda w: (w not in ALWAYS_INCLUDE_WORDS, w))
-            for word in sorted_words:
-                count = len(concordance[word])
-                source = word_sources.get(word, "unknown")
-                merged = ", ".join(merged_mapping.get(word, [word])[1:]) or "None"
-                sample_pages = ", ".join(sorted(concordance[word])[:3])
-                md.write(f"| {word} | {count} | {source} | {merged} | {sample_pages} |\n")
+
+            # Table 1: The Good Stuff
+            md.write("## The Good Stuff\n")
+            md.write("| Word | Count | Source |\n|------|-------|--------|\n")
+            for word, (count, source) in sorted(always_include.items(), key=lambda x: x[1][0], reverse=True):
+                md.write(f"| {word} | {count} | {source} |\n")
+            md.write("\n")
+
+            # Table 2: Possible Names
+            md.write("## Possible Names\n")
+            md.write("| Word | Count | Source |\n|------|-------|--------|\n")
+            for word, (count, source) in sorted(possible_names.items(), key=lambda x: x[1][0], reverse=True):
+                md.write(f"| {word} | {count} | {source} |\n")
+            md.write("\n")
+
+            # Table 3: Everything Else
+            md.write("## Everything Else\n")
+            md.write("| Word | Count | Source |\n|------|-------|--------|\n")
+            for word, (count, source) in sorted(everything_else.items(), key=lambda x: x[1][0], reverse=True):
+                md.write(f"| {word} | {count} | {source} |\n")
     except Exception as e:
-        print(f"Error generating concordance.md: {traceback.format_exc()}")
+        print(f"Error generating concordance3.md: {traceback.format_exc()}")
 
 # Function to generate video HTML pages
 def generate_video_pages():
@@ -756,7 +783,7 @@ def generate_video_pages():
         print(f"Error compiling video template: {traceback.format_exc()}")
         return
     
-    thumbnail_files = [f for f in os.listdir(objects_dir) if f.endswith('.jpg')]
+    thumbnail_files = [f for f in os.listdir(objects_dir) if f.endswith(('.jpg', '.jpeg', '.tif', '.tiff'))]
     found_thumbnails = 0
     missing_thumbnails = 0
     html_files_generated = 0
@@ -798,14 +825,15 @@ def generate_video_pages():
                 for t in sorted(set(sum(detections_by_label.values(), []))):
                     thumbnail_path = os.path.join("epstein_objects", f"{base_name}_t{t}.jpg")
                     full_thumbnail_path = os.path.join(os.getcwd(), thumbnail_path)
-                    for fname in [f"{base_name}_t{t}.jpg", f"{base_name.lower()}_t{t}.jpg"]:
+                    for fname in [f"{base_name}_t{t}.jpg", f"{base_name}_t{t}.jpeg", f"{base_name}_t{t}.tif", f"{base_name}_t{t}.tiff",
+                                  f"{base_name.lower()}_t{t}.jpg", f"{base_name.lower()}_t{t}.jpeg", f"{base_name.lower()}_t{t}.tif", f"{base_name.lower()}_t{t}.tiff"]:
                         full_path = os.path.join(os.getcwd(), "epstein_objects", fname)
                         if os.path.exists(full_path):
                             thumbnail_paths[t] = f"../epstein_objects/{fname}".replace(os.sep, '/')
                             found_thumbnails += 1
                             break
                     else:
-                        print(f"Warning: Thumbnail not found for {base_name}_t{t}.jpg at {full_thumbnail_path}")
+                        print(f"Warning: Thumbnail not found for {base_name}_t{t} (.jpg/.jpeg/.tif/.tiff) at {full_thumbnail_path}")
                         missing_thumbnails += 1
                 
                 try:
