@@ -104,6 +104,9 @@ main_word_template_str = """
         .text { flex: 1; font-family: monospace; white-space: pre-wrap; overflow: auto; height: 800px; padding-left: 10px; }
         img { width: 8.5in; height: auto; }
         .highlight { background-color: yellow; }
+        .alphabet-nav { text-align: center; margin: 20px 0; padding: 10px; background-color: #f0f0f0; border-radius: 5px; }
+        .alphabet-nav a { margin: 0 5px; text-decoration: none; color: #333; font-weight: bold; }
+        .alphabet-nav a:hover { color: #007bff; }
     </style>
     <script>
         let currentRun = 0;
@@ -172,10 +175,51 @@ main_word_template_str = """
             const after = pages.length - 1 - currentPageIndex;
             document.getElementById('contextHint').innerText = 'Showing page ' + currentPage + ' of run ' + (run.start || 0) + '-' + (run.end || 0) + ', can navigate ' + before + ' pages before, ' + after + ' pages after';
         }
+
+        function randomPage() {
+            if (!runs || runs.length === 0) {
+                alert('No pages available');
+                return;
+            }
+
+            // Collect all available page numbers
+            let allPages = [];
+            for (let run of runs) {
+                if (run.pages) {
+                    allPages = allPages.concat(run.pages);
+                }
+            }
+
+            if (allPages.length === 0) {
+                alert('No pages available');
+                return;
+            }
+
+            // Select a random page
+            const randomIndex = Math.floor(Math.random() * allPages.length);
+            const randomPageNum = allPages[randomIndex];
+
+            // Find which run and page index this corresponds to
+            for (let runIndex = 0; runIndex < runs.length; runIndex++) {
+                const run = runs[runIndex];
+                if (run.pages) {
+                    const pageIndex = run.pages.indexOf(randomPageNum);
+                    if (pageIndex !== -1) {
+                        loadPage(runIndex, pageIndex);
+                        return;
+                    }
+                }
+            }
+        }
         </%text>
     </script>
 </head>
 <body onload="loadPage(0, 0);">
+    <div class="alphabet-nav">
+        % for letter in ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']:
+            <a href="./index_${letter}.html">${letter}</a>
+        % endfor
+    </div>
     <h1>Pages containing "${word or 'Unknown'}" (${len(paths or [])} total)</h1>
     <div class="pager">
     % if runs and len(runs or []) > 0:
@@ -190,6 +234,7 @@ main_word_template_str = """
     </div>
     <div>
         <button id="prevArrow" class="nav-arrow" onclick="prevPage()">&larr;</button>
+        <button onclick="randomPage()" style="margin: 0 10px; padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">🎲 Random Page</button>
         <button id="nextArrow" class="nav-arrow" onclick="nextPage()">&rarr;</button>
     </div>
     <p id="contextHint" class="context-hint"></p>
@@ -229,13 +274,17 @@ index_template_str = """
 <html>
 <head>
     <title>Epstein Concordance Index</title>
+    <style>
+        .word-count { color: #666; font-size: 0.9em; margin-left: 10px; }
+        .word-item { margin: 5px 0; }
+    </style>
 </head>
 <body>
     <h1>Concordance Index</h1>
     <p>Click a word to see pages where it appears (top 1000 dictionary words, top 100 proper nouns, and always-included terms).</p>
     <ul>
     % for word in sorted_words or []:
-        <li><a href="${word}.html">${word}</a></li>
+        <li class="word-item"><a href="${word}.html">${word}</a><span class="word-count">(${word_counts.get(word, 0)} pages)</span></li>
     % endfor
     </ul>
 </body>
@@ -625,7 +674,9 @@ def generate_concordance_pages(concordance):
         # Create pageToPath and textData
         page_to_path = {}
         text_data = {}
-        for path in paths:
+        # Sort paths to prefer .jpg over .tif when both exist for same page
+        sorted_paths = sorted(paths, key=lambda x: (x.endswith('.tif') or x.endswith('.tiff')))
+        for path in sorted_paths:
             match = re.search(r'DOJ-OGR-(\d+)\.(jpg|jpeg|tif|tiff)$', path)
             if match:
                 page_num = int(match.group(1))
@@ -666,18 +717,20 @@ def generate_index(concordance):
     except Exception as e:
         print(f"Error compiling index template: {traceback.format_exc()}")
         return
-    
+
     sorted_words = sorted(concordance.keys())
-    
+    word_counts = {word: len(paths) for word, paths in concordance.items()}
+
     words_by_letter = defaultdict(list)
     for word in sorted_words:
         first_letter = word[0].upper() if word else '?'
         words_by_letter[first_letter].append(word)
-    
+
     for letter, letter_words in sorted(words_by_letter.items()):
         try:
             html_content = index_template.render(
-                sorted_words=letter_words
+                sorted_words=letter_words,
+                word_counts=word_counts
             )
             letter_path = os.path.join(concordance_pages_dir, f"index_{letter}.html")
             with open(letter_path, "w", encoding="utf-8") as html:
