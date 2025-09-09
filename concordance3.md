@@ -5,7 +5,7 @@
 - Unique words: 1100
 - Estimated proper nouns: 901
 - Average pages per word: 274.90
-- Top 10 non-dictionary words flagged as proper nouns: ['amb-fubinaca', 'qaqqdmaqqa', 'takeaways', 'declassify', 'faonvwoms', 'doublelocked', 'fifteenta', 'matrimonial', 'filed6r2a23', 'impermissible']
+- Top 10 non-dictionary words flagged as proper nouns: ['sourthouse', 'co-conspirator', 'conterence', 'councilor', 'wasfieninned', 'fingerprint', 'dwndwwnhwnh', 'formalizes', 'revocation', 'mid-level']
 
 ## The Good Stuff
 | Word | Count | Source |
