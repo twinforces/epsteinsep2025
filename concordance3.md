@@ -5,7 +5,7 @@
 - Unique words: 1100
 - Estimated proper nouns: 901
 - Average pages per word: 274.90
-- Top 10 non-dictionary words flagged as proper nouns: ['sourthouse', 'co-conspirator', 'conterence', 'councilor', 'wasfieninned', 'fingerprint', 'dwndwwnhwnh', 'formalizes', 'revocation', 'mid-level']
+- Top 10 non-dictionary words flagged as proper nouns: ['tru-intel', 'contenuoully', 'meiselman', 'transcriber', 'signed__4', 'pororeetol', 'stoltenborgh', 'premousty', 'd-options', 'proration']
 
 ## The Good Stuff
 | Word | Count | Source |

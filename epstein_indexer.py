@@ -2,6 +2,7 @@ import os
 import json
 import re
 import traceback
+import shutil
 from collections import defaultdict
 from mako.template import Template
 import unicodedata
@@ -124,7 +125,7 @@ main_word_template_str = """
             const pageNum = runs[runIndex].pages[pageIndex];
             const pagePath = pageToPath[pageNum];
             if (pagePath) {
-                document.getElementById('imageFrame').src = '../epstein_files/' + pagePath;
+                document.getElementById('imageFrame').src = pagePath;
                 const fullText = textData[pagePath] || 'No text available';
                 document.getElementById('pageText').innerHTML = fullText;
             }
@@ -262,7 +263,7 @@ subpage_template_str = """
     <h2>Group ${page_num} (${(page_num-1)*10 + 1} - ${min(page_num*10, len(group or []))})</h2>
     % for path, text_snippet in group or []:
         <p><strong>${path}</strong>: ${text_snippet}</p>
-        <img src="../epstein_files/${path.replace(os.sep, '/')}" alt="${path}"><br>
+        <img src="../${extract_dir}/${path}".replace(os.sep, '/') alt="${path}"><br>
     % endfor
 </body>
 </html>
@@ -390,7 +391,7 @@ def group_sequential_pages(paths):
     for path in set(paths):
         # Extract the page number from the filename (e.g., 'DOJ-OGR-00000519.jpg' -> 519)
         filename = os.path.basename(path)
-        match = re.search(r'DOJ-OGR-(\d+)\.(jpg|jpeg|tif|tiff)$', filename)
+        match = re.search(r'DOJ-OGR-(\d+)\.(jpg|jpeg)$', filename)
         if not match:
             print(f"Warning: Invalid page number in path {path}, skipping")
             continue
@@ -634,10 +635,11 @@ def build_concordance():
     print(f"Concordance built and saved to {index_file}.")
     print(f"Sample non-dictionary words flagged as proper nouns: {list(proper_nouns.keys())[:10]}")
     
-    thumbnail_files = [f for f in os.listdir(objects_dir) if f.endswith(('.jpg', '.jpeg', '.tif', '.tiff'))]
+    thumbnail_files = [f for f in os.listdir(objects_dir) if f.endswith(('.jpg', '.jpeg'))]
     print(f"Available thumbnails in {objects_dir}: {thumbnail_files[:10]}")
     
     return final_concordance, title_words, non_dict_words, final_word_sources, final_merged_mapping
+
 
 # Function to generate concordance HTML pages
 def generate_concordance_pages(concordance):
@@ -648,6 +650,7 @@ def generate_concordance_pages(concordance):
         print(f"Error compiling templates: {traceback.format_exc()}")
         return
     
+
     for word, paths in concordance.items():
         print(f"Generating pages for word: {word}, paths: {len(paths)}")
         page_size = 10
@@ -662,30 +665,31 @@ def generate_concordance_pages(concordance):
             groups.append(group)
         runs = group_sequential_pages(paths)
         print(f"Runs for {word}: {runs}")
-        
+
         # Validate runs
         if not runs or not all('start' in run and 'end' in run and 'pages' in run and run['pages'] for run in runs):
             print(f"Warning: Invalid runs for {word}: {runs}, skipping HTML generation")
             continue
-        
+
         # Pre-serialize runs to JSON
         runs_json = json.dumps(runs or [], ensure_ascii=False)
-    
+
         # Create pageToPath and textData
         page_to_path = {}
         text_data = {}
-        # Sort paths to prefer .jpg over .tif when both exist for same page
-        sorted_paths = sorted(paths, key=lambda x: (x.endswith('.tif') or x.endswith('.tiff')))
-        for path in sorted_paths:
-            match = re.search(r'DOJ-OGR-(\d+)\.(jpg|jpeg|tif|tiff)$', path)
+        # Only process .jpg files since Chrome can't display .tif files
+        for path in paths:
+            match = re.search(r'DOJ-OGR-(\d+)\.(jpg|jpeg)$', path)
             if match:
                 page_num = int(match.group(1))
-                page_to_path[page_num] = path
+                # Use relative path from concordance_pages to epstein_files
+                relative_path = f"../{extract_dir}/{path}".replace(os.sep, '/')
+                page_to_path[page_num] = relative_path
                 txt_path = os.path.join(ocr_dir, f"{path}.txt")
                 full_text = get_full_ocr_text(txt_path) if os.path.exists(txt_path) else "No text available"
                 # Pre-highlight the word
                 highlighted_text = re.sub(r'\b' + re.escape(word) + r'\b', '<span class="highlight">\\g<0></span>', full_text, flags=re.IGNORECASE)
-                text_data[path] = highlighted_text
+                text_data[relative_path] = highlighted_text
         page_to_path_json = json.dumps(page_to_path, ensure_ascii=False)
         text_data_json = json.dumps(text_data, ensure_ascii=False)
     
@@ -836,7 +840,7 @@ def generate_video_pages():
         print(f"Error compiling video template: {traceback.format_exc()}")
         return
     
-    thumbnail_files = [f for f in os.listdir(objects_dir) if f.endswith(('.jpg', '.jpeg', '.tif', '.tiff'))]
+    thumbnail_files = [f for f in os.listdir(objects_dir) if f.endswith(('.jpg', '.jpeg'))]
     found_thumbnails = 0
     missing_thumbnails = 0
     html_files_generated = 0
@@ -878,15 +882,15 @@ def generate_video_pages():
                 for t in sorted(set(sum(detections_by_label.values(), []))):
                     thumbnail_path = os.path.join("epstein_objects", f"{base_name}_t{t}.jpg")
                     full_thumbnail_path = os.path.join(os.getcwd(), thumbnail_path)
-                    for fname in [f"{base_name}_t{t}.jpg", f"{base_name}_t{t}.jpeg", f"{base_name}_t{t}.tif", f"{base_name}_t{t}.tiff",
-                                  f"{base_name.lower()}_t{t}.jpg", f"{base_name.lower()}_t{t}.jpeg", f"{base_name.lower()}_t{t}.tif", f"{base_name.lower()}_t{t}.tiff"]:
+                    for fname in [f"{base_name}_t{t}.jpg", f"{base_name}_t{t}.jpeg",
+                                  f"{base_name.lower()}_t{t}.jpg", f"{base_name.lower()}_t{t}.jpeg"]:
                         full_path = os.path.join(os.getcwd(), "epstein_objects", fname)
                         if os.path.exists(full_path):
                             thumbnail_paths[t] = f"../epstein_objects/{fname}".replace(os.sep, '/')
                             found_thumbnails += 1
                             break
                     else:
-                        print(f"Warning: Thumbnail not found for {base_name}_t{t} (.jpg/.jpeg/.tif/.tiff) at {full_thumbnail_path}")
+                        print(f"Warning: Thumbnail not found for {base_name}_t{t} (.jpg/.jpeg) at {full_thumbnail_path}")
                         missing_thumbnails += 1
                 
                 try:
