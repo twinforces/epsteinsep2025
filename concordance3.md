@@ -1,11 +1,11 @@
 # Concordance Review
 
 ## Stats
-- Total word occurrences: 302392
+- Total word occurrences: 302487
 - Unique words: 1100
-- Estimated proper nouns: 901
-- Average pages per word: 274.90
-- Top 10 non-dictionary words flagged as proper nouns: ['tru-intel', 'contenuoully', 'meiselman', 'transcriber', 'signed__4', 'pororeetol', 'stoltenborgh', 'premousty', 'd-options', 'proration']
+- Estimated proper nouns: 900
+- Average pages per word: 274.99
+- Top 10 non-dictionary words flagged as proper nouns: ['cuthbertson', 'document365', 'usao-sdel', 'gainesville', 'telemetry', 'easterbrook', 'jremmrono', 'jcmetoseevou', 'printthis', 'phopgovef']
 
 ## The Good Stuff
 | Word | Count | Source |
@@ -41,6 +41,7 @@
 | vagina | 133 | always_include |
 | mar-a-lago | 108 | all_caps,always_include |
 | wexner | 108 | all_caps,always_include,title_case |
+| cosby | 103 | all_caps,always_include,title_case |
 | ferguson | 63 | always_include,title_case |
 | weinstein | 52 | always_include,title_case,title_words |
 | seduction | 51 | always_include,title_case,title_words |
@@ -987,7 +988,6 @@
 | innovative | 9 | dictionary,title_case,title_words |
 | indonesia | 8 | all_caps,dictionary,title_case,title_words |
 | concentrate | 8 | all_caps,dictionary,title_words |
-| radiation | 8 | dictionary,title_case,title_words |
 
 ## Everything Else
 | Word | Count | Source |

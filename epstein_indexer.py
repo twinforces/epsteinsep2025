@@ -65,7 +65,7 @@ ALWAYS_INCLUDE_WORDS = {
     'submit', 'bondage', 'mar-a-lago', 'alessi', "wexner", 'maxwell', 'employee', 'kellen',
     'rodriguez', 'figueroa','jongh','dershowitz','brunel','richardson','dubin','copperfield','jackson',
     'black','giuffre','sjoberg','spacey','tucker','hawking','musk','hoffman','zuckerberg','ito','jongh',
-    'siegal','ferguson','althorp','andersson','minksy','weinstein','araoz'
+    'siegal','ferguson','althorp','andersson','minksy','weinstein','araoz','cosby'
 }
 
 # Static stop word regex patterns
